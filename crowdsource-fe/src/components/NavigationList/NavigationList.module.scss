@@ -3,7 +3,7 @@
   opacity: 0.8;
 
   &:global(.active) {
-    color: #0f2749;
+    color: var(--primary-color);
   }
 }
 

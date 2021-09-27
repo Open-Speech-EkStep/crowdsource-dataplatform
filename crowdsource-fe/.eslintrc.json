@@ -71,6 +71,10 @@
           {
             "name": "react-bootstrap",
             "message": "Please use 'react-bootstrap/*' components instead. Eg. 'react-bootstrap/Button'"
+          },
+          {
+            "name": "react-bootstrap/Button",
+            "message": "Please use 'components/Button' instead"
           }
         ]
       }

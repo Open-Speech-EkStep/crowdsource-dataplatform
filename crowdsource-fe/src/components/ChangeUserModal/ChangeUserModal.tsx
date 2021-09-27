@@ -1,10 +1,8 @@
 import { useTranslation } from 'next-i18next';
-import Button from 'react-bootstrap/Button';
 
+import Button from 'components/Button';
 import ChangeUserForm from 'components/ChangeUserForm';
 import Modal from 'components/Modal';
-
-import styles from './ChangeUserModal.module.scss';
 
 interface ChangeUserModalProps {
   onHide: () => void;
@@ -22,7 +20,7 @@ const ChangeUserModal = ({ onHide, ...rest }: ChangeUserModalProps) => {
       title={t('changeUserModalHeading')}
       subTitle={t('changeUserModalSubHeading')}
       footer={
-        <Button type="submit" form="changeUserForm" className={styles.submitButton}>
+        <Button type="submit" form="changeUserForm">
           {t('Done')}
         </Button>
       }

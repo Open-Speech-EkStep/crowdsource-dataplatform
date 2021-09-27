@@ -13,10 +13,15 @@ jest.mock('next/dist/client/router', () => {
   return router;
 });
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: key => key }),
-  Trans: () => null,
-}));
+jest.mock('react-i18next', () => {
+  const { Fragment } = require('react');
+
+  return {
+    useTranslation: () => ({ t: key => key }),
+    Trans: ({ components }) =>
+      Object.values(components).map((component, index) => <Fragment key={index}>{component}</Fragment>),
+  };
+});
 
 // As we're testing on the JSDOM, color-contrast testing can't run.
 // The types of results fetched are limited for performance reasons
@@ -38,6 +43,7 @@ global.CROWDSOURCE_FE_NODE_CONFIG = {
     feedbackTopComponent: false,
     contextRoot: '',
     enabled_languages: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+    enabledPages: {},
   },
 };
 

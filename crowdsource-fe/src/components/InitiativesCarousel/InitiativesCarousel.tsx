@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Slider from 'react-slick';
 
+import Button from 'components/Button';
 import InitiativeAction from 'components/InitiativeAction';
 import InitiativeHeader from 'components/InitiativeHeader';
 import Link from 'components/Link';
@@ -112,13 +113,10 @@ const InitiativesCarousel = () => {
                         <InitiativeAction actionIcon="validate.svg" initiative={initiative} />
                       </Col>
                       <Col className="mt-3 d-flex justify-content-center justify-content-md-start">
-                        <Link href={routePaths[`${initiative}IndiaHome`]}>
-                          <a
-                            data-testid="StartParticipating"
-                            className={`${styles.startParticipatingBtn} d-flex justify-content-center align-items-center w-100`}
-                          >
+                        <Link href={routePaths[`${initiative}IndiaHome`]} passHref>
+                          <Button data-testid="StartParticipating" as="a">
                             {t('startParticipating')}
-                          </a>
+                          </Button>
                         </Link>
                       </Col>
                     </Row>

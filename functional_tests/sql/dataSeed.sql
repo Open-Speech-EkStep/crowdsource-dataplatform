@@ -930,9 +930,9 @@ values ('Badge User','789456123abcde') ;
 insert into rewards (contributor_id,milestone_id)
 select (select contributor_id from contributors where user_name = 'Badge User' and contributor_identifier='789456123abcde'),milestone_id from reward_milestones where language in('Assamese') and type = 'ocr' and milestone in (5,50) and category = 'contribute'
 union
-select (select contributor_id from contributors where user_name = 'Badge User' and contributor_identifier='789456123abcde'),milestone_id from reward_milestones where language = 'Odia' and type = 'ocr' and milestone in (5,50,100) and category = 'validate'
+select (select contributor_id from contributors where user_name = 'Badge User' and contributor_identifier='789456123abcde'),milestone_id from reward_milestones where language = 'Odia' and type = 'ocr' and milestone in (5,50,200) and category = 'validate'
 union
-select (select contributor_id from contributors where user_name = 'Badge User' and contributor_identifier='789456123abcde'),milestone_id from reward_milestones where language in('Bengali') and type = 'parallel' and milestone in (5,50,100,200) and category = 'validate' ;
+select (select contributor_id from contributors where user_name = 'Badge User' and contributor_identifier='789456123abcde'),milestone_id from reward_milestones where language in('Bengali') and type = 'parallel' and milestone in (5,50,200,600) and category = 'validate' ;
 
 REFRESH MATERIALIZED VIEW contributions_and_demo_stats;
 REFRESH MATERIALIZED VIEW daily_stats_complete;

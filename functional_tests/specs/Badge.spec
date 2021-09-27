@@ -17,9 +17,9 @@ Tags: page
 * should select "validate-radio" radio button, "Validate 50 recordings in Hindi and earn Bolo India Silver Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
 * User should select "dekho" initiative from tab
 * User select "gold_participation_badge" badge level
-* should select "contribute-radio" radio button, "Contribute 100 image labels in Hindi and earn Dekho India Gold Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
-* should select "validate-radio" radio button, "Validate 100 image labels in Hindi and earn Dekho India Gold Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "contribute-radio" radio button, "Contribute 200 image labels in Hindi and earn Dekho India Gold Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "validate-radio" radio button, "Validate 200 image labels in Hindi and earn Dekho India Gold Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
 * User should select "likho" initiative from tab
 * User select "platinum_participation_badge" badge level
-* should select "contribute-radio" radio button, "Contribute 200 translations in Hindi and earn Likho India Platinum Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
-* should select "validate-radio" radio button, "Validate 200 translations in Hindi and earn Likho India Platinum Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "contribute-radio" radio button, "Contribute 600 translations in Hindi and earn Likho India Platinum Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "validate-radio" radio button, "Validate 600 translations in Hindi and earn Likho India Platinum Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default

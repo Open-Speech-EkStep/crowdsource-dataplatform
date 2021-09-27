@@ -21,7 +21,7 @@ exports[`Stats should render the component and matches it against stored snapsho
             a
           </span>
           <span
-            class="initiative mt-1 display-2"
+            class="text-light text-uppercase mt-1 display-2"
           >
             l1
           </span>
@@ -39,7 +39,7 @@ exports[`Stats should render the component and matches it against stored snapsho
             b
           </span>
           <span
-            class="initiative mt-1 display-2"
+            class="text-light text-uppercase mt-1 display-2"
           >
             l2
           </span>

@@ -6,10 +6,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Form from 'react-bootstrap/Form';
 
+import Button from 'components/Button';
 import Modal from 'components/Modal';
 import apiPaths from 'constants/apiPaths';
+import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
-import { pageRouteConstants, pageInitiativeRouteContants } from 'constants/pageRouteConstants';
+import pageRouteConstants, { pageInitiativeRouteConstants } from 'constants/pageRouteConstants';
 import { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 
@@ -41,7 +43,10 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
   const route = useRouter();
 
   const [speakerDetails] = useLocalStorage<{ userName: string }>(localStorageConstants.speakerDetails);
-  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const [contributionLanguage] = useLocalStorage<string>(
+    localStorageConstants.contributionLanguage,
+    RAW_LANGUAGES[DEFAULT_LOCALE]
+  );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,7 +60,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
         ...formData,
         email: speakerDetails?.userName || 'Anonymous',
         language: contributionLanguage,
-        module: pageInitiativeRouteContants[route.asPath] || '',
+        module: pageInitiativeRouteConstants[route.asPath] || '',
         target_page: pageRouteConstants[route.asPath] || '',
       })
     );
@@ -79,16 +84,16 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
       title={t('feedbackModalHeading')}
       subTitle={t('feedbackModalSubHeading')}
       footer={
-        <button disabled={!isButtonEnabled} form="feedbackForm" type="submit" className={styles.submitButton}>
+        <Button disabled={!isButtonEnabled} form="feedbackForm" type="submit">
           {t('submit')}
-        </button>
+        </Button>
       }
     >
       <div className={styles.form}>
         <Form id="feedbackForm" onSubmit={handleSubmit} className={`${styles.root} py-2`}>
           <Form.Group className="py-3" controlId="opinionRating">
             <Form.Label className="mb-3">
-              {t('opinionQuestionText')} <span className={styles.red}>({t('required')})</span>
+              {t('opinionQuestionText')} <span className="text-danger fst-italic">({t('required')})</span>
             </Form.Label>
             <div className={styles.opinions}>
               {opinions.map(opinion => (
@@ -126,7 +131,8 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
 
           <Form.Group className="py-3" controlId="category">
             <Form.Label className="mb-1">
-              {t('feedbackCategoryQuestionText')} <span className={styles.grey}>({t('optional')})</span>
+              {t('feedbackCategoryQuestionText')}{' '}
+              <span className={`${styles.grey} fst-italic`}>({t('optional')})</span>
             </Form.Label>
             <Form.Select
               aria-label="Default select example"

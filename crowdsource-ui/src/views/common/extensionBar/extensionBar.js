@@ -1,3 +1,5 @@
+const { base_url } = require('./env-api');
+
 const hideBackdrop = function (backdrop){
   if(!backdrop){
     return;
@@ -41,8 +43,16 @@ const addListenerToExtensionBarElements = ()=>{
 // setExtensionVideoFlag();
 
 $(document).ready(function () {
+  addBaseUrlToVideoSrc();
   addListenerToExtensionBarElements();
 });
+
+const addBaseUrlToVideoSrc = () => {
+  const videoElement = $('#extension_video');
+  const src = videoElement.find('source').attr('src');
+  videoElement.find('source').attr('src', `${base_url}${src}`);
+  videoElement[0].load();
+}
 
 module.exports = {addListenerToExtensionBarElements}
 

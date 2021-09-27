@@ -1,0 +1,23 @@
+= Skeleton =
+    contributionstats:
+        above badesgroup
+        below caraousel
+
+    badesgroup:
+        above bronzebadge
+        inside screen 32px left right
+
+    header:
+        above section
+        height 72px
+        inside screen 0px top left right
+
+    section, caraousel, contributionstats, bronzebadge:
+        inside screen 44px left right
+
+    section:
+        above caraousel
+
+    header, badesgroup, section, caraousel, contributionstats, bronzebadge:
+        centered horizontally inside screen 1px
+

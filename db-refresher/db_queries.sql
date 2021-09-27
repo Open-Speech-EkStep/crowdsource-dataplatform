@@ -72,7 +72,12 @@ SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select su
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select sum(goal) FILTER (WHERE category = 'contribute') as contribution_goal, sum(goal) FILTER (WHERE category = 'validate') as validation_goal, type, language from language_goals group by type, language )t;
 
 \o languagesWithData.json
-SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select type, media->>'language' as language from dataset_row group by type, language )t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select type, media->>'language' as language from dataset_row dr inner join configurations conf2 on conf2.config_name='include_profane' 
+inner join configurations conf3 on conf3.config_name='show_demo_data'
+left join master_dataset mds on dr.master_dataset_id=mds.master_dataset_id
+where (conf2.value=1 or is_profane=false) 
+and (conf3.value=0 or for_demo=true)
+and coalesce(mds.is_active, true) = true group by type, language )t;
 
 \o enableDisableCards.json
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select coalesce(has_target.type,all_contributed.type) as type, coalesce(has_target.language,all_contributed.language) as language, coalesce(has_target.hasTarget,false) as hasTarget, coalesce(all_contributed.isAllContributed,false) as isAllContributed 

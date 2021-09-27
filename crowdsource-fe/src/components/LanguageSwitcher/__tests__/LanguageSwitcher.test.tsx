@@ -21,6 +21,8 @@ describe('LanguageSwitcher', () => {
   it('should change the locale to hindi', async () => {
     setup();
 
+    expect(document.cookie).toBe('');
+
     userEvent.click(screen.getByText('English'));
 
     await waitFor(() => expect(screen.getByRole('link', { name: 'हिंदी' })).toBeInTheDocument());
@@ -30,6 +32,26 @@ describe('LanguageSwitcher', () => {
     expect(router.locale).toBe('hi');
 
     expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
+
+    expect(document.cookie).toBe('NEXT_LOCALE=hi');
+  });
+
+  it('should page not refresh when we click on same locale', async () => {
+    setup();
+
+    expect(document.cookie).toBe('NEXT_LOCALE=hi');
+
+    userEvent.click(screen.getByText('हिंदी'));
+
+    await waitFor(() => expect(screen.getByRole('link', { name: 'हिंदी' })).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('link', { name: 'हिंदी' }));
+
+    expect(router.locale).toBe('hi');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
+
+    expect(document.cookie).toBe('NEXT_LOCALE=hi');
   });
 
   it('should change the locale to English', async () => {

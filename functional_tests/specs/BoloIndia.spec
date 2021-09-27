@@ -70,7 +70,3 @@ Tags: component
 ## Check Terms and Condition links from Footer
 * Navigate to "Terms & Conditions" button and click "Terms & Conditions" button
 * Validate terms and condition content
-
-## Check Privacy and Policy links from Footer
-* Navigate to "Privacy Policy" button and click "Privacy Policy" button
-* Validate Privacy Policy content

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="info primary btn btn-primary"
+    data-testid="Button"
+    type="button"
+  >
+    some text
+  </button>
+</DocumentFragment>
+`;

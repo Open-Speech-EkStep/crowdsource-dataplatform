@@ -25,6 +25,7 @@ describe("Running tests for cache", () => {
     const lockObj = {
         unlock: jest.fn(() => Promise.resolve())
     };
+    const lockTimeOut = Math.floor(Number.MAX_SAFE_INTEGER / 10);
     const spyDBany = jest.spyOn(mockDB, 'any');
 
     const language = "Hindi", toLanguage = "Tamil", limit = 1000;
@@ -43,12 +44,12 @@ describe("Running tests for cache", () => {
         const key = `dataset_row_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getContributionDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
         when(mockIoRedis.Cluster.prototype.get).calledWith(`${key}_status`).mockReturnValue(Promise.resolve(null));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getContributionDataForCaching, [type, language, toLanguage, limit]);
 
 
-        expect(mockRedlock.prototype.acquire).toBeCalledWith(`lock:${key}`, 20000);
+        expect(mockRedlock.prototype.acquire).toBeCalledWith(`lock:${key}`, lockTimeOut);
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(1, "ut" + "_" + key + "_status", 'in progress', 'EX', 600);
         expect(mockIoRedis.Cluster.prototype.set).toHaveBeenNthCalledWith(2, "ut" + "_" + key, JSON.stringify(mockResult), 'EX', 600);
         expect(lockObj.unlock).toHaveBeenCalled();
@@ -62,7 +63,7 @@ describe("Running tests for cache", () => {
         ];
         const key = `dataset_row_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getParallelContributionDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelContributionDataForCaching, [type, language, toLanguage, limit]);
 
@@ -79,7 +80,7 @@ describe("Running tests for cache", () => {
         ];
         const key = `contributions_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit]);
 
@@ -98,7 +99,7 @@ describe("Running tests for cache", () => {
         const lesserThanValidationCount = mockResult.filter(d => d.validation_count < 3);
 
         when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
@@ -122,7 +123,7 @@ describe("Running tests for cache", () => {
 		.reverse();
 
         when(spyDBany).calledWith(getValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
@@ -138,7 +139,7 @@ describe("Running tests for cache", () => {
         ];
         const key = `contributions_${type}_${language}_${toLanguage}`;
         when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelValidationDataForCaching, [type, language, toLanguage, limit]);
 
@@ -157,7 +158,7 @@ describe("Running tests for cache", () => {
         const key = `contributions_${type}_${language}_${toLanguage}`;
 
         when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
@@ -181,7 +182,7 @@ describe("Running tests for cache", () => {
         const key = `contributions_${type}_${language}_${toLanguage}`;
 
         when(spyDBany).calledWith(getParallelValidationDataForCaching, [type, language, toLanguage, limit]).mockReturnValue(Promise.resolve(mockResult));
-        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, 20000).mockReturnValue(Promise.resolve(lockObj));
+        when(mockRedlock.prototype.acquire).calledWith(`lock:${key}`, lockTimeOut).mockReturnValue(Promise.resolve(lockObj));
 
         await cache.setWithLock(key, mockDB, getParallelValidationDataForCaching, [type, language, toLanguage, limit], cacheOperations.sortAndFilterValidationData);
 
