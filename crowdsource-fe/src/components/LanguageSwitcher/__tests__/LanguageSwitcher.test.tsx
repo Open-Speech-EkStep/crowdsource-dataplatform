@@ -32,4 +32,22 @@ describe('LanguageSwitcher', () => {
 
     expect(document.cookie).toBe('NEXT_LOCALE=hi');
   });
+
+  it('should page not refresh when we click on same locale', async () => {
+    setup();
+
+    expect(document.cookie).toBe('NEXT_LOCALE=hi');
+
+    userEvent.click(screen.getByText('हिंदी'));
+
+    await waitFor(() => expect(screen.getByRole('link', { name: 'हिंदी' })).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('link', { name: 'हिंदी' }));
+
+    expect(router.locale).toBe('hi');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'Hindi');
+
+    expect(document.cookie).toBe('NEXT_LOCALE=hi');
+  });
 });

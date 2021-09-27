@@ -19,6 +19,8 @@ const LanguageSwitcher = () => {
   const [, setContributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const [cookie, setCookie] = useCookies([localeCookieName]);
 
+  locales?.sort();
+
   return (
     <Dropdown
       data-testid="LanguageSwitcher"
