@@ -15,8 +15,8 @@ export const INITIATIVES_MEDIA_MAPPING = {
 export const INITIATIVES = Object.keys(INITIATIVES_MAPPING);
 
 export const INITIATIVE_ACTIONS = {
-  transcribe: 'Transcribe',
-  validate: 'Validate',
+  transcribe: 'transcribe',
+  validate: 'validate',
   contribute: 'Contribute',
   speak: 'Speak',
   label: 'Label',

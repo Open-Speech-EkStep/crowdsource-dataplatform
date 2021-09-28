@@ -25,7 +25,7 @@ const mapChartData = (data: any, key: string, langauge: string, initiativeMedia:
     if (contributedLanguageHours) {
       topLanguageArray.push(contributedLanguageHours);
     } else {
-      topLanguageArray.push({ language: langauge, total_contributions: 0.012 });
+      topLanguageArray.push({ language: langauge, total_contributions: 0.0 });
     }
     let remainingLanguage = data.filter((item: any) => item?.language !== langauge);
     remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
@@ -133,7 +133,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
     <div className="" data-testid="ContributionTracker">
       <Form.Group controlId="recommended" className="d-flex flex-column flex-md-row align-items-md-center">
         <Form.Label className="display-3 mb-0 mb-md-0 font-family-rowdies">
-          Your language and top 3 contributed languages
+          {t('contributionTrackerSubHeader')}
         </Form.Label>
         <div className="d-md-flex ms-md-9 mt-4 mt-md-0">
           <Form.Check

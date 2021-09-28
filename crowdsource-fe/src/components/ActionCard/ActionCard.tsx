@@ -40,7 +40,7 @@ const ActionCard = (props: ActionCardProps) => {
                   </div>
                   <div className={`${styles.card} d-flex p-5 p-md-7 p-xl-9 align-items-center`}>
                     <div className="flex-grow-1">
-                      <h1 className={styles.type}>{type}</h1>
+                      <h1 className={styles.type}>{t(type)}</h1>
                       <p className={`${styles.text} mt-1 mt-md-2 mb-0`}>{text}</p>
                     </div>
                     <div

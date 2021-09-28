@@ -89,8 +89,8 @@
   "languageIconAlt": "Language Icon",
   "submitSuccess": "Submitted successfully",
   "feedbackThankYou": "Thank you for your feedback",
-  "contributionTrackerHeader": "Contributions made to {{initiativeName}}",
-  "contributionTrackerSubHeader": "Overall Summary",
+  "contributionStatsHeader": "Contributions made to {{initiativeName}}",
+  "contributionStatsSubHeader": "Overall Summary",
   "validateWarningMsg": "Only contributions invited for the selected language",
   "contributeWarningMsg": "Only validations invited for the selected language",
 
@@ -116,10 +116,13 @@
   "durationTranscribed": "Duration transcribed",
   "durationValidated": "Duration Validated",
 
-  "contributionTracker": "Contribution Tracker",
+  "contributionTrackerHeader": "Contribution Tracker",
+  "contributionTrackerSubHeader": "Your language and top 3 contributed languages",
   "byHours": "By duration of hours",
   "bySentences": "By number of sentences",
   "totalSentences": "Total Sentences",
   "yourSelectedLanguage": "Your selected language",
-  "topLanguages": "Top Languages"
+  "topLanguages": "Top Languages",
+  "transcribe": "Transcribe",
+  "validate": "Validate"
 }

@@ -26,15 +26,15 @@ const SunoIndiaDetails = () => {
             initiative={INITIATIVES_MAPPING.suno}
           >
             <header className="d-flex flex-column">
-              <h3 className="w-100">{t('contributionTrackerHeader', { initiativeName })}</h3>
+              <h3 className="w-100">{t('contributionStatsHeader', { initiativeName })}</h3>
               <span className={`${styles.subHeader} display-3 mt-4 mb-0`}>
-                {t('contributionTrackerSubHeader')}
+                {t('contributionStatsSubHeader')}
               </span>
             </header>
           </ContributionStats>
         </section>
         <section className="mt-9 mt-md-12">
-          <h3>{t('contributionTracker')}</h3>
+          <h3>{t('contributionTrackerHeader')}</h3>
           <div className="mt-4">
             <ContributionTracker initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno} />
           </div>
