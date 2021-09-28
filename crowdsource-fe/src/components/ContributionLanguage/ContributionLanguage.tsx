@@ -25,7 +25,6 @@ const ContributionLanguage = () => {
   );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(currentLocale);
     if (cookie.NEXT_LOCALE !== currentLocale) {
       console.log(router);
       console.log('Need to refresh the page with en');
