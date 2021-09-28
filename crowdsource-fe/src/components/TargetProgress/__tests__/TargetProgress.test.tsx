@@ -1,6 +1,6 @@
 import { when } from 'jest-when';
 
-import { render, screen } from 'utils/testUtils';
+import { render, screen, waitFor } from 'utils/testUtils';
 
 import TargetProgress from '../TargetProgress';
 
@@ -83,11 +83,20 @@ describe('TargetProgress', () => {
     const renderResult = render(
       <TargetProgress
         initiative={initiative}
-        initiativeMedia={initiativeMedia}
+        initiativeType={initiativeMedia}
         source={source}
         language={contributionLanguage}
       />
     );
+    await waitFor(() => {
+      expect(localStorage.getItem).toBeCalled();
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeCount.json');
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/initiativeGoals.json');
+    });
     return renderResult;
   };
 

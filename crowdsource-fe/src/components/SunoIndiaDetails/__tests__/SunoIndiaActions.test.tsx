@@ -1,6 +1,3 @@
-/* eslint-disable import/no-internal-modules */
-import '__fixtures__/mockComponentsWithSideEffects';
-
 import { render, screen } from 'utils/testUtils';
 
 import SunoIndiaActions from '../SunoIndiaActions';

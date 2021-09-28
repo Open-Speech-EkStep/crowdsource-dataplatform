@@ -5,6 +5,7 @@ import Image from 'next/image';
 import InfoMessage from 'components/InfoMessage';
 import Link from 'components/Link';
 import routePaths from 'constants/routePaths';
+import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './ActionCard.module.scss';
 
@@ -24,7 +25,7 @@ const ActionCard = (props: ActionCardProps) => {
 
   return (
     <div className={classNames({ [styles.disabledCursor]: props.disabled })}>
-      <Link href={routePaths[`${initiative}India${type}`]}>
+      <Link href={routePaths[`${initiative}India${capitalizeFirstLetter(type)}`]}>
         <a className={classNames('d-block', { [styles.disabledCard]: props.disabled })}>
           <div data-testid="ActionCard" className={`${styles.root} overflow-hidden`}>
             <div className={styles.cardGradient}>

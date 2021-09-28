@@ -1,10 +1,10 @@
 import { when } from 'jest-when';
 
-import { render, screen, userEvent } from 'utils/testUtils';
+import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 
 import ContributionTracker from '../ContributionTracker';
 
-describe('ContributionActions', () => {
+describe('ContributionTracker', () => {
   const setup = async () => {
     const language = 'Hindi';
 
@@ -78,6 +78,15 @@ describe('ContributionActions', () => {
     );
 
     const renderResult = render(<ContributionTracker initiativeMedia="asr" />);
+    await waitFor(() => {
+      expect(localStorage.getItem).toBeCalled();
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/topLanguagesByHoursContributed.json');
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/topLanguagesBySpeakerContributions.json');
+    });
     return renderResult;
   };
 

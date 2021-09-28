@@ -17,7 +17,7 @@ const SunoIndiaDetails = () => {
         <section>
           <TargetProgress
             initiative={INITIATIVES_MAPPING.suno}
-            initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
+            initiativeType={INITIATIVES_MEDIA_MAPPING.suno}
           />
         </section>
         <section className="mt-9 mt-md-12">

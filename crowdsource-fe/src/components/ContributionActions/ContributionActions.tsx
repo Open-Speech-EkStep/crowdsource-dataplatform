@@ -21,7 +21,7 @@ interface LanguageWithData {
 
 interface ContributionActionProps {
   initiative: string;
-  initiativeMedia: string;
+  initiativeType: string;
   contributionLanguage: string;
 }
 
@@ -29,36 +29,39 @@ const ContributionActions = (props: ContributionActionProps) => {
   const { t } = useTranslation();
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
-  const { data: languageWithData, mutate } = useFetch<LanguageWithData[]>(apiPaths.languagesWithData, {
+  const { data: languageWithData, mutate: languageWithDataMutate } = useFetch<LanguageWithData[]>(
+    apiPaths.cumulativeCount,
+    {
+      revalidateOnMount: false,
+    }
+  );
+
+  const { data: cardState, mutate: cardStateMutate } = useFetch<any>(apiPaths.enableDisableCards, {
     revalidateOnMount: false,
   });
 
   useEffect(() => {
     if (contributionLanguage) {
-      mutate();
+      languageWithDataMutate();
+      cardStateMutate();
     }
-  }, [contributionLanguage, mutate]);
+  }, [contributionLanguage, languageWithDataMutate, cardStateMutate]);
 
-  const isLanguageAvailable = (languageData?: LanguageWithData[]) => {
-    return !!languageData?.find(
-      data => data.type === props.initiativeMedia && data.language === contributionLanguage
-    );
-  };
-
-  const { data: cardState } = useFetch<Array<{ count: string; type: string }>>(
-    isLanguageAvailable(languageWithData) ? apiPaths.enableDisableCards : null
+  const isLanguageAvailable = !!languageWithData?.find(
+    data => data.type === props.initiativeType && data.language === contributionLanguage
   );
 
-  let isContributionEnabled = true;
+  let isContributionEnabled = false;
   let isValidationEnabled = false;
 
-  if (cardState) {
+  if (isLanguageAvailable && cardState) {
     const filteredData: any =
       cardState.find(
-        (data: any) => data.type === props.initiativeMedia && data.language === contributionLanguage
+        (data: any) => data.type === props.initiativeType && data.language === contributionLanguage
       ) || {};
-    isContributionEnabled = filteredData.hastarget || false;
-    isValidationEnabled = filteredData.isallcontributed || false;
+
+    isValidationEnabled = filteredData.hastarget;
+    isContributionEnabled = !filteredData.isallcontributed ?? true;
   }
 
   return (
@@ -68,9 +71,9 @@ const ContributionActions = (props: ContributionActionProps) => {
           <ActionCard
             type={INITIATIVE_ACTIONS.transcribe}
             icon={`${props.initiative}_contribute_icon.svg`}
-            text={t('sunoContributionTagline')}
+            text={t(`${props.initiative}ContributionTagline`)}
             shadow="Green"
-            disabled={isContributionEnabled}
+            disabled={!isContributionEnabled}
             warningMsg="contributeWarningMsg"
             initiative={props.initiative}
           />
@@ -79,7 +82,7 @@ const ContributionActions = (props: ContributionActionProps) => {
           <ActionCard
             type={INITIATIVE_ACTIONS.validate}
             icon="validate.svg"
-            text={t('sunoValidationTagline')}
+            text={t(`${props.initiative}ValidationTagline`)}
             shadow="Blue"
             disabled={!isValidationEnabled}
             warningMsg="validateWarningMsg"

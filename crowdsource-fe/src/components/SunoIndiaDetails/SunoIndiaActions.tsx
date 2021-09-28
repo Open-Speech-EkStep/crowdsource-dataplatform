@@ -11,7 +11,7 @@ const SunoIndiaActions = () => {
     <section data-testid="SunoIndiaActions" className="mt-7 mt-md-9">
       <ContributionLanguage />
       <ContributionActions
-        initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
+        initiativeType={INITIATIVES_MEDIA_MAPPING.suno}
         contributionLanguage={contributionLanguage ?? ''}
         initiative={INITIATIVES_MAPPING.suno}
       />

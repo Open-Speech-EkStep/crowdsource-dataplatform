@@ -26,13 +26,6 @@ const getSourceCount = (
   return (contributionCount ?? 0) + (validationCount ?? 0);
 };
 
-const languageFilter = (data: any, initiativeType: any, language: any) => {
-  if (initiativeType === INITIATIVES_MAPPING.likho && language) {
-    return data.filter((d: { language: string }) => d?.language.split('-')[0] == language);
-  }
-  return data;
-};
-
 const reduceList = (dataList: any) => {
   return dataList.reduce((accumulator: any, item: any) => {
     Object.keys(item).forEach(key => {
@@ -45,7 +38,7 @@ const reduceList = (dataList: any) => {
 
 interface TargetProgressProps {
   initiative: string;
-  initiativeMedia: string;
+  initiativeType: string;
   source?: string;
   language?: string;
 }
@@ -78,15 +71,14 @@ const TargetProgress = (props: TargetProgressProps) => {
   let initiativeUnit;
 
   const getInitiativeGoal = (data: any) => {
-    let goalDataList = data.filter((d: any) => d.type === props.initiativeMedia) || [];
-    goalDataList = languageFilter(goalDataList, props.initiative, props.language);
+    const goalDataList = data.filter((d: any) => d.type === props.initiativeType) || [];
     const goalData = reduceList(goalDataList);
     const totalGoal = getSourceCount(props.source, goalData.contribution_goal, goalData.validation_goal) || 1;
     return totalGoal;
   };
 
   if (cumulativeCountData && cumulativeCountData.length && initiativeGoalData && initiativeGoalData.length) {
-    const initiativeCumulativeData = cumulativeCountData.find(item => item.type === props.initiativeMedia);
+    const initiativeCumulativeData = cumulativeCountData.find(item => item.type === props.initiativeType);
     if (props.initiative === INITIATIVES_MAPPING.suno || props.initiative === INITIATIVES_MAPPING.bolo) {
       initiativeUnit = t('hours');
       totalProgress = getSourceCount(
@@ -111,6 +103,7 @@ const TargetProgress = (props: TargetProgressProps) => {
 
   const initiativeName = `${t(props.initiative)} ${t('india')}`;
 
+  if (!cumulativeCountData) return null;
   return (
     <div className={`${styles.root} d-flex flex-column`} data-testid="TargetProgress">
       <div className={`${styles.details} d-flex justify-content-between align-items-center`}>
