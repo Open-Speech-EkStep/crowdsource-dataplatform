@@ -86,7 +86,7 @@ describe('ContributionStats', () => {
     expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
     expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
     expect(screen.getByText('durationValidated')).toBeInTheDocument();
-    expect(screen.getByText('Languages')).toBeInTheDocument();
+    expect(screen.getByText('languages')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('9')).toBeInTheDocument();
   });

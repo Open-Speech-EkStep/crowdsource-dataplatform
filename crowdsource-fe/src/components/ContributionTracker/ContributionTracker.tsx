@@ -167,7 +167,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
               {t('yourSelectedLanguage')}
             </span>
             <span className={`${styles.chartLabel} ${styles.chartLabelYellow} display-6 ms-4`}>
-              {t('Top Languages')}
+              {t('topLanguages')}
             </span>
           </div>
         </div>

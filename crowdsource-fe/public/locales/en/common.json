@@ -122,7 +122,8 @@
   "bySentences": "By number of sentences",
   "totalSentences": "Total Sentences",
   "yourSelectedLanguage": "Your selected language",
-  "topLanguages": "Top Languages",
+  "topLanguages": "Top languages",
   "transcribe": "Transcribe",
-  "validate": "Validate"
+  "validate": "Validate",
+  "languages": "Languages"
 }
