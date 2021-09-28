@@ -83,9 +83,9 @@ describe('ContributionStats', () => {
 
   it('should render the result for initiative home page', async () => {
     await setup('asr');
-    expect(screen.getByText('People participated')).toBeInTheDocument();
-    expect(screen.getByText('Duration transcribed')).toBeInTheDocument();
-    expect(screen.getByText('Duration Validated')).toBeInTheDocument();
+    expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
+    expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
+    expect(screen.getByText('durationValidated')).toBeInTheDocument();
     expect(screen.getByText('Languages')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('9')).toBeInTheDocument();
