@@ -11,7 +11,7 @@
     "enabledPages": {
       "error": true,
       "home": true,
-      "sunoIndiaHome": true,
+      "sunoIndiaHome": false,
       "styleGuide": true
     }
   }
