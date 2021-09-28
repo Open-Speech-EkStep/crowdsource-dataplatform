@@ -11,39 +11,3 @@ exports[`Button should render the component and matches it against stored snapsh
   </button>
 </DocumentFragment>
 `;
-
-exports[`Button should render the primary button 1`] = `
-<DocumentFragment>
-  <button
-    class="info primary btn btn-primary"
-    data-testid="Button"
-    type="button"
-  >
-    some text
-  </button>
-</DocumentFragment>
-`;
-
-exports[`Button should render the secondary button 1`] = `
-<DocumentFragment>
-  <button
-    class="light secondary btn btn-light"
-    data-testid="Button"
-    type="button"
-  >
-    some text
-  </button>
-</DocumentFragment>
-`;
-
-exports[`Button should render the tertiary button 1`] = `
-<DocumentFragment>
-  <button
-    class="transparent tertiary btn btn-transparent"
-    data-testid="Button"
-    type="button"
-  >
-    some text
-  </button>
-</DocumentFragment>
-`;

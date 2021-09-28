@@ -23,12 +23,12 @@ describe('Button', () => {
   it('should render the secondary button', () => {
     setup('secondary');
 
-    expect(screen.getByTestId('Button')).toHaveClass('btn-secondary');
+    expect(screen.getByTestId('Button')).toHaveClass('btn-light');
   });
 
   it('should render the tertiary button', () => {
     setup('tertiary');
 
-    expect(screen.getByTestId('Button')).toHaveClass('btn-tertiary');
+    expect(screen.getByTestId('Button')).toHaveClass('btn-transparent');
   });
 });

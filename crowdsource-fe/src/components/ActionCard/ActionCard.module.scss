@@ -87,9 +87,9 @@
 }
 
 .infoMsg {
-  top: 8px;
   left: 16px;
   right: 16px;
+  top: 8px;
 }
 
 .disabledCursor {
@@ -97,6 +97,6 @@
 }
 
 .disabledCard {
-  pointer-events: none;
   opacity: 0.3;
+  pointer-events: none;
 }

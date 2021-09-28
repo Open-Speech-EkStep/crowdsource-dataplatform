@@ -30,7 +30,9 @@ exports[`InfoMessage should render the component and matches it against stored s
     </div>
     <span
       class="ms-2"
-    />
+    >
+      Info message
+    </span>
   </div>
 </DocumentFragment>
 `;

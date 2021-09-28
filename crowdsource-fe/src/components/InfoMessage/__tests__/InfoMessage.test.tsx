@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import InfoMessage from '../InfoMessage';
 
 describe('InfoMessage', () => {
-  const setup = () => render(<InfoMessage />);
+  const setup = () => render(<InfoMessage text="Info message" />);
 
   verifyAxeTest(setup());
 
