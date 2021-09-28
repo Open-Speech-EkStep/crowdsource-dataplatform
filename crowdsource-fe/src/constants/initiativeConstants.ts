@@ -17,7 +17,7 @@ export const INITIATIVES = Object.keys(INITIATIVES_MAPPING);
 export const INITIATIVE_ACTIONS = {
   transcribe: 'transcribe',
   validate: 'validate',
-  contribute: 'Contribute',
+  contribute: 'contribute',
   speak: 'Speak',
   label: 'Label',
 } as const;

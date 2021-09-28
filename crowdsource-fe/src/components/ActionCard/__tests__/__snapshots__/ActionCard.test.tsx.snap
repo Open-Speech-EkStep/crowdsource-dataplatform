@@ -68,7 +68,7 @@ exports[`ActionCard should render the component and match it against stored snap
                   <h1
                     class="type"
                   >
-                    Transcribe
+                    transcribe
                   </h1>
                   <p
                     class="text mt-1 mt-md-2 mb-0"

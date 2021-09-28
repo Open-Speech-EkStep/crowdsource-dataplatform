@@ -78,7 +78,7 @@ exports[`ContributionActions should render the component and matches it against 
                         <h1
                           class="type"
                         >
-                          Transcribe
+                          transcribe
                         </h1>
                         <p
                           class="text mt-1 mt-md-2 mb-0"
@@ -189,7 +189,7 @@ exports[`ContributionActions should render the component and matches it against 
                         <h1
                           class="type"
                         >
-                          Validate
+                          validate
                         </h1>
                         <p
                           class="text mt-1 mt-md-2 mb-0"

@@ -98,7 +98,7 @@ describe('TargetProgress', () => {
   });
 
   it('should render the result for suno initiative home page', async () => {
-    await setup('suno', 'asr', 'Contribute');
+    await setup('suno', 'asr', 'contribute');
     expect(screen.getByText('progressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
@@ -108,7 +108,7 @@ describe('TargetProgress', () => {
   });
 
   it('should render the result for dekho initiative validate', async () => {
-    await setup('dekho', 'ocr', 'Validate');
+    await setup('dekho', 'ocr', 'validate');
     expect(screen.getByText('progressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
@@ -118,7 +118,7 @@ describe('TargetProgress', () => {
   });
 
   it('should render the result for likho initiative contribute', async () => {
-    await setup('likho', 'parallel', 'Contribute');
+    await setup('likho', 'parallel', 'contribute');
 
     expect(screen.getByText('progressStatus')).toBeInTheDocument();
     expect(
@@ -140,7 +140,7 @@ describe('TargetProgress', () => {
   });
 
   it('should print goal as 1 if goal is undefined', async () => {
-    await setup('bolo', 'text', 'Validate');
+    await setup('bolo', 'text', 'validate');
 
     expect(
       screen.getByText(content => {
