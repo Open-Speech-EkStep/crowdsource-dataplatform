@@ -8,6 +8,7 @@ import Link from 'components/Link';
 import {
   DEFAULT_LOCALE,
   DISPLAY_LANGUAGES,
+  localeCookieName,
   LOCALE_LANGUAGES,
   RAW_LANGUAGES,
 } from 'constants/localesConstants';
@@ -18,8 +19,6 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import { LOCALES_MAPPING } from '../../../next-i18next.config';
 
 import styles from './LanguageSwitcher.module.scss';
-
-const localeCookieName = 'NEXT_LOCALE';
 
 const LanguageSwitcher = () => {
   const { asPath: currentRoutePath, locale: currentLocale = DEFAULT_LOCALE, locales } = useRouter();
@@ -64,7 +63,6 @@ const LanguageSwitcher = () => {
               className={`${styles.item} text-primary display-5 px-4 py-2`}
               onClick={() => {
                 doSetContributionLanguage ? null : setContributionLanguage(RAW_LANGUAGES[locale]);
-
                 if (cookie.NEXT_LOCALE !== locale) {
                   // TODO: Some issue is still there with redirection to locale set in cookie.
                   // Check this comment on github: https://github.com/vercel/next.js/issues/22375#issuecomment-926827951

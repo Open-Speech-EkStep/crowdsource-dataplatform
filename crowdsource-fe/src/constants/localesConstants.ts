@@ -1,6 +1,7 @@
 import { LOCALES_MAPPING, i18n } from '../../next-i18next.config';
 
 export const DEFAULT_LOCALE = i18n.defaultLocale;
+export const localeCookieName = 'NEXT_LOCALE';
 
 export const DISPLAY_LANGUAGES = {
   [LOCALES_MAPPING.en]: 'English',

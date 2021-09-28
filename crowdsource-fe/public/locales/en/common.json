@@ -114,5 +114,12 @@
   "metaOGSiteName": "Bhasha Daan",
   "peopleParticipated": "People participated",
   "durationTranscribed": "Duration transcribed",
-  "durationValidated": "Duration Validated"
+  "durationValidated": "Duration Validated",
+
+  "contributionTracker": "Contribution Tracker",
+  "byHours": "By duration of hours",
+  "bySentences": "By number of sentences",
+  "totalSentences": "Total Sentences",
+  "yourSelectedLanguage": "Your selected language",
+  "topLanguages": "Top Languages"
 }
