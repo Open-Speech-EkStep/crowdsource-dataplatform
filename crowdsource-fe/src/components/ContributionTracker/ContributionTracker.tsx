@@ -127,30 +127,48 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
 
   return barChartData.data.length ? (
     <div className="" data-testid="ContributionTracker">
-      <Form.Group className="py-3" controlId="recommended">
-        <Form.Label className="mb-1 w-100">Your language and top 3 contributed languages</Form.Label>
-        <Form.Check
-          inline
-          type="radio"
-          label={t('yes')}
-          value="byDuration"
-          name="recommended"
-          id="feedbackFormYesCheckbox"
-          className={`${styles.radio} me-8 mb-0`}
-          onChange={handleChange}
-        />
-        <Form.Check
-          inline
-          type="radio"
-          label={t('no')}
-          value="bySpeaker"
-          name="recommended"
-          id="feedbackFormNoCheckbox"
-          className={`${styles.radio} me-8 mb-0`}
-          onChange={handleChange}
-        />
+      <Form.Group controlId="recommended" className="d-flex flex-column flex-md-row align-items-md-center">
+        <Form.Label className="display-3 mb-0 mb-md-0 font-family-rowdies">
+          Your language and top 3 contributed languages
+        </Form.Label>
+        <div className="d-md-flex ms-md-9 mt-4 mt-md-0">
+          <Form.Check
+            inline
+            type="radio"
+            label={t('byHours')}
+            value="byDuration"
+            name="recommended"
+            id="feedbackFormYesCheckbox"
+            className={`${styles.radio} me-8 mb-0`}
+            onChange={handleChange}
+            checked={chartFilterType === 'byDuration'}
+          />
+          <Form.Check
+            inline
+            type="radio"
+            label={t('bySentences')}
+            value="bySpeaker"
+            name="recommended"
+            id="feedbackFormNoCheckbox"
+            className={`${styles.radio} me-8 mb-0 mt-2 mt-md-0`}
+            onChange={handleChange}
+          />
+        </div>
       </Form.Group>
-      <BarChart id="bar_chart" data={barChartData} />
+      <div className="bg-secondary py-5 mt-4">
+        <div className="d-md-flex justify-content-between px-4 mb-4">
+          <p className="display-6">{t('totalSentences')}</p>
+          <div>
+            <span className={`${styles.chartLabel} ${styles.chartLabelOrange} display-6`}>
+              {t('yourSelectedLanguage')}
+            </span>
+            <span className={`${styles.chartLabel} ${styles.chartLabelYellow} display-6 ms-4`}>
+              {t('Top Languages')}
+            </span>
+          </div>
+        </div>
+        <BarChart id="bar_chart" data={barChartData} />
+      </div>
     </div>
   ) : null;
 };

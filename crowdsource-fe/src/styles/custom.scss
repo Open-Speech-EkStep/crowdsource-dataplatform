@@ -68,6 +68,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --link-color: #{$link-color};
   --primary-10-color: #{map-get($custom-colors, 'primary-10')};
   --primary-40-color: #{map-get($custom-colors, 'primary-40')};
+  --strong-warning-color: #{map-get($custom-colors, 'strong-warning')};
   --btn-grey-color: #e7e9ed;
   --btn-primary-disabled-bg-color: #9fa9b6;
   --btn-primary-disabled-text-color: #cfd4da;

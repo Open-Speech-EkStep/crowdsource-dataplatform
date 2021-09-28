@@ -21,7 +21,7 @@
 }
 
 .card {
-  height: 12.5rem;
+  height: 16rem;
 
   @include media-breakpoint-up(md) {
     height: 25rem;
@@ -73,41 +73,30 @@
 .icon {
   width: 5rem;
 
-  @include media-breakpoint-up(md) {
-    width: 6rem;
-  }
-
   @include media-breakpoint-up(xl) {
     width: 7.5rem;
   }
 }
 
 .iconShadowGreen {
-  box-shadow: none;
-
-  @include media-breakpoint-up(md) {
-    box-shadow: 0 0 12px 8px rgba(66, 178, 198, 0.4);
-  }
+  box-shadow: 0 0 12px 8px rgba(66, 178, 198, 0.4);
 }
 
 .iconShadowBlue {
-  box-shadow: none;
-
-  @include media-breakpoint-up(md) {
-    box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.4);
-  }
+  box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.4);
 }
 
-.cardWarning {
-  background: rgba(77, 130, 247, 0.1);
-  background-color: rgb(230 230 230 / 50%);
-  border: 1px solid rgba(67, 192, 215, 0.5) !important;
-  border-radius: 12px;
-  box-shadow: rgba(67, 192, 215, 0.5) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px !important;
-  font-style: italic;
-  left: 6%;
-  padding: 9px 15px;
+.infoMsg {
+  top: 8px;
+  left: 16px;
+  right: 16px;
+}
+
+.disabledCursor {
+  cursor: no-drop;
+}
+
+.disabledCard {
   pointer-events: none;
-  top: 15px;
-  width: 92%;
+  opacity: 0.3;
 }
