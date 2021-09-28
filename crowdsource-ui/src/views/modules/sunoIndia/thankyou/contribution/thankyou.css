@@ -138,7 +138,6 @@ h4,
   line-height: 22px;
 }
 
-
 .thankyou-content-wrapper.stats-container {
   border-radius: 34px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -203,7 +202,8 @@ h4,
 #platinum_reward_msg_1,
 #platinum_reward_msg_2 {
   text-align: left;
-  width: 40%;
+  width: 100%;
+  max-width: fit-content;
 }
 
 .badges_information .disable {
@@ -394,7 +394,7 @@ h4,
 .btn-custom-primary {
   min-width: 194px !important;
   font-size: 18px;
-  line-height: 32px;
+  line-height: 28px;
   align-items: center;
   text-align: center;
   color: #ffffff;
