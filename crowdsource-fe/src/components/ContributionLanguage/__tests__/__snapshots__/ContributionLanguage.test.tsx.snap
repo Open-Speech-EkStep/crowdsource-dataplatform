@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Suno Actions should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="row"
+  >
+    <div
+      class="col-6"
+      data-testid="ContributionLanguage"
+    >
+      <div
+        class="contributionLanguage"
+      >
+        <div
+          class="d-flex flex-column flex-md-row align-items-md-center"
+        >
+          <label
+            class="label mb-0 form-label"
+            for="contribution"
+          >
+            selectLanguagePrompt1:
+          </label>
+          <select
+            aria-label="Select the language for contribution"
+            class="selectContributionLanguage mt-3 mt-md-0 ms-md-2 form-select"
+            data-testid="select"
+            id="contribution"
+            name="contribution"
+          >
+            <option
+              value="English"
+            >
+              English
+            </option>
+            <option
+              value="Hindi"
+            >
+              हिंदी
+            </option>
+            <option
+              value="Tamil"
+            >
+              தமிழ்
+            </option>
+            <option
+              value="Telugu"
+            >
+              తెలుగు
+            </option>
+            <option
+              value="Assamese"
+            >
+              অসমীয়া
+            </option>
+            <option
+              value="Bengali"
+            >
+              বাংলা
+            </option>
+            <option
+              value="Gujarati"
+            >
+              ગુજરાતી
+            </option>
+            <option
+              value="Kannada"
+            >
+              ಕನ್ನಡ
+            </option>
+            <option
+              value="Malayalam"
+            >
+              മലയാളം
+            </option>
+            <option
+              value="Marathi"
+            >
+              मराठी
+            </option>
+            <option
+              value="Odia"
+            >
+              ଓଡିଆ
+            </option>
+            <option
+              value="Punjabi"
+            >
+              ਪੰਜਾਬੀ
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

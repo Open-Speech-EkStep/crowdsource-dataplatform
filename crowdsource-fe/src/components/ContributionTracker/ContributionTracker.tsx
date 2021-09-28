@@ -72,6 +72,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
 
   useEffect(() => {
     if (contributionLanguage) {
+      setChartFilterType('byDuration');
       hrsMutate();
       speakerMutate();
     }

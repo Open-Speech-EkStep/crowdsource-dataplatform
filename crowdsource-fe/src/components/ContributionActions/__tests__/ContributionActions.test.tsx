@@ -74,6 +74,6 @@ describe('ContributionActions', () => {
   it('should render the result of card state', async () => {
     await setup();
 
-    expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).toHaveClass('cardWarning');
+    expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).toHaveClass('infoMsg');
   });
 });
