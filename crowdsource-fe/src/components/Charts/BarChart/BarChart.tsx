@@ -51,7 +51,7 @@ const BarChart = (props: ChartProps) => {
 
     series.dataFields.categoryX = 'category';
     const columnTemplate = series.columns.template;
-    columnTemplate.tooltipHTML = props.data.tooltipTemplate;
+    columnTemplate.tooltipHTML = `<div>{tooltipText}</div>`;
     columnTemplate.tooltipX = am4core.percent(50);
     columnTemplate.tooltipY = am4core.percent(0);
     series.tooltip.getFillFromObject = false;

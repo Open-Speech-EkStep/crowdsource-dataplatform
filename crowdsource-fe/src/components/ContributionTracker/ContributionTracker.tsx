@@ -10,6 +10,7 @@ import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { TopLanguagesByHours, TopLanguagesBySpeaker } from 'types/TopLanguages';
+import { convertTimeFormat } from 'utils/utils';
 
 import styles from './ContributionTracker.module.scss';
 
@@ -24,7 +25,7 @@ const mapChartData = (data: any, key: string, langauge: string, initiativeMedia:
     if (contributedLanguageHours) {
       topLanguageArray.push(contributedLanguageHours);
     } else {
-      topLanguageArray.push({ language: langauge, total_contributions: '0.000' });
+      topLanguageArray.push({ language: langauge, total_contributions: 0.012 });
     }
     let remainingLanguage = data.filter((item: any) => item?.language !== langauge);
     remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
@@ -39,6 +40,7 @@ const getTopLanguagesByHoursChartData = (topLanguagesByHours?: TopLanguagesByHou
     topLanguagesByHours?.map(topLanguageByHours => ({
       category: topLanguageByHours?.language,
       value: topLanguageByHours?.total_contributions,
+      tooltipText: convertTimeFormat(topLanguageByHours?.total_contributions),
     })) ?? []
   );
 };
@@ -48,6 +50,7 @@ const getTopLanguagesBySpeakerChartData = (topLanguagesBySpeaker?: TopLanguagesB
     topLanguagesBySpeaker?.map(topLanguagesBySpeaker => ({
       category: topLanguagesBySpeaker?.language,
       value: topLanguagesBySpeaker?.total_speakers,
+      tooltipText: topLanguagesBySpeaker?.total_speakers + ' Sentences',
     })) ?? []
   );
 };
