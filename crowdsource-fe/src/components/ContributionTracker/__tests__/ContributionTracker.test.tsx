@@ -1,3 +1,5 @@
+import '__fixtures__/mockComponentsWithSideEffects';
+
 import { when } from 'jest-when';
 
 import { render, screen, userEvent, waitFor } from 'utils/testUtils';
