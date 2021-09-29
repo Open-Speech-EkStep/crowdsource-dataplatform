@@ -6,7 +6,7 @@ exports[`ViewAll Detail should render the view all detail button 1`] = `
     class="mb-9 mt-md-12 row"
   >
     <div
-      class="mt-3 d-flex justify-content-center col"
+      class="d-flex justify-content-center col"
     >
       <a
         class="info primary btn btn-primary"
