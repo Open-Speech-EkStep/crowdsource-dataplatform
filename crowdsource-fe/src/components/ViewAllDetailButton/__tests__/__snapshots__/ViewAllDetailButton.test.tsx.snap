@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewAll Detail should render the view all detail button 1`] = `
+<DocumentFragment>
+  <div
+    class="mb-9 mt-md-12 row"
+  >
+    <div
+      class="mt-3 d-flex justify-content-center col"
+    >
+      <a
+        class="info primary btn btn-primary"
+        data-testid="StartParticipating"
+        href="/sunoIndia/dashboard.html"
+        role="button"
+        tabindex="0"
+      >
+        viewAllDetail
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;

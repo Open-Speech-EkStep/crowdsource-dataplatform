@@ -11,6 +11,7 @@ const routePaths: { [key: string]: string } = {
   sunoIndiaHome: `${initiativeBaseRoute.sunoIndia}/home`,
   sunoIndiaTranscribe: `${initiativeBaseRoute.sunoIndia}/record.html`,
   sunoIndiaValidate: `${initiativeBaseRoute.sunoIndia}/validator-page.html`,
+  sunoIndiaDashboard: `${initiativeBaseRoute.sunoIndia}/dashboard.html`,
   boloIndiaTranscribe: `${initiativeBaseRoute.boloIndia}/record.html`,
   boloIndiaValidate: `${initiativeBaseRoute.boloIndia}/validator-page.html`,
   dekhoIndiaTranscribe: `${initiativeBaseRoute.dekhoIndia}/record.html`,
