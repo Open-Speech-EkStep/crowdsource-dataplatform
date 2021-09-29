@@ -21,7 +21,6 @@ interface LanguageWithData {
 interface ContributionActionProps {
   initiative: string;
   initiativeType: string;
-  contributionLanguage: string;
 }
 
 const ContributionActions = (props: ContributionActionProps) => {

@@ -47,7 +47,7 @@ const ContributionLanguage = () => {
             <Form.Label className={`${styles.label} mb-0`}>{t('selectLanguagePrompt1')}:</Form.Label>
             <Form.Select
               data-testid="select"
-              value={contributionLanguage || ''}
+              value={contributionLanguage || DISPLAY_LANGUAGES[currentLocale ?? DEFAULT_LOCALE]}
               aria-label="Select the language for contribution"
               className={`${styles.selectContributionLanguage} mt-3 mt-md-0 ms-md-2`}
               name="contribution"

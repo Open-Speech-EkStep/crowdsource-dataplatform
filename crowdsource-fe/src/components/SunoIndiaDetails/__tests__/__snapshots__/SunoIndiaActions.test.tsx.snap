@@ -1,0 +1,333 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Suno Actions should render the suno india action snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="mt-7 mt-md-9"
+    data-testid="SunoIndiaActions"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="col-6"
+        data-testid="ContributionLanguage"
+      >
+        <div
+          class="contributionLanguage"
+        >
+          <div
+            class="d-flex flex-column flex-md-row align-items-md-center"
+          >
+            <label
+              class="label mb-0 form-label"
+              for="contribution"
+            >
+              selectLanguagePrompt1:
+            </label>
+            <select
+              aria-label="Select the language for contribution"
+              class="selectContributionLanguage mt-3 mt-md-0 ms-md-2 form-select"
+              data-testid="select"
+              id="contribution"
+              name="contribution"
+            >
+              <option
+                value="English"
+              >
+                English
+              </option>
+              <option
+                value="Hindi"
+              >
+                हिंदी
+              </option>
+              <option
+                value="Tamil"
+              >
+                தமிழ்
+              </option>
+              <option
+                value="Telugu"
+              >
+                తెలుగు
+              </option>
+              <option
+                value="Assamese"
+              >
+                অসমীয়া
+              </option>
+              <option
+                value="Bengali"
+              >
+                বাংলা
+              </option>
+              <option
+                value="Gujarati"
+              >
+                ગુજરાતી
+              </option>
+              <option
+                value="Kannada"
+              >
+                ಕನ್ನಡ
+              </option>
+              <option
+                value="Malayalam"
+              >
+                മലയാളം
+              </option>
+              <option
+                value="Marathi"
+              >
+                मराठी
+              </option>
+              <option
+                value="Odia"
+              >
+                ଓଡିଆ
+              </option>
+              <option
+                value="Punjabi"
+              >
+                ਪੰਜਾਬੀ
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="root"
+      data-testid="ContributionActions"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="mt-7 mt-md-9 col-md-6"
+        >
+          <div
+            class="disabledCursor"
+          >
+            <a
+              class="d-block disabledCard"
+              href="/sunoIndia/record.html"
+            >
+              <div
+                class="root overflow-hidden"
+                data-testid="ActionCard"
+              >
+                <div
+                  class="cardGradient"
+                >
+                  <div
+                    class="cardTopBg"
+                  >
+                    <div
+                      class="cardBottomBg"
+                    >
+                      <div
+                        class="infoMsg position-absolute display-6"
+                        data-testid="ActionCardWarningMessage"
+                      >
+                        <div
+                          class="root d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                          data-testid="InfoMessage"
+                        >
+                          <div
+                            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                          >
+                            <div
+                              style="box-sizing: border-box; display: block; max-width: 100%;"
+                            >
+                              <img
+                                alt=""
+                                aria-hidden="true"
+                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                              />
+                            </div>
+                            <img
+                              alt="Info Icon"
+                              data-nimg="intrinsic"
+                              decoding="async"
+                              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                            />
+                            <noscript />
+                          </div>
+                          <span
+                            class="ms-2"
+                          >
+                            contributeWarningMsg
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        class="card d-flex p-5 p-md-7 p-xl-9 align-items-center"
+                      >
+                        <div
+                          class="flex-grow-1"
+                        >
+                          <h1
+                            class="type"
+                          >
+                            transcribe
+                          </h1>
+                          <p
+                            class="text mt-1 mt-md-2 mb-0"
+                          >
+                            sunoContributionTagline
+                          </p>
+                        </div>
+                        <div
+                          class="icon iconShadowGreen d-flex rounded-circle flex-shrink-0"
+                        >
+                          <div
+                            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                          >
+                            <div
+                              style="box-sizing: border-box; display: block; max-width: 100%;"
+                            >
+                              <img
+                                alt=""
+                                aria-hidden="true"
+                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                              />
+                            </div>
+                            <img
+                              alt="Contribute Icon"
+                              data-nimg="intrinsic"
+                              decoding="async"
+                              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                            />
+                            <noscript />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-9 mt-md-9 col-md-6"
+        >
+          <div
+            class="disabledCursor"
+          >
+            <a
+              class="d-block disabledCard"
+              href="/sunoIndia/validator-page.html"
+            >
+              <div
+                class="root overflow-hidden"
+                data-testid="ActionCard"
+              >
+                <div
+                  class="cardGradient"
+                >
+                  <div
+                    class="cardTopBg"
+                  >
+                    <div
+                      class="cardBottomBg"
+                    >
+                      <div
+                        class="infoMsg position-absolute display-6"
+                        data-testid="ActionCardWarningMessage"
+                      >
+                        <div
+                          class="root d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                          data-testid="InfoMessage"
+                        >
+                          <div
+                            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                          >
+                            <div
+                              style="box-sizing: border-box; display: block; max-width: 100%;"
+                            >
+                              <img
+                                alt=""
+                                aria-hidden="true"
+                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                              />
+                            </div>
+                            <img
+                              alt="Info Icon"
+                              data-nimg="intrinsic"
+                              decoding="async"
+                              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                            />
+                            <noscript />
+                          </div>
+                          <span
+                            class="ms-2"
+                          >
+                            validateWarningMsg
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        class="card d-flex p-5 p-md-7 p-xl-9 align-items-center"
+                      >
+                        <div
+                          class="flex-grow-1"
+                        >
+                          <h1
+                            class="type"
+                          >
+                            validate
+                          </h1>
+                          <p
+                            class="text mt-1 mt-md-2 mb-0"
+                          >
+                            sunoValidationTagline
+                          </p>
+                        </div>
+                        <div
+                          class="icon iconShadowBlue d-flex rounded-circle flex-shrink-0"
+                        >
+                          <div
+                            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                          >
+                            <div
+                              style="box-sizing: border-box; display: block; max-width: 100%;"
+                            >
+                              <img
+                                alt=""
+                                aria-hidden="true"
+                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                              />
+                            </div>
+                            <img
+                              alt="Contribute Icon"
+                              data-nimg="intrinsic"
+                              decoding="async"
+                              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                            />
+                            <noscript />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

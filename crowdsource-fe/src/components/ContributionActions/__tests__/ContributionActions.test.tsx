@@ -55,11 +55,7 @@ describe('ContributionActions', () => {
     );
 
     const renderResult = render(
-      <ContributionActions
-        initiativeType={initiativeType}
-        initiative={initiative}
-        contributionLanguage={language}
-      />
+      <ContributionActions initiativeType={initiativeType} initiative={initiative} />
     );
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
