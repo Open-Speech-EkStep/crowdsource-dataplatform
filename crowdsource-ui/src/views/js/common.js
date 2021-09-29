@@ -331,8 +331,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('#languageInTopMob').addClass('d-none');
   }
   const nextBadgeName = data.nextBadgeType && localeStrings[data.nextBadgeType.toLowerCase()];
-  $('#sentence-away-count').text(Number(data.nextMilestone) - Number(data.contributionCount));
-  $('#sentence_away_badge').text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1));
+  if (nextBadgeName) {
+    $('#sentence-away-count').text(Number(data.nextMilestone) - Number(data.contributionCount));
+    $('#sentence_away_badge').text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1));
+  }
 
   const source = functionalFlow === 'validator' ? 'validate' : 'contribute';
   $('#bronze_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'bronze', source, module));
