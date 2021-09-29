@@ -64,12 +64,6 @@ const BarChart = (props: ChartProps) => {
     columnTemplate.adapter.add('stroke', (value: any, target: any) => {
       return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
     });
-    if (props.data.isScrollbar) {
-      const scrollbarX = new am4charts.XYChartScrollbar();
-      scrollbarX.series.push(series);
-      x.scrollbarX = scrollbarX;
-    }
-
     chart.current = x;
 
     return () => {

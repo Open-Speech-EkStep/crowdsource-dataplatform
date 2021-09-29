@@ -13,6 +13,8 @@ const routePaths: { [key: string]: string } = {
   sunoIndiaValidate: `${initiativeBaseRoute.sunoIndia}/validator-page.html`,
   boloIndiaTranscribe: `${initiativeBaseRoute.boloIndia}/record.html`,
   boloIndiaValidate: `${initiativeBaseRoute.boloIndia}/validator-page.html`,
+  dekhoIndiaTranscribe: `${initiativeBaseRoute.dekhoIndia}/record.html`,
+  dekhoIndiaValidate: `${initiativeBaseRoute.dekhoIndia}/validator-page.html`,
   boloIndiaHome: '/boloIndia/home.html',
   likhoIndiaHome: '/likhoIndia/home.html',
   dekhoIndiaHome: '/dekhoIndia/home.html',

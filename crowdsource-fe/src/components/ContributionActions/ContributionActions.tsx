@@ -14,7 +14,6 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import styles from './ContributionActions.module.scss';
 
 interface LanguageWithData {
-  count: string;
   type: string;
   language: string;
 }
@@ -30,7 +29,7 @@ const ContributionActions = (props: ContributionActionProps) => {
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const { data: languageWithData, mutate: languageWithDataMutate } = useFetch<LanguageWithData[]>(
-    apiPaths.cumulativeCount,
+    apiPaths.languagesWithData,
     {
       revalidateOnMount: false,
     }
@@ -51,17 +50,16 @@ const ContributionActions = (props: ContributionActionProps) => {
     data => data.type === props.initiativeType && data.language === contributionLanguage
   );
 
-  let isContributionEnabled = false;
-  let isValidationEnabled = false;
+  let isAllContributed = true;
+  let hasTarget = false;
 
   if (isLanguageAvailable && cardState) {
     const filteredData: any =
       cardState.find(
         (data: any) => data.type === props.initiativeType && data.language === contributionLanguage
       ) || {};
-
-    isValidationEnabled = filteredData.hastarget;
-    isContributionEnabled = !filteredData.isallcontributed ?? true;
+    hasTarget = filteredData.hastarget ?? false;
+    isAllContributed = filteredData.isallcontributed ?? false;
   }
 
   return (
@@ -73,7 +71,7 @@ const ContributionActions = (props: ContributionActionProps) => {
             icon={`${props.initiative}_contribute_icon.svg`}
             text={t(`${props.initiative}ContributionTagline`)}
             shadow="Green"
-            disabled={!isContributionEnabled}
+            disabled={isAllContributed}
             warningMsg="contributeWarningMsg"
             initiative={props.initiative}
           />
@@ -84,7 +82,7 @@ const ContributionActions = (props: ContributionActionProps) => {
             icon="validate.svg"
             text={t(`${props.initiative}ValidationTagline`)}
             shadow="Blue"
-            disabled={!isValidationEnabled}
+            disabled={!hasTarget}
             warningMsg="validateWarningMsg"
             initiative={props.initiative}
           />

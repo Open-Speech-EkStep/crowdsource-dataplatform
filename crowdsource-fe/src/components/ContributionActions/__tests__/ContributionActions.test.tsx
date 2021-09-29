@@ -10,7 +10,7 @@ describe('ContributionActions', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
 
-    fetchMock.doMockOnceIf('/aggregated-json/cumulativeCount.json').mockResponseOnce(
+    fetchMock.doMockOnceIf('/aggregated-json/languagesWithData.json').mockResponseOnce(
       JSON.stringify([
         {
           language: 'Assamese',
@@ -21,7 +21,7 @@ describe('ContributionActions', () => {
           type: 'asr',
         },
         {
-          language: 'Hindi',
+          language: 'English',
           type: 'ocr',
         },
         {
@@ -46,12 +46,6 @@ describe('ContributionActions', () => {
           type: 'asr',
         },
         {
-          hastarget: true,
-          isallcontributed: true,
-          language: 'English',
-          type: 'asr',
-        },
-        {
           hastarget: false,
           isallcontributed: false,
           language: 'Assamese',
@@ -71,7 +65,7 @@ describe('ContributionActions', () => {
       expect(localStorage.getItem).toBeCalled();
     });
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeCount.json');
+      expect(fetchMock).toBeCalledWith('/aggregated-json/languagesWithData.json');
     });
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/aggregated-json/enableDisableCards.json');
@@ -106,6 +100,18 @@ describe('ContributionActions', () => {
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');
     });
+    await waitFor(() => {
+      expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
+    });
+  });
+
+  it('should make set he "{}" value when no value found in enable disable card api', async () => {
+    await setup('ocr', 'dekho', 'English');
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).toHaveClass('d-none');
+    });
+
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
     });
