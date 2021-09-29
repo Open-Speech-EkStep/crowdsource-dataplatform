@@ -101,7 +101,6 @@
   "contributionGraphYLabel2": "Contribution (total sentences)",
   "selectLanguagePrompt1": "Select the language for contribution",
   "selectLanguagePrompt2": "Select the language pair for contribution",
-  "hours": "hour(s)",
   "sentences": "sentence(s)",
   "images": "image(s)",
   "progressStatus": "<span>{{average}}%</span> of {{initiativeName}} Target Achieved",
@@ -114,7 +113,7 @@
   "metaOGSiteName": "Bhasha Daan",
   "peopleParticipated": "People participated",
   "durationTranscribed": "Duration transcribed",
-  "durationValidated": "Duration Validated",
+  "durationValidated": "Duration validated",
 
   "contributionTrackerHeader": "Contribution Tracker",
   "contributionTrackerSubHeader": "Your language and top 3 contributed languages",
@@ -125,5 +124,21 @@
   "topLanguages": "Top languages",
   "transcribe": "Transcribe",
   "validate": "Validate",
-  "languages": "Languages"
+  "languages": "Languages",
+  "hours": "hour(s)",
+  "minutes": "minute(s)",
+  "seconds": "second(s)",
+
+  "assamese": "Assamese",
+  "english": "English",
+  "telugu": "Telugu",
+  "hindi": "Hindi",
+  "marathi": "Marathi",
+  "tamil": "Tamil",
+  "kannada": "Kannada",
+  "malayalam": "Malayalam",
+  "bengali": "Bengali",
+  "odia": "Odia",
+  "punjabi": "Punjabi",
+  "gujarati": "Gujarati"
 }

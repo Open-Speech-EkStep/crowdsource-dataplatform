@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
-import { useTranslation } from 'next-i18next';
+import { useTranslation, i18n } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
 
 import { BarChart } from 'components/Charts';
@@ -38,7 +38,7 @@ const mapChartData = (data: any, key: string, langauge: string, initiativeMedia:
 const getTopLanguagesByHoursChartData = (topLanguagesByHours?: TopLanguagesByHours[]) => {
   return (
     topLanguagesByHours?.map(topLanguageByHours => ({
-      category: topLanguageByHours?.language,
+      category: i18n?.t((topLanguageByHours?.language).toLowerCase()),
       value: topLanguageByHours?.total_contributions,
       tooltipText: convertTimeFormat(topLanguageByHours?.total_contributions),
     })) ?? []
@@ -48,7 +48,7 @@ const getTopLanguagesByHoursChartData = (topLanguagesByHours?: TopLanguagesByHou
 const getTopLanguagesBySpeakerChartData = (topLanguagesBySpeaker?: TopLanguagesBySpeaker[]) => {
   return (
     topLanguagesBySpeaker?.map(topLanguagesBySpeaker => ({
-      category: topLanguagesBySpeaker?.language,
+      category: i18n?.t((topLanguagesBySpeaker?.language).toLowerCase()),
       value: topLanguagesBySpeaker?.total_speakers,
       tooltipText: topLanguagesBySpeaker?.total_speakers + ' Sentences',
     })) ?? []
@@ -104,7 +104,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
     props.initiativeMedia
   );
 
-  const chartLegendDeails = useMemo(
+  const chartLegendDetails = useMemo(
     () => ({
       colors: ['#F7CC56', '#F7CC56', '#F7CC56', '#EF8537'],
       xAxisLabel: t('month'),
@@ -120,9 +120,9 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
           : getTopLanguagesBySpeakerChartData(topSpeakersData),
       yAxisLabel:
         chartFilterType === 'byDuration' ? t('contributionGraphYLabel1') : t('contributionGraphYLabel2'),
-      ...chartLegendDeails,
+      ...chartLegendDetails,
     }),
-    [chartFilterType, chartLegendDeails, t, topLanguageHrsData, topSpeakersData]
+    [chartFilterType, chartLegendDetails, t, topLanguageHrsData, topSpeakersData]
   );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
