@@ -15,9 +15,12 @@ const useNavLink = () => {
   const { asPath: currentRoutePath } = useRouter();
   const getNavLinkProps = useCallback(
     routePath => ({
-      className: classnames(`${styles.link} d-flex align-items-center text-primary display-5 mx-xl-3`, {
-        active: currentRoutePath === routePath,
-      }),
+      className: classnames(
+        `${styles.link} d-flex align-items-center text-primary display-5 p-4 px-xl-5 py-xl-0`,
+        {
+          [styles.activeLink]: currentRoutePath === routePath,
+        }
+      ),
       'aria-current': currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
     }),
     [currentRoutePath]
