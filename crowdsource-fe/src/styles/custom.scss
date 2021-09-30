@@ -176,36 +176,66 @@ p {
   font-family: Roboto, sans-serif !important;
 }
 
-@include media-breakpoint-up(md) {
-  .display-1 {
+.display-1 {
+  font-size: 1.5rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 1.75rem !important; // 28px
   }
+}
 
-  .display-2 {
+.display-2 {
+  font-size: 1.25rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 1.5rem !important; // 24px
   }
+}
 
-  .display-3 {
+.display-3 {
+  font-size: 1.125rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 1.25rem !important; // 20px
   }
+}
 
-  .display-4 {
+.display-4 {
+  font-size: 1rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 1.125rem !important; // 18px
   }
+}
 
-  .display-5 {
+.display-5 {
+  font-size: 0.875rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 1rem !important; // 16px
   }
+}
 
-  .display-6 {
+.display-6 {
+  font-size: 0.75rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 0.875rem !important; // 14px
   }
+}
 
-  .display-7 {
+.display-7 {
+  font-size: 0.6875rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 0.75rem !important; // 12px
   }
+}
 
-  .display-8 {
+.display-8 {
+  font-size: 0.625rem !important;
+
+  @include media-breakpoint-up(md) {
     font-size: 0.6875rem !important; // 11px
   }
 }
