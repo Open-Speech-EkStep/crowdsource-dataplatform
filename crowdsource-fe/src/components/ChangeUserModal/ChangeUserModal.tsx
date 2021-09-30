@@ -7,9 +7,11 @@ import Modal from 'components/Modal';
 interface ChangeUserModalProps {
   onHide: () => void;
   show: Boolean;
+  doRedirection?: boolean;
+  redirectionUrl?: string;
 }
 
-const ChangeUserModal = ({ onHide, ...rest }: ChangeUserModalProps) => {
+const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: ChangeUserModalProps) => {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +28,7 @@ const ChangeUserModal = ({ onHide, ...rest }: ChangeUserModalProps) => {
       }
     >
       <div className="px-5 px-md-9">
-        <ChangeUserForm onSubmit={onHide} />
+        <ChangeUserForm onSubmit={onHide} doRedirection={doRedirection} redirectionUrl={redirectionUrl} />
       </div>
     </Modal>
   );

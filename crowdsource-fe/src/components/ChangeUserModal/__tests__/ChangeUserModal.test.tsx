@@ -7,7 +7,9 @@ describe('ChangeUserModal', () => {
     const onHide = jest.fn();
 
     return {
-      ...render(<ChangeUserModal show={true} onHide={onHide} />),
+      ...render(
+        <ChangeUserModal show={true} onHide={onHide} doRedirection={true} redirectionUrl={'/suno'} />
+      ),
       onHide,
     };
   };

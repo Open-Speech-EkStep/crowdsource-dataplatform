@@ -112,7 +112,8 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
           >
             <a
               class="d-block disabledCard"
-              href="/sunoIndia/record.html"
+              data-testid="cardAnchor"
+              href="#"
             >
               <div
                 class="root overflow-hidden"
@@ -223,7 +224,8 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
           >
             <a
               class="d-block disabledCard"
-              href="/sunoIndia/validator-page.html"
+              data-testid="cardAnchor"
+              href="#"
             >
               <div
                 class="root overflow-hidden"

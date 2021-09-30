@@ -7,7 +7,8 @@ exports[`ActionCard should render the component and match it against stored snap
   >
     <a
       class="d-block"
-      href="/sunoIndia/record.html"
+      data-testid="cardAnchor"
+      href="#"
     >
       <div
         class="root overflow-hidden"

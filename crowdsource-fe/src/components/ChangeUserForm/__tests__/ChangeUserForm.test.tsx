@@ -1,15 +1,18 @@
+import router from 'next/router';
+
 import { render, verifyAxeTest, screen, userEvent } from 'utils/testUtils';
 
 import ChangeUserForm from '../ChangeUserForm';
 
 describe('ChangeUserForm', () => {
-  const setup = () => {
+  const setup = (redirectionUrl?: any, doRedirection?: boolean) => {
+    router.locale = undefined;
     const onSubmit = jest.fn();
 
     return {
       ...render(
         <>
-          <ChangeUserForm onSubmit={onSubmit} />
+          <ChangeUserForm onSubmit={onSubmit} doRedirection={doRedirection} redirectionUrl={redirectionUrl} />
           <button form="changeUserForm">submit</button>
         </>
       ),
@@ -26,7 +29,7 @@ describe('ChangeUserForm', () => {
   });
 
   it('should handle for valid/invalid username', () => {
-    setup();
+    setup('/sunoIndia', true);
 
     expect(screen.queryByText('userNameError')).not.toBeInTheDocument();
     expect(screen.getByText('userNameHint')).toBeInTheDocument();
@@ -92,7 +95,7 @@ describe('ChangeUserForm', () => {
   });
 
   it('should handle gender radio combinations', () => {
-    setup();
+    setup(null, true);
 
     userEvent.click(screen.getByRole('radio', { name: 'male' }));
 

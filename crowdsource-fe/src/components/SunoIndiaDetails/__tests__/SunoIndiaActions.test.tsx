@@ -10,6 +10,19 @@ describe('Suno Actions', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => 'English');
 
+    const speakerDetails = {
+      userName: 'abc',
+      motherTongue: '',
+      age: '',
+      gender: '',
+      language: 'English',
+      toLanguage: '',
+    };
+
+    when(localStorage.getItem)
+      .calledWith('speakerDetails')
+      .mockImplementation(() => JSON.stringify(speakerDetails));
+
     return render(<SunoIndiaActions />);
   };
 

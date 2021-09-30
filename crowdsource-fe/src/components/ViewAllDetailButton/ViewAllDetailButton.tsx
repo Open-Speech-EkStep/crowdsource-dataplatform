@@ -14,7 +14,7 @@ const ViewAllDetailButton = ({ initiative }: ViewAllDetailButtonProps) => {
   const { t } = useTranslation();
 
   return (
-    <Row className="mb-9 mt-md-12">
+    <Row className="mb-9 mt-md-12 mx-0" data-testid="ViewAllDetailButton">
       <Col className="d-flex justify-content-center">
         <Link href={routePaths[`${initiative}IndiaDashboard`]} passHref>
           <Button data-testid="StartParticipating" as="a">

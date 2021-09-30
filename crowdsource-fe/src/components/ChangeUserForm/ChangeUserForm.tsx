@@ -21,13 +21,15 @@ const testUserName = (value: string) => {
 
 interface ChangeUserFormProps {
   onSubmit: () => void;
+  doRedirection?: boolean;
+  redirectionUrl?: string;
 }
 
-const ChangeUserForm = ({ onSubmit }: ChangeUserFormProps) => {
+const ChangeUserForm = ({ onSubmit, doRedirection, redirectionUrl }: ChangeUserFormProps) => {
   const { locales, locale: currentLocale = DEFAULT_LOCALE } = useRouter();
   const { t } = useTranslation();
   const [, setSpeakerDetails] = useLocalStorage(localStorageConstants.speakerDetails);
-
+  const router = useRouter();
   const [isOtherGenderVisible, setOtherGenderVisibility] = useState(false);
   const [formData, setFormData] = useState({
     userName: '',
@@ -72,6 +74,9 @@ const ChangeUserForm = ({ onSubmit }: ChangeUserFormProps) => {
       });
 
       onSubmit();
+    }
+    if (doRedirection) {
+      router.push(redirectionUrl ?? '');
     }
   };
 

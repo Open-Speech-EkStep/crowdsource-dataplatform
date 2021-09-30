@@ -10,6 +10,19 @@ describe('ContributionActions', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
 
+    const speakerDetails = {
+      userName: 'abc',
+      motherTongue: '',
+      age: '',
+      gender: '',
+      language: 'English',
+      toLanguage: '',
+    };
+
+    when(localStorage.getItem)
+      .calledWith('speakerDetails')
+      .mockImplementation(() => JSON.stringify(speakerDetails));
+
     fetchMock.doMockOnceIf('/aggregated-json/languagesWithData.json').mockResponseOnce(
       JSON.stringify([
         {

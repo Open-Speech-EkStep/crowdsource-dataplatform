@@ -17,7 +17,8 @@ exports[`ContributionActions should render the component and matches it against 
         >
           <a
             class="d-block disabledCard"
-            href="/boloIndia/record.html"
+            data-testid="cardAnchor"
+            href="#"
           >
             <div
               class="root overflow-hidden"
@@ -130,7 +131,8 @@ exports[`ContributionActions should render the component and matches it against 
         >
           <a
             class="d-block disabledCard"
-            href="/boloIndia/validator-page.html"
+            data-testid="cardAnchor"
+            href="#"
           >
             <div
               class="root overflow-hidden"

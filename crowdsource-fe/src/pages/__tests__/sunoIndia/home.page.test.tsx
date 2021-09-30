@@ -15,5 +15,6 @@ describe('Suno Home page', () => {
 
     expect(screen.getByTestId('SunoIndiaActions')).toBeInTheDocument();
     expect(screen.getByTestId('SunoIndiaDetails')).toBeInTheDocument();
+    expect(screen.getByTestId('ViewAllDetailButton')).toBeInTheDocument();
   });
 });

@@ -3,7 +3,8 @@
 exports[`ViewAll Detail should render the view all detail button 1`] = `
 <DocumentFragment>
   <div
-    class="mb-9 mt-md-12 row"
+    class="mb-9 mt-md-12 mx-0 row"
+    data-testid="ViewAllDetailButton"
   >
     <div
       class="d-flex justify-content-center col"
