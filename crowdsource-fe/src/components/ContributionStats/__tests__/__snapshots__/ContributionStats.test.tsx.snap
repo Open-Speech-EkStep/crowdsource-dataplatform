@@ -31,9 +31,9 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="text-light text-uppercase mt-1 display-2 text-center"
+                class="text-light mt-1 display-3 text-center"
               >
-                suno india
+                SUNO INDIA
               </span>
             </div>
           </div>
@@ -52,9 +52,9 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="text-light text-uppercase mt-1 display-2 text-center"
+                class="text-light mt-1 display-3 text-center"
               >
-                bolo india
+                BOLO INDIA
               </span>
             </div>
           </div>
@@ -73,9 +73,9 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="text-light text-uppercase mt-1 display-2 text-center"
+                class="text-light mt-1 display-3 text-center"
               >
-                likho india
+                LIKHO INDIA
               </span>
             </div>
           </div>
@@ -94,9 +94,9 @@ exports[`ContributionStats should render the component and matches it against st
                 />
               </span>
               <span
-                class="text-light text-uppercase mt-1 display-2 text-center"
+                class="text-light mt-1 display-3 text-center"
               >
-                dekho india
+                DEKHO INDIA
               </span>
             </div>
           </div>

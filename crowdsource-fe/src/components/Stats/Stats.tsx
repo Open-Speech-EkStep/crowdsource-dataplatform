@@ -29,7 +29,7 @@ const Stats = ({ contents }: StatsProps) => {
                     {stat ? stat : <Spinner data-testid="StatsSpinner" animation="border" variant="light" />}
                   </span>
                 }
-                <span className="text-light text-uppercase mt-1 display-2 text-center">{content.label}</span>
+                <span className="text-light mt-1 display-3 text-center">{content.label}</span>
               </div>
             </Col>
           );

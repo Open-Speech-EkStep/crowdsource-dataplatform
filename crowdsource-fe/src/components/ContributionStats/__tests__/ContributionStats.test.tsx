@@ -93,9 +93,9 @@ describe('ContributionStats', () => {
 
   it('should render the result for landing page', async () => {
     await setup();
-    expect(screen.getByText('bolo india')).toBeInTheDocument();
-    expect(screen.getByText('suno india')).toBeInTheDocument();
-    expect(screen.getByText('dekho india')).toBeInTheDocument();
-    expect(screen.getByText('likho india')).toBeInTheDocument();
+    expect(screen.getByText('BOLO INDIA')).toBeInTheDocument();
+    expect(screen.getByText('SUNO INDIA')).toBeInTheDocument();
+    expect(screen.getByText('DEKHO INDIA')).toBeInTheDocument();
+    expect(screen.getByText('LIKHO INDIA')).toBeInTheDocument();
   });
 });

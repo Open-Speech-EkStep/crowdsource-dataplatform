@@ -34,7 +34,7 @@ exports[`Logo should render the component and matches it against stored snapshot
       </div>
     </a>
     <a
-      class="d-none align-items-center d-md-flex"
+      class="d-none align-items-center d-md-flex ms-0 ms-lg-3"
       href="/"
     >
       <div
@@ -64,7 +64,7 @@ exports[`Logo should render the component and matches it against stored snapshot
       class="sep d-flex align-self-center border border-1 border-primary mx-3"
     />
     <a
-      class="label d-flex align-items-center text-primary px-xl-2 display-1 position-relative"
+      class="label d-flex align-items-center text-primary px-xl-2 position-relative"
       href="/home"
     >
       bhasha

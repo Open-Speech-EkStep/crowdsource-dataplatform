@@ -87,16 +87,19 @@
 }
 
 .infoMsg {
-  left: 16px;
-  right: 16px;
-  top: 8px;
+  left: 12px;
+  right: 12px;
+  top: 12px;
 }
 
 .disabledCursor {
   cursor: no-drop;
 }
 
-.disabledCard {
-  opacity: 0.3;
+.disableClick {
   pointer-events: none;
+}
+
+.disableCard {
+  opacity: 0.3;
 }

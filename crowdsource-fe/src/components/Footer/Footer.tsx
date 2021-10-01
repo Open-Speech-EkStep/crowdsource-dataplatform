@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer
       data-testid="Footer"
-      className={`${styles.root} d-flex align-items-center bg-light text-primary py-4`}
+      className={`${styles.root} display-5 d-flex align-items-center bg-light text-primary py-4`}
     >
       <Container fluid="lg" className="d-flex flex-column flex-lg-row">
         <div className="d-flex flex-column flex-lg-row align-items-center order-2 order-lg-1">

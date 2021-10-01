@@ -73,7 +73,11 @@ const ContributionStats = (props: ContributionStatsProps) => {
           ? null
           : participationStats.filter(stats => stats['type'] === typeMap[initiative])[0]?.count || '0';
 
-      statsContents.push({ id: initiative, stat: stat, label: `${t(initiative)} ${t('india')}` });
+      statsContents.push({
+        id: initiative,
+        stat: stat,
+        label: `${t(initiative)} ${t('india')}`.toUpperCase(),
+      });
     });
   } else {
     setStatsForInitiatives();

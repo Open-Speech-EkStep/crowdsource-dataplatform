@@ -16,7 +16,7 @@ exports[`ContributionActions should render the component and matches it against 
           class="disabledCursor"
         >
           <a
-            class="d-block disabledCard"
+            class="d-block disableClick"
             data-testid="cardAnchor"
             href="#"
           >
@@ -72,7 +72,7 @@ exports[`ContributionActions should render the component and matches it against 
                       </div>
                     </div>
                     <div
-                      class="card d-flex p-5 p-md-7 p-xl-9 align-items-center"
+                      class="card d-flex p-5 p-md-7 p-xl-9 align-items-center disableCard"
                     >
                       <div
                         class="flex-grow-1"
@@ -130,7 +130,7 @@ exports[`ContributionActions should render the component and matches it against 
           class="disabledCursor"
         >
           <a
-            class="d-block disabledCard"
+            class="d-block disableClick"
             data-testid="cardAnchor"
             href="#"
           >
@@ -186,7 +186,7 @@ exports[`ContributionActions should render the component and matches it against 
                       </div>
                     </div>
                     <div
-                      class="card d-flex p-5 p-md-7 p-xl-9 align-items-center"
+                      class="card d-flex p-5 p-md-7 p-xl-9 align-items-center disableCard"
                     >
                       <div
                         class="flex-grow-1"
