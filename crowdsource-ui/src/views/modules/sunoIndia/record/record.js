@@ -1,4 +1,4 @@
-const fetch = require('../common/fetch')
+const fetch = require('../common/fetch');
 const {
   setPageContentHeight,
   setFooterPosition,
@@ -10,14 +10,26 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo,
   getBrowserInfo,
-  translate
+  translate,
 } = require('../common/utils');
-const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
+const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
-const {CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE} = require('../common/constants');
-const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
-const {isKeyboardExtensionPresent,enableCancelButton,disableCancelButton,showErrorPopup, isMobileDevice,showOrHideExtensionCloseBtn} = require('../common/common');
+const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { showKeyboard, setInput } = require('../common/virtualKeyboard');
+const {
+  setCurrentSentenceIndex,
+  setTotalSentenceIndex,
+  updateProgressBar,
+} = require('../common/progressBar');
+const {
+  isKeyboardExtensionPresent,
+  enableCancelButton,
+  disableCancelButton,
+  showErrorPopup,
+  isMobileDevice,
+  showOrHideExtensionCloseBtn,
+  redirectToHomeForDirectLanding
+} = require('../common/common');
 const speakerDetailsKey = 'speakerDetails';
 const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
@@ -26,18 +38,14 @@ const currentIndexKey = 'sunoCurrentIndex';
 let localeStrings;
 window.sunoIndia = {};
 
-let playStr = "";
-let pauseStr = "";
-let replayStr = "";
-let resumeStr = "";
-let audioPlayerBtn = "";
+let playStr = '';
+let pauseStr = '';
+let replayStr = '';
+let resumeStr = '';
+let audioPlayerBtn = '';
 
 function getValue(number, maxValue) {
-  return number < 0
-    ? 0
-    : number > maxValue
-      ? maxValue
-      : number;
+  return number < 0 ? 0 : number > maxValue ? maxValue : number;
 }
 
 function getCurrentIndex(lastIndex) {
@@ -53,30 +61,30 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', sunoIndia.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language',localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
-  fd.append('state', localStorage.getItem('state_region') || "");
-  fd.append('country', localStorage.getItem('country') || "");
+  fd.append('state', localStorage.getItem('state_region') || '');
+  fd.append('country', localStorage.getItem('country') || '');
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
-  fd.append('type', MODULE.suno["api-type"]);
+  fd.append('type', MODULE.suno['api-type']);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
     body: fd,
   })
-  .then(data => {
-    if (!data.ok) {
-      throw (data.status || 500);
-    } else {
-      return Promise.resolve(data.json());
-    }
-  })
-  .catch(errStatus => {
-    showErrorPopup(errStatus);
-    throw errStatus
-  })
+    .then(data => {
+      if (!data.ok) {
+        throw data.status || 500;
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus;
+    })
     .then(() => {
       if (cb && typeof cb === 'function') {
         cb();
@@ -85,8 +93,8 @@ function uploadToServer(cb) {
 }
 
 function enableButton(element) {
-  element.children().removeAttr("opacity")
-  element.removeAttr("disabled")
+  element.children().removeAttr('opacity');
+  element.removeAttr('disabled');
 }
 
 const setAudioPlayer = function () {
@@ -99,13 +107,13 @@ const setAudioPlayer = function () {
   const textReplay = $('#audioplayer-text_replay');
   const textPause = $('#audioplayer-text_pause');
   const textResume = $('#audioplayer-text_resume');
-  const cancelButton = $("#cancel-edit-button");
+  const cancelButton = $('#cancel-edit-button');
   const $submitButton = $('#submit-edit-button');
 
   myAudio.addEventListener('play', () => {
-    $("#edit").removeAttr("disabled");
-    $("#virtualKeyBoardBtn").removeAttr("disabled");
-    $("#edit-text-suno").addClass("edit-text");
+    $('#edit').removeAttr('disabled');
+    $('#virtualKeyBoardBtn').removeAttr('disabled');
+    $('#edit-text-suno').addClass('edit-text');
     hideElement(play);
     hideElement(resume);
     showElement(pause);
@@ -114,7 +122,7 @@ const setAudioPlayer = function () {
     hideElement(replay);
     hideElement(textReplay);
     showElement(textPause);
-  })
+  });
 
   myAudio.addEventListener('pause', () => {
     hideElement(pause);
@@ -123,38 +131,38 @@ const setAudioPlayer = function () {
     showElement(textResume);
     hideElement(replay);
     hideElement(textReplay);
-  })
+  });
 
-  myAudio.addEventListener("ended", () => {
-    hideElement(pause)
-    hideElement(resume)
-    showElement(replay)
+  myAudio.addEventListener('ended', () => {
+    hideElement(pause);
+    hideElement(resume);
+    showElement(replay);
     hideElement(textPause);
     hideElement(textResume);
     showElement(textReplay);
-    localStorage.setItem("contribution_audioPlayed",true);
-    const previousActiveError = $("#edit-error-text .error-active");
-    if($("#edit").val() && !previousActiveError[0]){
-      $submitButton.removeAttr("disabled");
+    localStorage.setItem('contribution_audioPlayed', true);
+    const previousActiveError = $('#edit-error-text .error-active');
+    if ($('#edit').val() && !previousActiveError[0]) {
+      $submitButton.removeAttr('disabled');
     }
-    cancelButton.removeAttr("disabled");
-    $("#edit").removeAttr("disabled");
+    cancelButton.removeAttr('disabled');
+    $('#edit').removeAttr('disabled');
   });
 
   play.on('click', () => {
-    hideElement($('#default_line'))
+    hideElement($('#default_line'));
     playAudio();
-    $("#edit").removeAttr("disabled");
-    $("#virtualKeyBoardBtn").removeAttr("disabled");
-    $("#edit-text-suno").addClass("edit-text");
+    $('#edit').removeAttr('disabled');
+    $('#virtualKeyBoardBtn').removeAttr('disabled');
+    $('#edit-text-suno').addClass('edit-text');
   });
 
   pause.on('click', pauseAudio);
 
   replay.on('click', () => {
     replayAudio();
-    $("#edit").removeAttr("disabled");
-    $("#edit-text-suno").addClass("edit-text");
+    $('#edit').removeAttr('disabled');
+    $('#edit-text-suno').addClass('edit-text');
   });
 
   resume.on('click', () => {
@@ -533,73 +541,74 @@ function executeOnLoad() {
       location.href = './home.html';
       return;
     }
-    showUserProfile(localSpeakerDataParsed.userName)
-    onChangeUser('./record.html',MODULE.suno.value);
+    showUserProfile(localSpeakerDataParsed.userName);
+    onChangeUser('./record.html', MODULE.suno.value);
     onOpenUserDropDown();
 
-      localStorage.setItem("contribution_audioPlayed",false);
-      localStorage.removeItem(currentIndexKey);
-      const type = 'asr';
-      fetch(`/media/${type}`, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        body: JSON.stringify({
-          userName: localSpeakerDataParsed.userName,
-          language: contributionLanguage,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+    localStorage.setItem('contribution_audioPlayed', false);
+    localStorage.removeItem(currentIndexKey);
+    const type = 'asr';
+    fetch(`/media/${type}`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      body: JSON.stringify({
+        userName: localSpeakerDataParsed.userName,
+        language: contributionLanguage,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then(data => {
         if (!data.ok) {
-          throw (data.status || 500);
+          throw data.status || 500;
         } else {
           return Promise.resolve(data.json());
         }
       })
       .catch(errStatus => {
         showErrorPopup(errStatus);
-        throw errStatus
+        throw errStatus;
       })
-        .then((sentenceData) => {
-          sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
-          $loader.hide();
-          if (sunoIndia.sentences.length === 0) {
-            showNoSentencesMessage();
-            return;
-          }
-          
-          $pageContent.removeClass('d-none');
-          setFooterPosition();
-          initialize();
-        })
-        .then(() => {
-          $loader.hide();
-        });
+      .then(sentenceData => {
+        sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
+        $loader.hide();
+        if (sunoIndia.sentences.length === 0) {
+          showNoSentencesMessage();
+          return;
+        }
+
+        $pageContent.removeClass('d-none');
+        setFooterPosition();
+        initialize();
+      })
+      .then(() => {
+        $loader.hide();
+      });
   } catch (err) {
     console.log(err);
   }
 }
 
 const detectDevice = () => {
-    // false for not mobile device
-    playStr = "#play";
-    replayStr = "#replay";
-    pauseStr = "#pause";
-  resumeStr = "#resume";
-    audioPlayerBtn = "#audio-player-btn";
-}
+  // false for not mobile device
+  playStr = '#play';
+  replayStr = '#replay';
+  pauseStr = '#pause';
+  resumeStr = '#resume';
+  audioPlayerBtn = '#audio-player-btn';
+};
 
 $(document).ready(() => {
+  redirectToHomeForDirectLanding();
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
-  if(isMobileDevice()) {
+  if (isMobileDevice()) {
     hideElement($('#virtualKeyBoardBtn'));
   }
-  if(isMobileDevice() || isNotChrome){
+  if (isMobileDevice() || isNotChrome) {
     hideElement($('#extension-bar'));
   } else {
     showOrHideExtensionCloseBtn();

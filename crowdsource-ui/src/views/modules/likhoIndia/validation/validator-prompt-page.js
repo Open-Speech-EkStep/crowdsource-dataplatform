@@ -14,7 +14,7 @@ const {
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateLikhoLocaleLanguagesDropdown} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateLikhoLocaleLanguagesDropdown,redirectToHomeForDirectLanding} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
@@ -479,6 +479,7 @@ const executeOnLoad = function () {
 };
 
 $(document).ready(() => {
+  redirectToHomeForDirectLanding();
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

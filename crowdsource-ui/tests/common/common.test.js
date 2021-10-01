@@ -1,6 +1,6 @@
 const { readFileSync } = require('fs');
 jest.mock('node-fetch');
-const { stringToHTML, mockLocalStorage } = require('../utils');
+const { stringToHTML, mockLocalStorage, mockDom, mockLocation } = require('../utils');
 const {
   CONTRIBUTION_LANGUAGE,
   SPEAKER_DETAILS_KEY,
@@ -16,6 +16,7 @@ const {
   getCountBasedOnSource,
   languageFilter,
   reduceList,
+  redirectToHomeForDirectLanding,
 } = require('../../build/js/common/common.js');
 
 describe('test common js', () => {
@@ -906,6 +907,35 @@ describe('test common js', () => {
       const dataList = [{ key1: 'string1', key2: 'string2' }];
       const result = reduceList(dataList);
       expect(result).toEqual({});
+    });
+  });
+
+  describe('redirectToHomeForDirectLanding', () => {
+    test('should redirect to initiative landing page if url has been hit directly', () => {
+      mockLocation();
+      mockDom();
+      document.referrer = '';
+      location.href = './record.html';
+      redirectToHomeForDirectLanding();
+      expect(location.href).toEqual('./home.html');
+    });
+
+    test('should land to functional page if user went there through initiative landing page', () => {
+      mockLocation();
+      mockDom();
+      document.referrer = '/record.html';
+      location.href = './record.html';
+      redirectToHomeForDirectLanding();
+      expect(location.href).toEqual('./record.html');
+    });
+
+    test('should land to thankyou page if user went there through initiative landing page', () => {
+      mockLocation();
+      mockDom();
+      document.referrer = '/record.html';
+      location.href = './thankyou.html';
+      redirectToHomeForDirectLanding();
+      expect(location.href).toEqual('./thankyou.html');
     });
   });
 });

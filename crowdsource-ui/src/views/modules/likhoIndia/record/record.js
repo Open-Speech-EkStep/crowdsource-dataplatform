@@ -14,7 +14,7 @@ const {
 } = require('../common/utils');
 const {LIKHO_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE, CONTRIBUTION_LANGUAGE } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent,showErrorPopup, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn } = require('../common/common');
+const { isKeyboardExtensionPresent,showErrorPopup, enableCancelButton, disableCancelButton, isMobileDevice, updateLikhoLocaleLanguagesDropdown, showOrHideExtensionCloseBtn,redirectToHomeForDirectLanding } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'speakerDetails';
@@ -449,6 +449,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
+  redirectToHomeForDirectLanding();
   const browser = getBrowserInfo();
   const isNotChrome = !browser.includes('Chrome');
   if(isMobileDevice()) {

@@ -8,7 +8,7 @@ const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { MODULE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
-const { showErrorPopup } = require('./common');
+const { showErrorPopup,redirectToHomeForDirectLanding } = require('./common');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
@@ -353,6 +353,7 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 $(document).ready(() => {
+    redirectToHomeForDirectLanding();
     localStorage.setItem('module','bolo');
     // toggleFooterPosition();
     setPageContentHeight();

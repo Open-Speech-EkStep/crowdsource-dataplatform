@@ -11,15 +11,25 @@ const {
   getBrowserInfo,
   getDeviceInfo,
   getLocaleString,
-  translate
+  translate,
 } = require('../common/utils');
-const { onChangeUser,onOpenUserDropDown, showUserProfile } = require('../common/header');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS} = require('../common/constants');
-const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent, isMobileDevice, showOrHideExtensionCloseBtn, showErrorPopup} = require('../common/common');
-const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
-const {cdn_url} = require('../common/env-api');
-const {initializeFeedbackModal} = require('../common/feedback');
+const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS } = require('../common/constants');
+const { showKeyboard, setInput } = require('../common/virtualKeyboard');
+const {
+  isKeyboardExtensionPresent,
+  isMobileDevice,
+  showOrHideExtensionCloseBtn,
+  showErrorPopup,
+  redirectToHomeForDirectLanding,
+} = require('../common/common');
+const {
+  setCurrentSentenceIndex,
+  setTotalSentenceIndex,
+  updateProgressBar,
+} = require('../common/progressBar');
+const { cdn_url } = require('../common/env-api');
+const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
 
 const speakerDetailsKey = 'speakerDetails';
@@ -652,18 +662,20 @@ const executeOnLoad = function () {
       }
       setFooterPosition();
 
-
       initializeComponent();
     });
-  }
+};
 
 $(document).ready(() => {
-  getLocaleString().then(() => {
-    executeOnLoad();
-  }).catch(() => {
-    executeOnLoad();
-  });
-})
+  redirectToHomeForDirectLanding();
+  getLocaleString()
+    .then(() => {
+      executeOnLoad();
+    })
+    .catch(() => {
+      executeOnLoad();
+    });
+});
 
 module.exports = {
   setSentenceLabel,

@@ -26,6 +26,7 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
+  redirectToHomeForDirectLanding
 } = require('../common/common');
 
 const sunoCountKey = 'sunoCount';
@@ -181,6 +182,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
+  redirectToHomeForDirectLanding();
   localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
   localStorage.setItem('selectedType', 'contribute');
   initializeFeedbackModal();

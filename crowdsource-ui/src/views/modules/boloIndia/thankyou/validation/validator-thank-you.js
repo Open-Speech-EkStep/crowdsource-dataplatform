@@ -27,6 +27,7 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
+  redirectToHomeForDirectLanding
 } = require('../common/common');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 
@@ -181,6 +182,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
+  redirectToHomeForDirectLanding();
   localStorage.setItem(CURRENT_MODULE, MODULE.bolo.value);
   localStorage.setItem('selectedType', 'validate');
   initializeFeedbackModal();

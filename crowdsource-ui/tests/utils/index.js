@@ -1,41 +1,48 @@
 const stringToHTML = function (str) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(str, 'text/html');
-    return doc.body;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(str, 'text/html');
+  return doc.body;
 };
 
 const localStorageMock = (function () {
-    let store = {};
-    return {
-        getItem: function (key) {
-            return store[key];
-        },
-        setItem: function (key, value) {
-            store[key] =value && value.toString();
-        },
-        clear: function () {
-            store = {}
-        },
-        removeItem : function (key) {
-            delete(store[key]);
-        },
-    };
+  let store = {};
+  return {
+    getItem: function (key) {
+      return store[key];
+    },
+    setItem: function (key, value) {
+      store[key] = value && value.toString();
+    },
+    clear: function () {
+      store = {};
+    },
+    removeItem: function (key) {
+      delete store[key];
+    },
+  };
 })();
 
 function mockLocalStorage() {
-    Object.defineProperty(window, 'localStorage', {value: localStorageMock});
+  Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 }
 
+function mockLocation(url = '') {
+  Object.defineProperty(window, 'location', {
+    value: {
+      href: url,
+      host: url,
+    },
+  });
+}
 
-function mockLocation(url=""){
-    Object.defineProperty(window, 'location', {
-        value: {
-            href: url,
-            host: url
-        }
-    });
+function mockDom() {
+  Object.defineProperty(window, 'document', {
+    value: {
+      referral: '',
+    },
+  });
 }
 
 const flushPromises = () => new Promise(setImmediate);
 
-module.exports = {stringToHTML, mockLocalStorage, flushPromises,mockLocation};
+module.exports = { stringToHTML, mockLocalStorage, flushPromises, mockLocation, mockDom };

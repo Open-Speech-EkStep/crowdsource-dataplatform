@@ -26,6 +26,7 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
+  redirectToHomeForDirectLanding,
 } = require('../common/common');
 const { onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 
@@ -185,6 +186,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
+  redirectToHomeForDirectLanding();
   localStorage.setItem(CURRENT_MODULE, 'bolo');
   localStorage.setItem('selectedType', 'contribute');
   initializeFeedbackModal();

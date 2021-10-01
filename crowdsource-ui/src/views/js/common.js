@@ -766,6 +766,13 @@ const safeJqueryErrorHandling = e => {
   }
 };
 
+const redirectToHomeForDirectLanding = function () {
+  if (!document.referrer) {
+    location.href = './home.html';
+    return;
+  }
+};
+
 module.exports = {
   safeJqueryErrorHandling,
   isMobileDevice,
@@ -797,4 +804,5 @@ module.exports = {
   updateGoalProgressBarFromJson,
   languageFilter,
   reduceList,
+  redirectToHomeForDirectLanding,
 };

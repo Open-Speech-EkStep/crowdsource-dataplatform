@@ -5,7 +5,7 @@ const {
   setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
-const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup } = require('../common/common');
+const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,redirectToHomeForDirectLanding } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar} = require('../common/progressBar');
 const { cdn_url } = require('../common/env-api');
@@ -466,6 +466,7 @@ const executeOnLoad = function () {
 };
 
 $(document).ready(() => {
+  redirectToHomeForDirectLanding();
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

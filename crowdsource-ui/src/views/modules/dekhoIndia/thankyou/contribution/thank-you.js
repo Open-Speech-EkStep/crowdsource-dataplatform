@@ -25,6 +25,7 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
+  redirectToHomeForDirectLanding
 } = require('../common/common');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -180,6 +181,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
+  redirectToHomeForDirectLanding();
   $('#download_pdf').on('click', function () {
     downloadPdf($(this).attr('data-badge'));
   });

@@ -28,6 +28,7 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
+  redirectToHomeForDirectLanding
 } = require('../common/common');
 const { initializeFeedbackModal } = require('../common/feedback');
 
@@ -192,6 +193,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(function () {
+  redirectToHomeForDirectLanding();
   localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
   localStorage.setItem('selectedType', 'validate');
   initializeFeedbackModal();
