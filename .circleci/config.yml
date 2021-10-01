@@ -389,13 +389,13 @@ workflows:
           requires:
             - push_dev_image_next_ui
       
-      - cdn_invalidation:
-          name: cdn_invalidation_ui_dev
-          env-name: dev-ui
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - dev_ui_deployment_aks
+      # - cdn_invalidation:
+      #     name: cdn_invalidation_ui_dev
+      #     env-name: dev-ui
+      #     resource-group: ${AZURE_RESOURCE_GROUP}
+      #     profile-name: ${AZURE_PROFILE_NAME}
+      #     requires:
+      #       - dev_ui_deployment_aks
 
       - azure-acr/build-and-push-image:
           pre-steps:
