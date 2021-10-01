@@ -2,7 +2,6 @@ import { useTranslation } from 'next-i18next';
 
 const Hero = () => {
   const { t } = useTranslation();
-  console.log('testing new release');
 
   return (
     <section data-testid="Hero" className="d-flex align-items-center flex-column text-center">
