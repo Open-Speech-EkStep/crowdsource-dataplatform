@@ -10,13 +10,13 @@ const { i18n } = require('./next-i18next.config');
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
-  // webpack5: false,
+  webpack5: false,
   basePath: config.get('fe.contextRoot'),
   reactStrictMode: true,
   i18n,
   // Force .page prefix on page files (ex. index.page.tsx) so generated files can be included in /pages directory without Next.js throwing build errors
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
-  webpack: (config,options) => {
+  webpack: (config, options) => {
     console.log(options.webpack.version);
     config.module.rules.push({ test: /\.test.(jsx?|tsx?)$/, loader: 'ignore-loader' });
     config.module.rules.push({ test: /\.svg$/, use: ['@svgr/webpack'] });
