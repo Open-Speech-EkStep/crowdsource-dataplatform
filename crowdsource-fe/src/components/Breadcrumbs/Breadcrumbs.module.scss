@@ -1,0 +1,15 @@
+.initiative {
+  font-size: 0.875rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+  }
+}
+
+.icon {
+  width: 2rem;
+
+  @include media-breakpoint-up(md) {
+    width: 3rem;
+  }
+}

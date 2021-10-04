@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FunctionalPageBackground should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="root position-relative px-2 px-lg-0 flex-grow-1 pt-4 pb-8"
+    data-testid="FunctionalPageBackground"
+  />
+</DocumentFragment>
+`;

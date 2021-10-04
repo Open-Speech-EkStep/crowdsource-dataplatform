@@ -49,7 +49,7 @@ const LanguageSwitcher = () => {
       <Dropdown.Toggle
         id="languageSwitcherToggle"
         variant="light"
-        className={`${styles.toggle} d-flex h-100 justify-content-center align-items-center`}
+        className={`${styles.toggle} d-flex h-100 justify-content-center align-items-center px-3`}
       >
         <Image src="/images/locale_logo.svg" width="24" height="24" alt={t('languageIconAlt')} />
         <span className="d-none d-xl-block mx-1">{DISPLAY_LANGUAGES[currentLocale]}</span>

@@ -152,7 +152,7 @@ exports[`Header should render the component and matches it against stored snapsh
         </a>
       </div>
       <span
-        class="sep d-none d-lg-flex border border-1 border-primary align-self-center mx-3"
+        class="sep d-none d-lg-flex border border-1 border-primary align-self-center ms-3"
       />
     </div>
     <div
@@ -165,7 +165,7 @@ exports[`Header should render the component and matches it against stored snapsh
       >
         <button
           aria-expanded="false"
-          class="toggle d-flex h-100 justify-content-center align-items-center dropdown-toggle btn btn-light"
+          class="toggle d-flex h-100 justify-content-center align-items-center px-3 dropdown-toggle btn btn-light"
           id="languageSwitcherToggle"
           type="button"
         >

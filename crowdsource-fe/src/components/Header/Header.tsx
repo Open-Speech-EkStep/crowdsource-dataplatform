@@ -18,7 +18,7 @@ const Header = () => {
       <div className="d-flex order-2 order-lg-1">
         <Logo />
         <span
-          className={`${styles.sep} d-none d-lg-flex border border-1 border-primary align-self-center mx-3`}
+          className={`${styles.sep} d-none d-lg-flex border border-1 border-primary align-self-center ms-3`}
         />
       </div>
       <div className="d-flex order-3 ms-auto">

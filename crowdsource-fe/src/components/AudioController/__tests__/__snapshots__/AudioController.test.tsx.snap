@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageBackground should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="d-flex flex-column align-items-center text-center"
+  >
+    <span
+      class="label display-3"
+    >
+      Type the text as you hear the audio
+    </span>
+    <div
+      class="mt-2 mt-md-3"
+    >
+      <audio
+        class="audioPlayer"
+        controls=""
+      >
+        <source
+          src="horse.ogg"
+          type="audio/ogg"
+        />
+        <source
+          src="horse.mp3"
+          type="audio/mpeg"
+        />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+</DocumentFragment>
+`;

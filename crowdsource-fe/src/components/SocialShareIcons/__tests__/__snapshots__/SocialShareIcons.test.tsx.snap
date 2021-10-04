@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SocialShareIcons should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="socialShareLink mx-2 d-inline-block ms-0"
+    href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home.html"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <div
+      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+    >
+      <div
+        style="box-sizing: border-box; display: block; max-width: 100%;"
+      >
+        <img
+          alt=""
+          aria-hidden="true"
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+        />
+      </div>
+      <img
+        alt="Share on Facebook"
+        data-nimg="intrinsic"
+        decoding="async"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+      />
+      <noscript />
+    </div>
+  </a>
+  <a
+    class="socialShareLink mx-2 d-inline-block"
+    href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home.html"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <div
+      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+    >
+      <div
+        style="box-sizing: border-box; display: block; max-width: 100%;"
+      >
+        <img
+          alt=""
+          aria-hidden="true"
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+        />
+      </div>
+      <img
+        alt="Share on LinkedIn"
+        data-nimg="intrinsic"
+        decoding="async"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+      />
+      <noscript />
+    </div>
+  </a>
+  <a
+    class="socialShareLink mx-2 d-inline-block"
+    href="https://twitter.com/intent/tweet?text=socialSharingTextWithoutRank"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <div
+      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+    >
+      <div
+        style="box-sizing: border-box; display: block; max-width: 100%;"
+      >
+        <img
+          alt=""
+          aria-hidden="true"
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+        />
+      </div>
+      <img
+        alt="Share on Twitter"
+        data-nimg="intrinsic"
+        decoding="async"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+      />
+      <noscript />
+    </div>
+  </a>
+  <a
+    class="socialShareLink mx-2 d-inline-block me-0"
+    href="https://api.whatsapp.com/send?text=socialSharingTextWithoutRank"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <div
+      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+    >
+      <div
+        style="box-sizing: border-box; display: block; max-width: 100%;"
+      >
+        <img
+          alt=""
+          aria-hidden="true"
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+        />
+      </div>
+      <img
+        alt="Share on Whatsapp"
+        data-nimg="intrinsic"
+        decoding="async"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+      />
+      <noscript />
+    </div>
+  </a>
+</DocumentFragment>
+`;

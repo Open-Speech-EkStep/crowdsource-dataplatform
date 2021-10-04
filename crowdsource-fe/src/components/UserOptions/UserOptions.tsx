@@ -36,7 +36,7 @@ const UserOptions = () => {
         <Dropdown.Toggle
           id="userOptions"
           variant="light"
-          className={classnames(styles.toggle, 'd-flex h-100 justify-content-center align-items-center')}
+          className={classnames(styles.toggle, 'd-flex h-100 justify-content-center align-items-center px-3')}
         >
           <Image src="/images/usericon.svg" width="24" height="24" alt={t('languageIconAlt')} />
           {speakerDetails.userName && (

@@ -1,0 +1,48 @@
+.root {
+  background: var(--bg-light-color) url('/images/home_page_bg_mobile.svg') no-repeat top center;
+  position: relative;
+
+  @include media-breakpoint-up(md) {
+    background: var(--bg-light-color) url('/images/home_page_bg.svg') no-repeat top center;
+  }
+
+  &::before {
+    background: url('/images/left_triangle_mobile.svg') no-repeat;
+    content: '';
+    width: 46px;
+    height: 164px;
+    position: absolute;
+    left: 0;
+    margin: auto;
+    opacity: 0.3;
+    top: 5rem;
+
+    @include media-breakpoint-up(md) {
+      background: url('/images/left_triangle.svg') no-repeat;
+      height: 224px;
+      width: 70px;
+      top: 0;
+      bottom: 0;
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    background: url('/images/right_triangle_mobile.svg') no-repeat;
+    content: '';
+    width: 41px;
+    height: 91px;
+    position: absolute;
+    margin: auto;
+    right: 0;
+    top: 16rem;
+
+    @include media-breakpoint-up(md) {
+      background: url('/images/right_triangle.svg') no-repeat;
+      height: 146px;
+      width: 69px;
+      top: 0;
+      bottom: 0;
+    }
+  }
+}

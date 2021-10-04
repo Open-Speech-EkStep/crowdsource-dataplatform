@@ -14,7 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { t } = useTranslation();
 
   return (
-    <div data-testid="Layout">
+    <div data-testid="Layout" className="d-flex flex-column h-100">
       <Head>
         <title>{t('metaTitle')}</title>
         <meta charSet="UTF-8" />
@@ -29,7 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
         <link rel="icon" type="image/png" href="/img/favicon.png" />
       </Head>
       <Header />
-      <main>{children}</main>
+      <main className="d-flex flex-column flex-grow-1">{children}</main>
       <Footer />
     </div>
   );

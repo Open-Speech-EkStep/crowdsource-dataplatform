@@ -17,7 +17,7 @@ class MyDocument extends Document<MyDocumentProps> {
 
   render() {
     return (
-      <Html lang={this.props.locale}>
+      <Html lang={this.props.locale} className="h-100">
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -30,7 +30,7 @@ class MyDocument extends Document<MyDocumentProps> {
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
           />
         </Head>
-        <body>
+        <body className="h-100">
           <Main />
           <NextScript />
         </body>

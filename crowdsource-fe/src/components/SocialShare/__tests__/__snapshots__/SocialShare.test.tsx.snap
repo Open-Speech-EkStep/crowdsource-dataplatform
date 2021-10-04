@@ -12,10 +12,10 @@ exports[`SocialShare should render the component and matches it against stored s
       footerSocialShareText
     </span>
     <div
-      class="py-3 mt-lg-0 ms-lg-6"
+      class="d-flex py-3 mt-lg-0 ms-lg-6 py-md-0"
     >
       <a
-        class="mx-2 d-inline-block"
+        class="socialShareLink mx-2 d-inline-block ms-0"
         href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home.html"
         rel="noopener noreferrer"
         target="_blank"
@@ -44,7 +44,7 @@ exports[`SocialShare should render the component and matches it against stored s
         </div>
       </a>
       <a
-        class="mx-2 d-inline-block"
+        class="socialShareLink mx-2 d-inline-block"
         href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home.html"
         rel="noopener noreferrer"
         target="_blank"
@@ -73,7 +73,7 @@ exports[`SocialShare should render the component and matches it against stored s
         </div>
       </a>
       <a
-        class="mx-2 d-inline-block"
+        class="socialShareLink mx-2 d-inline-block"
         href="https://twitter.com/intent/tweet?text=socialSharingTextWithoutRank"
         rel="noopener noreferrer"
         target="_blank"
@@ -102,7 +102,7 @@ exports[`SocialShare should render the component and matches it against stored s
         </div>
       </a>
       <a
-        class="mx-2 d-inline-block me-lg-0"
+        class="socialShareLink mx-2 d-inline-block me-0"
         href="https://api.whatsapp.com/send?text=socialSharingTextWithoutRank"
         rel="noopener noreferrer"
         target="_blank"
