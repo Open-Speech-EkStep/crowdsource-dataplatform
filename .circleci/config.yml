@@ -126,7 +126,9 @@ jobs:
       - run:
           name: build_ui
           command: |
-            npm run gulp -- -- --env=<< parameters.env_name >>
+            cd crowdsource-fe
+            npm run build:docker
+
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
             tar -xf azcopy_v10.tar.gz --strip-components=1
 
@@ -135,9 +137,9 @@ jobs:
             if [ << parameters.env_name >> == 'prod' ]
             then
               echo "Deploying to prod"
-              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
+              ./azcopy copy ".next/static/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/assets/_next/static" --cache-control "max-age=1200" --recursive
             else
-              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
+              ./azcopy copy ".next/static/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/assets/_next/static" --cache-control "max-age=1200" --recursive
             fi
 
   db_migrate_azure:
@@ -358,15 +360,7 @@ workflows:
           name: build_dev_ui
           env_name: dev
           requires:
-            - migrate_dev_azure
-
-      - cdn_invalidation:
-          name: cdn_invalidation_dev
-          env-name: dev-vakyansh
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - build_dev_ui
+            - create-workspace
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -380,7 +374,7 @@ workflows:
           tag: dev
           checkout: false
           requires:
-            - create-workspace
+            - build_dev_ui
 
       - aks_deployment_ui:
           name: dev_ui_deployment_aks
@@ -388,6 +382,14 @@ workflows:
           env-name: dev
           requires:
             - push_dev_image_next_ui
+
+      - cdn_invalidation:
+          name: cdn_invalidation_dev
+          env-name: dev-ui
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - dev_ui_deployment_aks
       
       # - cdn_invalidation:
       #     name: cdn_invalidation_ui_dev
@@ -409,7 +411,7 @@ workflows:
           tag: dev
           checkout: false
           requires:
-            - build_dev_ui
+            - migrate_dev_azure
 
       - azure-acr/build-and-push-image:
           name: push_db_refresher_image
