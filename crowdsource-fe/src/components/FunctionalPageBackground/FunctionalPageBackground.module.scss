@@ -9,40 +9,40 @@
   &::before {
     background: url('/images/left_triangle_mobile.svg') no-repeat;
     content: '';
-    width: 46px;
     height: 164px;
-    position: absolute;
     left: 0;
     margin: auto;
     opacity: 0.3;
+    position: absolute;
     top: 5rem;
+    width: 46px;
 
     @include media-breakpoint-up(md) {
       background: url('/images/left_triangle.svg') no-repeat;
-      height: 224px;
-      width: 70px;
-      top: 0;
       bottom: 0;
+      height: 224px;
       opacity: 1;
+      top: 0;
+      width: 70px;
     }
   }
 
   &::after {
     background: url('/images/right_triangle_mobile.svg') no-repeat;
     content: '';
-    width: 41px;
     height: 91px;
-    position: absolute;
     margin: auto;
+    position: absolute;
     right: 0;
     top: 16rem;
+    width: 41px;
 
     @include media-breakpoint-up(md) {
       background: url('/images/right_triangle.svg') no-repeat;
-      height: 146px;
-      width: 69px;
-      top: 0;
       bottom: 0;
+      height: 146px;
+      top: 0;
+      width: 69px;
     }
   }
 }

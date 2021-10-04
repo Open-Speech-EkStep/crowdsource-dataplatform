@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import FunctionalPageBackground from '../FunctionalPageBackground';
 
 describe('FunctionalPageBackground', () => {
-  const setup = () => render(<FunctionalPageBackground />);
+  const setup = () => render(<FunctionalPageBackground> </FunctionalPageBackground>);
 
   verifyAxeTest(setup());
 

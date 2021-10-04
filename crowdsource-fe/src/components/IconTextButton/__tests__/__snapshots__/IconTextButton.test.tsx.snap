@@ -29,6 +29,11 @@ exports[`IconTextButton should render the component and matches it against store
       />
       <noscript />
     </div>
+    <span
+      class="text ms-2 d-none d-md-block"
+    >
+      some-text
+    </span>
   </button>
 </DocumentFragment>
 `;

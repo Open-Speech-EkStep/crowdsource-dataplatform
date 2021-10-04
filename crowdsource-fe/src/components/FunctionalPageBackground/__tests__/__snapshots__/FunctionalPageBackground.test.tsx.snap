@@ -5,6 +5,8 @@ exports[`FunctionalPageBackground should render the component and matches it aga
   <section
     class="root position-relative px-2 px-lg-0 flex-grow-1 pt-4 pb-8"
     data-testid="FunctionalPageBackground"
-  />
+  >
+     
+  </section>
 </DocumentFragment>
 `;

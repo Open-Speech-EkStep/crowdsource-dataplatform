@@ -1,6 +1,6 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import Breadcrumbs from 'components/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../Breadcrumbs';
 
 describe('Breadcrumbs', () => {
   const setup = () => render(<Breadcrumbs />);
