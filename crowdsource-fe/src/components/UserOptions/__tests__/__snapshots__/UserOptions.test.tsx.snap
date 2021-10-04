@@ -11,7 +11,7 @@ exports[`UserOptions should render the component when speaker details are presen
   >
     <button
       aria-expanded="false"
-      class="toggle d-flex h-100 justify-content-center align-items-center dropdown-toggle btn btn-light"
+      class="toggle d-flex h-100 justify-content-center align-items-center px-3 dropdown-toggle btn btn-light"
       id="userOptions"
       type="button"
     >
@@ -56,7 +56,7 @@ exports[`UserOptions should render the component when speaker details are presen
   >
     <button
       aria-expanded="false"
-      class="toggle d-flex h-100 justify-content-center align-items-center dropdown-toggle btn btn-light"
+      class="toggle d-flex h-100 justify-content-center align-items-center px-3 dropdown-toggle btn btn-light"
       id="userOptions"
       type="button"
     >
