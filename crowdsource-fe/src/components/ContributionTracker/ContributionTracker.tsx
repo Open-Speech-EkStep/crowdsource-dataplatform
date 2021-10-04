@@ -159,14 +159,14 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
           />
         </div>
       </Form.Group>
-      <div className="bg-secondary py-5 mt-4">
-        <div className="d-md-flex justify-content-between px-4 mb-4">
-          <p className="display-6">{t('totalSentences')}</p>
-          <div>
-            <span className={`${styles.chartLabel} ${styles.chartLabelOrange} display-6`}>
+      <div className="bg-secondary p-5 p-md-8 mt-4 mt-md-5">
+        <div className="d-md-flex justify-content-between display-5 mb-5 mb-md-6">
+          <p>{t('totalSentences')}</p>
+          <div className="mt-3 mt-md-0">
+            <span className={`${styles.chartLabel} ${styles.chartLabelOrange}`}>
               {t('yourSelectedLanguage')}
             </span>
-            <span className={`${styles.chartLabel} ${styles.chartLabelYellow} display-6 ms-4`}>
+            <span className={`${styles.chartLabel} ${styles.chartLabelYellow} ms-4`}>
               {t('topLanguages')}
             </span>
           </div>

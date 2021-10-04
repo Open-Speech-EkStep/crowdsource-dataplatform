@@ -6,7 +6,7 @@ exports[`Suno Actions should render the component and matches it against stored 
     class="row"
   >
     <div
-      class="col-6"
+      class="col"
       data-testid="ContributionLanguage"
     >
       <div
@@ -23,7 +23,7 @@ exports[`Suno Actions should render the component and matches it against stored 
           </label>
           <select
             aria-label="Select the language for contribution"
-            class="selectContributionLanguage mt-3 mt-md-0 ms-md-2 form-select"
+            class="selectContributionLanguage mt-1 mt-md-0 ms-md-2 form-select"
             data-testid="select"
             id="contribution"
             name="contribution"

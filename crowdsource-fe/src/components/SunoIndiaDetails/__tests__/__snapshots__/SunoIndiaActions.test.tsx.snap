@@ -10,7 +10,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
       class="row"
     >
       <div
-        class="col-6"
+        class="col"
         data-testid="ContributionLanguage"
       >
         <div
@@ -27,7 +27,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
             </label>
             <select
               aria-label="Select the language for contribution"
-              class="selectContributionLanguage mt-3 mt-md-0 ms-md-2 form-select"
+              class="selectContributionLanguage mt-1 mt-md-0 ms-md-2 form-select"
               data-testid="select"
               id="contribution"
               name="contribution"
@@ -133,7 +133,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
                         data-testid="ActionCardWarningMessage"
                       >
                         <div
-                          class="root d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                          class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                           data-testid="InfoMessage"
                         >
                           <div
@@ -245,7 +245,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
                         data-testid="ActionCardWarningMessage"
                       >
                         <div
-                          class="root d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                          class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                           data-testid="InfoMessage"
                         >
                           <div

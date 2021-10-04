@@ -34,7 +34,7 @@ const Logo = () => {
         <a className={`${styles.label} d-flex align-items-center text-primary px-xl-2 position-relative`}>
           {t('bhasha')}
           <span className={styles.labelSecondHalf}>{t('daan')}</span>
-          <span className={`${styles.betaText} display-10 position-absolute`}>{t('beta')}</span>
+          <span className={`${styles.betaText} display-9 position-absolute`}>{t('beta')}</span>
         </a>
       </Link>
     </div>

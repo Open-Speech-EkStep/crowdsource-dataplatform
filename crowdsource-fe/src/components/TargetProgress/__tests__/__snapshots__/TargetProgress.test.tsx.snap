@@ -16,7 +16,7 @@ exports[`TargetProgress should render the component and matches it against store
       </div>
     </div>
     <div
-      class="mt-2 mt-md-1 border border-1 border-info progress"
+      class="progressBar mt-2 mt-md-1 border border-1 border-info progress"
     >
       <div
         aria-valuemax="100"

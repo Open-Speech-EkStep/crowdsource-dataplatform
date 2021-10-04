@@ -12,7 +12,7 @@ exports[`UserOptions should render the component when speaker details are presen
     <button
       aria-expanded="false"
       class="toggle d-flex h-100 justify-content-center align-items-center dropdown-toggle btn btn-light"
-      id="languageSwitcherToggle"
+      id="userOptions"
       type="button"
     >
       <div
@@ -57,7 +57,7 @@ exports[`UserOptions should render the component when speaker details are presen
     <button
       aria-expanded="false"
       class="toggle d-flex h-100 justify-content-center align-items-center dropdown-toggle btn btn-light"
-      id="languageSwitcherToggle"
+      id="userOptions"
       type="button"
     >
       <div

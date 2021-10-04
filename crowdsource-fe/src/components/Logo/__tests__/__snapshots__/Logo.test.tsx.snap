@@ -74,7 +74,7 @@ exports[`Logo should render the component and matches it against stored snapshot
         daan
       </span>
       <span
-        class="betaText display-10 position-absolute"
+        class="betaText display-9 position-absolute"
       >
         beta
       </span>

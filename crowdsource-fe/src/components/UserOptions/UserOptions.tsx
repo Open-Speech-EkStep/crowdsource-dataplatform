@@ -34,7 +34,7 @@ const UserOptions = () => {
         align="end"
       >
         <Dropdown.Toggle
-          id="languageSwitcherToggle"
+          id="userOptions"
           variant="light"
           className={classnames(styles.toggle, 'd-flex h-100 justify-content-center align-items-center')}
         >

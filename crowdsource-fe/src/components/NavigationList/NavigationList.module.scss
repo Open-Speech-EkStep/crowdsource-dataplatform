@@ -1,9 +1,13 @@
 .link {
-  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  opacity: 0.8;
 
-  &:global(.active) {
-    color: var(--primary-color);
+  &:hover {
+    opacity: 1;
   }
+}
+
+.activeLink {
+  opacity: 1;
 }
 
 .root {

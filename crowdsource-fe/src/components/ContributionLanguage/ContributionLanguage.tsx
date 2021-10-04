@@ -38,7 +38,7 @@ const ContributionLanguage = () => {
 
   return (
     <Row>
-      <Col xs="6" data-testid="ContributionLanguage">
+      <Col data-testid="ContributionLanguage">
         <div className="contributionLanguage">
           <Form.Group
             controlId="contribution"
@@ -49,7 +49,7 @@ const ContributionLanguage = () => {
               data-testid="select"
               value={contributionLanguage || DISPLAY_LANGUAGES[currentLocale ?? DEFAULT_LOCALE]}
               aria-label="Select the language for contribution"
-              className={`${styles.selectContributionLanguage} mt-3 mt-md-0 ms-md-2`}
+              className={`${styles.selectContributionLanguage} mt-1 mt-md-0 ms-md-2`}
               name="contribution"
               onChange={handleChange as any}
             >

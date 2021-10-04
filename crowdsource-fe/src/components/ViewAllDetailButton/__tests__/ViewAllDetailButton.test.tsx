@@ -2,7 +2,7 @@ import { render } from 'utils/testUtils';
 
 import ViewAllDetailButton from '../ViewAllDetailButton';
 
-describe('ViewAll Detail', () => {
+describe('ViewAllDetailButton', () => {
   const setup = () => {
     return render(<ViewAllDetailButton initiative="suno" />);
   };

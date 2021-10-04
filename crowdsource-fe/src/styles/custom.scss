@@ -82,12 +82,12 @@ $font-family-base: Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue
 $font-size-base: 1rem;
 $line-height-base: 1.5;
 
-$h1-font-size: $font-size-base * 2; // 32px
-$h2-font-size: $font-size-base * 1.75; // 28px
-$h3-font-size: $font-size-base * 1.5; // 24px;
-$h4-font-size: $font-size-base * 1.25; // 20px
-$h5-font-size: $font-size-base * 1.125; // 18px
-$h6-font-size: $font-size-base; // 16px
+$h1-font-size: $font-size-base * 1.75; // 28px
+$h2-font-size: $font-size-base * 1.5; // 24px
+$h3-font-size: $font-size-base * 1.25; // 20px;
+$h4-font-size: $font-size-base * 1.125; // 18px
+$h5-font-size: $font-size-base * 1; // 16px
+$h6-font-size: $font-size-base * 0.875; // 14px
 
 $headings-margin-bottom: 0;
 $headings-font-family: Rowdies;
@@ -145,14 +145,14 @@ h6 {
 }
 
 $display-font-sizes: (
-  1: 1.5rem,
-  // 24px
-  2: 1.25rem,
+  1: 1.25rem,
   // 20px
-  3: 1.125rem,
+  2: 1.125rem,
   // 18px
-  4: 1rem,
+  3: 1rem,
   // 16px
+  4: 0.875rem,
+  // 14px
   5: 0.875rem,
   // 14px
   6: 0.75rem,
@@ -163,8 +163,6 @@ $display-font-sizes: (
   // 10px
   9: 0.625rem,
   // 10px
-  10: 0.5rem,
-  // 8px
 );
 $display-font-weight: 400;
 $display-line-height: $line-height-base;
@@ -177,7 +175,7 @@ p {
 }
 
 .display-1 {
-  font-size: 1.5rem !important;
+  font-size: 1.25rem !important;
 
   @include media-breakpoint-up(md) {
     font-size: 1.75rem !important; // 28px
@@ -185,7 +183,7 @@ p {
 }
 
 .display-2 {
-  font-size: 1.25rem !important;
+  font-size: 1.125rem !important;
 
   @include media-breakpoint-up(md) {
     font-size: 1.5rem !important; // 24px
@@ -193,7 +191,7 @@ p {
 }
 
 .display-3 {
-  font-size: 1.125rem !important;
+  font-size: 1rem !important;
 
   @include media-breakpoint-up(md) {
     font-size: 1.25rem !important; // 20px
@@ -201,7 +199,7 @@ p {
 }
 
 .display-4 {
-  font-size: 1rem !important;
+  font-size: 0.875rem !important;
 
   @include media-breakpoint-up(md) {
     font-size: 1.125rem !important; // 18px
@@ -237,6 +235,14 @@ p {
 
   @include media-breakpoint-up(md) {
     font-size: 0.6875rem !important; // 11px
+  }
+}
+
+.display-9 {
+  font-size: 0.625rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 0.625rem !important; // 11px
   }
 }
 
@@ -422,13 +428,18 @@ $input-border-color: var(--primary-color);
 $form-select-border-color: var(--primary-color);
 $input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
 $form-select-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
-$form-check-input-checked-bg-color: var(--primary-color);
+$form-check-input-width: 1rem;
+$form-check-input-height: 1rem;
+$form-check-input-checked-bg-color: var(--light-color);
+$form-check-input-border: 2px solid var(--primary-color);
 $form-check-input-checked-border-color: var(--primary-color);
 $form-check-input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
 $navbar-light-color: var(--primary-color);
 $navbar-light-hover-color: var(--primary-color);
 $progress-bg: var(--light-color);
 $progress-border-radius: 10px;
+$form-check-radio-checked-bg-image: url('/images/radio_checked.svg');
+$form-check-input-focus-box-shadow: none;
 
 :root {
   /* Z-Indexes */

@@ -7,7 +7,6 @@ import Container from 'react-bootstrap/Container';
 import PageBackground from 'components/PageBackground';
 import PageHeader from 'components/PageHeader';
 import SunoIndiaDetails, { SunoIndiaActions } from 'components/SunoIndiaDetails';
-import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
@@ -23,7 +22,6 @@ const HomePage: NextPage = () => {
         </Container>
       </PageBackground>
       <SunoIndiaDetails />
-      <ViewAllDetailButton initiative="suno" />
     </Fragment>
   );
 };

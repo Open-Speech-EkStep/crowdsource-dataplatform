@@ -23,9 +23,12 @@ class MyDocument extends Document<MyDocumentProps> {
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Rowdies:400,700&display=swap"
+            href="https://fonts.googleapis.com/css?family=Rowdies:300,400,700&display=swap"
           />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
+          />
         </Head>
         <body>
           <Main />

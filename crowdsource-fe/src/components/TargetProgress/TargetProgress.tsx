@@ -116,7 +116,10 @@ const TargetProgress = (props: TargetProgressProps) => {
           />
         </div>
       </div>
-      <ProgressBar now={formattedAverage} className="mt-2 mt-md-1 border border-1 border-info" />
+      <ProgressBar
+        now={formattedAverage}
+        className={`${styles.progressBar} mt-2 mt-md-1 border border-1 border-info`}
+      />
       <span className={`${styles.hours} mt-2 align-self-end`}>
         {currentInitiativeProgress}/{initiativeGoal} {initiativeUnit}
       </span>

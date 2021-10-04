@@ -58,24 +58,24 @@ exports[`ContributionTracker should render the component and matches it against 
       </div>
     </div>
     <div
-      class="bg-secondary py-5 mt-4"
+      class="bg-secondary p-5 p-md-8 mt-4 mt-md-5"
     >
       <div
-        class="d-md-flex justify-content-between px-4 mb-4"
+        class="d-md-flex justify-content-between display-5 mb-5 mb-md-6"
       >
-        <p
-          class="display-6"
-        >
+        <p>
           totalSentences
         </p>
-        <div>
+        <div
+          class="mt-3 mt-md-0"
+        >
           <span
-            class="chartLabel chartLabelOrange display-6"
+            class="chartLabel chartLabelOrange"
           >
             yourSelectedLanguage
           </span>
           <span
-            class="chartLabel chartLabelYellow display-6 ms-4"
+            class="chartLabel chartLabelYellow ms-4"
           >
             topLanguages
           </span>
