@@ -248,7 +248,7 @@ const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelR
   const minStr = localsStrings['minutes'] || 'minutes';
   const secStr = localsStrings['seconds'] || 'seconds';
   if (hours && minutes) {
-    const totalHours = ((hours + minutes / 60) * 100) / 100;
+    const totalHours = Math.floor((hours + minutes / 60) * 100) / 100;  //get decimal point upto 2 values
     return isLabelRequired ? `${totalHours} ${hrStr}` : `${totalHours}`;
   }
   if (hours == 0 && minutes == 0) {

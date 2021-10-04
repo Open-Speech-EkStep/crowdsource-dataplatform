@@ -226,7 +226,7 @@ describe('test utils', () => {
         'localeString',
         JSON.stringify({ hours: 'hours', seconds: 'seconds', minutes: 'minutes' })
       );
-      expect(formatTimeForLegends(162, 12, 0, true)).toEqual('162.2 hours');
+      expect(formatTimeForLegends(162, 15, 0, true)).toEqual('162.25 hours');
       localStorage.clear();
     });
 
@@ -236,7 +236,7 @@ describe('test utils', () => {
         'localeString',
         JSON.stringify({ hours: 'hours', seconds: 'seconds', minutes: 'minutes' })
       );
-      expect(formatTimeForLegends(162, 12, 0, false)).toEqual('162.2');
+      expect(formatTimeForLegends(162, 15, 0, false)).toEqual('162.25');
       localStorage.clear();
     });
 
