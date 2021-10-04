@@ -20,8 +20,8 @@ ENV NEXT_TELEMETRY_DISABLED 1
 WORKDIR /app
 COPY ./crowdsource-fe .
 COPY --from=deps /app/fe/node_modules ./node_modules/
-# RUN mkdir target
-# COPY --from=deps /app/ui/target ./target/
+RUN mkdir target
+COPY --from=deps /app/ui/target ./target/
 RUN npm run build:docker
 
 # Production image, copy all the files and run next
