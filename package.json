@@ -21,10 +21,11 @@
     "functional_test": "cd functional_tests && npm run test",
     "db-migrate": "cd crowdsource-api && npx db-migrate up --config migrations/config/migration_config.json -e dev",
     "prepare": "husky install",
-    "install": "run-p install:api install:ui install:ft",
+    "install": "run-p install:api install:ui install:ft install:fe",
     "install:api": "cd crowdsource-api && npm i",
     "install:ui": "cd crowdsource-ui && npm i",
     "install:ft": "cd functional_tests && npm i",
+    "install:fe": "cd crowdsource-fe && npm i",
     "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
