@@ -74,6 +74,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --btn-primary-disabled-text-color: #cfd4da;
   --btn-secondary-disabled-bg-color: #f9fbff;
   --btn-tertiary-disabled-text-color: #6f7d92;
+  --badge-bg-color: #fdf5dd;
 }
 
 // Typography
@@ -437,6 +438,9 @@ $form-check-input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
 $navbar-light-color: var(--primary-color);
 $navbar-light-hover-color: var(--primary-color);
 $progress-bg: var(--light-color);
+$progress-border-radius: 10px;
+$btn-padding-x: 0;
+$btn-padding-y: 0;
 $progress-border-radius: 10px;
 $form-check-radio-checked-bg-image: url('/images/radio_checked.svg');
 $form-check-input-focus-box-shadow: none;
