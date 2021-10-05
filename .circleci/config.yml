@@ -356,11 +356,11 @@ workflows:
             branches:
               only: [master]
 
-      - build_ui_push_to_blob_storage:
-          name: build_dev_ui
-          env_name: dev
-          requires:
-            - create-workspace
+      # - build_ui_push_to_blob_storage:
+      #     name: build_dev_ui
+      #     env_name: dev
+      #     requires:
+      #       - create-workspace
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -369,7 +369,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./
-          extra-build-args: --build-arg NODE_CONFIG_ENV=dev --build-arg TENANT_ID=${TENANT_ID} --build-arg APP_ID=${APP_ID} --build-arg AZURE_URL=${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-dev/assets/_next/static 
+          extra-build-args: "--build-arg NODE_CONFIG_ENV=dev --build-arg TENANT_ID=${TENANT_ID} --build-arg APP_ID=${APP_ID} --build-arg AZURE_URL=${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-dev/assets/_next/static" 
           repo: ${AZURE_REPO_UI}
           tag: dev
           checkout: false
