@@ -117,7 +117,8 @@ jobs:
           name: setup_machine
           command: |
             sudo apt-get update -y
-            curl -sL https://deb.nodesource.com/setup_14.17.5 | sudo bash -
+            sudo curl -sL https://deb.nodesource.com/setup_14.17.5 -o setup_14.sh
+            sudo sh ./setup_14.sh
             
             sudo apt-get -y install nodejs
             sudo apt-get install npm
