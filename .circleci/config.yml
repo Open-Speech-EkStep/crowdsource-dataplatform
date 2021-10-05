@@ -122,11 +122,10 @@ jobs:
             sudo apt-get install -y apt-utils
             sudo apt-get install wget
 
-      - node/install-packages
       - run:
           name: build_ui
           command: |
-            cd crowdsource-fe
+            cd crowdsource-fe && npm i
             NODE_CONFIG_ENV=<< parameters.env_name >> npm run build:docker
 
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
@@ -369,7 +368,7 @@ workflows:
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./
-          extra-build-args: "--build-arg NODE_CONFIG_ENV=dev --build-arg TENANT_ID=${TENANT_ID} --build-arg APP_ID=${APP_ID} --build-arg AZURE_URL=${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-dev/assets/_next/static" 
+          extra-build-args: "--build-arg NODE_CONFIG_ENV=dev" 
           repo: ${AZURE_REPO_UI}
           tag: dev
           checkout: false
