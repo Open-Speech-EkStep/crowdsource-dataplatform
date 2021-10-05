@@ -374,7 +374,7 @@ workflows:
           tag: dev
           checkout: false
           requires:
-            - build_dev_ui
+            - create-workspace
 
       - aks_deployment_ui:
           name: dev_ui_deployment_aks
