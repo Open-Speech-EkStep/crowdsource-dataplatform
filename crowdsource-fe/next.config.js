@@ -62,16 +62,16 @@ const nextConfig = {
           }
         ],
       },
-      {
-        source: '/:all*(svg|jpg|png)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=9999999999, must-revalidate',
-          }
-        ],
-      },
+      // {
+      //   source: '/:all*(svg|jpg|png)',
+      //   locale: false,
+      //   headers: [
+      //     {
+      //       key: 'Cache-Control',
+      //       value: 'public, max-age=9999999999, must-revalidate',
+      //     }
+      //   ],
+      // },
     ]
   },
   // assetPrefix: process.env.NODE_CONFIG_ENV ? `${config.get('fe.staticFileUrl')}/assets` : '',
