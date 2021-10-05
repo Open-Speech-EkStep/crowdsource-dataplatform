@@ -19,8 +19,6 @@ jobs:
       - run: rm -rf .git
       - run: mkdir ${HOME}/project/crowdsource-api/locales
       - run: cp -v -R crowdsource-ui/locales/ ${HOME}/project/crowdsource-api/
-      - run: cd ${HOME}/project/crowdsource-fe && npm install 
-      - run: cd ${HOME}/project/crowdsource-fe &&  NODE_CONFIG_ENV=dev npm run build:docker
       - persist_to_workspace:
           root: .
           paths:

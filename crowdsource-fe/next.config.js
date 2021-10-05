@@ -53,7 +53,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/*',
+        source: '/:all*',
         locale: false,
         headers: [
           {
