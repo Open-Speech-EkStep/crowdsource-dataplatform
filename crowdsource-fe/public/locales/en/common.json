@@ -141,5 +141,11 @@
   "odia": "Odia",
   "punjabi": "Punjabi",
   "gujarati": "Gujarati",
-  "viewAllDetail": "View all details"
+  "viewAllDetail": "View all details",
+  "reportModalHeading": "Report Content",
+  "reportModalSubHeading": "Help us understand what’s wrong with the image labelled",
+  "offensiveSubtext": "Hateful / Discriminatory / Vulgar language, drugs promotion etc.",
+  "specifyReason": "Please specify the reason (Optional)",
+  "thankyou": "Thank You",
+  "reportSubmitSuccess": "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback."
 }

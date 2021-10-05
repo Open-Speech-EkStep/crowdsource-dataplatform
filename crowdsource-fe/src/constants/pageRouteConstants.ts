@@ -6,6 +6,11 @@ export const pageRouteConstants = {
   [routePaths.sunoIndiaHome]: 'Suno India',
 } as const;
 
+export const pageSourceConstants = {
+  [routePaths.sunoIndiaTranscribe]: 'contribute',
+  [routePaths.sunoIndiaValidate]: 'validate',
+} as const;
+
 export const pageInitiativeRouteConstants = {
   [routePaths.home]: 'Others',
   [routePaths.sunoIndiaHome]: INITIATIVES_MAPPING.suno,

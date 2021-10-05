@@ -11,6 +11,7 @@ const apiPaths = {
     nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesBySpeakerContributions.json',
   participationStats: nodeConfig.staticFileUrl + '/aggregated-json/participationStats.json',
   feedback: nodeConfig.apiUrl + '/feedback',
+  report: nodeConfig.apiUrl + '/report',
 };
 
 export default apiPaths;

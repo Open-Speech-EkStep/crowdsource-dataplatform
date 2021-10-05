@@ -21,7 +21,7 @@ exports[`IconTextButton should render the component and matches it against store
         />
       </div>
       <img
-        alt="icon"
+        alt="text"
         data-nimg="intrinsic"
         decoding="async"
         src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

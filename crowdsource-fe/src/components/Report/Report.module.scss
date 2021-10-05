@@ -1,0 +1,11 @@
+.form {
+  padding: 0 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 2.5rem;
+  }
+}
+
+.radio label {
+  line-height: 1.375rem;
+}

@@ -3,7 +3,8 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import IconTextButton from '../IconTextButton';
 
 describe('IconTextButton', () => {
-  const setup = () => render(<IconTextButton icon="some-icon.svg" textDesktop="some-text" />);
+  const setup = () =>
+    render(<IconTextButton icon="some-icon.svg" textDesktop="some-text" onClick={() => {}} altText="text" />);
 
   verifyAxeTest(setup());
 
