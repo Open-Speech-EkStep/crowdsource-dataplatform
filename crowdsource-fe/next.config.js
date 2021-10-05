@@ -50,7 +50,7 @@ const nextConfig = {
   generateBuildId: async () => {
     return 'v1.0.0';
   },
-  assetPrefix: process.env.NODE_CONFIG_ENV ? `${config.get('fe.staticFileUrl')}/assets` : '',
+  // assetPrefix: process.env.NODE_CONFIG_ENV ? `${config.get('fe.staticFileUrl')}/assets` : '',
 };
 
 module.exports = withTM(nextConfig);
