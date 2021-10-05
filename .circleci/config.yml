@@ -125,7 +125,6 @@ jobs:
             nvm --version
             nvm install v14.17.5
             node -v
-      - run: |
             cd crowdsource-fe && npm i
             NODE_CONFIG_ENV=<< parameters.env_name >> npm run build:docker
       - run:
