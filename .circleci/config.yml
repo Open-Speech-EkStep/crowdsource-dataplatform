@@ -118,17 +118,16 @@ jobs:
           command: |
             sudo apt-get update -y
             sudo apt-get install -y curl
-      - run: |
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-      - run: |      
-            nvm --version
-            nvm install v14.17.5
-            node -v
-            
       - run:
           name: build_ui
           command: |
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+
+            nvm --version
+            nvm install v14.17.5
+            node -v
+
             cd crowdsource-fe && npm i
             NODE_CONFIG_ENV=<< parameters.env_name >> npm run build:docker
 
