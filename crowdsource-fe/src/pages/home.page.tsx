@@ -33,7 +33,7 @@ const Home: NextPage = () => {
           <section className="py-8 py-md-9">
             <ContributionStats initiative="">
               <header className="d-flex flex-column align-items-center flex-md-row justify-content-md-between">
-                <h1 className="mb-0">{t('totalParticipation')}</h1>
+                <h2 className="mb-0">{t('totalParticipation')}</h2>
               </header>
             </ContributionStats>
           </section>
