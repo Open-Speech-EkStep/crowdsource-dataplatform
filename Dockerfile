@@ -36,9 +36,9 @@ ARG TENANT_ID=test
 ARG APP_ID=test
 ARG AZURE_URL=test
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-RUN echo ${TENANT_ID}
-RUN echo ${APP_ID}
-RUN echo ${AZURE_URL}
+ENV TENANT_ID=${TENANT_ID}
+ENV APP_ID=${APP_ID}
+ENV AZURE_URL=${AZURE_URL}
 RUN wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
 RUN tar -xf azcopy_v10.tar.gz --strip-components=1
 RUN ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
