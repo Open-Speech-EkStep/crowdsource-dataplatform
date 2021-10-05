@@ -2,7 +2,7 @@
   "fe": {
     "apiUrl": "https://dev-api.vakyansh.in",
     "cdnUrl": "https://dev-data-crowdsource.azureedge.net",
-    "staticFileUrl": "https://dev-ui.azureedge.net",
+    "staticFileUrl": "https://dev.vakyansh.in",
     "whitelistingEmail": false,
     "showDataSource": false,
     "feedbackTopComponent": false,

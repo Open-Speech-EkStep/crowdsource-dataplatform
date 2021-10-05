@@ -2,7 +2,7 @@
   "fe": {
     "apiUrl": "https://test-api.vakyansh.in",
     "cdnUrl": "https://test-data-crowdsource.azureedge.net",
-    "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-test",
+    "staticFileUrl": "https://test.vakyansh.in",
     "whitelistingEmail": false,
     "showDataSource": true,
     "feedbackTopComponent": false,
