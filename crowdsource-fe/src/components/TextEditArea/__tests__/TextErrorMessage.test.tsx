@@ -1,9 +1,9 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import AudioController from '../AudioController';
+import TextErrorMessage from '../TextErrorMessage';
 
-describe('AudioController', () => {
-  const setup = () => render(<AudioController />);
+describe('TextErrorMessage', () => {
+  const setup = () => render(<TextErrorMessage />);
 
   verifyAxeTest(setup());
 

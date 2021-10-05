@@ -1,9 +1,9 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import AudioController from '../AudioController';
+import ButtonControls from '../ButtonControls';
 
-describe('AudioController', () => {
-  const setup = () => render(<AudioController />);
+describe('ButtonControls', () => {
+  const setup = () => render(<ButtonControls />);
 
   verifyAxeTest(setup());
 

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextEditArea should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="addText border border-2 border-primary bg-light p-4"
+    data-testid="TextEditArea"
+  >
+    <div>
+      <label
+        class="display-6 form-label"
+        for="textarea"
+      >
+        Add Text (Hindi)
+      </label>
+      <textarea
+        class="textarea border-0 p-0 display-3 form-control"
+        id="textarea"
+        placeholder="Start typing here..."
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

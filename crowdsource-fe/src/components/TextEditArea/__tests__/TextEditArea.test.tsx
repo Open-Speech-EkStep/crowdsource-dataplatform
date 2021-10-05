@@ -1,9 +1,9 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import AudioController from '../AudioController';
+import TextEditArea from '../TextEditArea';
 
-describe('AudioController', () => {
-  const setup = () => render(<AudioController />);
+describe('TextEditArea', () => {
+  const setup = () => render(<TextEditArea />);
 
   verifyAxeTest(setup());
 

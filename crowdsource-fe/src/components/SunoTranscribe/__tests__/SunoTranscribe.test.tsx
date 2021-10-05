@@ -1,4 +1,4 @@
-import { render } from 'utils/testUtils';
+import { render, screen } from 'utils/testUtils';
 
 import SunoTranscribe from '../SunoTranscribe';
 
@@ -9,5 +9,14 @@ describe('SunoTranscribe', () => {
     const { asFragment } = setup();
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should render the suno india record component', () => {
+    setup();
+
+    expect(screen.getByTestId('AudioController')).toBeInTheDocument();
+    expect(screen.getByTestId('TextEditArea')).toBeInTheDocument();
+    expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
+    expect(screen.getByTestId('ButtonControls')).toBeInTheDocument();
   });
 });
