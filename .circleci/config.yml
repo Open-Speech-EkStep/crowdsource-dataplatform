@@ -117,10 +117,15 @@ jobs:
           name: setup_machine
           command: |
             sudo apt-get update -y
-            sudo apt-get install nodejs
+            curl -sL https://deb.nodesource.com/setup_14.17.5 | sudo bash -
+            
+            sudo apt-get -y install nodejs
             sudo apt-get install npm
+            npm install -g npm@6.14.14
             sudo apt-get install -y apt-utils
             sudo apt-get install wget
+
+            node --version
 
       - run:
           name: build_ui
