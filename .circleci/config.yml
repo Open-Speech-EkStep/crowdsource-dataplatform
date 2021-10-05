@@ -356,11 +356,11 @@ workflows:
             branches:
               only: [master]
 
-      # - build_ui_push_to_blob_storage:
-      #     name: build_dev_ui
-      #     env_name: dev
-      #     requires:
-      #       - create-workspace
+      - build_ui_push_to_blob_storage:
+          name: build_dev_ui
+          env_name: dev
+          requires:
+            - create-workspace
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -374,7 +374,7 @@ workflows:
           tag: dev
           checkout: false
           requires:
-            - create-workspace
+            - build_dev_ui
 
       - aks_deployment_ui:
           name: dev_ui_deployment_aks

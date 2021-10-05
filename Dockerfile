@@ -24,27 +24,6 @@ RUN mkdir target
 COPY --from=deps /app/ui/target ./target/
 RUN npm run build:docker
 
-FROM ubuntu:latest as mover
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y curl
-RUN apt-get install -y unzip
-RUN apt-get install -y sudo
-RUN apt-get install -y wget
-# RUN apt install keyutils
-# RUN apt-get install -y python3 python3-pip
-ARG TENANT_ID=test
-ARG APP_ID=test
-ARG AZURE_URL=test
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-ENV TENANT_ID=${TENANT_ID}
-ENV APP_ID=${APP_ID}
-ENV AZURE_URL=${AZURE_URL}
-RUN wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
-RUN tar -xf azcopy_v10.tar.gz --strip-components=1
-RUN ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
-COPY --from=builder /app/.next ./.next
-RUN ./azcopy copy ".next/static/*" "${AZURE_URL}" --cache-control "max-age=1200" --recursive
-
 # Production image, copy all the files and run next
 FROM node:14-alpine AS runner
 ARG NODE_CONFIG_ENV=default
