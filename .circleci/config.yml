@@ -118,18 +118,19 @@ jobs:
           command: |
             sudo apt-get update -y
             sudo apt-get install -y curl
-      - run:
-          name: build_ui
-          command: |
+      - run: |
             echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
             echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-
+      - run: |      
             nvm --version
             nvm install v14.17.5
             node -v
-
+      - run: |
             cd crowdsource-fe && npm i
             NODE_CONFIG_ENV=<< parameters.env_name >> npm run build:docker
+      - run:
+          name: build_ui
+          command: |
 
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
             tar -xf azcopy_v10.tar.gz --strip-components=1
