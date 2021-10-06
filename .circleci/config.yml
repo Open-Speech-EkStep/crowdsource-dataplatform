@@ -329,16 +329,16 @@ workflows:
       - node/test:
           version: '14.17.5'
 
-      # - check_fe:
-      #     name: check_fe
-      #     env_name: default
-      #     requires:
-      #       - node/test
+      - check_fe:
+          name: check_fe
+          env_name: default
+          requires:
+            - node/test
 
       - create-workspace:
           name: create-workspace
-          # requires:
-          #   - check_fe
+          requires:
+            - check_fe
           filters:
             branches:
               only: [master, nextjs-basic-setup]
