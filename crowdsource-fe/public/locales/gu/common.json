@@ -89,7 +89,9 @@
   "validateWarningMsg": "ફક્ત પસંદ કરેલી ભાષા માટે જ યોગદાન",
   "contributeWarningMsg": "ફક્ત પસંદ કરેલી ભાષા માટે જ વેલિડેશન",
   "sunoContributionTagline": "આપ જે સાંભળો છો, તેને ટાઇપ કરો",
+  "boloContributionTagline": "તમારા અવાજનું યોગદાન આપો",
   "sunoValidationTagline": "અન્યના યોગદાનની ચકાસણી કરો",
+  "boloValidationTagline": "અન્યના યોગદાનની ચકાસણી કરો",
   "month": "માસ",
   "contributionGraphYLabel1": "યોગદાન (કલાકોમાં)",
   "contributionGraphYLabel2": "યોગદાન (કુલ વાક્યોની સંખ્યા)",
@@ -115,6 +117,7 @@
   "yourSelectedLanguage": "તમે પસંદ કરેલી ભાષા",
   "topLanguages": "ટોચની ભાષાઓ",
   "transcribe": "ટ્રાન્સક્રાઇબ કરો",
+  "speak": "બોલો",
   "validate": "માન્ય કરો",
   "languages": "ભાષાઓ",
   "hours": "કલાકો",
@@ -132,5 +135,11 @@
   "odia": "ઓડિયા",
   "punjabi": "પંજાબી",
   "gujarati": "ગુજરાતી",
-  "viewAllDetail": "તમામ વિગતો દર્શાવો"
+  "viewAllDetail": "તમામ વિગતો દર્શાવો",
+  "reportModalHeading": "કન્ટેન્ટની રિપોર્ટ કરો",
+  "reportModalSubHeading": "લેબલ કરેલી ઇમેજમાં શું ખોટું છે તે સમજવામાં અમારી મદદ કરો",
+  "offensiveSubtext": "દ્વેષપૂર્ણ / ભેદભાવપૂર્ણ / અભદ્ર ભાષા, ડ્રગ્સને પ્રોત્સાહન આપે છે, વગેરે.",
+  "specifyReason": "કૃપા કરીને કારણ સ્પષ્ટ કરો (વૈકલ્પિક)",
+  "thankyou": "આપનો આભાર",
+  "reportSubmitSuccess": "આપના પ્રતિભાવ જુવો ઇન્ડિયાને પ્રાસંગિક બનાવી રાખવામાં મદદરૂપ થાય છે, પ્રતિભાવ આપવા માટે સમય ફાળવવા બદલ અમે આપનો આભાર માનીએ છીએ."
 }

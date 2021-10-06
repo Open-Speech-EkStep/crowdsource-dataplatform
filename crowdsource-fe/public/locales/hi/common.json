@@ -89,7 +89,9 @@
   "validateWarningMsg": "चयनित भाषा के लिए ही केवल योगदान आमंत्रित",
   "contributeWarningMsg": "चयनित भाषा के लिए ही केवल सत्यापन आमंत्रित",
   "sunoContributionTagline": "आप जो सुन रहे हैं उसे टाइप करें",
+  "boloContributionTagline": "आवाज़ का योगदान दें",
   "sunoValidationTagline": "दूसरों के योगदान को सत्यापित करें",
+  "boloValidationTagline": "दूसरों के योगदान को सत्यापित करें",
   "month": "महीना",
   "contributionGraphYLabel1": "योगदान (घंटों में )",
   "contributionGraphYLabel2": "योगदान (वाक्यों की कुल संख्या )",
@@ -115,6 +117,7 @@
   "yourSelectedLanguage": "आपकी चुनी हुई भाषा",
   "topLanguages": "मुख्य भाषाएं",
   "transcribe": "ट्रांसक्राइब  करें",
+  "speak": "बोलें",
   "validate": "सत्यापित करें",
   "languages": "भाषाएं",
   "hours": "घंटे",
@@ -132,5 +135,11 @@
   "odia": "उड़िया",
   "punjabi": "पंजाबी",
   "gujarati": "गुजराती",
-  "viewAllDetail": "संपूर्ण जानकारी देखें"
+  "viewAllDetail": "संपूर्ण जानकारी देखें",
+  "reportModalHeading": "कॉन्टेंट की रिपोर्ट करें",
+  "reportModalSubHeading": "लेबल की गई इमेज में क्या गड़बड़ी है, यह समझने में हमारी मदद करें",
+  "offensiveSubtext": "नफ़रत फ़ैलाने वाली / भेदभाव वाली / अश्लील भाषा, नशीली दवाओं का प्रचार आदि",
+  "specifyReason": "कृपया कारण बताएं (वैकल्पिक)",
+  "thankyou": "धन्यवाद!",
+  "reportSubmitSuccess": "आपका फीडबैक देखो इंडिया को प्रासंगिक बनाए रखने में हमारी मदद करता है, हम इस बात की सराहना करते हैं कि आपने फीडबैक देने के लिए अपना कीमती समय निकाला।"
 }

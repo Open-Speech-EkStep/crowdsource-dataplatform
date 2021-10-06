@@ -89,7 +89,9 @@
   "validateWarningMsg": "ਸਿਰਫ ਚੁੁਣੀ ਗਈ ਭਾਸ਼ਾ ਦੇ ਲਈ ਹੀ ਯੋਗਦਾਨ ਦਾ ਸੱਦਾ",
   "contributeWarningMsg": "ਸਿਰਫ ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਦੇ ਲਈ ਹੀ ਪ੍ਰਮਾਣੀਕਰਨ ਦਾ ਸੱਦਾ",
   "sunoContributionTagline": "ਤੁਸੀਂ ਜੋ ਸੁਣ ਰਹੇ ਹੋ ਉਸ ਨੂੰ ਟਾਈਪ ਕਰੋ",
+  "boloContributionTagline": "ਆਪਣੀ ਆਵਾਜ਼ ਦਾ ਯੋਗਦਾਨ ਪਾਓ",
   "sunoValidationTagline": "ਹੋਰਾਂ ਦੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
+  "boloValidationTagline": "ਹੋਰਾਂ ਦੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
   "month": "ਮਹੀਨਾ",
   "contributionGraphYLabel1": "ਯੋਗਦਾਨ (ਘੰਟਿਆਂ ਵਿੱਚ)",
   "contributionGraphYLabel2": "ਯੋਗਦਾਨ (ਵਾਕਾਂ ਦੀ ਕੁੱਲ ਸੰਖਿਆ)",
@@ -115,6 +117,7 @@
   "yourSelectedLanguage": "ਤੁਹਾਡੀ ਚੁਣੀ ਹੋਈ ਭਾਸ਼ਾ",
   "topLanguages": "ਮੁੱਖ ਭਾਸ਼ਾਵਾਂ",
   "transcribe": "ਲਿਪੀਅੰਤਰਣ ਕਰੋ",
+  "speak": "ਬੋਲੋ",
   "validate": "ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
   "languages": "ਭਾਸ਼ਾਵਾਂ",
   "hours": "ਘੰਟੇ",
@@ -132,5 +135,11 @@
   "odia": "ਉੜੀਆ",
   "punjabi": "ਪੰਜਾਬੀ",
   "gujarati": "ਗੁਜਰਾਤੀ",
-  "viewAllDetail": "ਸਾਰੀ ਜਾਣਕਾਰੀ ਦੇਖੋ"
+  "viewAllDetail": "ਸਾਰੀ ਜਾਣਕਾਰੀ ਦੇਖੋ",
+  "reportModalHeading": "ਕੰਟੈਂਟ ਦੀ ਰਿਪੋਰਟ ਕਰੋ",
+  "reportModalSubHeading": "ਇਹ ਸਮਝਣ ਵਿੱਚ ਸਾਡੀ ਮਦਦ ਕਰੋ ਕਿ ਲੇਬਲ ਕੀਤੀ ਗਈ ਇਮੇਜ ਵਿੱਚ ਕੀ ਗੜਬੜੀ ਹੈ",
+  "offensiveSubtext": "ਨਫ਼ਰਤ ਭਰੀ / ਵਿਤਕਰੇ ਵਾਲੀ / ਅਸ਼ਲੀਲ ਭਾਸ਼ਾ, ਨਸ਼ਿਆਂ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨਾ ਆਦਿ",
+  "specifyReason": "ਕਿਰਪਾ ਕਰਕੇ ਕਾਰਨ ਦੱਸੋ (ਵਿਕਲਪਿਕ)",
+  "thankyou": "ਸ਼ੁਕਰੀਆ",
+  "reportSubmitSuccess": "ਤੁਹਾਡੀ ਫੀਡਬੈਕ ਦੇਖੋ ਇੰਡੀਆ ਨੂੰ ਪ੍ਰਾਸੰਗਿਕ ਬਣਾਈ ਰੱਖਣ ਵਿੱਚ ਸਾਡੀ ਮਦਦ ਕਰਦੀ ਹੈ, ਅਸੀਂ ਇਸ ਗੱਲ ਦੀ ਸਿਫਤ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਫੀਡਬੈਕ ਦੇਣ ਲਈ ਆਪਣਾ ਕੀਮਤੀ ਸਮਾਂ ਕੱਢਿਆ।"
 }

@@ -89,7 +89,9 @@
   "validateWarningMsg": "কেবল নির্বাচিত ভাষায় যোগদান করতে স্বাগত জানানো হচ্ছে",
   "contributeWarningMsg": "কেবল নির্বাচিত ভাষার যাচাই এর জন্য স্বাগত জানানো হচ্ছে",
   "sunoContributionTagline": "আপনি যা শুনছেন তা টাইপ করুন",
+  "boloContributionTagline": "আপনার কণ্ঠস্বর দান করুন",
   "sunoValidationTagline": "অন্যদের করা যোগদানগুলি যাচাই করুন",
+  "boloValidationTagline": "অন্যদের করা যোগদানগুলি যাচাই করুন",
   "month": "মাস",
   "contributionGraphYLabel1": "যোগদান (ঘন্টায়)",
   "contributionGraphYLabel2": "যোগদান (মোট বাক্যসংখ্যা)",
@@ -115,6 +117,7 @@
   "yourSelectedLanguage": "আপনার নির্বাচিত ভাষা",
   "topLanguages": "শীর্ষ ভাষাগুলি",
   "transcribe": "ট্রান্সক্রাইব করুন",
+  "speak": "বলুন",
   "validate": "যাচাই করুন",
   "languages": "ভাষাসমূহ",
   "hours": "ঘন্টা",
@@ -132,5 +135,11 @@
   "odia": "ওড়িয়া",
   "punjabi": "পাঞ্জাবী",
   "gujarati": "গুজরাটী",
-  "viewAllDetail": "সমস্ত বিবরণ দেখুন"
+  "viewAllDetail": "সমস্ত বিবরণ দেখুন",
+  "reportModalHeading": "বিষয়বস্তু সম্বন্ধে রিপোর্ট করুন",
+  "reportModalSubHeading": "লেবেলযুক্ত চিত্রটিতে কী কী ত্রুটি  আছে তা বুঝতে আমাদের সহায়তা করুন",
+  "offensiveSubtext": "ঘৃণ্য / বৈষম্যমূলক / অশ্লীল ভাষা, মাদকের প্রচার ইত্যাদি",
+  "specifyReason": "অনুগ্রহ করে কারণটি নির্দিষ্ট করুন (ঐচ্ছিক)",
+  "thankyou": "ধন্যবাদ",
+  "reportSubmitSuccess": "আপনার মতামত আমাদের দেখো ইন্ডিয়াকে প্রাসঙ্গিক রাখতে সহায়তা করে। আমরা আপনার মতামত ও সময়ের সমাদর করি।"
 }

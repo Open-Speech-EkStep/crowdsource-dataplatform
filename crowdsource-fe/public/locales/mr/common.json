@@ -89,7 +89,9 @@
   "validateWarningMsg": "निवड झालेल्या भाषांचेच फक्त्त योगदान आमंत्रित",
   "contributeWarningMsg": "निवड झालेल्या भाषांसाठीच फक्त प्रमाणिकरण आमंत्रित",
   "sunoContributionTagline": "तुम्ही जे ऐकत आहात ते टाईप करा",
+  "boloContributionTagline": "आवाजाचे योगदान द्या",
   "sunoValidationTagline": "दुसर्यांनी केलेल्या योगदानाला प्रमाणित करा",
+  "boloValidationTagline": "दुसर्यांनी केलेल्या योगदानाला प्रमाणित करा",
   "month": "महिना",
   "contributionGraphYLabel1": "योगदान (तास)",
   "contributionGraphYLabel2": "योगदान (एकूण वाक्यांची संख्या)",
@@ -115,6 +117,7 @@
   "yourSelectedLanguage": "तुम्ही निवडलेली भाषा",
   "topLanguages": "सर्वोच्च भाषा",
   "transcribe": "ट्रांसक्राइब करा",
+  "speak": "बोला",
   "validate": "प्रमाणित करा",
   "languages": "भाषा",
   "hours": "तास",
@@ -132,5 +135,11 @@
   "odia": "उडिया",
   "punjabi": "पंजाबी",
   "gujarati": "गुजराती",
-  "viewAllDetail": "संपूर्ण तपशील पाहा"
+  "viewAllDetail": "संपूर्ण तपशील पाहा",
+  "reportModalHeading": "कन्टेन्टचा रिपोर्ट करा",
+  "reportModalSubHeading": "चित्रांना लेबल देण्यात काय चुकले हे समजण्यासाठी आम्हांला मदत करा",
+  "offensiveSubtext": "द्वेषपूर्ण/भेदभावाची/अश्लील भाषा, अंमली पदार्थांची जाहिरात इत्यादी.",
+  "specifyReason": "कृपया कारण नमूद करा (ऐच्छिक)",
+  "thankyou": "धन्यवाद",
+  "reportSubmitSuccess": "आपल्या अभिप्रायाची आम्हांला \"पहा इंडिया\" चांगले करण्यासाठी मदत होते. आपण वेळ काढून अभिप्राय दिल्याबद्दल आभार."
 }

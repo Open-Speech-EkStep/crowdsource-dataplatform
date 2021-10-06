@@ -7,7 +7,6 @@ import Container from 'react-bootstrap/Container';
 import BoloIndiaDetails, { BoloIndiaActions } from 'components/BoloIndiaDetails';
 import PageBackground from 'components/PageBackground';
 import PageHeader from 'components/PageHeader';
-import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
@@ -23,7 +22,6 @@ const HomePage: NextPage = () => {
         </Container>
       </PageBackground>
       <BoloIndiaDetails />
-      <ViewAllDetailButton initiative={INITIATIVES_MAPPING.bolo} />
     </Fragment>
   );
 };
