@@ -28,7 +28,7 @@
       "error": false,
       "home": true,
       "sunoIndiaHome": true,
-      "boloIndiaHome": true,
+      "boloIndiaHome": false,
       "styleGuide": false
     }
   }
