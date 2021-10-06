@@ -5,7 +5,11 @@ import { render, verifyAxeTest, screen, waitFor } from 'utils/testUtils';
 import ContributionActions from '../ContributionActions';
 
 describe('ContributionActions', () => {
-  const setup = async (initiativeType: string, initiative: string, language: string) => {
+  const setup = async (
+    initiativeType: string,
+    initiative: 'suno' | 'bolo' | 'likho' | 'dekho',
+    language: string
+  ) => {
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);

@@ -37,7 +37,7 @@ exports[`Navigation should render the component and matches it against stored sn
             suno india
           </a>
           <a
-            class="link d-flex align-items-center text-primary display-5 p-4 px-xl-5 py-xl-0 nav-link"
+            class="link font-family-rowdies d-flex align-items-center text-primary display-5 p-4 px-xl-5 py-xl-0 nav-link"
             data-rr-ui-event-key="/boloIndia/home"
             href="/boloIndia/home"
           >
