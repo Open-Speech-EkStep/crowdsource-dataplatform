@@ -17,8 +17,6 @@ import routePaths from 'constants/routePaths';
 import styles from './InitiativesCarousel.module.scss';
 
 const InitiativesCarousel = () => {
-  console.log('testing deployment');
-
   const initiatives = INITIATIVES;
   const { t } = useTranslation();
   const [sliders, setNavs] = useState({ sliderOne: undefined, sliderTwo: undefined });
