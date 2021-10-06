@@ -15,11 +15,10 @@ export const INITIATIVES_MEDIA_MAPPING = {
 export const INITIATIVES = Object.keys(INITIATIVES_MAPPING);
 
 export const INITIATIVE_ACTIONS = {
-  transcribe: 'transcribe',
-  validate: 'validate',
-  contribute: 'contribute',
-  speak: 'Speak',
-  label: 'Label',
+  [INITIATIVES_MAPPING.suno]: { contribute: 'transcribe', validate: 'validate' },
+  [INITIATIVES_MAPPING.bolo]: { contribute: 'speak', validate: 'validate' },
+  [INITIATIVES_MAPPING.likho]: { contribute: 'translate', validate: 'validate' },
+  [INITIATIVES_MAPPING.dekho]: { contribute: 'label', validate: 'validate' },
 } as const;
 
 export const INITIATIVE_CUMULATIVE_VALUE = {

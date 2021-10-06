@@ -4,7 +4,7 @@ import { Trans, useTranslation } from 'next-i18next';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
+import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -18,9 +18,9 @@ const getSourceCount = (
   contributionCount: number | undefined,
   validationCount: number | undefined
 ) => {
-  if (source === INITIATIVE_ACTIONS.contribute) {
+  if (source === 'contribute') {
     return contributionCount ?? 0;
-  } else if (source == INITIATIVE_ACTIONS.validate) {
+  } else if (source == 'validate') {
     return validationCount ?? 0;
   }
   return (contributionCount ?? 0) + (validationCount ?? 0);

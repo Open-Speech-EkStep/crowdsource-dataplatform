@@ -95,7 +95,9 @@
   "contributeWarningMsg": "Only validations invited for the selected language",
 
   "sunoContributionTagline": "Type what you hear",
+  "boloContributionTagline": "Contribute your voice",
   "sunoValidationTagline": "Validate what others have contributed",
+  "boloValidationTagline": "Validate what others have contributed",
   "month": "Month",
   "contributionGraphYLabel1": "Contribution (in hours)",
   "contributionGraphYLabel2": "Contribution (total sentences)",
@@ -123,6 +125,7 @@
   "yourSelectedLanguage": "Your selected language",
   "topLanguages": "Top languages",
   "transcribe": "Transcribe",
+  "speak": "Speak",
   "validate": "Validate",
   "languages": "Languages",
   "hours": "hour(s)",

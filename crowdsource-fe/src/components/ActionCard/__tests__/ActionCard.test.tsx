@@ -18,7 +18,7 @@ describe('ActionCard', () => {
     const rendereResult = render(
       <ActionCard
         icon="some-icon.svg"
-        type="transcribe"
+        type="contribute"
         text="some-text"
         initiative="suno"
         warningMsg="Only contributions invited for the selected language"

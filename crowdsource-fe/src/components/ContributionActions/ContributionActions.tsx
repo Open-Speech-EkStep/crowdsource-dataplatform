@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row';
 
 import ActionCard from 'components/ActionCard';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -19,7 +18,7 @@ interface LanguageWithData {
 }
 
 interface ContributionActionProps {
-  initiative: string;
+  initiative: 'suno' | 'bolo' | 'likho' | 'dekho';
   initiativeType: string;
 }
 
@@ -66,7 +65,7 @@ const ContributionActions = (props: ContributionActionProps) => {
       <Row>
         <Col md="6" className="mt-7 mt-md-9">
           <ActionCard
-            type={INITIATIVE_ACTIONS.transcribe}
+            type={'contribute'}
             icon={`${props.initiative}_contribute_icon.svg`}
             text={t(`${props.initiative}ContributionTagline`)}
             shadow="Green"
@@ -77,7 +76,7 @@ const ContributionActions = (props: ContributionActionProps) => {
         </Col>
         <Col md="6" className="mt-9 mt-md-9">
           <ActionCard
-            type={INITIATIVE_ACTIONS.validate}
+            type={'validate'}
             icon="validate.svg"
             text={t(`${props.initiative}ValidationTagline`)}
             shadow="Blue"

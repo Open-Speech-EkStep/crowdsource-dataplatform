@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 
 import ChangeUserModal from 'components/ChangeUserModal';
 import InfoMessage from 'components/InfoMessage';
+import { INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -16,13 +17,13 @@ import { capitalizeFirstLetter } from 'utils/utils';
 import styles from './ActionCard.module.scss';
 
 interface ActionCardProps {
-  type: string;
+  type: 'contribute' | 'validate';
   icon: string;
   text: string;
   warningMsg: string;
-  initiative: string;
   shadow?: 'Blue' | 'Green';
   disabled?: boolean;
+  initiative: 'suno' | 'bolo' | 'likho' | 'dekho';
 }
 
 const ActionCard = (props: ActionCardProps) => {
@@ -67,7 +68,7 @@ const ActionCard = (props: ActionCardProps) => {
                   })}
                 >
                   <div className="flex-grow-1">
-                    <h1 className={styles.type}>{t(type)}</h1>
+                    <h1 className={styles.type}>{t(INITIATIVE_ACTIONS[initiative][type])}</h1>
                     <p className={`${styles.text} mt-1 mt-md-2 mb-0`}>{text}</p>
                   </div>
                   <div
