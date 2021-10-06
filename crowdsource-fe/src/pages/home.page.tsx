@@ -38,9 +38,6 @@ const Home: NextPage = () => {
             </ContributionStats>
           </section>
           <section className="py-8 py-md-9">
-            <BadgesIntro />
-          </section>
-          <section className="py-8 py-md-9">
             <BronzeContribute />
           </section>
         </Container>
