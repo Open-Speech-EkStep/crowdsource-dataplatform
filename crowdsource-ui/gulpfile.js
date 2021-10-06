@@ -17,6 +17,8 @@ const env = args.env || 'local';
 const filename = 'env.config.' + env + '.json';
 const settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
 
+
+
 gulp.task('common-ejs-gen', function () {
   return gulp.src(['src/views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common')).pipe(livereload());
 });
@@ -384,6 +386,10 @@ gulp.task('watch', function() {
     'css',
     'scss',
   ));
+});
+
+gulp.task('json', function () {
+  return gulp.src([`brand/${settings.brand}.json`]).pipe(gulp.dest('build/brand')).pipe(livereload()).pipe(gulp.dest('target/brand'));
 });
 
 gulp.task(
