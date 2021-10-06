@@ -185,7 +185,7 @@ jobs:
       - run:
           name: cdn_invalidation
           command: |
-            az cdn endpoint purge -g << parameters.resource-group >> -n << parameters.env-name >> --profile-name << parameters.profile-name >> --content-paths '/'
+            az cdn endpoint purge -g << parameters.resource-group >> -n << parameters.env-name >> --profile-name << parameters.profile-name >> --content-paths '/*'
 
   aks_deployment:
     executor: azure-aks/default
