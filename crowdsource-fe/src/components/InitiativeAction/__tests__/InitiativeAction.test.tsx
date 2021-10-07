@@ -3,7 +3,8 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import InitiativeAction from '../InitiativeAction';
 
 describe('InitiativeAction', () => {
-  const setup = () => render(<InitiativeAction actionIcon="some-action-icon.svg" initiative="suno" />);
+  const setup = () =>
+    render(<InitiativeAction actionIcon="some-action-icon.svg" initiative="suno" action="contribute" />);
 
   verifyAxeTest(setup());
 

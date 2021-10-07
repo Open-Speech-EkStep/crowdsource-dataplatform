@@ -274,7 +274,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoContributionSubtext
+                                    dekhoValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -437,7 +437,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    sunoContributionSubtext
+                                    sunoValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -600,7 +600,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    boloContributionSubtext
+                                    boloValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -763,7 +763,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    likhoContributionSubtext
+                                    likhoValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -926,7 +926,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoContributionSubtext
+                                    dekhoValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1089,7 +1089,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    sunoContributionSubtext
+                                    sunoValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1252,7 +1252,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    boloContributionSubtext
+                                    boloValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1415,7 +1415,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    likhoContributionSubtext
+                                    likhoValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1578,7 +1578,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoContributionSubtext
+                                    dekhoValidationSubtext
                                   </div>
                                 </div>
                               </div>

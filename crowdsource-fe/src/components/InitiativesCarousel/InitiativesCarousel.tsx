@@ -106,11 +106,16 @@ const InitiativesCarousel = () => {
                         <InitiativeAction
                           actionIcon={`${initiative}_contribute_icon.svg`}
                           initiative={initiative}
+                          action="contribute"
                           shadow="Green"
                         />
                       </Col>
                       <Col xs="6" md="3" lg="4" className="d-flex justify-content-center py-5">
-                        <InitiativeAction actionIcon="validate.svg" initiative={initiative} />
+                        <InitiativeAction
+                          actionIcon="validate.svg"
+                          initiative={initiative}
+                          action="validate"
+                        />
                       </Col>
                       <Col className="mt-3 d-flex justify-content-center justify-content-md-start">
                         <Link href={routePaths[`${initiative}IndiaHome`]} passHref>
