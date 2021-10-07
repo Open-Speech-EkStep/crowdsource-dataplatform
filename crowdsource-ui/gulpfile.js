@@ -150,7 +150,7 @@ gulp.task('js', function () {
           },
         ],
       })
-    ).pipe(replace_sting('"\/img\/', `"${settings.contextRoot}/img/`)
+    ).pipe(replace_sting('"\/img\/', `"${settings.contextRoot}/img/${settings.brand}/`)
     ).pipe(
       replace({
         patterns: [
@@ -265,7 +265,7 @@ function jsGulp(moduleName) {
           },
         ],
       })
-    ).pipe(replace_sting('"\/img\/', `"${settings.contextRoot}/img/`)
+    ).pipe(replace_sting('"\/img\/', `"${settings.contextRoot}/img/${settings.brand}/`)
     ).pipe(
       replace({
         patterns: [
@@ -308,11 +308,11 @@ gulp.task('js-likhoIndia', () => { return jsGulp('likhoIndia') });
 gulp.task('js-dekhoIndia', () => { return jsGulp('dekhoIndia') });
 
 gulp.task('css', function () {
-  return gulp.src(['src/assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`)).pipe(gulp.dest('target/css'));
+  return gulp.src(['src/assets/css/*.css']).pipe(gulpFlatten()).pipe(cleanCss()).pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/${settings.brand}/`)).pipe(gulp.dest('target/css'));
 });
 
 gulp.task('scss', function () {
-  return gulp.src(['src/assets/css/*.scss']).pipe(gulpFlatten()).pipe(sass().on('error', sass.logError)).pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`)).pipe(cleanCss()).pipe(gulp.dest('target/css'));
+  return gulp.src(['src/assets/css/*.scss']).pipe(gulpFlatten()).pipe(sass().on('error', sass.logError)).pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/${settings.brand}/`)).pipe(cleanCss()).pipe(gulp.dest('target/css'));
 });
 
 gulp.task('css-common', function () {
@@ -320,7 +320,7 @@ gulp.task('css-common', function () {
     .src(['src/views/common/**/*.css', 'src/views/style/common.css'])
     .pipe(gulpFlatten())
     .pipe(cleanCss())
-    .pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`))
+    .pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/${settings.brand}/`))
     .pipe(gulp.dest('target/css/common'));
 });
 
@@ -330,7 +330,7 @@ function cssClean(moduleName) {
     .src([`src/views/modules/${moduleName}/**/*.css`])
     .pipe(gulpFlatten())
     .pipe(cleanCss())
-    .pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/`))
+    .pipe(replace_sting('\/img\/', `${settings.contextRoot}/img/${settings.brand}/`))
     .pipe(gulp.dest(`target/css/${moduleName}`));
 }
 

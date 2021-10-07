@@ -4,7 +4,7 @@ const fs = require('fs');
 const ejs = require('ejs');
 const { I18n } = require('i18n');
 
-async function ejs2html(path, information, i18n, targetPath, fileName, locale, contextRoot) {
+async function ejs2html(path, information, i18n, targetPath, fileName, locale, contextRoot,brand) {
   fs.readFile(path, 'utf8', async function (err, data) {
     if (err) {
       return false;
@@ -19,7 +19,7 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale, c
 
     let html = ejs.render(data, info);
 
-    html = html.replace(/"\/img\//g, `"${contextRoot}/img/`);
+    html = html.replace(/"\/img\//g, `"${contextRoot}/img/${brand}/`);
     html = html.replace(/"\/js\//g, `"${contextRoot}/js/`);
     html = html.replace(/"\/css\//g, `"${contextRoot}/css/`);
 
@@ -108,7 +108,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'badges.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/my-badges.ejs`,
@@ -117,7 +117,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'my-badges.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/validatorBadgesInfo.ejs`,
@@ -126,7 +126,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'validator-badges.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/dashboard.ejs`,
@@ -135,7 +135,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'dashboard.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/home.ejs`,
@@ -144,7 +144,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'home.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/not-found.ejs`,
@@ -153,7 +153,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'not-found.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/record.ejs`,
@@ -162,7 +162,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'record.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/terms-and-conditions.ejs`,
@@ -171,7 +171,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'terms-and-conditions.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/thank-you.ejs`,
@@ -180,7 +180,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'thank-you.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/validator-thank-you.ejs`,
@@ -189,7 +189,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'validator-thank-you.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
 
     await ejs2html(
@@ -199,7 +199,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'validator-page.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
 
     await ejs2html(
@@ -209,7 +209,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'profanity-boloindia.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/profanity-home.ejs`,
@@ -218,7 +218,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'profanity-home.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
     await ejs2html(
       `${ejsPath}/profanity.ejs`,
@@ -227,9 +227,9 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       outputPath,
       'profanity.html',
       locale,
-      contextRoot
+      contextRoot,brand
     );
-    await ejs2html(`${ejsPath}/key_gen.ejs`, {}, i18n, outputPath, 'key_gen.html', locale, contextRoot);
+    await ejs2html(`${ejsPath}/key_gen.ejs`, {}, i18n, outputPath, 'key_gen.html', locale, contextRoot,brand);
   });
 };
 
