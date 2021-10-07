@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)</title>
+    <title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="Bhasha Daan: A crowdsourcing initiative for Indian languages">
+    <meta name="description" content="<%- `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice` %>">
+    <meta property="og:title" content="<%= __(`${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`) %>">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?">
-    <meta property="og:site_name" content="Bhasha Daan">
+    <meta property="og:description" content="<%= __('social sharing text without rank') %>">
+    <meta property="og:site_name" content="<%- `${config.title_1} ${config.title_2}` %>">
     <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
@@ -31,7 +31,7 @@
 <div class="container-fluid supreme-container px-0 padding-top-65">
     <div class="bg-body-primary px-3 overflow-hidden">
     <div class="row">
-        <%- include('../common/moduleIntro.ejs',{name:'Likho',intro:'Enrich your language by translating text',img:"LikhoIndiaLogo.svg"}); %>
+        <%- include('../common/moduleIntro.ejs',{name:config.initiative_3,intro:'Enrich your language by translating text',img:"LikhoIndiaLogo.svg"}); %>
     </div>
     <div class="row">
         <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
@@ -66,7 +66,7 @@
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto pt-5 px-5">
             <div class="row">
                 <div class="col-lg-11 p-0">
-                    <%- include('../common/thankyouPageProgressBar.ejs', {text:'Sentence(s)', progressBarStats: __(`<span id="totalAverage"></span> of Likho India Target Achieved`)})
+                    <%- include('../common/thankyouPageProgressBar.ejs', {text:'Sentence(s)', progressBarStats: __(`<span id="totalAverage"></span> of ${config.initiative_3} Target Achieved`)})
                         %>
                 </div>
             </div>
@@ -75,7 +75,7 @@
     <div class="row" id="contribution_stats">
         <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
             <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies" style="line-height:28px">
-                <%= __('Contributions made to Likho India') %>
+                <%= __(`Contributions made to ${config.initiative_3}`) %>
             </h2>
             <div class="font-family-Rowdies mt-3">
                 <%= __('Overall Summary') %>

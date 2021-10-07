@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
+<head><title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
@@ -113,7 +113,7 @@
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-3 col-md-6 col-8 text-center lead" id="start_contributing_id">
                         <a class="btn btn-primary text-white btn-lg h6 w-100" href="./home.html">
-                            <%- __('Back to Bolo India Home') %>
+                            <%- __(`Back to ${config.initiative_2} Home`) %>
                         </a></div>
                 </div>
             </div>

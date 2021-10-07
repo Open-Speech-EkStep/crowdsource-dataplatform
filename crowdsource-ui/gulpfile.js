@@ -18,33 +18,32 @@ const filename = 'env.config.' + env + '.json';
 const settings = JSON.parse(fs.readFileSync('src/assets/config/' + filename, 'utf8'));
 
 
-
 gulp.task('common-ejs-gen', function () {
   return gulp.src(['src/views/common/**/*.ejs']).pipe(gulpFlatten()).pipe(gulp.dest('build/views/common')).pipe(livereload());
 });
 
 gulp.task('html-gen-common', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`, null, settings.enabled_languages,settings.contextRoot);
+  generateLocalisedHtmlFromEjs(`${__dirname}/src/views`, `${__dirname}/target`, null, settings.enabled_languages,settings.contextRoot,settings.brand);
   callback();
 });
 
 gulp.task('html-gen-boloIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia', settings.enabled_languages,settings.contextRoot);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'boloIndia', settings.enabled_languages,settings.contextRoot,settings.brand);
   callback();
 });
 
 gulp.task('html-gen-sunoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'sunoIndia', settings.enabled_languages,settings.contextRoot);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'sunoIndia', settings.enabled_languages,settings.contextRoot,settings.brand);
   callback();
 });
 
 gulp.task('html-gen-likhoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'likhoIndia', settings.enabled_languages,settings.contextRoot);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'likhoIndia', settings.enabled_languages,settings.contextRoot,settings.brand);
   callback();
 });
 
 gulp.task('html-gen-dekhoIndia', function (callback) {
-  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia', settings.enabled_languages,settings.contextRoot);
+  generateLocalisedHtmlFromEjs(`${__dirname}/build/views`, `${__dirname}/target`, 'dekhoIndia', settings.enabled_languages,settings.contextRoot,settings.brand);
   callback();
 });
 
