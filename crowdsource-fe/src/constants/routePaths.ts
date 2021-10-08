@@ -9,7 +9,7 @@ const routePaths: { [key: string]: string } = {
   root: '/',
   home: '/home',
   sunoIndiaHome: `${initiativeBaseRoute.sunoIndia}/home`,
-  sunoIndiaTranscribe: `${initiativeBaseRoute.sunoIndia}/record`,
+  sunoIndiaContribute: `${initiativeBaseRoute.sunoIndia}/record`,
   sunoIndiaValidate: `${initiativeBaseRoute.sunoIndia}/validator-page.html`,
   sunoIndiaDashboard: `${initiativeBaseRoute.sunoIndia}/dashboard.html`,
   boloIndiaContribute: `${initiativeBaseRoute.boloIndia}/record.html`,

@@ -12,6 +12,7 @@ const apiPaths = {
   participationStats: nodeConfig.staticFileUrl + '/aggregated-json/participationStats.json',
   feedback: nodeConfig.apiUrl + '/feedback',
   report: nodeConfig.apiUrl + '/report',
+  mediaAsr: nodeConfig.apiUrl + '/media/asr',
 };
 
 export default apiPaths;

@@ -40,7 +40,7 @@ $link-color: #007bff;
 $theme-colors: (
   'primary': #0f2749,
   'secondary': #eff5ff,
-  'success': $success,
+  'success': #71e947,
   'info': #2961ad,
   'warning': #ffcc35,
   'danger': #d32f2f,
@@ -52,6 +52,7 @@ $custom-colors: (
   'primary-64': rgba(15, 39, 73, 0.64),
   'primary-40': rgba(15, 39, 73, 0.4),
   'primary-10': rgba(15, 39, 73, 0.1),
+  'primary-4': rgba(15, 39, 73, 0.04),
   'strong-warning': #ef8537,
 );
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -68,6 +69,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --link-color: #{$link-color};
   --primary-10-color: #{map-get($custom-colors, 'primary-10')};
   --primary-40-color: #{map-get($custom-colors, 'primary-40')};
+  --primary-4-color: #{map-get($custom-colors, 'primary-4')};
   --strong-warning-color: #{map-get($custom-colors, 'strong-warning')};
   --btn-grey-color: #e7e9ed;
   --btn-primary-disabled-bg-color: #9fa9b6;
@@ -443,6 +445,13 @@ $btn-padding-y: 0;
 $progress-border-radius: 10px;
 $form-check-radio-checked-bg-image: url('/images/radio_checked.svg');
 $form-check-input-focus-box-shadow: none;
+$input-focus-box-shadow: none;
+$input-focus-border-color: var(--primary-color);
+$form-select-focus-box-shadow: none;
+$form-select-focus-border-color: var(--primary-color);
+$btn-close-focus-shadow: none;
+$btn-focus-box-shadow: none;
+//$input-focus-box-shadow: inset 0 0 8px rgba(15, 39, 73, 0.5);
 
 :root {
   /* Z-Indexes */

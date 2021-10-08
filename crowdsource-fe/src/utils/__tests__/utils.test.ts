@@ -5,6 +5,7 @@ import {
   formatTime,
   isSunoOrBoloInitiative,
   capitalizeFirstLetter,
+  verifyLanguage,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -84,5 +85,22 @@ describe('Utils', () => {
 
     const expectedOutput = 'Suno';
     expect(capitalizeValue).toEqual(expectedOutput);
+  });
+
+  it('should test the verifyLanguage method', () => {
+    const errorType = verifyLanguage('suno', 'suno', 'Hindi');
+
+    const expectedOutput = { type: 'language' };
+    expect(errorType).toEqual(expectedOutput);
+
+    const errorType2 = verifyLanguage('abc', 'suno', 'English');
+
+    const expectedOutput2 = { type: '' };
+    expect(errorType2).toEqual(expectedOutput2);
+
+    const errorType3 = verifyLanguage('abc@', 'suno', 'English');
+
+    const expectedOutput3 = { type: 'symbol' };
+    expect(errorType3).toEqual(expectedOutput3);
   });
 });

@@ -12,3 +12,17 @@
     box-shadow: none;
   }
 }
+
+.keyboard {
+  position: absolute;
+  background-color: #ccc;
+  padding: 1rem 10px;
+  width: 600px;
+  z-index: 1;
+}
+
+.crossIcon {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}

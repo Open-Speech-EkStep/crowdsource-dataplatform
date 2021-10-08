@@ -6,7 +6,7 @@ exports[`TextErrorMessage should render the component and matches it against sto
     class="d-block text-danger px-4 fst-italic mt-2 display-5"
     data-testid="ErrorText"
   >
-    Some error text will appear here
+    error message
   </span>
 </DocumentFragment>
 `;

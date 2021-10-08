@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import TextErrorMessage from '../TextErrorMessage';
 
 describe('TextErrorMessage', () => {
-  const setup = () => render(<TextErrorMessage />);
+  const setup = () => render(<TextErrorMessage message="error message" />);
 
   verifyAxeTest(setup());
 
