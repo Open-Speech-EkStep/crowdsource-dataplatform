@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import Button from 'components/Button';
@@ -31,24 +30,10 @@ const ButtonControls = ({
   cancelDisable = true,
   submitDisable = true,
 }: ButtonControlProps) => {
-  const [showPlay, setShowPlay] = useState(true);
-  const [showPause, setShowPause] = useState(false);
-  const [showReplay, setShowReplay] = useState(false);
-
-  useEffect(() => {
-    setShowPlay(playButton);
-  }, [playButton]);
-
-  useEffect(() => {
-    setShowPause(pauseButton);
-  }, [pauseButton]);
-
-  useEffect(() => {
-    setShowReplay(replayButton);
-  }, [replayButton]);
+  const { t } = useTranslation();
 
   return (
-    <div data-testid="ButtonControls">
+    <div>
       <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center py-2 py-md-6">
         <Button
           onClick={onCancel}
@@ -56,44 +41,41 @@ const ButtonControls = ({
           variant="secondary"
           className="mx-md-6 order-2 order-md-1 my-2 my-md-0"
         >
-          Cancel
+          {t('cancel')}
         </Button>
-        {showPlay && (
+        {playButton && (
           <Button
-            data-testid="playBtn"
             variant="normal"
             onClick={onPlay}
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
-            <Image src="/images/play.svg" width="60" height="60" alt="Play Audio" />
+            <Image src="/images/play.svg" width="60" height="60" alt="Play Icon" />
             <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
-              Play
+              {t('play')}
             </span>
           </Button>
         )}
-        {showPause && (
+        {pauseButton && (
           <Button
-            data-testid="pauseBtn"
             variant="normal"
             onClick={onPause}
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
-            <Image src="/images/pause.svg" width="60" height="60" alt="Pause Audio" />
+            <Image src="/images/pause.svg" width="60" height="60" alt="Pause Icon" />
             <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
-              Pause
+              {t('pause')}
             </span>
           </Button>
         )}
-        {showReplay && (
+        {replayButton && (
           <Button
-            data-testid="replayBtn"
             variant="normal"
             onClick={onReplay}
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
-            <Image src="/images/replay.svg" width="60" height="60" alt="Replay Audio" />
+            <Image src="/images/replay.svg" width="60" height="60" alt="Replay Icon" />
             <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
-              Replay
+              {t('replay')}
             </span>
           </Button>
         )}
@@ -103,11 +85,11 @@ const ButtonControls = ({
           disabled={submitDisable}
           className="mx-md-6 order-3 order-md-3 my-2 my-md-0"
         >
-          Submit
+          {t('submit')}
         </Button>
       </div>
       <div className="d-flex justify-content-center mt-2 mt-md-11">
-        <Button variant="tertiary">Skip</Button>
+        <Button variant="tertiary">{t('skip')}</Button>
       </div>
     </div>
   );

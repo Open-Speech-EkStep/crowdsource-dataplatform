@@ -71,15 +71,10 @@ console.error = message => {
 
 // Mock data and helper methods
 global.window.HTMLMediaElement.prototype._mock = {
-  paused: true,
-  duration: NaN,
+  paused: false,
   _loaded: false,
   // Emulates the audio file loading
   _load: function audioInit(audio) {
-    // Note: we could actually load the file from this.src and get real duration
-    // and other metadata.
-    // See for example: https://github.com/59naga/mock-audio-element/blob/master/src/index.js
-    // For now, the 'duration' and other metadata has to be set manually in test code.
     audio.dispatchEvent(new Event('loadedmetadata'));
     audio.dispatchEvent(new Event('canplaythrough'));
   },
@@ -89,25 +84,6 @@ global.window.HTMLMediaElement.prototype._mock = {
   },
 };
 
-// Get "paused" value, it is automatically set to true / false when we play / pause the audio.
-Object.defineProperty(global.window.HTMLMediaElement.prototype, 'paused', {
-  get() {
-    return this._mock.paused;
-  },
-});
-
-// Get and set audio duration
-Object.defineProperty(global.window.HTMLMediaElement.prototype, 'duration', {
-  get() {
-    return this._mock.duration;
-  },
-  set(value) {
-    // Reset the mock state to initial (paused) when we set the duration.
-    this._mock._resetMock(this);
-    this._mock.duration = value;
-  },
-});
-
 // Start the playback.
 global.window.HTMLMediaElement.prototype.play = function playMock() {
   if (!this._mock._loaded) {
@@ -116,7 +92,6 @@ global.window.HTMLMediaElement.prototype.play = function playMock() {
   }
   this._mock.paused = false;
   this.dispatchEvent(new Event('play'));
-  // Note: we could
 };
 
 // Pause the playback

@@ -36,18 +36,18 @@ describe('ButtonControls', () => {
   it('should show the pause button', () => {
     setup(false, true, false, true, true);
 
-    expect(screen.getByTestId('pauseBtn')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Pause Icon' })).toBeInTheDocument();
   });
 
   it('should show the replay button', () => {
     setup(false, false, true, true, true);
 
-    expect(screen.getByTestId('replayBtn')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Replay Icon' })).toBeInTheDocument();
   });
 
   it('should render the button with default values', () => {
     setup(undefined, undefined, undefined, undefined, undefined);
 
-    expect(screen.getByTestId('playBtn')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Play Icon' })).toBeInTheDocument();
   });
 });

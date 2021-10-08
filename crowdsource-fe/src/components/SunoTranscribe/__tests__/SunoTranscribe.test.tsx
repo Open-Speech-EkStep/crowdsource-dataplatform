@@ -11,36 +11,26 @@ describe('SunoTranscribe', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should render the suno india record component', () => {
+  it('play button click should play audio and pause button should be enabled', async () => {
     setup();
 
-    expect(screen.getByTestId('AudioController')).toBeInTheDocument();
-    expect(screen.getByTestId('TextEditArea')).toBeInTheDocument();
-    expect(screen.getByTestId('ButtonControls')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Play Icon' })).toBeInTheDocument();
+
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
+
+    expect(screen.getByRole('img', { name: 'Pause Icon' })).toBeInTheDocument();
   });
 
-  it('should test the play button functionality on play, pause audio click', async () => {
+  it('pause button click should pause audio and play button should be enabled', async () => {
     setup();
-    userEvent.click(screen.getByRole('button', { name: 'Play Audio Play' }));
 
-    expect(screen.getByRole('button', { name: 'Pause Audio Pause' })).toBeInTheDocument();
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
-    userEvent.click(screen.getByRole('button', { name: 'Pause Audio Pause' }));
+    expect(screen.getByRole('img', { name: 'Pause Icon' })).toBeInTheDocument();
 
-    expect(screen.getByRole('button', { name: 'Play Audio Play' })).toBeInTheDocument();
+    userEvent.click(screen.getByRole('img', { name: 'Pause Icon' }));
 
-    userEvent.click(screen.getByRole('button', { name: 'Play Audio Play' }));
-
-    const audio: any = screen.getByTestId('audioElement');
-
-    await waitFor(() => {
-      audio.dispatchEvent(new window.Event('ended'));
-      expect(screen.getByRole('button', { name: 'Replay Audio Replay' })).toBeInTheDocument();
-    });
-
-    userEvent.click(screen.getByRole('button', { name: 'Replay Audio Replay' }));
-
-    expect(screen.getByRole('button', { name: 'Pause Audio Pause' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Play Icon' })).toBeInTheDocument();
   });
 
   it('should test the textarea text with valid language', async () => {
@@ -53,18 +43,29 @@ describe('SunoTranscribe', () => {
     });
   });
 
+  it('play button click should play audio and replay button should be enabled after audio stops', async () => {
+    setup();
+
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
+
+    await waitFor(() => screen.getByTestId('audioElement').dispatchEvent(new window.Event('ended')));
+    await waitFor(() => {
+      expect(screen.getByRole('img', { name: 'Replay Icon' })).toBeInTheDocument();
+    });
+  });
+
   it('should test the cancel button', async () => {
     setup();
 
-    expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
 
     userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
 
-    expect(screen.getByRole('button', { name: 'Cancel' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'cancel' })).toBeEnabled();
 
-    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    userEvent.click(screen.getByRole('button', { name: 'cancel' }));
 
-    expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
 
     await waitFor(() => {
       expect(screen.getByRole('textbox', { name: 'Add Text (Hindi)' })).toHaveValue('');
@@ -74,14 +75,12 @@ describe('SunoTranscribe', () => {
   it('should submit the form when click on submit button', () => {
     setup();
 
-    expect(screen.getByRole('button', { name: 'Submit' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
 
     userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
 
-    // expect(screen.getByRole('button', { name: 'Submit' })).toBeEnabled();
-
     expect(screen.getByRole('textbox', { name: 'Add Text (Hindi)' })).toHaveValue('बपपप');
 
-    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    userEvent.click(screen.getByRole('button', { name: 'submit' }));
   });
 });

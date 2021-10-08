@@ -2,9 +2,7 @@
 
 exports[`ButtonControls should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <div
-    data-testid="ButtonControls"
-  >
+  <div>
     <div
       class="d-flex flex-column flex-md-row justify-content-md-center align-items-center py-2 py-md-6"
     >
@@ -14,11 +12,11 @@ exports[`ButtonControls should render the component and matches it against store
         disabled=""
         type="button"
       >
-        Cancel
+        cancel
       </button>
       <button
         class="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0 info normal btn btn-link"
-        data-testid="playBtn"
+        data-testid="Button"
         type="button"
       >
         <div
@@ -35,7 +33,7 @@ exports[`ButtonControls should render the component and matches it against store
             />
           </div>
           <img
-            alt="Play Audio"
+            alt="Play Icon"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -46,7 +44,7 @@ exports[`ButtonControls should render the component and matches it against store
         <span
           class="mainControl display-3 position-absolute d-none d-md-block"
         >
-          Play
+          play
         </span>
       </button>
       <button
@@ -55,7 +53,7 @@ exports[`ButtonControls should render the component and matches it against store
         disabled=""
         type="button"
       >
-        Submit
+        submit
       </button>
     </div>
     <div
@@ -66,7 +64,7 @@ exports[`ButtonControls should render the component and matches it against store
         data-testid="Button"
         type="button"
       >
-        Skip
+        skip
       </button>
     </div>
   </div>

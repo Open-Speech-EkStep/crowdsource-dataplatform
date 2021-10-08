@@ -4,7 +4,6 @@ exports[`AudioController should render the component and matches it against stor
 <DocumentFragment>
   <div
     class="d-flex flex-column align-items-center text-center"
-    data-testid="AudioController"
   >
     <span
       class="label display-3"

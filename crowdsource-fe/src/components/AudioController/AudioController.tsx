@@ -29,7 +29,7 @@ const AudioController = ({ audioUrl, doPlay, doPause, onEnded }: AudoiController
   });
 
   return (
-    <div data-testid="AudioController" className="d-flex flex-column align-items-center text-center">
+    <div className="d-flex flex-column align-items-center text-center">
       <span className={`${styles.label} display-3`}>Type the text as you hear the audio</span>
       <div className={`mt-2 mt-md-3`}>
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
