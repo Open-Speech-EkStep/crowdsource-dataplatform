@@ -21,7 +21,9 @@ const ReeportSuccessModal = (props: ReeportSuccessModalProps) => {
     >
       <Modal.Header closeButton className={`${styles.modalHeader} border-bottom-0`} />
       <Modal.Body className="pt-0 pb-8 pb-md-9">
-        <div className="text-center">{t('thankyou')}</div>
+        <div className="text-center pb-4">
+          <h3> {t('thankyou')}</h3>
+        </div>
         <div className="text-center pt-2">{t('reportSubmitSuccess')}</div>
       </Modal.Body>
     </Modal>

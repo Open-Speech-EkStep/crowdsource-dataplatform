@@ -107,7 +107,7 @@ const TargetProgress = (props: TargetProgressProps) => {
   return (
     <div className={`${styles.root} d-flex flex-column`} data-testid="TargetProgress">
       <div className={`${styles.details} d-flex justify-content-between align-items-center`}>
-        <div className={styles.percentage}>
+        <div className={`${styles.percentage} font-family-rowdies`}>
           <Trans
             i18nKey="progressStatus"
             defaults="progressStatus"

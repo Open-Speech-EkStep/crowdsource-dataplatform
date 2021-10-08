@@ -6,6 +6,21 @@
   }
 }
 
-.radio label {
-  line-height: 1.375rem;
+.reasonText {
+  font-size: 0.875rem;
+  resize: none;
+  box-shadow: inset 0 0 8px rgba(15, 39, 73, 0.5);
+  height: 7.5rem;
+  border-radius: 8px;
+  border-width: 2px;
+
+  &:focus {
+    box-shadow: inset 0 0 8px rgba(15, 39, 73, 0.5);
+  }
+
+  &:disabled {
+    box-shadow: none;
+    border: 0;
+    background-color: var(--primary-4-color);
+  }
 }

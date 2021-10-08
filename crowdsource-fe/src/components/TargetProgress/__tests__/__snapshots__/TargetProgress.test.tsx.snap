@@ -10,7 +10,7 @@ exports[`TargetProgress should render the component and matches it against store
       class="details d-flex justify-content-between align-items-center"
     >
       <div
-        class="percentage"
+        class="percentage font-family-rowdies"
       >
         progressStatus
       </div>

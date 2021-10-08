@@ -6,9 +6,9 @@ import Container from 'react-bootstrap/Container';
 
 import Breadcrumbs from 'components/Breadcrumbs';
 import FunctionalPageBackground from 'components/FunctionalPageBackground';
-import IconTextButton from 'components/IconTextButton';
 import Report from 'components/Report';
 import SunoTranscribe from 'components/SunoTranscribe';
+import TestSpeakerMic from 'components/TestSpeakerMic';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const RecordPage: NextPage = () => (
@@ -21,13 +21,7 @@ const RecordPage: NextPage = () => (
             <Report />
           </div>
           <div className="ms-2 ms-md-4">
-            <IconTextButton
-              icon="speaker.svg"
-              textMobile="Test"
-              textDesktop="Test your speakers"
-              onClick={() => {}}
-              altText="testYourSpeaker"
-            />
+            <TestSpeakerMic showSpeaker={true} />
           </div>
         </div>
       </header>

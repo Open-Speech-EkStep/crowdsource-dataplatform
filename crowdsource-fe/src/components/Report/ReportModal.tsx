@@ -98,10 +98,13 @@ const ReportModal = ({ onSuccess: showThankyou, ...props }: ReportModalProps) =>
               value="Offensive"
               name="reportText"
               id="reportFormOffensiveCheckbox"
-              className={`${styles.radio} me-8 mb-0`}
+              className={`${styles.radio} mb-0 me-0`}
               onChange={handleChange}
             />
-            <Form.Label className="mb-1 w-100">{t('offensiveSubtext')}</Form.Label>
+            <span className="d-flex mt-1 mb-0 ms-6">{t('offensiveSubtext')}</span>
+          </Form.Group>
+
+          <Form.Group className="py-3" controlId="reportText">
             <Form.Check
               inline
               type="radio"
@@ -109,7 +112,7 @@ const ReportModal = ({ onSuccess: showThankyou, ...props }: ReportModalProps) =>
               value="Others"
               name="reportText"
               id="reportFormOthersCheckbox"
-              className={`${styles.radio} me-8 mb-0`}
+              className={`${styles.radio} mb-0 me-0`}
               onChange={handleChange}
             />
           </Form.Group>
@@ -123,6 +126,8 @@ const ReportModal = ({ onSuccess: showThankyou, ...props }: ReportModalProps) =>
               placeholder={t('specifyReason')}
               name="reportTextArea"
               onChange={e => setReportText(e.target.value)}
+              className={`${styles.reasonText} p-3`}
+              disabled={formData.reportText === ''}
             />
           </Form.Group>
         </Form>
