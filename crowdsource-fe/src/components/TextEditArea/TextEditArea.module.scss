@@ -14,15 +14,17 @@
 }
 
 .keyboard {
-  position: absolute;
   background-color: #ccc;
   padding: 1rem 10px;
+  position: absolute;
+
   width: 600px;
   z-index: 1;
 }
 
 .crossIcon {
-  position: absolute;
-  right: 15px;
   cursor: pointer;
+  position: absolute;
+
+  right: 15px;
 }
