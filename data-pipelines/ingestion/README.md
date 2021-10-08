@@ -1,5 +1,25 @@
 # Dataset Ingestion
 
+## Process
+
+1. Download (manula/script)
+2. Extract
+3. Upload to Azure bukets
+4. Update database
+
+## Setup
+
+## INSTALL AZCOPY: https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+
+```sh
+export AZCOPY_SPA_CLIENT_SECRET=*******
+export AZURE_ACC_URL=https://crowdsource1.blob.core.windows.net
+
+azcopy login --tenant-id ******** --service-principal --application-id *******
+
+azcopy cp "https://crowdsource1.blob.core.windows.net/ekstepspeechrecognition-crowdsource/" "https://crowdsource1.blob.core.windows.net/ekstepspeechrecognition-crowdsource-dev/" --recursive
+
+
 ## ASR dataset Ingestion
 
 Command for ingestion (Non-ULCA compliant):

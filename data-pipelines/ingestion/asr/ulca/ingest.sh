@@ -6,13 +6,13 @@ export paired=$5
 export connection=$6
 export ulca_dataset_path=$7
 
-dataset_name=$(basename ${asr_bundle_path} .tar.gz)
+dataset_name=$(basename ${asr_bundle_path} .zip)
 
-gsutil cp ${ulca_dataset_path}/${dataset_name}.tar.gz .
+gsutil cp ${ulca_dataset_path}/${dataset_name}.zip .
 
 export remote_bundle_path=${AZURE_ACC_URL}/${bucket}/$remote_base_path/${language}/original/bundled/${dataset_name}.tar.gz
 
-tar -xzvf $asr_bundle_path
+unzip $asr_bundle_path
 
 ls ${dataset_name} | grep '.wav'| awk -v path=${dataset_name}/ '{print path$1}'  > asr_files.txt
 
@@ -26,4 +26,4 @@ rm -rf $dataset_name
 
 azcopy copy $asr_bundle_path $remote_bundle_path
 
-rm -rf ${dataset_name}.tar.gz
+rm -rf ${dataset_name}.zip

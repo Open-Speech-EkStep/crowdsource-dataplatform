@@ -101,7 +101,7 @@ const start = async (connectionString, localDatasetPath, params,
         const files = fs.readFileSync('./ocr_files.txt', 'utf8').split('\n')
             .filter(x => x.split('.')[1] === 'png');
 
-        const id = await insertMaster(params, remote_dataset_bundle_path, client)
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'ocr')
 
         console.log('Inserting in dataset_rows')
 

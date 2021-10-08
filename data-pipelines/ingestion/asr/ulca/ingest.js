@@ -5,7 +5,7 @@ const { conn, insertMaster } = require('../../../common/dbUtils')
 const MIN_DURATION = 1
 const MAX_DURATION = 15
 
-const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, wav_paths, paired, wavToDataDict) => {
+const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, wav_paths, paired, wavToDataDict, profanity_check_required) => {
     const values = wav_paths
         .filter(path => {
             wavName = path.split('/').pop()
@@ -28,12 +28,13 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
             return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
                 ${datasetId},
-                ${paired === 'paired' ? '\'contributed\'' : null}
+                ${paired === 'paired' ? '\'contributed\'' : null},
+                ${profanity_check_required ? null : false}
             )`
         })
     // console.log('ingest1', values)
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id, state ) 
+    ( difficulty_level, type, media, master_dataset_id, state, is_profane ) 
     values ${values} RETURNING dataset_row_id`
 
     console.log('insert query', insert_rows)
@@ -64,11 +65,12 @@ const ingest2 = async (imageToIdDict, client, datset_base_path, language, wavToD
             "language": `${language}`
         }
         values.push(`(${imageToIdDict[image]}, ${contributorId},
-            '${JSON.stringify(media)}', 
-            true,
-            CURRENT_DATE,
-            'completed'
-        )`)
+                '${JSON.stringify(media)}', 
+                true,
+                CURRENT_DATE,
+                'completed'
+            )`)
+
     }
     console.log('values', values)
     const insert_rows = `insert into contributions 
@@ -105,21 +107,24 @@ const parse = (data, files) => {
     return dict
 }
 
-const start = async (connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired) => {
+const start = async (connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required) => {
     const client = conn(connectionString)
     try {
         const files = fs.readFileSync('./asr_files.txt', 'utf8').split('\n')
             .filter(x => x.includes('.wav'));
 
-        const id = await insertMaster(params, remote_dataset_bundle_path, client)
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'asr')
 
         console.log('Inserting in dataset_rows')
         const data = JSON.parse(fs.readFileSync(`${localDatasetPath}/data.json`))
         wavToDataDict = parse(data, files)
         console.log(wavToDataDict)
         wav_paths = parse1(files)
-        console.log("wav_paths", wav_paths)
-        const wavToIdDict = await ingest1(id, 'asr', client, `${basePath}/${language}`, language, wav_paths, paired, wavToDataDict)
+        // console.log("wav_paths", wav_paths)
+
+        console.log("inserting into dataset_row")
+
+        const wavToIdDict = await ingest1(id, 'asr', client, `${basePath}/${language}`, language, wav_paths, paired, wavToDataDict, profanity_check_required)
         console.log(wavToIdDict)
         console.log('Total dataset rows:', wavToIdDict)
 
@@ -149,7 +154,8 @@ const main = () => {
     console.log(localDatasetPath, remote_dataset_bundle_path, basePath, language, paired, connectionString)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
-    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired)
+    profanity_check_required = false
+    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required)
 }
 
 main()
