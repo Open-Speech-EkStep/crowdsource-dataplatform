@@ -4,22 +4,18 @@ import styles from './AudioController.module.scss';
 
 interface AudoiControllerProps {
   audioUrl: string;
-  doPlay: boolean;
-  doPause: boolean;
+  playAudio: boolean;
   onEnded: () => void;
 }
 
-const AudioController = ({ audioUrl, doPlay, doPause, onEnded }: AudoiControllerProps) => {
+const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps) => {
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
 
   useEffect(() => {
-    if (doPlay) audio?.play();
-  }, [audio, doPlay]);
-
-  useEffect(() => {
-    if (doPause) audio?.pause();
-  }, [audio, doPause]);
+    if (playAudio) audio?.play();
+    else audio?.pause();
+  }, [audio, playAudio]);
 
   useEffect(() => {
     audio?.addEventListener('ended', onEnded);

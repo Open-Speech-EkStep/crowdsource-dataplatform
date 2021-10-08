@@ -11,7 +11,6 @@ import styles from './SunoTranscribe.module.scss';
 
 const SunoTranscribe = () => {
   const [playAudio, setPlayAudio] = useState(false);
-  const [pauseVideo, setPauseAudio] = useState(false);
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
@@ -23,23 +22,18 @@ const SunoTranscribe = () => {
   const onPlayAudio = () => {
     setPlayAudio(true);
     setShowPauseButton(true);
-    setPauseAudio(false);
     setShowPlayButton(false);
   };
 
   const onPauseAudio = () => {
     setShowPauseButton(false);
     setPlayAudio(false);
-    setPauseAudio(true);
     setShowPlayButton(true);
   };
 
   const onReplayAudio = () => {
     setShowReplayButton(false);
-    setShowPauseButton(true);
-    setPlayAudio(true);
-    setPauseAudio(false);
-    setShowPlayButton(false);
+    onPlayAudio();
   };
 
   const onChangeTextInput = (text: string) => {
@@ -67,8 +61,7 @@ const SunoTranscribe = () => {
     <div data-testid="SunoTranscribe" className={`${styles.root} position-relative`}>
       <AudioController
         audioUrl="https://uat-data-crowdsource.azureedge.net/inbound%2Fasr%2FEnglish%2Fnewsonair.nic.in_09-08-2021_03-37%2F2_3_Regional-Kohima-English-0725-201951674824.wav"
-        doPlay={playAudio}
-        doPause={pauseVideo}
+        playAudio={playAudio}
         onEnded={onAudioEnd}
       />
       <div className="mt-4 mt-md-8">

@@ -1,9 +1,9 @@
 .test {
-  box-shadow: 0 4px 12px rgba(15, 39, 73, 0.2);
   border-radius: 12px;
-  width: 20rem;
-  top: 2.5rem;
+  box-shadow: 0 4px 12px rgba(15, 39, 73, 0.2);
   right: 0;
+  top: 2.5rem;
+  width: 20rem;
   z-index: 2;
 
   @include media-breakpoint-up(md) {
@@ -17,25 +17,25 @@
 }
 
 .testBtn {
-  min-height: 2rem;
-  font-size: 0.875rem;
   border-radius: 18px;
+  font-size: 0.875rem;
+  min-height: 2rem;
   width: 100%;
-
-  &:hover {
-    background-color: var(--primary-color);
-    color: var(--light-color);
-  }
 
   @include media-breakpoint-up(md) {
     min-height: 2.25rem;
     width: 15rem;
   }
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+  }
 }
 
 .bar {
-  height: 1.25rem;
   border-radius: 16px;
+  height: 1.25rem;
   width: 100%;
 }
 
@@ -44,17 +44,17 @@
 
   @include media-breakpoint-up(md) {
     position: absolute;
-    top: 1.5rem;
     right: 0;
+    top: 1.5rem;
   }
 }
 
 .progress {
-  height: 0.75rem;
   border-radius: 16px;
+  height: 0.75rem;
 }
 
 .close {
-  top: 1rem;
   right: 1rem;
+  top: 1rem;
 }
