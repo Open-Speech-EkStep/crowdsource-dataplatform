@@ -8,7 +8,7 @@ import Breadcrumbs from 'components/Breadcrumbs';
 import FunctionalPageBackground from 'components/FunctionalPageBackground';
 import Report from 'components/Report';
 import SunoTranscribe from 'components/SunoTranscribe';
-import TestSpeakerMic from 'components/TestSpeakerMic';
+// import TestSpeakerMic from 'components/TestSpeakerMic';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const RecordPage: NextPage = () => (
@@ -20,9 +20,7 @@ const RecordPage: NextPage = () => (
           <div>
             <Report />
           </div>
-          <div className="ms-2 ms-md-4">
-            <TestSpeakerMic showSpeaker={true} />
-          </div>
+          <div className="ms-2 ms-md-4">{/* <TestSpeakerMic showSpeaker={true} /> */}</div>
         </div>
       </header>
       <Container fluid="lg" className="mt-5">
