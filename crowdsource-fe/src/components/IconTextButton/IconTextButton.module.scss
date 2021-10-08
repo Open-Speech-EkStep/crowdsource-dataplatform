@@ -1,12 +1,13 @@
 .root {
-  background-color: #fff;
   border-radius: 4px;
   height: 2rem;
   opacity: 0.8;
-  text-decoration: none;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .text {
   font-size: 0.875rem;
-  line-height: 1.25rem;
 }

@@ -11,13 +11,14 @@ exports[`ButtonControls should render the component and matches it against store
       <button
         class="mx-md-6 order-2 order-md-1 my-2 my-md-0 light secondary btn btn-light"
         data-testid="Button"
+        disabled=""
         type="button"
       >
         Cancel
       </button>
       <button
         class="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0 info normal btn btn-link"
-        data-testid="Button"
+        data-testid="playBtn"
         type="button"
       >
         <div
@@ -51,6 +52,7 @@ exports[`ButtonControls should render the component and matches it against store
       <button
         class="mx-md-6 order-3 order-md-3 my-2 my-md-0 info primary btn btn-primary"
         data-testid="Button"
+        disabled=""
         type="button"
       >
         Submit

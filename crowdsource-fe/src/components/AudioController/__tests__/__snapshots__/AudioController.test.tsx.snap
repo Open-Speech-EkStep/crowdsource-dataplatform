@@ -17,17 +17,12 @@ exports[`AudioController should render the component and matches it against stor
       <audio
         class="audioPlayer"
         controls=""
-      >
-        <source
-          src="horse.ogg"
-          type="audio/ogg"
-        />
-        <source
-          src="horse.mp3"
-          type="audio/mpeg"
-        />
-        Your browser does not support the audio element.
-      </audio>
+        controlslist="nodownload"
+        crossorigin="anonymous"
+        data-testid="audioElement"
+        src="https://uat-data-crowdsource.azureedge.net/inbound%2Fasr%2FEnglish%2Fnewsonair.nic.in_09-08-2021_03-37%2F2_3_Regional-Kohima-English-0725-201951674824.wav"
+        tabindex="-1"
+      />
     </div>
   </div>
 </DocumentFragment>
