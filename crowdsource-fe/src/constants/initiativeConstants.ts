@@ -21,7 +21,7 @@ export const INITIATIVE_ACTIONS = {
   [INITIATIVES_MAPPING.dekho]: { contribute: 'label', validate: 'validate' },
 } as const;
 
-export const INITIATIVE_CUMULATIVE_VALUE: any = {
+export const INITIATIVE_CUMULATIVE_VALUE = {
   suno: [
     { languages: 'total_languages', isFormat: 'false' },
     { peopleParticipated: 'peopleParticipated', isFormat: 'false' },

@@ -10,7 +10,7 @@ interface AudoiControllerProps {
 }
 
 const AudioController = ({ audioUrl, doPlay, doPause, onEnded }: AudoiControllerProps) => {
-  const audioEl = useRef<HTMLAudioElement>();
+  const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
 
   useEffect(() => {
