@@ -1,11 +1,11 @@
 <html lang="en">
 
 <head>
-    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
+    <title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
+    <meta name="description" content="<%- `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice` %>">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
     <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -18,11 +18,11 @@
 </head>
 
 <body>
-<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:"Suno", PAGE_TITLE:__('Dashboard'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:config.initiative_1, PAGE_TITLE:__('Dashboard'),img:"SunoIndiaLogo.svg",homePath:"./home.html"}) %>
 <div class="padding-top-65">
 <div class="dashboard-bg">
 <div class="container container-fluid supreme-container">
-    <%- include('../common/breadcrumb.ejs', {MODULE:"Suno", PAGE_TITLE:__('Dashboard'),img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
+    <%- include('../common/breadcrumb.ejs', {MODULE:config.initiative_1, PAGE_TITLE:__('Dashboard'),img:"SunoIndiaLogo.svg", homePath:"./home.html"}) %>
     <div class="row mt-3 mt-lg-0">
         <div class="col-12">
             <div class="row">

@@ -1,5 +1,6 @@
 const { getEnabledLanguages, getAllLanguages } = require('./language-filter')
 const { enabled_languages } = require('./env-api')
+const config = require('../../../brand/meity.json')
 
 const DEFAULT_CON_LANGUAGE = "English";
 const AUDIO_DURATION = 6;
@@ -124,6 +125,20 @@ const ALL_MODULES = [
   'dekhoIndia',
 ];
 
+const BADGES_NAME = {
+  bronze : config.badge_1,
+  silver : config.badge_2,
+  gold : config.badge_3,
+  platinum : config.badge_4,
+}  
+
+const INITIATIVES_NAME = {
+  suno : config.initiative_1,
+  bolo : config.initiative_2,
+  likho : config.initiative_3,
+  dekho : config.initiative_4,
+}  
+
 module.exports = {
   DEFAULT_CON_LANGUAGE,
   AUDIO_DURATION,
@@ -144,5 +159,7 @@ module.exports = {
   OPINION_RATING_MAPPING,
   MOTHER_TONGUE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
-  CUMULATIVE_DATA
+  CUMULATIVE_DATA,
+  BADGES_NAME,
+  INITIATIVES_NAME,config
 }

@@ -1,5 +1,6 @@
 const { getEnabledLanguages, getAllLanguages } = require('./language-filter')
 const { enabled_languages } = require('./env-api')
+const config = require('../../../brand/meity.json')
 
 const DEFAULT_CON_LANGUAGE = "English";
 const AUDIO_DURATION = 6;
@@ -102,6 +103,20 @@ const AGE_GROUP = [
     '60+',
   ];
 
+const BADGES_NAME = {
+    bronze : config.badge_1,
+    silver : config.badge_2,
+    gold : config.badge_3,
+    platinum : config.badge_4,
+}  
+
+const INITIATIVES_NAME = {
+    suno : config.initiative_1,
+    bolo : config.initiative_2,
+    likho : config.initiative_3,
+    dekho : config.initiative_4,
+}
+
 module.exports = {
     DEFAULT_CON_LANGUAGE,
     AUDIO_DURATION,
@@ -125,5 +140,8 @@ module.exports = {
     LIKHO_FROM_LANGUAGE,
     ErrorStatusCode,
     CUMULATIVE_DATA,
-    AGE_GROUP
+    AGE_GROUP,
+    BADGES_NAME,
+    INITIATIVES_NAME,config
+
 }

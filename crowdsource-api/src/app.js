@@ -593,7 +593,15 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Images labelled',
             'Images validated',
             'An unexpected error has occurred.',
-            'We are processing multiple requests at the moment. Please try again after sometime.'
+            'We are processing multiple requests at the moment. Please try again after sometime.',
+            'Initiative_1',
+            'Initiative_2',
+            'Initiative_3',
+            'Initiative_4',
+            'badge_1',
+            'badge_2',
+            'badge_3',
+            'badge_4'
         ];
 
         const langSttr = {};

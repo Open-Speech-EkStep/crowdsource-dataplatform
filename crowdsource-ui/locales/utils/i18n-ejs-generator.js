@@ -229,7 +229,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       locale,
       contextRoot,brand
     );
-    await ejs2html(`${ejsPath}/key_gen.ejs`, {}, i18n, outputPath, 'key_gen.html', locale, contextRoot,brand);
+    await ejs2html(`${ejsPath}/key_gen.ejs`, {config}, i18n, outputPath, 'key_gen.html', locale, contextRoot,brand);
   });
 };
 

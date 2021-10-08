@@ -1,10 +1,10 @@
 const fetch = require('./fetch');
-const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, SPEAKER_DETAILS_KEY} = require('./constants');
+const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, SPEAKER_DETAILS_KEY,BADGES_NAME,
+  INITIATIVES_NAME} = require('./constants');
 const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   getLanguageBadge,
-  covertStringToCapitalised,
   translate
 } = require('./utils');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
@@ -16,13 +16,13 @@ const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeStri
   return `
   <div class="badge-widget cursor-pointer text-center bg-white" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
   <img src=${imgPath} class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover" >
-  <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[badgeType]}</h6>
+  <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[BADGES_NAME[badgeType]]}</h6>
 </div>`
 }
 
 const getWidgetWithoutBadge = (badgeType, type, localeString,initiativeType, language) => {
   return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_${language}_${initiativeType}_placeholder">
-                 <p class="text-capitalize">${localeString[badgeType]}</p>
+                 <p class="text-capitalize">${localeString[BADGES_NAME[badgeType]]}</p>
  </div>`
 }
 
@@ -119,7 +119,7 @@ const getBadgeRow = (result, id, type, localeString) => {
   } else {
     $(`#${type}-type`).addClass('d-none');
     const translatedError = translate(NO_BADGE_EARNED_TEXT);
-    const initiative = translate(`${covertStringToCapitalised(type)} India`);
+    const initiative = translate(INITIATIVES_NAME[type]);
     const finalErrorMessage = translatedError.replace("<initiative>", initiative);
     const row = ` <div class="col-12 p-0">
     <div class="row mx-0 text-center mt-5">

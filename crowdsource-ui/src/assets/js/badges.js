@@ -9,7 +9,9 @@ const {
   LOCALE_STRINGS,
   SPEAKER_DETAILS_KEY,
   MODULE,
-  DEFAULT_CON_LANGUAGE
+  DEFAULT_CON_LANGUAGE,
+  BADGES_NAME,
+  INITIATIVES_NAME
 } = require('./constants');
 const {onChangeUser, showUserProfile, onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
@@ -28,25 +30,25 @@ const getBadgeLevels = function (language, initiative, source) {
     <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card1">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="bronze_participation_badge">
                                     <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" id="bronze" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.bronze}</h6>
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.bronze]}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card2">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="silver_participation_badge">
                                     <img src="${getLanguageBadge(language,'silver',source, initiative)}" class="my-badge-image" id="silver" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.silver}</h6>
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.silver]}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card3">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="gold_participation_badge">
                                     <img src="${getLanguageBadge(language,'gold',source, initiative)}" class="my-badge-image" id="gold" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.gold}</h6>
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.gold]}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card4">
                                 <div class="badge-detail-widget cursor-pointer text-center" id="platinum_participation_badge">
                                     <img src="${getLanguageBadge(language,'platinum',source, initiative)}" class="my-badge-image" id="platinum" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString.platinum}</h6>
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.platinum]}</h6>
                                 </div>
                             </div>
     `
@@ -64,9 +66,10 @@ const renderCard = function (data, initiative, badge_color, source, language) {
   const localeLanguageStr = localeString[language];
   const localeTextTypeStr = localeString[moduleDetail[initiative]['text-type']];
   const localeSourceStr = localeString[source.charAt(0).toUpperCase() +  source.slice(1)];
+  const initiativeName = INITIATIVES_NAME[initiative.toLocaleLowerCase()];
 
-  const localeInitiativeStr = localeString[`${initiative.charAt(0).toUpperCase() +  initiative.slice(1)} India`];
-  const localeBadgeColorStr = localeString[badge_color.toLowerCase()];
+  const localeInitiativeStr = localeString[initiativeName];
+  const localeBadgeColorStr = localeString[BADGES_NAME[badge_color.toLowerCase()]];
 
   const $selectedBadgeCardImg = $('.selected-badge-card img');
   $selectedBadgeCardImg.attr('src',getLanguageBadge(language,badge_color,source, initiative));

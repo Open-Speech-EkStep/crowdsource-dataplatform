@@ -9,6 +9,7 @@ const {
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   AGGREGATED_DATA_BY_LANGUAGE,
   MODULE,
+  BADGES_NAME
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale, showLanguagePopup } = require('./locale');
@@ -330,7 +331,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('#languageInTopWeb').addClass('d-none');
     $('#languageInTopMob').addClass('d-none');
   }
-  const nextBadgeName = data.nextBadgeType && localeStrings[data.nextBadgeType.toLowerCase()];
+  const nextBadgeName = data.nextBadgeType && localeStrings[BADGES_NAME[data.nextBadgeType.toLowerCase()]];
   if (nextBadgeName) {
     $('#sentence-away-count').text(Number(data.nextMilestone) - Number(data.contributionCount));
     $('#sentence_away_badge').text(nextBadgeName.charAt(0).toUpperCase() + nextBadgeName.slice(1));
@@ -366,7 +367,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('.participation-msg-section').addClass('d-flex align-items-center');
 
     $('#milestone_text').removeClass('d-none');
-    const currentBadgeName = localeStrings[data.currentBadgeType.toLowerCase()];
+    const currentBadgeName = localeStrings[BADGES_NAME[data.currentBadgeType.toLowerCase()]];
     $('#current_badge_name').text(currentBadgeName.charAt(0).toUpperCase() + currentBadgeName.slice(1));
     $('#current_badge_name_1').text(localeStrings[data.currentBadgeType.toLowerCase()]);
     $('#current_badge_count').text(data.contributionCount);
@@ -416,7 +417,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
         'src',
         getLanguageBadge(contributionLanguage, data.currentBadgeType.toLowerCase(), 'contribute', module)
       );
-      const badgeTypeTranslation = toPascalCase(translate(badgeType.toLowerCase()));
+      const badgeTypeTranslation = toPascalCase(translate(BADGES_NAME[badgeType.toLowerCase()]));
       $('#last-bagde-earned').html(badgeTypeTranslation);
     }
     $('.new-badge-msg').addClass('d-none');

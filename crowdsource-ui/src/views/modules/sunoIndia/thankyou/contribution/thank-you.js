@@ -7,6 +7,7 @@ const {
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
   MODULE,
+  config
 } = require('../common/constants');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {
@@ -45,7 +46,7 @@ const getFormattedTime = totalSeconds => {
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localisedLanguage = sessionStorage.getItem('i18n');
-  const boloIndiaTitle = 'Bhasha Daan: A crowdsourcing initiative for Indian languages';
+  const boloIndiaTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
   let localeText = '';
   if (rank === 0) {
     localeText = localeStrings['social sharing text without rank'];
@@ -53,7 +54,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeStrings['social sharing text with rank'];
     localeText = localeText.replace('<x>', translate(language));
     localeText = localeText.replace('<y>', rank);
-    localeText = localeText.replace('<initiative name>', localeStrings['Suno India']);
+    localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_1]);
   }
   //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
   const $whatsappShare = $('#whatsapp_share');
@@ -63,7 +64,7 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $('#linkedin_share');
   $linkedinShare.attr(
     'href',
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
   );
 };
 
