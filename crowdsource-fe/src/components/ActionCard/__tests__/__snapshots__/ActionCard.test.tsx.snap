@@ -12,7 +12,7 @@ exports[`ActionCard should render the component and match it against stored snap
     >
       <div
         class="root overflow-hidden"
-        data-testid="ActionCard"
+        data-testid="ActionCardcontribute"
       >
         <div
           class="cardGradient"
