@@ -1,10 +1,13 @@
 import type { ReactNode } from 'react';
+import { useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
+import localStorageConstants from 'constants/localStorageConstants';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,6 +15,11 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (!localStorage.getItem(localStorageConstants.contributionLanguage))
+      localStorage.setItem(localStorageConstants.contributionLanguage, RAW_LANGUAGES[DEFAULT_LOCALE]);
+  });
 
   return (
     <div data-testid="Layout" className="d-flex flex-column h-100">
