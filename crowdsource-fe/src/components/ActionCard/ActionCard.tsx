@@ -76,7 +76,7 @@ const ActionCard = (props: ActionCardProps) => {
                       styles[`iconShadow${shadow}`]
                     } d-flex rounded-circle flex-shrink-0`}
                   >
-                    <Image src={`/images/${icon}`} alt="Contribute Icon" width="120" height="120" />
+                    <Image src={`/images/${icon}`} alt="Contribute Icon" width="120" height="120" priority />
                   </div>
                 </div>
               </div>
