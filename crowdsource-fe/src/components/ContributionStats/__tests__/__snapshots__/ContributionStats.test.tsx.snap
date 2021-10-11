@@ -13,7 +13,7 @@ exports[`ContributionStats should render the component and matches it against st
         class="root bg-info px-7 px-md-0 py-md-7"
       >
         <div
-          class="row"
+          class="m-md-0 row"
           data-testid="StatsRow"
         >
           <div

@@ -362,7 +362,7 @@ exports[`BarChart should render the component and matches it against stored snap
                                       aria-label="L"
                                       fill="#000000"
                                       fill-opacity="0"
-                                      font-size="12"
+                                      font-size="14"
                                       opacity="0"
                                       stroke-opacity="0"
                                       style="pointer-events: none;"

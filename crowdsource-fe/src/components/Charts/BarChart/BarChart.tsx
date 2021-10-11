@@ -25,7 +25,8 @@ const BarChart = (props: ChartProps) => {
     // categoryAxis.renderer.labels.template.fill = rgb(0,0,0);
     categoryAxis.renderer.grid.template.strokeWidth = 0;
     // categoryAxis.renderer.grid.template.disabled = true;
-    categoryAxis.renderer.labels.template.fontSize = 12;
+    categoryAxis.renderer.labels.template.fontSize = 14;
+    categoryAxis.renderer.labels.template.html = '<span class="amXAxisLabel">{category}</span>';
     categoryAxis.renderer.grid.template.location = 0;
     const label = categoryAxis.renderer.labels.template;
     // label.wrap = true;
