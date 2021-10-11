@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:title" content="<%= __(`${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`) %>">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="<%= __('social sharing text without rank') %>">
+    <meta property="og:site_name" content="<%- `${config.title_1} ${config.title_2}` %>">
+    <meta property="og:url" content="<%- `https://${config.brand_url}/${locale}/home.html` %>">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+    <script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/ocr/home.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/asr/thankyou.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="d-flex h-100 flex-column">
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:config.initiative_4, PAGE_TITLE:__('Validate'),img:"DekhoIndiaLogo.svg",homePath:"./home.html"}); %>
+<div id="content-wrapper" class="container-fluid thankyou-content-wrapper pb-4 pb-lg-2 pb-md-2 px-lg-3 px-md-3 px-4 px-md-5 flex-grow-1 bg-tri-color">
+    <%- include('../common/breadcrumb.ejs', {MODULE:config.initiative_4, PAGE_TITLE:__('Validate'),img:"DekhoIndiaLogo.svg", homePath:"./home.html"}) %>
+    <div class="text-center pt-2 pt-lg-0 pt-md-0 mt-5 position-relative">
+        <div class="row position-absolute top-back-btn">
+            <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+        </div>
+        <%- include('../common/thankyouPageHeading.ejs',{text:"language",text1:"validated", text2:"image label(s)"}) %>
+    </div>
+    <div id="loader" class="overlay__content"><span class="spinner"></span></div>
+    <div id="data-wrapper" class="d-none">
+        <div class="row justify-content-center progress-row mb-3" id="progress-row">
+            <div class="col-10 col-sm-8 col-lg-8 col-md-12 p-0 progress-bar-section">
+        <%- include('../common/thankyouPageProgressBar.ejs', {text:'Image(s)',progressBarStats: __(`<span id="totalAverage"></span> of <span id="metric-language"></span> ${config.initiative_4} Target Achieved`)}) %>
+            </div>
+        </div>
+        <div class="row mt-3 mt-lg-4 md-lg-4 lazy pt-5 pt-lg-2 pt-md-2">
+            <div class="col-lg-8 border overflow-hidden contribution-info">
+                <div class="bg-white m-0 contribution-info-inner">
+                    <div class="px-0 px-lg-3 px-md-3 thankyou-page ml-lg-auto">
+                        <%- include('../common/badgesMilestone.ejs',{module:config.initiative_4, badgeMilestoneMessage: __('Validated <span id="current_badge_count"></span> <span>image(s)</span> in <span id="conLanWhenGetBadge"></span>')}) %>
+                        <div class="row m-0" id="cardWithoutBadge">
+                            <div class="col-lg-4 col-md-5 col-sm-6 pl-0 pr-lg-3 pr-md-2 pr-0 pt-lg-3 pt-md-3 pt-0 text-left participation-msg-section">
+                                <%- include('../common/thankyouPageParticipationMsg.ejs',{language:'<language>',action_type: 'validator'}) %>
+                                <%- include ../common/sharableLink.ejs %>
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-6 px-0 px-lg-3 px-md-3 thankyou-bar-graph">
+                                <div class="d-none mb-0" id="showParticipateMsg"></div>
+                                <div id="bar_charts_container">
+                                    <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                                        <div><span class="spinner"></span></div>
+                                    </div>
+                                    <%- include('../common/verticalGraphForThankyouPage.ejs',{text:"languages",language:'<language>'}) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include ../common/thankyouPageBottomGraph.ejs %>
+
+    <div class="row justify-content-center mt-2 mt-lg-5 mt-md-5">
+        <%- include('../common/languageGoal.ejs', {ButtonText:__('Validate More'),url:"./validator-page.html",TEXT:"Validate",TEXT2:'image label(s)', MODULE:"dekho", PAGE:"_val"})%>
+    </div>
+    <%- include('../common/feedback.ejs', {page: "Validation Thank You Page"}) %>
+</div>
+<%- include('../common/speakerDetails.ejs',{path:"../"}) %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/js/ocr/validator-thank-you.js"></script>
+</body>
+</html>

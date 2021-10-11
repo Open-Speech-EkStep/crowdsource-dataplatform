@@ -27,7 +27,7 @@ $(document).ready(function () {
 
         const params = new URLSearchParams(location.search);
         const type = params.get('type');
-        if (!['sunoindia', 'likhoindia', 'dekhoindia', 'boloindia'].includes(type)) {
+        if (!['asr', 'parallel', 'ocr', 'text'].includes(type)) {
             alert("Matching type not found")
             return;
         }
@@ -49,21 +49,21 @@ $(document).ready(function () {
             language: language,
         };
         let keyMap = {
-            sunoindia: "sunoIndia",
-            boloindia: "boloIndia",
-            dekhoindia: "dekhoIndia",
-            likhoindia: "likhoIndia"
+            asr: "asr",
+            text: "text",
+            ocr: "ocr",
+            parallel: "parallel"
         }
         verifyUser(userNameValue).then(res => {
             if (res.ok) {
                 localStorage.setItem('profanityUserDetails', JSON.stringify(speakerDetails));
                 localStorage.setItem('profanityCheckLanguage', language);
                 localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-                if (type === 'boloindia') {
-                    location.href = `/en/profanity-boloindia.html`;
-                } else {
+                // if (type === 'boloindia') {
+                //     location.href = `/en/profanity-text.html`;
+                // } else {
                     location.href = `/en/${keyMap[type]}/profanity.html`;
-                }
+                // }
             } else {
                 alert("User not found")
             }

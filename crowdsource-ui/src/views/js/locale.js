@@ -34,10 +34,6 @@ const changeLocale = function (locale) {
     }
     const module = localStorage.getItem(CURRENT_MODULE);
     sessionStorage.setItem("i18n", locale);
-    // if(module == 'bolo' && currentPage == "home.html"){
-    //     location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
-    // }
-    // else
     if(module == 'home' || currentPage == "badges.html" || currentPage == "my-badges.html") {
         location.href = `${context_root}/${locale}/${currentPage}`;
     }

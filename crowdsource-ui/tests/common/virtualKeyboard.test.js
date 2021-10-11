@@ -2,7 +2,7 @@ const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('../utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('../../build/js/common/constants');
 
-const sunoValidatorPage = readFileSync(`${__dirname}/../../build/views/sunoIndia/validator-prompt-page.ejs`, 'UTF-8');
+const sunoValidatorPage = readFileSync(`${__dirname}/../../build/views/asr/validator-prompt-page.ejs`, 'UTF-8');
 const editAreaErrorPage = readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8');
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../../build/views/common/virtualKeyboard.ejs`, 'UTF-8')

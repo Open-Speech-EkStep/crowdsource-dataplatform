@@ -222,13 +222,13 @@ $(document).ready(function () {
 
   $('#back-btn').on('click', () => {
     if (moduleType == 'bolo') {
-      location.href = './boloIndia/home.html';
+      location.href = './text/home.html';
     } else if (moduleType == 'suno') {
-      location.href = './sunoIndia/home.html';
+      location.href = './asr/home.html';
     } else if (moduleType == 'likho') {
-      location.href = './likhoIndia/home.html';
+      location.href = './parallel/home.html';
     } else if (moduleType == 'dekho') {
-      location.href = './dekhoIndia/home.html';
+      location.href = './ocr/home.html';
     } else {
       location.href = './home.html';
     }

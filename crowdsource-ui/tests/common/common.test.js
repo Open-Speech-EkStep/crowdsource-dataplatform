@@ -766,7 +766,7 @@ describe('test common js', () => {
     beforeEach(() => {
       document.body = stringToHTML(
         readFileSync(`${__dirname}/../../build/views/common/thankyouPageProgressBar.ejs`, 'UTF-8') +
-          readFileSync(`${__dirname}/../../build/views/boloIndia/home.ejs`, 'UTF-8')
+          readFileSync(`${__dirname}/../../build/views/text/home.ejs`, 'UTF-8')
       );
     });
 

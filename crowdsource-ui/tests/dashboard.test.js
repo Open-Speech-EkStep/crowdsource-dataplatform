@@ -4,7 +4,7 @@ const {stringToHTML} = require('./utils');
 const {fetchDetail, getSpeakersData,isLanguageAvailable} = require('../src/assets/js/dashboard');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../build/views/boloIndia/dashboard.ejs`, 'UTF-8')
+  readFileSync(`${__dirname}/../build/views/text/dashboard.ejs`, 'UTF-8')
 );
 
 jest.mock('../src/assets/js/draw-chart', () => ({

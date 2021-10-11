@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="<%- `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice` %>">
+    <meta property="og:title" content="<%= __(`${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`) %>">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="<%= __('social sharing text without rank') %>">
+    <meta property="og:site_name" content="<%- `${config.title_1} ${config.title_2}` %>">
+    <meta property="og:url" content="https://bhashini.gov.in/bhashadaan">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://crowdsource1.blob.core.windows.net/vakyansh-json-data/bootstrap-tourist.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/parallel/home.css">
+    <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/common.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="bg-white">
+<%- include('../common/header.ejs',{home:"../home.html", bolo:"../text/home.html", suno:"../asr/home.html",likho:"./home.html",dekho:"../ocr/home.html",path:"../"}); %>
+<div class="container-fluid supreme-container px-0 padding-top-65">
+    <div class="bg-body-primary px-3 overflow-hidden">
+    <div class="row">
+        <%- include('../common/moduleIntro.ejs',{name:config.initiative_3,intro:'Enrich your language by translating text',img:"LikhoIndiaLogo.svg"}); %>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-10 offset-lg-1 mt-4">
+            <nav class="row d-flex justify-content-start navbar navbar-expand-lg navbar-light px-4 flex-flow-nowrap" id="contribution_lang_navbar">
+                <div class="pl-3">
+                    <%= __('Select the language pair for contribution') %>:
+                </div>
+                <div class="col-12 col-md-auto">
+                    <div class="row language-dropdown-wrapper">
+                        <div class="col pl-2 pr-0 pl-lg-3 pl-md-3 pr-md-3 pr-lg-3 d-flex align-items-center">
+                            <select class="language-dropdown btn dropdown-toggle h6 mb-0 rounded text-primary" id="from-language" style="height:40px;padding:0;padding:0 10px;color:#959595">
+                            </select>
+                        </div>
+                        <div class="col-auto px-2 px-lg-3 px-md-3 d-flex align-items-center">
+                            <img src="/img/arrow_right.svg" alt="arrow right">
+                        </div>
+                        <div class="col pl-0 pr-2 pl-lg-3 pl-md-3 pr-md-3 pr-lg-3 d-flex align-items-center">
+                            <select class="language-dropdown btn dropdown-toggle h6 mb-0 rounded text-primary" id="to-language" style="height:40px;padding:0;padding:0 10px;color:#959595">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </nav></div>
+    </div>
+    <div class="m-auto row justify-content-center mt-lg-4 mx-lg-5 pb-5">
+        <%- include('../common/cards.ejs',{left:{h1:__('Translate'),h2:__('Translate and type the text'),"p1":"",img:"/img/translate.svg"},right:{h1:__('Validate'),h2:__('Validate the translation contributed by others'),"p1":"",img:"/img/validate.svg"}}); %>
+    </div>
+    </div>
+</div>
+<div class="container-fluid supreme-container bg-white">
+    <div class="row mx-0 mt-4">
+        <div class="col-12 col-md-12 col-lg-11 ml-lg-auto pt-5 px-5">
+            <div class="row">
+                <div class="col-lg-11 p-0">
+                    <%- include('../common/thankyouPageProgressBar.ejs', {text:'Sentence(s)', progressBarStats: __(`<span id="totalAverage"></span> of ${config.initiative_3} Target Achieved`)})
+                        %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="contribution_stats">
+        <div class="col-12 col-md-12 col-lg-11 ml-lg-auto p-5 mt-4 text-dark">
+            <h2 class="font-wt-900 site-blue lh-5 font-family-Rowdies" style="line-height:28px">
+                <%= __(`Contributions made to ${config.initiative_3}`) %>
+            </h2>
+            <div class="font-family-Rowdies mt-3">
+                <%= __('Overall Summary') %>
+            </div>
+            <div class="row mt-4" id="speaker-data">
+                <div class="col-12 col-lg-11 col-md-12">
+                    <div class="row text-center contribution-details contribution-stats" id="contribution-details">
+                        <%- include('../common/contributionStats.ejs',{labels :[__('Language pairs'),__('People participated'),__('Translations done'),__('Translations validated')]}) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5 lazy">
+        <div class="col-12 col-md-11 col-lg-11 p-5 ml-lg-auto">
+            <div id="bar_charts_container">
+                <h2 class="h4 mb-4 font-family-Rowdies">
+                    <%= __('Contribution Tracker') %>
+                </h2>
+                <div class="row mx-0 mb-2">
+                    <div class="pl-0 col-12">
+                        <div class="font-family-Rowdies">
+                            <h5> <%= __('Your language pair and top 3 most contributed language pairs') %></h5>
+                         </div>
+                    </div>
+                </div>
+                <div class="justify-content-center align-items-center d-none" id="topLanguageSpinner">
+                    <div><span class="spinner"></span></div>
+                </div>
+                <div class="row m-0">
+                    <div class="col-lg-8 col-md-8 col-12 p-4 bg-secondary">
+                        <%- include('../common/verticalGraph.ejs',{text: __('Total translations')}) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'./dashboard.html'}); %>
+</div>
+<%- include('../common/speakerDetails.ejs',{path:"../"}) %>
+<%- include('../common/feedback.ejs', {page: "Likho India Home"}) %>
+<%- include('../common/footer.ejs',{path:"../"}) %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="/js/parallel/home.js" id="home-page"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+
+</body>
+</html>

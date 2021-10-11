@@ -127,11 +127,12 @@ router.get('/', function (req, res) {
 router.get('/profanity/:type', function (req, res) {
     // #swagger.ignore = true
     const type = req.params.type;
-    if (!['sunoindia', 'likhoindia', 'dekhoindia', 'boloindia'].includes(type)) {
+    if (!['asr', 'parallel', 'ocr', 'text'].includes(type)) {
         res.redirect('/en/not-found.html');
         return;
     }
-    res.redirect(`/en/profanity-home.html?type=${type}`);
+    // res.redirect(`/en/profanity-home.html?type=${type}`);
+    res.redirect(`/en/profanity.html?type=${type}`);
 });
 
 router.post('/verify-user', async (req, res) => {
