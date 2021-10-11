@@ -1,142 +1,142 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/platformCardSection.css">
 
 <div id="platform_section" class="p-20">
-    <div class="platform_card">
-        <div class="platform-card-top">
-            <div class="platform-card-bottom">
-                <div class="container-fluid px-0">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <ul class="nav nav-tabs border-0 mb-2 mb-lg-0 mb-md-0" role="tablist" id="tabBar">
-                                <li id="sunoTab" role="presentation" class="active" data-target="#carouselExampleIndicators" data-slide-to="0"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="suno" role="tab" data-toggle="tab"><%= __(config.initiative_1)%></a></li>
-                                <li id="boloTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="1"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="bolo" role="tab" data-toggle="tab"><%= __(config.initiative_2)%></a></li>
-                                <li id="likhoTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="2"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="likho" role="tab" data-toggle="tab"><%= __(config.initiative_3)%></a></li>
-                                <li id="dekhoTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="3"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="dekho" role="tab" data-toggle="tab"><%= __(config.initiative_4)%></a></li>
-                            </ul>
+  <div class="platform_card">
+    <div class="platform-card-top">
+      <div class="platform-card-bottom">
+        <div class="container-fluid px-0">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ul class="nav nav-tabs border-0 mb-2 mb-lg-0 mb-md-0" role="tablist" id="tabBar">
+              <li id="sunoTab" role="presentation" class="active" data-target="#carouselExampleIndicators" data-slide-to="0"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="suno" role="tab" data-toggle="tab"><%= __(config.initiative_1)%></a></li>
+              <li id="boloTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="1"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="bolo" role="tab" data-toggle="tab"><%= __(config.initiative_2)%></a></li>
+              <li id="likhoTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="2"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="likho" role="tab" data-toggle="tab"><%= __(config.initiative_3)%></a></li>
+              <li id="dekhoTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="3"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="dekho" role="tab" data-toggle="tab"><%= __(config.initiative_4)%></a></li>
+            </ul>
 
-                        <div id="platform_inner" class="carousel-inner mt-5 mt-lg-0 mt-md-0">
-                            <div class="carousel-item active p-0">
-                                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
-                                    <div class="col-lg-4 col-md-4 col-12 p-0">
-                                        <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
-                                            <img src="<%= `/img/${locale}-SunoIndiaLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
-                                            <p class="label-text mb-4 mt-lg-0 mt-md-0 mt-3"><%= __('Enrich your language by transcribing audio into text')%></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
-                                        <div class="row m-0">
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-cont-image m-auto">
-                                                    <img src="/img/listen2.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Contribute by typing what you hear on audio')%></p>
-                                            </div>
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-val-image m-auto">
-                                                <img src="/img/validate.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Validate the texts transcribed by others')%></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
-                                        <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./asr/home.html"'><%= __('Start Participating')%></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item p-0">
-                                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
-                                    <div class="col-lg-4 col-md-4 col-12 p-0">
-                                        <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
-                                            <img src="<%= `/img/${locale}-BoloIndiaLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
-                                            <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by donating your voice')%></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
-                                        <div class="row m-0">
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-cont-image m-auto">
-                                                    <img src="/img/say.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Contribute your voice by recording the sentence')%></p>
-                                            </div>
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-val-image m-auto">
-                                                    <img src="/img/validate.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Validate the audios recorded by others')%></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
-                                        <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./text/home.html"'><%= __('Start Participating')%></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item p-0">
-                                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
-                                    <div class="col-lg-4 col-md-4 col-12 p-0">
-                                        <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
-                                            <img src="<%= `/img/${locale}-LikhoIndiaLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
-                                            <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by translating text')%></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
-                                        <div class="row m-0">
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-cont-image m-auto">
-                                                    <img src="/img/translate.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Contribute by translating the prompted text in your language')%></p>
-                                            </div>
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-val-image m-auto">
-                                                    <img src="/img/validate.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Validate the translations contributed by others')%></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
-                                        <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./parallel/home.html"'><%= __('Start Participating')%></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item p-0">
-                                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
-                                    <div class="col-lg-4 col-md-4 col-12 p-0">
-                                        <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
-                                            <img src="<%= `/img/${locale}-DekhoIndiaLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
-                                            <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by labelling images')%></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
-                                        <div class="row m-0">
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-cont-image m-auto">
-                                                    <img src="/img/look.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Contribute by labelling the image')%></p>
-                                            </div>
-                                            <div class="col-6 p-0 text-center">
-                                                <div class="suno-val-image m-auto">
-                                                    <img src="/img/validate.svg" height="130" width="130">
-                                                </div>
-                                                <p class="image-text m-auto"><%= __('Validate the images labelled by others')%></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
-                                        <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./ocr/home.html"'><%= __('Start Participating')%></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div id="platform_inner" class="carousel-inner mt-5 mt-lg-0 mt-md-0">
+              <div class="carousel-item active p-0">
+                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
+                  <div class="col-lg-4 col-md-4 col-12 p-0">
+                    <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
+                      <img src="<%= `/img/${locale}-asrLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
+                      <p class="label-text mb-4 mt-lg-0 mt-md-0 mt-3"><%= __('Enrich your language by transcribing audio into text')%></p>
                     </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
+                    <div class="row m-0">
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-cont-image m-auto">
+                          <img src="/img/listen2.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Contribute by typing what you hear on audio')%></p>
+                      </div>
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-val-image m-auto">
+                          <img src="/img/validate.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Validate the texts transcribed by others')%></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
+                    <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./asr/home.html"'><%= __('Start Participating')%></button>
+                  </div>
                 </div>
+              </div>
+              <div class="carousel-item p-0">
+                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
+                  <div class="col-lg-4 col-md-4 col-12 p-0">
+                    <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
+                      <img src="<%= `/img/${locale}-BoloIndiaLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
+                      <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by donating your voice')%></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
+                    <div class="row m-0">
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-cont-image m-auto">
+                          <img src="/img/say.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Contribute your voice by recording the sentence')%></p>
+                      </div>
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-val-image m-auto">
+                          <img src="/img/validate.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Validate the audios recorded by others')%></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
+                    <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./text/home.html"'><%= __('Start Participating')%></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item p-0">
+                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
+                  <div class="col-lg-4 col-md-4 col-12 p-0">
+                    <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
+                      <img src="<%= `/img/${locale}-parallelLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
+                      <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by translating text')%></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
+                    <div class="row m-0">
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-cont-image m-auto">
+                          <img src="/img/translate.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Contribute by translating the prompted text in your language')%></p>
+                      </div>
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-val-image m-auto">
+                          <img src="/img/validate.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Validate the translations contributed by others')%></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
+                    <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./parallel/home.html"'><%= __('Start Participating')%></button>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item p-0">
+                <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
+                  <div class="col-lg-4 col-md-4 col-12 p-0">
+                    <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
+                      <img src="<%= `/img/${locale}-ocrLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
+                      <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by labelling images')%></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
+                    <div class="row m-0">
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-cont-image m-auto">
+                          <img src="/img/look.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Contribute by labelling the image')%></p>
+                      </div>
+                      <div class="col-6 p-0 text-center">
+                        <div class="suno-val-image m-auto">
+                          <img src="/img/validate.svg" height="130" width="130">
+                        </div>
+                        <p class="image-text m-auto"><%= __('Validate the images labelled by others')%></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center justify-content-md-start col-12 p-0 text-lg-left text-md-left mt-0 mt-lg-0 mt-md-0 mb-0 mb-lg-4">
+                    <button class="btn btn-custom-primary platform_button rounded-pill mt-5 mt-lg-0 mt-md-0 text-light" onclick='location.href="./ocr/home.html"'><%= __('Start Participating')%></button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 
