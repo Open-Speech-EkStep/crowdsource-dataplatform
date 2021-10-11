@@ -61,10 +61,10 @@ step("Check If Current Tab is <module>", async function (module) {
 step("Clicking <btnName> should navigate to <module> Page", async function (btnName, module) {
 	const btn = button(btnName)
 	const pageName = {
-		'Bolo India': 'boloIndia/home',
-		'Suno India': 'sunoIndia/home',
-		'Dekho India': 'dekhoIndia/home',
-		'Likho India': 'likhoIndia/home'
+		'Bolo India': 'text/home',
+		'Suno India': 'asr/home',
+		'Dekho India': 'ocr/home',
+		'Likho India': 'parallel/home'
 	}
 	assert.ok(await btn.exists());
 	await click(btn);
