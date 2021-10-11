@@ -8,7 +8,7 @@ exports[`ViewAllDetailButton should render the view all detail button 1`] = `
     <a
       class="info primary btn btn-primary"
       data-testid="ViewAllDetailButton"
-      href="/sunoIndia/dashboard.html"
+      href="/sunoIndia/dashboard"
       role="button"
       tabindex="0"
     >

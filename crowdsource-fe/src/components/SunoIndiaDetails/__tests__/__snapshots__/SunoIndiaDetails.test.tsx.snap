@@ -38,7 +38,7 @@ exports[`Suno Actions should render the suno india homepage 1`] = `
           <a
             class="info primary btn btn-primary"
             data-testid="ViewAllDetailButton"
-            href="/sunoIndia/dashboard.html"
+            href="/sunoIndia/dashboard"
             role="button"
             tabindex="0"
           >

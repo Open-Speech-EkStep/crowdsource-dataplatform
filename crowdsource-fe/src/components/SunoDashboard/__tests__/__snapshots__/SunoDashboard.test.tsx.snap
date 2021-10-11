@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SunoDashboard should render snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="row"
+    >
+      <div
+        class="col"
+      >
+        <div>
+          <div>
+            <label
+              class="form-label"
+              for="language"
+            >
+              Select a Language:
+            </label>
+            <select
+              aria-label="Select Language"
+              class="form-select"
+              id="language"
+            >
+              <option
+                value="All Languages"
+              >
+                All Languages
+              </option>
+              <option
+                value="English"
+              >
+                English
+              </option>
+              <option
+                value="Hindi"
+              >
+                हिंदी
+              </option>
+              <option
+                value="Tamil"
+              >
+                தமிழ்
+              </option>
+              <option
+                value="Telugu"
+              >
+                తెలుగు
+              </option>
+              <option
+                value="Assamese"
+              >
+                অসমীয়া
+              </option>
+              <option
+                value="Bengali"
+              >
+                বাংলা
+              </option>
+              <option
+                value="Gujarati"
+              >
+                ગુજરાતી
+              </option>
+              <option
+                value="Kannada"
+              >
+                ಕನ್ನಡ
+              </option>
+              <option
+                value="Malayalam"
+              >
+                മലയാളം
+              </option>
+              <option
+                value="Marathi"
+              >
+                मराठी
+              </option>
+              <option
+                value="Odia"
+              >
+                ଓଡିଆ
+              </option>
+              <option
+                value="Punjabi"
+              >
+                ਪੰਜਾਬੀ
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    DataLastUpdated
+  </div>
+</DocumentFragment>
+`;

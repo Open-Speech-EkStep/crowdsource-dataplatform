@@ -10,6 +10,7 @@ const apiPaths = {
   topLanguagesBySpeakerContributions:
     nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesBySpeakerContributions.json',
   participationStats: nodeConfig.staticFileUrl + '/aggregated-json/participationStats.json',
+  lastUpdatedTime: nodeConfig.staticFileUrl + '/aggregated-json/lastUpdatedAtQuery.json',
   feedback: nodeConfig.apiUrl + '/feedback',
   report: nodeConfig.apiUrl + '/report',
   mediaAsr: nodeConfig.apiUrl + '/media/asr',

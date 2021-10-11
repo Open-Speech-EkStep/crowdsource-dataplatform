@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import Breadcrumbs from '../Breadcrumbs';
 
 describe('Breadcrumbs', () => {
-  const setup = () => render(<Breadcrumbs />);
+  const setup = () => render(<Breadcrumbs initiative="suno" path="transcribe" />);
 
   verifyAxeTest(setup());
 

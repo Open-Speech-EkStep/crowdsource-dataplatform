@@ -38,7 +38,7 @@ exports[`Bolo Actions should render the bolo india homepage 1`] = `
           <a
             class="info primary btn btn-primary"
             data-testid="ViewAllDetailButton"
-            href="/boloIndia/dashboard.html"
+            href="/boloIndia/dashboard"
             role="button"
             tabindex="0"
           >

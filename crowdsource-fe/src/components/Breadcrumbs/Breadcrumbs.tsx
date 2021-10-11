@@ -7,9 +7,16 @@ import routePaths from 'constants/routePaths';
 
 import styles from './Breadcrumbs.module.scss';
 
-const Breadcrumbs = () => {
+interface BreadcrumbsPorpsInterface {
+  initiative: string;
+  path: string;
+}
+
+const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
+
+  const initiativeName = `${t(initiative)} ${t('india')}`;
 
   return (
     <div className="d-flex align-items-center" data-testid="Breadcrumbs">
@@ -23,11 +30,11 @@ const Breadcrumbs = () => {
               height="42"
             />
           </div>
-          <span className={`${styles.initiative} ms-1 ms-md-3 font-family-rowdies`}>Suno India</span>
+          <span className={`${styles.initiative} ms-1 ms-md-3 font-family-rowdies`}>{initiativeName}</span>
         </div>
       </Link>
       <span className="mx-1 mx-md-3 text-primary-40">/</span>
-      <span className="display-5">Transcribe</span>
+      <span className="display-5">{t(path)}</span>
     </div>
   );
 };
