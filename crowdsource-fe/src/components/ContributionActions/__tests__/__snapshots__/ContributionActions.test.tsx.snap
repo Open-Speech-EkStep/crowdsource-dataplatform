@@ -22,7 +22,7 @@ exports[`ContributionActions should render the component and matches it against 
           >
             <div
               class="root overflow-hidden"
-              data-testid="ActionCard"
+              data-testid="ActionCardcontribute"
             >
               <div
                 class="cardGradient"
@@ -136,7 +136,7 @@ exports[`ContributionActions should render the component and matches it against 
           >
             <div
               class="root overflow-hidden"
-              data-testid="ActionCard"
+              data-testid="ActionCardvalidate"
             >
               <div
                 class="cardGradient"

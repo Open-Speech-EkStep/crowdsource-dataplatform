@@ -117,7 +117,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
             >
               <div
                 class="root overflow-hidden"
-                data-testid="ActionCard"
+                data-testid="ActionCardcontribute"
               >
                 <div
                   class="cardGradient"
@@ -230,7 +230,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
             >
               <div
                 class="root overflow-hidden"
-                data-testid="ActionCard"
+                data-testid="ActionCardvalidate"
               >
                 <div
                   class="cardGradient"
