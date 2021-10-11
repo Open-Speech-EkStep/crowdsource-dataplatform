@@ -13,6 +13,10 @@ const togglePagesMapping = [
     pathname: '/sunoIndia/home',
   },
   {
+    key: 'sunoIndiaDashboard',
+    pathname: '/sunoIndia/dashboard',
+  },
+  {
     key: 'boloIndiaHome',
     pathname: '/boloIndia/home',
   },

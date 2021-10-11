@@ -12,7 +12,9 @@
       "error": true,
       "home": true,
       "sunoIndiaHome": true,
+      "sunoIndiaDashboard": true,
       "boloIndiaHome": true,
+      "boloIndiaDashboard": true,
       "styleGuide": true
     }
   }

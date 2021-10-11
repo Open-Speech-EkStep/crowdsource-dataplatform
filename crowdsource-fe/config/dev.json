@@ -28,7 +28,9 @@
       "error": false,
       "home": true,
       "sunoIndiaHome": true,
+      "sunoIndiaDashboard": true,
       "boloIndiaHome": true,
+      "boloIndiaDashboard": true,
       "styleGuide": false
     }
   }
