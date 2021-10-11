@@ -16,7 +16,7 @@ const useNavLink = () => {
   const getNavLinkProps = useCallback(
     routePath => ({
       className: classnames(
-        `${styles.link} font-family-rowdies d-flex align-items-center text-primary display-5 p-4 px-xl-5 py-xl-0`,
+        `${styles.link} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`,
         {
           [styles.activeLink]: currentRoutePath === routePath,
         }

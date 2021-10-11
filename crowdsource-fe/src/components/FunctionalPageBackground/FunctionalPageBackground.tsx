@@ -12,7 +12,7 @@ const FunctionalPageBackground = (props: FunctionalPageBackgroundProps) => {
       data-testid="FunctionalPageBackground"
       className={`${styles.root} position-relative px-2 px-lg-0 flex-grow-1 pt-4 pb-8`}
     >
-      {props.children}
+      <div className={`${styles.wrapper} position-relative`}>{props.children}</div>
     </section>
   );
 };

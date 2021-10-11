@@ -12,16 +12,15 @@
     height: 164px;
     left: 0;
     margin: auto;
-    opacity: 0.3;
+    opacity: 0.5;
     position: absolute;
     top: 5rem;
     width: 46px;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       background: url('/images/left_triangle.svg') no-repeat;
       bottom: 0;
       height: 224px;
-      opacity: 1;
       top: 0;
       width: 70px;
     }
@@ -37,7 +36,7 @@
     top: 16rem;
     width: 41px;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       background: url('/images/right_triangle.svg') no-repeat;
       bottom: 0;
       height: 146px;
@@ -45,4 +44,8 @@
       width: 69px;
     }
   }
+}
+
+.wrapper {
+  z-index: 1;
 }

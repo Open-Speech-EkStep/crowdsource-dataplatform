@@ -5,3 +5,17 @@
 .font-family-rowdies {
   font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+.form-check {
+  align-items: center;
+  display: inline-flex;
+  padding: 0;
+
+  .form-check-input {
+    margin: 0;
+  }
+
+  label {
+    margin-left: 10px;
+  }
+}

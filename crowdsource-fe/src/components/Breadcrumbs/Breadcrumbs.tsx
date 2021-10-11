@@ -23,9 +23,7 @@ const Breadcrumbs = () => {
               height="42"
             />
           </div>
-          <span className={`${styles.initiative} ms-1 ms-md-3 font-family-rowdies`}>
-            Suno <span className="text-warning">India</span>
-          </span>
+          <span className={`${styles.initiative} ms-1 ms-md-3 font-family-rowdies`}>Suno India</span>
         </div>
       </Link>
       <span className="mx-1 mx-md-3 text-primary-40">/</span>

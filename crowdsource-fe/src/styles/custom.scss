@@ -49,7 +49,7 @@ $theme-colors: (
 );
 $custom-colors: (
   'primary-80': rgba(15, 39, 73, 0.8),
-  'primary-64': rgba(15, 39, 73, 0.64),
+  'primary-60': rgba(15, 39, 73, 0.6),
   'primary-40': rgba(15, 39, 73, 0.4),
   'primary-10': rgba(15, 39, 73, 0.1),
   'primary-4': rgba(15, 39, 73, 0.04),
@@ -69,6 +69,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --link-color: #{$link-color};
   --primary-10-color: #{map-get($custom-colors, 'primary-10')};
   --primary-40-color: #{map-get($custom-colors, 'primary-40')};
+  --primary-60-color: #{map-get($custom-colors, 'primary-60')};
+  --primary-80-color: #{map-get($custom-colors, 'primary-80')};
   --primary-4-color: #{map-get($custom-colors, 'primary-4')};
   --strong-warning-color: #{map-get($custom-colors, 'strong-warning')};
   --btn-grey-color: #e7e9ed;
@@ -445,6 +447,12 @@ $btn-padding-y: 0;
 $progress-border-radius: 10px;
 $form-check-radio-checked-bg-image: url('/images/radio_checked.svg');
 $form-check-input-focus-box-shadow: none;
+$nav-tabs-border-width: 0;
+$nav-link-color: var(--primary-80-color);
+$nav-tabs-link-active-color: var(--primary-color);
+$nav-link-hover-color: var(--primary-color);
+$nav-link-padding-y: 0;
+$nav-link-padding-x: 0;
 $input-focus-box-shadow: none;
 $input-focus-border-color: var(--primary-color);
 $form-select-focus-box-shadow: none;
