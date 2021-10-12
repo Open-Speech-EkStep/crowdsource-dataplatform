@@ -10,13 +10,12 @@ const {
   SPEAKER_DETAILS_KEY,
   MODULE,
   DEFAULT_CON_LANGUAGE,
-  BADGES_NAME,
-  INITIATIVES_NAME
+  INITIATIVES_NAME,config,BADGES_API_TEXT
 } = require('./constants');
 const {onChangeUser, showUserProfile, onOpenUserDropDown} = require('./header');
 const {hasUserRegistered} = require('./common');
 
-let badgeLevel = 'bronze_participation_badge';
+let badgeLevel = 'badge_1_participation_badge';
 
 const selectBadgeLevel = function (id){
   $('.badge-level-section').find('.bg-white').removeClass('bg-white');
@@ -28,27 +27,27 @@ const getBadgeLevels = function (language, initiative, source) {
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   return `
     <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card1">
-                                <div class="badge-detail-widget cursor-pointer text-center" id="bronze_participation_badge">
-                                    <img src="${getLanguageBadge(language,'bronze',source, initiative)}" class="my-badge-image" id="bronze" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.bronze]}</h6>
+                                <div class="badge-detail-widget cursor-pointer text-center" id="badge_1_participation_badge">
+                                    <img src="${getLanguageBadge(language,'badge_1',source, initiative)}" class="my-badge-image" id="badge_1" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[config.badge_1]}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card2">
-                                <div class="badge-detail-widget cursor-pointer text-center" id="silver_participation_badge">
-                                    <img src="${getLanguageBadge(language,'silver',source, initiative)}" class="my-badge-image" id="silver" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.silver]}</h6>
+                                <div class="badge-detail-widget cursor-pointer text-center" id="badge_2_participation_badge">
+                                    <img src="${getLanguageBadge(language,'badge_2',source, initiative)}" class="my-badge-image" id="badge_2" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[config.badge_2]}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card3">
-                                <div class="badge-detail-widget cursor-pointer text-center" id="gold_participation_badge">
-                                    <img src="${getLanguageBadge(language,'gold',source, initiative)}" class="my-badge-image" id="gold" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.gold]}</h6>
+                                <div class="badge-detail-widget cursor-pointer text-center" id="badge_3_participation_badge">
+                                    <img src="${getLanguageBadge(language,'badge_3',source, initiative)}" class="my-badge-image" id="badge_3" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[config.badge_3]}</h6>
                                 </div>
                             </div>
                             <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card4">
-                                <div class="badge-detail-widget cursor-pointer text-center" id="platinum_participation_badge">
-                                    <img src="${getLanguageBadge(language,'platinum',source, initiative)}" class="my-badge-image" id="platinum" height="74" width="60" rel="popover" data-toggle="popover">
-                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[BADGES_NAME.platinum]}</h6>
+                                <div class="badge-detail-widget cursor-pointer text-center" id="badge_4_participation_badge">
+                                    <img src="${getLanguageBadge(language,'badge_4',source, initiative)}" class="my-badge-image" id="badge_4" height="74" width="60" rel="popover" data-toggle="popover">
+                                    <h6 class="mt-0 text-capitalize badge-level-heading">${localeString[config.badge_4]}</h6>
                                 </div>
                             </div>
     `
@@ -56,24 +55,24 @@ const getBadgeLevels = function (language, initiative, source) {
 
 const renderCard = function (data, initiative, badge_color, source, language) {
   const moduleDetail = {
-    bolo: {"text-type": "recordings"},
-    suno: {"text-type": "Sentences"},
-    likho: {"text-type": "Translations"},
-    dekho: {"text-type": "image labels"}
+    text: {"text-type": "recordings"},
+    asr: {"text-type": "Sentences"},
+    parallel: {"text-type": "Translations"},
+    ocr: {"text-type": "image labels"}
   }
 
   const localeString = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localeLanguageStr = localeString[language];
   const localeTextTypeStr = localeString[moduleDetail[initiative]['text-type']];
   const localeSourceStr = localeString[source.charAt(0).toUpperCase() +  source.slice(1)];
-  const initiativeName = INITIATIVES_NAME[initiative.toLocaleLowerCase()];
+  const initiativeName = INITIATIVES_NAME[initiative];
 
   const localeInitiativeStr = localeString[initiativeName];
-  const localeBadgeColorStr = localeString[BADGES_NAME[badge_color.toLowerCase()]];
+  const localeBadgeColorStr = localeString[config[badge_color]];
 
   const $selectedBadgeCardImg = $('.selected-badge-card img');
   $selectedBadgeCardImg.attr('src',getLanguageBadge(language,badge_color,source, initiative));
-  const currentBadge = data.find((element) => element.badge.toLowerCase() === badge_color.toLowerCase());
+  const currentBadge = data.find((element) => element.badge.toLowerCase() === BADGES_API_TEXT[badge_color].toLowerCase());
   $('#participation-type').html(localeSourceStr);
   $('#milestone').html(currentBadge.contributions);
   $('#text-type').html(localeTextTypeStr.toLowerCase());
@@ -82,11 +81,11 @@ const renderCard = function (data, initiative, badge_color, source, language) {
   $('#badge-color').html(localeBadgeColorStr.charAt(0).toUpperCase() + localeBadgeColorStr.slice(1));
 }
 
-const renderBadgeDetails = function (data, source, type, initiative, language, badge_color) {
+const renderBadgeDetails = function (data, source, initiative, language, badge_color) {
   const badgeLevels = getBadgeLevels(language, initiative, source)
   const $badgeLevelSection = $('.badge-level-section');
   $badgeLevelSection.html(badgeLevels);
-  $('#bronze_participation_badge, #silver_participation_badge ,#gold_participation_badge, #platinum_participation_badge').off('click').on('click',(e)=>{
+  $('#badge_1_participation_badge, #badge_2_participation_badge ,#badge_3_participation_badge, #badge_4_participation_badge').off('click').on('click',(e)=>{
     $('.badge-level-section').find('.bg-white').removeClass('bg-white');
     $(e.currentTarget).addClass('bg-white');
     const badgeColor = e.currentTarget.id.replace('_participation_badge','');
@@ -98,24 +97,24 @@ const renderBadgeDetails = function (data, source, type, initiative, language, b
   renderCard(data, initiative, badge_color, source, language);
 }
 
-const getBadgeData = (type, source, language,initiative,badge_color) => {
-  performAPIRequest(`/rewards-info?type=${type}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source, type,initiative, language,badge_color)).catch(console.log)
+const getBadgeData = (source, language,initiative,badge_color) => {
+  performAPIRequest(`/rewards-info?type=${initiative}&source=${source}&language=${language}`).then((data) => renderBadgeDetails(data, source,initiative, language,badge_color)).catch(console.log)
 }
 
 const initialise = () => {
-  let initiative = 'suno';
+  // let initiative = 'asr';
   let selectedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   let source = 'contribute';
   let badge_color = badgeLevel.replace('_participation_badge','');
   let type = localStorage.getItem("module");
-  let initiativeValue = type === 'home' ? 'asr' : MODULE[type]["api-type"];
+  let initiative = type === 'home' ? 'asr' : MODULE[type]["api-type"];
 
   if (type != 'home') {
-    initiative = type;
+    // initiative = initiativeValue;
     $("#initiative").find('.active').attr("aria-selected", false);
     $("#initiative").find('.active').removeClass('active');
-    $("#initiative").find('a[id="' + type + '"]').attr("aria-selected", true);
-    $("#initiative").find('a[id="' + type + '"]').addClass('active');
+    $("#initiative").find('a[id="' + initiative + '"]').attr("aria-selected", true);
+    $("#initiative").find('a[id="' + initiative + '"]').addClass('active');
     source = localStorage.getItem('selectedType');
     $("#languages").find('option[value="' + selectedLanguage + '"]').attr("selected", "selected");
     $("#participation-radios").find('input[value="' + source + '"]').attr("checked", "checked");
@@ -126,22 +125,24 @@ const initialise = () => {
     selectedLanguage = DEFAULT_CON_LANGUAGE;
   }
 
-  getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
+  getBadgeData(source, selectedLanguage,initiative,badge_color);
   selectBadgeLevel(badgeLevel);
 
   $('#initiative').on('click', (e) => {
-    initiative = e.target.id;
-    initiativeValue = MODULE[e.target.id]["api-type"];
-    badge_color = badgeLevel.replace('_participation_badge','');
     $("#initiative").find('.active').removeClass('active');
-    $("#initiative").find('a[id="' + type + '"]').addClass('active');
-    getBadgeData(initiativeValue, source, selectedLanguage, initiative,badge_color);
+    $("#initiative").find('a[id="' + initiative + '"]').addClass('active');
+    initiative = e.target.id;
+    // initiativeValue = e.target.id;
+    badge_color = badgeLevel.replace('_participation_badge','');
+    // $("#initiative").find('.active').removeClass('active');
+    // $("#initiative").find('a[id="' + type + '"]').addClass('active');
+    getBadgeData(source, selectedLanguage, initiative,badge_color);
   });
 
   $('#languages').on('change', (e) => {
     selectedLanguage = e.target.value;
     badge_color = badgeLevel.replace('_participation_badge','');
-    getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
+    getBadgeData(source, selectedLanguage,initiative,badge_color);
   });
 
   $('#participation-radios').on('change', (e) => {
@@ -153,7 +154,7 @@ const initialise = () => {
     if (selectedParticipation) selectedParticipation.checked = false;
     e.target.checked = true;
     badge_color = badgeLevel.replace('_participation_badge','');
-    getBadgeData(initiativeValue, source, selectedLanguage,initiative,badge_color);
+    getBadgeData(source, selectedLanguage,initiative,badge_color);
   })
 }
 
@@ -173,33 +174,33 @@ $(document).ready(function () {
     $("#home").addClass("active show");
   }
 
-  const $sunoTab = $('#suno');
-  const $boloTab = $('#bolo');
-  const $likhoTab = $('#likho');
-  const $dekhoTab = $('#dekho');
+  const $asrTab = $('#asr');
+  const $textTab = $('#text');
+  const $parallelTab = $('#parallel');
+  const $ocrTab = $('#ocr');
 
-  $sunoTab.on('click', function () {
+  $asrTab.on('click', function () {
     const $tabBar = document.getElementById('initiative');
     sideScroll($tabBar,'left',25,100,10);
   });
 
-  $boloTab.on('click', function () {
+  $textTab.on('click', function () {
     const prev = $('.badge-detail-container .nav-tabs li>a.active');
     const $tabBar = document.getElementById('initiative');
     const prevActiveTab = prev[0].id;
-    const direction = prevActiveTab == $sunoTab[0].id ? 'right' :'left';
+    const direction = prevActiveTab == $asrTab[0].id ? 'right' :'left';
     sideScroll($tabBar,direction,25,160,10);
   });
 
-  $likhoTab.on('click', function () {
+  $parallelTab.on('click', function () {
     const prev = $('.badge-detail-container .nav-tabs li>a.active');
     const $tabBar = document.getElementById('initiative');
     const prevActiveTab = prev[0].id;
-    const direction = prevActiveTab == $dekhoTab[0].id ? 'left' :'right';
+    const direction = prevActiveTab == $ocrTab[0].id ? 'left' :'right';
     sideScroll($tabBar,direction,25,160,10);
   });
 
-  $dekhoTab.on('click', function () {
+  $ocrTab.on('click', function () {
     const $tabBar = document.getElementById('initiative');
     sideScroll($tabBar,'right',25,100,10);
   });

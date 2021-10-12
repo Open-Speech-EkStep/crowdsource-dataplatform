@@ -110,11 +110,18 @@ const BADGES_NAME = {
     platinum : config.badge_4,
 }  
 
+const BADGES_API_TEXT = {
+    badge_1 : "bronze",
+    badge_2 : "silver",
+    badge_3 : "gold",
+    badge_4 : "platinum",
+}  
+
 const INITIATIVES_NAME = {
-    suno : config.initiative_1,
-    bolo : config.initiative_2,
-    likho : config.initiative_3,
-    dekho : config.initiative_4,
+    asr : config.initiative_1,
+    text : config.initiative_2,
+    parallel : config.initiative_3,
+    ocr : config.initiative_4,
 }
 
 module.exports = {
@@ -142,6 +149,6 @@ module.exports = {
     CUMULATIVE_DATA,
     AGE_GROUP,
     BADGES_NAME,
-    INITIATIVES_NAME,config
+    INITIATIVES_NAME,config,BADGES_API_TEXT
 
 }

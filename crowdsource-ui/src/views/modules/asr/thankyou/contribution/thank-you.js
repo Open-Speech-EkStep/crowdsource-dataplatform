@@ -70,7 +70,7 @@ const updateShareContent = function (language, rank) {
 
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
-    const top_languages_by_hours = jsonData.filter(d => d.type == MODULE.suno['api-type']);
+    const top_languages_by_hours = jsonData.filter(d => d.type == 'asr');
     if (top_languages_by_hours.length > 0) {
       const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
@@ -178,7 +178,7 @@ function executeOnLoad() {
     getLanguageStats().then(() => {
       setSentencesContributed();
     });
-    updateGoalProgressBarFromJson(MODULE.suno['api-type'], 'contribute', contributionLanguage);
+    updateGoalProgressBarFromJson('asr', 'contribute', contributionLanguage);
   }
 }
 

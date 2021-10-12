@@ -31,7 +31,7 @@ const getPngBadges = (contibutedLanguage, badgeType, source, initiativeType) =>{
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.png`;
 }
 
-$("#bronze_badge_link, #silver_badge_link, #gold_badge_link, #platinum_badge_link").on('click', function () {
+$("#badge_1_badge_link, #badge_2_badge_link, #badge_3_badge_link, #badge_4_badge_link").on('click', function () {
   if (!$(this).attr("disabled")) {
     downloadPdf($(this).attr("data-badge"));
   }

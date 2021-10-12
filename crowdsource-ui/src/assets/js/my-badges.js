@@ -1,6 +1,6 @@
 const fetch = require('./fetch');
-const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, SPEAKER_DETAILS_KEY,BADGES_NAME,
-  INITIATIVES_NAME} = require('./constants');
+const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, SPEAKER_DETAILS_KEY,
+  INITIATIVES_NAME,config} = require('./constants');
 const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
@@ -16,13 +16,13 @@ const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeStri
   return `
   <div class="badge-widget cursor-pointer text-center bg-white" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
   <img src=${imgPath} class="my-badge-image" height="74" width="60" rel="popover" data-toggle="popover" >
-  <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[BADGES_NAME[badgeType]]}</h6>
+  <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[config[badgeType]]}</h6>
 </div>`
 }
 
 const getWidgetWithoutBadge = (badgeType, type, localeString,initiativeType, language) => {
   return ` <div class="badge-widget-placeholder m-auto text-center" id="${badgeType}_${type}_${language}_${initiativeType}_placeholder">
-                 <p class="text-capitalize">${localeString[BADGES_NAME[badgeType]]}</p>
+                 <p class="text-capitalize">${localeString[config[badgeType]]}</p>
  </div>`
 }
 
@@ -43,17 +43,17 @@ const getBadgeRow = (result, id, type, localeString) => {
                    </div>
                  <div class="row m-0">
                    <div class="col-3 pl-0">
-                   ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(getLanguageBadge(item.name, 'bronze', 'contribute', type), 'bronze', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('bronze', 'contribution', localeString, type, item.name)}
+                   ${item.contribute[0] && item.contribute[0].grade == 'Bronze' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_1', 'contribute', type), 'badge_1', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_1', 'contribution', localeString, type, item.name)}
                   
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(getLanguageBadge(item.name, 'silver', 'contribute', type), 'silver', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('silver', 'contribution', localeString,type, item.name)}
+                     ${item.contribute[1] && item.contribute[1].grade == 'Silver' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_2', 'contribute', type), 'badge_2', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_2', 'contribution', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(getLanguageBadge(item.name, 'gold', 'contribute', type), 'gold', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('gold', 'contribution', localeString,type, item.name)}
+                     ${item.contribute[2] && item.contribute[2].grade == 'Gold' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_3', 'contribute', type), 'badge_3', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_3', 'contribution', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(item.name, 'platinum', 'contribute', type), 'platinum', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('platinum', 'contribution', localeString,type, item.name)}
+                   ${item.contribute[3] && item.contribute[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_4', 'contribute', type), 'badge_4', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_4', 'contribution', localeString,type, item.name)}
                    </div>
                  </div>
                </div>`: `<div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
@@ -62,16 +62,16 @@ const getBadgeRow = (result, id, type, localeString) => {
                  </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${getWidgetWithoutBadge('bronze', 'contribution', localeString, type, item.name)}
+                 ${getWidgetWithoutBadge('badge_1', 'contribution', localeString, type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                   ${getWidgetWithoutBadge('silver', 'contribution', localeString,type, item.name)}
+                   ${getWidgetWithoutBadge('badge_2', 'contribution', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                   ${ getWidgetWithoutBadge('gold', 'contribution', localeString,type, item.name)}
+                   ${ getWidgetWithoutBadge('badge_3', 'contribution', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                 ${getWidgetWithoutBadge('platinum', 'contribution', localeString,type, item.name)}
+                 ${getWidgetWithoutBadge('badge_4', 'contribution', localeString,type, item.name)}
                  </div>
                </div>
              </div>`}
@@ -81,16 +81,16 @@ const getBadgeRow = (result, id, type, localeString) => {
                </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(getLanguageBadge(item.name, 'bronze', 'validate', type), 'bronze', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('bronze', 'validation', localeString,type, item.name)}
+                 ${item.validate[0] && item.validate[0].grade == 'Bronze' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_1', 'validate', type), 'badge_1', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_1', 'validation', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                     ${item.validate[1] && item.validate[1].grade == 'Silver' ? getWidgetWithBadge(getLanguageBadge(item.name, 'silver', 'validate', type), 'silver', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('silver', 'validation', localeString,type,item.name)}
+                     ${item.validate[1] && item.validate[1].grade == 'Silver' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_2', 'validate', type), 'badge_2', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_2', 'validation', localeString,type,item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.validate[2] && item.validate[2].grade == 'Gold' ? getWidgetWithBadge(getLanguageBadge(item.name, 'gold', 'validate', type), 'gold', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('gold', 'validation', localeString,type, item.name)}
+                     ${item.validate[2] && item.validate[2].grade == 'Gold' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_3', 'validate', type), 'badge_3', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_3', 'validation', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(item.name, 'platinum', 'validate', type),'platinum', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('platinum', 'validation', localeString,type, item.name)}
+                   ${item.validate[3] && item.validate[3].grade == 'Platinum' ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_4', 'validate', type),'badge_4', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_4', 'validation', localeString,type, item.name)}
                    </div>
                </div>
              </div>` : `<div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
@@ -99,16 +99,16 @@ const getBadgeRow = (result, id, type, localeString) => {
              </div>
              <div class="row m-0">
                <div class="col-3 pl-0">
-               ${getWidgetWithoutBadge('bronze', 'validation', localeString,type, item.name)}
+               ${getWidgetWithoutBadge('badge_1', 'validation', localeString,type, item.name)}
                </div>
                <div class="col-3 pl-0">
-                   ${getWidgetWithoutBadge('silver', 'validation', localeString,type,item.name)}
+                   ${getWidgetWithoutBadge('badge_2', 'validation', localeString,type,item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                   ${getWidgetWithoutBadge('gold', 'validation', localeString,type, item.name)}
+                   ${getWidgetWithoutBadge('badge_3', 'validation', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                 ${getWidgetWithoutBadge('platinum', 'validation', localeString,type, item.name)}
+                 ${getWidgetWithoutBadge('badge_4', 'validation', localeString,type, item.name)}
                  </div>
              </div>
            </div>`}
@@ -187,48 +187,48 @@ const getBadgesForUser = (userName) => {
     })
       .then((result) => {
         let mappedData = [];
-        let initiativekeys = ['text', 'ocr', 'parallel', 'asr'];
+        let initiativeKeys = ['text', 'ocr', 'parallel', 'asr'];
         if (result && result.length) {
-          $('#suno-type').removeClass('d-none');
-          $('#bolo-type').removeClass('d-none');
-          $('#likho-type').removeClass('d-none');
-          $('#dekho-type').removeClass('d-none');
+          $('#asr-type').removeClass('d-none');
+          $('#text-type').removeClass('d-none');
+          $('#parallel-type').removeClass('d-none');
+          $('#ocr-type').removeClass('d-none');
           let groupByInitiative = groupBy(result, 'type');
-          initiativekeys.forEach(initiativekey => {
-            if (groupByInitiative && groupByInitiative[initiativekey]) {
-              let initiativeByData = groupByInitiative[initiativekey];
+          initiativeKeys.forEach(initiativeKey => {
+            if (groupByInitiative && groupByInitiative[initiativeKey]) {
+              let initiativeByData = groupByInitiative[initiativeKey];
               let groupByLanguage = groupBy(initiativeByData, 'language');
-              let langaugeKeys = Object.keys(groupByLanguage);
-              let langaugeArray = [];
-              langaugeKeys.forEach(elem => {
+              let languageKeys = Object.keys(groupByLanguage);
+              let languageArray = [];
+              languageKeys.forEach(elem => {
                 let result = groupByLanguage[elem];
-                const contribution = result.filter(initiativekey => initiativekey.category == 'contribute').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
-                const validate = result.filter(initiativekey => initiativekey.category == 'validate').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
+                const contribution = result.filter(initiativeKey => initiativeKey.category == 'contribute').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
+                const validate = result.filter(initiativeKey => initiativeKey.category == 'validate').sort((a, b) => Number(a.milestone) < Number(b.milestone) ? -1 : 1);
                 let languageObj = {
                   name: elem,
                   contribute: contribution,
                   validate: validate
                 }
-                langaugeArray.push(languageObj);
+                languageArray.push(languageObj);
               });
-              bindData(initiativekey, langaugeArray, mappedData)
+              bindData(initiativeKey, languageArray, mappedData)
             } else {
            
-              bindData(initiativekey, [], mappedData);
+              bindData(initiativeKey, [], mappedData);
             }
           });
         }  else {
-          $('#suno-type').addClass('d-none');
-          $('#bolo-type').addClass('d-none');
-          $('#likho-type').addClass('d-none');
-          $('#dekho-type').addClass('d-none');
-          initiativekeys.forEach(initiativekey => {
-              bindData(initiativekey, [], mappedData);
+          $('#asr-type').addClass('d-none');
+          $('#text-type').addClass('d-none');
+          $('#parallel-type').addClass('d-none');
+          $('#ocr-type').addClass('d-none');
+          initiativeKeys.forEach(initiativeKey => {
+              bindData(initiativeKey, [], mappedData);
           });
         }
           mappedData.forEach(element => {
-            const id = element.initiativeType == 'text' ? 'bolo-badge' : element.initiativeType == 'ocr' ? 'dekho-badge' : element.initiativeType == 'asr' ? 'suno-badge' : 'likho-badge';
-            const type = element.initiativeType == 'text' ? 'bolo' : element.initiativeType == 'ocr' ? 'dekho' : element.initiativeType == 'asr' ? 'suno' : 'likho';
+            const id = element.initiativeType == 'text' ? 'text-badge' : element.initiativeType == 'ocr' ? 'ocr-badge' : element.initiativeType == 'asr' ? 'asr-badge' : 'parallel-badge';
+            const type = element.initiativeType == 'text' ? 'text' : element.initiativeType == 'ocr' ? 'ocr' : element.initiativeType == 'asr' ? 'asr' : 'parallel';
             const localeString =  JSON.parse(localStorage.getItem(LOCALE_STRINGS));
             getBadgeRow(element, id, type, localeString);
           });
@@ -241,33 +241,33 @@ $(document).ready(() => {
   localStorage.setItem("module","others");
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';
 
-  const $sunoTab = $('#suno-tab');
-  const $boloTab = $('#bolo-tab');
-  const $likhoTab = $('#likho-tab');
-  const $dekhoTab = $('#dekho-tab');
+  const $asrTab = $('#asr-tab');
+  const $textTab = $('#text-tab');
+  const $parallelTab = $('#parallel-tab');
+  const $ocrTab = $('#ocr-tab');
 
-  $sunoTab.on('click', function () {
+  $asrTab.on('click', function () {
     const $tabBar = document.getElementById('my-badge');
     sideScroll($tabBar,'left',25,100,10);
   });
 
-  $boloTab.on('click', function () {
+  $textTab.on('click', function () {
     const prev = $('.my-badge-container .nav-tabs li>a.active');
     const $tabBar = document.getElementById('my-badge');
     const prevActiveTab = prev[0].id;
-    const direction = prevActiveTab == $sunoTab[0].id ? 'right' :'left';
+    const direction = prevActiveTab == $asrTab[0].id ? 'right' :'left';
     sideScroll($tabBar,direction,25,160,10);
   });
 
-  $likhoTab.on('click', function () {
+  $parallelTab.on('click', function () {
     const prev = $('.my-badge-container .nav-tabs li>a.active');
     const $tabBar = document.getElementById('my-badge');
     const prevActiveTab = prev[0].id;
-    const direction = prevActiveTab == $dekhoTab[0].id ? 'left' :'right';
+    const direction = prevActiveTab == $ocrTab[0].id ? 'left' :'right';
     sideScroll($tabBar,direction,25,160,10);
   });
 
-  $dekhoTab.on('click', function () {
+  $ocrTab.on('click', function () {
     const $tabBar = document.getElementById('my-badge');
     sideScroll($tabBar,'right',25,100,10);
   });
@@ -294,7 +294,7 @@ $(document).ready(() => {
   }).catch(err => {
     console.log(err);
   });
-  let moduleType = localStorage.getItem("module");
+  const moduleType = localStorage.getItem("module");
   if(hasUserRegistered()){
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
