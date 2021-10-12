@@ -692,7 +692,7 @@ describe('test common js', () => {
       expect($('.thankyou-page-heading').hasClass('d-none')).toEqual(true);
       expect($('.user-contribution-msg').hasClass('d-none')).toEqual(false);
       expect($('#sentence_away_msg').hasClass('d-none')).toEqual(true);
-      expect($('#platinum_reward_msg_1').hasClass('d-none')).toEqual(false);
+      expect($('#badge_4_reward_msg_1').hasClass('d-none')).toEqual(false);
       localStorage.clear();
     });
 
@@ -757,7 +757,7 @@ describe('test common js', () => {
       expect($('.thankyou-page-heading').hasClass('d-none')).toEqual(true);
       expect($('.user-contribution-msg').hasClass('d-none')).toEqual(false);
       expect($('#sentence_away_msg').hasClass('d-none')).toEqual(true);
-      expect($('#platinum_reward_msg_2').hasClass('d-none')).toEqual(false);
+      expect($('#badge_4_reward_msg_2').hasClass('d-none')).toEqual(false);
       localStorage.clear();
     });
   });
