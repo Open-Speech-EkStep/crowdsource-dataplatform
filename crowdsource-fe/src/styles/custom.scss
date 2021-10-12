@@ -79,6 +79,14 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --btn-secondary-disabled-bg-color: #f9fbff;
   --btn-tertiary-disabled-text-color: #6f7d92;
   --badge-bg-color: #fdf5dd;
+  --box-shadow: 0 0 32px rgba(15, 39, 73, 0.1);
+  --box-shadow-green: 0 0 32px #43c0d7;
+  --box-shadow-green-sm: 0 0 12px 8px rgba(67, 192, 215, 0.3);
+  --box-shadow-blue: 0 2px 12px #9fc8ff;
+  --box-shadow-blue-sm: 0 0 12px 8px rgba(102, 176, 255, 0.3);
+  --box-shadow-blue-md: 0 4px 16px 4px rgba(0, 123, 255, 0.2);
+  --box-shadow-blue-lg: 0 0 32px rgba(0, 123, 255, 0.4);
+  --box-shadow-grey: 0 4px 12px rgba(15, 39, 73, 0.2);
 }
 
 // Typography
@@ -260,10 +268,34 @@ a {
   text-decoration: none !important;
 }
 
+$box-shadow: var(--box-shadow);
+$box-shadow-green: var(--box-shadow-green);
+$box-shadow-green-sm: var(--box-shadow-green-sm);
+$box-shadow-blue: var(--box-shadow-blue);
+$box-shadow-blue-sm: var(--box-shadow-blue-sm);
+$box-shadow-blue-md: var(--box-shadow-blue-md);
+$box-shadow-blue-lg: var(--box-shadow-blue-lg);
+$box-shadow-grey: var(--box-shadow-grey);
+
 // Merge utilities
 $utilities: map-merge(
   $utilities,
   (
+    'shadow': (
+      property: box-shadow,
+      class: shadow,
+      values: (
+        null: $box-shadow,
+        green: $box-shadow-green,
+        green-sm: $box-shadow-green-sm,
+        blue: $box-shadow-blue,
+        blue-sm: $box-shadow-blue-sm,
+        blue-md: $box-shadow-blue-md,
+        blue-lg: $box-shadow-blue-lg,
+        grey: $box-shadow-grey,
+        none: none,
+      ),
+    ),
     'color': (
       property: color,
       class: text,

@@ -162,7 +162,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
       <div className="bg-secondary p-5 p-md-8 mt-4 mt-md-5">
         <div className="d-md-flex justify-content-between display-5 mb-5 mb-md-6">
           <p>{t('totalSentences')}</p>
-          <div className="mt-3 mt-md-0">
+          <div className="mt-3 mt-md-0 display-6">
             <span className={`${styles.chartLabel} ${styles.chartLabelOrange}`}>
               {t('yourSelectedLanguage')}
             </span>
@@ -171,7 +171,9 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
             </span>
           </div>
         </div>
-        <BarChart id="bar_chart" data={barChartData} />
+        <div className={styles.chartContainer}>
+          <BarChart id="bar_chart" data={barChartData} />
+        </div>
       </div>
     </div>
   ) : null;

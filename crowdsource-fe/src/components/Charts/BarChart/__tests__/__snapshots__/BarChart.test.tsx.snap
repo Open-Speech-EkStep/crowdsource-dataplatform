@@ -4,7 +4,7 @@ exports[`BarChart should render the component and matches it against stored snap
 <DocumentFragment>
   <div
     id="chart_id"
-    style="width: 100%; height: 500px;"
+    style="width: 100%; height: 100%;"
   >
     <div
       style="width: 100%; height: 100%; position: relative;"

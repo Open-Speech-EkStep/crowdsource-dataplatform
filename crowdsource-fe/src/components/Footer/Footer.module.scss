@@ -1,6 +1,4 @@
 .root {
-  box-shadow: 0 -2px 12px 0 var(--text-light-blue);
-
   @include media-breakpoint-up(lg) {
     height: 4rem;
   }

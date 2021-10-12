@@ -1,5 +1,11 @@
 #__next {
-  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+body {
+  min-height: 100%;
 }
 
 .font-family-rowdies {

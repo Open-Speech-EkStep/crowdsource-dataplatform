@@ -27,3 +27,11 @@
 .chartLabelYellow::before {
   background-color: var(--warning-color);
 }
+
+.chartContainer {
+  height: 20rem;
+
+  @include media-breakpoint-up(md) {
+    height: 20rem;
+  }
+}

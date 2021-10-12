@@ -3,7 +3,7 @@
 exports[`Header should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="root d-flex bg-light text-primary p-0 position-sticky w-100"
+    class="root shadow-blue d-flex bg-light text-primary p-0 position-sticky w-100"
     data-testid="Header"
     role="banner"
   >

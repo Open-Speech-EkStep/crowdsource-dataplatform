@@ -1,11 +1,11 @@
 .root {
   border: 1px solid rgba(67, 192, 215, 1);
   border-radius: 1.25rem;
-  box-shadow: rgb(67 192 215) 0 8px 0, rgb(0 0 0 / 10%) 0 0 32px;
+  box-shadow: rgb(67 192 215) 0 8px 0, var(--box-shadow);
   position: relative;
 
   &:hover {
-    box-shadow: rgb(67 192 215) 0 8px 0, rgb(67 192 215) 0 0 32px;
+    box-shadow: rgb(67 192 215) 0 8px 0, var(--box-shadow-green);
   }
 }
 
@@ -83,11 +83,11 @@
 }
 
 .iconShadowGreen {
-  box-shadow: 0 0 12px 8px rgba(66, 178, 198, 0.4);
+  box-shadow: var(--box-shadow-green-sm);
 }
 
 .iconShadowBlue {
-  box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.4);
+  box-shadow: var(--box-shadow-blue-sm);
 }
 
 .infoMsg {

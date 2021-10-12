@@ -22,7 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
   });
 
   return (
-    <div data-testid="Layout" className="d-flex flex-column h-100">
+    <div data-testid="Layout" className="d-flex flex-column flex-fill">
       <Head>
         <title>{t('metaTitle')}</title>
         <meta charSet="UTF-8" />

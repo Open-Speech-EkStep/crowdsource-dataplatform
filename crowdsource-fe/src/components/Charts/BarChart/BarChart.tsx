@@ -72,7 +72,7 @@ const BarChart = (props: ChartProps) => {
     };
   }, [props]);
 
-  return <div id={props.id} style={{ width: '100%', height: '500px' }}></div>;
+  return <div id={props.id} style={{ width: '100%', height: '100%' }}></div>;
 };
 
 export default BarChart;

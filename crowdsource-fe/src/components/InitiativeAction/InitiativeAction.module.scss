@@ -14,10 +14,10 @@
   }
 
   &Green {
-    box-shadow: 0 0 12px 8px rgba(66, 178, 198, 0.12);
+    box-shadow: var(--box-shadow-green-sm);
   }
 
   &Blue {
-    box-shadow: 0 0 12px 8px rgba(102, 176, 255, 0.12);
+    box-shadow: var(--box-shadow-blue-sm);
   }
 }

@@ -10,7 +10,7 @@ const Header = () => {
     <header
       data-testid="Header"
       role="banner"
-      className={`${styles.root} d-flex bg-light text-primary p-0 position-sticky w-100`}
+      className={`${styles.root} shadow-blue d-flex bg-light text-primary p-0 position-sticky w-100`}
     >
       <div className="d-flex order-1 order-lg-2">
         <Navigation />

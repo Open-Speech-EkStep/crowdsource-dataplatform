@@ -30,7 +30,7 @@ class MyDocument extends Document<MyDocumentProps> {
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
           />
         </Head>
-        <body className="h-100">
+        <body className="d-flex flex-column">
           <Main />
           <NextScript />
         </body>

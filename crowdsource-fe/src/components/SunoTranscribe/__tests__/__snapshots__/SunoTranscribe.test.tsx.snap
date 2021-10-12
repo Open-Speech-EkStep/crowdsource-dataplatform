@@ -18,7 +18,7 @@ exports[`SunoTranscribe should render the component and matches it against store
         class="mt-2 mt-md-3"
       >
         <audio
-          class="audioPlayer"
+          class="audioPlayer shadow-grey"
           controls=""
           controlslist="nodownload"
           crossorigin="anonymous"

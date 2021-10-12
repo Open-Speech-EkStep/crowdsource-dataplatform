@@ -27,13 +27,13 @@ const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps)
   return (
     <div className="d-flex flex-column align-items-center text-center">
       <span className={`${styles.label} display-3`}>Type the text as you hear the audio</span>
-      <div className={`mt-2 mt-md-3`}>
+      <div className="mt-2 mt-md-3">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio
           data-testid="audioElement"
           ref={audioEl}
           controls
-          className={styles.audioPlayer}
+          className={`${styles.audioPlayer} shadow-grey`}
           tabIndex={-1}
           src={audioUrl}
           controlsList="nodownload"
