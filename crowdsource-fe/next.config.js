@@ -26,6 +26,15 @@ const nextConfig = {
 
     config.plugins.push(new ConfigWebpackPlugin('CROWDSOURCE_FE_NODE_CONFIG'));
 
+    config.externals.push(
+      function (context, request, callback) {
+        if (/xlsx|canvg|pdfmake/.test(request)) {
+          return callback(null, "commonjs " + request);
+        }
+        callback();
+      }
+    )
+
     return config;
   },
   async redirects() {
