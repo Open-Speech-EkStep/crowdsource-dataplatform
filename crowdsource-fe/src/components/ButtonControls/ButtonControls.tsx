@@ -11,6 +11,7 @@ interface ButtonControlProps {
   onReplay: () => void;
   onSubmit: () => void;
   onCancel: () => void;
+  onSkip: () => void;
   playButton: boolean;
   pauseButton: boolean;
   replayButton: boolean;
@@ -24,6 +25,7 @@ const ButtonControls = ({
   onReplay,
   onSubmit,
   onCancel,
+  onSkip,
   playButton = true,
   pauseButton = false,
   replayButton = false,
@@ -89,7 +91,9 @@ const ButtonControls = ({
         </Button>
       </div>
       <div className="d-flex justify-content-center mt-2 mt-md-11">
-        <Button variant="tertiary">{t('skip')}</Button>
+        <Button onClick={onSkip} variant="tertiary">
+          {t('skip')}
+        </Button>
       </div>
     </div>
   );

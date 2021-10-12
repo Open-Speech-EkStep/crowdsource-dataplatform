@@ -23,7 +23,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           controlslist="nodownload"
           crossorigin="anonymous"
           data-testid="audioElement"
-          src="https://uat-data-crowdsource.azureedge.net/inbound%2Fasr%2FEnglish%2Fnewsonair.nic.in_09-08-2021_03-37%2F2_3_Regional-Kohima-English-0725-201951674824.wav"
+          src="https://dev-data-crowdsource.azureedge.net/inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav"
           tabindex="-1"
         />
       </div>
@@ -71,7 +71,8 @@ exports[`SunoTranscribe should render the component and matches it against store
                 alt="keyboardBtn"
                 data-nimg="intrinsic"
                 decoding="async"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                src="/_next/image?url=%2Fimages%2Freport.svg&w=48&q=75"
+                srcset="/_next/image?url=%2Fimages%2Freport.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Freport.svg&w=48&q=75 2x"
                 style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
               />
               <noscript />
@@ -114,7 +115,8 @@ exports[`SunoTranscribe should render the component and matches it against store
               alt="Play Icon"
               data-nimg="intrinsic"
               decoding="async"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              src="/_next/image?url=%2Fimages%2Fplay.svg&w=128&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fplay.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fplay.svg&w=128&q=75 2x"
               style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             />
             <noscript />
@@ -158,10 +160,10 @@ exports[`SunoTranscribe should render the component and matches it against store
           <div
             aria-valuemax="100"
             aria-valuemin="0"
-            aria-valuenow="60"
+            aria-valuenow="20"
             class="progress-bar bg-primary"
             role="progressbar"
-            style="width: 60%;"
+            style="width: 20%;"
           />
         </div>
       </div>

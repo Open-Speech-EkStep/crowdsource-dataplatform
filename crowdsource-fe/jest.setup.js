@@ -121,3 +121,48 @@ afterEach(() => {
 class SVGPathElement extends HTMLElement {}
 
 window.SVGPathElement = SVGPathElement;
+
+const mockConnect = jest.fn();
+const mockcreateMediaElementSource = jest.fn(() => {
+  return {
+    connect: mockConnect,
+  };
+});
+const mockgetByteFrequencyData = jest.fn();
+const mockcreateAnalyser = jest.fn(() => {
+  return {
+    connect: mockConnect,
+    frequencyBinCount: [0, 1, 2],
+    getByteFrequencyData: mockgetByteFrequencyData,
+  };
+});
+const mockcreateOscillator = jest.fn(() => {
+  return {
+    channelCount: 2,
+  };
+});
+const mockChannelSplitterConnect = jest.fn(n => n);
+const mockcreateChannelSplitter = jest.fn(() => {
+  return {
+    connect: mockChannelSplitterConnect,
+  };
+});
+
+window.AudioContext = jest.fn().mockImplementation(() => {
+  return {
+    createAnalyser: mockcreateAnalyser,
+    createMediaElementSource: mockcreateMediaElementSource,
+    createOscillator: mockcreateOscillator,
+    createChannelSplitter: mockcreateChannelSplitter,
+  };
+});
+
+const mockClearRect = jest.fn();
+const mockFillRect = jest.fn();
+
+HTMLCanvasElement.prototype.getContext = () => {
+  return {
+    clearRect: mockClearRect,
+    fillRect: mockFillRect,
+  };
+};

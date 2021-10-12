@@ -17,6 +17,7 @@ describe('ButtonControls', () => {
         onReplay={() => {}}
         onSubmit={() => {}}
         onCancel={() => {}}
+        onSkip={() => {}}
         playButton={showPlayButton}
         pauseButton={showPauseButton}
         replayButton={showReplayButton}

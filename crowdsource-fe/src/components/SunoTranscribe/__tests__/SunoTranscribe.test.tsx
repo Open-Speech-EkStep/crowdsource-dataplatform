@@ -1,18 +1,95 @@
+import { when } from 'jest-when';
+
 import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 
 import SunoTranscribe from '../SunoTranscribe';
 
 describe('SunoTranscribe', () => {
-  const setup = () => render(<SunoTranscribe />);
+  const setup = async () => {
+    when(localStorage.getItem)
+      .calledWith('contributionLanguage')
+      .mockImplementation(() => 'Hindi');
 
-  it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup();
+    const speakerDetails = {
+      userName: 'abc',
+      motherTongue: '',
+      age: '',
+      gender: '',
+      language: 'Hindi',
+      toLanguage: '',
+    };
+
+    when(localStorage.getItem)
+      .calledWith('speakerDetails')
+      .mockImplementation(() => JSON.stringify(speakerDetails));
+
+    fetchMock.doMockOnceIf('/media/asr').mockResponseOnce(
+      JSON.stringify({
+        data: [
+          {
+            dataset_row_id: 1248671,
+            media_data:
+              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+            source_info:
+              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+          },
+          {
+            dataset_row_id: 1248672,
+            media_data:
+              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+            source_info:
+              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+          },
+          {
+            dataset_row_id: 1248673,
+            media_data:
+              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+            source_info:
+              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+          },
+          {
+            dataset_row_id: 1248674,
+            media_data:
+              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+            source_info:
+              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+          },
+          {
+            dataset_row_id: 1248675,
+            media_data:
+              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+            source_info:
+              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+          },
+        ],
+      })
+    );
+
+    fetchMock.doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace').mockResponseOnce('ip=103.92.40.39');
+
+    fetchMock.doMockOnceIf('/location-info?ip=103.92.40.39').mockResponseOnce(
+      JSON.stringify({
+        country: 'India',
+        regionName: 'Uttar Pradesh',
+      })
+    );
+
+    const renderResult = render(<SunoTranscribe />);
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalled();
+    });
+    return renderResult;
+  };
+
+  it('should render the component and matches it against stored snapshot', async () => {
+    const { asFragment } = await setup();
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('play button click should play audio and pause button should be enabled', async () => {
-    setup();
+    await setup();
 
     expect(screen.getByRole('img', { name: 'Play Icon' })).toBeInTheDocument();
 
@@ -22,7 +99,7 @@ describe('SunoTranscribe', () => {
   });
 
   it('pause button click should pause audio and play button should be enabled', async () => {
-    setup();
+    await setup();
 
     userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
@@ -34,7 +111,7 @@ describe('SunoTranscribe', () => {
   });
 
   it('should test the textarea text with valid language', async () => {
-    setup();
+    await setup();
 
     userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
 
@@ -44,7 +121,7 @@ describe('SunoTranscribe', () => {
   });
 
   it('play button click should play audio and replay button should be enabled after audio stops', async () => {
-    setup();
+    await setup();
 
     userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
@@ -52,10 +129,16 @@ describe('SunoTranscribe', () => {
     await waitFor(() => {
       expect(screen.getByRole('img', { name: 'Replay Icon' })).toBeInTheDocument();
     });
+
+    userEvent.click(screen.getByRole('img', { name: 'Replay Icon' }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('img', { name: 'Pause Icon' })).toBeInTheDocument();
+    });
   });
 
-  it('should test the cancel button', async () => {
-    setup();
+  it('should test the cancel button functionality', async () => {
+    await setup();
 
     expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
 
@@ -72,15 +155,106 @@ describe('SunoTranscribe', () => {
     });
   });
 
-  it('should submit the form when click on submit button', () => {
-    setup();
+  it('should test the skip functionality', async () => {
+    const url = '/skip';
+    const successResponse = { message: 'Skipped successfully.', statusCode: 200 };
+
+    await setup();
+    fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName: 'abc',
+          language: 'Hindi',
+          type: 'asr',
+          sentenceId: 1248671,
+          state_region: 'Uttar Pradesh',
+          country: 'India',
+          device: '',
+          browser: '',
+        }),
+      });
+    });
+  });
+
+  it('should test the submit button', async () => {
+    const url = '/store';
+    const successResponse = { success: true };
+
+    await setup();
+
+    fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
 
     expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
 
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
+
+    expect(screen.getByRole('img', { name: 'Pause Icon' })).toBeInTheDocument();
+
+    userEvent.click(screen.getByRole('img', { name: 'Pause Icon' }));
+
+    expect(screen.getByRole('img', { name: 'Play Icon' })).toBeInTheDocument();
+
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
+
+    const audio: any = screen.getByTestId('audioElement');
+
+    await waitFor(() => {
+      audio.dispatchEvent(new window.Event('ended'));
+      expect(screen.getByRole('img', { name: 'Replay Icon' })).toBeInTheDocument();
+    });
+
     userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
 
-    expect(screen.getByRole('textbox', { name: 'Add Text (Hindi)' })).toHaveValue('बपपप');
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'submit' })).toBeEnabled();
+    });
 
     userEvent.click(screen.getByRole('button', { name: 'submit' }));
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userInput: 'बपपप',
+          speakerDetails: '{"userName":"abc"}',
+          language: 'Hindi',
+          type: 'asr',
+          sentenceId: 1248671,
+          state: 'Uttar Pradesh',
+          country: 'India',
+          device: '',
+          browser: '',
+        }),
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Thank you for contributing')).toBeInTheDocument();
+    });
+  });
+
+  it('should go to thank you page after 5 skip sentences', async () => {
+    await setup();
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
   });
 });

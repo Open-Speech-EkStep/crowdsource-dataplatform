@@ -76,3 +76,54 @@ export const verifyLanguage = (text: string, currentModule: string, language: st
   });
   return error;
 };
+
+export const fetchLocationInfo = () => {
+  const result = fetch('https://www.cloudflare.com/cdn-cgi/trace')
+    .then(res => res.text())
+    .then(async ipAddressText => {
+      const dataArray = ipAddressText.split('\n');
+      let ipAddress = '';
+      for (let ind in dataArray) {
+        if (dataArray[ind].startsWith('ip=')) {
+          ipAddress = dataArray[ind].replace('ip=', '');
+          break;
+        }
+      }
+      if (ipAddress.length !== 0) {
+        const data = await fetch(`/location-info?ip=${ipAddress}`);
+        return data.json();
+      } else {
+        return new Promise((resolve, reject) => {
+          reject('Ip Address not available');
+        });
+      }
+    });
+
+  return result;
+};
+
+// export const getDeviceInfo = () => {
+//   const os = platform.os;
+//   let info = '';
+//   if (os.family) {
+//     info = info + os.family;
+//   }
+//   if (os.version) {
+//     info = info + ' ' + os.version;
+//   }
+//   if (platform.product) {
+//     info = info + ' ' + platform.product;
+//   }
+//   return info.trim();
+// };
+
+// export const getBrowserInfo = () => {
+//   let info = '';
+//   if (platform.name) {
+//     info = info + platform.name;
+//   }
+//   if (platform.version) {
+//     info = info + ' ' + platform.version;
+//   }
+//   return info.trim();
+// };

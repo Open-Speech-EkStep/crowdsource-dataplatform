@@ -15,6 +15,5 @@ describe('Suno Home page', () => {
 
     expect(screen.getByTestId('Breadcrumbs')).toBeInTheDocument();
     expect(screen.getByTestId('FunctionalPageBackground')).toBeInTheDocument();
-    expect(screen.getByTestId('SunoTranscribe')).toBeInTheDocument();
   });
 });

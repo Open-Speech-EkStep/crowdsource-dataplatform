@@ -14,6 +14,8 @@ const apiPaths = {
   feedback: nodeConfig.apiUrl + '/feedback',
   report: nodeConfig.apiUrl + '/report',
   mediaAsr: nodeConfig.apiUrl + '/media/asr',
+  store: nodeConfig.apiUrl + '/store',
+  skip: nodeConfig.apiUrl + '/skip',
 };
 
 export default apiPaths;

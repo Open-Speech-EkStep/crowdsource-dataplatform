@@ -4,6 +4,10 @@ export const KEYBOARD_ERROR = {
   noError: { type: '' },
 } as const;
 
+export const TEXT_INPUT_LENGTH = {
+  LENGTH: 3,
+};
+
 export const LANGUAGE_UNICODE = {
   Assamese: /^[\u0980-\u09FF\u0030-\u0039]+$/,
   Bengali: /^[\u0980-\u09FF\u0030-\u0039]+$/,

@@ -35,7 +35,7 @@ const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps)
           controls
           className={`${styles.audioPlayer} shadow-grey`}
           tabIndex={-1}
-          src={audioUrl}
+          src={`https://dev-data-crowdsource.azureedge.net/${audioUrl}`}
           controlsList="nodownload"
           crossOrigin="anonymous"
         ></audio>
