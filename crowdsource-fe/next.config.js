@@ -1,3 +1,8 @@
+// eslint-disable-next-line import/order
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
+
 const config = require('config');
 const ConfigWebpackPlugin = require('config-webpack');
 const withTM = require('next-transpile-modules')(['@amcharts/amcharts4']);
@@ -77,4 +82,4 @@ const nextConfig = {
   // assetPrefix: process.env.NODE_CONFIG_ENV ? `${config.get('fe.staticFileUrl')}/assets` : '',
 };
 
-module.exports = withTM(nextConfig);
+module.exports = withBundleAnalyzer(withTM(nextConfig))

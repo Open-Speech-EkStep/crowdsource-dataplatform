@@ -23,10 +23,14 @@
     "build": "next build",
     "build:docker": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
-    "start:docker": "cross-env NODE_ENV=production node server.docker.js"
+    "start:docker": "cross-env NODE_ENV=production node server.docker.js",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.22",
+    "@next/bundle-analyzer": "^11.1.2",
     "bootstrap": "^5.1.1",
     "classnames": "^2.3.1",
     "next": "11.1.2",
