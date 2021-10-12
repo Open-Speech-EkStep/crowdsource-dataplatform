@@ -147,7 +147,7 @@ step("User clicks on <arg0> he should see thank you page and should be able to s
 	assert.ok(await text("Share on").isVisible());
 	assert.ok(await text("Download").isVisible());
 	assert.ok(await image({ id: "reward-img" }).isVisible());
-	assert.ok(! await image({ id: "bronze_badge_link_img" }).isDisabled());
+	assert.ok(! await image({ id: "badge_1_badge_link_img" }).isDisabled());
 });
 
 step("User should see add extension and watch video link", async function () {
