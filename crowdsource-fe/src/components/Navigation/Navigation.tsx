@@ -36,6 +36,7 @@ const Navigation = () => {
         className="d-flex align-items-stretch h-100 p-0"
         expanded={isExpanded}
         onToggle={handleToggle}
+        collapseOnSelect
       >
         <Navbar.Toggle
           className={`${styles.toggle} align-items-center border-0 flex-column justify-content-center p-0`}
