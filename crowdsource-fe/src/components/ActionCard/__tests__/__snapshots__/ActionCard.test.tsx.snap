@@ -11,7 +11,7 @@ exports[`ActionCard should render the component and match it against stored snap
       href="#"
     >
       <div
-        class="root overflow-hidden"
+        class="root rounded-20 overflow-hidden"
         data-testid="ActionCardcontribute"
       >
         <div
@@ -28,7 +28,7 @@ exports[`ActionCard should render the component and match it against stored snap
                 data-testid="ActionCardWarningMessage"
               >
                 <div
-                  class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                  class="rounded-20 border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                   data-testid="InfoMessage"
                 >
                   <div

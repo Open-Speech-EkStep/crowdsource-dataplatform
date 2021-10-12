@@ -17,7 +17,7 @@ const FeedbackSuccessModal = (props: FeedbackSuccessModalProps) => {
       data-testid="FeedbackSuccessModal"
       {...props}
       dialogClassName={styles.root}
-      contentClassName={styles.content}
+      contentClassName={`${styles.content} d-flex flex-column overflow-auto rounded-12`}
       centered
     >
       <Modal.Header closeButton className={`${styles.modalHeader} border-bottom-0`} />

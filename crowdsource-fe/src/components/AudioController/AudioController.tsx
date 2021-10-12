@@ -33,7 +33,7 @@ const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps)
           data-testid="audioElement"
           ref={audioEl}
           controls
-          className={`${styles.audioPlayer} shadow-grey`}
+          className="d-flex shadow-grey rounded-24"
           tabIndex={-1}
           src={`https://dev-data-crowdsource.azureedge.net/${audioUrl}`}
           controlsList="nodownload"

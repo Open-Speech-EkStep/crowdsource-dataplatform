@@ -14,7 +14,7 @@ import { pageSourceConstants } from 'constants/pageRouteConstants';
 import { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 
-import styles from './Report.module.scss';
+import styles from './ReportModal.module.scss';
 
 interface ReportModalProps {
   onHide: () => void;
@@ -126,7 +126,7 @@ const ReportModal = ({ onSuccess: showThankyou, ...props }: ReportModalProps) =>
               placeholder={t('specifyReason')}
               name="reportTextArea"
               onChange={e => setReportText(e.target.value)}
-              className={`${styles.reasonText} p-3`}
+              className={`${styles.reasonText} p-3 rounded-8`}
               disabled={formData.reportText === ''}
             />
           </Form.Group>

@@ -55,28 +55,28 @@ exports[`BronzeContribute should render the component and matches it against sto
             class="fx-bold d-flex flex-wrap justify-content-center justify-content-md-start mt-6"
           >
             <a
-              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
+              class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="sunoHome"
               href="/sunoIndia/home"
             >
               suno india
             </a>
             <a
-              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
+              class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="boloHome"
               href="/boloIndia/home"
             >
               bolo india
             </a>
             <a
-              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
+              class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="likhoHome"
               href="/likhoIndia/home.html"
             >
               likho india
             </a>
             <a
-              class="link bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
+              class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="dekhoHome"
               href="/dekhoIndia/home.html"
             >

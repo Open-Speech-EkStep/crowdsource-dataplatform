@@ -19,7 +19,7 @@ const IconTextButton = ({ icon, textDesktop, textMobile, onClick, altText }: Ico
   return (
     <Button
       data-testid="IconTextButton"
-      className={`${styles.root} d-flex align-items-center px-3 text-primary bg-light text-decoration-none`}
+      className={`${styles.root} rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none`}
       variant="normal"
       onClick={onClick}
     >

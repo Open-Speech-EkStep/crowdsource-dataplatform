@@ -81,7 +81,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
     <div>
       <div
         data-testid="TextEditArea"
-        className={`${styles.addText} border border-2 border-primary bg-light p-4`}
+        className={`${styles.addText} rounded-8 border border-2 border-primary bg-light p-4`}
       >
         <Form.Group controlId="textarea">
           <Form.Label className="display-6">Add Text ({language})</Form.Label>

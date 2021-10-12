@@ -52,7 +52,7 @@ const ActionCard = (props: ActionCardProps) => {
         href={url}
         onClick={handleUserForm}
       >
-        <div data-testid={`ActionCard${type}`} className={`${styles.root} overflow-hidden`}>
+        <div data-testid={`ActionCard${type}`} className={`${styles.root} rounded-20 overflow-hidden`}>
           <div className={styles.cardGradient}>
             <div className={`${styles.cardTopBg}`}>
               <div className={`${styles.cardBottomBg}`}>

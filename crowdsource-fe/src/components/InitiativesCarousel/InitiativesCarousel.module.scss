@@ -1,10 +1,8 @@
 .root {
-  border-radius: 1.25rem;
   z-index: 1;
 }
 
 .bottomShadow {
-  border-radius: 1.25rem;
   box-shadow: 0 8px 0 #43c0d7;
 }
 
@@ -22,7 +20,7 @@
 
       &::after {
         background-color: var(--primary-color);
-        border-radius: 0.75rem;
+        border-radius: var(--border-radius-12);
         bottom: 0;
         content: '';
         height: 0.25rem;

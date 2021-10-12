@@ -87,6 +87,13 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --box-shadow-blue-md: 0 4px 16px 4px rgba(0, 123, 255, 0.2);
   --box-shadow-blue-lg: 0 0 32px rgba(0, 123, 255, 0.4);
   --box-shadow-grey: 0 4px 12px rgba(15, 39, 73, 0.2);
+  --border-radius: 0.25rem;
+  --border-radius-8: 0.5rem;
+  --border-radius-12: 0.75rem;
+  --border-radius-16: 1rem;
+  --border-radius-20: 1.25rem;
+  --border-radius-24: 1.5rem;
+  --border-radius-40: 2.5rem;
 }
 
 // Typography
@@ -277,25 +284,55 @@ $box-shadow-blue-md: var(--box-shadow-blue-md);
 $box-shadow-blue-lg: var(--box-shadow-blue-lg);
 $box-shadow-grey: var(--box-shadow-grey);
 
+$border-radius: var(--border-radius);
+$border-radius-8: var(--border-radius-8);
+$border-radius-12: var(--border-radius-12);
+$border-radius-16: var(--border-radius-16);
+$border-radius-20: var(--border-radius-20);
+$border-radius-24: var(--border-radius-24);
+$border-radius-40: var(--border-radius-40);
+
 // Merge utilities
 $utilities: map-merge(
   $utilities,
   (
-    'shadow': (
-      property: box-shadow,
-      class: shadow,
-      values: (
-        null: $box-shadow,
-        green: $box-shadow-green,
-        green-sm: $box-shadow-green-sm,
-        blue: $box-shadow-blue,
-        blue-sm: $box-shadow-blue-sm,
-        blue-md: $box-shadow-blue-md,
-        blue-lg: $box-shadow-blue-lg,
-        grey: $box-shadow-grey,
-        none: none,
+    'rounded':
+      map-merge(
+        map-get($utilities, 'rounded'),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, 'rounded'), 'values'),
+              (
+                8: $border-radius-8,
+                12: $border-radius-12,
+                16: $border-radius-16,
+                20: $border-radius-20,
+                24: $border-radius-24,
+                40: $border-radius-40,
+              )
+            ),
+        )
       ),
-    ),
+    'shadow':
+      map-merge(
+        map-get($utilities, 'shadow'),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, 'shadow'), 'values'),
+              (
+                green: $box-shadow-green,
+                green-sm: $box-shadow-green-sm,
+                blue: $box-shadow-blue,
+                blue-sm: $box-shadow-blue-sm,
+                blue-md: $box-shadow-blue-md,
+                blue-lg: $box-shadow-blue-lg,
+                grey: $box-shadow-grey,
+              )
+            ),
+        )
+      ),
     'color': (
       property: color,
       class: text,

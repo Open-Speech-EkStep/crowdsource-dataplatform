@@ -14,7 +14,7 @@ exports[`AudioController should render the component and matches it against stor
       class="mt-2 mt-md-3"
     >
       <audio
-        class="audioPlayer shadow-grey"
+        class="d-flex shadow-grey rounded-24"
         controls=""
         controlslist="nodownload"
         crossorigin="anonymous"

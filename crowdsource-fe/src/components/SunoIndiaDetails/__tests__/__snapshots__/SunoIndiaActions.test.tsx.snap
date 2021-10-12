@@ -116,7 +116,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
               href="#"
             >
               <div
-                class="root overflow-hidden"
+                class="root rounded-20 overflow-hidden"
                 data-testid="ActionCardcontribute"
               >
                 <div
@@ -133,7 +133,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
                         data-testid="ActionCardWarningMessage"
                       >
                         <div
-                          class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                          class="rounded-20 border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                           data-testid="InfoMessage"
                         >
                           <div
@@ -229,7 +229,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
               href="#"
             >
               <div
-                class="root overflow-hidden"
+                class="root rounded-20 overflow-hidden"
                 data-testid="ActionCardvalidate"
               >
                 <div
@@ -246,7 +246,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
                         data-testid="ActionCardWarningMessage"
                       >
                         <div
-                          class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                          class="rounded-20 border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                           data-testid="InfoMessage"
                         >
                           <div

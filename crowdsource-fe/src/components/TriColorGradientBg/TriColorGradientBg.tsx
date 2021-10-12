@@ -8,8 +8,8 @@ interface TriColorGradientBgProps {
 
 const TriColorGradientBg = ({ children }: TriColorGradientBgProps) => {
   return (
-    <div className={styles.root}>
-      <div className={`${styles.inner} bg-light p-5`}>{children}</div>
+    <div className={`${styles.root} rounded-20`}>
+      <div className="rounded-20 bg-light p-5">{children}</div>
     </div>
   );
 };

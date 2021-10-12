@@ -38,7 +38,7 @@
 }
 
 .content {
-  border-radius: 0.75rem;
+  border-radius: var(--border-radius-12);
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;

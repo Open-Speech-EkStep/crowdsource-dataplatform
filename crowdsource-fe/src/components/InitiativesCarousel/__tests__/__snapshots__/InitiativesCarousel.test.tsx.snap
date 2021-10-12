@@ -3,11 +3,11 @@
 exports[`InitiativesCarousel should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root shadow-blue-lg mx-auto"
+    class="root rounded-20 shadow-blue-lg mx-auto"
     data-testid="InitiativesCarousel"
   >
     <div
-      class="bottomShadow overflow-hidden"
+      class="bottomShadow rounded-20 overflow-hidden"
     >
       <section
         class="root"

@@ -18,7 +18,7 @@ exports[`SunoTranscribe should render the component and matches it against store
         class="mt-2 mt-md-3"
       >
         <audio
-          class="audioPlayer shadow-grey"
+          class="d-flex shadow-grey rounded-24"
           controls=""
           controlslist="nodownload"
           crossorigin="anonymous"
@@ -33,7 +33,7 @@ exports[`SunoTranscribe should render the component and matches it against store
     >
       <div>
         <div
-          class="addText border border-2 border-primary bg-light p-4"
+          class="addText rounded-8 border border-2 border-primary bg-light p-4"
           data-testid="TextEditArea"
         >
           <div>
@@ -50,7 +50,7 @@ exports[`SunoTranscribe should render the component and matches it against store
             />
           </div>
           <button
-            class="root d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
+            class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
             data-testid="IconTextButton"
             type="button"
           >

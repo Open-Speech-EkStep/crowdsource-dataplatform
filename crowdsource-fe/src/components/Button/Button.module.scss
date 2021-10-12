@@ -1,6 +1,6 @@
 .primary {
   align-items: center;
-  border-radius: 40px;
+  border-radius: var(--border-radius-40);
   box-shadow: 0 8px 24px rgba(15, 39, 73, 0.2);
   display: flex;
   font-size: 1rem;
@@ -40,7 +40,7 @@
 
 .secondary {
   align-items: center;
-  border-radius: 40px;
+  border-radius: var(--border-radius-40);
   box-shadow: 0 8px 24px rgba(15, 39, 73, 0.2);
   color: var(--primary-color);
   display: flex;
@@ -79,7 +79,7 @@
 
 .tertiary {
   align-items: center;
-  border-radius: 24px;
+  border-radius: var(--border-radius-24);
   display: flex;
   font-size: 1rem;
   height: 2.75rem;

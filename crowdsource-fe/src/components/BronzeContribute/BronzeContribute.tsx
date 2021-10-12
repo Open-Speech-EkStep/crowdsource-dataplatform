@@ -35,7 +35,7 @@ const BronzeContribute = () => {
                   <Link href={routePaths[`${initiative}IndiaHome`]} key={initiative}>
                     <a
                       data-testid={`${initiative}Home`}
-                      className={`${styles.link} bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase`}
+                      className={`${styles.link} rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase`}
                     >
                       {t(`${initiative}`)} {t('india')}
                     </a>

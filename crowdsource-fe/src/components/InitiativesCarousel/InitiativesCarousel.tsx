@@ -74,8 +74,8 @@ const InitiativesCarousel = () => {
   }, []);
 
   return (
-    <div data-testid="InitiativesCarousel" className={`${styles.root} shadow-blue-lg mx-auto`}>
-      <div className={`${styles.bottomShadow} overflow-hidden`}>
+    <div data-testid="InitiativesCarousel" className={`${styles.root} rounded-20 shadow-blue-lg mx-auto`}>
+      <div className={`${styles.bottomShadow} rounded-20 overflow-hidden`}>
         <TriColorBackground>
           <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-5 pb-md-3 py-md-8`}>
             <div className={`${styles.labelCarousel} mb-4`}>

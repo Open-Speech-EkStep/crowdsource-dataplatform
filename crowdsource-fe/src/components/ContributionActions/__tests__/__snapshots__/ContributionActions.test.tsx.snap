@@ -21,7 +21,7 @@ exports[`ContributionActions should render the component and matches it against 
             href="#"
           >
             <div
-              class="root overflow-hidden"
+              class="root rounded-20 overflow-hidden"
               data-testid="ActionCardcontribute"
             >
               <div
@@ -38,7 +38,7 @@ exports[`ContributionActions should render the component and matches it against 
                       data-testid="ActionCardWarningMessage"
                     >
                       <div
-                        class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                        class="rounded-20 border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                         data-testid="InfoMessage"
                       >
                         <div
@@ -135,7 +135,7 @@ exports[`ContributionActions should render the component and matches it against 
             href="#"
           >
             <div
-              class="root overflow-hidden"
+              class="root rounded-20 overflow-hidden"
               data-testid="ActionCardvalidate"
             >
               <div
@@ -152,7 +152,7 @@ exports[`ContributionActions should render the component and matches it against 
                       data-testid="ActionCardWarningMessage"
                     >
                       <div
-                        class="root border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
+                        class="rounded-20 border border-1 border-primary d-flex align-items-center px-2 py-2 bg-light fst-italic text-primary"
                         data-testid="InfoMessage"
                       >
                         <div

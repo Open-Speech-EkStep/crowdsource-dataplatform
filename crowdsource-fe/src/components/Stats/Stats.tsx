@@ -16,7 +16,7 @@ interface StatsProps {
 
 const Stats = ({ contents }: StatsProps) => {
   return (
-    <div className={`${styles.root} bg-info px-7 px-md-0 py-md-7`}>
+    <div className={`${styles.root} rounded-20 bg-info px-7 px-md-0 py-md-7`}>
       <Row data-testid="StatsRow" className="m-md-0">
         {contents.map(content => {
           const stat = content.stat;
