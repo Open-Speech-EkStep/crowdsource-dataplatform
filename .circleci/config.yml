@@ -132,8 +132,7 @@ jobs:
             wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux 
             tar -xf azcopy_v10.tar.gz --strip-components=1
 
-            cd crowdsource-ui/target/ && echo "{commit:$CIRCLE_SHA1}" >> build.json
-            cd ../../
+            cd crowdsource-ui/target/ && echo "{version:$CIRCLE_SHA1}" >> version.json && cd ../../
 
             ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
 
