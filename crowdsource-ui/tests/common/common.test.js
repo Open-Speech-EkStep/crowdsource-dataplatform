@@ -6,6 +6,7 @@ const {
   SPEAKER_DETAILS_KEY,
   CURRENT_MODULE,
   AGGREGATED_DATA_BY_LANGUAGE,
+  INITIATIVES
 } = require('../../build/js/common/constants');
 const {
   hasUserRegistered,
@@ -33,7 +34,7 @@ describe('test common js', () => {
   });
 
   describe('getTop3Languages', () => {
-    test('should give top 3 for suno India based on contribution count', () => {
+    test('should give top 3 for asr based on contribution count', () => {
       const languagList = [
         {
           language: 'Assamese',
@@ -99,12 +100,12 @@ describe('test common js', () => {
         },
       ];
 
-      const result = getTop3Languages('contribute', 'suno', 'Hindi');
+      const result = getTop3Languages('contribute', INITIATIVES.asr.value, 'Hindi');
       expect(result).toEqual(sortedLanguageStats);
       localStorage.clear();
     });
 
-    test('should give top 2 for suno India based on contribution count', () => {
+    test('should give top 2 for asr based on contribution count', () => {
       const languageList = [
         {
           language: 'English',
@@ -146,7 +147,7 @@ describe('test common js', () => {
         },
       ];
 
-      const result = getTop3Languages('contribute', 'suno', 'Hindi');
+      const result = getTop3Languages('contribute', INITIATIVES.asr.value, 'Hindi');
       expect(result).toEqual(sortedLanguageStats);
       localStorage.clear();
     });
@@ -217,7 +218,7 @@ describe('test common js', () => {
         },
       ];
 
-      const result = getTop3Languages('contribute', 'suno', 'Hindi');
+      const result = getTop3Languages('contribute', INITIATIVES.asr.value, 'Hindi');
       expect(result).toEqual(sortedLanguageStats);
       localStorage.clear();
     });
@@ -372,7 +373,7 @@ describe('test common js', () => {
   describe('setBadge', () => {
     test('should show card without badge when user skip all sentences for contribution flow when language is in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'bolo');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
       const sortedLanguageStats = [
         {
@@ -417,7 +418,7 @@ describe('test common js', () => {
 
     test('should show card without badge when user skip all sentences for contribution flow when language is not in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'suno');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
       const sortedLanguageStats = [
         {
@@ -470,7 +471,7 @@ describe('test common js', () => {
 
     test('should show card without badge when user contribute very few sentences when language is not in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'suno');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
       const sortedLanguageStats = [
         {
@@ -523,7 +524,7 @@ describe('test common js', () => {
 
     test('should show card with badge when user achieved a badge for the language that is not in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'suno');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
       const sortedLanguageStats = [
         {
@@ -582,7 +583,7 @@ describe('test common js', () => {
 
     test('should show card with badge after user achieved a badge for the language that is not in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'suno');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
       const sortedLanguageStats = [
         {
@@ -640,7 +641,7 @@ describe('test common js', () => {
 
     test('should show card with Platinum badge after user achieved a Platinum badge when language is in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'bolo');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'hindi');
       const sortedLanguageStats = [
         {
@@ -698,7 +699,7 @@ describe('test common js', () => {
 
     test('should show card with Platinum badge after user achieved a Platinum badge for the language that is not in top', () => {
       mockLocalStorage();
-      localStorage.setItem(CURRENT_MODULE, 'suno');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
       localStorage.setItem(CONTRIBUTION_LANGUAGE, 'punjabi');
       const sortedLanguageStats = [
         {
@@ -780,7 +781,7 @@ describe('test common js', () => {
         'localeString',
         JSON.stringify({ 'hour(s)': 'hour(s)', 'minute(s)': 'minute(s)', 'second(s)': 'second(s)' })
       );
-      localStorage.setItem(CURRENT_MODULE, 'suno');
+      localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
 
       const origFetch = require('node-fetch');
       origFetch.mockImplementation(() => {

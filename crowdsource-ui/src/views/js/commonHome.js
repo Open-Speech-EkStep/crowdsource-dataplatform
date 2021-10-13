@@ -3,7 +3,7 @@ const {
   TOP_LANGUAGES_BY_SPEAKERS,
   AGGREGATED_DATA_BY_LANGUAGE,
   DEFAULT_CON_LANGUAGE,
-  CONTRIBUTION_LANGUAGE
+  CONTRIBUTION_LANGUAGE,
 } = require('./constants');
 const { setLangNavBar } = require('../common/languageNavBar')
 
@@ -81,8 +81,8 @@ const setDefaultLang = function () {
 const getStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/cumulativeCount.json`, (jsonData) => {
     $.getJSON(`${context_root}/aggregated-json/participationStats.json`, (jsonData2) => {
-      const bData2 = jsonData2.find(d => d.type == module["api-type"]) || {};
-      const bData = jsonData.find(d => d.type == module["api-type"]) || {};
+      const bData2 = jsonData2.find(d => d.type == module.type) || {};
+      const bData = jsonData.find(d => d.type == module.type) || {};
       bData.total_speakers = bData2.count || 0;
       getStatistics(bData || {}, null, module.value);
     });
@@ -92,11 +92,12 @@ const getStats = (module) => {
 }
 const getChartStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
-    const top_languages_by_hours = jsonData.filter(d => d.type == module["api-type"]);
+    const top_languages_by_hours = jsonData.filter(d => d.type == module.type);
     localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
     const languages = getContributedAndTopLanguage(top_languages_by_hours, module.value);
     localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
     showByHoursChart(module.value);
+
 
     if (top_languages_by_hours.length === 0) {
       $("#bar_charts_container").hide();
@@ -113,7 +114,7 @@ const getChartStats = (module) => {
 }
 const getSpeakerChartStats = (module) => {
   $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
-    const top_languages_by_speakers = jsonData.filter(d => d.type == module["api-type"]);
+    const top_languages_by_speakers = jsonData.filter(d => d.type == module.type);
     localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(top_languages_by_speakers));
   }).fail((e) => {
     safeJqueryErrorHandling(e);
