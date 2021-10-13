@@ -113,6 +113,16 @@ beforeEach(() => {
     get: () => 13,
     configurable: true,
   });
+
+  Object.defineProperty(platform.os, 'version', {
+    get: () => '11',
+    configurable: true,
+  });
+
+  Object.defineProperty(platform.os, 'family', {
+    get: () => 'android',
+    configurable: true,
+  });
 });
 
 afterEach(() => {

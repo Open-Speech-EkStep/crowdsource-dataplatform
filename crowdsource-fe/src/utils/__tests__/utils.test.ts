@@ -109,7 +109,7 @@ describe('Utils', () => {
   it('should test the device info method', () => {
     const deviceInfo = getDeviceInfo();
 
-    const expectedOutput = 'Darwin null';
+    const expectedOutput = 'android 11';
     expect(deviceInfo).toEqual(expectedOutput);
   });
 
