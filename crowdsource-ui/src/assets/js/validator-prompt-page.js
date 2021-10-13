@@ -18,7 +18,7 @@ const SKIP_ACTION = 'skip';
 const currentIndexKey = `${config.initiativeKey_2}ValidationCurrentIndex`;
 const textValidatorCountKey = `${config.initiativeKey_2}ValidatorCount`;
 
-window.boloIndiaValidator = {};
+window.textValidator = {};
 
 function getValue(number, maxValue) {
     return number < 0
@@ -169,15 +169,15 @@ let currentIndex = 0, validationCount = 0;
 
 function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
-    $sentenceLabel[0].innerText = boloIndiaValidator.sentences[index].sentence;
-    setDataSource(boloIndiaValidator.sentences[index].source_info);
+    $sentenceLabel[0].innerText = window.textValidator.sentences[index].sentence;
+    setDataSource(window.textValidator.sentences[index].source_info);
 }
 
 function getNextSentence() {
-    if (currentIndex < boloIndiaValidator.sentences.length - 1) {
+    if (currentIndex < window.textValidator.sentences.length - 1) {
         currentIndex++;
-        updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length);
-        const encodedUrl = encodeURIComponent(boloIndiaValidator.sentences[currentIndex].contribution);
+        updateProgressBar(currentIndex + 1,window.textValidator.sentences.length);
+        const encodedUrl = encodeURIComponent(window.textValidator.sentences[currentIndex].contribution);
         loadAudio(`${cdn_url}/${encodedUrl}`)
         resetValidation();
         setSentenceLabel(currentIndex);
@@ -223,8 +223,8 @@ function recordValidation(action) {
     if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
         validationCount++;
     }
-    const sentenceId = boloIndiaValidator.sentences[currentIndex].dataset_row_id
-    const contribution_id = boloIndiaValidator.sentences[currentIndex].contribution_id;
+    const sentenceId = window.textValidator.sentences[currentIndex].dataset_row_id
+    const contribution_id = window.textValidator.sentences[currentIndex].contribution_id;
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
     fetch(`/validate/${contribution_id}/${action}`, {
         method: 'POST',
@@ -330,7 +330,7 @@ const handleSubmitFeedback = function () {
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
     const reqObj = {
-        sentenceId: boloIndiaValidator.sentences[currentIndex].contribution_id,
+        sentenceId: window.textValidator.sentences[currentIndex].contribution_id,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
         language: contributionLanguage,
         userName: speakerDetails ? speakerDetails.userName : '',
@@ -433,9 +433,9 @@ $(document).ready(() => {
       })
         .then((sentenceData) => {
 
-        boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(textValidatorCountKey, boloIndiaValidator.sentences.length);
-      if (boloIndiaValidator.sentences.length === 0) {
+        window.textValidator.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(textValidatorCountKey, window.textValidator.sentences.length);
+      if (window.textValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
       }
@@ -445,9 +445,9 @@ $(document).ready(() => {
 });
 
 const initializeComponent = function () {
-  const totalItems = boloIndiaValidator.sentences.length;
+  const totalItems = window.textValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const sentence = boloIndiaValidator.sentences[currentIndex];
+  const sentence = window.textValidator.sentences[currentIndex];
   hideElement($('#loader-play-btn'));
   addListeners();
   if (sentence) {
@@ -456,7 +456,7 @@ const initializeComponent = function () {
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, boloIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, window.textValidator.sentences.length)
     // updateValidationCount();
     resetValidation();
     setAudioPlayer();

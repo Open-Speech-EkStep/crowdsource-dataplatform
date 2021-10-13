@@ -41,7 +41,7 @@ const REJECT_ACTION = 'reject';
 const ocrCountKey = `${config.initiativeKey_3}Count`;
 const currentIndexKey = `${config.initiativeKey_3}CurrentIndex`;
 
-window.dekhoIndia = {};
+window.ocrInitiative = {};
 
 function getValue(number, maxValue) {
   return number < 0 ? 0 : number > maxValue ? maxValue : number;
@@ -58,7 +58,7 @@ function markContributionSkipped() {
   const state_region = localStorage.getItem('state_region') || '';
   const country = localStorage.getItem('country') || '';
   const reqObj = {
-    sentenceId: dekhoIndia.sentences[currentIndex].dataset_row_id,
+    sentenceId: window.ocrInitiative.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
     language: contributionLanguage,
     device: getDeviceInfo(),
@@ -95,10 +95,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', dekhoIndia.editedText);
+  fd.append('userInput',window.ocrInitiative.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', dekhoIndia.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', window.ocrInitiative.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || '');
   fd.append('country', localStorage.getItem('country') || '');
   fd.append('device', getDeviceInfo());
@@ -133,12 +133,12 @@ let currentIndex;
 let validationCount = 0;
 
 function getNextSentence() {
-  if (currentIndex < dekhoIndia.sentences.length - 1) {
+  if (currentIndex < window.ocrInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
-    const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media_data);
+    updateProgressBar(currentIndex + 1, window.ocrInitiative.sentences.length);
+    const encodedUrl = encodeURIComponent(window.ocrInitiative.sentences[currentIndex].media_data);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
-    setDataSource(dekhoIndia.sentences[currentIndex].source_info);
+    setDataSource(window.ocrInitiative.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'));
   } else {
@@ -158,7 +158,7 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = dekhoIndia.sentences[currentIndex].dataset_row_id;
+  const sentenceId = window.ocrInitiative.sentences[currentIndex].dataset_row_id;
   fetch(`/validate/${sentenceId}/${action}`, {
     method: 'POST',
     credentials: 'include',
@@ -209,7 +209,7 @@ function addListeners() {
   needChangeButton.on('click', () => {
     hideElement($('#textarea-row'));
     openEditor();
-    const originalText = dekhoIndia.sentences[currentIndex].contribution;
+    const originalText = window.ocrInitiative.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -247,7 +247,7 @@ function addListeners() {
     const $submitEditButton = $('#submit-edit-button');
     $submitEditButton.attr('disabled', true);
     showElement($('#progress-row'));
-    dekhoIndia.editedText = $('#edit').val();
+    window.ocrInitiative.editedText = $('#edit').val();
     uploadToServer();
     $('#edit').css('pointer-events', 'none');
     setTimeout(() => {
@@ -336,7 +336,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: dekhoIndia.sentences[currentIndex].dataset_row_id,
+    sentenceId: window.ocrInitiative.sentences[currentIndex].dataset_row_id,
     reportText:
       otherText !== '' && otherText !== undefined ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
@@ -363,7 +363,7 @@ const handleSubmitFeedback = function () {
 };
 
 const initializeComponent = () => {
-  const totalItems = dekhoIndia.sentences.length;
+  const totalItems = window.ocrInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -403,7 +403,7 @@ const initializeComponent = () => {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  const validationData = dekhoIndia.sentences[currentIndex];
+  const validationData = window.ocrInitiative.sentences[currentIndex];
   addListeners();
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media_data);
@@ -411,7 +411,7 @@ const initializeComponent = () => {
     setDataSource(validationData.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, window.ocrInitiative.sentences.length)
   }
 
 }
@@ -490,9 +490,9 @@ const executeOnLoad = function () {
         throw errStatus;
       })
       .then(sentenceData => {
-        dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(ocrCountKey, dekhoIndia.sentences.length);
-        if (dekhoIndia.sentences.length === 0) {
+        window.ocrInitiative.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(ocrCountKey, window.ocrInitiative.sentences.length);
+        if (window.ocrInitiative.sentences.length === 0) {
           showNoSentencesMessage();
           return;
         }
