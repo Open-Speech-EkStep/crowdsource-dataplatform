@@ -24,7 +24,7 @@ const sentencesKey = `${config.initiativeKey_4}SentencesKey`;
 // eslint-disable-next-line no-unused-vars
 let localeStrings;
 
-window.dekhoIndia = {};
+window.ocrInitiative = {};
 
 function getValue(number, maxValue) {
   return number < 0
@@ -42,10 +42,10 @@ function getCurrentIndex(lastIndex) {
 let currentIndex;
 
 function getNextSentence() {
-  if (currentIndex < dekhoIndia.sentences.length - 1) {
+  if (currentIndex < window.ocrInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
-    const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media);
+    updateProgressBar(currentIndex + 1, window.ocrInitiative.sentences.length);
+    const encodedUrl = encodeURIComponent(window.ocrInitiative.sentences[currentIndex].media);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -84,7 +84,7 @@ function onProfanityUpdated() {
 
 function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
-  updateProfanityState(localSpeakerDataParsed.userName, dekhoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+  updateProfanityState(localSpeakerDataParsed.userName, window.ocrInitiative.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
     .then(() => {
       onProfanityUpdated();
     }).catch(err => {
@@ -93,7 +93,7 @@ function invokeProfanityStateUpdate(state) {
 }
 
 function updateSkipAction() {
-  const sentenceId = dekhoIndia.sentences[currentIndex].dataset_row_id;
+  const sentenceId = window.ocrInitiative.sentences[currentIndex].dataset_row_id;
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/ocr`, {
     method: 'PUT',
@@ -183,16 +183,16 @@ function showNoSentencesMessage() {
 
 
 const initializeComponent = () => {
-  const totalItems = dekhoIndia.sentences.length;
+  const totalItems = window.ocrInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const validationData = dekhoIndia.sentences[currentIndex];
+  const validationData = window.ocrInitiative.sentences[currentIndex];
   addListeners();
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, window.ocrInitiative.sentences.length)
   }
 
 }
@@ -228,7 +228,7 @@ const executeOnLoad = function () {
 
     if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
       setFooterPosition();
-      dekhoIndia.sentences = localSentencesParsed.sentences;
+      window.ocrInitiative.sentences = localSentencesParsed.sentences;
       initializeComponent();
     } else {
       localStorage.removeItem(currentIndexKey);
@@ -256,8 +256,8 @@ const executeOnLoad = function () {
           setFooterPosition();
         }
         setFooterPosition();
-        dekhoIndia.sentences = sentenceData.data;
-        localStorage.setItem(ocrCountKey, dekhoIndia.sentences.length);
+        window.ocrInitiative.sentences = sentenceData.data;
+        localStorage.setItem(ocrCountKey, window.ocrInitiative.sentences.length);
         localStorage.setItem(
           sentencesKey,
           JSON.stringify({

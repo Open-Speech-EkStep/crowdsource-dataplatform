@@ -36,7 +36,7 @@ const { setDataSource } = require('../common/sourceInfo');
 const asrCountKey = `${config.initiativeKey_1}Count`;
 const currentIndexKey = `${config.initiativeKey_1}CurrentIndex`;
 let localeStrings;
-window.sunoIndia = {};
+window.asrInitiative = {};
 
 let playStr = '';
 let pauseStr = '';
@@ -59,10 +59,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', sunoIndia.editedText);
+  fd.append('userInput', window.asrInitiative.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', sunoIndia.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', window.asrInitiative.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || '');
   fd.append('country', localStorage.getItem('country') || '');
   fd.append('device', getDeviceInfo());
@@ -209,13 +209,13 @@ const setAudioPlayer = function () {
 let currentIndex = localStorage.getItem(currentIndexKey) || 0;
 
 function getNextSentence() {
-  if (currentIndex < sunoIndia.sentences.length - 1) {
+  if (currentIndex < window.asrInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
-    const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media_data);
+    updateProgressBar(currentIndex + 1, window.asrInitiative.sentences.length);
+    const encodedUrl = encodeURIComponent(window.asrInitiative.sentences[currentIndex].media_data);
     localStorage.setItem("contribution_audioPlayed",false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
-    setDataSource(sunoIndia.sentences[currentIndex].source_info);
+    setDataSource(window.asrInitiative.sentences[currentIndex].source_info);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -263,7 +263,7 @@ function markContributionSkipped() {
   const state_region = localStorage.getItem('state_region') || "";
   const country = localStorage.getItem('country') || "";
   const reqObj = {
-    sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
+    sentenceId: window.asrInitiative.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
     language:contributionLanguage,
     device: getDeviceInfo(),
@@ -333,7 +333,7 @@ function addListeners() {
     hideElement($(audioPlayerBtn))
     hideElement($skipButton)
     showElement($('#thankyou-text'));
-    sunoIndia.editedText = $("#edit").val();
+    window.asrInitiative.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $(cancelButton).attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
@@ -431,7 +431,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: sunoIndia.sentences[currentIndex].dataset_row_id,
+    sentenceId: window.asrInitiative.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -454,7 +454,7 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 const initialize = function () {
-  const totalItems = sunoIndia.sentences.length;
+  const totalItems = window.asrInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -494,7 +494,7 @@ const initialize = function () {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  const audio = sunoIndia.sentences[currentIndex];
+  const audio = window.asrInitiative.sentences[currentIndex];
   addListeners();
 
   if (audio) {
@@ -505,7 +505,7 @@ const initialize = function () {
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     setAudioPlayer();
-    updateProgressBar(currentIndex + 1,sunoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1,window.asrInitiative.sentences.length)
   }
 };
 
@@ -572,10 +572,10 @@ function executeOnLoad() {
         throw errStatus;
       })
       .then(sentenceData => {
-        sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(asrCountKey, sunoIndia.sentences.length);
+        window.asrInitiative.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(asrCountKey, window.asrInitiative.sentences.length);
         $loader.hide();
-        if (sunoIndia.sentences.length === 0) {
+        if (window.asrInitiative.sentences.length === 0) {
           showNoSentencesMessage();
           return;
         }
