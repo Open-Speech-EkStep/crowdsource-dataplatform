@@ -3,11 +3,13 @@
 exports[`ContributionTracker should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class=""
     data-testid="ContributionTracker"
   >
+    <h3>
+      contributionTrackerHeader
+    </h3>
     <div
-      class="d-flex flex-column flex-md-row align-items-md-center"
+      class="mt-4 d-flex flex-column flex-md-row align-items-md-center"
     >
       <label
         class="display-3 mb-0 mb-md-0 font-family-rowdies form-label"
@@ -85,6 +87,23 @@ exports[`ContributionTracker should render the component and matches it against 
         class="chartContainer"
       >
         BarChart
+      </div>
+    </div>
+    <div
+      class="mt-9 mt-md-12"
+    >
+      <div
+        class="d-flex justify-content-center"
+      >
+        <a
+          class="info primary btn btn-primary"
+          data-testid="ViewAllDetailButton"
+          href="/sunoIndia/dashboard"
+          role="button"
+          tabindex="0"
+        >
+          viewAllDetail
+        </a>
       </div>
     </div>
   </div>

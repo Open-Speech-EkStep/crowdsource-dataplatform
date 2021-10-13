@@ -90,8 +90,10 @@
   "contributeWarningMsg": "Only validations invited for the selected language",
   "sunoContributionTagline": "আপুনি যি শুনিছে টাইপ কৰক",
   "boloContributionTagline": "আপোনাৰ কন্ঠৰ অৱদান দিয়ক",
+  "dekhoContributionTagline": "ছৱি অনুসৰি পাঠ টাইপ কৰক",
   "sunoValidationTagline": "ছৱি অনুযায়ী আনে লেবেল লগোৱা পাঠ বৈধকৰণ কৰক",
   "boloValidationTagline": "ছৱি অনুযায়ী আনে লেবেল লগোৱা পাঠ বৈধকৰণ কৰক",
+  "dekhoValidationTagline": "ছৱি অনুযায়ী আনে লেবেল লগোৱা পাঠ বৈধকৰণ কৰক",
   "month": "Month",
   "contributionGraphYLabel1": "Contribution (in hours)",
   "contributionGraphYLabel2": "Contribution (total sentences)",
@@ -109,6 +111,9 @@
   "peopleParticipated": "জন অংশগ্ৰহণকাৰী",
   "durationTranscribed": "প্ৰতিলিপিবদ্ধ সময়সীমা",
   "durationValidated": "বৈধকৰণৰ সময়সীমা",
+  "durationRecorded": "বাণীবদ্ধকৰণৰ সময়সীমা",
+  "imagesLabelled": "লেবেলযুক্ত ছৱি খন",
+  "imagesValidated": "বৈধকৰণ কৰা ছৱি খন",
   "contributionTrackerHeader": "Contribution Tracker",
   "contributionTrackerSubHeader": "Overall Summary",
   "byHours": "By duration of hours",
@@ -119,6 +124,7 @@
   "transcribe": "প্ৰতিলিপিবদ্ধ",
   "speak": "কওঁক",
   "validate": "বৈধকৰণ",
+  "label": "লেবেল",
   "languages": "ভাষাবোৰ",
   "hours": "ঘন্টা",
   "minutes": "মিনিট",
@@ -141,5 +147,6 @@
   "offensiveSubtext": "ঘৃণনীয় / বৈষম্যমূলক / অশালীন ভাষা, ড্ৰাগছৰ প্ৰচাৰ ইত্যাদি।",
   "specifyReason": "অনুগ্ৰহ কৰি কাৰণটো উল্লেখ কৰক (বৈকল্পিক)",
   "thankyou": "আপোনাক ধন্যবাদ জনাইছো",
-  "reportSubmitSuccess": "আপোনাৰ মতামতে দেখো ইণ্ডিয়াক প্ৰাসংগিক কৰি ৰখাত সহায় কৰে, আমি আপোনাক মতামত দিবলৈ লোৱা সময়ৰ বাবে প্ৰশংসা কৰো।"
+  "reportSubmitSuccess": "আপোনাৰ মতামতে দেখো ইণ্ডিয়াক প্ৰাসংগিক কৰি ৰখাত সহায় কৰে, আমি আপোনাক মতামত দিবলৈ লোৱা সময়ৰ বাবে প্ৰশংসা কৰো।",
+  "skip": "এৰি আগলৈ যাওঁক"
 }

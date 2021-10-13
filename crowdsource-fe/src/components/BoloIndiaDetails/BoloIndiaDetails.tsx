@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import ContributionStats from 'components/ContributionStats';
 import ContributionTracker from 'components/ContributionTracker';
 import TargetProgress from 'components/TargetProgress';
-import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 
 const BoloIndiaDetails = () => {
@@ -27,13 +26,7 @@ const BoloIndiaDetails = () => {
           />
         </section>
         <section className="mt-9 mt-md-12">
-          <h3>{t('contributionTrackerHeader')}</h3>
-          <div className="mt-4">
-            <ContributionTracker initiativeMedia={INITIATIVES_MEDIA_MAPPING.bolo} />
-          </div>
-        </section>
-        <section className="mt-9 mt-md-12">
-          <ViewAllDetailButton initiative="bolo" />
+          <ContributionTracker initiative={INITIATIVES_MAPPING.bolo} />
         </section>
       </Container>
     </section>

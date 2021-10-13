@@ -1,14 +1,17 @@
-import { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useTranslation, i18n } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
 
 import { BarChart } from 'components/Charts';
+import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import apiPaths from 'constants/apiPaths';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
+import type { Initiative } from 'types/Initiatives';
 import type { TopLanguagesByHours, TopLanguagesBySpeaker } from 'types/TopLanguages';
 import { convertTimeFormat } from 'utils/utils';
 
@@ -56,7 +59,7 @@ const getTopLanguagesBySpeakerChartData = (topLanguagesBySpeaker?: TopLanguagesB
 };
 
 interface ContributionTrackerProps {
-  initiativeMedia: string;
+  initiative: Initiative;
 }
 
 const ContributionTracker = (props: ContributionTrackerProps) => {
@@ -85,23 +88,23 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
   let speakersData = topLanguagesBySpeakerData;
 
   hoursData = topLanguagesByHoursData?.filter(
-    topLanguageByHours => topLanguageByHours.type === props.initiativeMedia
+    topLanguageByHours => topLanguageByHours.type === INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
   const topLanguageHrsData = mapChartData(
     hoursData,
     'total_contributions',
     contributionLanguage ?? '',
-    props.initiativeMedia
+    INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
 
   speakersData = topLanguagesBySpeakerData?.filter(
-    topLanguagesBySpeaker => topLanguagesBySpeaker.type === props.initiativeMedia
+    topLanguagesBySpeaker => topLanguagesBySpeaker.type === INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
   const topSpeakersData = mapChartData(
     speakersData,
     'total_speakers',
     contributionLanguage ?? '',
-    props.initiativeMedia
+    INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
 
   const chartLegendDetails = useMemo(
@@ -130,8 +133,12 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
   };
 
   return barChartData.data.length ? (
-    <div className="" data-testid="ContributionTracker">
-      <Form.Group controlId="recommended" className="d-flex flex-column flex-md-row align-items-md-center">
+    <div data-testid="ContributionTracker">
+      <h3>{t('contributionTrackerHeader')}</h3>
+      <Form.Group
+        controlId="recommended"
+        className="mt-4 d-flex flex-column flex-md-row align-items-md-center"
+      >
         <Form.Label className="display-3 mb-0 mb-md-0 font-family-rowdies">
           {t('contributionTrackerSubHeader')}
         </Form.Label>
@@ -174,6 +181,9 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         <div className={styles.chartContainer}>
           <BarChart id="bar_chart" data={barChartData} />
         </div>
+      </div>
+      <div className="mt-9 mt-md-12">
+        <ViewAllDetailButton initiative={props.initiative} />
       </div>
     </div>
   ) : null;

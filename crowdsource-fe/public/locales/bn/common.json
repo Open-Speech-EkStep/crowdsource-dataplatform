@@ -90,8 +90,10 @@
   "contributeWarningMsg": "কেবল নির্বাচিত ভাষার যাচাই এর জন্য স্বাগত জানানো হচ্ছে",
   "sunoContributionTagline": "আপনি যা শুনছেন তা টাইপ করুন",
   "boloContributionTagline": "আপনার কণ্ঠস্বর দান করুন",
+  "dekhoContributionTagline": "চিত্র অনুযায়ী টাইপ করে লিখুন",
   "sunoValidationTagline": "অন্যদের করা যোগদানগুলি যাচাই করুন",
   "boloValidationTagline": "অন্যদের করা যোগদানগুলি যাচাই করুন",
+  "dekhoValidationTagline": "অন্যদের করা যোগদানগুলি যাচাই করুন",
   "month": "মাস",
   "contributionGraphYLabel1": "যোগদান (ঘন্টায়)",
   "contributionGraphYLabel2": "যোগদান (মোট বাক্যসংখ্যা)",
@@ -109,6 +111,9 @@
   "peopleParticipated": "অংশগ্রহণকারী জনগণ",
   "durationTranscribed": "ট্রান্সক্রিপশন এর সময়সীমা",
   "durationValidated": "যাচাইকৃত সময়সীমা",
+  "durationRecorded": "রেকডিকৃত সময়সীমা",
+  "imagesLabelled": "লেবেল করা চিত্র সমূহ",
+  "imagesValidated": "যাচাই করা চিত্র সমূহ",
   "contributionTrackerHeader": "যোগদান ট্র্যাকার",
   "contributionTrackerSubHeader": "সামগ্রিক সারসংক্ষেপ",
   "byHours": "প্রদত্ত সময়ের ভিত্তিতে",
@@ -119,6 +124,7 @@
   "transcribe": "ট্রান্সক্রাইব করুন",
   "speak": "বলুন",
   "validate": "যাচাই করুন",
+  "label": "লেবেল করো",
   "languages": "ভাষাসমূহ",
   "hours": "ঘন্টা",
   "minutes": "মিনিট",
@@ -141,5 +147,6 @@
   "offensiveSubtext": "ঘৃণ্য / বৈষম্যমূলক / অশ্লীল ভাষা, মাদকের প্রচার ইত্যাদি",
   "specifyReason": "অনুগ্রহ করে কারণটি নির্দিষ্ট করুন (ঐচ্ছিক)",
   "thankyou": "ধন্যবাদ",
-  "reportSubmitSuccess": "আপনার মতামত আমাদের দেখো ইন্ডিয়াকে প্রাসঙ্গিক রাখতে সহায়তা করে। আমরা আপনার মতামত ও সময়ের সমাদর করি।"
+  "reportSubmitSuccess": "আপনার মতামত আমাদের দেখো ইন্ডিয়াকে প্রাসঙ্গিক রাখতে সহায়তা করে। আমরা আপনার মতামত ও সময়ের সমাদর করি।",
+  "skip": "এড়িয়ে যান"
 }

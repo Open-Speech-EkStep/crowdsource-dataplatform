@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Suno Actions should render the suno india homepage 1`] = `
+exports[`Dekho Actions should render the dekho india homepage 1`] = `
 <DocumentFragment>
   <section
     class="py-9 py-md-11 px-2 px-lg-0"
-    data-testid="SunoIndiaDetails"
+    data-testid="DekhoIndiaDetails"
   >
     <div
       class="container-lg"

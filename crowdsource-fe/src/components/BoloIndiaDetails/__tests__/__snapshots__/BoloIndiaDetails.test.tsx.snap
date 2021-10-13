@@ -20,31 +20,7 @@ exports[`Bolo Actions should render the bolo india homepage 1`] = `
       <section
         class="mt-9 mt-md-12"
       >
-        <h3>
-          contributionTrackerHeader
-        </h3>
-        <div
-          class="mt-4"
-        >
-          ContributionTracker
-        </div>
-      </section>
-      <section
-        class="mt-9 mt-md-12"
-      >
-        <div
-          class="d-flex justify-content-center"
-        >
-          <a
-            class="info primary btn btn-primary"
-            data-testid="ViewAllDetailButton"
-            href="/boloIndia/dashboard"
-            role="button"
-            tabindex="0"
-          >
-            viewAllDetail
-          </a>
-        </div>
+        ContributionTracker
       </section>
     </div>
   </section>

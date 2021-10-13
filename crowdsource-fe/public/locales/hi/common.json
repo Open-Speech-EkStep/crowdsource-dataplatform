@@ -90,8 +90,10 @@
   "contributeWarningMsg": "चयनित भाषा के लिए ही केवल सत्यापन आमंत्रित",
   "sunoContributionTagline": "आप जो सुन रहे हैं उसे टाइप करें",
   "boloContributionTagline": "आवाज़ का योगदान दें",
+  "dekhoContributionTagline": "इमेज में दिए  गए  टेक्स्ट को टाइप करें",
   "sunoValidationTagline": "दूसरों के योगदान को सत्यापित करें",
   "boloValidationTagline": "दूसरों के योगदान को सत्यापित करें",
+  "dekhoValidationTagline": "दूसरों के योगदान को सत्यापित करें",
   "month": "महीना",
   "contributionGraphYLabel1": "योगदान (घंटों में )",
   "contributionGraphYLabel2": "योगदान (वाक्यों की कुल संख्या )",
@@ -109,6 +111,9 @@
   "peopleParticipated": "लोगों ने भाग लिया",
   "durationTranscribed": "ट्रांसक्राइबड अवधि",
   "durationValidated": "सत्यापित अवधि",
+  "durationRecorded": "रिकॉर्ड की गई अवधि",
+  "imagesLabelled": "लेबल की  गई इमेजेस",
+  "imagesValidated": "सत्यापित की गई इमेजेस",
   "contributionTrackerHeader": "योगदान ट्रैकर",
   "contributionTrackerSubHeader": "समग्र सारांश",
   "byHours": "घंटो के आधार पर",
@@ -119,6 +124,7 @@
   "transcribe": "ट्रांसक्राइब  करें",
   "speak": "बोलें",
   "validate": "सत्यापित करें",
+  "label": "लेबल करें",
   "languages": "भाषाएं",
   "hours": "घंटे",
   "minutes": "मिनट",
@@ -141,5 +147,6 @@
   "offensiveSubtext": "नफ़रत फ़ैलाने वाली / भेदभाव वाली / अश्लील भाषा, नशीली दवाओं का प्रचार आदि",
   "specifyReason": "कृपया कारण बताएं (वैकल्पिक)",
   "thankyou": "धन्यवाद!",
-  "reportSubmitSuccess": "आपका फीडबैक देखो इंडिया को प्रासंगिक बनाए रखने में हमारी मदद करता है, हम इस बात की सराहना करते हैं कि आपने फीडबैक देने के लिए अपना कीमती समय निकाला।"
+  "reportSubmitSuccess": "आपका फीडबैक देखो इंडिया को प्रासंगिक बनाए रखने में हमारी मदद करता है, हम इस बात की सराहना करते हैं कि आपने फीडबैक देने के लिए अपना कीमती समय निकाला।",
+  "skip": "स्किप करें"
 }

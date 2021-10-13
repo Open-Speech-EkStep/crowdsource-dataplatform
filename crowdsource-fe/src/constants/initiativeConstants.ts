@@ -35,5 +35,10 @@ export const INITIATIVE_CUMULATIVE_VALUE = {
     { durationValidated: 'total_validations', isFormat: 'true' },
   ],
   likho: [],
-  dekho: [],
+  dekho: [
+    { languages: 'total_languages', isFormat: 'false' },
+    { peopleParticipated: 'peopleParticipated', isFormat: 'false' },
+    { imagesLabelled: 'total_contribution_count', isFormat: 'false' },
+    { imagesValidated: 'total_validation_count', isFormat: 'false' },
+  ],
 } as const;

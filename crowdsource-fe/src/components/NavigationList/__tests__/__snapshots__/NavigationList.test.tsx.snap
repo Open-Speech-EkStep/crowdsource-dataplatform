@@ -29,8 +29,8 @@ exports[`NavigationList should render the component and matches it against store
     </a>
     <a
       class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
-      data-rr-ui-event-key="/dekhoIndia/home.html"
-      href="/dekhoIndia/home.html"
+      data-rr-ui-event-key="/dekhoIndia/home"
+      href="/dekhoIndia/home"
     >
       dekho india
     </a>

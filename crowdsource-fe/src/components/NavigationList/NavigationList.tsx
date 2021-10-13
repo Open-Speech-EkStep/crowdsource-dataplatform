@@ -51,7 +51,7 @@ const NavigationList = () => {
           {t('likho')} {t('india')}
         </Nav.Link>
       </Link>
-      <Link href={routePaths.dekhoIndiaHome} prefetch={false} passHref>
+      <Link href={routePaths.dekhoIndiaHome} passHref>
         <Nav.Link {...getNavLinkProps(routePaths.dekhoIndiaHome)}>
           {t('dekho')} {t('india')}
         </Nav.Link>

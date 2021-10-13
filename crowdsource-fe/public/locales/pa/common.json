@@ -90,8 +90,10 @@
   "contributeWarningMsg": "ਸਿਰਫ ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਦੇ ਲਈ ਹੀ ਪ੍ਰਮਾਣੀਕਰਨ ਦਾ ਸੱਦਾ",
   "sunoContributionTagline": "ਤੁਸੀਂ ਜੋ ਸੁਣ ਰਹੇ ਹੋ ਉਸ ਨੂੰ ਟਾਈਪ ਕਰੋ",
   "boloContributionTagline": "ਆਪਣੀ ਆਵਾਜ਼ ਦਾ ਯੋਗਦਾਨ ਪਾਓ",
+  "dekhoContributionTagline": "ਇਮੇਜ ਵਿੱਚ ਦਿੱਤੀ ਗਈ ਟੈਕਸਟ ਟਾਈਪ ਕਰੋ",
   "sunoValidationTagline": "ਹੋਰਾਂ ਦੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
   "boloValidationTagline": "ਹੋਰਾਂ ਦੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
+  "dekhoValidationTagline": "ਹੋਰਾਂ ਦੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
   "month": "ਮਹੀਨਾ",
   "contributionGraphYLabel1": "ਯੋਗਦਾਨ (ਘੰਟਿਆਂ ਵਿੱਚ)",
   "contributionGraphYLabel2": "ਯੋਗਦਾਨ (ਵਾਕਾਂ ਦੀ ਕੁੱਲ ਸੰਖਿਆ)",
@@ -109,6 +111,9 @@
   "peopleParticipated": "ਲੋਕਾਂ ਨੇ ਹਿੱਸਾ ਲਿਆ",
   "durationTranscribed": "ਲਿਪੀਅੰਤਰਣ ਦੀ ਮਿਆਦ",
   "durationValidated": "ਪ੍ਰਮਾਣੀਕਰਨ ਦੀ ਮਿਆਦ",
+  "durationRecorded": "ਰਿਕਾਰਡ ਕੀਤੀ ਗਈ ਮਿਆਦ",
+  "imagesLabelled": "ਲੇਬਲ ਕੀਤੀਆਂ ਗਈਆਂ ਇਮੇਜਾਂ",
+  "imagesValidated": "ਪ੍ਰਮਾਣਿਤ ਕੀਤੀਆਂ ਗਈਆਂ ਇਮੇਜਾਂ",
   "contributionTrackerHeader": "ਯੋਗਦਾਨ ਟ੍ਰੈਕਰ",
   "contributionTrackerSubHeader": "ਸਮੁੱਚਾ ਸਾਰ",
   "byHours": "ਘੰਟਿਆਂ ਦੇ ਆਧਾਰ 'ਤੇ",
@@ -119,6 +124,7 @@
   "transcribe": "ਲਿਪੀਅੰਤਰਣ ਕਰੋ",
   "speak": "ਬੋਲੋ",
   "validate": "ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
+  "label": "ਲੇਬਲ ਕਰੋ",
   "languages": "ਭਾਸ਼ਾਵਾਂ",
   "hours": "ਘੰਟੇ",
   "minutes": "ਮਿੰਟ",
@@ -141,5 +147,6 @@
   "offensiveSubtext": "ਨਫ਼ਰਤ ਭਰੀ / ਵਿਤਕਰੇ ਵਾਲੀ / ਅਸ਼ਲੀਲ ਭਾਸ਼ਾ, ਨਸ਼ਿਆਂ ਨੂੰ ਉਤਸ਼ਾਹਿਤ ਕਰਨਾ ਆਦਿ",
   "specifyReason": "ਕਿਰਪਾ ਕਰਕੇ ਕਾਰਨ ਦੱਸੋ (ਵਿਕਲਪਿਕ)",
   "thankyou": "ਸ਼ੁਕਰੀਆ",
-  "reportSubmitSuccess": "ਤੁਹਾਡੀ ਫੀਡਬੈਕ ਦੇਖੋ ਇੰਡੀਆ ਨੂੰ ਪ੍ਰਾਸੰਗਿਕ ਬਣਾਈ ਰੱਖਣ ਵਿੱਚ ਸਾਡੀ ਮਦਦ ਕਰਦੀ ਹੈ, ਅਸੀਂ ਇਸ ਗੱਲ ਦੀ ਸਿਫਤ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਫੀਡਬੈਕ ਦੇਣ ਲਈ ਆਪਣਾ ਕੀਮਤੀ ਸਮਾਂ ਕੱਢਿਆ।"
+  "reportSubmitSuccess": "ਤੁਹਾਡੀ ਫੀਡਬੈਕ ਦੇਖੋ ਇੰਡੀਆ ਨੂੰ ਪ੍ਰਾਸੰਗਿਕ ਬਣਾਈ ਰੱਖਣ ਵਿੱਚ ਸਾਡੀ ਮਦਦ ਕਰਦੀ ਹੈ, ਅਸੀਂ ਇਸ ਗੱਲ ਦੀ ਸਿਫਤ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਫੀਡਬੈਕ ਦੇਣ ਲਈ ਆਪਣਾ ਕੀਮਤੀ ਸਮਾਂ ਕੱਢਿਆ।",
+  "skip": "ਸਕਿਪ"
 }

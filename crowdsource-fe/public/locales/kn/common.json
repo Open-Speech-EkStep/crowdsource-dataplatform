@@ -90,8 +90,10 @@
   "contributeWarningMsg": "ಆಯ್ದ ಭಾಷೆಗೆ ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ಮಾತ್ರ ಅಪೇಕ್ಷಿಸಲ್ಪಟ್ಟಿದೆ",
   "sunoContributionTagline": "ನಿಮಗೆ ಕೇಳಿಸಿದ್ದನ್ನು ಟೈಪ್ ಮಾಡಿ",
   "boloContributionTagline": "ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ಕೊಡುಗೆ ನೀಡಿ",
+  "dekhoContributionTagline": "ಚಿತ್ರದ ಅನುಸಾರ ಪಠ್ಯವನ್ನು ಟೈಪ್ ಮಾಡಿ",
   "sunoValidationTagline": "ಇತರರು ನೀಡಿರುವ ಕೊಡುಗೆಯನ್ನು ಮೌಲ್ಯೀಕರಿಸಿ",
   "boloValidationTagline": "ಇತರರು ನೀಡಿರುವ ಕೊಡುಗೆಯನ್ನು ಮೌಲ್ಯೀಕರಿಸಿ",
+  "dekhoValidationTagline": "ಇತರರು ನೀಡಿರುವ ಕೊಡುಗೆಯನ್ನು ಮೌಲ್ಯೀಕರಿಸಿ",
   "month": "ತಿಂಗಳು",
   "contributionGraphYLabel1": "ಕೊಡುಗೆ (ಗಂಟೆಗಳಲ್ಲಿ)",
   "contributionGraphYLabel2": "ಕೊಡುಗೆಗಳು (ಒಟ್ಟು ವಾಕ್ಯಗಳು)",
@@ -109,6 +111,9 @@
   "peopleParticipated": "ವ್ಯಕ್ತಿಗಳು ಭಾಗವಹಿಸಿದ್ದಾರೆ",
   "durationTranscribed": "ಪ್ರತಿಲೇಖಿಸಲ್ಪಟ್ಟಿದೆ",
   "durationValidated": "ಮೌಲ್ಯೀಕರಿಸಲ್ಪಪಟ್ಟಿದೆ",
+  "durationRecorded": "ರೆಕಾರ್ಡ್ ಮಾಡಲ್ಪಟ್ಟಿದೆ",
+  "imagesLabelled": "ಲೇಬಲ್ ಮಾಡಲ್ಪಟ್ಟ ಚಿತ್ರಗಳು",
+  "imagesValidated": "ಮೌಲ್ಯೀಕರಿಸಲ್ಪಟ್ಟ ಚಿತ್ರಗಳು",
   "contributionTrackerHeader": "ಕೊಡುಗೆಗಳ ಟ್ಯಾಕರ್",
   "contributionTrackerSubHeader": "ಒಟ್ಟಾರೆ ಸಾರಾಂಶ",
   "byHours": "ಗಂಟೆಗಳ ಆಧಾರದ ಮೇಲೆ",
@@ -119,6 +124,7 @@
   "transcribe": "ಪ್ರತಿಲೇಖಿಸಿ",
   "speak": "ಮಾತನಾಡಿ",
   "validate": "ಮೌಲ್ಯೀಕರಿಸಿ",
+  "label": "ಲೇಬಲ್ ಮಾಡಿ",
   "languages": "ಭಾಷೆಗಳು",
   "hours": "ಗಂಟೆಗಳು",
   "minutes": "ನಿಮಿಷಗಳು",
@@ -141,5 +147,6 @@
   "offensiveSubtext": "ದ್ವೇಷಪೂರಿತ / ತಾರತಮ್ಯಯುಕ್ತ / ಅಶ್ಲೀಲ ಭಾಷೆ, ಮಾದಕ ಪದಾರ್ಥಗಳ ಪ್ರಚಾರ ಇತ್ಯಾದಿ.",
   "specifyReason": "ದಯವಿಟ್ಟು ಕಾರಣವನ್ನು ಸ್ಪಷ್ಟಪಡಿಸಿ (ಐಚ್ಛಿಕ)",
   "thankyou": "ಧನ್ಯವಾದಗಳು",
-  "reportSubmitSuccess": "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವು ನೋಡು ಇಂಡಿಯಾವನ್ನು ಪ್ರಸ್ತುತವಾಗಿಸಲು ನಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ.  ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನೀಡಿದ್ದಕ್ಕಾಗಿ ನಿಮಗೆ ಅಭಿನಂದನೆಗಳು."
+  "reportSubmitSuccess": "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವು ನೋಡು ಇಂಡಿಯಾವನ್ನು ಪ್ರಸ್ತುತವಾಗಿಸಲು ನಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ.  ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನೀಡಿದ್ದಕ್ಕಾಗಿ ನಿಮಗೆ ಅಭಿನಂದನೆಗಳು.",
+  "skip": "ಬಿಟ್ಟುಬಿಡಿ / ಸ್ಕಿಪ್ ಮಾಡಿ"
 }

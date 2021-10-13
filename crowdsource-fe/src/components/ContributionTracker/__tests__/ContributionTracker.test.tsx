@@ -79,7 +79,7 @@ describe('ContributionTracker', () => {
       ])
     );
 
-    const renderResult = render(<ContributionTracker initiativeMedia="asr" />);
+    const renderResult = render(<ContributionTracker initiative="suno" />);
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });
@@ -101,13 +101,13 @@ describe('ContributionTracker', () => {
   it('should render the chart component after api gives data', async () => {
     await setup();
 
-    expect(screen.getByTestId('ContributionTracker').children.length).toBe(2);
+    expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
   });
 
   it('should render the chart for speaker data', async () => {
     await setup();
 
     userEvent.click(screen.getAllByRole('radio')[1]);
-    expect(screen.getByTestId('ContributionTracker').children.length).toBe(2);
+    expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
   });
 });
