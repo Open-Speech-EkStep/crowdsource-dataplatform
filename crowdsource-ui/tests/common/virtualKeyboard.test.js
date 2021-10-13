@@ -97,7 +97,7 @@ describe("lngtype", () => {
   test("should give language error for for any module when given input text ends with any different character set for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
     expect(lngtype('কিন্তুu')).toEqual({type:'language'});
     localStorage.clear();
@@ -106,7 +106,7 @@ describe("lngtype", () => {
   test("should give language error for any module when given input text contains any different character set for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Telugu');
     expect(lngtype('డ్డా ॐ యి')).toEqual({type:'language'});
     localStorage.clear();
@@ -123,10 +123,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give error as null for dekho when character is any English numeral for any language", () => {
+  test("should give error as null for ocr initiative when character is any English numeral for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
     numbers.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -134,10 +134,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give error as null for likho when character is any English numeral for any language", () => {
+  test("should give error as null for parallel initiative when character is any English numeral for any language", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
     numbers.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -233,10 +233,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Assamese", () => {
+  test("should give true for parallel initiative when character is any special symbol for Assamese", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Assamese');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -244,10 +244,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Bengali", () => {
+  test("should give true for parallel initiative when character is any special symbol for Bengali", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Bengali');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -255,10 +255,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Gujarati", () => {
+  test("should give true for parallel initiative when character is any special symbol for Gujarati", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -266,11 +266,11 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Hindi", () => {
+  test("should give true for parallel initiative when character is any special symbol for Hindi", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
 
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Hindi');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -278,11 +278,11 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Kannada", () => {
+  test("should give true for parallel initiative when character is any special symbol for Kannada", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
 
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Kannada');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -290,10 +290,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Malayalam", () => {
+  test("should give true for parallel initiative when character is any special symbol for Malayalam", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Malayalam');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -301,10 +301,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Marathi", () => {
+  test("should give true for parallel initiative when character is any special symbol for Marathi", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Marathi');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -312,10 +312,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Odia", () => {
+  test("should give true for parallel initiative when character is any special symbol for Odia", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Odia');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -323,10 +323,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Punjabi", () => {
+  test("should give true for parallel initiative when character is any special symbol for Punjabi", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Punjabi');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -334,10 +334,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Tamil", () => {
+  test("should give true for parallel initiative when character is any special symbol for Tamil", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Tamil');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -345,10 +345,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for likho when character is any special symbol for Telugu", () => {
+  test("should give true for parallel initiative when character is any special symbol for Telugu", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -356,10 +356,10 @@ describe("lngtype", () => {
     localStorage.clear();
   })
 
-  test("should give true for dekho when character is any special symbol for Telugu", () => {
+  test("should give true for ocr initiative when character is any special symbol for Telugu", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -377,7 +377,7 @@ describe("lngtype", () => {
       'ও', 'এ', 'অ', 'ই', 'উ', 'ফ', 'খ', 'থ', 'ছ', 'ঠ','ঁ', 'ণ', 'শ', 'ষ', '।', 'য়'
     ]
     mockLocalStorage();
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
     characters.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -390,7 +390,7 @@ describe("lngtype", () => {
       'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
     ]
     mockLocalStorage();
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
     characters.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
@@ -400,7 +400,7 @@ describe("lngtype", () => {
 
   test("should give false for any module when characters is not related to selected language", () => {
     mockLocalStorage();
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
     expect(lngtype('।')).toEqual({type:'language'});
     expect(lngtype('॥')).toEqual({type:'language'});
@@ -409,7 +409,7 @@ describe("lngtype", () => {
 
   test("should give false for any module when characters is not related to chosen language", () => {
     mockLocalStorage();
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Tamil');
     expect(lngtype('त')).toEqual({type:'language'});
     localStorage.clear();

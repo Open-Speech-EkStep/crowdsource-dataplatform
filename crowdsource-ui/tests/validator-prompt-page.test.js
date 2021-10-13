@@ -26,25 +26,11 @@ document.body = stringToHTML(
 );
 
 
-// const Visualizer = require('../src/assets/js/visualizer');
 jest.mock('../src/assets/js/visualizer');
 
 const {
   setAudioPlayer,
 } = require('../src/assets/js/validator-prompt-page');
-
-
-
-// describe("startVisualizer",()=>{
-//   test("should start visualiser",()=>{
-//         const mockVisualizerInstance = Visualizer.mock.instances[0];
-//         const mockVisualize = mockVisualizerInstance.visualize;
-//         const audio = document.getElementById('my-audio');
-//         startVisualizer();
-//         expect(mockVisualize).toHaveBeenCalledTimes(1);
-//     })
-// })
-
 
 describe("setAudioPlayer", () => {
   const play = $('#play');

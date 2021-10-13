@@ -5,7 +5,8 @@ const {
   updateLocaleLanguagesDropdown,
   getLocaleString,
   getLanguageBadge,
-  translate
+  translate,
+  toPascalCase
 } = require('./utils');
 const {onChangeUser, showUserProfile,onOpenUserDropDown} = require('./header');
 const {isMobileDevice, hasUserRegistered, showErrorPopup} = require('./common');
@@ -32,6 +33,7 @@ const getBadgeRow = (result, id, type, localeString) => {
  
   if (result && result.language && result.language.length > 0) {
     result.language.forEach(item => {
+
       const row = ` <div class="col-12 p-0 my-2">
               <div class="row m-0">
                 <div class="col-lg-2 p-0 p-lg-3 p-md-3 col-12 m-auto">
@@ -43,17 +45,17 @@ const getBadgeRow = (result, id, type, localeString) => {
                    </div>
                  <div class="row m-0">
                    <div class="col-3 pl-0">
-                   ${item.contribute[0] && item.contribute[0].grade == BADGES_API_TEXT.badge_1 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_1', 'contribute', type), 'badge_1', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_1', 'contribution', localeString, type, item.name)}
+                   ${item.contribute[0] && item.contribute[0].grade == toPascalCase(BADGES_API_TEXT.badge_1) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_1', 'contribute', type), 'badge_1', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_1', 'contribution', localeString, type, item.name)}
                   
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[1] && item.contribute[1].grade == BADGES_API_TEXT.badge_2 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_2', 'contribute', type), 'badge_2', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_2', 'contribution', localeString,type, item.name)}
+                     ${item.contribute[1] && item.contribute[1].grade == toPascalCase(BADGES_API_TEXT.badge_2) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_2', 'contribute', type), 'badge_2', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_2', 'contribution', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.contribute[2] && item.contribute[2].grade == BADGES_API_TEXT.badge_3 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_3', 'contribute', type), 'badge_3', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_3', 'contribution', localeString,type, item.name)}
+                     ${item.contribute[2] && item.contribute[2].grade == toPascalCase(BADGES_API_TEXT.badge_3) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_3', 'contribute', type), 'badge_3', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_3', 'contribution', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.contribute[3] && item.contribute[3].grade == BADGES_API_TEXT.badge_4 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_4', 'contribute', type), 'badge_4', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_4', 'contribution', localeString,type, item.name)}
+                   ${item.contribute[3] && item.contribute[3].grade == toPascalCase(BADGES_API_TEXT.badge_4) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_4', 'contribute', type), 'badge_4', type, 'contribution', localeString, item.name) : getWidgetWithoutBadge('badge_4', 'contribution', localeString,type, item.name)}
                    </div>
                  </div>
                </div>`: `<div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">
@@ -81,16 +83,16 @@ const getBadgeRow = (result, id, type, localeString) => {
                </div>
                <div class="row m-0">
                  <div class="col-3 pl-0">
-                 ${item.validate[0] && item.validate[0].grade == BADGES_API_TEXT.badge_1 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_1', 'validate', type), 'badge_1', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_1', 'validation', localeString,type, item.name)}
+                 ${item.validate[0] && item.validate[0].grade == toPascalCase(BADGES_API_TEXT.badge_1 )? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_1', 'validate', type), 'badge_1', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_1', 'validation', localeString,type, item.name)}
                  </div>
                  <div class="col-3 pl-0">
-                     ${item.validate[1] && item.validate[1].grade == BADGES_API_TEXT.badge_2 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_2', 'validate', type), 'badge_2', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_2', 'validation', localeString,type,item.name)}
+                     ${item.validate[1] && item.validate[1].grade == toPascalCase(BADGES_API_TEXT.badge_2) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_2', 'validate', type), 'badge_2', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_2', 'validation', localeString,type,item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                     ${item.validate[2] && item.validate[2].grade == BADGES_API_TEXT.badge_3 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_3', 'validate', type), 'badge_3', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_3', 'validation', localeString,type, item.name)}
+                     ${item.validate[2] && item.validate[2].grade == toPascalCase(BADGES_API_TEXT.badge_3) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_3', 'validate', type), 'badge_3', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_3', 'validation', localeString,type, item.name)}
                    </div>
                    <div class="col-3 pl-0">
-                   ${item.validate[3] && item.validate[3].grade == BADGES_API_TEXT.badge_4 ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_4', 'validate', type),'badge_4', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_4', 'validation', localeString,type, item.name)}
+                   ${item.validate[3] && item.validate[3].grade == toPascalCase(BADGES_API_TEXT.badge_4) ? getWidgetWithBadge(getLanguageBadge(item.name, 'badge_4', 'validate', type),'badge_4', type, 'validation', localeString, item.name) : getWidgetWithoutBadge('badge_4', 'validation', localeString,type, item.name)}
                    </div>
                </div>
              </div>` : `<div class="col-lg-5 col-12 mt-3 mt-lg-0 mt-md-0 p-0 p-lg-3 p-md-3">

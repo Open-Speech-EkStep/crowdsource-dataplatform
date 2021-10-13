@@ -59,11 +59,7 @@ $(document).ready(function () {
                 localStorage.setItem('profanityUserDetails', JSON.stringify(speakerDetails));
                 localStorage.setItem('profanityCheckLanguage', language);
                 localStorage.setItem(CONTRIBUTION_LANGUAGE, language);
-                // if (type === 'boloindia') {
-                //     location.href = `/en/profanity-text.html`;
-                // } else {
                     location.href = `/en/${keyMap[type]}/profanity.html`;
-                // }
             } else {
                 alert("User not found")
             }
@@ -72,8 +68,4 @@ $(document).ready(function () {
             alert("User not found")
         })
     });
-    // $(window).unload(function(){
-    //     localStorage.removeItem('profanityUserDetails');
-    //     localStorage.removeItem('profanityCheckLanguage');
-    // });
 });

@@ -339,6 +339,12 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 };
 
+const toPascalCase = function (text) {
+  return text.replace(/\w+/g, function (w) {
+    return w[0].toUpperCase() + w.slice(1).toLowerCase();
+  });
+};
+
 module.exports = {
   safeJsonParse,
   safeJson,
@@ -363,4 +369,5 @@ module.exports = {
   formatTimeForLegends,
   getLanguageBadge,
   translate,
+  toPascalCase
 };

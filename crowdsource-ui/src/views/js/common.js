@@ -198,7 +198,7 @@ const showFunctionalCards = (type, fromLanguage, toLanguage) => {
         getJson('/aggregated-json/enableDisableCards.json')
           .then(jsonData => {
             var language = fromLanguage;
-            if (type == INITIATIVES.parallel.value && toLanguage) {
+            if (type == INITIATIVES.parallel.type && toLanguage) {
               language = `${fromLanguage}-${toLanguage}`;
             }
             const filteredData =

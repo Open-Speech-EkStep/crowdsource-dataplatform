@@ -9,8 +9,8 @@ document.body = stringToHTML(
 );
 
 describe('fetch user badge', () => {
-    let $tableRows = $(`#suno-badge`);
-    let $boloTableRows = $(`#bolo-badge`);
+    let $tableRows = $(`#asr-badge`);
+    let $textTableRows = $(`#text-badge`);
     test("should fetch user rewards", () => {
         mockLocalStorage();
         localStorage.setItem("speakerDetails", "{'userName' : 'myUser'}");
@@ -60,10 +60,10 @@ describe('fetch user badge', () => {
     });
 
 
-    test("validate suno badge data", () => {
+    test("validate asr badge data", () => {
         mockLocalStorage();
         localStorage.setItem(LOCALE_STRINGS, "{'Kannada' : 'Kannada','Validation': 'Validation', 'Contribution': 'Contribution'}");
-        let sunoItem = {
+        let asrItem = {
             initiativeType: "asr",
             language: [
                 {
@@ -85,7 +85,7 @@ describe('fetch user badge', () => {
             ]
         }
 
-        const sunoRow = `<div class="col-12 p-0">
+        const asrRow = `<div class="col-12 p-0">
         <div class="row m-0">
           <div class="col-lg-2 col-md-3 col-12 m-auto">
             <h4 class="font-family-Rowdies my-4 my-lg-0 my-md-0">Kannada</h4> 
@@ -97,23 +97,23 @@ describe('fetch user badge', () => {
            <div class="row m-0">
              <div class="col-3 pl-0">
              
-<div class="badge-widget text-center" rel="popover" id="Bronze_contribution_suno_badge">
-<img src="/img/en_suno_bronze_contribute.svg" class="my-badge-image" height="74" width="60">
+<div class="badge-widget text-center" rel="popover" id="badge_1_contribution_asr_badge">
+<img src="/img/en_asr_badge_1_contribute.svg" class="my-badge-image" height="74" width="60">
 <h6 class="mt-2 font-family-Rowdies">Bronze</h6>
 </div>
              </div>
              <div class="col-3 pl-0">
-                <div class="badge-widget-placeholder m-auto text-center" id="Silver_contribution_placeholder">
+                <div class="badge-widget-placeholder m-auto text-center" id="badge_2_contribution_placeholder">
            <p>Silver</p>
 </div>
              </div>
              <div class="col-3 pl-0">
-                <div class="badge-widget-placeholder m-auto text-center" id="Gold_contribution_placeholder">
+                <div class="badge-widget-placeholder m-auto text-center" id="badge_3_contribution_placeholder">
            <p>Gold</p>
 </div>
              </div>
              <div class="col-3 pl-0">
-              <div class="badge-widget-placeholder m-auto text-center" id="Platinum_contribution_placeholder">
+              <div class="badge-widget-placeholder m-auto text-center" id="badge_4_contribution_placeholder">
            <p>Platinum</p>
 </div>
              </div>
@@ -124,21 +124,21 @@ describe('fetch user badge', () => {
       </div>`;
       const localString = localStorage.getItem(LOCALE_STRINGS);
       console.log("localStorage + Ayush",localString);
-        getBadgeRow(sunoItem, 'suno-badge', 'suno', localString, "English");
+        getBadgeRow(asrItem, 'asr-badge', 'asr', localString, "English");
 
         setTimeout(() => {
-            $tableRows.append(sunoRow);
-            expect($tableRows.innerHtml).toEqual(sunoRow);
+            $tableRows.append(asrRow);
+            expect($tableRows.innerHtml).toEqual(asrRow);
             localStorage.clear();
         }, 1000);
       
     });
 
 
-    test("validate bolo badge data", () => {
+    test("validate text badge data", () => {
         mockLocalStorage();
         localStorage.setItem(LOCALE_STRINGS, "{'Hindi' : 'Hindi', 'Validation': 'Validation', 'Contribution': 'Contribution'}");
-        let boloItem = {
+        let textItem = {
             initiativeType: "text",
             language: [
                 {
@@ -171,7 +171,7 @@ describe('fetch user badge', () => {
             ]
         }
 
-        const boloRow = `<div class="col-12 p-0">
+        const textRow = `<div class="col-12 p-0">
         <div class="row m-0">
           <div class="col-lg-2 col-md-3 col-12 m-auto">
             <h4 class="font-family-Rowdies my-4 my-lg-0 my-md-0">Hindi</h4> 
@@ -183,23 +183,23 @@ describe('fetch user badge', () => {
            <div class="row m-0">
              <div class="col-3 pl-0">
              
-<div class="badge-widget text-center" rel="popover" id="Bronze_contribution_bolo_badge">
-<img src="/img/en_bolo_bronze_contribute.svg" class="my-badge-image" height="74" width="60">
+<div class="badge-widget text-center" rel="popover" id="badge_1_contribution_text_badge">
+<img src="/img/en_text_badge_1_contribute.svg" class="my-badge-image" height="74" width="60">
 <h6 class="mt-2 font-family-Rowdies">Bronze</h6>
 </div>
              </div>
              <div class="col-3 pl-0">
-                <div class="badge-widget-placeholder m-auto text-center" id="Silver_contribution_placeholder">
+                <div class="badge-widget-placeholder m-auto text-center" id="badge_2_contribution_placeholder">
            <p>Silver</p>
 </div>
              </div>
              <div class="col-3 pl-0">
-                <div class="badge-widget-placeholder m-auto text-center" id="Gold_contribution_placeholder">
+                <div class="badge-widget-placeholder m-auto text-center" id="badge_3_contribution_placeholder">
            <p>Gold</p>
 </div>
              </div>
              <div class="col-3 pl-0">
-              <div class="badge-widget-placeholder m-auto text-center" id="Platinum_contribution_placeholder">
+              <div class="badge-widget-placeholder m-auto text-center" id="badge_4_contribution_placeholder">
            <p>Platinum</p>
 </div>
              </div>
@@ -212,23 +212,23 @@ describe('fetch user badge', () => {
          <div class="row m-0">
            <div class="col-3 pl-0">
            
-<div class="badge-widget text-center" rel="popover" id="Bronze_validation_bolo_badge">
-<img src="/img/en_bolo_bronze_validate.svg" class="my-badge-image" height="74" width="60">
+<div class="badge-widget text-center" rel="popover" id="badge_1_validation_text_badge">
+<img src="/img/en_text_badge_1_validate.svg" class="my-badge-image" height="74" width="60">
 <h6 class="mt-2 font-family-Rowdies">Bronze</h6>
 </div>
            </div>
            <div class="col-3 pl-0">
-                <div class="badge-widget-placeholder m-auto text-center" id="Silver_validation_placeholder">
+                <div class="badge-widget-placeholder m-auto text-center" id="badge_2_validation_placeholder">
            <p>Silver</p>
 </div>
              </div>
              <div class="col-3 pl-0">
-                <div class="badge-widget-placeholder m-auto text-center" id="Gold_validation_placeholder">
+                <div class="badge-widget-placeholder m-auto text-center" id="badge_3_validation_placeholder">
            <p>Gold</p>
 </div>
              </div>
              <div class="col-3 pl-0">
-              <div class="badge-widget-placeholder m-auto text-center" id="Platinum_validation_placeholder">
+              <div class="badge-widget-placeholder m-auto text-center" id="badge_4_validation_placeholder">
            <p>Platinum</p>
 </div>
              </div>
@@ -237,11 +237,11 @@ describe('fetch user badge', () => {
         </div>
       </div>`;
       const localString = localStorage.getItem(LOCALE_STRINGS);
-        getBadgeRow(boloItem, 'bolo-badge', 'bolo', localString, "English");
+        getBadgeRow(textItem, 'text-badge', 'text', localString, "English");
 
         setTimeout(() => {
-            $boloTableRows.append(boloRow);
-            expect($boloTableRows.innerHtml).toEqual(boloRow);
+            $textTableRows.append(textRow);
+            expect($textTableRows.innerHtml).toEqual(textRow);
         }, 1000);
 
     });
