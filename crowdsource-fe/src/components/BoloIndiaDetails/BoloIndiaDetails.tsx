@@ -21,7 +21,6 @@ const BoloIndiaDetails = () => {
         </section>
         <section className="mt-9 mt-md-12">
           <ContributionStats
-            initiativeMedia={INITIATIVES_MEDIA_MAPPING.bolo}
             initiative={INITIATIVES_MAPPING.bolo}
             header={t('contributionStatsHeader', { initiativeName })}
             subHeader={t('contributionStatsSubHeader')}

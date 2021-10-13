@@ -23,7 +23,6 @@ const SunoIndiaDetails = () => {
         </section>
         <section className="mt-9 mt-md-12">
           <ContributionStats
-            initiativeMedia={INITIATIVES_MEDIA_MAPPING.suno}
             initiative={INITIATIVES_MAPPING.suno}
             header={t('contributionStatsHeader', { initiativeName })}
             subHeader={t('contributionStatsSubHeader')}
