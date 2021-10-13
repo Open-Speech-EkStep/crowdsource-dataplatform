@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "dekho_india_tab" from header
+* Select "ocr_initiative_tab" from header
 
 ## Check Dekho India Home Page
 * Validate Dekho India content

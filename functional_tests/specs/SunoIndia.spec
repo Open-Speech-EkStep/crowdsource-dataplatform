@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "suno_india_tab" from header
+* Select "asr_initiative_tab" from header
 
 ## Check Home Page
 * Validate Suno India content

@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "bolo_india_tab" from header
+* Select "text_initiative_tab" from header
 
 ## Validate the Speaker Details pop-up
 * Select Contribution Language as "हिंदी"

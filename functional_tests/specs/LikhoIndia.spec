@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "likho_india_tab" from header
+* Select "parallel_initiative_tab" from header
 
 ## Check Likho India Home Page
 * Validate Likho India content
