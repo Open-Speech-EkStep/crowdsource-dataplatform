@@ -42,10 +42,10 @@ function getCurrentIndex(lastIndex) {
 let currentIndex;
 
 function getNextSentence() {
-  if (currentIndex < window.ocrInitiative.sentences.length - 1) {
+  if (currentIndex < ocrInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, window.ocrInitiative.sentences.length);
-    const encodedUrl = encodeURIComponent(window.ocrInitiative.sentences[currentIndex].media);
+    updateProgressBar(currentIndex + 1, ocrInitiative.sentences.length);
+    const encodedUrl = encodeURIComponent(ocrInitiative.sentences[currentIndex].media);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
@@ -84,7 +84,7 @@ function onProfanityUpdated() {
 
 function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
-  updateProfanityState(localSpeakerDataParsed.userName, window.ocrInitiative.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+  updateProfanityState(localSpeakerDataParsed.userName, ocrInitiative.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
     .then(() => {
       onProfanityUpdated();
     }).catch(err => {
@@ -93,7 +93,7 @@ function invokeProfanityStateUpdate(state) {
 }
 
 function updateSkipAction() {
-  const sentenceId = window.ocrInitiative.sentences[currentIndex].dataset_row_id;
+  const sentenceId = ocrInitiative.sentences[currentIndex].dataset_row_id;
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/ocr`, {
     method: 'PUT',
@@ -183,16 +183,16 @@ function showNoSentencesMessage() {
 
 
 const initializeComponent = () => {
-  const totalItems = window.ocrInitiative.sentences.length;
+  const totalItems = ocrInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const validationData = window.ocrInitiative.sentences[currentIndex];
+  const validationData = ocrInitiative.sentences[currentIndex];
   addListeners();
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, window.ocrInitiative.sentences.length)
+    updateProgressBar(currentIndex + 1, ocrInitiative.sentences.length)
   }
 
 }
@@ -228,7 +228,7 @@ const executeOnLoad = function () {
 
     if (isExistingUser && localSentencesParsed.sentences.length != 0 && localSentencesParsed.language === language) {
       setFooterPosition();
-      window.ocrInitiative.sentences = localSentencesParsed.sentences;
+      ocrInitiative.sentences = localSentencesParsed.sentences;
       initializeComponent();
     } else {
       localStorage.removeItem(currentIndexKey);
@@ -256,8 +256,8 @@ const executeOnLoad = function () {
           setFooterPosition();
         }
         setFooterPosition();
-        window.ocrInitiative.sentences = sentenceData.data;
-        localStorage.setItem(ocrCountKey, window.ocrInitiative.sentences.length);
+        ocrInitiative.sentences = sentenceData.data;
+        localStorage.setItem(ocrCountKey, ocrInitiative.sentences.length);
         localStorage.setItem(
           sentencesKey,
           JSON.stringify({

@@ -45,10 +45,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', window.ocrValidator.editedText);
+  fd.append('userInput', ocrValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', window.ocrValidator.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', ocrValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -80,19 +80,19 @@ function uploadToServer(cb) {
 
 function setCapturedText(index) {
   const $capturedtext = $('#original-text');
-  const capturedText = window.ocrValidator.sentences[index].contribution;
+  const capturedText = ocrValidator.sentences[index].contribution;
   $capturedtext.text(capturedText);
   $('#captured-text').text(capturedText);
   $('#edit').text(capturedText);
 }
 
 function getNextSentence() {
-  if (currentIndex < window.ocrValidator.sentences.length - 1) {
+  if (currentIndex < ocrValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,window.ocrValidator.sentences.length);
-    const encodedUrl = encodeURIComponent(window.ocrValidator.sentences[currentIndex].sentence);
+    updateProgressBar(currentIndex + 1,ocrValidator.sentences.length);
+    const encodedUrl = encodeURIComponent(ocrValidator.sentences[currentIndex].sentence);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
-    setDataSource(window.ocrValidator.sentences[currentIndex].source_info);
+    setDataSource(ocrValidator.sentences[currentIndex].source_info);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -113,8 +113,8 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = window.ocrValidator.sentences[currentIndex].dataset_row_id
-  const contribution_id = window.ocrValidator.sentences[currentIndex].contribution_id
+  const sentenceId = ocrValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = ocrValidator.sentences[currentIndex].contribution_id
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
@@ -181,7 +181,7 @@ function addListeners() {
     }
     hideElement($('#textarea-row'));
     openEditor();
-    const originalText = window.ocrValidator.sentences[currentIndex].contribution;
+    const originalText = ocrValidator.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -219,7 +219,7 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'));
-    window.ocrValidator.editedText = $("#edit").val();
+    ocrValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
@@ -307,7 +307,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: window.ocrValidator.sentences[currentIndex].dataset_row_id,
+    sentenceId: ocrValidator.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -331,7 +331,7 @@ const handleSubmitFeedback = function () {
 const initializeComponent = () => {
   // showOrHideExtensionCloseBtn();
     hideElement($('#virtualKeyBoardBtn'));
-    const totalItems = window.ocrValidator.sentences.length;
+    const totalItems = ocrValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
@@ -341,7 +341,7 @@ const initializeComponent = () => {
     $('#keyboardLayoutName').text(localeLanguage);
 
     addListeners();
-    const validationData = window.ocrValidator.sentences[currentIndex];
+    const validationData = ocrValidator.sentences[currentIndex];
     if (validationData) {
       const encodedUrl = encodeURIComponent(validationData.sentence);
       setOcrImage(`${cdn_url}/${encodedUrl}`);
@@ -349,7 +349,7 @@ const initializeComponent = () => {
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);
-      updateProgressBar(currentIndex + 1,window.ocrValidator.sentences.length)
+      updateProgressBar(currentIndex + 1,ocrValidator.sentences.length)
     }
 }
 
@@ -453,9 +453,9 @@ const executeOnLoad = function () {
       showErrorPopup(errStatus);
       throw errStatus
     }).then(result => {
-      window.ocrValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(ocrValidatorCountKey, window.ocrValidator.sentences.length);
-      if(window.ocrValidator.sentences.length === 0){
+      ocrValidator.sentences = result.data ? result.data : [];
+      localStorage.setItem(ocrValidatorCountKey, ocrValidator.sentences.length);
+      if(ocrValidator.sentences.length === 0){
         showNoSentencesMessage();
         return;
       }

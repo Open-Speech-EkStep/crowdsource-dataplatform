@@ -209,13 +209,13 @@ const setAudioPlayer = function () {
 let currentIndex = localStorage.getItem(currentIndexKey) || 0;
 
 function getNextSentence() {
-  if (currentIndex < window.asrInitiative.sentences.length - 1) {
+  if (currentIndex < asrInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, window.asrInitiative.sentences.length);
-    const encodedUrl = encodeURIComponent(window.asrInitiative.sentences[currentIndex].media_data);
+    updateProgressBar(currentIndex + 1, asrInitiative.sentences.length);
+    const encodedUrl = encodeURIComponent(asrInitiative.sentences[currentIndex].media_data);
     localStorage.setItem("contribution_audioPlayed",false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
-    setDataSource(window.asrInitiative.sentences[currentIndex].source_info);
+    setDataSource(asrInitiative.sentences[currentIndex].source_info);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -263,7 +263,7 @@ function markContributionSkipped() {
   const state_region = localStorage.getItem('state_region') || "";
   const country = localStorage.getItem('country') || "";
   const reqObj = {
-    sentenceId: window.asrInitiative.sentences[currentIndex].dataset_row_id,
+    sentenceId: asrInitiative.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
     language:contributionLanguage,
     device: getDeviceInfo(),
@@ -333,7 +333,7 @@ function addListeners() {
     hideElement($(audioPlayerBtn))
     hideElement($skipButton)
     showElement($('#thankyou-text'));
-    window.asrInitiative.editedText = $("#edit").val();
+    asrInitiative.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $(cancelButton).attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
@@ -431,7 +431,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: window.asrInitiative.sentences[currentIndex].dataset_row_id,
+    sentenceId: asrInitiative.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -454,7 +454,7 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 const initialize = function () {
-  const totalItems = window.asrInitiative.sentences.length;
+  const totalItems = asrInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -494,7 +494,7 @@ const initialize = function () {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  const audio = window.asrInitiative.sentences[currentIndex];
+  const audio = asrInitiative.sentences[currentIndex];
   addListeners();
 
   if (audio) {
@@ -505,7 +505,7 @@ const initialize = function () {
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     setAudioPlayer();
-    updateProgressBar(currentIndex + 1,window.asrInitiative.sentences.length)
+    updateProgressBar(currentIndex + 1,asrInitiative.sentences.length)
   }
 };
 
@@ -572,10 +572,10 @@ function executeOnLoad() {
         throw errStatus;
       })
       .then(sentenceData => {
-        window.asrInitiative.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(asrCountKey, window.asrInitiative.sentences.length);
+        asrInitiative.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(asrCountKey, asrInitiative.sentences.length);
         $loader.hide();
-        if (window.asrInitiative.sentences.length === 0) {
+        if (asrInitiative.sentences.length === 0) {
           showNoSentencesMessage();
           return;
         }

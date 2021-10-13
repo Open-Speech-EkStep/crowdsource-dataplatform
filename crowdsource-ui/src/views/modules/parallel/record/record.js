@@ -33,11 +33,11 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', window.parallelInitiative.editedText);
+  fd.append('userInput', parallelInitiative.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(PARALLEL_TO_LANGUAGE));
   fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', window.parallelInitiative.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', parallelInitiative.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -86,11 +86,11 @@ function disableSkipButton() {
 }
 
 function getNextSentence() {
-  if (currentIndex < window.parallelInitiative.sentences.length - 1) {
+  if (currentIndex < parallelInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, window.parallelInitiative.sentences.length);
-    setSentence(window.parallelInitiative.sentences[currentIndex].media_data);
-    setDataSource(window.parallelInitiative.sentences[currentIndex].source_info);
+    updateProgressBar(currentIndex + 1, parallelInitiative.sentences.length);
+    setSentence(parallelInitiative.sentences[currentIndex].media_data);
+    setDataSource(parallelInitiative.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -111,7 +111,7 @@ function markContributionSkipped() {
   const state_region = localStorage.getItem('state_region') || "";
   const country = localStorage.getItem('country') || "";
   const reqObj = {
-    sentenceId: window.parallelInitiative.sentences[currentIndex].dataset_row_id,
+    sentenceId: parallelInitiative.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
     language: contributionLanguage,
     device: getDeviceInfo(),
@@ -176,7 +176,7 @@ function addListeners() {
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-    window.parallelInitiative.editedText = $("#edit").val();
+    parallelInitiative.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
@@ -256,7 +256,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: window.parallelInitiative.sentences[currentIndex].dataset_row_id,
+    sentenceId: parallelInitiative.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -298,7 +298,7 @@ function getCurrentIndex(lastIndex) {
 
 let selectedReportVal = '';
 const initialize = function () {
-  const totalItems = window.parallelInitiative.sentences.length;
+  const totalItems = parallelInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
 
@@ -345,7 +345,7 @@ const initialize = function () {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  const translation = window.parallelInitiative.sentences[currentIndex];
+  const translation = parallelInitiative.sentences[currentIndex];
   addListeners();
 
   if (translation) {
@@ -353,7 +353,7 @@ const initialize = function () {
     setDataSource(translation.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, window.parallelInitiative.sentences.length)
+    updateProgressBar(currentIndex + 1, parallelInitiative.sentences.length)
   }
 };
 
@@ -429,10 +429,10 @@ function executeOnLoad() {
         throw errStatus
       })
         .then((sentenceData) => {
-          window.parallelInitiative.sentences = sentenceData.data ? sentenceData.data : [];
-          localStorage.setItem(parallelCountKey, window.parallelInitiative.sentences.length);
+          parallelInitiative.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(parallelCountKey, parallelInitiative.sentences.length);
           $loader.hide();
-          if (window.parallelInitiative.sentences.length === 0) {
+          if (parallelInitiative.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }
