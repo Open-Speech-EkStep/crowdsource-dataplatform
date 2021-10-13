@@ -7,11 +7,9 @@ import TargetProgress from 'components/TargetProgress';
 import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 
-import styles from './BoloIndiaDetails.module.scss';
-
 const BoloIndiaDetails = () => {
   const { t } = useTranslation();
-  const initiativeName = `${t('bolo')} ${t('india')}`;
+  const initiativeName = `${t(INITIATIVES_MAPPING.bolo)} ${t('india')}`;
   return (
     <section data-testid="BoloIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">
@@ -25,14 +23,9 @@ const BoloIndiaDetails = () => {
           <ContributionStats
             initiativeMedia={INITIATIVES_MEDIA_MAPPING.bolo}
             initiative={INITIATIVES_MAPPING.bolo}
-          >
-            <header className="d-flex flex-column">
-              <h3 className="w-100">{t('contributionStatsHeader', { initiativeName })}</h3>
-              <span className={`${styles.subHeader} display-3 mt-4 mb-0`}>
-                {t('contributionStatsSubHeader')}
-              </span>
-            </header>
-          </ContributionStats>
+            header={t('contributionStatsHeader', { initiativeName })}
+            subHeader={t('contributionStatsSubHeader')}
+          />
         </section>
         <section className="mt-9 mt-md-12">
           <h3>{t('contributionTrackerHeader')}</h3>

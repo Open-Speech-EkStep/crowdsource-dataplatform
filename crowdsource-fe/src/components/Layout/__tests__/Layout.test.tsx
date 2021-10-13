@@ -35,13 +35,13 @@ describe('Layout', () => {
     expect(screen.getByTestId('Footer')).toBeInTheDocument();
   });
 
-  it('should set to default contribution language', async () => {
+  it('should set contribution language to default in local storage', async () => {
     setup();
 
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
-      .mockImplementation(() => 'English');
+      .mockImplementation(() => null);
 
-    expect(localStorage.getItem).toBeCalled();
+    expect(localStorage.setItem).toBeCalledWith('contributionLanguage', 'English');
   });
 });

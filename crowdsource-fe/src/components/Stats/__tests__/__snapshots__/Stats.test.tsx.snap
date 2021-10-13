@@ -10,7 +10,7 @@ exports[`Stats should render the component and matches it against stored snapsho
       data-testid="StatsRow"
     >
       <div
-        class="stat col-md-3 col-12"
+        class="stat col-md-6 col-12"
       >
         <div
           class="d-flex flex-column align-items-center py-7 py-md-0"
@@ -28,7 +28,7 @@ exports[`Stats should render the component and matches it against stored snapsho
         </div>
       </div>
       <div
-        class="stat col-md-3 col-12"
+        class="stat col-md-6 col-12"
       >
         <div
           class="d-flex flex-column align-items-center py-7 py-md-0"

@@ -1,25 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContributionStats should render the component and matches it against stored snapshot 1`] = `
+exports[`ContributionStatsByLanguage should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <div
-    data-testid="ContributionStats"
-  >
-    <header
-      class="d-flex flex-column"
-    />
+  <div>
     <div
       class="mt-4 mt-md-5"
     >
       <div
-        class="root rounded-20 bg-info px-7 px-md-0 py-md-7"
+        class="root bg-info px-7 px-md-0 py-md-7"
       >
         <div
           class="m-md-0 row"
           data-testid="StatsRow"
         >
           <div
-            class="stat col-md-3 col-12"
+            class="stat col-md-4 col-12"
           >
             <div
               class="d-flex flex-column align-items-center py-7 py-md-0"
@@ -27,25 +22,7 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                2
-              </span>
-              <span
-                class="text-light mt-1 display-3 text-center"
-              >
-                languages
-              </span>
-            </div>
-          </div>
-          <div
-            class="stat col-md-3 col-12"
-          >
-            <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
-            >
-              <span
-                class="count text-warning display-1"
-              >
-                9
+                6
               </span>
               <span
                 class="text-light mt-1 display-3 text-center"
@@ -55,7 +32,7 @@ exports[`ContributionStats should render the component and matches it against st
             </div>
           </div>
           <div
-            class="stat col-md-3 col-12"
+            class="stat col-md-4 col-12"
           >
             <div
               class="d-flex flex-column align-items-center py-7 py-md-0"
@@ -73,7 +50,7 @@ exports[`ContributionStats should render the component and matches it against st
             </div>
           </div>
           <div
-            class="stat col-md-3 col-12"
+            class="stat col-md-4 col-12"
           >
             <div
               class="d-flex flex-column align-items-center py-7 py-md-0"
@@ -81,7 +58,7 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                7 seconds
+                3 minutes
               </span>
               <span
                 class="text-light mt-1 display-3 text-center"

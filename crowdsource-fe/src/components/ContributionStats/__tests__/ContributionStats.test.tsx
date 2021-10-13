@@ -1,3 +1,5 @@
+import { SWRConfig } from 'swr';
+
 import { render, verifyAxeTest, screen, waitForElementToBeRemoved } from 'utils/testUtils';
 
 import ContributionStats from '../ContributionStats';
@@ -58,31 +60,26 @@ describe('ContributionStats', () => {
     );
 
     const renderResult = render(
-      <ContributionStats initiativeMedia={value} initiative="suno">
-        {' '}
-      </ContributionStats>
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <ContributionStats initiative={value} />
+      </SWRConfig>
     );
-    value !== 'asr' ? waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner')) : null;
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     return renderResult;
   };
 
   async () => {
-    verifyAxeTest(await setup(undefined));
+    verifyAxeTest(await setup('suno'));
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
+    const { asFragment } = await setup('suno');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should not render the data when "no" data is present for inititative', async () => {
-    await setup('parallel');
-    expect(screen.getByTestId('StatsRow').children.length).toEqual(0);
-  });
-
   it('should render the result for initiative home page', async () => {
-    await setup('asr');
+    await setup('suno');
     expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
     expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
     expect(screen.getByText('durationValidated')).toBeInTheDocument();
@@ -91,11 +88,13 @@ describe('ContributionStats', () => {
     expect(screen.getByText('9')).toBeInTheDocument();
   });
 
-  it('should render the result for landing page', async () => {
-    await setup();
-    expect(screen.getByText('BOLO INDIA')).toBeInTheDocument();
-    expect(screen.getByText('SUNO INDIA')).toBeInTheDocument();
-    expect(screen.getByText('DEKHO INDIA')).toBeInTheDocument();
-    expect(screen.getByText('LIKHO INDIA')).toBeInTheDocument();
+  it('should render the result for likho initiative home page', async () => {
+    await setup('bolo');
+    expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
+    expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
+    expect(screen.getByText('durationValidated')).toBeInTheDocument();
+    expect(screen.getByText('languages')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('283')).toBeInTheDocument();
   });
 });

@@ -28,4 +28,12 @@ export const INITIATIVE_CUMULATIVE_VALUE = {
     { durationTranscribed: 'total_contributions', isFormat: 'true' },
     { durationValidated: 'total_validations', isFormat: 'true' },
   ],
+  bolo: [
+    { languages: 'total_languages', isFormat: 'false' },
+    { peopleParticipated: 'peopleParticipated', isFormat: 'false' },
+    { durationTranscribed: 'total_contributions', isFormat: 'true' },
+    { durationValidated: 'total_validations', isFormat: 'true' },
+  ],
+  likho: [],
+  dekho: [],
 } as const;

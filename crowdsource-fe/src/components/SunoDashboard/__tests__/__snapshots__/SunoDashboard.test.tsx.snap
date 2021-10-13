@@ -92,7 +92,7 @@ exports[`SunoDashboard should render snapshot 1`] = `
         </div>
       </div>
     </div>
-    DataLastUpdated
+    DataLastUpdatedContributionStats
   </div>
 </DocumentFragment>
 `;

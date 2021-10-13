@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 
 import apiPaths from 'constants/apiPaths';
@@ -7,12 +8,13 @@ import type { DataLastUpdated as DataLastUpdatedType } from 'types/DataLastUpdat
 function DataLastUpdated() {
   const { t } = useTranslation();
 
-  const { data: dateTime } = useFetch<Array<DataLastUpdatedType>>(apiPaths.lastUpdatedTime);
+  const { data } = useFetch<Array<DataLastUpdatedType>>(apiPaths.lastUpdatedTime);
 
-  if (dateTime) {
+  if (data) {
+    const lastUpdatedAt = moment(data[0]['timezone']).format('DD-MM-YYYY, h:mm:ss a');
     return (
       <div>
-        {t('dataLastUpdated')}: {dateTime[0].timezone}
+        {t('dataLastUpdated')}: {lastUpdatedAt}
       </div>
     );
   } else {
