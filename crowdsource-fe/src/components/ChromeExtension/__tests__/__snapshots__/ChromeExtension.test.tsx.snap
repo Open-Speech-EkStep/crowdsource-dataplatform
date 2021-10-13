@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chrome Extension should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <button
+      class="info primary btn btn-primary"
+      data-testid="Button"
+      type="button"
+    >
+      Watch Video
+    </button>
+    <button
+      class="info primary btn btn-primary"
+      data-testid="Button"
+      type="button"
+    >
+      Install Now
+    </button>
+  </div>
+</DocumentFragment>
+`;
