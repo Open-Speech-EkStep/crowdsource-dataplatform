@@ -21,6 +21,10 @@ const togglePagesMapping = [
     pathname: '/boloIndia/home',
   },
   {
+    key: 'dekhoIndiaHome',
+    pathname: '/dekhoIndia/home',
+  },
+  {
     key: 'styleGuide',
     pathname: '/style-guide',
   },
