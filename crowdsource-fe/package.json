@@ -20,6 +20,7 @@
     "test:lh-ci": "rimraf .lighthouseci/ && cross-env LIGHTHOUSE_CI_PORT=8080 lhci --config=./.lighthouserc.js autorun",
     "node-talisman": "node-talisman --pattern=\"src/**/*.ts\" && node-talisman --pattern=\"src/**/*.tsx\"",
     "check": "npm run lint && npm run stylelint && npm run typecheck && cross-env CI=true npm run test:coverage -- --runInBand && npm run node-talisman",
+    "prebuild": "npm run check",
     "build": "next build",
     "build:docker": "next build",
     "start": "cross-env NODE_ENV=production node server.js",

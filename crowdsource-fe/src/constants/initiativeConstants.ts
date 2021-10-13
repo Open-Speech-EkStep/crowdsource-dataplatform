@@ -31,7 +31,7 @@ export const INITIATIVE_CUMULATIVE_VALUE = {
   bolo: [
     { languages: 'total_languages', isFormat: 'false' },
     { peopleParticipated: 'peopleParticipated', isFormat: 'false' },
-    { durationTranscribed: 'total_contributions', isFormat: 'true' },
+    { durationRecorded: 'total_contributions', isFormat: 'true' },
     { durationValidated: 'total_validations', isFormat: 'true' },
   ],
   likho: [],
