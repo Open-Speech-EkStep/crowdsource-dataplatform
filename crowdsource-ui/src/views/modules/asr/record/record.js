@@ -14,7 +14,7 @@ const {
 } = require('../common/utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
-const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE,INITIATIVES ,config} = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const {
   setCurrentSentenceIndex,
@@ -33,8 +33,8 @@ const {
 const speakerDetailsKey = 'speakerDetails';
 const { initializeFeedbackModal } = require('../common/feedback');
 const { setDataSource } = require('../common/sourceInfo');
-const sunoCountKey = 'sunoCount';
-const currentIndexKey = 'sunoCurrentIndex';
+const asrCountKey = `${config.initiativeKey_1}Count`;
+const currentIndexKey = `${config.initiativeKey_1}CurrentIndex`;
 let localeStrings;
 window.sunoIndia = {};
 
@@ -67,7 +67,7 @@ function uploadToServer(cb) {
   fd.append('country', localStorage.getItem('country') || '');
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
-  fd.append('type', MODULE.suno['api-type']);
+  fd.append('type', INITIATIVES.asr.type);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -113,7 +113,7 @@ const setAudioPlayer = function () {
   myAudio.addEventListener('play', () => {
     $('#edit').removeAttr('disabled');
     $('#virtualKeyBoardBtn').removeAttr('disabled');
-    $('#edit-text-suno').addClass('edit-text');
+    $('#edit-text-asr').addClass('edit-text');
     hideElement(play);
     hideElement(resume);
     showElement(pause);
@@ -154,7 +154,7 @@ const setAudioPlayer = function () {
     playAudio();
     $('#edit').removeAttr('disabled');
     $('#virtualKeyBoardBtn').removeAttr('disabled');
-    $('#edit-text-suno').addClass('edit-text');
+    $('#edit-text-asr').addClass('edit-text');
   });
 
   pause.on('click', pauseAudio);
@@ -162,7 +162,7 @@ const setAudioPlayer = function () {
   replay.on('click', () => {
     replayAudio();
     $('#edit').removeAttr('disabled');
-    $('#edit-text-suno').addClass('edit-text');
+    $('#edit-text-asr').addClass('edit-text');
   });
 
   resume.on('click', () => {
@@ -270,7 +270,7 @@ function markContributionSkipped() {
     browser: getBrowserInfo(),
     state_region: state_region,
     country: country,
-    type: MODULE.suno["api-type"]
+    type: INITIATIVES.asr.type
   };
   fetch('/skip', {
     method: 'POST',
@@ -319,14 +319,14 @@ function addListeners() {
     hideElement($('#edit-error-row'))
     const previousActiveError = $("#edit-error-text .error-active");
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
-    $("#edit-text-suno").removeClass('edit-error-area').addClass('edit-text');
+    $("#edit-text-asr").removeClass('edit-error-area').addClass('edit-text');
     closeEditor();
   })
 
   $submitButton.on('click', () => {
     setInput("");
     $("#edit").attr("disabled", true);
-    $("#edit-text-suno").removeClass("edit-text");
+    $("#edit-text-asr").removeClass("edit-text");
     hideElement($('#keyboardBox'));
     hideElement(cancelButton);
     hideElement($submitButton)
@@ -359,7 +359,7 @@ function addListeners() {
   $skipButton.on('click', () => {
     disableSkipButton();
     $("#edit").attr("disabled", true);
-    $("#edit-text-suno").removeClass("edit-text");
+    $("#edit-text-asr").removeClass("edit-text");
     if ($('#pause').hasClass('d-none')) {
       $('#pause').trigger('click');
     }
@@ -377,7 +377,7 @@ function addListeners() {
     hideElement($('#edit-error-row'))
     const previousActiveError = $("#edit-error-text .error-active");
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
-    $("#edit-text-suno").removeClass('edit-error-area');
+    $("#edit-text-asr").removeClass('edit-error-area');
     cancelButton.attr("disabled", true);
     closeEditor();
 
@@ -542,7 +542,7 @@ function executeOnLoad() {
       return;
     }
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html', MODULE.suno.value);
+    onChangeUser('./record.html', INITIATIVES.asr.value);
     onOpenUserDropDown();
 
     localStorage.setItem('contribution_audioPlayed', false);
@@ -573,7 +573,7 @@ function executeOnLoad() {
       })
       .then(sentenceData => {
         sunoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
+        localStorage.setItem(asrCountKey, sunoIndia.sentences.length);
         $loader.hide();
         if (sunoIndia.sentences.length === 0) {
           showNoSentencesMessage();
@@ -613,7 +613,7 @@ $(document).ready(() => {
   } else {
     showOrHideExtensionCloseBtn();
   }
-  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
   hideElement($('#keyboardBox'));
   initializeFeedbackModal();
   getLocaleString().then(() => {

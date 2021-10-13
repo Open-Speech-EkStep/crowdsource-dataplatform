@@ -6,7 +6,7 @@
  */
 
 const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES } = require('./constants');
 const { isMobileDevice } = require('./common');
 
 function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
@@ -16,7 +16,7 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
   if (inputTextLength > 2 && error == null) {
     callback1();
     const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
-    if (currentModule == 'suno') {
+    if (currentModule == INITIATIVES.asr.value) {
       if (isAudioPlayed == 'true') {
         $submitEditButton.removeAttr('disabled');
       } else {
@@ -32,7 +32,7 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
     const previousActiveError = $("#edit-error-text .error-active");
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-error-row").addClass('d-none');
-    $("#edit-text").add($('#edit-text-suno ')).removeClass('edit-error-area').addClass('edit-text');
+    $("#edit-text").add($('#edit-text-asr')).removeClass('edit-error-area').addClass('edit-text');
   } else {
     if (error && error.type == 'noText') {
       callback2()
@@ -52,7 +52,7 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
       $("#edit-error-row").removeClass('d-none');
     if(error && error.type) {
       $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
-      $("#edit-text").add($('#edit-text-suno')).addClass('edit-error-area').removeClass('edit-text');
+      $("#edit-text").add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
     }
   }
 }
@@ -151,7 +151,7 @@ function lngtype(text) {
     "Santali": /^[\u0020-\u007F]+$/,
     "Maithili": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
   }
-  if (currentModule == 'suno') {
+  if (currentModule == INITIATIVES.asr.value) {
     langdic = {
       "Assamese": /^[\u0980-\u09FF\u0030-\u0039]+$/,
       "Bengali": /^[\u0980-\u09FF\u0030-\u0039]+$/,
@@ -182,11 +182,11 @@ function lngtype(text) {
 
   const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
 
-  if (currentModule == 'suno' && specialSymbols.test(newText) == true) {
+  if (currentModule == INITIATIVES.asr.value && specialSymbols.test(newText) == true) {
     return { type: 'symbol' }
   }
 
-  const contributionLanguage = currentModule === 'likho' ? localStorage.getItem(LIKHO_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const contributionLanguage = currentModule === INITIATIVES.parallel.value ? localStorage.getItem(PARALLEL_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
   Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true
     if (value.test(newText) == true) {   //Check Unicode to see which one is true

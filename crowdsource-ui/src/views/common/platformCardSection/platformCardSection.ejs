@@ -7,10 +7,10 @@
         <div class="container-fluid px-0">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
             <ul class="nav nav-tabs border-0 mb-2 mb-lg-0 mb-md-0" role="tablist" id="tabBar">
-              <li id="sunoTab" role="presentation" class="active" data-target="#carouselExampleIndicators" data-slide-to="0"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="suno" role="tab" data-toggle="tab"><%= __(config.initiative_1)%></a></li>
-              <li id="boloTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="1"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="bolo" role="tab" data-toggle="tab"><%= __(config.initiative_2)%></a></li>
-              <li id="likhoTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="2"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="likho" role="tab" data-toggle="tab"><%= __(config.initiative_3)%></a></li>
-              <li id="dekhoTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="3"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="dekho" role="tab" data-toggle="tab"><%= __(config.initiative_4)%></a></li>
+              <li id="asrTab" role="presentation" class="active" data-target="#carouselExampleIndicators" data-slide-to="0"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="asr" role="tab" data-toggle="tab"><%= __(config.initiative_1)%></a></li>
+              <li id="textTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="1"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="text" role="tab" data-toggle="tab"><%= __(config.initiative_2)%></a></li>
+              <li id="parallelTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="2"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="parallel" role="tab" data-toggle="tab"><%= __(config.initiative_3)%></a></li>
+              <li id="ocrTab" role="presentation" data-target="#carouselExampleIndicators" data-slide-to="3"><a href="#" class="text-decoration-none text-btn-primary" aria-controls="ocr" role="tab" data-toggle="tab"><%= __(config.initiative_4)%></a></li>
             </ul>
 
             <div id="platform_inner" class="carousel-inner mt-5 mt-lg-0 mt-md-0">
@@ -25,13 +25,13 @@
                   <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                     <div class="row m-0">
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-cont-image m-auto">
+                        <div class="asr-cont-image m-auto">
                           <img src="/img/listen2.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Contribute by typing what you hear on audio')%></p>
                       </div>
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-val-image m-auto">
+                        <div class="asr-val-image m-auto">
                           <img src="/img/validate.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Validate the texts transcribed by others')%></p>
@@ -47,20 +47,20 @@
                 <div class="row pt-lg-5 pb-lg-4 py-md-5 pb-0 px-lg-4 px-md-4 px-0 m-0">
                   <div class="col-lg-4 col-md-4 col-12 p-0">
                     <div class="text-left d-inline-flex mt-lg-4 mt-md-4 mb-4 mb-lg-0 mb-md-0 w-100">
-                      <img src="<%= `/img/${locale}-BoloIndiaLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
+                      <img src="<%= `/img/${locale}-textLogo.svg`%>" class="pb-2 landing-img-logo" alt="logo" width="119" height="107">
                       <p class="label-text mb-4 mt-lg-3 mt-md-3 mt-3"><%= __('Enrich your language by donating your voice')%></p>
                     </div>
                   </div>
                   <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                     <div class="row m-0">
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-cont-image m-auto">
+                        <div class="asr-cont-image m-auto">
                           <img src="/img/say.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Contribute your voice by recording the sentence')%></p>
                       </div>
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-val-image m-auto">
+                        <div class="asr-val-image m-auto">
                           <img src="/img/validate.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Validate the audios recorded by others')%></p>
@@ -84,13 +84,13 @@
                   <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                     <div class="row m-0">
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-cont-image m-auto">
+                        <div class="asr-cont-image m-auto">
                           <img src="/img/translate.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Contribute by translating the prompted text in your language')%></p>
                       </div>
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-val-image m-auto">
+                        <div class="asr-val-image m-auto">
                           <img src="/img/validate.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Validate the translations contributed by others')%></p>
@@ -113,13 +113,13 @@
                   <div class="col-lg-8 col-md-8 col-12 p-0 mt-2 mt-lg-0 mt-md-0">
                     <div class="row m-0">
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-cont-image m-auto">
+                        <div class="asr-cont-image m-auto">
                           <img src="/img/look.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Contribute by labelling the image')%></p>
                       </div>
                       <div class="col-6 p-0 text-center">
-                        <div class="suno-val-image m-auto">
+                        <div class="asr-val-image m-auto">
                           <img src="/img/validate.svg" height="130" width="130">
                         </div>
                         <p class="image-text m-auto"><%= __('Validate the images labelled by others')%></p>

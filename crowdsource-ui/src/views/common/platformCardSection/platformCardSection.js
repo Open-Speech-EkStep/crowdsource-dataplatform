@@ -1,32 +1,32 @@
 
 $(document).ready(function () {
-  const $sunoTab = $('#sunoTab');
-  const $boloTab = $('#boloTab');
-  const $likhoTab = $('#likhoTab');
-  const $dekhoTab = $('#dekhoTab');
+  const $asrTab = $('#asrTab');
+  const $textTab = $('#textTab');
+  const $parallelTab = $('#parallelTab');
+  const $ocrTab = $('#ocrTab');
 
-  $sunoTab.on('click', function () {
+  $asrTab.on('click', function () {
     const $tabBar = document.getElementById('tabBar');
     sideScroll($tabBar,'left',25,100,10);
   });
 
-  $boloTab.on('click', function () {
+  $textTab.on('click', function () {
     const prev = $('#carouselExampleIndicators .nav-tabs li.active');
     const $tabBar = document.getElementById('tabBar');
     const prevActiveTab = prev[0].id;
-    const direction = prevActiveTab == $sunoTab[0].id ? 'right' :'left';
+    const direction = prevActiveTab == $asrTab[0].id ? 'right' :'left';
     sideScroll($tabBar,direction,25,10,10);
   });
 
-  $likhoTab.on('click', function () {
+  $parallelTab.on('click', function () {
     const prev = $('#carouselExampleIndicators .nav-tabs li.active');
     const $tabBar = document.getElementById('tabBar');
     const prevActiveTab = prev[0].id;
-    const direction = prevActiveTab == $dekhoTab[0].id ? 'left' :'right';
+    const direction = prevActiveTab == $ocrTab[0].id ? 'left' :'right';
     sideScroll($tabBar,direction,25,120,10);
   });
 
-  $dekhoTab.on('click', function () {
+  $ocrTab.on('click', function () {
     const $tabBar = document.getElementById('tabBar');
     sideScroll($tabBar,'right',25,100,10);
   });
@@ -52,23 +52,23 @@ $(document).ready(function () {
     const $tabBar = document.getElementById('tabBar');
     const prevActiveTab = prev[0].id;
     if(evt.direction === 'right') {
-       if(prevActiveTab === "likhoTab") {
+       if(prevActiveTab === "parallelTab") {
         sideScroll($tabBar,'left',25,120,10);
        } 
-       if(prevActiveTab === "boloTab") {
+       if(prevActiveTab === "textTab") {
         sideScroll($tabBar,'left',25,100,10);
        }
-       if(prevActiveTab === "sunoTab") {
+       if(prevActiveTab === "asrTab") {
         sideScroll($tabBar,'right',25,210,10);
       }
     } else {
-      if(prevActiveTab === "likhoTab") {
+      if(prevActiveTab === "parallelTab") {
         sideScroll($tabBar,'right',25,100,10);
       }
-      if(prevActiveTab === "sunoTab") {
+      if(prevActiveTab === "asrTab") {
         sideScroll($tabBar,'right',25,120,10);
       }
-      if(prevActiveTab === "dekhoTab") {
+      if(prevActiveTab === "ocrTab") {
         sideScroll($tabBar,'left',25,210,10);
       }
     }

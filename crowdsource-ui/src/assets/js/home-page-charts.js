@@ -1,7 +1,6 @@
-const TOP_LANGUAGES_BY_HOURS = 'topLanguagesByHours';
-const TOP_LANGUAGES_BY_SPEAKERS = 'topLanguagesBySpeakers';
 const { calculateTime, formatTime, formatTimeForLegends, getJson, translate } = require('./utils');
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
+const { INITIATIVES, TOP_LANGUAGES_BY_HOURS ,TOP_LANGUAGES_BY_SPEAKERS} = require('./constants');
 
 const getTotalParticipation = data => {
   let validation_count = 0;
@@ -255,7 +254,7 @@ function showByHoursChart() {
   if (chartReg['chart'] && chartData && chartData.length) {
     chartReg['chart'].dispose();
   }
-  drawTopLanguageChart(chartData, 'bolo');
+  drawTopLanguageChart(chartData, INITIATIVES.text.value);
 }
 
 function showBySpeakersChart() {
@@ -264,7 +263,7 @@ function showBySpeakersChart() {
   }
   const topLanguagesBySpeakers = localStorage.getItem(TOP_LANGUAGES_BY_SPEAKERS);
   const chartData = topLanguagesBySpeakers ? JSON.parse(topLanguagesBySpeakers).reverse() : [];
-  drawTopLanguageChart(chartData, 'bolo', 'speaker');
+  drawTopLanguageChart(chartData, INITIATIVES.text.value, 'speaker');
 }
 
 module.exports = {

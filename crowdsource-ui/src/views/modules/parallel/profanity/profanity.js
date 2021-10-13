@@ -9,14 +9,14 @@ const {
   onHover,
   afterHover
 } = require('../common/utils');
-const { LOCALE_STRINGS, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { LOCALE_STRINGS, CURRENT_MODULE ,INITIATIVES,config} = require('../common/constants');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const speakerDetailsKey = 'profanityUserDetails';
 
-const currentIndexKey = 'likhoCurrentIndex';
-const sentencesKey = 'likhoSentencesKey';
-const likhoCountKey = 'likhoCount';
+const currentIndexKey = `${config.initiativeKey_3}CurrentIndex`;
+const sentencesKey = `${config.initiativeKey_3}SentencesKey`;
+const parallelCountKey = `${config.initiativeKey_3}Count`;
 // eslint-disable-next-line no-unused-vars
 let localeStrings;
 
@@ -172,38 +172,10 @@ function showNoSentencesMessage() {
   hideElement($('#progress-row'))
   showElement($('#no-sentences-row'))
   hideElement($('#skip_btn_row'));
-  // hideElement($('#report_btn'));
   hideElement($("#test-mic-speakers"));
   hideElement($('#instructive-msg'));
   hideElement($('#editor-row'));
-  // hideElement($('#thankyou-text'));
 }
-
-// const handleSubmitFeedback = function () {
-//   const contributionLanguage = localStorage.getItem("contributionLanguage");
-//   const otherText = $("#other_text").val();
-//   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-//
-//   const reqObj = {
-//     sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
-//     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
-//     language: contributionLanguage,
-//     userName: speakerDetails ? speakerDetails.userName : '',
-//     source: "contribution"
-//   };
-//   reportSentenceOrRecording(reqObj).then(function (resp) {
-//     if (resp.statusCode === 200) {
-//       $('#skip_button').click();
-//       $("#report_sentence_modal").modal('hide');
-//       $("#report_sentence_thanks_modal").modal('show');
-//       $("#report_submit_id").attr("disabled", true);
-//       $("input[type=radio][name=reportRadio]").each(function () {
-//         $(this).prop("checked", false);
-//       });
-//       $("#other_text").val("");
-//     }
-//   });
-// }
 
 const setSentence = function (text) {
   $('#captured-text').text(text);
@@ -222,41 +194,9 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-// let selectedReportVal = '';
 const initialize = function () {
   const totalItems = likhoIndia.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-
-  // $("#start_contributing_id").on('click', function () {
-  //   const data = localStorage.getItem("speakerDetails");
-  //   if (data !== null) {
-  //     const speakerDetails = JSON.parse(data);
-  //     speakerDetails.language = language;
-  //     localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
-  //   }
-  //   location.href = './home.html';
-  // });
-
-  // const $reportModal = $("#report_sentence_modal");
-
-  // $("#report_submit_id").on('click', handleSubmitFeedback);
-  //
-  // $("#report_btn").on('click', function () {
-  //   $reportModal.modal('show');
-  // });
-  //
-  // $("#report_close_btn").on("click", function () {
-  //   $reportModal.modal('hide');
-  // });
-  //
-  // $("#report_sentence_thanks_close_id").on("click", function () {
-  //   $("#report_sentence_thanks_modal").modal('hide');
-  // });
-  //
-  // $("input[type=radio][name=reportRadio]").on("change", function () {
-  //   selectedReportVal = this.value;
-  //   $("#report_submit_id").attr("disabled", false);
-  // });
 
   const translation = likhoIndia.sentences[currentIndex];
   addListeners();
@@ -270,7 +210,6 @@ const initialize = function () {
 };
 
 function executeOnLoad() {
-  // toggleFooterPosition();
   setPageContentHeight();
   setFooterPosition();
   const $loader = $('#loader');
@@ -278,13 +217,7 @@ function executeOnLoad() {
   const fromLanguage = localStorage.getItem('contributionLanguage');
   localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   $('#from-label').text(fromLanguage);
-
-  // fetchLocationInfo().then(res => {
-  //   return res.json()
-  // }).then(response => {
-  //   localStorage.setItem("state_region", response.regionName);
-  //   localStorage.setItem("country", response.country);
-  // }).catch(console.log);
+  
   try {
     const localSpeakerData = localStorage.getItem(speakerDetailsKey);
     const localSpeakerDataParsed = JSON.parse(localSpeakerData);
@@ -345,7 +278,7 @@ function executeOnLoad() {
           setFooterPosition();
 
           likhoIndia.sentences = sentenceData.data;
-          localStorage.setItem(likhoCountKey, likhoIndia.sentences.length);
+          localStorage.setItem(parallelCountKey, likhoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
@@ -372,7 +305,7 @@ function executeOnLoad() {
 
 $(document).ready(() => {
   $('#from-label').text(localStorage.getItem('contributionLanguage'));
-  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

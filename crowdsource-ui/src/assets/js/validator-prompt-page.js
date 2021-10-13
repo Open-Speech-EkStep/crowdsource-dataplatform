@@ -6,7 +6,7 @@ const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = re
 const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
-const { MODULE } = require('./constants');
+const { CURRENT_MODULE,INITIATIVES ,config,CONTRIBUTION_LANGUAGE} = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { showErrorPopup,redirectToHomeForDirectLanding } = require('./common');
 const visualizer = new Visualizer();
@@ -15,8 +15,8 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-const currentIndexKey = 'boloValidationCurrentIndex';
-const boloValidatorCountKey = 'boloValidatorCount';
+const currentIndexKey = `${config.initiativeKey_2}ValidationCurrentIndex`;
+const textValidatorCountKey = `${config.initiativeKey_2}ValidatorCount`;
 
 window.boloIndiaValidator = {};
 
@@ -237,8 +237,8 @@ function recordValidation(action) {
             userName: speakerDetails && speakerDetails.userName,
             device: getDeviceInfo(),
             browser: getBrowserInfo(),
-            type: MODULE.bolo["api-type"],
-            fromLanguage: localStorage.getItem('contributionLanguage')
+            type: INITIATIVES.text.type,
+            fromLanguage: localStorage.getItem(CONTRIBUTION_LANGUAGE)
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -307,7 +307,7 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     $('#spn-validation-language').html(translate(contributionLanguage));
     hideElement($('#instructions-row'));
     hideElement($('#sentences-row'));
@@ -321,11 +321,11 @@ function showNoSentencesMessage() {
     hideElement($('#report_btn'));
     hideElement($("#test-mic-speakers"));
     $("#validation-container").removeClass("validation-container");
-    $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+    $('#start-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
 }
 
 const handleSubmitFeedback = function () {
-    const contributionLanguage = localStorage.getItem("contributionLanguage");
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const otherText = $("#other_text").val();
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
@@ -354,10 +354,10 @@ const handleSubmitFeedback = function () {
 let selectedReportVal = '';
 $(document).ready(() => {
     redirectToHomeForDirectLanding();
-    localStorage.setItem('module','bolo');
+    localStorage.setItem(CURRENT_MODULE,INITIATIVES.text.value);
     // toggleFooterPosition();
     setPageContentHeight();
-    const language = localStorage.getItem('contributionLanguage');
+    const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (language) {
         updateLocaleLanguagesDropdown(language);
     }
@@ -410,7 +410,7 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',MODULE.bolo.value);
+  onChangeUser('./validator-page.html',INITIATIVES.text.value);
     onOpenUserDropDown();
 
     localStorage.removeItem(currentIndexKey);
@@ -434,7 +434,7 @@ $(document).ready(() => {
         .then((sentenceData) => {
 
         boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
+        localStorage.setItem(textValidatorCountKey, boloIndiaValidator.sentences.length);
       if (boloIndiaValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;

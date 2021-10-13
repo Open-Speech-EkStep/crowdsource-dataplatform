@@ -1,15 +1,14 @@
 const {
   CONTRIBUTION_LANGUAGE,
   TOP_LANGUAGES_BY_HOURS,
-  LIKHO_TO_LANGUAGE,
+  PARALLEL_TO_LANGUAGE,
   ALL_LANGUAGES,
   CURRENT_MODULE,
   SPEAKER_DETAILS_KEY,
   DEFAULT_CON_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   AGGREGATED_DATA_BY_LANGUAGE,
-  MODULE,
-  BADGES_NAME,BADGES_STRING
+  BADGES_NAME,BADGES_STRING,INITIATIVES,BADGES_API_TEXT
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale, showLanguagePopup } = require('./locale');
@@ -38,8 +37,8 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
     );
     const topLanguagesResult = [...topLanguagesData];
     const contributedLanguage =
-      type == 'likho'
-        ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE)
+      type == INITIATIVES.parallel.value
+        ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(PARALLEL_TO_LANGUAGE)
         : localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const topLanguageArray = [];
     let topLanguages = [];
@@ -48,7 +47,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
       topLanguageArray.push(contributedLanguageHours);
       let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
       remainingLanguage =
-        type == 'dekho' || type == 'likho'
+        type == INITIATIVES.ocr.value || type == INITIATIVES.parallel.value
           ? remainingLanguage.sort((a, b) =>
               Number(a.total_contribution_count) > Number(b.total_contribution_count) ? -1 : 1
             )
@@ -58,7 +57,7 @@ const getContributedAndTopLanguage = (topLanguagesData, type) => {
       topLanguages = remainingLanguage.slice(0, 3);
     } else {
       if (contributedLanguage != topLanguagesData[0].language) {
-        if (type == 'suno' || type == 'bolo') {
+        if (type == INITIATIVES.asr.value || type == INITIATIVES.text.value) {
           topLanguageArray.push({ language: contributedLanguage, total_contributions: '0.000' });
         } else {
           topLanguageArray.push({ language: contributedLanguage, total_contribution_count: '0' });
@@ -81,8 +80,8 @@ const getTopLanguage = (topLanguagesData, type, keyInSentence, keyInHrs) => {
     );
     const topLanguagesResult = [...topLanguagesData];
     const contributedLanguage =
-      type == 'likho'
-        ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(LIKHO_TO_LANGUAGE)
+      type == INITIATIVES.parallel.value
+        ? localStorage.getItem(CONTRIBUTION_LANGUAGE) + '-' + localStorage.getItem(PARALLEL_TO_LANGUAGE)
         : localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const topLanguageArray = [];
     let topLanguages = [];
@@ -91,13 +90,13 @@ const getTopLanguage = (topLanguagesData, type, keyInSentence, keyInHrs) => {
       topLanguageArray.push(contributedLanguageHours);
       let remainingLanguage = topLanguagesData.filter(item => item.language !== contributedLanguage);
       remainingLanguage =
-        type == 'dekho' || type == 'likho'
+        type == INITIATIVES.ocr.value || type == INITIATIVES.parallel.value
           ? remainingLanguage.sort((a, b) => (Number(a[keyInSentence]) > Number(b[keyInSentence]) ? -1 : 1))
           : remainingLanguage.sort((a, b) => (Number(a[keyInHrs]) > Number(b[keyInHrs]) ? -1 : 1));
       topLanguages = remainingLanguage.slice(0, 3);
     } else {
       if (contributedLanguage != topLanguagesData[0].language) {
-        if (type == 'suno' || type == 'bolo') {
+        if (type == INITIATIVES.asr.value || type == INITIATIVES.text.value) {
           topLanguageArray.push({ language: contributedLanguage, [keyInHrs]: '0.000' });
         } else {
           topLanguageArray.push({ language: contributedLanguage, [keyInSentence]: '0' });
@@ -142,7 +141,7 @@ function redirectToLocalisedPage() {
     changeLocale(locale);
   } else {
     const language = ALL_LANGUAGES.find(ele => ele.id === locale);
-    if (language && module != 'likho') {
+    if (language && module != INITIATIVES.parallel.value) {
       updateLocaleLanguagesDropdown(language.value);
     }
   }
@@ -199,7 +198,7 @@ const showFunctionalCards = (type, fromLanguage, toLanguage) => {
         getJson('/aggregated-json/enableDisableCards.json')
           .then(jsonData => {
             var language = fromLanguage;
-            if (type == 'parallel' && toLanguage) {
+            if (type == INITIATIVES.parallel.value && toLanguage) {
               language = `${fromLanguage}-${toLanguage}`;
             }
             const filteredData =
@@ -256,12 +255,12 @@ const getTop3Languages = function (functionalFlow = '', currentModule = '', cont
   const sortingKey =
     functionalFlow == 'validator'
       ? 'total_validation_count'
-      : currentModule == 'bolo'
+      : currentModule == INITIATIVES.text.value
       ? 'total_contributions'
       : 'total_contribution_count';
 
   const sortingLanguages =
-    currentModule == 'dekho' || currentModule == 'likho'
+    currentModule == INITIATIVES.ocr.value || currentModule == INITIATIVES.parallel.value
       ? topLanguages.sort((a, b) => (Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1)).slice(0, 3)
       : topLanguages.sort((a, b) => (Number(a[sortingKey]) > Number(b[sortingKey]) ? -1 : 1)).slice(0, 3);
 
@@ -292,6 +291,10 @@ const getTop3Languages = function (functionalFlow = '', currentModule = '', cont
   return sortingLanguages;
 };
 
+const getInitiativeType = function(initiative){
+  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
+}
+
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
@@ -302,24 +305,26 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   $('#user-contribution-count').text(data.contributionCount);
 
   let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  let likhoContributionLanguage;
+  let parallelContributionLanguage;
   const module = localStorage.getItem(CURRENT_MODULE);
 
-  if (module === 'likho') {
-    const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
-    const likhoPairLanguage = contributionLanguage + '-' + toLanguage;
-    likhoContributionLanguage = likhoPairLanguage;
+  if (module === INITIATIVES.parallel.value) {
+    const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
+    const parallelPairLanguage = contributionLanguage + '-' + toLanguage;
+    parallelContributionLanguage = parallelPairLanguage;
   }
 
   const top3Languages = getTop3Languages(
     functionalFlow,
     module,
-    module === 'likho' ? likhoContributionLanguage : contributionLanguage
+    module === INITIATIVES.parallel.value ? parallelContributionLanguage : contributionLanguage
   );
   const isLanguageOnTop = isInTopLanguage(
     top3Languages,
-    module === 'likho' ? likhoContributionLanguage : contributionLanguage
+    module === INITIATIVES.parallel.value ? parallelContributionLanguage : contributionLanguage
   );
+
+  const initiativeType = getInitiativeType(module);
   if (isLanguageOnTop) {
     $('#languageInTopWeb').removeClass('d-none');
     $('#languageInTopMob').removeClass('d-none');
@@ -338,13 +343,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   }
 
   const source = functionalFlow === 'validator' ? 'validate' : 'contribute';
-  $('#badge_1_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_1', source, MODULE[module]["api-type"]));
-  $('#badge_2_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_2', source, MODULE[module]["api-type"]));
-  $('#badge_3_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_3', source, MODULE[module]["api-type"]));
-  $('#badge_4_badge_link_img').attr(
-    'src',
-    getLanguageBadge(contributionLanguage, 'badge_4', source, MODULE[module]["api-type"])
-  );
+  $('#badge_1_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_1', source, initiativeType));
+  $('#badge_2_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_2', source, initiativeType));
+  $('#badge_3_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_3', source, initiativeType));
+  $('#badge_4_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_4', source, initiativeType));
 
   if (data.isNewBadge) {
     $('.new-badge-msg').removeClass('d-none');
@@ -378,12 +380,12 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     if (functionalFlow === 'validator') {
       $('#reward-img').attr(
         'src',
-        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'validate', MODULE[module]["api-type"])
+        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'validate', initiativeType)
       );
     } else {
       $('#reward-img').attr(
         'src',
-        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'contribute', MODULE[module]["api-type"])
+        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'contribute', initiativeType)
       );
     }
   } else if (data.contributionCount === 0) {
@@ -415,7 +417,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
       const badgeType = data.currentBadgeType;
       $('#thankyou-last-badge').attr(
         'src',
-        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'contribute', MODULE[module]["api-type"])
+        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'contribute', initiativeType)
       );
       const badgeTypeTranslation = toPascalCase(translate(BADGES_NAME[badgeType.toLowerCase()]));
       $('#last-bagde-earned').html(badgeTypeTranslation);
@@ -435,7 +437,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   const $badge_3_Badge = $('#badge_3_badge_link');
   const $badge_4_BadgeLink = $('#badge_4_badge_link_img');
   const $badge_4_Badge = $('#badge_4_badge_link');
-  if (data.currentBadgeType.toLowerCase() == 'bronze') {
+  if (data.currentBadgeType.toLowerCase() == BADGES_API_TEXT.badge_1) {
     $badge_1_Badge.attr('disabled', false);
     $badge_1_BadgeLink.attr('title', 'Download Badge_1 Badge');
     $('.downloadable_badges').append($badge_1_Badge);
@@ -444,7 +446,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $badge_2_BadgeLink.removeClass('disable');
     $badge_1_BadgeLink.addClass('enable');
     $badge_1_BadgeLink.removeClass('disable');
-  } else if (data.currentBadgeType.toLowerCase() === 'silver') {
+  } else if (data.currentBadgeType.toLowerCase() === BADGES_API_TEXT.badge_2) {
     $badge_1_Badge.attr('disabled', false);
     $badge_1_BadgeLink.attr('title', 'Download Badge_1 Badge');
     $badge_2_Badge.attr('disabled', false);
@@ -458,7 +460,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $badge_2_BadgeLink.addClass('enable');
     $badge_2_BadgeLink.removeClass('disable');
     $badge_3_BadgeLink.removeClass('disable');
-  } else if (data.currentBadgeType.toLowerCase() === 'gold') {
+  } else if (data.currentBadgeType.toLowerCase() === BADGES_API_TEXT.badge_3) {
     $badge_1_Badge.attr('disabled', false);
     $badge_2_Badge.attr('disabled', false);
     $badge_3_Badge.attr('disabled', false);
@@ -477,7 +479,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $badge_3_BadgeLink.addClass('enable');
     $badge_3_BadgeLink.removeClass('disable');
     $badge_4_BadgeLink.removeClass('disable');
-  } else if (data.currentBadgeType.toLowerCase() === 'platinum') {
+  } else if (data.currentBadgeType.toLowerCase() === BADGES_API_TEXT.badge_4) {
     $badge_1_Badge.attr('disabled', false);
     $badge_2_Badge.attr('disabled', false);
     $badge_3_Badge.attr('disabled', false);
@@ -562,7 +564,7 @@ const showOrHideExtensionCloseBtn = function () {
   // }
 };
 
-const updateLikhoLocaleLanguagesDropdown = language => {
+const updateParallelLocaleLanguagesDropdown = language => {
   const dropDown = $('#localisation_dropdown');
   const localeLang = ALL_LANGUAGES.find(ele => ele.value == language);
   if (language.toLowerCase() === 'english' || localeLang.hasLocaleText === false) {
@@ -621,7 +623,7 @@ function getCumulativeJsonUrl(language) {
 }
 
 function languageFilter(data, type, language) {
-  if (type == MODULE.likho['api-type']) {
+  if (type == INITIATIVES.parallel.type) {
     language = language.split('-')[0];
   }
   if (language) return data.filter(d => d.language.split('-')[0] == language);
@@ -645,7 +647,7 @@ function setCurrentProgress(type, source = '', language = '') {
     progressDataList = languageFilter(progressDataList, type, language);
     const progressData = reduceList(progressDataList);
     var totalProgress;
-    if (type == MODULE.bolo['api-type'] || type == MODULE.suno['api-type']) {
+    if (type == INITIATIVES.text.type || type == INITIATIVES.asr.type) {
       totalProgress =
         getCountBasedOnSource(source, progressData.total_contributions, progressData.total_validations) || 0;
 
@@ -713,7 +715,7 @@ const updateGoalProgressBar = function (url) {
       const maxValue = Number(data.goal);
       const currentValue = Number(data['current-progress']);
 
-      if (moduleType !== 'likho' && moduleType !== 'dekho') {
+      if (moduleType !== INITIATIVES.parallel.value && moduleType !== INITIATIVES.ocr.value) {
         const { hours, minutes, seconds } = calculateTime(currentValue * 60 * 60);
 
         const formattedCurrentProgress = formatTime(hours, minutes, seconds);
@@ -781,7 +783,7 @@ module.exports = {
   showErrorPopup,
   setLocalisationAndProfile,
   getContributedAndTopLanguage,
-  updateLikhoLocaleLanguagesDropdown,
+  updateParallelLocaleLanguagesDropdown,
   updateLocaleLanguagesDropdown,
   getLanguageTargetInfo,
   showByHoursChartThankyouPage,
@@ -806,4 +808,5 @@ module.exports = {
   languageFilter,
   reduceList,
   redirectToHomeForDirectLanding,
+  getInitiativeType
 };

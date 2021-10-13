@@ -199,8 +199,8 @@ h4,
   font-weight: 400;
 }
 
-#platinum_reward_msg_1,
-#platinum_reward_msg_2 {
+#badge_4_reward_msg_1,
+#badge_4_reward_msg_2 {
   text-align: left;
   width: 100%;
   max-width: fit-content;
@@ -261,15 +261,15 @@ h4,
   }
 
   #sentence_away_msg,
-  #platinum_reward_msg_1,
-  #platinum_reward_msg_2,
+  #badge_4_reward_msg_1,
+  #badge_4_reward_msg_2,
   .thankyou-Know-More {
     width: 100%;
   }
 
   #sentence_away_msg,
-  #platinum_reward_msg_1,
-  #platinum_reward_msg_2,
+  #badge_4_reward_msg_1,
+  #badge_4_reward_msg_2,
   .badges_information,
   .thankyou-Know-More {
     text-align: center;

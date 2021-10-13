@@ -8,12 +8,11 @@ const {
   CONTRIBUTION_LANGUAGE,
   LOCALE_STRINGS,
   SPEAKER_DETAILS_KEY,
-  MODULE,
   DEFAULT_CON_LANGUAGE,
-  INITIATIVES_NAME,config,BADGES_API_TEXT
+  INITIATIVES_NAME,config,BADGES_API_TEXT,INITIATIVES,CURRENT_MODULE
 } = require('./constants');
 const {onChangeUser, showUserProfile, onOpenUserDropDown} = require('./header');
-const {hasUserRegistered} = require('./common');
+const {hasUserRegistered,getInitiativeType} = require('./common');
 
 let badgeLevel = 'badge_1_participation_badge';
 
@@ -106,8 +105,8 @@ const initialise = () => {
   let selectedLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   let source = 'contribute';
   let badge_color = badgeLevel.replace('_participation_badge','');
-  let type = localStorage.getItem("module");
-  let initiative = type === 'home' ? 'asr' : MODULE[type]["api-type"];
+  let type = localStorage.getItem(CURRENT_MODULE);
+  let initiative = type === 'home' ? 'asr' : getInitiativeType(type);
 
   if (type != 'home') {
     // initiative = initiativeValue;
@@ -222,13 +221,13 @@ $(document).ready(function () {
 
 
   $('#back-btn').on('click', () => {
-    if (moduleType == 'bolo') {
+    if (moduleType == INITIATIVES.text.value) {
       location.href = './text/home.html';
-    } else if (moduleType == 'suno') {
+    } else if (moduleType == INITIATIVES.asr.value) {
       location.href = './asr/home.html';
-    } else if (moduleType == 'likho') {
+    } else if (moduleType == INITIATIVES.parallel.value) {
       location.href = './parallel/home.html';
-    } else if (moduleType == 'dekho') {
+    } else if (moduleType == INITIATIVES.ocr.value) {
       location.href = './ocr/home.html';
     } else {
       location.href = './home.html';

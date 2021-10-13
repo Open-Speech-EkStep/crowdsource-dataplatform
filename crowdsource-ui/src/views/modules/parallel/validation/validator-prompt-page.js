@@ -12,9 +12,9 @@ const {
   getLocaleString,
   translate
 } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LIKHO_TO_LANGUAGE,LOCALE_STRINGS} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,LOCALE_STRINGS,config,INITIATIVES} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
-const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateLikhoLocaleLanguagesDropdown,redirectToHomeForDirectLanding} = require('../common/common');
+const {isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup, updateParallelLocaleLanguagesDropdown,redirectToHomeForDirectLanding} = require('../common/common');
 const {setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar} = require('../common/progressBar');
 const {showUserProfile, onChangeUser,onOpenUserDropDown} = require('../common/header');
 const { setDataSource } = require('../common/sourceInfo');
@@ -25,8 +25,8 @@ const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 const {initializeFeedbackModal} = require('../common/feedback');
 
-const currentIndexKey = 'likhoValidatorCurrentIndex';
-const likhoValidatorCountKey = 'likhoValidatorCount';
+const currentIndexKey = `${config.initiativeKey_3}ValidatorCurrentIndex`;
+const parallelValidatorCountKey = `${config.initiativeKey_3}ValidatorCount`;
 
 function getValue(number, maxValue) {
   return number < 0
@@ -74,14 +74,14 @@ function uploadToServer(cb) {
   });
   fd.append('userInput', likhoIndiaValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
-  fd.append('language', localStorage.getItem(LIKHO_TO_LANGUAGE));
+  fd.append('language', localStorage.getItem(PARALLEL_TO_LANGUAGE));
   fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
   fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
-  fd.append('type', MODULE.likho["api-type"]);
+  fd.append('type', INITIATIVES.parallel.type);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -167,9 +167,9 @@ function skipValidation(action) {
       userName: speakerDetails && speakerDetails.userName,
       device: getDeviceInfo(),
       browser: getBrowserInfo(),
-      type: MODULE.likho["api-type"],
+      type: INITIATIVES.parallel.type,
       fromLanguage: localStorage.getItem("contributionLanguage"),
-      language: localStorage.getItem(LIKHO_TO_LANGUAGE)
+      language: localStorage.getItem(PARALLEL_TO_LANGUAGE)
     }),
     headers: {
       'Content-Type': 'application/json',
@@ -339,7 +339,7 @@ const initializeComponent = () => {
   const totalItems = likhoIndiaValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const validationData = likhoIndiaValidator.sentences[currentIndex];
-  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
 
@@ -385,9 +385,9 @@ const executeOnLoad = function () {
   } else {
     showOrHideExtensionCloseBtn();
   }
-  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
   initializeFeedbackModal();
   setFooterPosition();
   showKeyboard(toLanguage.toLowerCase());
@@ -402,7 +402,7 @@ const executeOnLoad = function () {
   $('#to-label').text(localeToLanguage);
 
   if (fromLanguage && toLanguage) {
-    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    updateParallelLocaleLanguagesDropdown(fromLanguage, toLanguage);
   }
 
   $("#start_contributing_id").on('click', function () {
@@ -447,7 +447,7 @@ const executeOnLoad = function () {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName)
-  onChangeUser('./validator-page.html',MODULE.likho.value);
+  onChangeUser('./validator-page.html',INITIATIVES.parallel.value);
   onOpenUserDropDown();
     localStorage.removeItem(currentIndexKey);
     const type = 'parallel';
@@ -467,7 +467,7 @@ const executeOnLoad = function () {
       throw errStatus
     }).then(result => {
       likhoIndiaValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(likhoValidatorCountKey, likhoIndiaValidator.sentences.length);
+      localStorage.setItem(parallelValidatorCountKey, likhoIndiaValidator.sentences.length);
       if (likhoIndiaValidator.sentences.length == 0) {
         showNoSentencesMessage();
         return;

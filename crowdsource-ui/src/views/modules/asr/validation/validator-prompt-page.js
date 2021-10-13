@@ -14,7 +14,7 @@ const {
   translate,
 } = require('../common/utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LOCALE_STRINGS,config,INITIATIVES } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const {
   isKeyboardExtensionPresent,
@@ -37,8 +37,8 @@ const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-const currentIndexKey = 'sunoValidationCurrentIndex';
-const sunoValidatorCountKey = 'sunoValidatorCount';
+const currentIndexKey = `${config.initiativeKey_1}ValidationCurrentIndex`;
+const asrValidatorCountKey = `${config.initiativeKey_1}ValidatorCount`;
 
 window.sunoIndiaValidator = {};
 
@@ -80,7 +80,7 @@ function uploadToServer(cb) {
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
-  fd.append('type', MODULE.suno["api-type"]);
+  fd.append('type', INITIATIVES.asr.type);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -300,7 +300,7 @@ function recordValidation(action) {
       userName: speakerDetails && speakerDetails.userName,
       device: getDeviceInfo(),
       browser: getBrowserInfo(),
-      type: MODULE.suno["api-type"],
+      type:INITIATIVES.asr.type,
       fromLanguage: localStorage.getItem("contributionLanguage")
     }),
     headers: {
@@ -563,7 +563,7 @@ const executeOnLoad = function () {
   } else {
     showOrHideExtensionCloseBtn();
   }
-  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE,INITIATIVES.asr.value);
   initializeFeedbackModal();
   detectDevice();
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -632,7 +632,7 @@ const executeOnLoad = function () {
   }
 
   showUserProfile(localSpeakerDataParsed.userName)
-  onChangeUser('./validator-page.html',MODULE.suno.value);
+  onChangeUser('./validator-page.html',INITIATIVES.asr.value);
   onOpenUserDropDown();
 
     localStorage.setItem("validation_audioPlayed", false);
@@ -655,7 +655,7 @@ const executeOnLoad = function () {
       throw errStatus
     }).then((result) => {
       sunoIndiaValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(sunoValidatorCountKey, sunoIndiaValidator.sentences.length);
+      localStorage.setItem(asrValidatorCountKey, sunoIndiaValidator.sentences.length);
       if (sunoIndiaValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;

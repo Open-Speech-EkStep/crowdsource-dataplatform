@@ -1,6 +1,6 @@
+const config = require('../../../brand/meity.json')
 const { getEnabledLanguages, getAllLanguages } = require('./language-filter')
 const { enabled_languages } = require('./env-api')
-const config = require('../../../brand/meity.json')
 
 const DEFAULT_CON_LANGUAGE = "English";
 const AUDIO_DURATION = 6;
@@ -13,8 +13,9 @@ const CUMULATIVE_DATA = "cumulativeDataByLanguage";
 const LOCALE_STRINGS = 'localeString';
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
-const LIKHO_TO_LANGUAGE = "likho_to-language";
-const LIKHO_FROM_LANGUAGE = "likho_from-language";
+const PARALLEL_TO_LANGUAGE = `${config.initiativeKey_3}_to-language`;
+const PARALLEL_FROM_LANGUAGE = `${config.initiativeKey_3}_from-language`;
+const CURRENT_MODULE = 'module';
 
 const ErrorStatusCode = {
     SUCCESS: 200,
@@ -28,37 +29,6 @@ if (enabled_languages != null && !enabled_languages.includes('@@')) {
     ALL_LANGUAGES = getEnabledLanguages(enabled_languages)
 }
 
-const BADGES = {
-    bronze: { imgLg: "/img/bronze_badge.svg", imgSm: "/img/bronze_contributor.jpg" },
-    silver: { imgLg: "/img/silver_badge.svg", imgSm: "/img/silver_contributor.jpg" },
-    gold: { imgLg: "/img/gold_badge.svg", imgSm: "/img/gold_contributor.jpg" },
-    platinum: { imgLg: "/img/platinum_badge.svg", imgSm: "/img/platinum_contributor.jpg" },
-}
-const BOLOPAGE = {
-    bronze : {imgLg : "/img/bronze_medal.svg", imgSm:"/img/bronze_medal_val.svg"},
-    silver :{imgLg:"/img/silver_medal.svg",imgSm:"/img/silver_medal_val.svg"},
-    gold :{imgLg:"/img/gold_medal.svg",imgSm:"/img/gold_medal_val.svg"},
-    platinum :{imgLg:"/img/platinum_medal.svg",imgSm:"/img/platinum_medal_val.svg"},
-}
-const SUNOPAGE = {
-    bronze : {imgLg : "/img/suno_bronze_medal.svg", imgSm:"/img/suno_bronze_medal_val.svg"},
-    silver :{imgLg:"/img/suno_silver_medal.svg",imgSm:"/img/suno_silver_medal_val.svg"},
-    gold :{imgLg:"/img/suno_gold_medal.svg",imgSm:"/img/suno_gold_medal_val.svg"},
-    platinum :{imgLg:"/img/suno_platinum_medal.svg",imgSm:"/img/suno_platinum_medal_val.svg"},
-}
-const DEKHOPAGE = {
-    bronze : {imgLg : "/img/dekho_bronze_medal.svg", imgSm:"/img/dekho_bronze_medal_val.svg"},
-    silver :{imgLg:"/img/dekho_silver_medal.svg",imgSm:"/img/dekho_silver_medal_val.svg"},
-    gold :{imgLg:"/img/dekho_gold_medal.svg",imgSm:"/img/dekho_gold_medal_val.svg"},
-    platinum :{imgLg:"/img/dekho_platinum_medal.svg",imgSm:"/img/dekho_platinum_medal_val.svg"},
-}
-const LIKHOPAGE = {
-    bronze : {imgLg : "/img/likho_bronze_medal.svg", imgSm:"/img/likho_bronze_medal_val.svg"},
-    silver :{imgLg:"/img/likho_silver_medal.svg",imgSm:"/img/likho_silver_medal_val.svg"},
-    gold :{imgLg:"/img/likho_gold_medal.svg",imgSm:"/img/likho_gold_medal_val.svg"},
-    platinum :{imgLg:"/img/likho_platinum_medal.svg",imgSm:"/img/likho_platinum_medal_val.svg"},
-}
-const CURRENT_MODULE = 'module';
 const MODULE = {
     bolo: {
         url: 'text', value: 'bolo',"api-type":'text', BADGES: {
@@ -94,6 +64,14 @@ const MODULE = {
         }
     },
 };
+
+const INITIATIVES = {
+    asr: {type: 'asr', value: config.initiativeKey_1,name :config.initiative_1},
+    text: {type: 'text', value: config.initiativeKey_2, name :config.initiative_2},
+    parallel: {type: 'parallel', value: config.initiativeKey_3,name :config.initiative_3},
+    ocr: { type: 'ocr', value: config.initiativeKey_4,name :config.initiative_4}
+};
+
 
 const AGE_GROUP = [
     '',
@@ -135,20 +113,15 @@ module.exports = {
     AGGREGATED_DATA_BY_LANGUAGE,
     LOCALE_STRINGS,
     CONTRIBUTION_LANGUAGE,
-    BADGES,
     SPEAKER_DETAILS_KEY,
     CURRENT_MODULE,
     MODULE,
-    BOLOPAGE,
-    DEKHOPAGE,
-    SUNOPAGE,
-    LIKHOPAGE,
-    LIKHO_TO_LANGUAGE,
-    LIKHO_FROM_LANGUAGE,
+    PARALLEL_TO_LANGUAGE,
+    PARALLEL_FROM_LANGUAGE,
     ErrorStatusCode,
     CUMULATIVE_DATA,
     AGE_GROUP,
     BADGES_NAME,
-    INITIATIVES_NAME,config,BADGES_API_TEXT
+    INITIATIVES_NAME,config,BADGES_API_TEXT,INITIATIVES
 
 }

@@ -1,4 +1,4 @@
-const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,LIKHO_TO_LANGUAGE, MODULE } = require('./constants');
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, LOCALE_STRINGS,PARALLEL_TO_LANGUAGE,INITIATIVES } = require('./constants');
 const { getLocaleString } = require('./utils');
 const fetch = require('./fetch')
 const {whitelisting_email} = require('./env-api')
@@ -224,9 +224,9 @@ const setStartRecordingBtnOnClick = function (url, module = '') {
             userNameValue = $userName.val().trim();
         }
         let contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-        let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+        let toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
         const selectedLanguage = ALL_LANGUAGES.find(e => e.value === contributionLanguage);
-        if(module != MODULE.likho.value){
+        if(module != INITIATIVES.parallel.value){
             if (!selectedLanguage.data) contributionLanguage = DEFAULT_CON_LANGUAGE;
         }
         if (testUserName(userNameValue)) {

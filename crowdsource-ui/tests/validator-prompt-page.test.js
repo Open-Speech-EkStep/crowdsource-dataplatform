@@ -20,7 +20,7 @@ const { stringToHTML } = require('./utils');
 document.body = stringToHTML(
   readFileSync(`${__dirname}/../build/views/text/validator-prompt-page.ejs`, 'UTF-8') +
   readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, 'UTF-8') +
-  readFileSync(`${__dirname}/../src/views/common/bolo-mic-speaker-testing.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../src/views/common/text-mic-speaker-testing.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../src/views/common/validation-report-modal.ejs`, 'UTF-8')
 
 );

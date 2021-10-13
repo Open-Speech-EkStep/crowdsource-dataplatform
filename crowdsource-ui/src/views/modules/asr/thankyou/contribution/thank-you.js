@@ -6,8 +6,7 @@ const {
   AGGREGATED_DATA_BY_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CURRENT_MODULE,
-  MODULE,
-  config
+  config,INITIATIVES
 } = require('../common/constants');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const {
@@ -30,10 +29,10 @@ const {
   redirectToHomeForDirectLanding
 } = require('../common/common');
 
-const sunoCountKey = 'sunoCount';
-const CURRENT_INDEX = 'sunoCurrentIndex';
+const asrCountKey = `${config.initiativeKey_1}Count`;
+const CURRENT_INDEX = `${config.initiativeKey_1}CurrentIndex`;
 const SPEAKER_DETAILS = 'speakerDetails';
-const totalSentence = Number(localStorage.getItem(sunoCountKey));
+const totalSentence = Number(localStorage.getItem(asrCountKey));
 
 const getFormattedTime = totalSeconds => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -46,7 +45,7 @@ const getFormattedTime = totalSeconds => {
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localisedLanguage = sessionStorage.getItem('i18n');
-  const boloIndiaTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
+  const asrTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
   let localeText = '';
   if (rank === 0) {
     localeText = localeStrings['social sharing text without rank'];
@@ -56,7 +55,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeText.replace('<y>', rank);
     localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_1]);
   }
-  //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
+  
   const $whatsappShare = $('#whatsapp_share');
   $whatsappShare.attr('href', `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $('#twitter_share');
@@ -64,7 +63,7 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $('#linkedin_share');
   $linkedinShare.attr(
     'href',
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[asrTitle]}&summary=${localeText}`
   );
 };
 
@@ -76,12 +75,12 @@ const getLanguageStats = function () {
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
       const languages = getTopLanguage(
         top_languages_by_hours,
-        MODULE.suno.value,
+        INITIATIVES.asr.value,
         'total_contribution_count',
         'total_contributions'
       );
       localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-      showByHoursChartThankyouPage(MODULE.suno.value, 'thankyou', 'sentences');
+      showByHoursChartThankyouPage(INITIATIVES.asr.value, 'thankyou', 'sentences');
       const data = top_languages_by_hours.sort((a, b) =>
         Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
       );
@@ -148,7 +147,7 @@ function executeOnLoad() {
     location.href = './home.html';
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./thank-you.html', MODULE.suno.value);
+    onChangeUser('./thank-you.html', INITIATIVES.asr.value);
     onOpenUserDropDown();
 
     // setPageContentHeight();
@@ -184,7 +183,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   redirectToHomeForDirectLanding();
-  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
   localStorage.setItem('selectedType', 'contribute');
   initializeFeedbackModal();
   $('#download_pdf').on('click', function () {

@@ -4,10 +4,9 @@ const {
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
-  MODULE,
   AGGREGATED_DATA_BY_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
-  config
+  config,INITIATIVES
 } = require('../common/constants');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 
@@ -31,10 +30,10 @@ const {
   redirectToHomeForDirectLanding
 } = require('../common/common');
 
-const CURRENT_INDEX = 'sunoValidationCurrentIndex';
+const CURRENT_INDEX = `${config.initiativeKey_1}ValidationCurrentIndex`;
 const SPEAKER_DETAILS = 'speakerDetails';
-const sunoValidatorCountKey = 'sunoValidatorCount';
-const totalSentence = Number(localStorage.getItem(sunoValidatorCountKey));
+const asrValidatorCountKey = `${config.initiativeKey_1}ValidatorCount`;
+const totalSentence = Number(localStorage.getItem(asrValidatorCountKey));
 const { initializeFeedbackModal } = require('../common/feedback');
 
 const getFormattedTime = totalSeconds => {
@@ -48,7 +47,7 @@ const getFormattedTime = totalSeconds => {
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localisedLanguage = sessionStorage.getItem('i18n');
-  const boloIndiaTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
+  const asrTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
   let localeText = '';
   if (rank === 0) {
     localeText = localeStrings['social sharing text without rank'];
@@ -58,7 +57,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeText.replace('<y>', rank);
     localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_1]);
   }
-  //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
+  
   const $whatsappShare = $('#whatsapp_share');
   $whatsappShare.attr('href', `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $('#twitter_share');
@@ -66,24 +65,24 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $('#linkedin_share');
   $linkedinShare.attr(
     'href',
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[asrTitle]}&summary=${localeText}`
   );
 };
 
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
-    const top_languages_by_hours = jsonData.filter(d => d.type == MODULE.suno['api-type']);
+    const top_languages_by_hours = jsonData.filter(d => d.type == INITIATIVES.asr.type);
     if (top_languages_by_hours.length > 0) {
       const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
       const languages = getTopLanguage(
         top_languages_by_hours,
-        MODULE.suno.value,
+        INITIATIVES.asr.value,
         'total_validation_count',
         'total_validations'
       );
       localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-      showByHoursChartThankyouPage(MODULE.suno.value, 'thankyou', 'sentences');
+      showByHoursChartThankyouPage(INITIATIVES.asr.value, 'thankyou', 'sentences');
       const data = top_languages_by_hours.sort((a, b) =>
         Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
       );
@@ -150,7 +149,7 @@ function executeOnLoad() {
     location.href = './home.html';
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./validator-thank-you.html', MODULE.suno.value);
+    onChangeUser('./validator-thank-you.html', INITIATIVES.asr.value);
     onOpenUserDropDown();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -176,13 +175,13 @@ function executeOnLoad() {
     getLanguageStats().then(() => {
       setSentencesContributed();
     });
-    updateGoalProgressBarFromJson(MODULE.suno['api-type'], 'validate', contributionLanguage);
+    updateGoalProgressBarFromJson(INITIATIVES.asr.type, 'validate', contributionLanguage);
   }
 }
 
 $(document).ready(function () {
   redirectToHomeForDirectLanding();
-  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
   localStorage.setItem('selectedType', 'validate');
   initializeFeedbackModal();
 

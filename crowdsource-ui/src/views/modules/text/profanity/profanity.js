@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const { setPageContentHeight, fetchLocationInfo, updateLocaleLanguagesDropdown, getLocaleString, hideElement, showElement,onHover,
     afterHover } = require('../common/utils');
 const { showUserProfile } = require('../common/header');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE,LOCALE_STRINGS } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE,LOCALE_STRINGS, INITIATIVES } = require('../common/constants');
 
 const speakerDetailsKey = 'profanityUserDetails';
 const sentencesKey = 'sentences';
@@ -364,7 +364,7 @@ function executeOnLoad() {
 }
 
 $(document).ready(() => {
-    localStorage.setItem(CURRENT_MODULE, MODULE.bolo.value);
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
     getLocaleString().then(() => {
         executeOnLoad();
     }).catch(() => {

@@ -1,6 +1,6 @@
 const fetch = require('./fetch')
 const { calculateTime, formatTime, getJson, translate } = require('./utils');
-const { CURRENT_MODULE, MODULE } = require('./constants');
+const { CURRENT_MODULE,INITIATIVES } = require('./constants');
 import origFetch from 'node-fetch';
 const { context_root } = require('./env-api');
 
@@ -44,13 +44,13 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
       chartData[i].year = String(chartData[i].year);
       const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(chartData[i].cumulative_contributions) * 60 * 60), true);
       const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime((Number(chartData[i].cumulative_validations) * 60 * 60), true);
-      chartData[i].contributedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_contribution_count :  formatTime(cHours, cMinutes, cSeconds);
-      chartData[i].validatedHours = currentModule == "dekho" || currentModule == "likho" ? chartData[i].total_validation_count : formatTime(vHours, vMinutes, vSeconds);
+      chartData[i].contributedHours = currentModule == INITIATIVES.ocr.value|| currentModule == INITIATIVES.parallel.value ? chartData[i].total_contribution_count :  formatTime(cHours, cMinutes, cSeconds);
+      chartData[i].validatedHours = currentModule == INITIATIVES.ocr.value || currentModule == INITIATIVES.parallel.value ? chartData[i].total_validation_count : formatTime(vHours, vMinutes, vSeconds);
     }
 
     let contributeTooltip;
     let validateTooltip;
-    if (currentModule == MODULE.suno.value) {
+    if (currentModule == INITIATIVES.asr.value) {
       contributeTooltip = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div>${translate('Transcribed')}: <label>{contributedHours}</label></div>
@@ -60,7 +60,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
             <div style="text-align: left;">${translate('Validated')}: <label>{validatedHours}</label></div>
         </div>`;
     }
-    if (currentModule == MODULE.likho.value) {
+    if (currentModule == INITIATIVES.parallel.value) {
       contributeTooltip = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div style="text-align: left;">${translate('Translated')}: <label>{contributedHours}</label></div>
@@ -71,7 +71,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
         </div>`;
     }
 
-    if (currentModule == MODULE.dekho.value) {
+    if (currentModule == INITIATIVES.ocr.value) {
       contributeTooltip = `<div style="padding: 10px;">
                 <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
                 <div style="text-align: left;">${translate('Labelled')}: <label>{contributedHours}</label></div>
@@ -99,14 +99,14 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = "3,3";
     hourAxis.renderer.labels.template.fill = '#000';
-    hourAxis.title.text = currentModule == "dekho" ? translate("Images") : currentModule == MODULE.likho.value ? translate("Sentences") : translate('Contribution (in hours)');
+    hourAxis.title.text = currentModule == INITIATIVES.ocr.value ? translate("Images") : currentModule == INITIATIVES.parallel.value ? translate("Sentences") : translate('Contribution (in hours)');
     hourAxis.renderer.labels.template.fontSize = 12;
     hourAxis.title.fontSize = 12;
 
     // Create series
     var series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = "duration";
-    series.dataFields.valueY = currentModule == "dekho" || currentModule == MODULE.likho.value ? "total_contribution_count" : "cumulative_contributions";
+    series.dataFields.valueY = currentModule == INITIATIVES.ocr.value || currentModule == INITIATIVES.parallel.value ? "total_contribution_count" : "cumulative_contributions";
     series.strokeWidth = 3;
     series.tensionX = 0.8;
     series.tooltipHTML = contributeTooltip;
@@ -121,7 +121,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     // Create series
     var series2 = chart.series.push(new am4charts.LineSeries());
     series2.dataFields.dateX = "duration";
-    series2.dataFields.valueY = currentModule == "dekho" || currentModule == "likho" ? "total_validation_count" : "cumulative_validations";
+    series2.dataFields.valueY = currentModule == INITIATIVES.ocr.value || currentModule == INITIATIVES.parallel.value ? "total_validation_count" : "cumulative_validations";
     series2.sequencedInterpolation = true;
     series2.tensionX = 0.8;
     series2.tooltipHTML = validateTooltip;
@@ -174,7 +174,7 @@ function buildLineGraphs(language, timeframe, module, series1Name, series2Name) 
   getJson(url)
   .then((data) => {
     try {
-      data = data.filter(d => d.type == module["api-type"]) || [];
+      data = data.filter(d => d.type == module.type) || [];
       data = language !== "" ? getLanguageSpecificData(data, language) : data;
       $timelineLoader.hide().removeClass('d-flex');
       $timelineChart.removeClass('d-none');

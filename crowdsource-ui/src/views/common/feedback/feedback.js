@@ -1,4 +1,4 @@
-const { CURRENT_MODULE, MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES } = require('./constants');
+const { CURRENT_MODULE, SELECT_PAGE_OPTIONS_FEEDBACK, OPINION_RATING_MAPPING, ALL_LANGUAGES } = require('./constants');
 const fetch = require('./fetch')
 const { feedback_top_component } = require('./env-api');
 const { showErrorPopup } = require('./common');
@@ -16,7 +16,7 @@ const checkGivingFeedbackFor = () => {
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     document.querySelectorAll('input[name="moduleSelectRadio"]').forEach((component) => {
         try {
-            if (component.value === MODULE[currentModule].value) {
+            if (component.value === currentModule) {
                 component.checked = true;
             }
         } catch (error) {

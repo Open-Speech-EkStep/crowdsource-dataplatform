@@ -3,7 +3,7 @@ const { onChangeUser,showUserProfile,onOpenUserDropDown } = require('../common/h
 const { generateIndiaMap } = require('../common/map');
 const { setUserNameOnInputFocus, setUserModalOnShown,setStartRecordingBtnOnClick,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
-const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE, MODULE,SPEAKER_DETAILS_KEY } = require('../common/constants');
+const { CURRENT_MODULE,CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY,INITIATIVES } = require('../common/constants');
 const { hasUserRegistered, showErrorPopup } = require('../common/common');
 const fetch = require('../common/fetch');
 const { getJson } = require('../common/utils');
@@ -65,8 +65,8 @@ function updateLanguage(language) {
             getJson(url)
                 .then((data) => {
                     try {
-                        participationData = participationData.find(d => d.type == MODULE.suno["api-type"]);
-                        const sData = data.filter(d => d.type == MODULE.suno["api-type"]) || [];
+                        participationData = participationData.find(d => d.type == INITIATIVES.asr.type);
+                        const sData = data.filter(d => d.type == INITIATIVES.asr.type) || [];
                         if (language == "") {
                             sData[0].total_speakers = participationData.count || 0;
                         }
@@ -75,8 +75,8 @@ function updateLanguage(language) {
                         if (langaugeExists) {
                             $speakerDataLanguagesWrapper.addClass('d-none');
                             $speakerDataDetails.addClass('d-none');
-                            generateIndiaMap(language, MODULE.suno);
-                            updateLineGraph(language, activeDurationText, MODULE.suno, "Transcribed", "Validated");
+                            generateIndiaMap(language, INITIATIVES.asr);
+                            updateLineGraph(language, activeDurationText, INITIATIVES.asr, "Transcribed", "Validated");
                             setSpeakerData(sData, language);
                             $speakerDataDetails.removeClass('d-none');
                         } else {
@@ -97,7 +97,7 @@ function updateLanguage(language) {
 }
 
 const initializeBlock = function () {
-    localStorage.setItem(CURRENT_MODULE,MODULE.suno.value);
+    localStorage.setItem(CURRENT_MODULE,INITIATIVES.asr.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
     // const speakerDetailsKey = 'speakerDetails';
@@ -127,7 +127,7 @@ const initializeBlock = function () {
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
-        updateLineGraph(selectedLanguage, selectedDuration, MODULE.suno, "Transcribed","Validated");
+        updateLineGraph(selectedLanguage, selectedDuration, INITIATIVES.asr, "Transcribed","Validated");
     });
 
     $("#no-data-found").on('mouseenter', () => {
@@ -155,7 +155,7 @@ const initializeBlock = function () {
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html',MODULE.suno.value);
+            setStartRecordingBtnOnClick('./record.html',INITIATIVES.asr.value);
         } else {
             location.href ='./record.html';
         }
@@ -172,7 +172,7 @@ const initializeBlock = function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.suno.value);
+    onChangeUser('./dashboard.html',INITIATIVES.asr.value);
     onOpenUserDropDown();
 
     // toggleFooterPosition();

@@ -12,5 +12,9 @@
   "badge_2": "silver",
   "badge_3": "gold",
   "badge_4": "platinum",
-  "brand_url": "bhashini.gov.in/bhashadaan"
+  "brand_url": "bhashini.gov.in/bhashadaan",
+  "initiativeKey_1" :"suno",
+  "initiativeKey_2" :"bolo",
+  "initiativeKey_3" :"likho",
+  "initiativeKey_4" :"dekho"
 }

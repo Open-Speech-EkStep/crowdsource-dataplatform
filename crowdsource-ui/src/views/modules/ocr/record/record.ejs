@@ -31,7 +31,7 @@
             <%- include ../common/extensionBar.ejs %>
             <%- include('../common/breadcrumb.ejs', {MODULE:config.initiative_4, PAGE_TITLE:__('Label'),img:"ocrLogo.svg", homePath:"./home.html"}) %>
             <div class="modal-footer pt-3 pb-0 pb-lg-3 pb-md-3 px-0 record-btn-container position-relative">
-                <div class="row position-absolute dekho-back-btn top-back-btn">
+                <div class="row position-absolute ocr-back-btn top-back-btn">
                     <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
                 </div>
                 <%- include ../common/report-btn.ejs %>
@@ -40,7 +40,7 @@
                 <%- include ../common/speakerTesting.ejs %>
             </div>
             <%- include('../common/assistiveText.ejs',{msg:__('Type the text from the image')}) %>
-            <div class="row justify-content-center" id="dekho-image">
+            <div class="row justify-content-center" id="ocr-image">
                 <div class="col-lg-8 col-md-5 col-12">
                     <%- include ../common/image.ejs %>
                     <span id="expand-view" class="position-absolute text-muted expand-view-text"> <%= __('Click to open expanded view') %></span>

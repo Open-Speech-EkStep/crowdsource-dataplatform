@@ -1,6 +1,6 @@
 const {readFileSync} = require('fs');
 const {stringToHTML, mockLocalStorage} = require('../utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LIKHO_TO_LANGUAGE} = require('../../build/js/common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE} = require('../../build/js/common/constants');
 
 const sunoValidatorPage = readFileSync(`${__dirname}/../../build/views/asr/validator-prompt-page.ejs`, 'UTF-8');
 const editAreaErrorPage = readFileSync(`${__dirname}/../../build/views/common/editAreaError.ejs`, 'UTF-8');
@@ -107,7 +107,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Telugu');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Telugu');
     expect(lngtype('డ్డా ॐ యి')).toEqual({type:'language'});
     localStorage.clear();
   })
@@ -138,7 +138,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Gujarati');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
     numbers.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -237,7 +237,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Assamese');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Assamese');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -248,7 +248,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Bengali');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Bengali');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -259,7 +259,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Gujarati');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -271,7 +271,7 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
 
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Hindi');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Hindi');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -283,7 +283,7 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
 
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Kannada');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Kannada');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -294,7 +294,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Malayalam');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Malayalam');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -305,7 +305,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Marathi');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Marathi');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -316,7 +316,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Odia');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Odia');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -327,7 +327,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Punjabi');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Punjabi');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -338,7 +338,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Tamil');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Tamil');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })
@@ -349,7 +349,7 @@ describe("lngtype", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, 'likho');
-    localStorage.setItem(LIKHO_TO_LANGUAGE, 'Telugu');
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
       expect(lngtype(symbol)).toEqual(null);
     })

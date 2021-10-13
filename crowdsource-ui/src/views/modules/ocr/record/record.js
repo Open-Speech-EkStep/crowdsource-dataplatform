@@ -14,7 +14,7 @@ const {
   translate,
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LOCALE_STRINGS,INITIATIVES,config } = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
 const {
   isKeyboardExtensionPresent,
@@ -38,8 +38,8 @@ const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 
-const dekhoCountKey = 'dekhoCount';
-const currentIndexKey = 'dekhoCurrentIndex';
+const ocrCountKey = `${config.initiativeKey_3}Count`;
+const currentIndexKey = `${config.initiativeKey_3}CurrentIndex`;
 
 window.dekhoIndia = {};
 
@@ -65,7 +65,7 @@ function markContributionSkipped() {
     browser: getBrowserInfo(),
     state_region: state_region,
     country: country,
-    type: MODULE.dekho['api-type'],
+    type: INITIATIVES.ocr.type,
   };
   fetch('/skip', {
     method: 'POST',
@@ -103,7 +103,7 @@ function uploadToServer(cb) {
   fd.append('country', localStorage.getItem('country') || '');
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
-  fd.append('type', MODULE.dekho['api-type']);
+  fd.append('type', INITIATIVES.ocr.type);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -137,7 +137,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media_data);
-    setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setOcrImage(`${cdn_url}/${encodedUrl}`);
     setDataSource(dekhoIndia.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'));
@@ -287,7 +287,7 @@ function addListeners() {
   });
 }
 
-const setDekhoImage = function (audioLink) {
+const setOcrImage = function (audioLink) {
   $('#view-image').attr('src', audioLink);
 };
 
@@ -313,7 +313,7 @@ function showNoSentencesMessage() {
   hideElement($('#textarea-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'));
-  hideElement($('#dekho-image'));
+  hideElement($('#ocr-image'));
   hideElement($('#validation-button-row'));
   hideElement($('#progress-row'));
   showElement($('#no-textarea-row'));
@@ -407,7 +407,7 @@ const initializeComponent = () => {
   addListeners();
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media_data);
-    setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setOcrImage(`${cdn_url}/${encodedUrl}`);
     setDataSource(validationData.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
@@ -461,7 +461,7 @@ const executeOnLoad = function () {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html', MODULE.dekho.value);
+    onChangeUser('./record.html', INITIATIVES.ocr.value);
     onOpenUserDropDown();
     localStorage.removeItem(currentIndexKey);
     const type = 'ocr';
@@ -491,7 +491,7 @@ const executeOnLoad = function () {
       })
       .then(sentenceData => {
         dekhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
+        localStorage.setItem(ocrCountKey, dekhoIndia.sentences.length);
         if (dekhoIndia.sentences.length === 0) {
           showNoSentencesMessage();
           return;
@@ -518,7 +518,7 @@ $(document).ready(() => {
   } else {
     showOrHideExtensionCloseBtn();
   }
-  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
   initializeFeedbackModal();
   hideElement($('#keyboardBox'));
   getLocaleString().then(() => {

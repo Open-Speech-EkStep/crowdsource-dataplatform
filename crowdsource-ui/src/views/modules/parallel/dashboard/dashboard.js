@@ -11,9 +11,9 @@ const {
     // toggleFooterPosition,
     getLocaleString
 } = require('../common/utils');
-const { hasUserRegistered, updateLikhoLocaleLanguagesDropdown, showErrorPopup } = require('../common/common');
-const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, MODULE, SPEAKER_DETAILS_KEY, CONTRIBUTION_LANGUAGE,
-    LIKHO_TO_LANGUAGE } = require('../common/constants');
+const { hasUserRegistered, updateParallelLocaleLanguagesDropdown, showErrorPopup } = require('../common/common');
+const { DEFAULT_CON_LANGUAGE, ALL_LANGUAGES, CURRENT_MODULE, SPEAKER_DETAILS_KEY, CONTRIBUTION_LANGUAGE,
+    PARALLEL_TO_LANGUAGE ,INITIATIVES} = require('../common/constants');
 const fetch = require('../common/fetch');
 
 const { setSpeakerData } = require('../common/contributionStats');
@@ -103,8 +103,8 @@ function updateLanguage(language) {
             getJson(url)
                 .then((data) => {
                     try {
-                        participationData = participationData.find(d => d.type == MODULE.likho["api-type"]);
-                        const lData = data.filter(d => d.type == MODULE.likho["api-type"]) || [];
+                        participationData = participationData.find(d => d.type == INITIATIVES.parallel.type);
+                        const lData = data.filter(d => d.type == INITIATIVES.parallel.type) || [];
                         if (language == "") {
                             lData[0].total_speakers = participationData.count || 0;
                         }
@@ -113,9 +113,9 @@ function updateLanguage(language) {
                         if (langaugeExists) {
                             $speakerDataLanguagesWrapper.addClass('d-none');
                             $speakerDataDetails.addClass('d-none');
-                            generateIndiaMap(language, MODULE.likho);
-                            updateLineGraph(language, activeDurationText, MODULE.likho, "Translations done", "Translations validated");
-                            setSpeakerData(lData, language, 'likho');
+                            generateIndiaMap(language, INITIATIVES.parallel);
+                            updateLineGraph(language, activeDurationText, INITIATIVES.parallel, "Translations done", "Translations validated");
+                            setSpeakerData(lData, language, INITIATIVES.parallel.value);
                             $speakerDataDetails.removeClass('d-none');
                         } else {
                             const previousLanguage = localStorage.getItem('previousLanguage');
@@ -138,7 +138,7 @@ function updateLanguage(language) {
 
 
 const executeOnLoad = function () {
-    localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
     // const speakerDetailsKey = 'speakerDetails';
@@ -152,9 +152,9 @@ const executeOnLoad = function () {
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const contributionLanguage2 = localStorage.getItem(LIKHO_TO_LANGUAGE);
+    const contributionLanguage2 = localStorage.getItem(PARALLEL_TO_LANGUAGE);
     if (contributionLanguage) {
-        updateLikhoLocaleLanguagesDropdown(contributionLanguage, contributionLanguage2);
+        updateParallelLocaleLanguagesDropdown(contributionLanguage, contributionLanguage2);
     }
 
     function checkAndReturnLanguage(fromLanguage, toLanguage) {
@@ -176,7 +176,7 @@ const executeOnLoad = function () {
         const fromLanguage = $('#from-dash-language option:selected').val() || "";
         const toLanguage = $('#to-dash-language option:selected').val() || "";
         const selectedLanguage = checkAndReturnLanguage(fromLanguage, toLanguage);
-        updateLineGraph(selectedLanguage, selectedDuration, MODULE.likho, "Translations done", "Translations validated");
+        updateLineGraph(selectedLanguage, selectedDuration, INITIATIVES.parallel, "Translations done", "Translations validated");
     });
 
     $("#no-data-found").on('mouseenter', () => {
@@ -230,11 +230,11 @@ const executeOnLoad = function () {
         sessionStorage.setItem("i18n", "en");
         sentenceLanguage = languageToRecord;
         localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-        localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+        localStorage.setItem(PARALLEL_TO_LANGUAGE, toLanguage);
         localStorage.setItem("selectedType", "contribute");
         if (!hasUserRegistered()) {
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html', MODULE.likho.value);
+            setStartRecordingBtnOnClick('./record.html', INITIATIVES.parallel.value);
         } else {
             location.href = './record.html';
         }
@@ -250,7 +250,7 @@ const executeOnLoad = function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html', MODULE.likho.value);
+    onChangeUser('./dashboard.html', INITIATIVES.parallel.value);
     onOpenUserDropDown();
 
     // toggleFooterPosition();

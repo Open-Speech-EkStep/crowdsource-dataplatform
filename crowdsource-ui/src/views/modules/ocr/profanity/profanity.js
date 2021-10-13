@@ -11,15 +11,15 @@ const {
   afterHover
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE, LOCALE_STRINGS } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LOCALE_STRINGS,config,INITIATIVES } = require('../common/constants');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 
 const speakerDetailsKey = 'profanityUserDetails';
 
-const dekhoCountKey = 'dekhoCount';
-const currentIndexKey = 'dekhoCurrentIndex';
-const sentencesKey = 'dekhoSentencesKey';
+const ocrCountKey = `${config.initiativeKey_4}Count`;
+const currentIndexKey = `${config.initiativeKey_4}CurrentIndex`;
+const sentencesKey = `${config.initiativeKey_4}SentencesKey`;
 
 // eslint-disable-next-line no-unused-vars
 let localeStrings;
@@ -46,7 +46,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndia.sentences[currentIndex].media);
-    setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setOcrImage(`${cdn_url}/${encodedUrl}`);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
@@ -157,7 +157,7 @@ function addListeners() {
   })
 }
 
-const setDekhoImage = function (audioLink) {
+const setOcrImage = function (audioLink) {
   $('#view-image').attr('src', audioLink)
 };
 
@@ -169,7 +169,7 @@ function showThankYou() {
 function showNoSentencesMessage() {
   $('#spn-validation-language').html(localStorage.getItem('contributionLanguage'));
   hideElement($('#audio-row'))
-  hideElement($('#dekho-image'));
+  hideElement($('#ocr-image'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
   hideElement($('#skip_btn_row'));
@@ -189,7 +189,7 @@ const initializeComponent = () => {
   addListeners();
   if (validationData) {
     const encodedUrl = encodeURIComponent(validationData.media);
-    setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setOcrImage(`${cdn_url}/${encodedUrl}`);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     updateProgressBar(currentIndex + 1, dekhoIndia.sentences.length)
@@ -257,7 +257,7 @@ const executeOnLoad = function () {
         }
         setFooterPosition();
         dekhoIndia.sentences = sentenceData.data;
-        localStorage.setItem(dekhoCountKey, dekhoIndia.sentences.length);
+        localStorage.setItem(ocrCountKey, dekhoIndia.sentences.length);
         localStorage.setItem(
           sentencesKey,
           JSON.stringify({
@@ -280,7 +280,7 @@ const executeOnLoad = function () {
 }
 
 $(document).ready(() => {
-  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

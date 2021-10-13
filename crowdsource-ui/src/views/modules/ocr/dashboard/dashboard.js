@@ -3,7 +3,7 @@ const { generateIndiaMap } = require('../common/map');
 const { setUserNameOnInputFocus, setStartRecordingBtnOnClick, setUserModalOnShown,setGenderRadioButtonOnClick } = require('../common/speakerDetails');
 const { updateLocaleLanguagesDropdown, getLocaleString } = require('../common/utils');
 const { hasUserRegistered, showErrorPopup } = require('../common/common');
-const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,MODULE,SPEAKER_DETAILS_KEY} = require('../common/constants');
+const { DEFAULT_CON_LANGUAGE,CURRENT_MODULE ,CONTRIBUTION_LANGUAGE,SPEAKER_DETAILS_KEY,INITIATIVES} = require('../common/constants');
 const fetch = require('../common/fetch');
 const {setSpeakerData} = require('../common/contributionStats');
 const {initializeFeedbackModal} = require('../common/feedback')
@@ -62,8 +62,8 @@ function updateLanguage(language) {
             getJson(url)
                 .then((data) => {
                     try {
-                        participationData = participationData.find(d => d.type == MODULE.dekho["api-type"]);
-                        const dData = data.filter(d => d.type == MODULE.dekho["api-type"]) || [];
+                        participationData = participationData.find(d => d.type == INITIATIVES.ocr.type);
+                        const dData = data.filter(d => d.type == INITIATIVES.ocr.type) || [];
                         if (language == "") {
                             dData[0].total_speakers = participationData.count || 0;
                         }
@@ -72,9 +72,9 @@ function updateLanguage(language) {
                         if (langaugeExists) {
                             $speakerDataLanguagesWrapper.addClass('d-none');
                             $speakerDataDetails.addClass('d-none');
-                            generateIndiaMap(language, MODULE.dekho);
-                            updateLineGraph(language, activeDurationText, MODULE.dekho, "Images labelled", "Images validated");
-                            setSpeakerData(dData, language, "dekho");
+                            generateIndiaMap(language, INITIATIVES.ocr);
+                            updateLineGraph(language, activeDurationText, INITIATIVES.ocr, "Images labelled", "Images validated");
+                            setSpeakerData(dData, language, INITIATIVES.ocr.value);
                             $speakerDataDetails.removeClass('d-none');
                         } else {
                             const previousLanguage = localStorage.getItem('previousLanguage');
@@ -94,7 +94,7 @@ function updateLanguage(language) {
 }
 
 const initializeBlock = function () {
-    localStorage.setItem(CURRENT_MODULE,'dekho');
+    localStorage.setItem(CURRENT_MODULE,INITIATIVES.ocr.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
     // const speakerDetailsKey = 'speakerDetails';
@@ -129,7 +129,7 @@ const initializeBlock = function () {
         $durationLiActive.removeClass('active').addClass('inactive');
         const selectedDuration = e.target.dataset.value;
         const selectedLanguage = $('#language option:selected').val();
-        updateLineGraph(selectedLanguage, selectedDuration, MODULE.dekho, "Images labelled","Images validated");
+        updateLineGraph(selectedLanguage, selectedDuration, INITIATIVES.ocr, "Images labelled","Images validated");
     });
 
     $("#no-data-found").on('mouseenter', () => {
@@ -158,7 +158,7 @@ const initializeBlock = function () {
         localStorage.setItem("selectedType", "contribute");
         if(!hasUserRegistered()){
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html',MODULE.dekho.value);
+            setStartRecordingBtnOnClick('./record.html',INITIATIVES.ocr.value);
         } else {
             location.href ='./record.html';
         }
@@ -174,7 +174,7 @@ const initializeBlock = function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html',MODULE.dekho.value);
+    onChangeUser('./dashboard.html',INITIATIVES.ocr.value);
     onOpenUserDropDown();
 
     // toggleFooterPosition();

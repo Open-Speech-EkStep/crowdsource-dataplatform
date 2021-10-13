@@ -94,6 +94,20 @@ gulp.task('html', function () {
     .pipe(livereload());
 });
 
+gulp.task('js-config-1', function () {
+  return gulp
+    .src(['src/assets/js/*.js'])
+    .pipe(replace_sting(/\/brand\/.*.json/, `${settings.contextRoot}/brand/${settings.brand}.json`))
+    .pipe(gulp.dest('src/assets/js'))
+})
+
+gulp.task('js-config-2', function () {
+  return gulp
+    .src(['src/views/js/*.js'])
+    .pipe(replace_sting(/\/brand\/.*.json/, `${settings.contextRoot}/brand/${settings.brand}.json`))
+    .pipe(gulp.dest('src/views/js'))
+})
+
 gulp.task('js', function () {
   return gulp
     .src(['src/assets/js/*.js'])
@@ -393,7 +407,7 @@ gulp.task('json', function () {
 
 gulp.task(
   'default',
-  gulp.series('copy locales',
+  gulp.series('copy locales','js-config-1','js-config-2',
     gulp.parallel(
       'js',
       'json',

@@ -23,7 +23,7 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const headless = process.env.headless_chrome.toLowerCase() === 'false';
 const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
 
 beforeSuite(async () => {
@@ -149,7 +149,7 @@ step("user should <arg0> see instructions to record", async function (arg0) {
 });
 
 step("When user click on Lets Go Button for Validate, user should <arg0> see instructions to record", async function (arg0) {
-    await click(taiko.button({ id: 'bolo-proceed-box' }))
+    await click(taiko.button({ id: 'text-proceed-box' }))
     await taiko.waitFor(1500)
 
     if (arg0 == "not") {
@@ -162,9 +162,9 @@ step("When user click on Lets Go Button for Validate, user should <arg0> see ins
 
 step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
-        const username = taiko.textBox({ id: 'bolo-username' })
+        const username = taiko.textBox({ id: 'text-username' })
         await taiko.waitFor(700)
-        await clear(taiko.textBox({ id: 'bolo-username' }));
+        await clear(taiko.textBox({ id: 'text-username' }));
         await taiko.waitFor(300)
         await write(usrnm, into(username))
         await taiko.waitFor(500)

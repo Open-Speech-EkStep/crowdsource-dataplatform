@@ -1,5 +1,5 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
-const { redirectToLocalisedPage, showFunctionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateLikhoLocaleLanguagesDropdown } = require('../common/common');
+const { redirectToLocalisedPage, showFunctionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateParallelLocaleLanguagesDropdown } = require('../common/common');
 const {
   getLocaleString,
 } = require('../common/utils');
@@ -14,12 +14,11 @@ const { getStatsSummary } = require('../common/commonHome')
 
 const {
   CURRENT_MODULE,
-  MODULE,
   ALL_LANGUAGES,
-  LIKHO_TO_LANGUAGE,
+  PARALLEL_TO_LANGUAGE,
   SPEAKER_DETAILS_KEY,
   CONTRIBUTION_LANGUAGE,
-  DEFAULT_CON_LANGUAGE
+  DEFAULT_CON_LANGUAGE,INITIATIVES
 } = require('../common/constants');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -35,7 +34,7 @@ const addToLanguage = function (id, list) {
 
 const updatePage = (fromLanguage, toLanguage) => {
   showFunctionalCards('parallel', fromLanguage, toLanguage);
-  getStatsSummary('/stats/summary/parallel', MODULE.likho);
+  getStatsSummary('/stats/summary/parallel', INITIATIVES.parallel);
 }
 
 
@@ -48,15 +47,15 @@ function initializeBlock() {
   }
 
   let fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-  let toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+  let toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
 
   addToLanguage('from-language', ALL_LANGUAGES);
   if (fromLanguage && toLanguage) {
     const languages = ALL_LANGUAGES.filter(item => item.value != fromLanguage);
     addToLanguage('to-language', languages);
-    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    updateParallelLocaleLanguagesDropdown(fromLanguage, toLanguage);
     showFunctionalCards('parallel', fromLanguage, toLanguage);
-    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, toLanguage);
     $(`#from-language option[value=${fromLanguage}]`).attr("selected", "selected");
     $(`#to-language option[value=${toLanguage}]`).attr("selected", "selected");
   } else {
@@ -71,10 +70,10 @@ function initializeBlock() {
     addToLanguage('to-language', languages);
     $('#to-language option:first-child').attr("selected", "selected");
     toLanguage = $('#to-language option:first-child').val();
-    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    updateParallelLocaleLanguagesDropdown(fromLanguage, toLanguage);
     showFunctionalCards('parallel', fromLanguage, toLanguage);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
-    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, toLanguage);
   }
 
   $('#from-language').on('change', (e) => {
@@ -84,8 +83,8 @@ function initializeBlock() {
     addToLanguage('to-language', languages);
     $('#to-language option:first-child').attr("selected", "selected");
     toLanguage = $('#to-language option:first-child').val();
-    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
-    updateLikhoLocaleLanguagesDropdown(fromLanguage, toLanguage);
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, toLanguage);
+    updateParallelLocaleLanguagesDropdown(fromLanguage, toLanguage);
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
     updatePage(fromLanguage, toLanguage);
@@ -94,7 +93,7 @@ function initializeBlock() {
   $('#to-language').on('change', (e) => {
     toLanguage = e.target.value;
     const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    localStorage.setItem(LIKHO_TO_LANGUAGE, toLanguage);
+    localStorage.setItem(PARALLEL_TO_LANGUAGE, toLanguage);
     updatePage(fromLanguage, toLanguage);
   });
 
@@ -102,7 +101,7 @@ function initializeBlock() {
     localStorage.setItem("selectedType", "contribute");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./record.html', MODULE.likho.value);
+      setStartRecordingBtnOnClick('./record.html', INITIATIVES.parallel.value);
     } else {
       location.href = './record.html';
     }
@@ -113,7 +112,7 @@ function initializeBlock() {
     localStorage.setItem("selectedType", "validate");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./validator-page.html', MODULE.likho.value);
+      setStartRecordingBtnOnClick('./validator-page.html', INITIATIVES.parallel.value);
     } else {
       location.href = './validator-page.html';
     }
@@ -132,19 +131,19 @@ function initializeBlock() {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  onChangeUser('./home.html', MODULE.likho.value);
+  onChangeUser('./home.html', INITIATIVES.parallel.value);
   onOpenUserDropDown();
-  updateGoalProgressBarFromJson(MODULE.likho['api-type']);
-  getStatsSummary('/stats/summary/parallel', MODULE.likho);
+  updateGoalProgressBarFromJson(INITIATIVES.parallel.type);
+  getStatsSummary('/stats/summary/parallel', INITIATIVES.parallel);
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
   initializeFeedbackModal();
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {
     initializeBlock();
   });
-  onActiveNavbar(MODULE.likho.value);
+  onActiveNavbar(INITIATIVES.parallel.value);
 });

@@ -7,11 +7,13 @@ const {
   translate,
 } = require('./utils');
 
+const {INITIATIVES} = require('./constants')
+
 const getTotalParticipation = (data, moduleType) => {
   let validation_count = 0;
   let contribution_count = 0;
 
-  if (moduleType == 'parallel' || moduleType == 'ocr') {
+  if (moduleType == INITIATIVES.parallel.type || moduleType == INITIATIVES.ocr.type) {
     if (data.total_validation_count) {
       validation_count = Number(data.total_validation_count);
     }
@@ -123,24 +125,24 @@ const drawMap = function (response, moduleType) {
         true
       );
       st.contributed_time =
-        moduleType == 'parallel' || moduleType == 'ocr'
+        moduleType == INITIATIVES.parallel.type || moduleType == INITIATIVES.ocr.type
           ? Number(ele.total_contribution_count)
           : formatTime(cHours, cMinutes, cSeconds);
       st.validated_time =
-        moduleType == 'parallel' || moduleType == 'ocr'
+        moduleType == INITIATIVES.parallel.type || moduleType == INITIATIVES.ocr.type
           ? Number(ele.total_validation_count)
           : formatTime(vHours, vMinutes, vSeconds);
       st.value = getTotalParticipation(ele, moduleType);
       st.total_speakers = ele.total_speakers;
     } else {
-      st.contributed_time = moduleType == 'parallel' || moduleType == 'ocr' ? '0' : formatTime(0, 0, 0);
-      st.validated_time = moduleType == 'parallel' || moduleType == 'ocr' ? '0' : formatTime(0, 0, 0);
+      st.contributed_time = moduleType == INITIATIVES.parallel.type || moduleType == INITIATIVES.ocr.type ? '0' : formatTime(0, 0, 0);
+      st.validated_time = moduleType == INITIATIVES.parallel.type || moduleType == INITIATIVES.ocr.type ? '0' : formatTime(0, 0, 0);
       st.value = 0;
       st.total_speakers = 0;
     }
     st.state = translate(st.state);
   });
-  const sunoTooltip = `<div style="text-align: left;">
+  const asrTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6>
                           <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
@@ -153,7 +155,7 @@ const drawMap = function (response, moduleType) {
                             )}:  <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`;
-  const likhoTooltip = `<div style="text-align: left;">
+  const parallelTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6>
                           <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
@@ -164,7 +166,7 @@ const drawMap = function (response, moduleType) {
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`;
-  const dekhoTooltip = `<div style="text-align: left;">
+  const ocrTooltip = `<div style="text-align: left;">
                           <h6>{state}</h6>
                           <div style="text-align: left;">{total_speakers} ${translate('People')}</div>
                           <div style="text-align: left;">
@@ -175,12 +177,12 @@ const drawMap = function (response, moduleType) {
                             <label style="margin-left: 8px">{validated_time}</label>
                           </div>
                         </div>`;
-  let toolTipContent = sunoTooltip;
-  if (moduleType === 'parallel') {
-    toolTipContent = likhoTooltip;
+  let toolTipContent = asrTooltip;
+  if (moduleType === INITIATIVES.parallel.type) {
+    toolTipContent = parallelTooltip;
   }
-  if (moduleType === 'ocr') {
-    toolTipContent = dekhoTooltip;
+  if (moduleType === INITIATIVES.ocr.type) {
+    toolTipContent = ocrTooltip;
   }
   var chart = am4core.create('indiaMapChart', am4maps.MapChart);
   const index = chart.series.indexOf(polygonSeries);
@@ -209,7 +211,7 @@ const drawMap = function (response, moduleType) {
 
   polygonSeries.mapPolygons.template.adapter.add('fill', function (fill, target) {
     if (target.dataItem) {
-      if (moduleType == 'text' || moduleType == 'asr') {
+      if (moduleType == INITIATIVES.text.type || moduleType == INITIATIVES.asr.type) {
         if (target.dataItem.value >= quarterVal * 3) {
           return am4core.color('#4061BF');
         } else if (target.dataItem.value >= quarterVal * 2) {
@@ -249,16 +251,16 @@ const drawMap = function (response, moduleType) {
   const { hours: hHours, minutes: hMinuts } = calculateTime(quarterVal * 2 * 60 * 60, false);
   const { hours: tQHours, minutes: tQMinuts } = calculateTime(quarterVal * 3 * 60 * 60, false);
   $quarter.text(
-    moduleType == 'parallel'
+    moduleType == INITIATIVES.parallel.type
       ? formatTransAndImages('0', 100, 'translations')
-      : moduleType == 'ocr'
+      : moduleType == INITIATIVES.ocr.type
       ? formatTransAndImages('0', 100, 'images')
       : `0 - ${formatTimeForLegends(qHours, qMinuts, 0, true)}`
   );
   $half.text(
-    moduleType == 'parallel'
+    moduleType == INITIATIVES.parallel.type
       ? formatTransAndImages('100', 200, 'translations')
-      : moduleType == 'ocr'
+      : moduleType == INITIATIVES.ocr.type
       ? formatTransAndImages('100', 200, 'images')
       : `${formatTimeForLegends(qHours, qMinuts, 0, false)} - ${formatTimeForLegends(
           hHours,
@@ -268,9 +270,9 @@ const drawMap = function (response, moduleType) {
         )}`
   );
   $threeQuarter.text(
-    moduleType == 'parallel'
+    moduleType == INITIATIVES.parallel.type
       ? formatTransAndImages('200', 500, 'translations')
-      : moduleType == 'ocr'
+      : moduleType == INITIATIVES.ocr.type
       ? formatTransAndImages('200', 500, 'images')
       : `${formatTimeForLegends(hHours, hMinuts, 0, false)} - ${formatTimeForLegends(
           tQHours,
@@ -280,9 +282,9 @@ const drawMap = function (response, moduleType) {
         )}`
   );
   $full.text(
-    moduleType == 'parallel'
+    moduleType == INITIATIVES.parallel.type
       ? formatTransAndImages('', '> 500', 'translations')
-      : moduleType == 'ocr'
+      : moduleType == INITIATIVES.ocr.type
       ? formatTransAndImages('', '> 500', 'images')
       : `> ${formatTimeForLegends(tQHours, tQMinuts, 0, true)}`
   );

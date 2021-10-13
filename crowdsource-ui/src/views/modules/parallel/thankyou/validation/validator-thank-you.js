@@ -3,12 +3,11 @@ const {
   HOUR_IN_SECONDS,
   LOCALE_STRINGS,
   CURRENT_MODULE,
-  MODULE,
   AGGREGATED_DATA_BY_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
-  LIKHO_TO_LANGUAGE,
-  config
+  PARALLEL_TO_LANGUAGE,
+  config,INITIATIVES
 } = require('../common/constants');
 
 const {
@@ -25,7 +24,7 @@ const { showUserProfile, onChangeUser, onOpenUserDropDown } = require('../common
 const {
   showByHoursChartThankyouPage,
   setBadge,
-  updateLikhoLocaleLanguagesDropdown,
+  updateParallelLocaleLanguagesDropdown,
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
@@ -33,10 +32,10 @@ const {
 } = require('../common/common');
 const { initializeFeedbackModal } = require('../common/feedback');
 
-const CURRENT_INDEX = 'likhoValidatorCurrentIndex';
+const CURRENT_INDEX = `${config.initiativeKey_3}ValidatorCurrentIndex`;
 const SPEAKER_DETAILS = 'speakerDetails';
-const likhoValidatorCountKey = 'likhoValidatorCount';
-const totalSentence = Number(localStorage.getItem(likhoValidatorCountKey));
+const parallelValidatorCountKey = `${config.initiativeKey_3}ValidatorCount`;
+const totalSentence = Number(localStorage.getItem(parallelValidatorCountKey));
 
 const getFormattedTime = totalSeconds => {
   const hours = Math.floor(totalSeconds / HOUR_IN_SECONDS);
@@ -49,7 +48,7 @@ const getFormattedTime = totalSeconds => {
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localisedLanguage = sessionStorage.getItem('i18n');
-  const boloIndiaTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
+  const parallelTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
   let localeText = '';
   if (rank === 0) {
     localeText = localeStrings['social sharing text without rank'];
@@ -59,7 +58,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeText.replace('<y>', rank);
     localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_3]);
   }
-  //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
+  
   const $whatsappShare = $('#whatsapp_share');
   $whatsappShare.attr('href', `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $('#twitter_share');
@@ -67,24 +66,24 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $('#linkedin_share');
   $linkedinShare.attr(
     'href',
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[parallelTitle]}&summary=${localeText}`
   );
 };
 
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
-    const top_languages_by_hours = jsonData.filter(d => d.type == MODULE.likho['api-type']);
+    const top_languages_by_hours = jsonData.filter(d => d.type == INITIATIVES.parallel.type);
     if (top_languages_by_hours.length > 0) {
       const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
       const languages = getTopLanguage(
         top_languages_by_hours,
-        MODULE.likho.value,
+        INITIATIVES.parallel.value,
         'total_validation_count',
         'total_validations'
       );
       localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-      showByHoursChartThankyouPage(MODULE.likho.value, 'thankyou');
+      showByHoursChartThankyouPage(INITIATIVES.parallel.value, 'thankyou');
       const data = top_languages_by_hours.sort((a, b) =>
         Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
       );
@@ -151,13 +150,13 @@ function executeOnLoad() {
     location.href = './home.html';
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./validator-thank-you.html', MODULE.likho.value);
+    onChangeUser('./validator-thank-you.html', INITIATIVES.parallel.value);
     onOpenUserDropDown();
 
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const toLanguage = localStorage.getItem(LIKHO_TO_LANGUAGE);
+    const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
     if (contributionLanguage && toLanguage) {
-      updateLikhoLocaleLanguagesDropdown(contributionLanguage, toLanguage);
+      updateParallelLocaleLanguagesDropdown(contributionLanguage, toLanguage);
     }
 
     const localStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -185,17 +184,13 @@ function executeOnLoad() {
     getLanguageStats().then(() => {
       setSentencesContributed();
     });
-    updateGoalProgressBarFromJson(
-      MODULE.likho['api-type'],
-      'validate',
-      `${contributionLanguage}-${toLanguage}`
-    );
+    updateGoalProgressBarFromJson(INITIATIVES.parallel.type,'validate', `${contributionLanguage}-${toLanguage}`);
   }
 }
 
 $(document).ready(function () {
   redirectToHomeForDirectLanding();
-  localStorage.setItem(CURRENT_MODULE, MODULE.likho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
   localStorage.setItem('selectedType', 'validate');
   initializeFeedbackModal();
 

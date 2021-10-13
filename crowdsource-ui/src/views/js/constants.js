@@ -1,6 +1,6 @@
+const config = require('../../../brand/meity.json')
 const { getEnabledLanguages, getAllLanguages } = require('./language-filter')
 const { enabled_languages } = require('./env-api')
-const config = require('../../../brand/meity.json')
 
 const DEFAULT_CON_LANGUAGE = "English";
 const AUDIO_DURATION = 6;
@@ -15,9 +15,10 @@ const LOCALE_STRINGS = 'localeString';
 const SELECTED_MODULE = "selectedModule";
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const TO_LANGUAGE = "to-language";
-const LIKHO_TO_LANGUAGE = "likho_to-language";
-const LIKHO_FROM_LANGUAGE = "likho_from-language";
+const PARALLEL_TO_LANGUAGE = `${config.initiativeKey_3}_to-language`;
+const PARALLEL_FROM_LANGUAGE = `${config.initiativeKey_3}_from-language`;
 const SPEAKER_DETAILS_KEY = 'speakerDetails';
+const CURRENT_MODULE = 'module';
 
 const MOTHER_TONGUE = [
   'Assamese',
@@ -57,7 +58,6 @@ const BADGES = {
   platinum: { imgLg: "/img/platinum_badge.svg", imgSm: "/img/platinum_contributor.jpg" },
 }
 
-const CURRENT_MODULE = 'module';
 
 const MODULE = {
   bolo: {
@@ -96,10 +96,10 @@ const MODULE = {
 };
 
 const SELECT_PAGE_OPTIONS_FEEDBACK = [
-  { module: 'suno', pages: ['Badges Info', 'Dashboard', 'Suno India Home', 'Transcribe', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'bolo', pages: ['Badges Info', 'Dashboard', 'Bolo India Home', 'Speak', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'likho', pages: ['Badges Info', 'Dashboard', 'Likho India Home', 'Translate', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'dekho', pages: ['Badges Info', 'Dashboard', 'Dekho India Home', 'Label', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: 'suno', pages: ['Badges Info', 'Dashboard', `${config.initiative_1} Home`, 'Transcribe', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: 'bolo', pages: ['Badges Info', 'Dashboard', `${config.initiative_2} Home`, 'Speak', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: 'likho', pages: ['Badges Info', 'Dashboard', `${config.initiative_3} Home`, 'Translate', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: 'dekho', pages: ['Badges Info', 'Dashboard', `${config.initiative_4} Home`, 'Label', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
   { module: 'others', pages: ['About Us' , 'Home Page' , 'Terms and Conditions' ,'Badges Info', 'My Badges']}
 ];
 
@@ -118,11 +118,19 @@ const OPINION_RATING_MAPPING = [
   { opinion: "very_happy", value: 5 },
 ];
 
+
+const INITIATIVES = {
+  asr: {type: 'asr', value: config.initiativeKey_1,name :config.initiative_1},
+  text: {type: 'text', value: config.initiativeKey_2, name :config.initiative_2},
+  parallel: {type: 'parallel', value: config.initiativeKey_3,name :config.initiative_3},
+  ocr: { type: 'ocr', value: config.initiativeKey_4,name :config.initiative_4}
+};
+
 const ALL_MODULES = [
-  'boloIndia',
-  'sunoIndia',
-  'likhoIndia',
-  'dekhoIndia',
+  'text',
+  'asr',
+  'parallel',
+  'ocr',
 ];
 
 const BADGES_NAME = {
@@ -167,7 +175,7 @@ module.exports = {
   BADGES,
   SPEAKER_DETAILS_KEY,
   SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE, ALL_MODULES,
-  LIKHO_FROM_LANGUAGE, LIKHO_TO_LANGUAGE,
+  PARALLEL_FROM_LANGUAGE,  PARALLEL_TO_LANGUAGE,
   SELECT_PAGE_OPTIONS_FEEDBACK,
   FEEDBACK_CATEGORY,
   OPINION_RATING_MAPPING,
@@ -175,5 +183,5 @@ module.exports = {
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   CUMULATIVE_DATA,
   BADGES_NAME,
-  INITIATIVES_NAME,config,BADGES_STRING,BADGES_API_TEXT
+  INITIATIVES_NAME,config,BADGES_STRING,BADGES_API_TEXT,INITIATIVES
 }

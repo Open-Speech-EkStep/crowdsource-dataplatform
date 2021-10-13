@@ -4,10 +4,9 @@ const {
   LOCALE_STRINGS,
   CURRENT_MODULE,
   CONTRIBUTION_LANGUAGE,
-  MODULE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   AGGREGATED_DATA_BY_LANGUAGE,
-  config
+  config,INITIATIVES
 } = require('../common/constants');
 const {
   updateLocaleLanguagesDropdown,
@@ -69,7 +68,7 @@ const getFormattedTime = totalSeconds => {
 const updateShareContent = function (language, rank) {
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
   const localisedLanguage = sessionStorage.getItem('i18n');
-  const boloIndiaTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
+  const textTitle = `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`;
   let localeText = '';
   if (rank === 0) {
     localeText = localeStrings['social sharing text without rank'];
@@ -79,7 +78,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeText.replace('<y>', rank);
     localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_2]);
   }
-  //const text = `I've contributed towards building open language repository for India on https://boloindia.nplt.in You and I can make a difference by donating our voices that can help machines learn our language and interact with us through great linguistic applications. Our ${language} language ranks ${rank} on BoloIndia. Do your bit and empower the language?`;
+  
   const $whatsappShare = $('#whatsapp_share');
   $whatsappShare.attr('href', `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $('#twitter_share');
@@ -87,23 +86,23 @@ const updateShareContent = function (language, rank) {
   const $linkedinShare = $('#linkedin_share');
   $linkedinShare.attr(
     'href',
-    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[boloIndiaTitle]}&summary=${localeText}`
+    `https://www.linkedin.com/shareArticle?mini=true&url=https://${config.brand_url}/${localisedLanguage}/home.html&title=${localeStrings[textTitle]}&summary=${localeText}`
   );
 };
 
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
-    const top_languages_by_hours = jsonData.filter(d => d.type == MODULE.bolo['api-type']);
+    const top_languages_by_hours = jsonData.filter(d => d.type == INITIATIVES.text.type);
     if (top_languages_by_hours.length > 0) {
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
       const languages = getTopLanguage(
         top_languages_by_hours,
-        MODULE.bolo.value,
+        INITIATIVES.text.value,
         'total_contribution_count',
         'total_contributions'
       );
       localStorage.setItem(AGGREGATED_DATA_BY_TOP_LANGUAGE, JSON.stringify(languages));
-      showByHoursChartThankyouPage(MODULE.bolo.value, 'thankyou');
+      showByHoursChartThankyouPage(INITIATIVES.text.value, 'thankyou');
       const data = top_languages_by_hours.sort((a, b) =>
         Number(a.total_contributions) > Number(b.total_contributions) ? -1 : 1
       );
@@ -157,7 +156,7 @@ function executeOnLoad() {
     location.href = './home.html';
   } else {
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./thank-you.html', MODULE.bolo.value);
+    onChangeUser('./thank-you.html', INITIATIVES.text.value);
     onOpenUserDropDown();
   }
 
@@ -180,7 +179,7 @@ function executeOnLoad() {
   hideElement($('#loader'));
   showElement($('#data-wrapper'));
 
-  updateGoalProgressBarFromJson(MODULE.bolo['api-type'], 'contribute', contributionLanguage);
+  updateGoalProgressBarFromJson(INITIATIVES.text.type, 'contribute', contributionLanguage);
   getLanguageStats().then(() => {
     setSentencesContributed();
   });
@@ -188,7 +187,7 @@ function executeOnLoad() {
 
 $(document).ready(function () {
   redirectToHomeForDirectLanding();
-  localStorage.setItem(CURRENT_MODULE, 'bolo');
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
   localStorage.setItem('selectedType', 'contribute');
   initializeFeedbackModal();
   $('#download_pdf').on('click', function () {

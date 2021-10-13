@@ -15,9 +15,8 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
-  MODULE,
   SPEAKER_DETAILS_KEY,
-  ALL_LANGUAGES
+  ALL_LANGUAGES,INITIATIVES
 } = require('../common/constants');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -46,7 +45,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
-    getStatsSummary('/stats/summary/ocr', MODULE.dekho, () => { });
+    getStatsSummary('/stats/summary/ocr', INITIATIVES.ocr, () => { });
     showFunctionalCards('ocr', fromLanguage);
   });
 
@@ -55,7 +54,7 @@ function initializeBlock() {
     localStorage.setItem("selectedType", "contribute");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./record.html', MODULE.dekho.value);
+      setStartRecordingBtnOnClick('./record.html', INITIATIVES.ocr.value);
     } else {
       location.href = './record.html';
     }
@@ -66,15 +65,15 @@ function initializeBlock() {
     localStorage.setItem("selectedType", "validate");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./validator-page.html', MODULE.dekho.value);
+      setStartRecordingBtnOnClick('./validator-page.html', INITIATIVES.ocr.value);
     } else {
       location.href = './validator-page.html';
     }
   })
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   showFunctionalCards('ocr', language);
-  updateGoalProgressBarFromJson(MODULE.dekho['api-type']);
-  getStatsSummary('/stats/summary/ocr', MODULE.dekho, () => { });
+  updateGoalProgressBarFromJson(INITIATIVES.ocr.type);
+  getStatsSummary('/stats/summary/ocr', INITIATIVES.ocr, () => { });
   const $startRecordBtn = $('#proceed-box');
   const $startRecordBtnTooltip = $startRecordBtn.parent();
 
@@ -87,19 +86,19 @@ function initializeBlock() {
     const localSpeakerDataParsed = JSON.parse(speakerDetails);
     showUserProfile(localSpeakerDataParsed.userName);
   }
-  onChangeUser('./home.html', MODULE.dekho.value);
+  onChangeUser('./home.html', INITIATIVES.ocr.value);
   onOpenUserDropDown();
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
   initializeFeedbackModal();
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {
     initializeBlock();
   });
-  onActiveNavbar(MODULE.dekho.value);
+  onActiveNavbar(INITIATIVES.ocr.value);
 });
 
 

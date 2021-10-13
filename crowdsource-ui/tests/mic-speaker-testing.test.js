@@ -3,8 +3,8 @@ const {stringToHTML} = require("./utils");
 const {addOnClickListener, showAmbientNoise, writeUTFBytes} = require('../src/assets/js/mic-speaker-testing')
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../src/views/common/bolo-mic-speaker-testing.ejs`, "UTF-8") +
-  readFileSync(`${__dirname}/../src/views/common/bolo-mic-speaker-test-btn.ejs`, "UTF-8")
+  readFileSync(`${__dirname}/../src/views/common/text-mic-speaker-testing.ejs`, "UTF-8") +
+  readFileSync(`${__dirname}/../src/views/common/text-mic-speaker-test-btn.ejs`, "UTF-8")
 );
 
 describe("$testMicSpeakerBtn", () => {

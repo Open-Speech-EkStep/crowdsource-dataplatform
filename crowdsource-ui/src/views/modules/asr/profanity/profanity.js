@@ -10,16 +10,16 @@ const {
   afterHover
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require('../common/constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE,config,INITIATIVES } = require('../common/constants');
 const { showUserProfile } = require('../common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex, updateProgressBar } = require('../common/progressBar');
 const { isMobileDevice } = require('../common/common');
 
 const speakerDetailsKey = 'profanityUserDetails';
 
-const sunoCountKey = 'sunoCount';
-const currentIndexKey = 'sunoCurrentIndex';
-const sentencesKey = 'sunoSentencesKey';
+const asrCountKey = `${config.initiativeKey_1}Count`;
+const currentIndexKey = `${config.initiativeKey_1}CurrentIndex`;
+const sentencesKey = `${config.initiativeKey_1}SentencesKey`;
 window.sunoIndia = {};
 
 let playStr = "";
@@ -376,7 +376,7 @@ function executeOnLoad() {
           }
           $pageContent.removeClass('d-none');
           sunoIndia.sentences = sentenceData.data;
-          localStorage.setItem(sunoCountKey, sunoIndia.sentences.length);
+          localStorage.setItem(asrCountKey, sunoIndia.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,
@@ -423,7 +423,7 @@ $(document).ready(() => {
   const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
   disableButton($submitButton);
   disableButton(cancelButton);
-  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
   getLocaleString().then(() => {
     executeOnLoad();
   }).catch(() => {

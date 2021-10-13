@@ -3,7 +3,7 @@ const {
   setPageContentHeight,
   // toggleFooterPosition,
   setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate } = require('../common/utils');
-const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,MODULE,LOCALE_STRINGS} = require('../common/constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,LOCALE_STRINGS,config,INITIATIVES} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,redirectToHomeForDirectLanding } = require('../common/common');
 const { showUserProfile, onChangeUser,onOpenUserDropDown } = require('../common/header');
@@ -21,8 +21,8 @@ let currentIndex ;
 // eslint-disable-next-line no-unused-vars
 let validationCount = 0;
 
-const currentIndexKey = 'dekhoValidatorCurrentIndex';
-const dekhoValidatorCountKey = 'dekhoValidatorCount';
+const currentIndexKey = `${config.initiativeKey_4}ValidatorCurrentIndex`;
+const ocrValidatorCountKey = `${config.initiativeKey_4}ValidatorCount`;
 
 function getValue(number, maxValue) {
   return number < 0
@@ -53,7 +53,7 @@ function uploadToServer(cb) {
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
   fd.append('browser', getBrowserInfo());
-  fd.append('type', MODULE.dekho["api-type"]);
+  fd.append('type', INITIATIVES.ocr.type);
   fetch('/store', {
     method: 'POST',
     credentials: 'include',
@@ -91,7 +91,7 @@ function getNextSentence() {
     currentIndex++;
     updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length);
     const encodedUrl = encodeURIComponent(dekhoIndiaValidator.sentences[currentIndex].sentence);
-    setDekhoImage(`${cdn_url}/${encodedUrl}`);
+    setOcrImage(`${cdn_url}/${encodedUrl}`);
     setDataSource(dekhoIndiaValidator.sentences[currentIndex].source_info);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -127,7 +127,7 @@ function skipValidation(action) {
       userName: speakerDetails && speakerDetails.userName,
       device: getDeviceInfo(),
       browser: getBrowserInfo(),
-      type: MODULE.dekho["api-type"],
+      type: INITIATIVES.ocr.type,
       fromLanguage: localStorage.getItem("contributionLanguage")
     }),
     headers: {
@@ -257,7 +257,7 @@ function addListeners() {
   })
 }
 
-const setDekhoImage = function (audioLink) {
+const setOcrImage = function (audioLink) {
   $('#view-image').attr('src', audioLink)
 };
 
@@ -283,7 +283,7 @@ function showNoSentencesMessage() {
   hideElement($('#textarea-row'));
   hideElement($('#virtualKeyBoardBtn'));
   hideElement($('#audio-row'));
-  hideElement($('#dekho-image'));
+  hideElement($('#ocr-image'));
   hideElement($('#validation-button-row'))
   hideElement($('#progress-row'))
   hideElement($('#mic-report-row'));
@@ -344,7 +344,7 @@ const initializeComponent = () => {
     const validationData = dekhoIndiaValidator.sentences[currentIndex];
     if (validationData) {
       const encodedUrl = encodeURIComponent(validationData.sentence);
-      setDekhoImage(`${cdn_url}/${encodedUrl}`);
+      setOcrImage(`${cdn_url}/${encodedUrl}`);
       setDataSource(validationData.source_info);
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
@@ -374,7 +374,7 @@ const executeOnLoad = function () {
   } else {
     showOrHideExtensionCloseBtn();
   }
-  localStorage.setItem(CURRENT_MODULE, MODULE.dekho.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   initializeFeedbackModal();
   setFooterPosition();
@@ -433,7 +433,7 @@ const executeOnLoad = function () {
     return;
   }
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',MODULE.dekho.value);
+  onChangeUser('./validator-page.html',INITIATIVES.ocr.value);
   onOpenUserDropDown();
     localStorage.removeItem(currentIndexKey);
     const type = 'ocr';
@@ -454,7 +454,7 @@ const executeOnLoad = function () {
       throw errStatus
     }).then(result => {
       dekhoIndiaValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(dekhoValidatorCountKey, dekhoIndiaValidator.sentences.length);
+      localStorage.setItem(ocrValidatorCountKey, dekhoIndiaValidator.sentences.length);
       if(dekhoIndiaValidator.sentences.length === 0){
         showNoSentencesMessage();
         return;

@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./text/home.html",
-        suno:"./asr/home.html",likho:"./parallel/home.html",dekho:"./ocr/home.html",path:"./"}); %>
+    <%- include('common/header/header.ejs',{home:"./home.html", text:"./text/home.html",
+        asr:"./asr/home.html",parallel:"./parallel/home.html",ocr:"./ocr/home.html",path:"./"}); %>
         <div class="container-fluid">
             <div class="row justify-content-center bg-secondary">
                 <div class="col-12 col-sm-10 col-md-8 px-1 py-0 text-light text-center mt-0 mt-sm-2 mt-3">
@@ -50,10 +50,10 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-8 col-lg-6 text-left">Indians can contribute in the following way on the Website <br><br>
                     <ol type="1">
-                        <li> Record their voices on the Bolo India Website while reading prompted texts <b>(“Voice Recordings”)</b> to create an open database of diverse voice recordings that can be used to develop open source speech-to-text technology tools.</li>
-                        <li> Transcribe text on the Suno India Website while listening to the audio clips <b>(“Transcribed Texts”)</b> to create an open database of voice recordings and respective transcription that can be used to develop open source text-to-speech technology tools.</li>
-                        <li> Translate a text <b>(“Translated Texts”)</b> from one Indian language to another on the Likho India Website to create an open database of parallel translations.</li>
-                        <li> Label an image <b>(“Labelled Images”)</b> on the Dekho India Website while reading the text on the Image to create an open database of labelled images for optical character recognition.</li>
+                        <li> Record their voices on the <%= `${config.initiative_2}`%> Website while reading prompted texts <b>(“Voice Recordings”)</b> to create an open database of diverse voice recordings that can be used to develop open source speech-to-text technology tools.</li>
+                        <li> Transcribe text on the <%= `${config.initiative_1}`%> Website while listening to the audio clips <b>(“Transcribed Texts”)</b> to create an open database of voice recordings and respective transcription that can be used to develop open source text-to-speech technology tools.</li>
+                        <li> Translate a text <b>(“Translated Texts”)</b> from one Indian language to another on the <%= `${config.initiative_3}`%> Website to create an open database of parallel translations.</li>
+                        <li> Label an image <b>(“Labelled Images”)</b> on the <%= `${config.initiative_4}`%> Website while reading the text on the Image to create an open database of labelled images for optical character recognition.</li>
                     </ol>
                     <p>The terms ‘you’, ‘your’ refer to anyone who accesses, uses or contributes to the Website
                         <b>(“User”)</b>. These terms of use, as amended, govern the usage of Website by its Users

@@ -6,10 +6,11 @@ const {
 } = require('./speakerDetails');
 
 const {isMobileDevice} = require('./common');
+const {CURRENT_MODULE} = require('./constants');
 
 function onActiveNavbar(value) {
   const $header = $('#module_name');
-  localStorage.setItem("selectedModule", value);
+  localStorage.setItem(CURRENT_MODULE, value);
   const allDivs = $header.children();
   let targetedDivIndex = -1;
   allDivs.each(function (index, element) {

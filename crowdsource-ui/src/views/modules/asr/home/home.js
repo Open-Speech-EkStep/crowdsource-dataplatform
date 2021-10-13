@@ -15,9 +15,8 @@ const {
   DEFAULT_CON_LANGUAGE,
   CONTRIBUTION_LANGUAGE,
   CURRENT_MODULE,
-  MODULE,
   SPEAKER_DETAILS_KEY,
-  ALL_LANGUAGES
+  ALL_LANGUAGES,INITIATIVES
 } = require('../common/constants');
 
 const { initializeFeedbackModal } = require('../common/feedback');
@@ -44,7 +43,7 @@ function initializeBlock() {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, fromLanguage);
     sessionStorage.setItem("i18n", "en");
     redirectToLocalisedPage();
-    getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
+    getStatsSummary('/stats/summary/asr', INITIATIVES.asr, () => { });
     showFunctionalCards('asr', fromLanguage);
     const chartRadio = document.querySelector(
       'input[name = "topLanguageChart"][value="hours"]'
@@ -59,7 +58,7 @@ function initializeBlock() {
     localStorage.setItem("selectedType", "contribute");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./record.html', MODULE.suno.value);
+      setStartRecordingBtnOnClick('./record.html', INITIATIVES.asr.value);
     } else {
       location.href = './record.html';
     }
@@ -70,7 +69,7 @@ function initializeBlock() {
     localStorage.setItem("selectedType", "validate");
     if (!hasUserRegistered()) {
       $('#userModal').modal('show');
-      setStartRecordingBtnOnClick('./validator-page.html', MODULE.suno.value);
+      setStartRecordingBtnOnClick('./validator-page.html', INITIATIVES.asr.value);
     } else {
       location.href = './validator-page.html';
     }
@@ -85,7 +84,7 @@ function initializeBlock() {
   setGenderRadioButtonOnClick();
   setUserNameOnInputFocus();
 
-  onChangeUser('./home.html', MODULE.suno.value);
+  onChangeUser('./home.html', INITIATIVES.asr.value);
   onOpenUserDropDown();
   if (hasUserRegistered()) {
     const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
@@ -93,21 +92,21 @@ function initializeBlock() {
     showUserProfile(localSpeakerDataParsed.userName);
   }
   $('[name="topLanguageChart"]').on('change', (event) => {
-    showByHoursChart('suno', 'home', event.target.value);
+    showByHoursChart(INITIATIVES.asr.value, 'home', event.target.value);
   });
-  updateGoalProgressBarFromJson(MODULE.suno['api-type']);
-  getStatsSummary('/stats/summary/asr', MODULE.suno, () => { });
+  updateGoalProgressBarFromJson(INITIATIVES.asr.type);
+  getStatsSummary('/stats/summary/asr', INITIATIVES.asr, () => { });
 }
 
 $(document).ready(function () {
-  localStorage.setItem(CURRENT_MODULE, MODULE.suno.value);
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
   initializeFeedbackModal();
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {
     initializeBlock();
   });
-  onActiveNavbar(MODULE.suno.value);
+  onActiveNavbar(INITIATIVES.asr.value);
 });
 
 module.exports = {

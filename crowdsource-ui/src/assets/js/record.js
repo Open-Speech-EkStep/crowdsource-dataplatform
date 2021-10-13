@@ -11,7 +11,7 @@ const {
   safeJson,
   translate,
 } = require('./utils');
-const { LOCALE_STRINGS, MODULE, CONTRIBUTION_LANGUAGE } = require('./constants');
+const { LOCALE_STRINGS, CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,INITIATIVES} = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
 const { onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const { showErrorPopup, redirectToHomeForDirectLanding } = require('./common');
@@ -395,7 +395,7 @@ const initialize = () => {
       browser: getBrowserInfo(),
       state_region: state_region,
       country: country,
-      type: MODULE.bolo['api-type'],
+      type: INITIATIVES.text.type,
       language: localStorage.getItem(CONTRIBUTION_LANGUAGE),
     };
     fetch('/skip', {
@@ -443,7 +443,7 @@ const initialize = () => {
     fd.append('audioDuration', crowdSource.audioDuration);
     fd.append('device', getDeviceInfo());
     fd.append('browser', getBrowserInfo());
-    fd.append('type', MODULE.bolo['api-type']);
+    fd.append('type', INITIATIVES.text.type);
     fetch('/store', {
       method: 'POST',
       credentials: 'include',
@@ -604,7 +604,7 @@ function executeOnLoad() {
     }
 
     showUserProfile(localSpeakerDataParsed.userName);
-    onChangeUser('./record.html', MODULE.bolo.value);
+    onChangeUser('./record.html', INITIATIVES.text.value);
     onOpenUserDropDown();
     const isExistingUser =
       localSentencesParsed &&
@@ -672,7 +672,7 @@ function executeOnLoad() {
 
 $(document).ready(() => {
   redirectToHomeForDirectLanding();
-  localStorage.setItem('module', 'bolo');
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
   getLocaleString()
     .then(() => {
       executeOnLoad();

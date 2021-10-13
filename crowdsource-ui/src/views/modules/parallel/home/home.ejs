@@ -27,7 +27,7 @@
 </head>
 
 <body class="bg-white">
-<%- include('../common/header.ejs',{home:"../home.html", bolo:"../text/home.html", suno:"../asr/home.html",likho:"./home.html",dekho:"../ocr/home.html",path:"../"}); %>
+<%- include('../common/header.ejs',{home:"../home.html", text:"../text/home.html", asr:"../asr/home.html",parallel:"./home.html",ocr:"../ocr/home.html",path:"../"}); %>
 <div class="container-fluid supreme-container px-0 padding-top-65">
     <div class="bg-body-primary px-3 overflow-hidden">
     <div class="row">
@@ -116,7 +116,7 @@
     <%- include('../common/viewAllDetailBtn.ejs',{DASHBOARD:'./dashboard.html'}); %>
 </div>
 <%- include('../common/speakerDetails.ejs',{path:"../"}) %>
-<%- include('../common/feedback.ejs', {page: "Likho India Home"}) %>
+<%- include('../common/feedback.ejs', {page: `${config.initiative_3} Home`}) %>
 <%- include('../common/footer.ejs',{path:"../"}) %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

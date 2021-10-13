@@ -6,7 +6,7 @@ const {
     setGenderRadioButtonOnClick,
     setStartRecordingBtnOnClick } = require('./speakerDetails');
 const { updateLocaleLanguagesDropdown, calculateTime, getLocaleString, formatTime, getJson } = require('./utils');
-const { DEFAULT_CON_LANGUAGE, MODULE, CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY } = require('../../../build/js/common/constants');
+const { DEFAULT_CON_LANGUAGE, CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY,INITIATIVES,CURRENT_MODULE } = require('../../../build/js/common/constants');
 const { hasUserRegistered, showErrorPopup } = require('./common');
 const fetch = require('./fetch');
 const moment = require('moment');
@@ -92,8 +92,8 @@ function updateLanguage(language) {
             getJson(url)
                 .then((data) => {
                     try {
-                        participationData = participationData.find(d => d.type == MODULE.bolo["api-type"]);
-                        const bData = data.filter(d => d.type == MODULE.bolo["api-type"]) || [];
+                        participationData = participationData.find(d => d.type == INITIATIVES.text.type);
+                        const bData = data.filter(d => d.type == INITIATIVES.text.type) || [];
                         if (language == "") {
                             bData[0].total_speakers = participationData.count || 0;
                         }
@@ -152,14 +152,14 @@ function updateLanguage(language) {
 
 const initializeBlock = function () {
     localStorage.removeItem('previousLanguage');
-    localStorage.setItem('module', 'bolo');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
     const $userName = $('#username');
     updateLanguage('');
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (contributionLanguage) {
         updateLocaleLanguagesDropdown(contributionLanguage);
     }
@@ -206,7 +206,7 @@ const initializeBlock = function () {
         localStorage.setItem("selectedType", "contribute");
         if (!hasUserRegistered()) {
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html', MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./record.html', INITIATIVES.text.value);
         } else {
             location.href = './record.html';
         }
@@ -221,7 +221,7 @@ const initializeBlock = function () {
         const localSpeakerDataParsed = JSON.parse(speakerDetails);
         showUserProfile(localSpeakerDataParsed.userName);
     }
-    onChangeUser('./dashboard.html', MODULE.bolo.value);
+    onChangeUser('./dashboard.html', INITIATIVES.text.value);
     onOpenUserDropDown();
 };
 
