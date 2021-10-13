@@ -25,10 +25,10 @@ window.parallelInitiative = {};
 let currentIndex;
 
 function getNextSentence() {
-  if (currentIndex < window.parallelInitiative.sentences.length - 1) {
+  if (currentIndex < parallelInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, window.parallelInitiative.sentences.length);
-    setSentence(window.parallelInitiative.sentences[currentIndex].media);
+    updateProgressBar(currentIndex + 1, parallelInitiative.sentences.length);
+    setSentence(parallelInitiative.sentences[currentIndex].media);
     localStorage.setItem(currentIndexKey, currentIndex);
   } else {
     const sentencesObj = JSON.parse(localStorage.getItem(sentencesKey));
@@ -81,7 +81,7 @@ function onProfanityUpdated() {
 
 function invokeProfanityStateUpdate(state) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
-  updateProfanityState(localSpeakerDataParsed.userName, window.parallelInitiative.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+  updateProfanityState(localSpeakerDataParsed.userName, parallelInitiative.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
     .then(() => {
       onProfanityUpdated();
     }).catch(err => {
@@ -90,7 +90,7 @@ function invokeProfanityStateUpdate(state) {
 }
 
 function updateSkipAction() {
-  const sentenceId = window.parallelInitiative.sentences[currentIndex].dataset_row_id;
+  const sentenceId = parallelInitiative.sentences[currentIndex].dataset_row_id;
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/parallel`, {
     method: 'PUT',
@@ -195,17 +195,17 @@ function getCurrentIndex(lastIndex) {
 }
 
 const initialize = function () {
-  const totalItems = window.parallelInitiative.sentences.length;
+  const totalItems = parallelInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
 
-  const translation = window.parallelInitiative.sentences[currentIndex];
+  const translation = parallelInitiative.sentences[currentIndex];
   addListeners();
   console.log(translation);
   if (translation) {
     setSentence(translation.media);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, window.parallelInitiative.sentences.length)
+    updateProgressBar(currentIndex + 1, parallelInitiative.sentences.length)
   }
 };
 
@@ -244,7 +244,7 @@ function executeOnLoad() {
       $loader.hide();
       $pageContent.removeClass('d-none');
       setFooterPosition();
-      window.parallelInitiative.sentences = localSentencesParsed.sentences;
+      parallelInitiative.sentences = localSentencesParsed.sentences;
       initialize();
     } else {
       localStorage.removeItem(currentIndexKey);
@@ -277,8 +277,8 @@ function executeOnLoad() {
           $pageContent.removeClass('d-none');
           setFooterPosition();
 
-          window.parallelInitiative.sentences = sentenceData.data;
-          localStorage.setItem(parallelCountKey, window.parallelInitiative.sentences.length);
+          parallelInitiative.sentences = sentenceData.data;
+          localStorage.setItem(parallelCountKey, parallelInitiative.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,

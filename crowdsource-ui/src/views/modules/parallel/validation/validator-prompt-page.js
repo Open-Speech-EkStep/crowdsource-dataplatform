@@ -72,11 +72,11 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', window.parallelValidator.editedText);
+  fd.append('userInput', parallelValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(PARALLEL_TO_LANGUAGE));
   fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', window.parallelValidator.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', parallelValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -111,7 +111,7 @@ let currentIndex;
 let validationCount = 0;
 
 function setCapturedText(index) {
-  const capturedText = window.parallelValidator.sentences[index].contribution;
+  const capturedText = parallelValidator.sentences[index].contribution;
   $('#edit').text(capturedText);
 }
 
@@ -121,12 +121,12 @@ function enableButton(element) {
 }
 
 function getNextSentence() {
-  if (currentIndex < window.parallelValidator.sentences.length - 1) {
+  if (currentIndex < parallelValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, window.parallelValidator.sentences.length)
-    setSentence(window.parallelValidator.sentences[currentIndex].sentence);
-    setDataSource(window.parallelValidator.sentences[currentIndex].source_info);
-    setTranslation(window.parallelValidator.sentences[currentIndex].contribution);
+    updateProgressBar(currentIndex + 1, parallelValidator.sentences.length)
+    setSentence(parallelValidator.sentences[currentIndex].sentence);
+    setDataSource(parallelValidator.sentences[currentIndex].source_info);
+    setTranslation(parallelValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -153,8 +153,8 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = window.parallelValidator.sentences[currentIndex].dataset_row_id
-  const contribution_id = window.parallelValidator.sentences[currentIndex].contribution_id
+  const sentenceId = parallelValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = parallelValidator.sentences[currentIndex].contribution_id
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
@@ -219,7 +219,7 @@ function addListeners() {
     }
     showElement($('#editor-row'));
     openEditor();
-    const originalText = window.parallelValidator.sentences[currentIndex].contribution;
+    const originalText = parallelValidator.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -256,7 +256,7 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thank-you-row'));
     showElement($('#progress-row'))
-    window.parallelValidator.editedText = $("#edit").val();
+    parallelValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events', 'none');
     setTimeout(() => {
@@ -303,7 +303,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: window.parallelValidator.sentences[currentIndex].contribution_id,
+    sentenceId: parallelValidator.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -336,9 +336,9 @@ const setTranslation = function (translatedText) {
 const initializeComponent = () => {
   showOrHideExtensionCloseBtn();
   hideElement($('#virtualKeyBoardBtn'));
-  const totalItems = window.parallelValidator.sentences.length;
+  const totalItems = parallelValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const validationData = window.parallelValidator.sentences[currentIndex];
+  const validationData = parallelValidator.sentences[currentIndex];
   const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -360,7 +360,7 @@ const initializeComponent = () => {
     setCapturedText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, window.parallelValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, parallelValidator.sentences.length)
   }
 }
 
@@ -466,9 +466,9 @@ const executeOnLoad = function () {
       showErrorPopup(errStatus);
       throw errStatus
     }).then(result => {
-      window.parallelValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(parallelValidatorCountKey, window.parallelValidator.sentences.length);
-      if (window.parallelValidator.sentences.length == 0) {
+      parallelValidator.sentences = result.data ? result.data : [];
+      localStorage.setItem(parallelValidatorCountKey, parallelValidator.sentences.length);
+      if (parallelValidator.sentences.length == 0) {
         showNoSentencesMessage();
         return;
       }
