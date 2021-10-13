@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoDataFound should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-5 text-center container-lg"
+  >
+    <div
+      class="d-flex flex-column align-items-center"
+    >
+      <h1>
+        Thank you for your enthusiasm to validate the recordings.
+      </h1>
+      <p
+        class="mt-9"
+      >
+        We do not have any data in Hindi language. Please try again later.
+      </p>
+      <a
+        class="mt-9 info primary btn btn-primary"
+        data-testid="Button"
+        href="/some-url"
+        role="button"
+        tabindex="0"
+      >
+        Back to suno India Home
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
