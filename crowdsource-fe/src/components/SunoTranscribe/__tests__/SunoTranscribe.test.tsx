@@ -79,6 +79,7 @@ describe('SunoTranscribe', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalled();
     });
+
     return renderResult;
   };
 
@@ -177,8 +178,8 @@ describe('SunoTranscribe', () => {
           sentenceId: 1248671,
           state_region: 'Uttar Pradesh',
           country: 'India',
-          device: '',
-          browser: '',
+          device: 'Darwin null',
+          browser: 'Node.js 13',
         }),
       });
     });
@@ -231,8 +232,8 @@ describe('SunoTranscribe', () => {
           sentenceId: 1248671,
           state: 'Uttar Pradesh',
           country: 'India',
-          device: '',
-          browser: '',
+          device: 'Darwin null',
+          browser: 'Node.js 13',
         }),
       });
     });

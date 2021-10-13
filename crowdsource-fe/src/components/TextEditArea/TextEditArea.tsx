@@ -105,8 +105,8 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}
       {showKeyboard ? (
-        <Draggable ref={drag} bounds="body">
-          <div data-testid="virtual-keyboard" className={styles.keyboard}>
+        <Draggable bounds="parent">
+          <div ref={drag} data-testid="virtual-keyboard" className={styles.keyboard}>
             <span>{language}</span>
             <span
               data-testid="close-keyboard"

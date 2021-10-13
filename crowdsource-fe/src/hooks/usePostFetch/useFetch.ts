@@ -16,6 +16,7 @@ const useFetch = <T>({ url, init, processData }: RequestProps<T>) => {
   // If no processing function is passed just cast the object to type T
   // The callback hook ensures that the function is only created once
   // and hence the effect hook below doesn't start an infinite loop
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const processJson = useCallback(processData || ((jsonBody: any) => jsonBody as T), []);
 
   useEffect(() => {

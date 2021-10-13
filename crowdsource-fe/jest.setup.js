@@ -108,6 +108,11 @@ beforeEach(() => {
   jest.spyOn(Storage.prototype, 'getItem');
   jest.spyOn(Storage.prototype, 'setItem');
   jest.spyOn(Storage.prototype, 'removeItem');
+  const platform = jest.requireActual('platform');
+  Object.defineProperty(platform, 'version', {
+    get: () => 13,
+    configurable: true,
+  });
 });
 
 afterEach(() => {

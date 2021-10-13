@@ -6,6 +6,8 @@ import {
   isSunoOrBoloInitiative,
   capitalizeFirstLetter,
   verifyLanguage,
+  getDeviceInfo,
+  getBrowserInfo,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -102,5 +104,19 @@ describe('Utils', () => {
 
     const expectedOutput3 = { type: 'symbol' };
     expect(errorType3).toEqual(expectedOutput3);
+  });
+
+  it('should test the device info method', () => {
+    const deviceInfo = getDeviceInfo();
+
+    const expectedOutput = 'Darwin null';
+    expect(deviceInfo).toEqual(expectedOutput);
+  });
+
+  it('should test the browser info method', () => {
+    const browserInfo = getBrowserInfo();
+
+    const expectedOutput = 'Node.js 13';
+    expect(browserInfo).toEqual(expectedOutput);
   });
 });

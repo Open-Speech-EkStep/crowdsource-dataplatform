@@ -3,6 +3,8 @@ import { i18n } from 'next-i18next';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { KEYBOARD_ERROR, LANGUAGE_UNICODE } from 'constants/Keyboard';
 
+var platform = require('platform');
+
 export const convertIntoHrsFormat = (data: any, isSeconds = true) => {
   const hours = Math.floor(data / 3600);
   const remainingAfterHours = data % 3600;
@@ -102,28 +104,11 @@ export const fetchLocationInfo = () => {
   return result;
 };
 
-// export const getDeviceInfo = () => {
-//   const os = platform.os;
-//   let info = '';
-//   if (os.family) {
-//     info = info + os.family;
-//   }
-//   if (os.version) {
-//     info = info + ' ' + os.version;
-//   }
-//   if (platform.product) {
-//     info = info + ' ' + platform.product;
-//   }
-//   return info.trim();
-// };
+export const getDeviceInfo = () => {
+  const os = platform.os;
+  return os.family + ' ' + os.version;
+};
 
-// export const getBrowserInfo = () => {
-//   let info = '';
-//   if (platform.name) {
-//     info = info + platform.name;
-//   }
-//   if (platform.version) {
-//     info = info + ' ' + platform.version;
-//   }
-//   return info.trim();
-// };
+export const getBrowserInfo = () => {
+  return platform.name + ' ' + platform.version;
+};

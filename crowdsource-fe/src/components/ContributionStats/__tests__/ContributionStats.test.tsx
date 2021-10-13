@@ -91,7 +91,7 @@ describe('ContributionStats', () => {
   it('should render the result for likho initiative home page', async () => {
     await setup('bolo');
     expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
-    expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
+    expect(screen.getByText('durationRecorded')).toBeInTheDocument();
     expect(screen.getByText('durationValidated')).toBeInTheDocument();
     expect(screen.getByText('languages')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();

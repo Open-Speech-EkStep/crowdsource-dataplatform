@@ -5,7 +5,7 @@ import { render, screen } from 'utils/testUtils';
 
 import RecordPage from '../../sunoIndia/record.page';
 
-describe('Suno Home page', () => {
+describe('Suno Record page', () => {
   const setup = () => {
     return render(<RecordPage />);
   };
@@ -13,7 +13,6 @@ describe('Suno Home page', () => {
   it('should render the suno india record component', () => {
     setup();
 
-    expect(screen.getByTestId('Breadcrumbs')).toBeInTheDocument();
     expect(screen.getByTestId('FunctionalPageBackground')).toBeInTheDocument();
   });
 });
