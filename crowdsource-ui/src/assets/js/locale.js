@@ -27,11 +27,11 @@ const changeLocale = function (locale) {
     }
     sessionStorage.setItem("i18n", locale);
     const module = localStorage.getItem(CURRENT_MODULE);
-    const initiativeType = getInitiativeType(module);
     if(module == 'home' || currentPage == "my-badges.html"){
         location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {
+        const initiativeType = getInitiativeType(module);
         location.href = `${context_root}/${locale}/${initiativeType}/${currentPage}`;
     }
 }

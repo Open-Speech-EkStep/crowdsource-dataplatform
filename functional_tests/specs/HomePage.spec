@@ -24,8 +24,9 @@ Tags: page
 * Clicking "Likho India" should navigate to "Parallel Initiative" Page
 * Clicking "Dekho India" should navigate to "Ocr Initiative" Page
 
-//## Validate Localisation
-//* Should select "हिंदी" from localisation dropdown "localeDropdownMenuButton"
+## Validate Localisation
+* Should select "हिंदी" from localisation dropdown "localeDropdownMenuButton"
+* Section should have text "भाषा दान"
 //* Clicking "देखो इंडिया" should navigate to "Dekho India" Page
 //* Select "likho_india_tab" from header
 //* Validate contribution language should be selected "हिंदी" from "from-language"

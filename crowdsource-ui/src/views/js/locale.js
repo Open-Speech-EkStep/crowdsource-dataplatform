@@ -34,12 +34,12 @@ const changeLocale = function (locale) {
         currentPage = "home.html";
     }
     const module = localStorage.getItem(CURRENT_MODULE);
-    const initiativeType = getInitiativeType(module);
     sessionStorage.setItem("i18n", locale);
     if(module == 'home' || currentPage == "badges.html" || currentPage == "my-badges.html") {
         location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {
+        const initiativeType = getInitiativeType(module);
         location.href = `${context_root}/${locale}/${initiativeType}/${currentPage}`;
     }
 }
