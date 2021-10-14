@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, verifyAxeTest, screen } from 'utils/testUtils';
 
 import NoDataFound from '../NoDataFound';
 
@@ -11,5 +11,14 @@ describe('NoDataFound', () => {
     const { asFragment } = setup();
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should test the valid text', () => {
+    setup();
+
+    expect(screen.getByText('thankyouForEnthusiasm')).toBeInTheDocument();
+    expect(
+      screen.getByText('We do not have any data in Hindi language. Please try again later.')
+    ).toBeInTheDocument();
   });
 });

@@ -21,11 +21,10 @@
   width: 100%;
 
   @include media-breakpoint-up(md) {
-    min-height: 2.25rem;
     width: 15rem;
   }
 
-  &:hover {
+  &.active {
     background-color: var(--primary-color);
     color: var(--light-color);
   }
@@ -53,4 +52,5 @@
 .close {
   right: 1rem;
   top: 1rem;
+  z-index: 1;
 }

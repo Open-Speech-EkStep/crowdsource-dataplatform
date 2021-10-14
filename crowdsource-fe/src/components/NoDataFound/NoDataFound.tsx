@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Container from 'react-bootstrap/Container';
 
 import Button from 'components/Button';
@@ -10,10 +11,11 @@ interface NoDataFoundProps {
 }
 
 const NoDataFound = ({ url, initiative, language }: NoDataFoundProps) => {
+  const { t } = useTranslation();
   return (
     <Container fluid="lg" className="mt-5 text-center">
       <div className="d-flex flex-column align-items-center">
-        <h1>Thank you for your enthusiasm to validate the recordings.</h1>
+        <h1>{t('thankyouForEnthusiasm')}</h1>
         <p className="mt-9">{`We do not have any data in ${language} language. Please try again later.`}</p>
         <Link href={url} passHref>
           <Button className="mt-9" as="a" variant="primary">{`Back to ${initiative} India Home`}</Button>

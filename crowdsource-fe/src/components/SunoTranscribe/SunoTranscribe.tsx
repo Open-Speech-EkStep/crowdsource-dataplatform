@@ -15,6 +15,7 @@ import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
+import routePaths from 'constants/routePaths';
 import { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useFetch from 'hooks/usePostFetch';
@@ -247,7 +248,7 @@ const SunoTranscribe = () => {
     </div>
   ) : (
     <NoDataFound
-      url={`/${currentLocale}/sunoIndia/home`}
+      url={`/${currentLocale}${routePaths.sunoIndiaHome}`}
       initiative={INITIATIVES_MAPPING.suno}
       language={contributionLanguage ?? ''}
     />

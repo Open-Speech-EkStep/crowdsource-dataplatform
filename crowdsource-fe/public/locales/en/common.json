@@ -159,5 +159,7 @@
   "specifyReason": "Please specify the reason (Optional)",
   "thankyou": "Thank You",
   "reportSubmitSuccess": "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.",
-  "skip": "Skip"
+  "skip": "Skip",
+  "thankyouForContributing": "Thank you for contributing!",
+  "thankyouForEnthusiasm": "Thank you for your enthusiasm to validate the recordings."
 }

@@ -9,7 +9,7 @@ exports[`NoDataFound should render the component and matches it against stored s
       class="d-flex flex-column align-items-center"
     >
       <h1>
-        Thank you for your enthusiasm to validate the recordings.
+        thankyouForEnthusiasm
       </h1>
       <p
         class="mt-9"

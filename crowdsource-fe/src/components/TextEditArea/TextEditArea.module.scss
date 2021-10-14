@@ -13,10 +13,10 @@
 }
 
 .keyboard {
-  background-color: #ccc;
-  padding: 1rem 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  padding: 0.8rem 10px;
   position: absolute;
-
   width: 600px;
   z-index: 1;
 }
@@ -24,6 +24,10 @@
 .crossIcon {
   cursor: pointer;
   position: absolute;
-
   right: 15px;
+}
+
+.keyboardIcon {
+  bottom: 5px;
+  right: 0;
 }

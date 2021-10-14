@@ -72,7 +72,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         altText="testYourSpeaker"
       />
       {showMicSpeaker && (
-        <div className={`${styles.test} position-absolute bg-light p-5`}>
+        <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>
           <Button
             onClick={() => setShowMicSpeaker(false)}
             variant="normal"
@@ -89,16 +89,16 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
             <div className="d-md-flex flex-column flex-md-row align-items-center py-3">
               <Button
                 variant="normal"
-                className={`${styles.testBtn} d-flex align-items-center justify-content-center border border-1 border-primary`}
+                className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
               >
                 <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
                 <span className="d-flex ms-2">Test Mic</span>
               </Button>
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">
                 <div
-                  className={`${styles.bar} d-flex align-items-center border border-1 border-primary-20 px-1`}
+                  className={`${styles.bar} rounded-16 d-flex align-items-center border border-1 border-primary-20 px-1`}
                 >
-                  <span className={`${styles.progress} bg-success w-50`}>&nbsp;</span>
+                  <span className={`${styles.progress} rounded-16 bg-success w-50`}>&nbsp;</span>
                 </div>
                 <div
                   className={`${styles.text} d-flex align-items-center mt-1 mt-md-0 justify-content-center justify-content-md-start`}
@@ -114,7 +114,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 onClick={playSpeakerSound}
                 variant="normal"
                 data-testid="speakerbtn"
-                className={`${styles.testBtn} d-flex align-items-center justify-content-center border border-1 border-primary`}
+                className={`${styles.testBtn} ${styles.active} d-flex align-items-center justify-content-center border border-1 rounded-16 border-primary`}
               >
                 <Image src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
                 <span className="d-flex ms-2">Test Speakers</span>
@@ -129,7 +129,15 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 ></audio>
               </div>
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">
-                <canvas id="speaker-canvas" data-testid="speakerCanvas"></canvas>
+                <div
+                  className={`${styles.bar} rounded-16 d-flex align-items-center border border-1 border-primary-20 px-1`}
+                >
+                  <canvas
+                    className={`${styles.progress} rounded-16 w-100`}
+                    id="speaker-canvas"
+                    data-testid="speakerCanvas"
+                  ></canvas>
+                </div>
               </div>
             </div>
           )}

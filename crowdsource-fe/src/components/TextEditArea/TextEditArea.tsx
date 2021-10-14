@@ -81,7 +81,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
     <div>
       <div
         data-testid="TextEditArea"
-        className={`${styles.addText} rounded-8 border border-2 border-primary bg-light p-4`}
+        className={`${styles.addText} position-relative rounded-8 border border-2 border-primary bg-light p-4`}
       >
         <Form.Group controlId="textarea">
           <Form.Label className="display-6">Add Text ({language})</Form.Label>
@@ -96,28 +96,32 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
             className={`${styles.textarea} border-0 p-0 display-3`}
           />
         </Form.Group>
-        <IconTextButton
-          icon="report.svg"
-          textDesktop=""
-          onClick={() => setShowKeyboard(true)}
-          altText="keyboardBtn"
-        />
+        <div className={`${styles.keyboardIcon}  position-absolute`}>
+          <IconTextButton
+            icon="keyboard_icon.svg"
+            textDesktop=""
+            onClick={() => setShowKeyboard(true)}
+            altText="keyboardBtn"
+          />
+        </div>
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}
       {showKeyboard ? (
         <Draggable bounds="parent">
           <div ref={drag} data-testid="virtual-keyboard" className={styles.keyboard}>
-            <span>{language}</span>
-            <span
-              data-testid="close-keyboard"
-              className={styles.crossIcon}
-              onClick={() => {
-                setShowKeyboard(false);
-              }}
-              aria-hidden="true"
-            >
-              X
-            </span>
+            <div className="pb-2">
+              <span>{language}</span>
+              <span
+                data-testid="close-keyboard"
+                className={styles.crossIcon}
+                onClick={() => {
+                  setShowKeyboard(false);
+                }}
+                aria-hidden="true"
+              >
+                X
+              </span>
+            </div>
 
             <Keyboard
               keyboardRef={(r: any) => (keyboard = r)}
