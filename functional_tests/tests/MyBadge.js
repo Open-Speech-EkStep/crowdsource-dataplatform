@@ -23,9 +23,7 @@ step("Select MyBadges from the dropdown", async function() {
     await taiko.waitFor(1000);
     assert.ok(await text('Your Medal Gallery').isVisible())
     assert.ok(await text('Please keep contributing actively to stand a chance to get recognised.').isVisible())
-    assert.ok(await text('Your contribution will be validated before confirming the badge.').isVisible())
     assert.ok(await text('Levels and badges may take upto 48 hours to update.').isVisible())
-
 })
 
 step("<congratstext> text should be visible", async function(congratstext) {
