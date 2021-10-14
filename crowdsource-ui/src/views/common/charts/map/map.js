@@ -324,10 +324,10 @@ const generateIndiaMap = function (language = '', module) {
       : '/aggregated-json/cumulativeDataByState.json';
   getJson(url)
     .then(data => {
-      data = data.filter(d => d.type == module['api-type']) || [];
+      data = data.filter(d => d.type == module.type) || [];
       const result = language !== '' ? getLanguageSpecificData(data, language) : data;
       // disposeLineChart('indiaMapChart')
-      drawMap(result, module['api-type']);
+      drawMap(result, module.type);
       $mapLoader.hide().removeClass('d-flex');
       $mapChart.removeClass('d-none');
     })

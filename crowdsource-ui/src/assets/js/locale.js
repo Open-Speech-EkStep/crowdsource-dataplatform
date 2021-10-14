@@ -1,6 +1,7 @@
 const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE, MODULE } = require("./constants");
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require("./constants");
 const { base_url,context_root } = require('./env-api');
+const {getInitiativeType } = require('./common');
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');
@@ -26,11 +27,12 @@ const changeLocale = function (locale) {
     }
     sessionStorage.setItem("i18n", locale);
     const module = localStorage.getItem(CURRENT_MODULE);
+    const initiativeType = getInitiativeType(module);
     if(module == 'home' || currentPage == "my-badges.html"){
         location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {
-        location.href = `${context_root}/${locale}/${MODULE[module].url}/${currentPage}`;
+        location.href = `${context_root}/${locale}/${initiativeType}/${currentPage}`;
     }
 }
 
@@ -60,7 +62,7 @@ function redirectToLocalisedPage() {
 }
 
 $(document).ready(function () {
-    $("#bhashadaan_logo").attr('href', base_url);
+    $("#title_logo").attr('href', base_url);
     registerEvents();
 })
 

@@ -12,7 +12,6 @@ const AGGREGATED_DATA_BY_LANGUAGE = "aggregateDataCountByLanguage";
 const CUMULATIVE_DATA = "cumulativeDataByLanguage";
 const AGGREGATED_DATA_BY_TOP_LANGUAGE = "aggregateDataCountByTopLanguage";
 const LOCALE_STRINGS = 'localeString';
-const SELECTED_MODULE = "selectedModule";
 const CONTRIBUTION_LANGUAGE = "contributionLanguage";
 const TO_LANGUAGE = "to-language";
 const PARALLEL_TO_LANGUAGE = `${config.initiativeKey_3}_to-language`;
@@ -51,55 +50,11 @@ if (enabled_languages != null && !enabled_languages.includes('@@')) {
   ALL_LANGUAGES = getEnabledLanguages(enabled_languages)
 }
 
-const BADGES = {
-  bronze: { imgLg: "/img/bronze_badge.svg", imgSm: "/img/bronze_contributor.jpg" },
-  silver: { imgLg: "/img/silver_badge.svg", imgSm: "/img/silver_contributor.jpg" },
-  gold: { imgLg: "/img/gold_badge.svg", imgSm: "/img/gold_contributor.jpg" },
-  platinum: { imgLg: "/img/platinum_badge.svg", imgSm: "/img/platinum_contributor.jpg" },
-}
-
-
-const MODULE = {
-  bolo: {
-    url: 'text', value: 'bolo',"api-type":"text", BADGES: {
-      bronze: { imgLg: "/img/bronze_badge.svg", imgSm: "/img/bolo_bronze_con.jpeg", imgValSvg: "/img/bolo_bronze_val.svg", imgValJpg: "/img/bolo_bronze_val.jpeg" },
-      silver: { imgLg: "/img/silver_badge.svg", imgSm: "/img/bolo_silver_con.jpeg", imgValSvg: "/img/bolo_silver_val.svg", imgValJpg: "/img/bolo_silver_val.jpeg" },
-      gold: { imgLg: "/img/gold_badge.svg", imgSm: "/img/bolo_gold_con.jpeg", imgValSvg: "/img/bolo_gold_val.svg", imgValJpg: "/img/bolo_gold_val.jpeg" },
-      platinum: { imgLg: "/img/platinum_badge.svg", imgSm: "/img/bolo_platinum_con.jpeg", imgValSvg: "/img/bolo_platinum_val.svg", imgValJpg: "/img/bolo_platinum_val.jpeg" },
-    }
-  },
-  suno: {
-    url: 'asr', value: 'suno',"api-type":"asr", BADGES: {
-      bronze: { imgLg: "/img/suno_bronze_badge.svg", imgSm: "/img/suno_bronze_con.jpeg", imgValSvg: "/img/suno_bronze_val.svg", imgValJpg: "/img/suno_bronze_val.jpeg" },
-      silver: { imgLg: "/img/suno_silver_badge.svg", imgSm: "/img/suno_silver_con.jpeg", imgValSvg: "/img/suno_silver_val.svg", imgValJpg: "/img/suno_silver_val.jpeg" },
-      gold: { imgLg: "/img/suno_gold_badge.svg", imgSm: "/img/suno_gold_con.jpeg", imgValSvg: "/img/suno_gold_val.svg", imgValJpg: "/img/suno_gold_val.jpeg" },
-      platinum: { imgLg: "/img/suno_platinum_badge.svg", imgSm: "/img/suno_platinum_con.jpeg", imgValSvg: "/img/suno_platinum_val.svg", imgValJpg: "/img/suno_platinum_val.jpeg" },
-    }
-  },
-
-  likho: {
-    url: 'parallel', value: 'likho',"api-type":"parallel", BADGES: {
-      bronze: { imgLg: "/img/likho_bronze_badge.svg", imgSm: "/img/likho_bronze_con.jpeg", imgValSvg: "/img/likho_bronze_val.svg", imgValJpg: "/img/likho_bronze_val.jpeg" },
-      silver: { imgLg: "/img/likho_silver_badge.svg", imgSm: "/img/likho_silver_con.jpeg", imgValSvg: "/img/likho_silver_val.svg", imgValJpg: "/img/likho_silver_val.jpeg" },
-      gold: { imgLg: "/img/likho_gold_badge.svg", imgSm: "/img/likho_gold_con.jpeg", imgValSvg: "/img/likho_gold_val.svg", imgValJpg: "/img/likho_gold_val.jpeg" },
-      platinum: { imgLg: "/img/likho_platinum_badge.svg", imgSm: "/img/likho_platinum_con.jpeg", imgValSvg: "/img/likho_platinum_val.svg", imgValJpg: "/img/likho_platinum_val.jpeg" },
-    }
-  },
-  dekho: {
-    url: 'ocr', value: 'dekho',"api-type":"ocr", BADGES: {
-      bronze: { imgLg: "/img/dekho_bronze_badge.svg", imgSm: "/img/dekho_bronze_con.jpeg", imgValSvg: "/img/dekho_bronze_val.svg", imgValJpg: "/img/dekho_bronze_val.jpeg" },
-      silver: { imgLg: "/img/dekho_silver_badge.svg", imgSm: "/img/dekho_silver_con.jpeg", imgValSvg: "/img/dekho_silver_val.svg", imgValJpg: "/img/dekho_silver_val.jpeg" },
-      gold: { imgLg: "/img/dekho_gold_badge.svg", imgSm: "/img/dekho_gold_con.jpeg", imgValSvg: "/img/dekho_gold_val.svg", imgValJpg: "/img/dekho_gold_val.jpeg" },
-      platinum: { imgLg: "/img/dekho_platinum_badge.svg", imgSm: "/img/dekho_platinum_con.jpeg", imgValSvg: "/img/dekho_platinum_val.svg", imgValJpg: "/img/dekho_platinum_val.jpeg" },
-    }
-  },
-};
-
 const SELECT_PAGE_OPTIONS_FEEDBACK = [
-  { module: 'suno', pages: ['Badges Info', 'Dashboard', `${config.initiative_1} Home`, 'Transcribe', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'bolo', pages: ['Badges Info', 'Dashboard', `${config.initiative_2} Home`, 'Speak', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'likho', pages: ['Badges Info', 'Dashboard', `${config.initiative_3} Home`, 'Translate', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
-  { module: 'dekho', pages: ['Badges Info', 'Dashboard', `${config.initiative_4} Home`, 'Label', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: `${config.initiativeKey_1}`, pages: ['Badges Info', 'Dashboard', `${config.initiative_1} Home`, 'Transcribe', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: `${config.initiativeKey_2}`, pages: ['Badges Info', 'Dashboard', `${config.initiative_2} Home`, 'Speak', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: `${config.initiativeKey_3}`, pages: ['Badges Info', 'Dashboard', `${config.initiative_3} Home`, 'Translate', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
+  { module: `${config.initiativeKey_4}`, pages: ['Badges Info', 'Dashboard', `${config.initiative_4} Home`, 'Label', 'Validate', 'Contribution Thank You Page', 'Validation Thank You Page', 'Validator Badges Info'] },
   { module: 'others', pages: ['About Us' , 'Home Page' , 'Terms and Conditions' ,'Badges Info', 'My Badges']}
 ];
 
@@ -172,9 +127,8 @@ module.exports = {
   AGGREGATED_DATA_BY_LANGUAGE,
   LOCALE_STRINGS,
   CONTRIBUTION_LANGUAGE,
-  BADGES,
   SPEAKER_DETAILS_KEY,
-  SELECTED_MODULE, MODULE, CURRENT_MODULE, TO_LANGUAGE, ALL_MODULES,
+  CURRENT_MODULE, TO_LANGUAGE, ALL_MODULES,
   PARALLEL_FROM_LANGUAGE,  PARALLEL_TO_LANGUAGE,
   SELECT_PAGE_OPTIONS_FEEDBACK,
   FEEDBACK_CATEGORY,

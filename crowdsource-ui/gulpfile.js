@@ -130,8 +130,8 @@ gulp.task('js', function () {
       replace({
         patterns: [
           {
-            match: 'bhashadaanLogoUrl',
-            replacement: settings.bhashadaanLogoUrl,
+            match: 'titleLogoUrl',
+            replacement: settings.titleLogoUrl,
           },
         ],
       })
@@ -254,8 +254,8 @@ function jsGulp(moduleName) {
       replace({
         patterns: [
           {
-            match: 'bhashadaanLogoUrl',
-            replacement: settings.bhashadaanLogoUrl,
+            match: 'titleLogoUrl',
+            replacement: settings.titleLogoUrl,
           },
         ],
       })
