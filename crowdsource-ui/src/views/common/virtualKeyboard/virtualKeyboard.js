@@ -8,6 +8,7 @@
 const { keyboardLayout } = require('./keyboardLayout');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES } = require('./constants');
 const { isMobileDevice } = require('./common');
+const { overlap_score } = require('./validations')
 
 function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
@@ -195,6 +196,13 @@ function lngtype(text) {
       }
     }
   });
+
+  const refText = $('#captured-text').text();
+  console.log('auto ', overlap_score(refText, text))
+  if (overlap_score(refText, text)) {
+    error = { type: 'auto-validation' }
+  }
+
   return error;
 }
 
