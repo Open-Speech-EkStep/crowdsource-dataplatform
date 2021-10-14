@@ -67,7 +67,7 @@ describe('SunoTranscribe', () => {
 
     fetchMock.doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace').mockResponseOnce('ip=103.92.40.39');
 
-    fetchMock.doMockOnceIf('/location-info?ip=103.92.40.39').mockResponseOnce(
+    fetchMock.doMock('/location-info?ip=103.92.40.39').mockResponse(
       JSON.stringify({
         country: 'India',
         regionName: 'Uttar Pradesh',
@@ -77,7 +77,22 @@ describe('SunoTranscribe', () => {
     const renderResult = render(<SunoTranscribe />);
 
     await waitFor(() => {
-      expect(fetchMock).toBeCalled();
+      expect(fetchMock).toBeCalledWith('/media/asr', {
+        body: JSON.stringify({
+          language: 'Hindi',
+          userName: 'abc',
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      });
+    });
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
+    });
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/location-info?ip=103.92.40.39');
     });
 
     return renderResult;
@@ -239,7 +254,7 @@ describe('SunoTranscribe', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText('Thank you for contributing')).toBeInTheDocument();
+      expect(screen.getByText('thankyouForContributing')).toBeInTheDocument();
     });
   });
 

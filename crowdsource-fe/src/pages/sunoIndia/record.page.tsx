@@ -5,14 +5,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import FunctionalPageBackground from 'components/FunctionalPageBackground';
 import SunoTranscribe from 'components/SunoTranscribe';
-// import TestSpeakerMic from 'components/TestSpeakerMic';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const RecordPage: NextPage = () => (
   <Fragment>
     <FunctionalPageBackground>
-      {/* <ChromeExtension /> */}
-
       <SunoTranscribe />
     </FunctionalPageBackground>
   </Fragment>

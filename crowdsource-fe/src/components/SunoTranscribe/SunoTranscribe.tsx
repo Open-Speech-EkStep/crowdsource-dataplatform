@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
+import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import AudioController from 'components/AudioController';
-import Breadcrumbs from 'components/Breadcrumbs';
 import ButtonControls from 'components/ButtonControls';
+import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
-import Report from 'components/Report';
-import TestSpeakerMic from 'components/TestSpeakerMic';
 import TextEditArea from 'components/TextEditArea';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
@@ -30,6 +30,8 @@ interface ResultType {
 }
 
 const SunoTranscribe = () => {
+  const { t } = useTranslation();
+
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
@@ -80,8 +82,8 @@ const SunoTranscribe = () => {
     url: apiPaths.mediaAsr,
     init: {
       body: JSON.stringify({
-        language: 'English',
-        userName: 'BadgeTest',
+        language: contributionLanguage,
+        userName: speakerDetails?.userName,
       }),
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -89,18 +91,18 @@ const SunoTranscribe = () => {
   });
 
   useEffect(() => {
-    const getLocationInfo = async () => {
-      setLocationInfo(await fetchLocationInfo());
-    };
-    getLocationInfo();
-  }, []);
-
-  useEffect(() => {
     if (result && result.data) {
       setContributionData(result.data);
       setShowUIdata(result.data[currentDataIndex]);
     }
   }, [currentDataIndex, result]);
+
+  useEffect(() => {
+    const getLocationInfo = async () => {
+      setLocationInfo(await fetchLocationInfo());
+    };
+    getLocationInfo();
+  }, []);
 
   const onPlayAudio = () => {
     setPlayAudio(true);
@@ -157,6 +159,9 @@ const SunoTranscribe = () => {
         }),
       })
     );
+    setTimeout(() => {
+      setShowThankyouMessage(false);
+    }, 1500);
   };
 
   const onCancelContribution = () => {
@@ -188,19 +193,9 @@ const SunoTranscribe = () => {
     setShowReplayButton(true);
   };
 
-  return result?.data && result?.data.length ? (
+  return contributionData && contributionData.length ? (
     <div>
-      <header className="d-flex justify-content-between align-items-center px-3 px-md-6">
-        <Breadcrumbs initiative="suno" path="transcribe" />
-        <div className="d-flex">
-          <div>
-            <Report />
-          </div>
-          <div className="ms-2 ms-md-4">
-            <TestSpeakerMic showSpeaker={true} />
-          </div>
-        </div>
-      </header>
+      <FunctionalHeader />
       <Container fluid="lg" className="mt-5">
         <div data-testid="SunoTranscribe" className={`${styles.root} position-relative`}>
           <AudioController audioUrl={showUIData?.media_data} playAudio={playAudio} onEnded={onAudioEnd} />
@@ -213,7 +208,12 @@ const SunoTranscribe = () => {
             />
           </div>
           {showThankyouMessage ? (
-            <div> Thank you for contributing</div>
+            <div className="d-flex align-items-center justify-content-center mt-9 display-1">
+              <span className="me-2 d-flex">
+                <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+              </span>
+              {t('thankyouForContributing')}
+            </div>
           ) : (
             <ButtonControls
               onPlay={onPlayAudio}

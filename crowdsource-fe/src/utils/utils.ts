@@ -79,8 +79,8 @@ export const verifyLanguage = (text: string, currentModule: string, language: st
   return error;
 };
 
-export const fetchLocationInfo = () => {
-  const result = fetch('https://www.cloudflare.com/cdn-cgi/trace')
+export const fetchLocationInfo = async () => {
+  const result = await fetch('https://www.cloudflare.com/cdn-cgi/trace')
     .then(res => res.text())
     .then(async ipAddressText => {
       const dataArray = ipAddressText.split('\n');
