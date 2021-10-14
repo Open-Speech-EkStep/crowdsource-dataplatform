@@ -8,6 +8,7 @@ const browserify = require('gulp-browserify');
 const replace = require('gulp-replace-task');
 const replace_sting = require('gulp-replace');
 var uglify = require('gulp-uglify');
+const terser = require('gulp-terser')
 const args = require('yargs').argv;
 const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator');
@@ -307,7 +308,7 @@ function jsGulp(moduleName) {
         ],
       })
     )
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(gulp.dest(`target/js/${moduleName}`));
 }
 
