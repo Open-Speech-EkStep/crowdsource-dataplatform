@@ -1,7 +1,6 @@
-const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
+const { updateLocaleLanguagesDropdown, getCookie,getInitiativeType } = require('./utils');
 const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE, CURRENT_MODULE } = require("./constants");
 const { base_url,context_root } = require('./env-api');
-const {getInitiativeType } = require('./common');
 
 const registerEvents = function () {
     const localisation_dropdown = $('#localisation_dropdown');

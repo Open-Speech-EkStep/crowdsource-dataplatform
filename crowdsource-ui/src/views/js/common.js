@@ -21,6 +21,7 @@ const {
   getJson,
   translate,
   toPascalCase,
+  getInitiativeType
 } = require('./utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('./header');
 const {
@@ -291,9 +292,6 @@ const getTop3Languages = function (functionalFlow = '', currentModule = '', cont
   return sortingLanguages;
 };
 
-const getInitiativeType = function(initiative){
-  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
-}
 
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
@@ -808,5 +806,4 @@ module.exports = {
   languageFilter,
   reduceList,
   redirectToHomeForDirectLanding,
-  getInitiativeType
 };

@@ -1,4 +1,4 @@
-const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require('./constants');
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,INITIATIVES } = require('./constants');
 const fetch = require('./fetch');
 const platform = require('./platform');
 const { context_root } = require('./env-api');
@@ -330,6 +330,10 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 };
 
+const getInitiativeType = function(initiative){
+  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
+}
+
 module.exports = {
   setPageContentHeight,
   toggleFooterPosition,
@@ -355,4 +359,5 @@ module.exports = {
   formatTransAndImages,
   translate,
   toPascalCase,
+  getInitiativeType
 };

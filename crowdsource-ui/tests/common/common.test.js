@@ -6,7 +6,7 @@ const {
   SPEAKER_DETAILS_KEY,
   CURRENT_MODULE,
   AGGREGATED_DATA_BY_LANGUAGE,
-  INITIATIVES
+  INITIATIVES,config
 } = require('../../build/js/common/constants');
 const {
   hasUserRegistered,
@@ -403,7 +403,7 @@ describe('test common js', () => {
       ];
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
       const data = { isNewBadge: false, contributionCount: 0, nextBadgeType: 'Bronze', currentBadgeType: '' };
-      const localeStrings = { bronze: 'Bronze', silver: 'Silver' };
+      const localeStrings = { [config.badge_1]: 'Bronze', [config.badge_2]: 'Silver' };
       setBadge(data, localeStrings, 'contribute');
 
       expect($('#languageInTopWeb').hasClass('d-none')).toEqual(false);
@@ -456,7 +456,7 @@ describe('test common js', () => {
       ];
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
       const data = { isNewBadge: false, contributionCount: 0, nextBadgeType: 'Bronze', currentBadgeType: '' };
-      const localeStrings = { bronze: 'Bronze', silver: 'Silver' };
+      const localeStrings = { [config.badge_1]: 'Bronze', [config.badge_2]: 'Silver' };
       setBadge(data, localeStrings, 'contribute');
 
       expect($('#languageInTopWeb').hasClass('d-none')).toEqual(true);
@@ -509,7 +509,7 @@ describe('test common js', () => {
       ];
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(sortedLanguageStats));
       const data = { isNewBadge: false, contributionCount: 2, nextBadgeType: 'Bronze', currentBadgeType: '' };
-      const localeStrings = { bronze: 'Bronze', silver: 'Silver' };
+      const localeStrings = { [config.badge_1]: 'Bronze', [config.badge_2]: 'Silver' };
       setBadge(data, localeStrings, 'contribute');
 
       expect($('#languageInTopWeb').hasClass('d-none')).toEqual(true);
@@ -567,7 +567,7 @@ describe('test common js', () => {
         nextBadgeType: 'Silver',
         currentBadgeType: 'Bronze',
       };
-      const localeStrings = { bronze: 'Bronze', silver: 'Silver' };
+      const localeStrings = { [config.badge_1]: 'Bronze', [config.badge_2]: 'Silver' };
       setBadge(data, localeStrings, 'contribute');
 
       expect($('#languageInTopWeb').hasClass('d-none')).toEqual(true);
@@ -626,7 +626,7 @@ describe('test common js', () => {
         nextBadgeType: 'Silver',
         currentBadgeType: 'Bronze',
       };
-      const localeStrings = { bronze: 'Bronze', silver: 'Silver' };
+      const localeStrings = { [config.badge_1]: 'Bronze', [config.badge_2]: 'Silver' };
       setBadge(data, localeStrings, 'contribute');
 
       expect($('#languageInTopWeb').hasClass('d-none')).toEqual(true);
@@ -678,10 +678,10 @@ describe('test common js', () => {
         currentBadgeType: 'Platinum',
       };
       const localeStrings = {
-        bronze: 'Bronze',
-        silver: 'Silver',
-        gold: 'Gold',
-        platinum: 'Platinum',
+        [config.badge_1]: 'Bronze',
+        [config.badge_2]: 'Silver',
+        [config.badge_3]: 'Gold',
+        [config.badge_4]: 'Platinum',
       };
       setBadge(data, localeStrings, 'contribute');
 
@@ -743,10 +743,10 @@ describe('test common js', () => {
         currentBadgeType: 'Platinum',
       };
       const localeStrings = {
-        bronze: 'Bronze',
-        silver: 'Silver',
-        gold: 'Gold',
-        platinum: 'Platinum',
+        [config.badge_1]: 'Bronze',
+        [config.badge_2]: 'Silver',
+        [config.badge_3]: 'Gold',
+        [config.badge_4]: 'Platinum',
       };
       setBadge(data, localeStrings, 'contribute');
 

@@ -5,6 +5,7 @@ const {
   CONTRIBUTION_LANGUAGE,
   DEFAULT_CON_LANGUAGE,
   ErrorStatusCode,
+  INITIATIVES
 } = require('./constants');
 const fetch = require('./fetch');
 const platform = require('./platform');
@@ -345,6 +346,10 @@ const toPascalCase = function (text) {
   });
 };
 
+const getInitiativeType = function(initiative){
+  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
+}
+
 module.exports = {
   safeJsonParse,
   safeJson,
@@ -369,5 +374,6 @@ module.exports = {
   formatTimeForLegends,
   getLanguageBadge,
   translate,
-  toPascalCase
+  toPascalCase,
+  getInitiativeType
 };
