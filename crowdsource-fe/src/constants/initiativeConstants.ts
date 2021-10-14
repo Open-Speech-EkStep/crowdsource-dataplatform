@@ -5,6 +5,13 @@ export const INITIATIVES_MAPPING = {
   dekho: 'dekho',
 } as const;
 
+export const INITIATIVES_MEDIA = {
+  asr: 'asr',
+  text: 'text',
+  parallel: 'parallel',
+  ocr: 'ocr',
+} as const;
+
 export const INITIATIVES_MEDIA_MAPPING = {
   [INITIATIVES_MAPPING.suno]: 'asr',
   [INITIATIVES_MAPPING.bolo]: 'text',

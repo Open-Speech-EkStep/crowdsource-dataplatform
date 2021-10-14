@@ -33,6 +33,21 @@ const BarChart = (props: ChartProps) => {
     label.truncate = true;
     label.maxWidth = 120;
 
+    /* istanbul ignore next */
+    categoryAxis.events.on('sizechanged', function (ev) {
+      var axis = ev.target;
+      var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+      if (cellWidth < axis.renderer.labels.template.maxWidth) {
+        axis.renderer.labels.template.rotation = -45;
+        axis.renderer.labels.template.horizontalCenter = 'right';
+        axis.renderer.labels.template.verticalCenter = 'middle';
+      } else {
+        axis.renderer.labels.template.rotation = 0;
+        axis.renderer.labels.template.horizontalCenter = 'middle';
+        axis.renderer.labels.template.verticalCenter = 'top';
+      }
+    });
+
     const valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
     valueAxis.renderer.labels.template.fill = '#142745';
@@ -59,9 +74,11 @@ const BarChart = (props: ChartProps) => {
     series.tooltip.background.fill = am4core.color('#333333');
     columnTemplate.tooltipX = am4core.percent(50);
     columnTemplate.tooltipY = am4core.percent(0);
+    /* istanbul ignore next */
     columnTemplate.adapter.add('fill', (value: any, target: any) => {
       return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
     });
+    /* istanbul ignore next */
     columnTemplate.adapter.add('stroke', (value: any, target: any) => {
       return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
     });

@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { BarChart } from 'components/Charts';
 import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MEDIA, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -143,29 +143,32 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         <Form.Label className="display-3 mb-0 mb-md-0 font-family-rowdies">
           {t('contributionTrackerSubHeader')}
         </Form.Label>
-        <div className="d-md-flex ms-md-9 mt-4 mt-md-0">
-          <Form.Check
-            inline
-            type="radio"
-            label={t('byHours')}
-            value="byDuration"
-            name="recommended"
-            id="feedbackFormYesCheckbox"
-            className={`${styles.radio} me-8 mb-0`}
-            onChange={handleChange}
-            checked={chartFilterType === 'byDuration'}
-          />
-          <Form.Check
-            inline
-            type="radio"
-            label={t('bySentences')}
-            value="bySpeaker"
-            name="recommended"
-            id="feedbackFormNoCheckbox"
-            className={`${styles.radio} me-8 mb-0 mt-2 mt-md-0`}
-            onChange={handleChange}
-          />
-        </div>
+        {(INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.text ||
+          INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.asr) && (
+          <div className="d-md-flex ms-md-9 mt-4 mt-md-0">
+            <Form.Check
+              inline
+              type="radio"
+              label={t('byHours')}
+              value="byDuration"
+              name="recommended"
+              id="feedbackFormYesCheckbox"
+              className={`${styles.radio} me-8 mb-0`}
+              onChange={handleChange}
+              checked={chartFilterType === 'byDuration'}
+            />
+            <Form.Check
+              inline
+              type="radio"
+              label={t('bySentences')}
+              value="bySpeaker"
+              name="recommended"
+              id="feedbackFormNoCheckbox"
+              className={`${styles.radio} me-8 mb-0 mt-2 mt-md-0`}
+              onChange={handleChange}
+            />
+          </div>
+        )}
       </Form.Group>
       <div className="bg-secondary p-5 p-md-8 mt-4 mt-md-5">
         <div className="d-md-flex justify-content-between display-5 mb-5 mb-md-6">
