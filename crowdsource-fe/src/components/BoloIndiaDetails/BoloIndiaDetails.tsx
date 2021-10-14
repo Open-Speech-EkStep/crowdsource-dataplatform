@@ -9,6 +9,7 @@ import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initia
 const BoloIndiaDetails = () => {
   const { t } = useTranslation();
   const initiativeName = `${t(INITIATIVES_MAPPING.bolo)} ${t('india')}`;
+  const graphTitle = t('totalRecordings');
   return (
     <section data-testid="BoloIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">
@@ -26,7 +27,7 @@ const BoloIndiaDetails = () => {
           />
         </section>
         <section className="mt-9 mt-md-12">
-          <ContributionTracker initiative={INITIATIVES_MAPPING.bolo} />
+          <ContributionTracker initiative={INITIATIVES_MAPPING.bolo} graphTitle={graphTitle} />
         </section>
       </Container>
     </section>

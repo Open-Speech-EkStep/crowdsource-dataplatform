@@ -79,7 +79,7 @@ describe('ContributionTracker', () => {
       ])
     );
 
-    const renderResult = render(<ContributionTracker initiative="suno" />);
+    const renderResult = render(<ContributionTracker initiative="suno" graphTitle="totalSentences" />);
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });

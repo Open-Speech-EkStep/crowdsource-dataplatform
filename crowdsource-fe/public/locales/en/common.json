@@ -127,6 +127,8 @@
   "byHours": "By duration of hours",
   "bySentences": "By number of sentences",
   "totalSentences": "Total sentences",
+  "totalRecordings": "Total recordings",
+  "imagesLabelledAndValidated": "Images labelled and validated",
   "yourSelectedLanguage": "Your selected language",
   "topLanguages": "Top languages",
   "transcribe": "Transcribe",

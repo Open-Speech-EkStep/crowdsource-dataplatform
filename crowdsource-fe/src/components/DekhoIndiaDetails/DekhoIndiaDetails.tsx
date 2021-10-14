@@ -9,6 +9,7 @@ import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initia
 const DekhoIndiaDetails = () => {
   const { t } = useTranslation();
   const initiativeName = `${t('dekho')} ${t('india')}`;
+  const graphTitle = t('imagesLabelledAndValidated');
   return (
     <section data-testid="DekhoIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">
@@ -26,7 +27,7 @@ const DekhoIndiaDetails = () => {
           />
         </section>
         <section className="mt-9 mt-md-12">
-          <ContributionTracker initiative={INITIATIVES_MAPPING.dekho} />
+          <ContributionTracker initiative={INITIATIVES_MAPPING.dekho} graphTitle={graphTitle} />
         </section>
       </Container>
     </section>
