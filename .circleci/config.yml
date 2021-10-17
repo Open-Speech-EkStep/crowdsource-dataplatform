@@ -5,6 +5,10 @@ orbs:
   azure-acr: circleci/azure-acr@0.2.0
   kubernetes: circleci/kubernetes@0.11.2
   azure-cli: circleci/azure-cli@1.2.0
+  aws-ecr: circleci/aws-ecr@6.15.3
+  aws-eks: circleci/aws-eks@1.0.3
+  aws-cli: circleci/aws-cli@1.4.0
+  aws-s3: circleci/aws-s3@2.0.0
 
 definition:
   fast-checkout: &fast-checkout
@@ -105,62 +109,6 @@ jobs:
     steps:
       - run: echo "Hold for approval"
 
-  build_ui_push_to_blob_storage:
-    parameters:
-      env_name:
-        type: string
-    machine:
-      image: ubuntu-1604:202104-01
-    steps:
-      - *fast-checkout
-      - run:
-          name: setup_machine
-          command: |
-            sudo apt-get update -y
-            sudo apt-get install nodejs
-            sudo apt-get install npm
-            sudo apt-get install -y apt-utils
-            sudo apt-get install wget
-
-      - node/install-packages
-      - run:
-          name: build_ui
-          command: |
-            npm run gulp -- -- --env=<< parameters.env_name >>
-            wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
-            tar -xf azcopy_v10.tar.gz --strip-components=1
-
-            ./azcopy login --tenant-id ${TENANT_ID} --service-principal --application-id ${APP_ID}
-
-            if [ << parameters.env_name >> == 'prod' ]
-            then
-              echo "Deploying to prod"
-              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/bhashadaan/" --cache-control "max-age=1200" --recursive
-            else
-              ./azcopy copy "crowdsource-ui/target/*" "${AZURE_ACC_URL}/${AZURE_STATIC_CONTENT}-<< parameters.env_name >>/" --cache-control "max-age=1200" --recursive
-            fi
-
-  db_migrate_azure:
-    parameters:
-      db_name:
-        type: string
-      db_host:
-        type: string
-      db_user:
-        type: string
-    executor:
-      name: node/default
-    steps:
-      - *fast-checkout
-      - run:
-          name: Run DB Migrate
-          command: |
-            echo << parameters.db_name >>
-            export DATABASE_URL=postgresql://<< parameters.db_user >>:${AZURE_DB_PASS}@<< parameters.db_host >>/<< parameters.db_name >>
-            echo << parameters.db_name >>
-            echo $DATABASE_URL
-            npm run install:api
-            cd crowdsource-api && npx db-migrate up
 
   cdn_invalidation:
     executor: azure-cli/default
@@ -187,36 +135,6 @@ jobs:
           command: |
             az cdn endpoint purge -g << parameters.resource-group >> -n << parameters.env-name >> --profile-name << parameters.profile-name >> --content-paths '/*'
 
-  aks_deployment:
-    executor: azure-aks/default
-    parameters:
-      cluster-name:
-        description: |
-          Name of the EKS cluster
-        type: string
-      env-name:
-        description: |
-          Name of the env
-        type: string
-
-    steps:
-      - *fast-checkout
-      - azure-aks/update-kubeconfig-with-credentials:
-          cluster-name: << parameters.cluster-name >>
-          install-kubectl: true
-          perform-login: true
-          resource-group: ${AZURE_RESOURCE_GROUP}
-      - run:
-          command: |
-            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env-name >>
-
-            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env-name >>
-            kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
-
-            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
-
-            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
-          name: Deploy container
 
   aks_deployment_ui:
     executor: azure-aks/default
@@ -323,312 +241,96 @@ jobs:
       - store_test_results:
           path: crowdsource-fe/test-results
 
+  eks_fargate_deployment:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env-name:
+        description: |
+          Name of the env
+        type: string
+
+    steps:
+      - *fast-checkout
+      - aws-cli/setup:
+          profile-name: circle-ci
+      - kubernetes/install
+      - run:
+          command: |
+            aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
+            ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${AZURE_REPO_UI}:<< parameters.env-name >>
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/deployment_dev.yaml | kubectl -n << parameters.env-name >> apply  -f -
+          name: Deploy container
+      - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
+
+
 workflows:
   build_test_deploy:
     jobs:
       - node/test:
           version: '14.17.5'
 
-      - check_fe:
-          name: check_fe
-          env_name: default
-          requires:
-            - node/test
+      # - check_fe:
+      #     name: check_fe
+      #     env_name: default
+      #     requires:
+      #       - node/test
 
       - create-workspace:
           name: create-workspace
-          requires:
-            - check_fe
+          # requires:
+          #   - check_fe
           filters:
             branches:
               only: [master, nextjs-basic-setup]
 
-      - db_migrate_azure:
-          name: migrate_dev_azure
-          db_name: ${AZURE_DEV_DB_NAME}
-          db_host: ${AZURE_DB_HOST}
-          db_user: ${AZURE_DB_USER}
-          requires:
-            - create-workspace
-          filters:
-            branches:
-              only: [master]
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_dev_image_next_ui
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+      #     repo: ${AZURE_REPO_UI}
+      #     tag: dev
+      #     checkout: false
+      #     requires:
+      #       - create-workspace
 
-      - build_ui_push_to_blob_storage:
-          name: build_dev_ui
-          env_name: dev
-          requires:
-            - migrate_dev_azure
-
-      - cdn_invalidation:
-          name: cdn_invalidation_dev
-          env-name: dev-vakyansh
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - build_dev_ui
-
-      - azure-acr/build-and-push-image:
+      - aws-ecr/build-and-push-image:
           pre-steps:
             - *fast-checkout
           name: push_dev_image_next_ui
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
-          path: ./
-          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           repo: ${AZURE_REPO_UI}
           tag: dev
+          path: ./
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           checkout: false
           requires:
             - create-workspace
 
-      - aks_deployment_ui:
-          name: dev_ui_deployment_aks
-          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+      # - aks_deployment_ui:
+      #     name: dev_ui_deployment_aks
+      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
+      #     env-name: dev
+      #     requires:
+      #       - push_dev_image_next_ui
+      
+      # - cdn_invalidation:
+      #     name: cdn_invalidation_ui_dev
+      #     env-name: next-dev
+      #     resource-group: ${AZURE_RESOURCE_GROUP}
+      #     profile-name: ${AZURE_PROFILE_NAME}
+      #     requires:
+      #       - dev_ui_deployment_aks
+
+      - eks_fargate_deployment:
+          name: dev_ui_deployment_eks
+          cluster-name: ${CLUSTER_NAME}
           env-name: dev
           requires:
             - push_dev_image_next_ui
-      
-      - cdn_invalidation:
-          name: cdn_invalidation_ui_dev
-          env-name: next-dev
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - dev_ui_deployment_aks
-
-      - azure-acr/build-and-push-image:
-          pre-steps:
-            - *fast-checkout
-          name: push_dev_image
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-          repo: ${AZURE_REPO}
-          tag: dev
-          checkout: false
-          requires:
-            - build_dev_ui
-
-      - azure-acr/build-and-push-image:
-          name: push_db_refresher_image
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
-          dockerfile: Dockerfile-dbRefresh
-          path: ./db-refresher
-          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-          repo: ${DB_REFRESHER_REPO}
-          tag: 'dev,test,prod,uat'
-          requires:
-            - migrate_dev_azure
-
-      - aks_deployment:
-          name: dev_deployment_aks
-          cluster-name: ${AZURE_CLUSTER_NAME}
-          env-name: dev
-          requires:
-            - push_dev_image
-            - push_db_refresher_image
-
-      - setup_functional_tests:
-          name: setup_ft_dev
-          cluster-name: ${AZURE_CLUSTER_NAME}
-          env_name: dev
-          db_name: ${AZURE_DEV_DB_NAME}
-          requires:
-            - dev_deployment_aks
-            - build_dev_ui
-
-      - run_functional_tests:
-          name: functional_tests_dev
-          env_name: dev
-          db_name: ${AZURE_DEV_DB_NAME}
-          requires:
-            - setup_ft_dev
-
-      - failed-notification:
-          name: dev-failed-notification
-          requires:
-            - functional_tests_dev
-
-      - success-notification:
-          name: dev-success-notification
-          requires:
-            - functional_tests_dev
-
-      - approve_to_deploy:
-          name: approve_test_deployment_aks
-          type: approval
-          requires:
-            - dev_deployment_aks
-            - build_dev_ui
-            # - functional_tests_dev
-          filters:
-            branches:
-              only: master
-
-      - db_migrate_azure:
-          name: migrate_test_azure
-          db_name: ${AZURE_TEST_DB_NAME}
-          db_host: ${AZURE_DB_HOST}
-          db_user: ${AZURE_DB_USER}
-          requires:
-            - approve_test_deployment_aks
-
-      - build_ui_push_to_blob_storage:
-          name: build_test_ui
-          env_name: test
-          requires:
-            - migrate_test_azure
-
-      - cdn_invalidation:
-          name: cdn_invalidation_test
-          env-name: test-vakyansh
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - build_test_ui
-
-      - azure-acr/build-and-push-image:
-          pre-steps:
-            - *fast-checkout
-          name: push_test_image
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_CONFIG_ENV=test
-          repo: ${AZURE_REPO}
-          tag: test
-          checkout: false
-          requires:
-            - build_test_ui
-
-      - aks_deployment:
-          name: test_deployment_aks
-          cluster-name: ${AZURE_CLUSTER_NAME}
-          env-name: test
-          requires:
-            - push_test_image
-
-      - setup_functional_tests:
-          name: setup_ft_test
-          cluster-name: ${AZURE_CLUSTER_NAME}
-          env_name: test
-          db_name: ${AZURE_TEST_DB_NAME}
-          requires:
-            - test_deployment_aks
-            - build_test_ui
-
-      - run_functional_tests:
-          name: functional_tests_test
-          env_name: test
-          db_name: ${AZURE_TEST_DB_NAME}
-          requires:
-            - setup_ft_test
-
-      - approve_to_deploy:
-          name: approve_uat_deployment_aks
-          type: approval
-          requires:
-            - test_deployment_aks
-            - build_test_ui
-            #- functional_tests_test
-          filters:
-            branches:
-              only: master
-
-      - db_migrate_azure:
-          name: migrate_uat_azure
-          db_name: ${AZURE_UAT_DB_NAME}
-          db_host: ${AZURE_DB_HOST}
-          db_user: ${AZURE_DB_USER}
-          requires:
-            - approve_uat_deployment_aks
-
-      - build_ui_push_to_blob_storage:
-          name: build_uat_ui
-          env_name: uat
-          requires:
-            - migrate_uat_azure
-
-      - cdn_invalidation:
-          name: cdn_invalidation_uat
-          env-name: uat-vakyansh
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - build_uat_ui
-
-      - azure-acr/build-and-push-image:
-          pre-steps:
-            - *fast-checkout
-          name: push_uat_image
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_CONFIG_ENV=uat
-          repo: ${AZURE_REPO}
-          tag: uat
-          checkout: false
-          requires:
-            - build_uat_ui
-
-      - aks_deployment:
-          name: uat_deployment_aks
-          cluster-name: ${AZURE_CLUSTER_NAME}
-          env-name: uat
-          requires:
-            - push_uat_image
-
-      - approve_to_deploy:
-          name: approve_prod_deployment_aks
-          type: approval
-          requires:
-            - uat_deployment_aks
-          filters:
-            branches:
-              only: master
-
-      - db_migrate_azure:
-          name: migrate_prod_azure
-          db_name: ${AZURE_PROD_DB_NAME}
-          db_host: ${AZURE_PROD_DB_HOST}
-          db_user: ${AZURE_PROD_DB_USER}
-          requires:
-            - approve_prod_deployment_aks
-
-      - build_ui_push_to_blob_storage:
-          name: build_prod_ui
-          env_name: prod
-          requires:
-            - migrate_prod_azure
-
-      - cdn_invalidation:
-          name: cdn_invalidation_prod
-          env-name: prod-vakyansh
-          resource-group: ${AZURE_RESOURCE_GROUP}
-          profile-name: ${AZURE_PROFILE_NAME}
-          requires:
-            - build_prod_ui
-
-      - azure-acr/build-and-push-image:
-          pre-steps:
-            - *fast-checkout
-          name: push_prod_image
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
-          path: ./crowdsource-api
-          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
-          repo: ${AZURE_REPO}
-          tag: prod
-          checkout: false
-          requires:
-            - build_prod_ui
-
-      - aks_deployment:
-          name: prod_deployment_eks
-          cluster-name: ${AZURE_PROD_CLUSTER_NAME}
-          env-name: prod
-          requires:
-            - push_prod_image
