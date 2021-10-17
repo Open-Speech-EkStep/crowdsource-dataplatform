@@ -264,7 +264,7 @@ jobs:
             ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${AZURE_REPO_UI}:<< parameters.env-name >>
             sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/deployment_dev.yaml | kubectl -n << parameters.env-name >> apply  -f -
           name: Deploy container
-      - run: aws cloudfront create-invalidation --distribution-id << parameters.distributionId >> --paths '/*'
+      - run: aws cloudfront create-invalidation --distribution-id ${CUG_DISTRIBUTION_ID} --paths '/*'
 
 
 workflows:
