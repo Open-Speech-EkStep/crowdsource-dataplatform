@@ -50,7 +50,6 @@
   "noUsername": "No Username",
   "changeUser": "Change User",
   "myBadges": "My Badges",
-
   "changeUserModalHeading": "User Details",
   "changeUserModalSubHeading": "All the fields are optional but you can enrich your dataset contribution by providing the demographic details.",
   "name": "Name",
@@ -61,12 +60,10 @@
   "selectMotherTongue": "Select Mother Tongue",
   "ageGroup": "Age Group",
   "selectAgeGroup": "Select Age Group",
-
   "kidAgeGroup": "upto 10 (Kid)",
   "youthAgeGroup": "10 - 30 (Youth)",
   "adultAgeGroup": "30 - 60 (Adult)",
   "seniorAgeGroup": "60+ (Senior)",
-
   "gender": "Gender",
   "male": "Male",
   "female": "Female",
@@ -77,12 +74,10 @@
   "termsConditionsText": "By proceeding ahead you agree to the <TermsAndConditionsLink />",
   "termsAndConditionsTextValue": "Terms and Conditions",
   "Done": "Done",
-
   "404Title": "This page could not be found",
   "privacyPolicy": "Privacy Policy",
   "footerSocialShareText": "Share it with your friends and family",
   "socialSharingTextWithoutRank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan. You and I can make a difference by contributing to Bhasha Daan that can help machines learn our language and interact with us through great linguistic applications. Do your bit and empower the language?",
-
   "bhashiniLogoAlt": "Bhashini Logo",
   "initiativeLogo": "Initiative Logo",
   "feedbackIconAlt": "Feedback Icon",
@@ -93,22 +88,22 @@
   "contributionStatsSubHeader": "Overall Summary",
   "validateWarningMsg": "Only contributions invited for the selected language",
   "contributeWarningMsg": "Only validations invited for the selected language",
-
   "sunoContributionTagline": "Type what you hear",
   "boloContributionTagline": "Contribute your voice",
   "dekhoContributionTagline": "Type the text as per the image",
+  "likhoContributionTagline": "Translate and type the text",
   "sunoValidationTagline": "Validate what others have contributed",
   "boloValidationTagline": "Validate what others have contributed",
   "dekhoValidationTagline": "Validate what others have contributed",
+  "likhoValidationTagline": "Validate what others have contributed",
   "month": "Month",
   "contributionGraphYLabel1": "Contribution (in hours)",
   "contributionGraphYLabel2": "Contribution (total sentences)",
   "selectLanguagePrompt1": "Select the language for contribution",
   "selectLanguagePrompt2": "Select the language pair for contribution",
-  "sentences": "sentence(s)",
+  "sentences": "Sentence(s)",
   "images": "Image(s)",
   "progressStatus": "<span>{{average}}%</span> of {{initiativeName}} Target Achieved",
-
   "beta": "Beta",
   "metaTitle": "Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)",
   "metaDescription": "Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice",
@@ -121,13 +116,16 @@
   "durationRecorded": "Duration recorded",
   "imagesLabelled": "Images labelled",
   "imagesValidated": "Images validated",
-
+  "translationsDone": "Translations done",
+  "translationsValidated": "Translations validated",
+  "languagePairs": "Language pairs",
   "contributionTrackerHeader": "Contribution Tracker",
   "contributionTrackerSubHeader": "Your language and top 3 contributed languages",
   "byHours": "By duration of hours",
   "bySentences": "By number of sentences",
   "totalSentences": "Total sentences",
   "totalRecordings": "Total recordings",
+  "totalTranslations": "Total translations",
   "imagesLabelledAndValidated": "Images labelled and validated",
   "yourSelectedLanguage": "Your selected language",
   "topLanguages": "Top languages",
@@ -135,11 +133,11 @@
   "speak": "Speak",
   "validate": "Validate",
   "label": "Label",
+  "translate": "Translate",
   "languages": "Languages",
   "hours": "hour(s)",
   "minutes": "minute(s)",
   "seconds": "second(s)",
-
   "assamese": "Assamese",
   "english": "English",
   "telugu": "Telugu",
@@ -174,5 +172,6 @@
   "typingPlaceholder": "Start typing here...",
   "backToInitiativePrompt": "Back to {{initiativeName}} Home",
   "noDataMessage": "We do not have any data in {{language}} language. Please try again later.",
-  "addText": "Add Text"
+  "addText": "Add Text",
+  "playing": "Playing"
 }

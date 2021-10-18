@@ -87,7 +87,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
       >
         <Form.Group controlId="textarea">
           <Form.Label className="display-6">
-            {t('addText')} ({t(`${language}`)})
+            {t('addText')} ({t(language.toLowerCase())})
           </Form.Label>
           <Form.Control
             as="textarea"
@@ -111,10 +111,10 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}
       {showKeyboard ? (
-        <Draggable bounds="parent">
+        <Draggable>
           <div ref={drag} data-testid="virtual-keyboard" className={styles.keyboard}>
             <div className="pb-2">
-              <span>{t(`${language}`)}</span>
+              <span>{t(language.toLowerCase())}</span>
               <span
                 data-testid="close-keyboard"
                 className={styles.crossIcon}

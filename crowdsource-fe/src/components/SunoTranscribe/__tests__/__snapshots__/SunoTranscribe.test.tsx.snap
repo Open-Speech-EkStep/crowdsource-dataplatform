@@ -187,7 +187,7 @@ exports[`SunoTranscribe should render the component and matches it against store
                   class="display-6 form-label"
                   for="textarea"
                 >
-                  addText (Hindi)
+                  addText (hindi)
                 </label>
                 <textarea
                   class="textarea border-0 p-0 display-3 form-control"

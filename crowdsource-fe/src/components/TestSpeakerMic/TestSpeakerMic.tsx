@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -16,7 +16,9 @@ interface TestSpeakerProps {
 const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const { t } = useTranslation();
   const [showMicSpeaker, setShowMicSpeaker] = useState(false);
+  const [speakerText, setSpeakerText] = useState('testSpeakers');
   const audioEl: any = useRef<HTMLAudioElement>();
+  const audio = audioEl.current;
   const speakerRef: any = useRef();
 
   let context: any;
@@ -25,7 +27,9 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
     speakerAudio?.play();
+    console.log(context);
     if (!context) {
+      // setSpeakerText('playing');
       const AudioContext = window.AudioContext;
       context = new AudioContext();
       const mediaElementSrc = context.createMediaElementSource(speakerAudio);
@@ -60,6 +64,17 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     }
     renderFrame();
   };
+
+  const onEnded = () => {
+    setSpeakerText('testSpeakers');
+  };
+
+  useEffect(() => {
+    audio?.addEventListener('ended', onEnded);
+    return () => {
+      audio?.removeEventListener('ended', onEnded);
+    };
+  }, [audio]);
 
   const playSpeakerSound = () => {
     playSpeaker();
@@ -117,11 +132,16 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 onClick={playSpeakerSound}
                 variant="normal"
                 data-testid="speakerbtn"
-                className={`${styles.testBtn} ${styles.active} d-flex align-items-center justify-content-center border border-1 rounded-16 border-primary`}
+                className={`${styles.testBtn} ${
+                  speakerText === 'playing' ? `${styles.active}` : ``
+                } d-flex align-items-center justify-content-center border border-1 rounded-16 border-primary`}
               >
-                <Image src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
+                {speakerText !== 'playing' && (
+                  <Image src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
+                )}
+
                 <span ref={speakerRef} className="d-flex ms-2">
-                  {t('testSpeakers')}
+                  {t(speakerText)}
                 </span>
               </Button>
               <div className="mt-2 mt-md-3 d-none">
