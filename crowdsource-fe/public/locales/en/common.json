@@ -161,5 +161,18 @@
   "reportSubmitSuccess": "Your feedback helps us keep Dekho India relevant, we appreciate you taking time to leave the feedback.",
   "skip": "Skip",
   "thankyouForContributing": "Thank you for contributing!",
-  "thankyouForEnthusiasm": "Thank you for your enthusiasm to validate the recordings."
+  "thankyouForEnthusiasm": "Thank you for your enthusiasm to validate the recordings.",
+  "cancel": "Cancel",
+  "play": "Play",
+  "pause": "Pause",
+  "replay": "Replay",
+  "report": "Report",
+  "testYourSpeaker": "Test your Speaker",
+  "audioHeading": "Type the text as you hear the audio",
+  "testSpeakers": "Test Speaker",
+  "test": "Test",
+  "typingPlaceholder": "Start typing here...",
+  "backToInitiativePrompt": "Back to {{initiativeName}} Home",
+  "noDataMessage": "We do not have any data in {{language}} language. Please try again later.",
+  "addText": "Add Text"
 }

@@ -1,4 +1,5 @@
 import Breadcrumbs from 'components/Breadcrumbs';
+// import ChromeExtension from 'components/ChromeExtension';
 import Report from 'components/Report';
 import TestSpeakerMic from 'components/TestSpeakerMic';
 

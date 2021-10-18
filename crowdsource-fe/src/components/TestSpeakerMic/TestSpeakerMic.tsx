@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import Button from 'components/Button';
@@ -13,8 +14,10 @@ interface TestSpeakerProps {
 }
 
 const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
+  const { t } = useTranslation();
   const [showMicSpeaker, setShowMicSpeaker] = useState(false);
   const audioEl: any = useRef<HTMLAudioElement>();
+  const speakerRef: any = useRef();
 
   let context: any;
   let analyser: any;
@@ -66,8 +69,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     <div className="position-relative">
       <IconTextButton
         icon="speaker.svg"
-        textMobile="Test"
-        textDesktop="Test your speakers"
+        textMobile={t('test')}
+        textDesktop={t('testYourSpeaker')}
         onClick={() => setShowMicSpeaker(true)}
         altText="testYourSpeaker"
       />
@@ -83,7 +86,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           <div className={`${styles.heading} d-flex align-items-center mb-3 mt-3 mt-md-0`}>
             <Image src="/images/speaker.svg" width="24" height="24" alt="Speaker Icon" />
             {showMic && <p className="ms-2">Test your microphone and speakers</p>}
-            {showSpeaker && <p className="ms-2">Test your speakers</p>}
+            {showSpeaker && <p className="ms-2">{t('testYourSpeaker')}</p>}
           </div>
           {showMic && (
             <div className="d-md-flex flex-column flex-md-row align-items-center py-3">
@@ -117,7 +120,9 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 className={`${styles.testBtn} ${styles.active} d-flex align-items-center justify-content-center border border-1 rounded-16 border-primary`}
               >
                 <Image src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
-                <span className="d-flex ms-2">Test Speakers</span>
+                <span ref={speakerRef} className="d-flex ms-2">
+                  {t('testSpeakers')}
+                </span>
               </Button>
               <div className="mt-2 mt-md-3 d-none">
                 {/* eslint-disable-next-line jsx-a11y/media-has-caption */}

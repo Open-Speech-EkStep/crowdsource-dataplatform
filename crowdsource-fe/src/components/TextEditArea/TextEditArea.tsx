@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+import { useTranslation } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
 import Draggable from 'react-draggable';
 import Keyboard from 'react-simple-keyboard';
@@ -22,6 +23,7 @@ interface TextEditAreaProps {
 }
 
 const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEditAreaProps) => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [layout, setLayout] = useState<any>();
@@ -84,7 +86,9 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
         className={`${styles.addText} position-relative rounded-8 border border-2 border-primary bg-light p-4`}
       >
         <Form.Group controlId="textarea">
-          <Form.Label className="display-6">Add Text ({language})</Form.Label>
+          <Form.Label className="display-6">
+            {t('addText')} ({t(`${language}`)})
+          </Form.Label>
           <Form.Control
             as="textarea"
             value={input}
@@ -92,7 +96,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
               setShowKeyboard(true);
             }}
             onChange={onChangeInput}
-            placeholder="Start typing here..."
+            placeholder={t('typingPlaceholder')}
             className={`${styles.textarea} border-0 p-0 display-3`}
           />
         </Form.Group>
@@ -110,7 +114,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
         <Draggable bounds="parent">
           <div ref={drag} data-testid="virtual-keyboard" className={styles.keyboard}>
             <div className="pb-2">
-              <span>{language}</span>
+              <span>{t(`${language}`)}</span>
               <span
                 data-testid="close-keyboard"
                 className={styles.crossIcon}

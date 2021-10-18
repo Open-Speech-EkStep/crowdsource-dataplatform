@@ -92,7 +92,7 @@ exports[`SunoTranscribe should render the component and matches it against store
             <span
               class="text ms-2 d-none d-md-block"
             >
-              Report
+              report
             </span>
           </button>
         </div>
@@ -133,12 +133,12 @@ exports[`SunoTranscribe should render the component and matches it against store
               <span
                 class="text ms-2 d-md-none"
               >
-                Test
+                test
               </span>
               <span
                 class="text ms-2 d-none d-md-block"
               >
-                Test your speakers
+                testYourSpeaker
               </span>
             </button>
           </div>
@@ -158,7 +158,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           <span
             class="label display-3"
           >
-            Type the text as you hear the audio
+            audioHeading
           </span>
           <div
             class="mt-2 mt-md-3"
@@ -187,12 +187,12 @@ exports[`SunoTranscribe should render the component and matches it against store
                   class="display-6 form-label"
                   for="textarea"
                 >
-                  Add Text (Hindi)
+                  addText (Hindi)
                 </label>
                 <textarea
                   class="textarea border-0 p-0 display-3 form-control"
                   id="textarea"
-                  placeholder="Start typing here..."
+                  placeholder="typingPlaceholder"
                 />
               </div>
               <div

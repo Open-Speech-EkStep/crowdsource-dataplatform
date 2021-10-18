@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import { useTranslation } from 'next-i18next';
+
 import styles from './AudioController.module.scss';
 
 interface AudoiControllerProps {
@@ -9,6 +11,7 @@ interface AudoiControllerProps {
 }
 
 const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps) => {
+  const { t } = useTranslation();
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
 
@@ -26,7 +29,7 @@ const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps)
 
   return (
     <div className="d-flex flex-column align-items-center text-center">
-      <span className={`${styles.label} display-3`}>Type the text as you hear the audio</span>
+      <span className={`${styles.label} display-3`}>{t('audioHeading')}</span>
       <div className="mt-2 mt-md-3">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio

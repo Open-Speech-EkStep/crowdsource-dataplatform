@@ -23,7 +23,7 @@ describe('Report', () => {
   it('should open report modal if button clicked', async () => {
     await setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'reportIconAlt Report' }));
+    userEvent.click(screen.getByRole('button', { name: 'reportIconAlt report' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('Report', () => {
 
     await setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'reportIconAlt Report' }));
+    userEvent.click(screen.getByRole('button', { name: 'reportIconAlt report' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();

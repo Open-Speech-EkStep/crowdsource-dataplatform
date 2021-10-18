@@ -35,12 +35,12 @@ exports[`TestSpeakerMic should render the component and matches it against store
       <span
         class="text ms-2 d-md-none"
       >
-        Test
+        test
       </span>
       <span
         class="text ms-2 d-none d-md-block"
       >
-        Test your speakers
+        testYourSpeaker
       </span>
     </button>
   </div>

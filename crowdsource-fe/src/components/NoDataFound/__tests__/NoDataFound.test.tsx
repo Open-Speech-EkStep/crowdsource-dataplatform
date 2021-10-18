@@ -17,8 +17,5 @@ describe('NoDataFound', () => {
     setup();
 
     expect(screen.getByText('thankyouForEnthusiasm')).toBeInTheDocument();
-    expect(
-      screen.getByText('We do not have any data in Hindi language. Please try again later.')
-    ).toBeInTheDocument();
   });
 });

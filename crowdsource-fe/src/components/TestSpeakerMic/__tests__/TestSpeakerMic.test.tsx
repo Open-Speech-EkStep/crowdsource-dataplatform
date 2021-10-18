@@ -17,7 +17,7 @@ describe('TestSpeakerMic', () => {
 
   it('should test the test speaker modal open and close behaviour', async () => {
     setup(true, true);
-    userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker Test Test your speakers' }));
+    userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker test testYourSpeaker' }));
 
     await waitFor(() => {
       expect(screen.getByTestId('speakerbtn')).toBeInTheDocument();
@@ -32,13 +32,13 @@ describe('TestSpeakerMic', () => {
 
   it('should test the test speaker audio', async () => {
     setup(false, true);
-    userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker Test Test your speakers' }));
+    userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker test testYourSpeaker' }));
 
     await waitFor(() => {
       expect(screen.getByTestId('speakerbtn')).toBeInTheDocument();
     });
 
-    userEvent.click(screen.getByRole('button', { name: 'Microphone Icon Test Speakers' }));
+    userEvent.click(screen.getByRole('button', { name: 'Microphone Icon testSpeakers' }));
 
     expect(screen.getByTestId('speakerCanvas')).toBeInTheDocument();
 
@@ -46,7 +46,7 @@ describe('TestSpeakerMic', () => {
 
     await waitFor(() => {
       audio.dispatchEvent(new window.Event('ended'));
-      userEvent.click(screen.getByRole('button', { name: 'Microphone Icon Test Speakers' }));
+      userEvent.click(screen.getByRole('button', { name: 'Microphone Icon testSpeakers' }));
     });
 
     userEvent.click(screen.getByRole('button', { name: 'Close' }));

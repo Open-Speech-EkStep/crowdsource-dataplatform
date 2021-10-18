@@ -250,7 +250,7 @@ const SunoTranscribe = () => {
     <NoDataFound
       url={`/${currentLocale}${routePaths.sunoIndiaHome}`}
       initiative={INITIATIVES_MAPPING.suno}
-      language={contributionLanguage ?? ''}
+      language={contributionLanguage?.toLowerCase() ?? ''}
     />
   );
 };

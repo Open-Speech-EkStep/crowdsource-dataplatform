@@ -129,7 +129,7 @@ describe('SunoTranscribe', () => {
   it('should test the textarea text with valid language', async () => {
     await setup();
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (Hindi)' }), 'बपपप');
 
     await waitFor(() => {
       expect(screen.queryByText('Please type in your chosen language')).not.toBeInTheDocument();
@@ -158,7 +158,7 @@ describe('SunoTranscribe', () => {
 
     expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (Hindi)' }), 'बपपप');
 
     expect(screen.getByRole('button', { name: 'cancel' })).toBeEnabled();
 
@@ -167,7 +167,7 @@ describe('SunoTranscribe', () => {
     expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
 
     await waitFor(() => {
-      expect(screen.getByRole('textbox', { name: 'Add Text (Hindi)' })).toHaveValue('');
+      expect(screen.getByRole('textbox', { name: 'addText (Hindi)' })).toHaveValue('');
     });
   });
 
@@ -227,7 +227,7 @@ describe('SunoTranscribe', () => {
       expect(screen.getByRole('img', { name: 'Replay Icon' })).toBeInTheDocument();
     });
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (Hindi)' }), 'बपपप');
 
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'submit' })).toBeEnabled();

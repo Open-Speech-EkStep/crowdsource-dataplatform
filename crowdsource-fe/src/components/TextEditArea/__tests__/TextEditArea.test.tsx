@@ -17,7 +17,7 @@ describe('TextEditArea English', () => {
   it('should test the textarea text with valid language', async () => {
     setup('English');
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (English)' }), 'abc');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (English)' }), 'abc');
 
     await waitFor(() => {
       expect(screen.queryByText('Please type in your chosen language')).not.toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('TextEditArea English', () => {
   it('should show the error with "Special characters are not allowed"', async () => {
     setup('English');
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (English)' }), 'abc@');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (English)' }), 'abc@');
 
     expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
     expect(screen.getByText('Special characters are not allowed')).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('TextEditArea English', () => {
   it('should show the error with "Please type in your chosen language"', async () => {
     setup('English');
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (English)' }), 'बपपप');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (English)' }), 'बपपप');
 
     expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
     expect(screen.getByText('Please type in your chosen language')).toBeInTheDocument();
@@ -65,7 +65,7 @@ describe('TextEditArea English', () => {
     userEvent.click(screen.getByText('caps'));
     userEvent.click(screen.getByText('A'));
 
-    expect(screen.getByRole('textbox', { name: 'Add Text (English)' })).toHaveValue('A');
+    expect(screen.getByRole('textbox', { name: 'addText (English)' })).toHaveValue('A');
   });
 
   it('should show the virtual keyboard on button click', async () => {
@@ -93,9 +93,9 @@ describe('TextEditArea English', () => {
       expect(screen.getByTestId('virtual-keyboard')).toBeInTheDocument();
     });
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (English)' }), 'abc');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (English)' }), 'abc');
 
-    userEvent.clear(screen.getByRole('textbox', { name: 'Add Text (English)' }));
+    userEvent.clear(screen.getByRole('textbox', { name: 'addText (English)' }));
 
     await waitFor(() => {
       expect(screen.queryByText('X')).not.toBeInTheDocument();
@@ -110,7 +110,7 @@ describe('TextEditArea Hindi', () => {
   it('should test the textarea text with valid language', async () => {
     setup('Hindi');
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (Hindi)' }), 'बपपप');
 
     await waitFor(() => {
       expect(screen.queryByText('Please type in your chosen language')).not.toBeInTheDocument();
@@ -120,7 +120,7 @@ describe('TextEditArea Hindi', () => {
   it('should show the error with "Special characters are not allowed"', async () => {
     setup('Hindi');
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप@');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (Hindi)' }), 'बपपप@');
 
     expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
     expect(screen.getByText('Special characters are not allowed')).toBeInTheDocument();
@@ -137,7 +137,7 @@ describe('TextEditArea Hindi', () => {
     userEvent.click(screen.getByText('caps'));
     userEvent.click(screen.getByText('क्ष'));
 
-    expect(screen.getByRole('textbox', { name: 'Add Text (Hindi)' })).toHaveValue('क्ष');
+    expect(screen.getByRole('textbox', { name: 'addText (Hindi)' })).toHaveValue('क्ष');
   });
 
   it('should hide the virtual keyboard when user empty the textfield', async () => {
@@ -149,9 +149,9 @@ describe('TextEditArea Hindi', () => {
       expect(screen.getByTestId('virtual-keyboard')).toBeInTheDocument();
     });
 
-    userEvent.type(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }), 'बपपप');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (Hindi)' }), 'बपपप');
 
-    userEvent.clear(screen.getByRole('textbox', { name: 'Add Text (Hindi)' }));
+    userEvent.clear(screen.getByRole('textbox', { name: 'addText (Hindi)' }));
 
     await waitFor(() => {
       expect(screen.queryByText('X')).not.toBeInTheDocument();

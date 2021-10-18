@@ -89,7 +89,7 @@ exports[`FunctionalHeader should render the component and matches it against sto
           <span
             class="text ms-2 d-none d-md-block"
           >
-            Report
+            report
           </span>
         </button>
       </div>
@@ -129,12 +129,12 @@ exports[`FunctionalHeader should render the component and matches it against sto
             <span
               class="text ms-2 d-md-none"
             >
-              Test
+              test
             </span>
             <span
               class="text ms-2 d-none d-md-block"
             >
-              Test your speakers
+              testYourSpeaker
             </span>
           </button>
         </div>

@@ -14,7 +14,7 @@ exports[`NoDataFound should render the component and matches it against stored s
       <p
         class="mt-9"
       >
-        We do not have any data in Hindi language. Please try again later.
+        noDataMessage
       </p>
       <a
         class="mt-9 info primary btn btn-primary"
@@ -23,7 +23,7 @@ exports[`NoDataFound should render the component and matches it against stored s
         role="button"
         tabindex="0"
       >
-        Back to suno India Home
+        backToInitiativePrompt
       </a>
     </div>
   </div>

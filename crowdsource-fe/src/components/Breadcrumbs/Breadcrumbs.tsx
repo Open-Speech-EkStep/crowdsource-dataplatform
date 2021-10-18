@@ -20,7 +20,7 @@ const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
 
   return (
     <div className="d-flex align-items-center" data-testid="Breadcrumbs">
-      <Link href={routePaths.sunoIndiaHome}>
+      <Link href={`/${currentLocale}${routePaths.sunoIndiaHome}`}>
         <div className="d-flex align-items-center">
           <div className={`${styles.icon} d-flex`}>
             <Image

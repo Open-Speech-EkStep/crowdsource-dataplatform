@@ -12,12 +12,12 @@ exports[`TextEditArea English should render the component and matches it against
           class="display-6 form-label"
           for="textarea"
         >
-          Add Text (English)
+          addText (English)
         </label>
         <textarea
           class="textarea border-0 p-0 display-3 form-control"
           id="textarea"
-          placeholder="Start typing here..."
+          placeholder="typingPlaceholder"
         />
       </div>
       <div
