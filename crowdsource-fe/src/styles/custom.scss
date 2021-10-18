@@ -93,7 +93,6 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --border-radius-16: 1rem;
   --border-radius-20: 1.25rem;
   --border-radius-24: 1.5rem;
-  --border-radius-40: 2.5rem;
 }
 
 // Typography
@@ -290,7 +289,6 @@ $border-radius-12: var(--border-radius-12);
 $border-radius-16: var(--border-radius-16);
 $border-radius-20: var(--border-radius-20);
 $border-radius-24: var(--border-radius-24);
-$border-radius-40: var(--border-radius-40);
 
 // Merge utilities
 $utilities: map-merge(
@@ -309,7 +307,6 @@ $utilities: map-merge(
                 16: $border-radius-16,
                 20: $border-radius-20,
                 24: $border-radius-24,
-                40: $border-radius-40,
               )
             ),
         )
