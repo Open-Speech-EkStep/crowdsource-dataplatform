@@ -8,6 +8,8 @@ import 'styles/slickCarousel.scss';
 
 import Feedback from 'components/Feedback';
 import Layout from 'components/Layout';
+import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
+import localStorageConstants from 'constants/localStorageConstants';
 
 type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProps['Component'] };
 
@@ -32,6 +34,9 @@ if (
 
   axe(React, ReactDOM, 1000);
 }
+
+if (typeof window !== 'undefined' && !localStorage.getItem(localStorageConstants.contributionLanguage))
+  localStorage.setItem(localStorageConstants.contributionLanguage, RAW_LANGUAGES[DEFAULT_LOCALE]);
 
 const App = appWithTranslation(MyApp) as typeof MyApp;
 

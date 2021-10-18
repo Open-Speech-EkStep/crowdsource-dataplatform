@@ -1,5 +1,3 @@
-import { when } from 'jest-when';
-
 import { render, screen, verifyAxeTest } from 'utils/testUtils';
 
 import Layout from '../Layout';
@@ -33,15 +31,5 @@ describe('Layout', () => {
     setup();
 
     expect(screen.getByTestId('Footer')).toBeInTheDocument();
-  });
-
-  it('should set contribution language to default in local storage', async () => {
-    setup();
-
-    when(localStorage.getItem)
-      .calledWith('contributionLanguage')
-      .mockImplementation(() => null);
-
-    expect(localStorage.setItem).toBeCalledWith('contributionLanguage', 'English');
   });
 });
