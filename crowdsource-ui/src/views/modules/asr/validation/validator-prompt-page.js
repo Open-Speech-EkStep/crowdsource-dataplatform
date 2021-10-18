@@ -12,6 +12,7 @@ const {
   getDeviceInfo,
   getLocaleString,
   translate,
+  safeJson
 } = require('../common/utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LOCALE_STRINGS,config,INITIATIVES } = require('../common/constants');
@@ -616,7 +617,7 @@ const executeOnLoad = function () {
   });
 
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);

@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
   // toggleFooterPosition,
-  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate } = require('../common/utils');
+  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate,safeJson } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,LOCALE_STRINGS,config,INITIATIVES} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,redirectToHomeForDirectLanding } = require('../common/common');
@@ -355,7 +355,7 @@ const initializeComponent = () => {
 
 const getLocationInfo = () => {
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);

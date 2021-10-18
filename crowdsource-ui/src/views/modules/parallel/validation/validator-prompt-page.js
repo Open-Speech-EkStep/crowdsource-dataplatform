@@ -10,7 +10,8 @@ const {
   getDeviceInfo,
   getBrowserInfo,
   getLocaleString,
-  translate
+  translate,
+  safeJson
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,LOCALE_STRINGS,config,INITIATIVES} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
@@ -366,7 +367,7 @@ const initializeComponent = () => {
 
 const getLocationInfo = () => {
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);

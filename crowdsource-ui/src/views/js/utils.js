@@ -4,6 +4,12 @@ const platform = require('./platform');
 const { context_root } = require('./env-api');
 const { ErrorStatusCode } = require('./enum');
 
+const safeJson = res => {
+  if (!res) return res;
+  if (typeof res.json === 'function') return res.json();
+  return res;
+};
+
 function getDeviceInfo() {
   const os = platform.os;
   let info = '';
@@ -359,5 +365,6 @@ module.exports = {
   formatTransAndImages,
   translate,
   toPascalCase,
-  getInitiativeType
+  getInitiativeType,
+  safeJson
 };

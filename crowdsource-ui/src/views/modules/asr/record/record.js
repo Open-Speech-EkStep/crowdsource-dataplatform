@@ -11,6 +11,7 @@ const {
   getDeviceInfo,
   getBrowserInfo,
   translate,
+  safeJson
 } = require('../common/utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { cdn_url } = require('../common/env-api');
@@ -527,7 +528,7 @@ function executeOnLoad() {
   }
 
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);

@@ -3,7 +3,7 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate} = require('./utils');
+const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate,safeJson} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
 const { CURRENT_MODULE,INITIATIVES ,config,CONTRIBUTION_LANGUAGE} = require('./constants');
@@ -395,7 +395,7 @@ $(document).ready(() => {
     });
 
     fetchLocationInfo().then(res => {
-        return res.json()
+        return safeJson(res);
     }).then(response => {
         localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);

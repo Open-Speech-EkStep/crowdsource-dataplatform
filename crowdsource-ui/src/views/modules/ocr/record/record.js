@@ -12,6 +12,7 @@ const {
   getBrowserInfo,
   getDeviceInfo,
   translate,
+  safeJson
 } = require('../common/utils');
 const { cdn_url } = require('../common/env-api');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LOCALE_STRINGS,INITIATIVES,config } = require('../common/constants');
@@ -418,7 +419,7 @@ const initializeComponent = () => {
 
 const getLocationInfo = () => {
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);

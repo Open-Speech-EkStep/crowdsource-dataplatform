@@ -10,7 +10,8 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo, 
   getBrowserInfo,
-  translate
+  translate,
+  safeJson
 } = require('../common/utils');
 const {PARALLEL_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, CONTRIBUTION_LANGUAGE ,INITIATIVES,config} = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
@@ -379,7 +380,7 @@ function executeOnLoad() {
   }
 
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
