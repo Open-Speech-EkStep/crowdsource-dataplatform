@@ -94,7 +94,10 @@ step("User details popup should appear and close button should close the pop up"
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
     await taiko.waitFor(1000)
-    assert.ok(await taiko.textBox({ id: 'username' }).exists())
+    const usernameFiled = taiko.textBox({ id: 'username' })
+    assert.ok(await usernameFiled.exists());
+    await write('1234', into(usernameFiled));
+    await taiko.text(`Please don't use email or numbers as user name`).isVisible();
     assert.ok(await taiko.dropDown({ id: 'mother-tongue' }).exists())
     assert.ok(await taiko.dropDown({ id: 'age' }).exists())
     assert.ok(await taiko.radioButton({ id: 'other-check' }).exists())
