@@ -19,48 +19,48 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const [speakerText, setSpeakerText] = useState('testSpeakers');
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
-  const speakerRef: any = useRef();
-
-  let context: any;
-  let analyser: any;
+  const context: any = useRef<AudioContext>();
+  const mediaElementSrc: any = useRef();
+  const analyser: any = useRef();
 
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
     speakerAudio?.play();
-    console.log(context);
-    if (!context) {
-      // setSpeakerText('playing');
+    setSpeakerText('playing');
+    if (!context.current) {
       const AudioContext = window.AudioContext;
-      context = new AudioContext();
-      const mediaElementSrc = context.createMediaElementSource(speakerAudio);
-      analyser = context.createAnalyser();
-      mediaElementSrc.connect(analyser);
-      analyser.connect(context.destination);
-      analyser.fftSize = 256;
+      context.current = new AudioContext();
+      mediaElementSrc.current = context.current.createMediaElementSource(speakerAudio);
+      analyser.current = context.current.createAnalyser();
+      mediaElementSrc.current.connect(analyser.current);
+      analyser.current.connect(context.current.destination);
+      analyser.current.fftSize = 256;
     }
     const speakerCanvas: any = document.getElementById('speaker-canvas');
     const speakerCanvasCtx = speakerCanvas?.getContext('2d');
-    const bufferLength = analyser.frequencyBinCount;
+    const bufferLength = analyser.current.frequencyBinCount;
     let max_level_L = 50;
     const dataArray = new Uint8Array(bufferLength);
 
     function renderFrame() {
-      requestAnimationFrame(renderFrame);
-      analyser.getByteFrequencyData(dataArray);
-      let sum_L = 0.0;
-      for (let i = 0; i < dataArray.length; ++i) {
-        sum_L += dataArray[i] * dataArray[i];
+      if (analyser.current) {
+        requestAnimationFrame(renderFrame);
+        analyser.current.getByteFrequencyData(dataArray);
+        let sum_L = 0.0;
+        for (let i = 0; i < dataArray.length; ++i) {
+          sum_L += dataArray[i] * dataArray[i];
+        }
+        const instant_L = Math.sqrt(sum_L / dataArray.length);
+        max_level_L = Math.max(max_level_L, instant_L);
+        speakerCanvasCtx.clearRect(0, 0, speakerCanvas?.width, speakerCanvas?.height);
+        speakerCanvasCtx.fillStyle = '#83E561';
+        speakerCanvasCtx.fillRect(
+          0,
+          0,
+          speakerCanvas?.width * (instant_L / max_level_L),
+          speakerCanvas?.height
+        );
       }
-      const instant_L = Math.sqrt(sum_L / dataArray.length);
-      max_level_L = Math.max(max_level_L, instant_L);
-      speakerCanvasCtx.clearRect(0, 0, speakerCanvas?.width, speakerCanvas?.height);
-      speakerCanvasCtx.fillStyle = '#83E561';
-      speakerCanvasCtx.fillRect(
-        0,
-        0,
-        speakerCanvas?.width * (instant_L / max_level_L),
-        speakerCanvas?.height
-      );
     }
     renderFrame();
   };
@@ -74,7 +74,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     return () => {
       audio?.removeEventListener('ended', onEnded);
     };
-  }, [audio]);
+  });
 
   const playSpeakerSound = () => {
     playSpeaker();
@@ -92,7 +92,13 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
       {showMicSpeaker && (
         <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>
           <Button
-            onClick={() => setShowMicSpeaker(false)}
+            onClick={() => {
+              setSpeakerText('testSpeakers');
+              setShowMicSpeaker(false);
+              context.current = null;
+              mediaElementSrc.current = null;
+              analyser.current = null;
+            }}
             variant="normal"
             className={`${styles.close} d-flex position-absolute`}
           >
@@ -140,7 +146,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   <Image src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
                 )}
 
-                <span ref={speakerRef} className="d-flex ms-2">
+                <span id="speakerText" className="d-flex ms-2">
                   {t(speakerText)}
                 </span>
               </Button>
