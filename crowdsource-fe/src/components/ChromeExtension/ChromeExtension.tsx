@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import Button from 'components/Button';
 import Modal from 'components/Modal';
+import { getBrowserInfo } from 'utils/utils';
 
 import styles from './ChromeExtension.module.scss';
 
@@ -12,6 +13,13 @@ const ChromeExtension = () => {
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const [showChromeExtension, setShowChromeExtension] = useState(true);
+
+  const [isNotChrome, setIsNotChrome] = useState(false);
+
+  useEffect(() => {
+    const browser = getBrowserInfo();
+    setIsNotChrome(!browser.includes('Chrome'));
+  }, []);
 
   const onShowVideoModal = () => {
     setShow(true);
@@ -21,7 +29,7 @@ const ChromeExtension = () => {
     setShow(false);
   };
 
-  if (!showChromeExtension) {
+  if (!showChromeExtension || isNotChrome) {
     return null;
   }
 

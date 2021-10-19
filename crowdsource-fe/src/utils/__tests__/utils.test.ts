@@ -116,7 +116,7 @@ describe('Utils', () => {
   it('should test the browser info method', () => {
     const browserInfo = getBrowserInfo();
 
-    const expectedOutput = 'Node.js 13';
+    const expectedOutput = 'Chrome 13';
     expect(browserInfo).toEqual(expectedOutput);
   });
 });

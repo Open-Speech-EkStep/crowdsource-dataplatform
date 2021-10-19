@@ -200,7 +200,7 @@ describe('SunoTranscribe', () => {
           state_region: 'Uttar Pradesh',
           country: 'India',
           device: 'android 11',
-          browser: 'Node.js 13',
+          browser: 'Chrome 13',
         }),
       });
     });
@@ -254,7 +254,7 @@ describe('SunoTranscribe', () => {
           state: 'Uttar Pradesh',
           country: 'India',
           device: 'android 11',
-          browser: 'Node.js 13',
+          browser: 'Chrome 13',
         }),
       });
     });

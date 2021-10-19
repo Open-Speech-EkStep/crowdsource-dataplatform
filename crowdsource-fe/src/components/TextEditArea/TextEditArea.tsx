@@ -34,15 +34,17 @@ const TextEditArea = ({
   const [input, setInput] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [layout, setLayout] = useState<any>();
+  const [isUsingPhysicalKeyboard, setIsUsingPhysicalKeyboard] = useState(false);
   const [layoutName, setLayoutName] = useState<string>('default');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
   const nodeRef = useRef(null);
+  const chromeExtension = useRef<any>(null);
 
   let keyboard: any;
 
   useEffect(() => {
+    chromeExtension.current = document.getElementById('GOOGLE_INPUT_CHEXT_FLAG');
     if (!textValue) {
       setShowError(false);
     }
@@ -51,6 +53,7 @@ const TextEditArea = ({
   }, [language, textValue]);
 
   const onChange = (input: any) => {
+    setIsUsingPhysicalKeyboard(false);
     setInput(input);
     const error = verifyLanguage(input, initiative, language);
     handleError(error);
@@ -78,6 +81,7 @@ const TextEditArea = ({
   };
 
   const onChangeInput = (event: any) => {
+    setIsUsingPhysicalKeyboard(true);
     const input = event.target.value;
     const error = verifyLanguage(input, initiative, language);
     handleError(error);
@@ -108,7 +112,9 @@ const TextEditArea = ({
             disabled={isTextareaDisabled}
             value={input}
             onFocus={() => {
-              setShowKeyboard(true);
+              if (!isUsingPhysicalKeyboard && !chromeExtension.current) {
+                setShowKeyboard(true);
+              }
             }}
             onChange={onChangeInput}
             placeholder={t('typingPlaceholder')}
