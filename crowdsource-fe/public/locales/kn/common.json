@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
   "noDataMessage": "{{language}} ಭಾಷೆಯಲ್ಲಿ ನಮ್ಮಲ್ಲಿ ಯಾವುದೇ ಡೇಟಾ ಇಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಪುನಃ ಪ್ರಯತ್ನಿಸಿ.",
   "addText": "ಪಠ್ಯವನ್ನು ಸೇರಿಸಿ",
-  "playing": "ಪ್ಲೇ ಆಗುತ್ತಿದೆ"
+  "playing": "ಪ್ಲೇ ಆಗುತ್ತಿದೆ",
+  "offensive": "ಅಪಮಾನಕರ",
+  "typeInChosenLanguage": "ದಯವಿಟ್ಟು ನೀವು ಆಯ್ಕೆ ಮಾಡಿಕೊಂಡ ಭಾಷೆಯಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ",
+  "specialCharacters": "ಸ್ಪೆಷಲ್ ಕ್ಯಾರೆಕ್ಟರ್‌ಗಳನ್ನು ಬಳಸುವಂತಿಲ್ಲ"
 }

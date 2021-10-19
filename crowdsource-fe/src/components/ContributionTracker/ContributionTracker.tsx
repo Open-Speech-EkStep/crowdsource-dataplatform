@@ -7,19 +7,25 @@ import Form from 'react-bootstrap/Form';
 import { BarChart } from 'components/Charts';
 import ViewAllDetailButton from 'components/ViewAllDetailButton';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MEDIA, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import {
+  INITIATIVE_MEDIA_CONTRIBUTION_MAPPING,
+  INITIATIVES_MEDIA,
+  INITIATIVES_MEDIA_MAPPING,
+  INITIATIVES_MEDIA_TYPE_MAPPING,
+} from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
+import type { InitiativeType } from 'types/InitiativeType';
 import type { TopLanguagesByHours, TopLanguagesBySpeaker } from 'types/TopLanguages';
-import { convertTimeFormat } from 'utils/utils';
+import { convertTimeFormat, isSunoOrBoloInitiative } from 'utils/utils';
 
 import styles from './ContributionTracker.module.scss';
 
 type ChartFilterType = 'byDuration' | 'bySpeaker';
 
-const mapChartData = (data: any, key: string, langauge: string, initiativeMedia: string) => {
+const mapChartData = (data: any, key: string, langauge: string, initiativeMedia: InitiativeType) => {
   if (langauge && data && data.length) {
     const contributedLanguageHours = data.find(
       (item: any) => item.language === langauge && item.type === initiativeMedia
@@ -28,7 +34,10 @@ const mapChartData = (data: any, key: string, langauge: string, initiativeMedia:
     if (contributedLanguageHours) {
       topLanguageArray.push(contributedLanguageHours);
     } else {
-      topLanguageArray.push({ language: langauge, total_contributions: 0.0 });
+      topLanguageArray.push({
+        language: langauge,
+        [INITIATIVE_MEDIA_CONTRIBUTION_MAPPING[initiativeMedia]]: 0.0,
+      });
     }
     let remainingLanguage = data.filter((item: any) => item?.language !== langauge);
     remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
@@ -38,12 +47,25 @@ const mapChartData = (data: any, key: string, langauge: string, initiativeMedia:
   }
 };
 
-const getTopLanguagesByHoursChartData = (topLanguagesByHours?: TopLanguagesByHours[]) => {
+const translateCategory = (language: string) => {
+  return language
+    .split('-')
+    .map(language => i18n?.t(language.toLowerCase()))
+    .join('-');
+};
+
+const getTopLanguagesByHoursChartData = (
+  contributionValue: string,
+  initiativeMedia: InitiativeType,
+  topLanguagesByHours?: TopLanguagesByHours[]
+) => {
   return (
     topLanguagesByHours?.map(topLanguageByHours => ({
-      category: i18n?.t((topLanguageByHours?.language).toLowerCase()),
-      value: topLanguageByHours?.total_contributions,
-      tooltipText: convertTimeFormat(topLanguageByHours?.total_contributions),
+      category: translateCategory(topLanguageByHours?.language),
+      value: (topLanguageByHours as any)[contributionValue],
+      tooltipText: isSunoOrBoloInitiative(initiativeMedia)
+        ? convertTimeFormat(topLanguageByHours?.total_contributions)
+        : `${topLanguageByHours?.total_contribution_count} ${INITIATIVES_MEDIA_TYPE_MAPPING[initiativeMedia]}`,
     })) ?? []
   );
 };
@@ -67,6 +89,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
   const { t } = useTranslation();
   const [chartFilterType, setChartFilterType] = useState<ChartFilterType>('byDuration');
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const [translatedLanguage] = useLocalStorage<string>(localStorageConstants.translatedLanguage);
   const { data: topLanguagesByHoursData, mutate: hrsMutate } = useFetch<Array<TopLanguagesByHours>>(
     apiPaths.topLanguagesByHoursContributed,
     { revalidateOnMount: false }
@@ -83,7 +106,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
       hrsMutate();
       speakerMutate();
     }
-  }, [contributionLanguage, speakerMutate, hrsMutate]);
+  }, [contributionLanguage, translatedLanguage, speakerMutate, hrsMutate]);
 
   let hoursData = topLanguagesByHoursData;
   let speakersData = topLanguagesBySpeakerData;
@@ -91,10 +114,16 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
   hoursData = topLanguagesByHoursData?.filter(
     topLanguageByHours => topLanguageByHours.type === INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
+
+  const language =
+    INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
+      ? `${contributionLanguage}-${translatedLanguage}`
+      : contributionLanguage;
+
   const topLanguageHrsData = mapChartData(
     hoursData,
-    'total_contributions',
-    contributionLanguage ?? '',
+    INITIATIVE_MEDIA_CONTRIBUTION_MAPPING[INITIATIVES_MEDIA_MAPPING[props.initiative]],
+    language as string,
     INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
 
@@ -104,7 +133,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
   const topSpeakersData = mapChartData(
     speakersData,
     'total_speakers',
-    contributionLanguage ?? '',
+    language as string,
     INITIATIVES_MEDIA_MAPPING[props.initiative]
   );
 
@@ -120,13 +149,17 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
     () => ({
       data:
         chartFilterType === 'byDuration'
-          ? getTopLanguagesByHoursChartData(topLanguageHrsData)
+          ? getTopLanguagesByHoursChartData(
+              INITIATIVE_MEDIA_CONTRIBUTION_MAPPING[INITIATIVES_MEDIA_MAPPING[props.initiative]],
+              INITIATIVES_MEDIA_MAPPING[props.initiative],
+              topLanguageHrsData
+            )
           : getTopLanguagesBySpeakerChartData(topSpeakersData),
       yAxisLabel:
         chartFilterType === 'byDuration' ? t('contributionGraphYLabel1') : t('contributionGraphYLabel2'),
       ...chartLegendDetails,
     }),
-    [chartFilterType, chartLegendDetails, t, topLanguageHrsData, topSpeakersData]
+    [chartFilterType, chartLegendDetails, props.initiative, t, topLanguageHrsData, topSpeakersData]
   );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

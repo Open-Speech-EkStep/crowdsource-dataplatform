@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import ReportSuccessModal from '../ReportSuccessModal';
 
 describe('ReportSuccessModal', () => {
-  const setup = () => render(<ReportSuccessModal show={false} onHide={() => {}} />);
+  const setup = () => render(<ReportSuccessModal show={false} onHide={() => {}} initiative="suno" />);
 
   verifyAxeTest(setup());
 

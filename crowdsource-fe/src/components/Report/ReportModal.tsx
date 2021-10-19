@@ -94,7 +94,7 @@ const ReportModal = ({ onSuccess: showThankyou, ...props }: ReportModalProps) =>
             <Form.Check
               inline
               type="radio"
-              label={t('Offensive')}
+              label={t('offensive')}
               value="Offensive"
               name="reportText"
               id="reportFormOffensiveCheckbox"
@@ -108,7 +108,7 @@ const ReportModal = ({ onSuccess: showThankyou, ...props }: ReportModalProps) =>
             <Form.Check
               inline
               type="radio"
-              label={t('Others')}
+              label={t('others')}
               value="Others"
               name="reportText"
               id="reportFormOthersCheckbox"

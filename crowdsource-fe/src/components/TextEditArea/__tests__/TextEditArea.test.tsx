@@ -4,7 +4,14 @@ import TextEditArea from '../TextEditArea';
 
 describe('TextEditArea English', () => {
   const setup = (contributionLanguage: string) =>
-    render(<TextEditArea language={contributionLanguage} initiative="suno" setTextValue={value => value} />);
+    render(
+      <TextEditArea
+        language={contributionLanguage}
+        initiative="suno"
+        setTextValue={value => value}
+        isTextareaDisabled={false}
+      />
+    );
 
   verifyAxeTest(setup('English'));
 
@@ -29,8 +36,7 @@ describe('TextEditArea English', () => {
 
     userEvent.type(screen.getByRole('textbox', { name: 'addText (english)' }), 'abc@');
 
-    expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
-    expect(screen.getByText('Special characters are not allowed')).toBeInTheDocument();
+    expect(screen.getByText('specialCharacters')).toBeInTheDocument();
   });
 
   it('should show the error with "Please type in your chosen language"', async () => {
@@ -39,7 +45,7 @@ describe('TextEditArea English', () => {
     userEvent.type(screen.getByRole('textbox', { name: 'addText (english)' }), 'बपपप');
 
     expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
-    expect(screen.getByText('Please type in your chosen language')).toBeInTheDocument();
+    expect(screen.getByText('typeInChosenLanguage')).toBeInTheDocument();
   });
 
   it('should test the textarea button for setting layout from virtual keyboard', async () => {
@@ -105,7 +111,14 @@ describe('TextEditArea English', () => {
 
 describe('TextEditArea Hindi', () => {
   const setup = (contributionLanguage: string) =>
-    render(<TextEditArea language={contributionLanguage} initiative="suno" setTextValue={value => value} />);
+    render(
+      <TextEditArea
+        language={contributionLanguage}
+        initiative="suno"
+        setTextValue={value => value}
+        isTextareaDisabled={false}
+      />
+    );
 
   it('should test the textarea text with valid language', async () => {
     setup('Hindi');
@@ -113,17 +126,17 @@ describe('TextEditArea Hindi', () => {
     userEvent.type(screen.getByRole('textbox', { name: 'addText (hindi)' }), 'बपपप');
 
     await waitFor(() => {
-      expect(screen.queryByText('Please type in your chosen language')).not.toBeInTheDocument();
+      expect(screen.queryByText('typeInChosenLanguage')).not.toBeInTheDocument();
     });
   });
 
   it('should show the error with "Special characters are not allowed"', async () => {
     setup('Hindi');
 
-    userEvent.type(screen.getByRole('textbox', { name: 'addText (hindi)' }), 'बपपप@');
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (hindi)' }), 'बपपप@.');
 
     expect(screen.getByTestId('ErrorText')).toBeInTheDocument();
-    expect(screen.getByText('Special characters are not allowed')).toBeInTheDocument();
+    expect(screen.getByText('specialCharacters')).toBeInTheDocument();
   });
 
   it('should test the textarea text from virtual keyboard for "Hindi" language', async () => {

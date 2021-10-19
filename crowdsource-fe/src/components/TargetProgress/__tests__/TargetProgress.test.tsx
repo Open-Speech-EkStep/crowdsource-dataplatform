@@ -15,6 +15,10 @@ describe('TargetProgress', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => 'Hindi');
 
+    when(localStorage.getItem)
+      .calledWith('likho_to-language')
+      .mockImplementation(() => 'English');
+
     fetchMock.doMockOnceIf('/aggregated-json/cumulativeCount.json').mockResponseOnce(
       JSON.stringify([
         {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Form from 'react-bootstrap/Form';
@@ -20,9 +20,16 @@ interface TextEditAreaProps {
   initiative: string;
   setTextValue: (value: string) => void;
   textValue?: string;
+  isTextareaDisabled: boolean;
 }
 
-const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEditAreaProps) => {
+const TextEditArea = ({
+  language,
+  isTextareaDisabled,
+  initiative,
+  setTextValue,
+  textValue,
+}: TextEditAreaProps) => {
   const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
@@ -31,11 +38,14 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const drag = useRef<any>();
+  const nodeRef = useRef(null);
 
   let keyboard: any;
 
   useEffect(() => {
+    if (!textValue) {
+      setShowError(false);
+    }
     setLayout(KeyboardLanguageLayout[language]);
     setInput(textValue ?? '');
   }, [language, textValue]);
@@ -49,10 +59,10 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
   const handleError = (error: any) => {
     if (error && error.type === 'language') {
       setShowError(true);
-      setErrorMessage('Please type in your chosen language');
+      setErrorMessage(t('typeInChosenLanguage'));
     } else if (error && error.type === 'symbol') {
       setShowError(true);
-      setErrorMessage('Special characters are not allowed');
+      setErrorMessage(t('specialCharacters'));
     } else {
       setTextValue(input);
       setShowError(false);
@@ -80,10 +90,14 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
   };
 
   return (
-    <div>
+    <Fragment>
       <div
         data-testid="TextEditArea"
-        className={`${styles.addText} position-relative rounded-8 border border-2 border-primary bg-light p-4`}
+        className={`${styles.addText} ${
+          isTextareaDisabled
+            ? `${styles.addTextDisabled} border border-2 border-primary-40`
+            : 'border border-2 border-primary'
+        } position-relative rounded-8  bg-light p-4`}
       >
         <Form.Group controlId="textarea">
           <Form.Label className="display-6">
@@ -91,6 +105,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
           </Form.Label>
           <Form.Control
             as="textarea"
+            disabled={isTextareaDisabled}
             value={input}
             onFocus={() => {
               setShowKeyboard(true);
@@ -100,7 +115,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
             className={`${styles.textarea} border-0 p-0 display-3`}
           />
         </Form.Group>
-        <div className={`${styles.keyboardIcon}  position-absolute`}>
+        <div className={`${styles.keyboardIcon} d-none  d-md-block  position-absolute`}>
           <IconTextButton
             icon="keyboard_icon.svg"
             textDesktop=""
@@ -111,8 +126,12 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}
       {showKeyboard ? (
-        <Draggable>
-          <div ref={drag} data-testid="virtual-keyboard" className={styles.keyboard}>
+        <Draggable bounds="body" nodeRef={nodeRef}>
+          <div
+            ref={nodeRef}
+            data-testid="virtual-keyboard"
+            className={`${styles.keyboard} d-none d-md-block`}
+          >
             <div className="pb-2">
               <span>{t(language.toLowerCase())}</span>
               <span
@@ -137,7 +156,7 @@ const TextEditArea = ({ language, initiative, setTextValue, textValue }: TextEdi
           </div>
         </Draggable>
       ) : null}
-    </div>
+    </Fragment>
   );
 };
 

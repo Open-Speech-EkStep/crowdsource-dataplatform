@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} പ്രധാന താളിലേക്ക് മടങ്ങുക",
   "noDataMessage": "{{language}} ഭാഷയിലെ ഡേറ്റയൊന്നും ഞങ്ങളുടെ പക്കല്‍ ഇല്ല. ദയവായി പിന്നീട് ശ്രമിക്കുക.",
   "addText": "വാചകം ചേ൪ക്കുക",
-  "playing": "പ്ലേ ചെയ്യുന്നു"
+  "playing": "പ്ലേ ചെയ്യുന്നു",
+  "offensive": "പ്രതിലോമപരം",
+  "typeInChosenLanguage": "നിങ്ങൾ തിരഞ്ഞെടുത്ത ഭാഷ ടൈപ്പ് ചെയ്യുക",
+  "specialCharacters": "സ്പെഷ്യൽ ക്യാരക്റ്ററുകൾ അനുവദനീയമല്ല"
 }

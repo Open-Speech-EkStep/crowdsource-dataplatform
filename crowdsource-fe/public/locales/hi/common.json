@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} के होम पेज पर वापस जाएं",
   "noDataMessage": "हमारे पास {{language}} भाषा में कोई डेटा नहीं है। कृपया बाद में पुन: प्रयास करें।",
   "addText": "टेक्स्ट लिखें",
-  "playing": "प्ले हो रहा है"
+  "playing": "प्ले हो रहा है",
+  "offensive": "अपमानजनक",
+  "typeInChosenLanguage": "कृपया अपनी चुनी हुई भाषा में टाइप करें",
+  "specialCharacters": "विशेष वर्णों का इस्तेमाल संभव नहीं"
 }

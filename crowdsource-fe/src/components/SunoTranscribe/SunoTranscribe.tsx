@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Spinner from 'react-bootstrap/Spinner';
 
 import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
@@ -37,6 +38,7 @@ const SunoTranscribe = () => {
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
+  const [isDisabled, setIsDisabled] = useState(true);
   const [playAudio, setPlayAudio] = useState(false);
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
@@ -106,6 +108,7 @@ const SunoTranscribe = () => {
   }, []);
 
   const onPlayAudio = () => {
+    setIsDisabled(false);
     setPlayAudio(true);
     setShowPauseButton(true);
     setShowPlayButton(false);
@@ -138,10 +141,11 @@ const SunoTranscribe = () => {
   };
 
   const resetState = () => {
+    setIsDisabled(true);
+    onCancelContribution();
     setShowPauseButton(false);
     setShowPlayButton(true);
     setShowReplayButton(false);
-    onCancelContribution();
   };
 
   const onSubmitContribution = () => {
@@ -194,14 +198,25 @@ const SunoTranscribe = () => {
     setShowReplayButton(true);
   };
 
-  return contributionData && contributionData.length ? (
+  if (!result) {
+    return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
+  }
+
+  return contributionData && result?.data?.length !== 0 ? (
     <div>
       <FunctionalHeader />
       <Container fluid="lg" className="mt-5">
-        <div data-testid="SunoTranscribe" className={`${styles.root} position-relative`}>
-          <AudioController audioUrl={showUIData?.media_data} playAudio={playAudio} onEnded={onAudioEnd} />
+        <div data-testid="SunoTranscribe" className={`${styles.root}`}>
+          <AudioController
+            audioUrl={showUIData?.media_data}
+            playAudio={playAudio}
+            onEnded={onAudioEnd}
+            onPlay={onPlayAudio}
+            onPause={onPauseAudio}
+          />
           <div className="mt-4 mt-md-8">
             <TextEditArea
+              isTextareaDisabled={isDisabled}
               language={contributionLanguage ?? ''}
               initiative={INITIATIVES_MAPPING.suno}
               setTextValue={onChangeTextInput}
@@ -237,7 +252,11 @@ const SunoTranscribe = () => {
 
           <div className="d-flex align-items-center mt-10 mt-md-14">
             <div className="flex-grow-1">
-              <ProgressBar now={(currentDataIndex + 1) * 20} variant="primary" className={styles.progress} />
+              <ProgressBar
+                now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                variant="primary"
+                className={styles.progress}
+              />
             </div>
             <span className="ms-5">
               {currentDataIndex + 1}/{contributionData.length}

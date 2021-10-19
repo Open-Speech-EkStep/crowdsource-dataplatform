@@ -14,6 +14,10 @@ describe('ContributionActions', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
 
+    when(localStorage.getItem)
+      .calledWith('likho_to-language')
+      .mockImplementation(() => 'Hindi');
+
     const speakerDetails = {
       userName: 'abc',
       motherTongue: '',
@@ -42,7 +46,7 @@ describe('ContributionActions', () => {
           type: 'ocr',
         },
         {
-          language: 'Hindi',
+          language: 'English-Hindi',
           type: 'parallel',
         },
       ])
@@ -68,12 +72,16 @@ describe('ContributionActions', () => {
           language: 'Assamese',
           type: 'text',
         },
+        {
+          hastarget: false,
+          isallcontributed: true,
+          language: 'English-Hindi',
+          type: 'parallel',
+        },
       ])
     );
 
-    const renderResult = render(
-      <ContributionActions initiativeType={initiativeType} initiative={initiative} />
-    );
+    const renderResult = render(<ContributionActions initiative={initiative} />);
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });
@@ -123,6 +131,18 @@ describe('ContributionActions', () => {
 
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).toHaveClass('d-none');
+    });
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
+    });
+  });
+
+  it('should test the card enable  disable for likho', async () => {
+    await setup('parallel', 'likho', 'English');
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');
     });
 
     await waitFor(() => {

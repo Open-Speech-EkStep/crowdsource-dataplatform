@@ -3,9 +3,17 @@
   opacity: 0.8;
 }
 
+.addTextDisabled {
+  box-shadow: inset 0 0 18px #d8d8d8;
+}
+
 .textarea {
   height: 6.25rem;
   resize: none;
+
+  &:disabled {
+    background-color: var(--light-color);
+  }
 
   &:focus {
     box-shadow: none;

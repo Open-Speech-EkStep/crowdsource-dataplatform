@@ -6,7 +6,7 @@ export interface TopLanguagesBySpeaker {
 
 export interface TopLanguagesByHours {
   language: string;
-  total_contribution_count: number;
-  total_contributions: number;
-  type: string;
+  total_contribution_count?: number;
+  total_contributions?: number;
+  type?: string;
 }

@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} ହୋମ ପେଜକୁ ଆଉଥରେ ଯାଆନ୍ତୁ",
   "noDataMessage": "{{language}} ଭାଷାରେ ଆମ ପାଖରେ କୌଣସି ଡେଟା ନାହିଁ । ଦୟାକରି ପରେ ଚେଷ୍ଟା କରନ୍ତୁ।",
   "addText": "ଟେକ୍ସଟ୍ ଲେଖନ୍ତୁ",
-  "playing": "ପ୍ଲେ ହେଉଛି"
+  "playing": "ପ୍ଲେ ହେଉଛି",
+  "offensive": "ଆପତ୍ତିଜନକ",
+  "typeInChosenLanguage": "ଦୟାକରି ଆପଣ ବାଛିଥିବା ଭାଷାରେ ଟାଇପ୍ କରନ୍ତୁ",
+  "specialCharacters": "ବିଶେଷ ବର୍ଣ୍ଣଗୁଡ଼ିକୁ ବ୍ୟବହାର କରିବା ସମ୍ଭବ ନୁହେଁ"
 }

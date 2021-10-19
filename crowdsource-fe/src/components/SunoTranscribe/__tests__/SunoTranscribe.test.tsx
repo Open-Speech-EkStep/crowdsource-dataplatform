@@ -107,11 +107,15 @@ describe('SunoTranscribe', () => {
   it('play button click should play audio and pause button should be enabled', async () => {
     await setup();
 
+    expect(screen.getByRole('textbox', { name: 'addText (hindi)' })).toBeDisabled();
+
     expect(screen.getByRole('img', { name: 'Play Icon' })).toBeInTheDocument();
 
     userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
     expect(screen.getByRole('img', { name: 'Pause Icon' })).toBeInTheDocument();
+
+    expect(screen.getByRole('textbox', { name: 'addText (hindi)' })).toBeEnabled();
   });
 
   it('pause button click should pause audio and play button should be enabled', async () => {
@@ -157,6 +161,8 @@ describe('SunoTranscribe', () => {
     await setup();
 
     expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
+
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
     userEvent.type(screen.getByRole('textbox', { name: 'addText (hindi)' }), 'बपपप');
 

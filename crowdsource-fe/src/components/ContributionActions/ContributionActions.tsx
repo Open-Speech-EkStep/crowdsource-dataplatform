@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 
 import ActionCard from 'components/ActionCard';
 import apiPaths from 'constants/apiPaths';
+import { INITIATIVES_MEDIA, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -19,12 +20,12 @@ interface LanguageWithData {
 
 interface ContributionActionProps {
   initiative: 'suno' | 'bolo' | 'likho' | 'dekho';
-  initiativeType: string;
 }
 
 const ContributionActions = (props: ContributionActionProps) => {
   const { t } = useTranslation();
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const [translatedLanguage] = useLocalStorage<string>(localStorageConstants.translatedLanguage);
 
   const { data: languageWithData, mutate: languageWithDataMutate } = useFetch<LanguageWithData[]>(
     apiPaths.languagesWithData,
@@ -42,20 +43,26 @@ const ContributionActions = (props: ContributionActionProps) => {
       languageWithDataMutate();
       cardStateMutate();
     }
-  }, [contributionLanguage, languageWithDataMutate, cardStateMutate]);
+  }, [contributionLanguage, translatedLanguage, languageWithDataMutate, cardStateMutate]);
 
-  const isLanguageAvailable = !!languageWithData?.find(
-    data => data.type === props.initiativeType && data.language === contributionLanguage
-  );
+  const callbacks = {
+    asr: (data: LanguageWithData) =>
+      data.type === INITIATIVES_MEDIA_MAPPING[props.initiative] && data.language === contributionLanguage,
+    parallel: (data: LanguageWithData) =>
+      data.type === INITIATIVES_MEDIA_MAPPING[props.initiative] &&
+      data.language === `${contributionLanguage}-${translatedLanguage}`,
+  };
+
+  const isLanguageAvailable = !!languageWithData?.find(callbacks[INITIATIVES_MEDIA.asr]);
 
   let isAllContributed = true;
   let hasTarget = false;
 
   if (isLanguageAvailable && cardState) {
     const filteredData: any =
-      cardState.find(
-        (data: any) => data.type === props.initiativeType && data.language === contributionLanguage
-      ) || {};
+      INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
+        ? cardState?.find(callbacks[INITIATIVES_MEDIA.parallel])
+        : cardState?.find(callbacks[INITIATIVES_MEDIA.asr]) || {};
     hasTarget = filteredData.hastarget ?? false;
     isAllContributed = filteredData.isallcontributed ?? false;
   }

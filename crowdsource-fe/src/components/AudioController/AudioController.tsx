@@ -8,9 +8,11 @@ interface AudoiControllerProps {
   audioUrl: string;
   playAudio: boolean;
   onEnded: () => void;
+  onPlay: () => void;
+  onPause: () => void;
 }
 
-const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps) => {
+const AudioController = ({ audioUrl, playAudio, onEnded, onPlay, onPause }: AudoiControllerProps) => {
   const { t } = useTranslation();
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
@@ -24,6 +26,15 @@ const AudioController = ({ audioUrl, playAudio, onEnded }: AudoiControllerProps)
     audio?.addEventListener('ended', onEnded);
     return () => {
       audio?.removeEventListener('ended', onEnded);
+    };
+  });
+
+  useEffect(() => {
+    audio?.addEventListener('play', onPlay);
+    audio?.addEventListener('pause', onPause);
+    return () => {
+      audio?.removeEventListener('pause', onPause);
+      audio?.removeEventListener('play', onPlay);
     };
   });
 

@@ -2,56 +2,54 @@
 
 exports[`TextEditArea English should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <div
-      class="addText position-relative rounded-8 border border-2 border-primary bg-light p-4"
-      data-testid="TextEditArea"
-    >
-      <div>
-        <label
-          class="display-6 form-label"
-          for="textarea"
-        >
-          addText (english)
-        </label>
-        <textarea
-          class="textarea border-0 p-0 display-3 form-control"
-          id="textarea"
-          placeholder="typingPlaceholder"
-        />
-      </div>
-      <div
-        class="keyboardIcon  position-absolute"
+  <div
+    class="addText border border-2 border-primary position-relative rounded-8  bg-light p-4"
+    data-testid="TextEditArea"
+  >
+    <div>
+      <label
+        class="display-6 form-label"
+        for="textarea"
       >
-        <button
-          class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
-          data-testid="IconTextButton"
-          type="button"
+        addText (english)
+      </label>
+      <textarea
+        class="textarea border-0 p-0 display-3 form-control"
+        id="textarea"
+        placeholder="typingPlaceholder"
+      />
+    </div>
+    <div
+      class="keyboardIcon d-none  d-md-block  position-absolute"
+    >
+      <button
+        class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
+        data-testid="IconTextButton"
+        type="button"
+      >
+        <div
+          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
         >
           <div
-            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            style="box-sizing: border-box; display: block; max-width: 100%;"
           >
-            <div
-              style="box-sizing: border-box; display: block; max-width: 100%;"
-            >
-              <img
-                alt=""
-                aria-hidden="true"
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-              />
-            </div>
             <img
-              alt="keyboardBtn"
-              data-nimg="intrinsic"
-              decoding="async"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              alt=""
+              aria-hidden="true"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
             />
-            <noscript />
           </div>
-        </button>
-      </div>
+          <img
+            alt="keyboardBtn"
+            data-nimg="intrinsic"
+            decoding="async"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+          />
+          <noscript />
+        </div>
+      </button>
     </div>
   </div>
 </DocumentFragment>

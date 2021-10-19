@@ -53,8 +53,8 @@ exports[`Header should render the component and matches it against stored snapsh
               </a>
               <a
                 class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
-                data-rr-ui-event-key="/likhoIndia/home.html"
-                href="/likhoIndia/home.html"
+                data-rr-ui-event-key="/likhoIndia/home"
+                href="/likhoIndia/home"
               >
                 likho india
               </a>

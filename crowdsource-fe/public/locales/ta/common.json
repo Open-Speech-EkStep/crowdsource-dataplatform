@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} முகப்பிற்குச் செல்",
   "noDataMessage": "எங்களிடம் {{language}} மொழியில் தரவு இல்லை. தயவுசெய்து பிறகு முயற்சிக்கவும்.",
   "addText": "எழுத்துவடிவை சேர்க்கவும்",
-  "playing": "இயங்குகிறது"
+  "playing": "இயங்குகிறது",
+  "offensive": "குற்றம்",
+  "typeInChosenLanguage": "நீங்கள் தேர்ந்தெடுத்த மொழியில் தட்டச்சு செய்யவும்",
+  "specialCharacters": "சிறப்பு எழுத்துக்கள் அனுமதிக்கப்படுவதில்லை"
 }

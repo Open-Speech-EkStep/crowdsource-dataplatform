@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} মুখঃপৃষ্ঠা তে ফিরে যান",
   "noDataMessage": "আমাদের {{language}} ভাষায় কোনও ডেটা নেই। অনুগ্রহ করে আবার পরে চেষ্টা করুন।",
   "addText": "লেখাটি যোগ করুন",
-  "playing": "প্লে হচ্ছে"
+  "playing": "প্লে হচ্ছে",
+  "offensive": "আপত্তিকর",
+  "typeInChosenLanguage": "আপনার নির্বাচিত ভাষা টাইপ করুন",
+  "specialCharacters": "বিশেষ চিহ্নসমূহের ব্যবহার নিষিদ্ধ"
 }

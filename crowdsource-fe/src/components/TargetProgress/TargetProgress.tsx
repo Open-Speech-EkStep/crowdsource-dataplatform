@@ -56,13 +56,14 @@ const TargetProgress = (props: TargetProgressProps) => {
   >(apiPaths.initiativeGoals, { revalidateOnMount: false });
 
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const [translatedLanguage] = useLocalStorage<string>(localStorageConstants.translatedLanguage);
 
   useEffect(() => {
     if (contributionLanguage) {
       cumulativeMutate();
       initiativeGoalMutate();
     }
-  }, [initiativeGoalMutate, cumulativeMutate, contributionLanguage]);
+  }, [initiativeGoalMutate, cumulativeMutate, contributionLanguage, translatedLanguage]);
 
   let totalProgress;
   let formattedAverage;

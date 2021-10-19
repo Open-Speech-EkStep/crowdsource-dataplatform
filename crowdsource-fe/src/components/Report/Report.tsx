@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 
 import IconTextButton from 'components/IconTextButton';
+import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 
 import ReportSuccessModal from './ReportSuccessModal';
 
@@ -35,7 +36,13 @@ const Report = () => {
         altText="reportIconAlt"
       />
       {modalShow && <ReportModal show={modalShow} onHide={hideModal} onSuccess={showReportSuccess} />}
-      {reportSuccess && <ReportSuccessModal show={reportSuccess} onHide={hideReportSuccess} />}
+      {reportSuccess && (
+        <ReportSuccessModal
+          show={reportSuccess}
+          onHide={hideReportSuccess}
+          initiative={INITIATIVES_MAPPING.suno}
+        />
+      )}
     </Fragment>
   );
 };

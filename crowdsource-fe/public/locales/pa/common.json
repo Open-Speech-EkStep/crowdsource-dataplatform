@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} ਦੇ ਹੋਮ ਪੇਜ 'ਤੇ ਵਾਪਸ ਜਾਓ",
   "noDataMessage": "ਸਾਡੇ ਕੋਲ {{language}} ਭਾਸ਼ਾ ਵਿੱਚ ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
   "addText": "ਟੈਕਸਟ ਜੋੜੋ",
-  "playing": "ਪਲੇਅ ਹੋ ਰਿਹਾ ਹੈ"
+  "playing": "ਪਲੇਅ ਹੋ ਰਿਹਾ ਹੈ",
+  "offensive": "ਅਪਮਾਨਜਨਕ",
+  "typeInChosenLanguage": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਚੁਣੀ ਹੋਈ ਭਾਸ਼ਾ ਵਿੱਚ ਟਾਈਪ ਕਰੋ",
+  "specialCharacters": "ਵਿਸ਼ੇਸ਼ ਅੱਖਰਾਂ ਦੀ ਵਰਤੋਂ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"
 }

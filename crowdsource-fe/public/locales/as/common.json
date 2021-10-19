@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "",
   "noDataMessage": "",
   "addText": "পাঠ যোগদান দিয়ক",
-  "playing": "বজাওক"
+  "playing": "বজাওক",
+  "offensive": "আক্ৰমণাত্মক",
+  "typeInChosenLanguage": "আপোনাৰ বাছনি কৰা ভাষাত টাইপ কৰক",
+  "specialCharacters": "বিশেষ বৰ্ণ অনুমোদিত নহয়"
 }

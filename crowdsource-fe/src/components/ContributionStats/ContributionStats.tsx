@@ -35,7 +35,7 @@ const ContributionStats = (props: ContributionStatsProps) => {
   )?.count;
   INITIATIVE_CUMULATIVE_VALUE[props.initiative].forEach((ele, index) => {
     let statValue;
-    if (isSunoOrBoloInitiative(props.initiative) && ele.isFormat === 'true') {
+    if (isSunoOrBoloInitiative(INITIATIVES_MEDIA_MAPPING[props.initiative]) && ele.isFormat === 'true') {
       statValue = convertTimeFormat(initiativeData[Object.values(ele)[0]!]);
     } else {
       statValue = initiativeData[Object.values(ele)[0]!];

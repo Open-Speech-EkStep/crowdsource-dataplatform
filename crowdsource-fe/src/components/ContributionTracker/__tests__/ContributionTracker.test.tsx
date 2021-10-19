@@ -14,6 +14,10 @@ describe('ContributionTracker', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
 
+    when(localStorage.getItem)
+      .calledWith('likho_to-language')
+      .mockImplementation(() => 'Hindi');
+
     fetchMock.doMockOnceIf('/aggregated-json/topLanguagesByHoursContributed.json').mockResponseOnce(
       JSON.stringify([
         {
@@ -42,9 +46,9 @@ describe('ContributionTracker', () => {
           type: 'text',
         },
         {
-          language: 'Hindi',
-          total_contributions: 0.049,
-          type: 'text',
+          language: 'English',
+          total_contributions: 1,
+          type: 'parallel',
         },
       ])
     );

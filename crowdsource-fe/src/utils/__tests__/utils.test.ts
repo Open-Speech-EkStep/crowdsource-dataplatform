@@ -76,7 +76,7 @@ describe('Utils', () => {
   });
 
   it('should test the isSunoOrBoloInitiative method', () => {
-    const roundValue = isSunoOrBoloInitiative('suno');
+    const roundValue = isSunoOrBoloInitiative('asr');
 
     const expectedOutput = true;
     expect(roundValue).toEqual(expectedOutput);

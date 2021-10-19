@@ -773,7 +773,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/likhoIndia/home.html"
+                                  href="/likhoIndia/home"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -1425,7 +1425,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/likhoIndia/home.html"
+                                  href="/likhoIndia/home"
                                   role="button"
                                   tabindex="0"
                                 >

@@ -20,15 +20,15 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
             class="d-flex flex-column flex-md-row align-items-md-center"
           >
             <label
-              class="label mb-0 form-label"
+              class="label mb-0 me-md-2 form-label"
               for="contribution"
             >
               selectLanguagePrompt1:
             </label>
             <select
               aria-label="Select the language for contribution"
-              class="selectContributionLanguage mt-1 mt-md-0 ms-md-2 form-select"
-              data-testid="select"
+              class="languageDropdown mt-1 mt-md-0 form-select"
+              data-testid="SelectContributionLanguage"
               id="contribution"
               name="contribution"
             >

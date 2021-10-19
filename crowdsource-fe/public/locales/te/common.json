@@ -173,5 +173,8 @@
   "backToInitiativePrompt": "{{initiativeName}} ఇండియా ముఖపుటకి వెళ్ళండి",
   "noDataMessage": "{{language}} భాషలో మాకు డేటా లేదు. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి.",
   "addText": "టెక్స్ట్‌ని జోడించండి",
-  "playing": "ప్లే అవుతోంది"
+  "playing": "ప్లే అవుతోంది",
+  "offensive": "అభ్యంతరకరం",
+  "typeInChosenLanguage": "మీరు ఎంచుకున్న భాషలో టైప్ చేయండి",
+  "specialCharacters": "స్పెషల్ కారెక్టర్స్ ఉండకూడదు"
 }

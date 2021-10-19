@@ -2,6 +2,7 @@ import { i18n } from 'next-i18next';
 
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { KEYBOARD_ERROR, LANGUAGE_UNICODE } from 'constants/Keyboard';
+import type { InitiativeType } from 'types/InitiativeType';
 
 var platform = require('platform');
 
@@ -56,8 +57,8 @@ export const convertTimeFormat = (value: any) => {
   return data;
 };
 
-export const isSunoOrBoloInitiative = (value: string) => {
-  const boloOrSuno = ['suno', 'bolo'];
+export const isSunoOrBoloInitiative = (value: InitiativeType) => {
+  const boloOrSuno = ['asr', 'text'];
   return boloOrSuno.includes(value);
 };
 

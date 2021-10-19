@@ -10,7 +10,7 @@ import ContributionLanguage from '../ContributionLanguage';
 describe('Suno Actions', () => {
   const setup = (locale: string) => {
     router.locale = locale;
-    return render(<ContributionLanguage />);
+    return render(<ContributionLanguage initiative="suno" />);
   };
 
   it('should render the component and matches it against stored snapshot', () => {
@@ -22,7 +22,7 @@ describe('Suno Actions', () => {
   it('should select the "Hindi" contribution language', async () => {
     setup('as');
 
-    userEvent.selectOptions(screen.getByTestId('select'), 'हिंदी');
+    userEvent.selectOptions(screen.getByTestId('SelectContributionLanguage'), 'हिंदी');
 
     expect(screen.getByRole('combobox', { name: 'Select the language for contribution' })).toHaveValue(
       'Hindi'
@@ -36,7 +36,7 @@ describe('Suno Actions', () => {
   it('should not refresh page when default and current locale are same', async () => {
     setup('en');
 
-    userEvent.selectOptions(screen.getByTestId('select'), 'English');
+    userEvent.selectOptions(screen.getByTestId('SelectContributionLanguage'), 'English');
 
     expect(screen.getByRole('combobox', { name: 'Select the language for contribution' })).toHaveValue(
       'English'
