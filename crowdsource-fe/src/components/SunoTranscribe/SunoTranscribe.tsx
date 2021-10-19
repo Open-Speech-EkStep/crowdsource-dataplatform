@@ -111,6 +111,7 @@ const SunoTranscribe = () => {
   }, []);
 
   const onPlayAudio = () => {
+    setShowReplayButton(false);
     setIsDisabled(false);
     setPlayAudio(true);
     setShowPauseButton(true);
