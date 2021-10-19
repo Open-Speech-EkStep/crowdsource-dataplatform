@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
+import ChromeExtension from 'components/ChromeExtension';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
 import TextEditArea from 'components/TextEditArea';
@@ -205,68 +206,71 @@ const SunoTranscribe = () => {
   }
 
   return contributionData && result?.data?.length !== 0 ? (
-    <div>
-      <FunctionalHeader />
-      <Container fluid="lg" className="mt-5">
-        <div data-testid="SunoTranscribe" className={`${styles.root}`}>
-          <AudioController
-            audioUrl={showUIData?.media_data}
-            playAudio={playAudio}
-            onEnded={onAudioEnd}
-            onPlay={onPlayAudio}
-            onPause={onPauseAudio}
-          />
-          <div className="mt-4 mt-md-8">
-            <TextEditArea
-              isTextareaDisabled={isDisabled}
-              language={contributionLanguage ?? ''}
-              initiative={INITIATIVES_MAPPING.suno}
-              setTextValue={onChangeTextInput}
-              textValue={formData.userInput}
-            />
-          </div>
-          {showThankyouMessage ? (
-            <div className="d-flex align-items-center justify-content-center mt-9 display-1">
-              <span className="me-2 d-flex">
-                <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
-              </span>
-              {t('thankyouForContributing')}
-            </div>
-          ) : (
-            <ButtonControls
+    <Fragment>
+      <ChromeExtension />
+      <div className="pt-4 px-2 px-lg-0 pb-8">
+        <FunctionalHeader />
+        <Container fluid="lg" className="mt-5">
+          <div data-testid="SunoTranscribe" className={`${styles.root}`}>
+            <AudioController
+              audioUrl={showUIData?.media_data}
+              playAudio={playAudio}
+              onEnded={onAudioEnd}
               onPlay={onPlayAudio}
               onPause={onPauseAudio}
-              onReplay={onReplayAudio}
-              playButton={showPlayButton}
-              pauseButton={showPauseButton}
-              replayButton={showReplayButton}
-              cancelDisable={!formData.userInput}
-              submitDisable={
-                !showReplayButton ||
-                !formData.userInput ||
-                formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH
-              }
-              onSubmit={onSubmitContribution}
-              onCancel={onCancelContribution}
-              onSkip={onSkipContribution}
             />
-          )}
-
-          <div className="d-flex align-items-center mt-10 mt-md-14">
-            <div className="flex-grow-1">
-              <ProgressBar
-                now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                variant="primary"
-                className={styles.progress}
+            <div className="mt-4 mt-md-8">
+              <TextEditArea
+                isTextareaDisabled={isDisabled}
+                language={contributionLanguage ?? ''}
+                initiative={INITIATIVES_MAPPING.suno}
+                setTextValue={onChangeTextInput}
+                textValue={formData.userInput}
               />
             </div>
-            <span className="ms-5">
-              {currentDataIndex + 1}/{contributionData.length}
-            </span>
+            {showThankyouMessage ? (
+              <div className="d-flex align-items-center justify-content-center mt-9 display-1">
+                <span className="me-2 d-flex">
+                  <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+                </span>
+                {t('thankyouForContributing')}
+              </div>
+            ) : (
+              <ButtonControls
+                onPlay={onPlayAudio}
+                onPause={onPauseAudio}
+                onReplay={onReplayAudio}
+                playButton={showPlayButton}
+                pauseButton={showPauseButton}
+                replayButton={showReplayButton}
+                cancelDisable={!formData.userInput}
+                submitDisable={
+                  !showReplayButton ||
+                  !formData.userInput ||
+                  formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH
+                }
+                onSubmit={onSubmitContribution}
+                onCancel={onCancelContribution}
+                onSkip={onSkipContribution}
+              />
+            )}
+
+            <div className="d-flex align-items-center mt-10 mt-md-14">
+              <div className="flex-grow-1">
+                <ProgressBar
+                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                  variant="primary"
+                  className={styles.progress}
+                />
+              </div>
+              <span className="ms-5">
+                {currentDataIndex + 1}/{contributionData.length}
+              </span>
+            </div>
           </div>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </Fragment>
   ) : (
     <NoDataFound
       url={routePaths.sunoIndiaHome}

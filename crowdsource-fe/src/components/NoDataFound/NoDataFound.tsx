@@ -17,7 +17,7 @@ const NoDataFound = ({ url, initiative, language }: NoDataFoundProps) => {
 
   const initiativeName = `${t(INITIATIVES_MAPPING[initiative])} ${t('india')}`;
   return (
-    <Container fluid="lg" className="mt-5 text-center">
+    <Container fluid="lg" className="text-center pt-4 px-2 px-lg-0 pb-8">
       <div className="d-flex flex-column align-items-center">
         <h1>{t('thankyouForEnthusiasm')}</h1>
         <p className="mt-9">{t('noDataMessage', { language })}</p>
