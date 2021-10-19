@@ -3,105 +3,65 @@
 exports[`SunoTranscribe should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div>
-    <header
-      class="d-flex justify-content-between align-items-center px-3 px-md-6"
-    >
+    <header>
       <div
-        class="d-flex align-items-center"
-        data-testid="Breadcrumbs"
+        class="d-flex justify-content-between align-items-center px-3 px-md-6"
       >
         <div
           class="d-flex align-items-center"
+          data-testid="Breadcrumbs"
         >
           <div
-            class="icon d-flex"
+            class="d-flex align-items-center"
           >
             <div
-              style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+              class="icon d-flex"
             >
               <div
-                style="box-sizing: border-box; display: block; max-width: 100%;"
+                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
               >
+                <div
+                  style="box-sizing: border-box; display: block; max-width: 100%;"
+                >
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iNDIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                  />
+                </div>
                 <img
-                  alt=""
-                  aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iNDIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                  style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                  alt="sunoLogo"
+                  data-nimg="intrinsic"
+                  decoding="async"
+                  src="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75 2x"
+                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                 />
+                <noscript />
               </div>
-              <img
-                alt="sunoLogo"
-                data-nimg="intrinsic"
-                decoding="async"
-                src="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75"
-                srcset="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75 2x"
-                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-              />
-              <noscript />
-            </div>
-          </div>
-          <span
-            class="initiative ms-1 ms-md-3 font-family-rowdies"
-          >
-            suno india
-          </span>
-        </div>
-        <span
-          class="mx-1 mx-md-3 text-primary-40"
-        >
-          /
-        </span>
-        <span
-          class="display-5"
-        >
-          transcribe
-        </span>
-      </div>
-      <div
-        class="d-flex"
-      >
-        <div>
-          <button
-            class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
-            data-testid="IconTextButton"
-            type="button"
-          >
-            <div
-              style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-            >
-              <div
-                style="box-sizing: border-box; display: block; max-width: 100%;"
-              >
-                <img
-                  alt=""
-                  aria-hidden="true"
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                  style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                />
-              </div>
-              <img
-                alt="reportIconAlt"
-                data-nimg="intrinsic"
-                decoding="async"
-                src="/_next/image?url=%2Fimages%2Freport.svg&w=48&q=75"
-                srcset="/_next/image?url=%2Fimages%2Freport.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Freport.svg&w=48&q=75 2x"
-                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-              />
-              <noscript />
             </div>
             <span
-              class="text ms-2 d-none d-md-block"
+              class="initiative ms-1 ms-md-3 font-family-rowdies"
             >
-              report
+              suno india
             </span>
-          </button>
+          </div>
+          <span
+            class="mx-1 mx-md-3 text-primary-40"
+          >
+            /
+          </span>
+          <span
+            class="display-5"
+          >
+            transcribe
+          </span>
         </div>
         <div
-          class="ms-2 ms-md-4"
+          class="d-flex"
         >
-          <div
-            class="position-relative"
-          >
+          <div>
             <button
               class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
               data-testid="IconTextButton"
@@ -121,26 +81,68 @@ exports[`SunoTranscribe should render the component and matches it against store
                   />
                 </div>
                 <img
-                  alt="testYourSpeaker"
+                  alt="reportIconAlt"
                   data-nimg="intrinsic"
                   decoding="async"
-                  src="/_next/image?url=%2Fimages%2Fspeaker.svg&w=48&q=75"
-                  srcset="/_next/image?url=%2Fimages%2Fspeaker.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fspeaker.svg&w=48&q=75 2x"
+                  src="/_next/image?url=%2Fimages%2Freport.svg&w=48&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Freport.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Freport.svg&w=48&q=75 2x"
                   style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                 />
                 <noscript />
               </div>
               <span
-                class="text ms-2 d-md-none"
-              >
-                test
-              </span>
-              <span
                 class="text ms-2 d-none d-md-block"
               >
-                testYourSpeaker
+                report
               </span>
             </button>
+          </div>
+          <div
+            class="ms-2 ms-md-4"
+          >
+            <div
+              class="position-relative"
+            >
+              <button
+                class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
+                data-testid="IconTextButton"
+                type="button"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="testYourSpeaker"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="/_next/image?url=%2Fimages%2Fspeaker.svg&w=48&q=75"
+                    srcset="/_next/image?url=%2Fimages%2Fspeaker.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fspeaker.svg&w=48&q=75 2x"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+                <span
+                  class="text ms-2 d-md-none"
+                >
+                  test
+                </span>
+                <span
+                  class="text ms-2 d-none d-md-block"
+                >
+                  testYourSpeaker
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -176,5 +176,8 @@
   "playing": "Playing",
   "offensive": "Offensive",
   "typeInChosenLanguage": "Please type in your chosen language",
-  "specialCharacters": "Special characters are not allowed"
+  "specialCharacters": "Special characters are not allowed",
+  "watchTheVideo": "Watch the video",
+  "installNow": "Install Now",
+  "chromeExtensionLabel": "Get Chrome extension to type in any language you choose"
 }

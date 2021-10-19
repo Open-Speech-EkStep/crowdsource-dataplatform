@@ -3,13 +3,73 @@
 exports[`FunctionalPageBackground should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="root position-relative px-2 px-lg-0 flex-grow-1 pt-4 pb-8"
+    class="root position-relative flex-grow-1 pb-8"
     data-testid="FunctionalPageBackground"
   >
     <div
-      class="wrapper position-relative"
+      class="root d-none d-md-block d-lg-flex position-relative align-items-md-center bg-secondary px-3 px-md-6 py-3 py-lg-0 border-bottom border-1 border-primary-10"
+      data-testid="ChromeExtension"
     >
-       
+      <span
+        class="fst-italic"
+      >
+        chromeExtensionLabel
+      </span>
+      <div
+        class="d-flex align-items-center mt-md-2 mt-lg-0"
+      >
+        <button
+          class="ceBtn mx-lg-5 ms-0 me-5 light secondary btn btn-light"
+          data-testid="Button"
+          type="button"
+        >
+          watchTheVideo
+        </button>
+        <span
+          class="sep d-flex border border-start-0 border-primary w-0"
+        />
+        <a
+          class="mx-5"
+          href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
+          rel="noreferrer"
+          target="_blank"
+        >
+          installNow
+        </a>
+      </div>
+      <button
+        class="close d-flex position-absolute cursor info normal btn btn-link"
+        data-testid="Button"
+        type="button"
+      >
+        <div
+          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+        >
+          <div
+            style="box-sizing: border-box; display: block; max-width: 100%;"
+          >
+            <img
+              alt=""
+              aria-hidden="true"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+            />
+          </div>
+          <img
+            alt="Close Chrome Extension"
+            data-nimg="intrinsic"
+            decoding="async"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+          />
+          <noscript />
+        </div>
+      </button>
+    </div>
+    <div
+      class="wrapper position-relative px-2 px-lg-0 pt-4"
+    >
+      Some Content
     </div>
   </section>
 </DocumentFragment>

@@ -176,5 +176,8 @@
   "playing": "प्ले होत आहे",
   "offensive": "आक्षेपार्ह",
   "typeInChosenLanguage": "कृपया तुम्ही निवडलेल्या भाषेतच टाईप करा",
-  "specialCharacters": "विशिष्ट चिन्हांना अनुमती नाही"
+  "specialCharacters": "विशिष्ट चिन्हांना अनुमती नाही",
+  "watchTheVideo": "व्हिडिओ पाहा",
+  "installNow": "आता इंस्टॉल करा",
+  "chromeExtensionLabel": "तुम्हाला हव्या त्या भाषेमध्ये टाईप करण्यासाठी क्रोम एक्सटेंशन डाउनलोड करा"
 }

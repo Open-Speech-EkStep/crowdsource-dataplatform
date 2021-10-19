@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import type { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -8,11 +8,9 @@ import SunoTranscribe from 'components/SunoTranscribe';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
 const RecordPage: NextPage = () => (
-  <Fragment>
-    <FunctionalPageBackground>
-      <SunoTranscribe />
-    </FunctionalPageBackground>
-  </Fragment>
+  <FunctionalPageBackground>
+    <SunoTranscribe />
+  </FunctionalPageBackground>
 );
 
 /* istanbul ignore next */

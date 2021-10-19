@@ -13,15 +13,25 @@ describe('Chrome Extension', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should test he video modal is open or close', async () => {
+  it('should test the video modal is open or close', async () => {
     setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'Watch Video' }));
+    userEvent.click(screen.getByRole('button', { name: 'watchTheVideo' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
     });
 
     userEvent.click(screen.getByRole('button', { name: 'Close' }));
+  });
+
+  it('should test the chrome extension is open or close', async () => {
+    setup();
+
+    expect(screen.getByTestId('ChromeExtension')).toBeInTheDocument();
+    userEvent.click(screen.getByRole('button', { name: 'Close Chrome Extension' }));
+    await waitFor(() => {
+      expect(screen.queryByText('Watch the video')).not.toBeInTheDocument();
+    });
   });
 });

@@ -1,0 +1,25 @@
+.root {
+  min-height: 3.75rem;
+}
+
+.ceBtn {
+  box-shadow: none;
+  font-size: 1rem;
+  height: 2.25rem;
+  min-width: auto;
+}
+
+.sep {
+  height: 1.5rem;
+  opacity: 0.2;
+}
+
+.close {
+  right: 1.5rem;
+  top: 1rem;
+  z-index: 1;
+
+  @include media-breakpoint-up(lg) {
+    top: 1.25rem;
+  }
+}

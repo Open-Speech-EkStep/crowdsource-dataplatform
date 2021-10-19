@@ -176,5 +176,8 @@
   "playing": "প্লে হচ্ছে",
   "offensive": "আপত্তিকর",
   "typeInChosenLanguage": "আপনার নির্বাচিত ভাষা টাইপ করুন",
-  "specialCharacters": "বিশেষ চিহ্নসমূহের ব্যবহার নিষিদ্ধ"
+  "specialCharacters": "বিশেষ চিহ্নসমূহের ব্যবহার নিষিদ্ধ",
+  "watchTheVideo": "ভিডিওটি দেখুন",
+  "installNow": "এখন ইনস্টল করুন",
+  "chromeExtensionLabel": "আপনার পছন্দমত যে কোনও ভাষায় টাইপ করতে ক্রোম এক্সটেনশন ডাউনলোড করুন"
 }

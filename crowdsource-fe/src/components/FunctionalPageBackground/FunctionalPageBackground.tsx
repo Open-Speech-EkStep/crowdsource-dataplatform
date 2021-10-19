@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import ChromeExtension from 'components/ChromeExtension';
+
 import styles from './FunctionalPageBackground.module.scss';
 
 interface FunctionalPageBackgroundProps {
@@ -10,9 +12,10 @@ const FunctionalPageBackground = (props: FunctionalPageBackgroundProps) => {
   return (
     <section
       data-testid="FunctionalPageBackground"
-      className={`${styles.root} position-relative px-2 px-lg-0 flex-grow-1 pt-4 pb-8`}
+      className={`${styles.root} position-relative flex-grow-1 pb-8`}
     >
-      <div className={`${styles.wrapper} position-relative`}>{props.children}</div>
+      <ChromeExtension />
+      <div className={`${styles.wrapper} position-relative px-2 px-lg-0 pt-4`}>{props.children}</div>
     </section>
   );
 };
