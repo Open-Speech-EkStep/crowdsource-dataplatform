@@ -60,7 +60,7 @@ exports[`ContributionTracker should render the component and matches it against 
       </div>
     </div>
     <div
-      class="bg-secondary p-5 p-md-8 mt-4 mt-md-5"
+      class="bg-secondary p-5 p-md-8 mt-4 mt-md-5 rounded-8"
     >
       <div
         class="d-md-flex justify-content-between display-5 mb-5 mb-md-6"

@@ -76,41 +76,43 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
             className="d-flex flex-column flex-md-row align-items-md-center"
           >
             <Form.Label className={`${styles.label} mb-0 me-md-2`}>{t('selectLanguagePrompt1')}:</Form.Label>
-            <Form.Select
-              data-testid="SelectContributionLanguage"
-              value={contributionLanguage || DISPLAY_LANGUAGES[currentLocale ?? DEFAULT_LOCALE]}
-              aria-label="Select the language for contribution"
-              className={`${styles.languageDropdown} mt-1 mt-md-0`}
-              name="contribution"
-              onChange={handleContributionLanguageChange as any}
-            >
-              {locales?.map(locale => (
-                <option key={locale} value={RAW_LANGUAGES[locale]}>
-                  {DISPLAY_LANGUAGES[locale]}
-                </option>
-              ))}
-            </Form.Select>
-            {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (
-              <span className="d-flex mx-8">
-                <Image src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
-              </span>
-            )}
-            {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (
+            <div className="d-flex">
               <Form.Select
-                data-testid="SelectTranslatedLanguage"
-                value={translatedLanguage || DISPLAY_LANGUAGES['as']}
-                aria-label="Select the translated language"
+                data-testid="SelectContributionLanguage"
+                value={contributionLanguage || DISPLAY_LANGUAGES[currentLocale ?? DEFAULT_LOCALE]}
+                aria-label="Select the language for contribution"
                 className={`${styles.languageDropdown} mt-1 mt-md-0`}
-                name="translation"
-                onChange={handleTranslatedLanguageChange as any}
+                name="contribution"
+                onChange={handleContributionLanguageChange as any}
               >
-                {translatedDropdownValue?.map(locale => (
+                {locales?.map(locale => (
                   <option key={locale} value={RAW_LANGUAGES[locale]}>
                     {DISPLAY_LANGUAGES[locale]}
                   </option>
                 ))}
               </Form.Select>
-            )}
+              {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (
+                <span className="d-flex mx-3 mx-md-4 flex-shrink-0">
+                  <Image src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
+                </span>
+              )}
+              {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (
+                <Form.Select
+                  data-testid="SelectTranslatedLanguage"
+                  value={translatedLanguage || DISPLAY_LANGUAGES['as']}
+                  aria-label="Select the translated language"
+                  className={`${styles.languageDropdown} mt-1 mt-md-0`}
+                  name="translation"
+                  onChange={handleTranslatedLanguageChange as any}
+                >
+                  {translatedDropdownValue?.map(locale => (
+                    <option key={locale} value={RAW_LANGUAGES[locale]}>
+                      {DISPLAY_LANGUAGES[locale]}
+                    </option>
+                  ))}
+                </Form.Select>
+              )}
+            </div>
           </Form.Group>
         </div>
       </Col>
