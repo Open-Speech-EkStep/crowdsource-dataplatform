@@ -21,6 +21,7 @@ const useFetch = <T>({ url, init, processData }: RequestProps<T>) => {
 
   useEffect(() => {
     // Define asynchronous function
+    if (!stringifiedInit) return;
     const fetchApi = async () => {
       try {
         // Fetch data from REST API

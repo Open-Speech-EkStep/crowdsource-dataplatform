@@ -23,6 +23,8 @@ describe('SunoTranscribe', () => {
       .calledWith('speakerDetails')
       .mockImplementation(() => JSON.stringify(speakerDetails));
 
+    fetchMock.doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace').mockResponseOnce('ip=103.92.40.39');
+
     fetchMock.doMockOnceIf('/media/asr').mockResponseOnce(
       JSON.stringify({
         data: [
@@ -65,8 +67,6 @@ describe('SunoTranscribe', () => {
       })
     );
 
-    fetchMock.doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace').mockResponseOnce('ip=103.92.40.39');
-
     fetchMock.doMock('/location-info?ip=103.92.40.39').mockResponse(
       JSON.stringify({
         country: 'India',
@@ -77,6 +77,14 @@ describe('SunoTranscribe', () => {
     const renderResult = render(<SunoTranscribe />);
 
     await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
+    });
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/location-info?ip=103.92.40.39');
+    });
+
+    await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/media/asr', {
         body: JSON.stringify({
           language: 'Hindi',
@@ -85,14 +93,6 @@ describe('SunoTranscribe', () => {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       });
-    });
-
-    await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
-    });
-
-    await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/location-info?ip=103.92.40.39');
     });
 
     return renderResult;

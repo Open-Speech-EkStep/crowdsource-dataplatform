@@ -81,19 +81,24 @@ const SunoTranscribe = () => {
     browser: getBrowserInfo(),
   });
 
+  console.log(contributionLanguage);
+
   const result = useFetch<ResultType>({
     url: apiPaths.mediaAsr,
-    init: {
-      body: JSON.stringify({
-        language: contributionLanguage,
-        userName: speakerDetails?.userName,
-      }),
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    },
+    init: contributionLanguage
+      ? {
+          body: JSON.stringify({
+            language: contributionLanguage,
+            userName: speakerDetails?.userName,
+          }),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      : undefined,
   });
 
   useEffect(() => {
+    console.log(result);
     if (result && result.data) {
       setContributionData(result.data);
       setShowUIdata(result.data[currentDataIndex]);
