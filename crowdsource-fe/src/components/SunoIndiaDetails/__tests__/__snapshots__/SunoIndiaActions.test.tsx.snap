@@ -110,10 +110,10 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
           <div
             class="disabledCursor"
           >
-            <a
-              class="d-block disableClick"
+            <button
+              class="w-100 text-start disableClick info normal btn btn-link"
               data-testid="cardAnchor"
-              href="#"
+              type="button"
             >
               <div
                 class="root rounded-20 overflow-hidden"
@@ -214,7 +214,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
                   </div>
                 </div>
               </div>
-            </a>
+            </button>
           </div>
         </div>
         <div
@@ -223,10 +223,10 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
           <div
             class="disabledCursor"
           >
-            <a
-              class="d-block disableClick"
+            <button
+              class="w-100 text-start disableClick info normal btn btn-link"
               data-testid="cardAnchor"
-              href="#"
+              type="button"
             >
               <div
                 class="root rounded-20 overflow-hidden"
@@ -327,7 +327,7 @@ exports[`Suno Actions should render the suno india action snapshot 1`] = `
                   </div>
                 </div>
               </div>
-            </a>
+            </button>
           </div>
         </div>
       </div>

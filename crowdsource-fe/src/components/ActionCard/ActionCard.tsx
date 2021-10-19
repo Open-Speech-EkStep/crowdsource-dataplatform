@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import Button from 'components/Button';
 import ChangeUserModal from 'components/ChangeUserModal';
 import InfoMessage from 'components/InfoMessage';
 import { INITIATIVE_ACTIONS } from 'constants/initiativeConstants';
@@ -32,8 +33,6 @@ const ActionCard = (props: ActionCardProps) => {
   const [modalShow, setModalShow] = useState(false);
   const router = useRouter();
 
-  const url = '#';
-
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
   const handleUserForm = () => {
@@ -46,10 +45,10 @@ const ActionCard = (props: ActionCardProps) => {
 
   return (
     <div className={classNames({ [styles.disabledCursor]: props.disabled })}>
-      <a
+      <Button
+        variant="normal"
         data-testid="cardAnchor"
-        className={classNames('d-block', { [styles.disableClick]: props.disabled })}
-        href={url}
+        className={classNames('w-100 text-start', { [styles.disableClick]: props.disabled })}
         onClick={handleUserForm}
       >
         <div data-testid={`ActionCard${type}`} className={`${styles.root} rounded-20 overflow-hidden`}>
@@ -83,7 +82,7 @@ const ActionCard = (props: ActionCardProps) => {
             </div>
           </div>
         </div>
-      </a>
+      </Button>
       <ChangeUserModal
         show={modalShow}
         onHide={() => setModalShow(false)}

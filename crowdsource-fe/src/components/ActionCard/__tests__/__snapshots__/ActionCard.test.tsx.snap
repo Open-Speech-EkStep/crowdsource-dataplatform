@@ -5,10 +5,10 @@ exports[`ActionCard should render the component and match it against stored snap
   <div
     class=""
   >
-    <a
-      class="d-block"
+    <button
+      class="w-100 text-start info normal btn btn-link"
       data-testid="cardAnchor"
-      href="#"
+      type="button"
     >
       <div
         class="root rounded-20 overflow-hidden"
@@ -109,7 +109,7 @@ exports[`ActionCard should render the component and match it against stored snap
           </div>
         </div>
       </div>
-    </a>
+    </button>
   </div>
 </DocumentFragment>
 `;

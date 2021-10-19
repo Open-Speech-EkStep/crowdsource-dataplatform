@@ -15,10 +15,10 @@ exports[`ContributionActions should render the component and matches it against 
         <div
           class="disabledCursor"
         >
-          <a
-            class="d-block disableClick"
+          <button
+            class="w-100 text-start disableClick info normal btn btn-link"
             data-testid="cardAnchor"
-            href="#"
+            type="button"
           >
             <div
               class="root rounded-20 overflow-hidden"
@@ -120,7 +120,7 @@ exports[`ContributionActions should render the component and matches it against 
                 </div>
               </div>
             </div>
-          </a>
+          </button>
         </div>
       </div>
       <div
@@ -129,10 +129,10 @@ exports[`ContributionActions should render the component and matches it against 
         <div
           class="disabledCursor"
         >
-          <a
-            class="d-block disableClick"
+          <button
+            class="w-100 text-start disableClick info normal btn btn-link"
             data-testid="cardAnchor"
-            href="#"
+            type="button"
           >
             <div
               class="root rounded-20 overflow-hidden"
@@ -234,7 +234,7 @@ exports[`ContributionActions should render the component and matches it against 
                 </div>
               </div>
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </div>
