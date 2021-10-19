@@ -9,3 +9,10 @@
 .icon {
   width: 3rem;
 }
+
+.link {
+  color: var(--primary-color);
+  &:hover {
+    color: var(--primary-color);
+  }
+}

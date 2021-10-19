@@ -267,7 +267,7 @@ const SunoTranscribe = () => {
     </div>
   ) : (
     <NoDataFound
-      url={`/${currentLocale}${routePaths.sunoIndiaHome}`}
+      url={routePaths.sunoIndiaHome}
       initiative={INITIATIVES_MAPPING.suno}
       language={contributionLanguage?.toLowerCase() ?? ''}
     />
