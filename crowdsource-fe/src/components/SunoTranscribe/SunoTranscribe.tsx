@@ -81,8 +81,6 @@ const SunoTranscribe = () => {
     browser: getBrowserInfo(),
   });
 
-  console.log(contributionLanguage);
-
   const result = useFetch<ResultType>({
     url: apiPaths.mediaAsr,
     init: contributionLanguage
@@ -98,7 +96,6 @@ const SunoTranscribe = () => {
   });
 
   useEffect(() => {
-    console.log(result);
     if (result && result.data) {
       setContributionData(result.data);
       setShowUIdata(result.data[currentDataIndex]);
