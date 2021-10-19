@@ -3,24 +3,25 @@ import '__fixtures__/mockComponentsWithSideEffects';
 
 import router from 'next/router';
 
+import type { Initiative } from 'types/Initiatives';
 import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 
 import ContributionLanguage from '../ContributionLanguage';
 
 describe('Suno Actions', () => {
-  const setup = (locale: string) => {
+  const setup = (locale: string, initiative: Initiative) => {
     router.locale = locale;
-    return render(<ContributionLanguage initiative="suno" />);
+    return render(<ContributionLanguage initiative={initiative} />);
   };
 
   it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup('en');
+    const { asFragment } = setup('en', 'suno');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should select the "Hindi" contribution language', async () => {
-    setup('as');
+    setup('as', 'suno');
 
     userEvent.selectOptions(screen.getByTestId('SelectContributionLanguage'), 'हिंदी');
 
@@ -34,7 +35,7 @@ describe('Suno Actions', () => {
   });
 
   it('should not refresh page when default and current locale are same', async () => {
-    setup('en');
+    setup('en', 'suno');
 
     userEvent.selectOptions(screen.getByTestId('SelectContributionLanguage'), 'English');
 
@@ -45,5 +46,15 @@ describe('Suno Actions', () => {
     await waitFor(() => expect(router.locale).toBe('en'));
 
     expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'English');
+  });
+
+  it('should select the value from translated dropdown', async () => {
+    setup('en', 'likho');
+
+    userEvent.selectOptions(screen.getByTestId('SelectTranslatedLanguage'), 'Hindi');
+
+    expect(screen.getByTestId('SelectTranslatedLanguage')).toHaveValue('Hindi');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('likho_to-language', 'Hindi');
   });
 });

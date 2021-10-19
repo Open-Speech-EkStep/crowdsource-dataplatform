@@ -48,10 +48,6 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
   };
 
   const handleTranslatedLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (DEFAULT_LOCALE !== currentLocale) {
-      router.push(`/${DEFAULT_LOCALE}${router.asPath}`, undefined, { locale: DEFAULT_LOCALE });
-      setCookie(localeCookieName, DEFAULT_LOCALE, { path: '/' });
-    }
     setTranslatedLanguage(e.target.value);
   };
 

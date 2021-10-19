@@ -53,7 +53,10 @@ const ContributionActions = (props: ContributionActionProps) => {
       data.language === `${contributionLanguage}-${translatedLanguage}`,
   };
 
-  const isLanguageAvailable = !!languageWithData?.find(callbacks[INITIATIVES_MEDIA.asr]);
+  const isLanguageAvailable =
+    INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
+      ? !!languageWithData?.find(callbacks[INITIATIVES_MEDIA.parallel])
+      : !!languageWithData?.find(callbacks[INITIATIVES_MEDIA.asr]);
 
   let isAllContributed = true;
   let hasTarget = false;
@@ -61,7 +64,7 @@ const ContributionActions = (props: ContributionActionProps) => {
   if (isLanguageAvailable && cardState) {
     const filteredData: any =
       INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
-        ? cardState?.find(callbacks[INITIATIVES_MEDIA.parallel])
+        ? cardState?.find(callbacks[INITIATIVES_MEDIA.parallel]) || {}
         : cardState?.find(callbacks[INITIATIVES_MEDIA.asr]) || {};
     hasTarget = filteredData.hastarget ?? false;
     isAllContributed = filteredData.isallcontributed ?? false;
