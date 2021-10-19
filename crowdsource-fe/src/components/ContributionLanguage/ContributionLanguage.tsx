@@ -1,4 +1,5 @@
 import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -13,6 +14,7 @@ import {
   DEFAULT_LOCALE,
   DISPLAY_LANGUAGES,
   localeCookieName,
+  LOCALE_LANGUAGES,
   RAW_LANGUAGES,
 } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
@@ -29,6 +31,7 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
   const { t } = useTranslation();
   const { locales, locale: currentLocale } = useRouter();
   const [, setCookie] = useCookies([localeCookieName]);
+  const [translatedDropdownValue, setTranslatedDropdownValue] = useState(locales);
   const router = useRouter();
 
   const [contributionLanguage, setContributionLanguage] = useLocalStorage<string>(
@@ -36,13 +39,26 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
   );
 
   const [translatedLanguage, setTranslatedLanguage] = useLocalStorage<string>(
-    localStorageConstants.translatedLanguage
+    localStorageConstants.translatedLanguage,
+    DISPLAY_LANGUAGES['as']
   );
+
+  useEffect(() => {
+    if (contributionLanguage) {
+      const filteredResult: any = locales?.filter(item => item !== LOCALE_LANGUAGES[contributionLanguage]);
+      setTranslatedDropdownValue(filteredResult);
+    }
+  }, [contributionLanguage, locales]);
 
   const handleContributionLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (DEFAULT_LOCALE !== currentLocale) {
       router.push(`/${DEFAULT_LOCALE}${router.asPath}`, undefined, { locale: DEFAULT_LOCALE });
       setCookie(localeCookieName, DEFAULT_LOCALE, { path: '/' });
+    }
+    if (e.target.value === translatedLanguage) {
+      const filteredResult: any = locales?.filter(item => item !== LOCALE_LANGUAGES[e.target.value]);
+      setTranslatedDropdownValue(filteredResult);
+      setTranslatedLanguage(RAW_LANGUAGES[filteredResult[0]]);
     }
     setContributionLanguage(e.target.value);
   };
@@ -82,13 +98,13 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
             {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (
               <Form.Select
                 data-testid="SelectTranslatedLanguage"
-                value={translatedLanguage || DISPLAY_LANGUAGES[currentLocale ?? DEFAULT_LOCALE]}
+                value={translatedLanguage || DISPLAY_LANGUAGES['as']}
                 aria-label="Select the translated language"
                 className={`${styles.languageDropdown} mt-1 mt-md-0`}
                 name="translation"
                 onChange={handleTranslatedLanguageChange as any}
               >
-                {locales?.map(locale => (
+                {translatedDropdownValue?.map(locale => (
                   <option key={locale} value={RAW_LANGUAGES[locale]}>
                     {DISPLAY_LANGUAGES[locale]}
                   </option>

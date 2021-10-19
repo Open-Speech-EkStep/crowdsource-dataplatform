@@ -36,8 +36,10 @@ if (
 }
 
 /* istanbul ignore next */
-if (typeof window !== 'undefined' && !localStorage.getItem(localStorageConstants.contributionLanguage))
+if (typeof window !== 'undefined' && !localStorage.getItem(localStorageConstants.contributionLanguage)) {
   localStorage.setItem(localStorageConstants.contributionLanguage, RAW_LANGUAGES[DEFAULT_LOCALE]);
+  localStorage.setItem(localStorageConstants.translatedLanguage, RAW_LANGUAGES['as']);
+}
 
 const App = appWithTranslation(MyApp) as typeof MyApp;
 

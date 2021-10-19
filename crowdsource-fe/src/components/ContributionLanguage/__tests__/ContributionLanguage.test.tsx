@@ -15,7 +15,7 @@ describe('Suno Actions', () => {
   };
 
   it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup('en', 'suno');
+    const { asFragment } = setup('en', 'likho');
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -51,10 +51,33 @@ describe('Suno Actions', () => {
   it('should select the value from translated dropdown', async () => {
     setup('en', 'likho');
 
-    userEvent.selectOptions(screen.getByTestId('SelectTranslatedLanguage'), 'Hindi');
+    userEvent.selectOptions(screen.getByTestId('SelectTranslatedLanguage'), 'English');
 
-    expect(screen.getByTestId('SelectTranslatedLanguage')).toHaveValue('Hindi');
+    expect(screen.getByTestId('SelectTranslatedLanguage')).toHaveValue('English');
 
-    expect(localStorage.setItem).toHaveBeenCalledWith('likho_to-language', 'Hindi');
+    expect(localStorage.setItem).toHaveBeenCalledWith('likho_to-language', 'English');
+  });
+
+  it('should check the condition for contribution and translation match', async () => {
+    setup('en', 'likho');
+    userEvent.selectOptions(screen.getByTestId('SelectTranslatedLanguage'), 'English');
+
+    expect(screen.getByTestId('SelectTranslatedLanguage')).toHaveValue('English');
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('likho_to-language', 'English');
+
+    userEvent.selectOptions(screen.getByTestId('SelectContributionLanguage'), 'English');
+
+    expect(screen.getByRole('combobox', { name: 'Select the language for contribution' })).toHaveValue(
+      'English'
+    );
+
+    await waitFor(() => expect(router.locale).toBe('en'));
+
+    expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'English');
+
+    await waitFor(() => {
+      expect(localStorage.setItem).toHaveBeenCalledWith('likho_to-language', 'Hindi');
+    });
   });
 });
