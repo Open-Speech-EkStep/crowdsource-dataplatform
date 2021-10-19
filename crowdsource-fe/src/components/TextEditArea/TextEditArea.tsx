@@ -1,18 +1,18 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import Form from 'react-bootstrap/Form';
 import Draggable from 'react-draggable';
 import Keyboard from 'react-simple-keyboard';
 
-import IconTextButton from 'components/IconTextButton';
+import Button from 'components/Button';
 import { KeyboardLanguageLayout } from 'constants/Keyboard';
 import { verifyLanguage } from 'utils/utils';
 
 import styles from './TextEditArea.module.scss';
 import TextErrorMessage from './TextErrorMessage';
 
-// eslint-disable-next-line import/no-internal-modules
 import 'react-simple-keyboard/build/css/index.css';
 
 interface TextEditAreaProps {
@@ -97,37 +97,38 @@ const TextEditArea = ({
     <Fragment>
       <div
         data-testid="TextEditArea"
-        className={`${styles.addText} ${
-          isTextareaDisabled
-            ? `${styles.addTextDisabled} border border-2 border-primary-40`
-            : 'border border-2 border-primary'
-        } position-relative rounded-8  bg-light p-4`}
+        className={`
+          position-relative border border-2 border-primary
+          ${styles.addText} ${
+          isTextareaDisabled && `${styles.addTextDisabled} border border-2 border-primary-20`
+        }
+          ${showError && `${styles.addTextError} border border-2 border-danger`} rounded-8  bg-light p-4
+        `}
       >
-        <Form.Group controlId="textarea">
-          <Form.Label className="display-6">
-            {t('addText')} ({t(language.toLowerCase())})
-          </Form.Label>
-          <Form.Control
-            as="textarea"
-            disabled={isTextareaDisabled}
-            value={input}
-            onFocus={() => {
-              if (!isUsingPhysicalKeyboard && !chromeExtension.current) {
-                setShowKeyboard(true);
-              }
-            }}
-            onChange={onChangeInput}
-            placeholder={t('typingPlaceholder')}
-            className={`${styles.textarea} border-0 p-0 display-3`}
-          />
-        </Form.Group>
-        <div className={`${styles.keyboardIcon} d-none  d-md-block  position-absolute`}>
-          <IconTextButton
-            icon="keyboard_icon.svg"
-            textDesktop=""
-            onClick={() => setShowKeyboard(true)}
-            altText="keyboardBtn"
-          />
+        <div className={`${isTextareaDisabled && `${styles.textAreaDisabled}`}`}>
+          <Form.Group controlId="textarea">
+            <Form.Label className={`${styles.textareaLabel} display-6`}>
+              {t('addText')} ({t(language.toLowerCase())})
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              disabled={isTextareaDisabled}
+              value={input}
+              onFocus={() => {
+                if (!isUsingPhysicalKeyboard && !chromeExtension.current) {
+                  setShowKeyboard(true);
+                }
+              }}
+              onChange={onChangeInput}
+              placeholder={t('typingPlaceholder')}
+              className={`${styles.textarea} border-0 p-0 display-3`}
+            />
+          </Form.Group>
+          <div className={`${styles.keyboardIcon} d-none  d-md-block  position-absolute`}>
+            <Button variant="normal" onClick={() => setShowKeyboard(true)} className="d-flex">
+              <Image src="/images/keyboard_icon.svg" width="24" height="24" alt="keyboardBtn" />
+            </Button>
+          </div>
         </div>
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}

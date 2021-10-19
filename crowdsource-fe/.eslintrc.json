@@ -50,7 +50,7 @@
     "import/no-internal-modules": [
       "error",
       {
-        "allow": ["*/*", "@amcharts/amcharts4/charts", "@amcharts/amcharts4/core"]
+        "allow": ["*/*", "@amcharts/amcharts4/charts", "@amcharts/amcharts4/core", "@amcharts/amcharts4/maps", "react-simple-keyboard/build/css/index.css"]
       }
     ],
     "import/no-duplicates": ["error", { "considerQueryString": true }],

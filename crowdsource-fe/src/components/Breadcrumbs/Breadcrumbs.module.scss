@@ -7,9 +7,5 @@
 }
 
 .icon {
-  width: 2rem;
-
-  @include media-breakpoint-up(md) {
-    width: 3rem;
-  }
+  width: 3rem;
 }

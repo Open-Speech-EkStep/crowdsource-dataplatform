@@ -31,3 +31,9 @@ body {
     font-size: 1rem;
   }
 }
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--primary-color) !important;
+  opacity: 0.63 !important; /* Firefox */
+}

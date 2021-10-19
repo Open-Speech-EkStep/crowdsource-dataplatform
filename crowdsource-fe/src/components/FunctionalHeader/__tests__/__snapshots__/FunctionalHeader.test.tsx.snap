@@ -40,7 +40,7 @@ exports[`FunctionalHeader should render the component and matches it against sto
             </div>
           </div>
           <span
-            class="initiative ms-1 ms-md-3 font-family-rowdies"
+            class="initiative d-none d-md-block ms-1 ms-md-3 font-family-rowdies"
           >
             suno india
           </span>
