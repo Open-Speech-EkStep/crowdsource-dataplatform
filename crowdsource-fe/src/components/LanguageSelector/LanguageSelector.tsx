@@ -12,13 +12,16 @@ const LanguageSelector = ({
   selectedLanguage,
   updateSelectedLanguage,
 }: {
-  selectedLanguage: string;
-  updateSelectedLanguage: (language: string) => void;
+  selectedLanguage: string | undefined;
+  updateSelectedLanguage: (language: string | undefined) => void;
 }) => {
   const { locales } = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    updateSelectedLanguage(e.target.value);
+    const value = e.target.value;
+
+    if (value === 'all') updateSelectedLanguage(undefined);
+    else updateSelectedLanguage(value);
   };
 
   return (
@@ -31,10 +34,9 @@ const LanguageSelector = ({
               <Form.Select
                 value={selectedLanguage}
                 aria-label="Select Language"
-                className={``}
                 onChange={handleChange as any}
               >
-                <option key="all" value="All Languages">
+                <option key="all" value="all">
                   All Languages
                 </option>
                 {locales?.map(locale => (

@@ -12,6 +12,9 @@ const apiPaths = {
   participationStats: nodeConfig.staticFileUrl + '/aggregated-json/participationStats.json',
   lastUpdatedTime: nodeConfig.staticFileUrl + '/aggregated-json/lastUpdatedAtQuery.json',
   cumulativeDataByLanguage: nodeConfig.staticFileUrl + '/aggregated-json/cumulativeDataByLanguage.json',
+  cumulativeDataByState: nodeConfig.staticFileUrl + '/aggregated-json/cumulativeDataByState.json',
+  cumulativeDataByLanguageAndState:
+    nodeConfig.staticFileUrl + '/aggregated-json/cumulativeDataByLanguageAndState.json',
   feedback: nodeConfig.apiUrl + '/feedback',
   report: nodeConfig.apiUrl + '/report',
   mediaAsr: nodeConfig.apiUrl + '/media/asr',

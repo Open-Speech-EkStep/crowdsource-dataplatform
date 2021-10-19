@@ -56,4 +56,9 @@ describe('ContributionStatsByLanguage', () => {
     expect(screen.getByText('1 minutes')).toBeInTheDocument();
     expect(screen.getByText('3 minutes')).toBeInTheDocument();
   });
+
+  it('should display zeros when no data found for initiative', async () => {
+    await setup('dekho');
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
 });

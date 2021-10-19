@@ -22,7 +22,7 @@ exports[`LanguageSelector should render snapshot 1`] = `
             id="language"
           >
             <option
-              value="All Languages"
+              value="all"
             >
               All Languages
             </option>

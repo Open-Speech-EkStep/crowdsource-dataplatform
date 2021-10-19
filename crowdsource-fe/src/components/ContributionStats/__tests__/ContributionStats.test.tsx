@@ -61,7 +61,7 @@ describe('ContributionStats', () => {
 
     const renderResult = render(
       <SWRConfig value={{ provider: () => new Map() }}>
-        <ContributionStats initiative={value} header="Contribution Tracker" subHeader="Trackeerer" />
+        <ContributionStats initiative={value} header="Header" subHeader="Sub Header" />
       </SWRConfig>
     );
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));

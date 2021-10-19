@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndiaMapChart should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="pt-7 pt-md-9 container-lg"
+  >
+    <h3>
+      Geographical Distribution
+    </h3>
+    MapChart
+  </div>
+</DocumentFragment>
+`;

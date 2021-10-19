@@ -8,5 +8,6 @@ jest.mock('components/ContributionTracker', () => () => 'ContributionTracker');
 jest.mock('components/Charts/BarChart', () => () => 'BarChart');
 jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 jest.mock('components/SunoTranscribe', () => () => 'SunoTranscribe');
+jest.mock('components/MapChart', () => () => 'MapChart');
 
 export {};

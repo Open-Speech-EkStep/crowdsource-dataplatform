@@ -35,6 +35,7 @@ if (
   axe(React, ReactDOM, 1000);
 }
 
+/* istanbul ignore next */
 if (typeof window !== 'undefined' && !localStorage.getItem(localStorageConstants.contributionLanguage))
   localStorage.setItem(localStorageConstants.contributionLanguage, RAW_LANGUAGES[DEFAULT_LOCALE]);
 
