@@ -206,7 +206,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
       <div className="bg-secondary p-5 p-md-8 mt-4 mt-md-5 rounded-8">
         <div className="d-md-flex justify-content-between display-5 mb-5 mb-md-6">
           <p>{props.graphTitle}</p>
-          <div className="mt-3 mt-md-0 display-6">
+          <div className="d-flex align-items-center mt-3 mt-md-0 display-6">
             <span className={`${styles.chartLabel} ${styles.chartLabelOrange}`}>
               {t('yourSelectedLanguage')}
             </span>
