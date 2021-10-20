@@ -1,7 +1,7 @@
 const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const { getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { updateLocaleLanguagesDropdown, getLocaleString } = require('./utils')
+const { updateLocaleLanguagesDropdown, getLocaleString,fetchLocationInfo,safeJson } = require('./utils')
 const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -158,6 +158,17 @@ function initializeBlock() {
 $(document).ready(function () {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
     onActiveNavbar(INITIATIVES.text.value);
+    fetchLocationInfo()
+    .then(res => {
+      return safeJson(res);
+    })
+    .then(response => {
+      localStorage.setItem('state_region', response.regionName);
+      localStorage.setItem('country', response.country);
+    })
+    .catch(err => {
+      console.log(err);
+    });
     getLocaleString().then(() => {
         initializeBlock();
     }).catch(err => {

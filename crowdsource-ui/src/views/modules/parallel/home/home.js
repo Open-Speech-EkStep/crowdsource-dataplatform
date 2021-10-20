@@ -1,7 +1,7 @@
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('../common/header');
 const { redirectToLocalisedPage, showFunctionalCards, updateGoalProgressBarFromJson, hasUserRegistered, updateParallelLocaleLanguagesDropdown } = require('../common/common');
 const {
-  getLocaleString,
+  getLocaleString,fetchLocationInfo,safeJson
 } = require('../common/utils');
 const {
   setUserModalOnShown,
@@ -140,6 +140,17 @@ function initializeBlock() {
 $(document).ready(function () {
   localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
   initializeFeedbackModal();
+  fetchLocationInfo()
+    .then(res => {
+      return safeJson(res);
+    })
+    .then(response => {
+      localStorage.setItem('state_region', response.regionName);
+      localStorage.setItem('country', response.country);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   getLocaleString().then(() => {
     initializeBlock();
   }).catch(() => {

@@ -128,9 +128,12 @@ function fetchLocationInfo() {
           break;
         }
       }
-      if (ipAddress.length !== 0) {
-        return fetch(`/location-info?ip=${ipAddress}`);
-      } else {
+      if (ipAddress.length !== 0 && ipAddress !== null) {
+        // return fetch(`/location-info?ip=${ipAddress}`);
+        return fetch(`http://ip-api.com/json/${ipAddress}?fields=country,regionName`).then(jsonRes => jsonRes.json()).then(response => {
+        return Promise.resolve(response);
+    
+    })} else {
         return new Promise((resolve, reject) => {
           reject('Ip Address not available');
         });
