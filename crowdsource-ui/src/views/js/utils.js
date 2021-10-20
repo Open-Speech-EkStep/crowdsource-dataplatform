@@ -130,10 +130,10 @@ function fetchLocationInfo() {
       }
       if (ipAddress.length !== 0 && ipAddress !== null) {
         // return fetch(`/location-info?ip=${ipAddress}`);
-        return fetch(`http://ip-api.com/json/${ipAddress}?fields=country,regionName`).then(jsonRes => jsonRes.json()).then(response => {
+        return fetch(`https://extreme-ip-lookup.com/json`).then(jsonRes => jsonRes.json()).then(response => {
         return Promise.resolve(response);
-    
-    })} else {
+    })
+  } else {
         return new Promise((resolve, reject) => {
           reject('Ip Address not available');
         });

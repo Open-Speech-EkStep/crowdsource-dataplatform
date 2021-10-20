@@ -163,7 +163,7 @@ $(document).ready(function () {
       return safeJson(res);
     })
     .then(response => {
-      localStorage.setItem('state_region', response.regionName);
+      localStorage.setItem('state_region', response.region);
       localStorage.setItem('country', response.country);
     })
     .catch(err => {

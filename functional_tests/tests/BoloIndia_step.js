@@ -97,7 +97,7 @@ step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio butto
     const usernameFiled = taiko.textBox({ id: 'username' })
     assert.ok(await usernameFiled.exists());
     await write('1234', into(usernameFiled));
-    await taiko.text(`Please don't use numerics or email as username`).isVisible();
+    await taiko.text(`Please don't use only numerics or email as username`).isVisible();
     assert.ok(await taiko.dropDown({ id: 'mother-tongue' }).exists())
     assert.ok(await taiko.dropDown({ id: 'age' }).exists())
     assert.ok(await taiko.radioButton({ id: 'other-check' }).exists())
