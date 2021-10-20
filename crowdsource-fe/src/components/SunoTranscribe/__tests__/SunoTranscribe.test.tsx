@@ -92,6 +92,8 @@ describe('SunoTranscribe', () => {
         }),
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
       });
     });
 
