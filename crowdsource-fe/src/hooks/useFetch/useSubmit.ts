@@ -15,6 +15,8 @@ const useSubmit = <Data = any, Error = any>(
 
         const res = await fetch(key, {
           method,
+          credentials: 'include',
+          mode: 'cors',
           body,
           headers,
         });

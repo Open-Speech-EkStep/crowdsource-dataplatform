@@ -53,6 +53,8 @@ describe('FeedbackModal', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith(url, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           opinion_rating: '1',
@@ -100,6 +102,8 @@ describe('FeedbackModal', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith(url, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           opinion_rating: '1',

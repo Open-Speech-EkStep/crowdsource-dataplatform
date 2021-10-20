@@ -193,6 +193,8 @@ describe('SunoTranscribe', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith(url, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userName: 'abc',
@@ -246,6 +248,8 @@ describe('SunoTranscribe', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith(url, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userInput: 'बपपप',

@@ -1,12 +1,13 @@
 import Breadcrumbs from 'components/Breadcrumbs';
 import Report from 'components/Report';
 import TestSpeakerMic from 'components/TestSpeakerMic';
+import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 
 const FunctionalHeader = () => {
   return (
     <header>
       <div className="d-flex justify-content-between align-items-center px-3 px-md-6">
-        <Breadcrumbs initiative="suno" path="transcribe" />
+        <Breadcrumbs initiative={INITIATIVES_MAPPING.suno} path="transcribe" />
         <div className="d-flex">
           <div>
             <Report />

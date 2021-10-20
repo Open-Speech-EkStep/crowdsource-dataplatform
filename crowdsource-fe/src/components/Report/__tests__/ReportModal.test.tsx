@@ -53,6 +53,8 @@ describe('ReportModal', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith(url, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           language: 'Hindi',
@@ -101,6 +103,8 @@ describe('ReportModal', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith(url, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           language: 'Hindi',
