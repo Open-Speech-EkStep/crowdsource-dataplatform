@@ -302,15 +302,15 @@ body {
     top: 12px;
     left: -4px;
   }
-  .bolo-back-btn {
+  .text-back-btn {
     left: 28px !important;
     top: 12px !important;
   }
-  .bolo-validate-back-btn {
+  .text-validate-back-btn {
     left: 15px !important;
     top: 8px !important;
   }
-  .dekho-back-btn {
+  .ocr-back-btn {
     left: 1px !important;
   }
 
@@ -379,11 +379,11 @@ body {
     max-height: 490px;
     overflow: auto;
   }
-  .bolo-back-btn {
+  .text-back-btn {
     left: 35px !important;
     top: 5px !important;
   }
-  .bolo-validate-back-btn {
+  .text-validate-back-btn {
     left: 35px !important;
     top: 5px !important;
   }
@@ -640,7 +640,7 @@ body {
     font-size: 16px !important;
   }
 
-  .bolo-btn-control {
+  .text-btn-control {
     flex-direction: column;
   }
   .second {
@@ -653,7 +653,7 @@ body {
     order: 2;
   }
 
-  .suno #report_btn {
+  .asr #report_btn {
     margin-right: 1rem !important;
   }
   .my-badge-image {

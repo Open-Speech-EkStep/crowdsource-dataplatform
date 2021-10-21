@@ -1,12 +1,6 @@
-const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const {
-  ALL_LANGUAGES,
-  CONTRIBUTION_LANGUAGE,
-  CURRENT_MODULE,
-  MODULE,
-  DEFAULT_CON_LANGUAGE,
-} = require('./constants');
-const { context_root } = require('./env-api');
+const { updateLocaleLanguagesDropdown, getCookie, getInitiativeType } = require('./utils');
+const { ALL_LANGUAGES, CONTRIBUTION_LANGUAGE, CURRENT_MODULE, DEFAULT_CON_LANGUAGE } = require('./constants');
+const { base_url, context_root } = require('./env-api');
 
 const registerEvents = function () {
   const localisation_dropdown = $('#localisation_dropdown');
@@ -42,14 +36,11 @@ const changeLocale = function (locale) {
   }
   const module = localStorage.getItem(CURRENT_MODULE);
   sessionStorage.setItem('i18n', locale);
-  // if(module == 'bolo' && currentPage == "home.html"){
-  //     location.href = `/${locale}/${MODULE[module].url}/${currentPage}`;
-  // }
-  // else
   if (module == 'home' || currentPage == 'badges.html' || currentPage == 'my-badges.html') {
     location.href = `${context_root}/${locale}/${currentPage}`;
   } else {
-    location.href = `${context_root}/${locale}/${MODULE[module].url}/${currentPage}`;
+    const initiativeType = getInitiativeType(module);
+    location.href = `${context_root}/${locale}/${initiativeType}/${currentPage}`;
   }
 };
 
@@ -84,7 +75,7 @@ $(document).ready(function () {
     const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || 'en';
     sessionStorage.setItem('i18n', currentLocale);
   }
-  // $("#bhashadaan_logo").attr('href', base_url);
+  $('#title_logo').attr('href', base_url);
   registerEvents();
 });
 

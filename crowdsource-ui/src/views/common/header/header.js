@@ -9,6 +9,7 @@ const {
 function onActiveNavbar(value) {
   const $header = $('#module_name');
   localStorage.setItem(CURRENT_MODULE, value);
+
   const allDivs = $header.children();
   let targetedDivIndex = -1;
   allDivs.each(function (index, element) {

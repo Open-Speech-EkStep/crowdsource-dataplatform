@@ -3,22 +3,22 @@ const { showInstructions } = require('./validator-instructions')
 const Visualizer = require('./visualizer')
 const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
 const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate} = require('./utils');
+const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate,safeJson} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
-const { MODULE } = require('./constants');
+const { CURRENT_MODULE,INITIATIVES ,config,CONTRIBUTION_LANGUAGE} = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
-const { showErrorPopup } = require('./common');
+const { showErrorPopup,redirectToHomeForDirectLanding } = require('./common');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-const currentIndexKey = 'boloValidationCurrentIndex';
-const boloValidatorCountKey = 'boloValidatorCount';
+const currentIndexKey = `${config.initiativeKey_2}ValidationCurrentIndex`;
+const textValidatorCountKey = `${config.initiativeKey_2}ValidatorCount`;
 
-window.boloIndiaValidator = {};
+window.textValidator = {};
 
 function getValue(number, maxValue) {
     return number < 0
@@ -169,15 +169,15 @@ let currentIndex = 0, validationCount = 0;
 
 function setSentenceLabel(index) {
     const $sentenceLabel = $('#sentenceLabel')
-    $sentenceLabel[0].innerText = boloIndiaValidator.sentences[index].sentence;
-    setDataSource(boloIndiaValidator.sentences[index].source_info);
+    $sentenceLabel[0].innerText = textValidator.sentences[index].sentence;
+    setDataSource(textValidator.sentences[index].source_info);
 }
 
 function getNextSentence() {
-    if (currentIndex < boloIndiaValidator.sentences.length - 1) {
+    if (currentIndex < textValidator.sentences.length - 1) {
         currentIndex++;
-        updateProgressBar(currentIndex + 1,boloIndiaValidator.sentences.length);
-        const encodedUrl = encodeURIComponent(boloIndiaValidator.sentences[currentIndex].contribution);
+        updateProgressBar(currentIndex + 1,textValidator.sentences.length);
+        const encodedUrl = encodeURIComponent(textValidator.sentences[currentIndex].contribution);
         loadAudio(`${cdn_url}/${encodedUrl}`)
         resetValidation();
         setSentenceLabel(currentIndex);
@@ -223,8 +223,8 @@ function recordValidation(action) {
     if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
         validationCount++;
     }
-    const sentenceId = boloIndiaValidator.sentences[currentIndex].dataset_row_id
-    const contribution_id = boloIndiaValidator.sentences[currentIndex].contribution_id;
+    const sentenceId = textValidator.sentences[currentIndex].dataset_row_id
+    const contribution_id = textValidator.sentences[currentIndex].contribution_id;
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
     fetch(`/validate/${contribution_id}/${action}`, {
         method: 'POST',
@@ -237,8 +237,8 @@ function recordValidation(action) {
             userName: speakerDetails && speakerDetails.userName,
             device: getDeviceInfo(),
             browser: getBrowserInfo(),
-            type: MODULE.bolo["api-type"],
-            fromLanguage: localStorage.getItem('contributionLanguage')
+            type: INITIATIVES.text.type,
+            fromLanguage: localStorage.getItem(CONTRIBUTION_LANGUAGE)
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -307,7 +307,7 @@ function showThankYou() {
 }
 
 function showNoSentencesMessage() {
-    const contributionLanguage = localStorage.getItem('contributionLanguage');
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     $('#spn-validation-language').html(translate(contributionLanguage));
     hideElement($('#instructions-row'));
     hideElement($('#sentences-row'));
@@ -321,16 +321,16 @@ function showNoSentencesMessage() {
     hideElement($('#report_btn'));
     hideElement($("#test-mic-speakers"));
     $("#validation-container").removeClass("validation-container");
-    $('#start-validation-language').html(localStorage.getItem('contributionLanguage'));
+    $('#start-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
 }
 
 const handleSubmitFeedback = function () {
-    const contributionLanguage = localStorage.getItem("contributionLanguage");
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const otherText = $("#other_text").val();
     const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
     const reqObj = {
-        sentenceId: boloIndiaValidator.sentences[currentIndex].contribution_id,
+        sentenceId: textValidator.sentences[currentIndex].contribution_id,
         reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
         language: contributionLanguage,
         userName: speakerDetails ? speakerDetails.userName : '',
@@ -353,10 +353,11 @@ const handleSubmitFeedback = function () {
 
 let selectedReportVal = '';
 $(document).ready(() => {
-    localStorage.setItem('module','bolo');
+    redirectToHomeForDirectLanding();
+    localStorage.setItem(CURRENT_MODULE,INITIATIVES.text.value);
     // toggleFooterPosition();
     setPageContentHeight();
-    const language = localStorage.getItem('contributionLanguage');
+    const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     if (language) {
         updateLocaleLanguagesDropdown(language);
     }
@@ -394,9 +395,9 @@ $(document).ready(() => {
     });
 
     fetchLocationInfo().then(res => {
-        return res.json()
+        return safeJson(res);
     }).then(response => {
-        localStorage.setItem("state_region", response.regionName);
+        localStorage.setItem("state_region", response.region);
         localStorage.setItem("country", response.country);
     }).catch((err) => {console.log(err)});
 
@@ -409,7 +410,7 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',MODULE.bolo.value);
+  onChangeUser('./validator-page.html',INITIATIVES.text.value);
     onOpenUserDropDown();
 
     localStorage.removeItem(currentIndexKey);
@@ -432,9 +433,9 @@ $(document).ready(() => {
       })
         .then((sentenceData) => {
 
-        boloIndiaValidator.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(boloValidatorCountKey, boloIndiaValidator.sentences.length);
-      if (boloIndiaValidator.sentences.length === 0) {
+        textValidator.sentences = sentenceData.data ? sentenceData.data : [];
+        localStorage.setItem(textValidatorCountKey, textValidator.sentences.length);
+      if (textValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
       }
@@ -444,9 +445,9 @@ $(document).ready(() => {
 });
 
 const initializeComponent = function () {
-  const totalItems = boloIndiaValidator.sentences.length;
+  const totalItems = textValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const sentence = boloIndiaValidator.sentences[currentIndex];
+  const sentence = textValidator.sentences[currentIndex];
   hideElement($('#loader-play-btn'));
   addListeners();
   if (sentence) {
@@ -455,7 +456,7 @@ const initializeComponent = function () {
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, boloIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, textValidator.sentences.length)
     // updateValidationCount();
     resetValidation();
     setAudioPlayer();

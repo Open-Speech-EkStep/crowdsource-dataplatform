@@ -49,10 +49,10 @@ step("Close button should close the pop up and user should see <flow> India Home
 		await click(taiko.button({ class: 'close float-right' }))
 	}
 
-	if (flow == "Dekho") {
+	if (flow == "ocr") {
 		assert.ok(await text("Enrich your language by typing the text you see").exists());
 	}
-	if (flow == "Suno") {
+	if (flow == "asr") {
 		assert.ok(await text("Enrich your language by transcribing audio into text").exists());
 	}
 
@@ -84,13 +84,13 @@ step("When user clicks on Contribute more button , user should see no data avail
 	await click(link('Contribute More'))
 	await taiko.waitFor(2000)
 
-	if (flow == "Dekho") {
+	if (flow == "ocr") {
 		assert.ok(await text('Thank you for your enthusiasm to label the images').exists())
 	}
-	if (flow == "Likho") {
+	if (flow == "parallel") {
 		assert.ok(await text('Thank you for your enthusiasm to translate the sentences.').exists())
 	}
-	if (flow == "Suno") {
+	if (flow == "asr") {
 		assert.ok(await text('Thank you for your enthusiasm to transcribe the recordings.').exists())
 	}
 });
@@ -101,13 +101,13 @@ step("When user clicks on Validate more button , user should see no data availab
 	await click(link('Validate More'))
 	await taiko.waitFor(2000)
 
-	if (flow == "Dekho") {
+	if (flow == "ocr") {
 		assert.ok(await text('Thank you for your enthusiasm to validate the image labels.').exists())
 	}
-	if (flow == "Likho") {
+	if (flow == "parallel") {
 		assert.ok(await text('Thank you for your effort to validate translations.').exists())
 	}
-	if (flow == "Suno") {
+	if (flow == "asr") {
 		assert.ok(await text('Thank you for your enthusiasm to validate the recordings.').exists())
 	}
 });
@@ -147,7 +147,7 @@ step("User clicks on <arg0> he should see thank you page and should be able to s
 	assert.ok(await text("Share on").isVisible());
 	assert.ok(await text("Download").isVisible());
 	assert.ok(await image({ id: "reward-img" }).isVisible());
-	assert.ok(! await image({ id: "bronze_badge_link_img" }).isDisabled());
+	assert.ok(! await image({ id: "badge_1_badge_link_img" }).isDisabled());
 });
 
 step("User should see add extension and watch video link", async function () {

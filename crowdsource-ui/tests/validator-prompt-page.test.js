@@ -18,33 +18,19 @@ const { readFileSync } = require('fs');
 const { stringToHTML } = require('./utils');
 
 document.body = stringToHTML(
-  readFileSync(`${__dirname}/../build/views/boloIndia/validator-prompt-page.ejs`, 'UTF-8') +
+  readFileSync(`${__dirname}/../build/views/text/validator-prompt-page.ejs`, 'UTF-8') +
   readFileSync(`${__dirname}/../build/views/common/headerWithoutNavBar.ejs`, 'UTF-8') +
-  readFileSync(`${__dirname}/../src/views/common/bolo-mic-speaker-testing.ejs`, 'UTF-8')+
+  readFileSync(`${__dirname}/../src/views/common/text-mic-speaker-testing.ejs`, 'UTF-8')+
   readFileSync(`${__dirname}/../src/views/common/validation-report-modal.ejs`, 'UTF-8')
 
 );
 
 
-// const Visualizer = require('../src/assets/js/visualizer');
 jest.mock('../src/assets/js/visualizer');
 
 const {
   setAudioPlayer,
 } = require('../src/assets/js/validator-prompt-page');
-
-
-
-// describe("startVisualizer",()=>{
-//   test("should start visualiser",()=>{
-//         const mockVisualizerInstance = Visualizer.mock.instances[0];
-//         const mockVisualize = mockVisualizerInstance.visualize;
-//         const audio = document.getElementById('my-audio');
-//         startVisualizer();
-//         expect(mockVisualize).toHaveBeenCalledTimes(1);
-//     })
-// })
-
 
 describe("setAudioPlayer", () => {
   const play = $('#play');

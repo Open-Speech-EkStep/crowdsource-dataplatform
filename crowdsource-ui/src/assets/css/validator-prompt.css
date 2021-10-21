@@ -36,7 +36,7 @@ a {
   background-color: #ffffff;
 }
 
-#edit-text-suno {
+#edit-text-asr {
   min-height: 180px;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
@@ -46,7 +46,7 @@ a {
   background-color: #ffffff;
 }
 
-#edit-text-suno .form-control:disabled {
+#edit-text-asr .form-control:disabled {
   background-color: transparent !important;
 }
 
@@ -59,7 +59,7 @@ a {
   border-radius: 12px !important;
 }
 
-#edit-text textarea, #edit-text-suno textarea {
+#edit-text textarea, #edit-text-asr textarea {
   border: none;
   padding: 0;
   box-shadow: none;
@@ -113,7 +113,7 @@ a {
   .original-text, #edit-text label {
     font-size: 12px;
   }
-  #edit-text textarea, #edit-text-suno textarea {
+  #edit-text textarea, #edit-text-asr textarea {
     font-size: 16px;
   }
   .btn-link-primary {
@@ -167,7 +167,7 @@ a {
 }
 
 @media (max-width: 767px) {
-  #edit-text-suno {
+  #edit-text-asr {
     min-height: 120px !important;
     padding: 16px !important;
   }

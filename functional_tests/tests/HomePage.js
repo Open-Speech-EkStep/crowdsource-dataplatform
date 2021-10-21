@@ -41,16 +41,16 @@ step("Check If Current Tab is <module>", async function (module) {
 	await taiko.waitFor(1500)
 	assert.ok(await button("Start Participating").exists())
 	switch (module) {
-		case 'Bolo India':
+		case 'Text Initiative':
 			assert.ok(await text('Enrich your language by donating your voice').isVisible())
 			break;
-		case 'Suno India':
+		case 'Asr Initiative':
 			assert.ok(text('Enrich your language by typing the audio that you hear').isVisible())
 			break;
-		case 'Likho India':
+		case 'Parallel Initiative':
 			assert.ok(text('Enrich your language by translating text').isVisible())
 			break;
-		case 'Dekho India':
+		case 'Ocr Initiative':
 			assert.ok(text('Enrich your language by typing the text you see').isVisible())
 			break;
 		default:
@@ -61,10 +61,10 @@ step("Check If Current Tab is <module>", async function (module) {
 step("Clicking <btnName> should navigate to <module> Page", async function (btnName, module) {
 	const btn = button(btnName)
 	const pageName = {
-		'Bolo India': 'boloIndia/home',
-		'Suno India': 'sunoIndia/home',
-		'Dekho India': 'dekhoIndia/home',
-		'Likho India': 'likhoIndia/home'
+		'Text Initiative': 'text/home',
+		'Asr Initiative': 'asr/home',
+		'Ocr Initiative': 'ocr/home',
+		'Parallel Initiative': 'parallel/home'
 	}
 	assert.ok(await btn.exists());
 	await click(btn);
@@ -126,14 +126,14 @@ step("Validate contribution language should be selected <lang> from <dropdown_id
 step("Validate participation section content", async function() {
 	await taiko.waitFor(1500)
 	const titleText = 'Total Participation'
-	const sunoText = text('SUNO INDIA',taiko.below(titleText))
-	const boloText = text('BOLO INDIA',taiko.toRightOf(sunoText))
-	const likhoText = text('LIKHO INDIA',taiko.toRightOf(boloText))
-	const dekhoText = text('DEKHO INDIA',taiko.toRightOf(likhoText))
+	const asrText = text('SUNO INDIA',taiko.below(titleText))
+	const textText = text('BOLO INDIA',taiko.toRightOf(asrText))
+	const parallelText = text('LIKHO INDIA',taiko.toRightOf(textText))
+	const ocrText = text('DEKHO INDIA',taiko.toRightOf(parallelText))
 	await taiko.waitFor(1500)
 	assert.ok(await text(titleText).exists())
-	assert.ok(await boloText.exists())
-	assert.ok(await likhoText.exists())
-	assert.ok(await sunoText.exists())
-	assert.ok(await dekhoText.exists())
+	assert.ok(await textText.exists())
+	assert.ok(await parallelText.exists())
+	assert.ok(await asrText.exists())
+	assert.ok(await ocrText.exists())
 });

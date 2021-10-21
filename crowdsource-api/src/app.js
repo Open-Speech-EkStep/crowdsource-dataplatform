@@ -50,10 +50,10 @@ const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
 app.use(bodyParser.json());
-// morganBody(app, {
-//     logAllReqHeader: true,
-//     noColors: true
-// });
+morganBody(app, {
+    logAllReqHeader: true,
+    noColors: true
+});
 
 app.enable('trust proxy');
 
@@ -122,11 +122,12 @@ app.use(express.static('../crowdsource-ui/target', { redirect: false }));
 router.get('/profanity/:type', function (req, res) {
     // #swagger.ignore = true
     const type = req.params.type;
-    if (!['sunoindia', 'likhoindia', 'dekhoindia', 'boloindia'].includes(type)) {
+    if (!['asr', 'parallel', 'ocr', 'text'].includes(type)) {
         res.redirect('/en/not-found.html');
         return;
     }
-    res.redirect(`/en/profanity-home.html?type=${type}`);
+    // res.redirect(`/en/profanity-home.html?type=${type}`);
+    res.redirect(`/en/profanity.html?type=${type}`);
 });
 
 router.post('/verify-user', async (req, res) => {
@@ -475,14 +476,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'social sharing text without rank',
             'Level',
             'Sentences',
-            'bronze',
-            'silver',
-            'gold',
-            'platinum',
-            'Bolo India',
-            'Suno India',
-            'Dekho India',
-            'Likho India',
             'Recording',
             'Labelling',
             'Transcribing',
@@ -502,7 +495,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'English',
             'Bengali',
             'All Languages',
-            'Bhasha Daan: A crowdsourcing initiative for Indian languages',
             'Validation so far in <y> - <x>',
             'Contribution so far in <y> - <x>',
             'minute(s)',
@@ -588,7 +580,17 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Images labelled',
             'Images validated',
             'An unexpected error has occurred.',
-            'We are processing multiple requests at the moment. Please try again after sometime.'
+            'We are processing multiple requests at the moment. Please try again after sometime.',
+            'bronze',
+            'silver',
+            'gold',
+            'platinum',
+            'Bolo India',
+            'Suno India',
+            'Dekho India',
+            'Likho India',
+            'Bhasha Daan: A crowdsourcing initiative for Indian languages',
+
         ];
 
         const langSttr = {};

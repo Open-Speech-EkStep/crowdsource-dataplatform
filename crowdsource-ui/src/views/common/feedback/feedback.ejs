@@ -36,22 +36,22 @@
                     <div class="mb-4 content-component" style="display:none">
                         <div class="form-row">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
-                                <label class="form-check-label xs-radio-label" for="bolo_id">
-                                    <%= __('Bolo') %>
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="text_id" value="<%- `${config.initiativeKey_2}` %>">
+                                <label class="form-check-label xs-radio-label" for="text_id">
+                                    <%= __(config.initiative_2) %>
                                 </label>
                             </div>
     
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
-                                <label class="form-check-label xs-radio-label" for="suno_id">
-                                    <%= __('Suno') %>
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="asr_id" value="<%- `${config.initiativeKey_1}` %>">
+                                <label class="form-check-label xs-radio-label" for="asr_id">
+                                    <%= __(config.initiative_1) %>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="likho_id" value="likho">
-                                <label class="form-check-label xs-radio-label" for="likho_id">
-                                    <%= __('Likho') %>
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="parallel_id" value="<%- `${config.initiativeKey_3}` %>">
+                                <label class="form-check-label xs-radio-label" for="parallel_id">
+                                    <%= __(config.initiative_3) %>
                                 </label>
                             </div>
                         </div>
@@ -59,9 +59,9 @@
                     <div class="mb-4 content-component" style="display:none">
                         <div class="form-row">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
-                                <label class="form-check-label xs-radio-label" for="dekho_id">
-                                    <%= __('Dekho') %>
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="ocr_id" value="<%- `${config.initiativeKey_4}` %>">
+                                <label class="form-check-label xs-radio-label" for="ocr_id">
+                                    <%= __(config.initiative_4) %>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -194,7 +194,7 @@
     
                     <div class="form-group mb-4">
                         <label for="recommend" class="form-label label-color-feedback mb-0">
-                            <%= __('Would you recommend Bhasha Daan to your friends & family?') %>  <span class="text-primary-muted">(<%= __('optional')%>)</span>
+                            <%= __(`Would you recommend ${config.title_1} ${config.title_2} to your friends & family?`) %>  <span class="text-primary-muted">(<%= __('optional')%>)</span>
                         </label>
                         <div class="justify-content-between">
                             <div class="form-check form-check-inline">
@@ -220,7 +220,7 @@
     
                     <div class="form-group m-0">
                         <label for="revisit" class="form-label label-color-feedback mb-0">
-                            <%= __('Would you revisit Bhasha Daan?') %>  <span class="text-primary-muted">(<%= __('optional')%>)</span>
+                            <%= __(`Would you revisit ${config.title_1} ${config.title_2}?`) %>  <span class="text-primary-muted">(<%= __('optional')%>)</span>
                         </label>
                         <div class="justify-content-between">
                             <div class="form-check form-check-inline">

@@ -1,0 +1,112 @@
+<html lang="en">
+
+<head>
+    <title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
+    <meta name="description" content="<%- `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice` %>">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<%- include('../common/headerWithoutNavBar.ejs',{path:"../",MODULE:config.initiative_3, PAGE_TITLE:__('Dashboard'),img:"parallelLogo.svg",homePath:"./home.html"}) %>
+<div class="padding-top-65">
+    <div class="dashboard-bg">
+<div class="container container-fluid supreme-container">
+    <%- include('../common/breadcrumb.ejs', {MODULE:config.initiative_3, PAGE_TITLE:__('Dashboard'),img:"parallelLogo.svg", homePath:"./home.html"}) %>
+    <div class="row mt-3 mt-lg-0">
+        <div class="col-12">
+            <div class="row">
+                <%- include('../common/back-btn.ejs',{url:"./home.html"}) %>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-6">
+                    <div class="mb-3 text-primary font-family-Rowdies" style="font-weight:300!important">
+                        <%= __('Select a language pair') %>:
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-md-4">
+                <div class="col-12 col-md-7 col-lg-auto all-languages mb-0">
+                    <div class="row">
+                        <div class="col pr-0 pr-lg-3 pr-md-3 d-flex align-items-center">
+                            <select class="language-dropdown bg-white btn dropdown-toggle h6 mb-0 rounded" id="from-dash-language" style="height:48px;color:#959595" autocomplete="off">
+                                <option selected="selected" class="pointer" id="language_button" value="">
+                                    <%= __('All Languages') %>
+                                </option>
+                                <% LANGUAGES.forEach(function(lang) { %>
+                                    <option value="<%= lang.value %>">
+                                        <%= lang.text %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="col-auto p-0 px-lg-3 px-md-3 d-flex align-items-center">
+                            <img src="/img/arrow_right.svg" alt="arrow right">
+                        </div>
+                        <div class="col pl-0 pl-lg-3 pl-md-3 d-flex align-items-center">
+                            <select class="language-dropdown bg-white btn dropdown-toggle h6 mb-0 rounded" id="to-dash-language" style="height:48px;color:#959595">
+                        </select>
+                       </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center col-12 col-md-5 col-lg-auto data-updated mb-lg-0 mb-md-0 mb-4">
+                    <div class="m-0 pt-2 pt-md-0"><span>
+                                    <%= __('Data Last Updated') %>:
+                                </span><span id="data-updated"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include ../common/noDataFoundPopUp.ejs %>
+    <div class="row" id="speaker-data">
+        <div class="col-12">
+            <div class="row text-center contribution-details contribution-stats d-none" id="contribution-details">
+                <%- include('../common/contributionStats.ejs',{labels :[__('Language pairs'),__('People participated'),__('Translations done'),__('Translations validated')]})%>
+            </div>
+        </div>
+    </div>
+    <div class="row chart-row">
+        <div class="col-12">
+            <div class="row justify-content-center mt-5 mx-0">
+                <div id="map-loader" class="col-12 col-lg-6 text-center d-flex justify-content-center align-items-center chart-spinner">
+                    <span class="spinner"></span></div>
+                <div class="col-12 col-lg-5 mb-3 text-center chart state-chart text-dark p-4">
+                    <div class="text-left px-3 pb-3 state-chart-text">
+                        <%= __('Geographical Distribution') %>
+                    </div>
+                    <%- include ../common/map.ejs %>
+                </div>
+                <div id="timeline-loader" class="col-12 col-lg-5 text-center d-flex justify-content-center align-items-center chart-spinner">
+                    <span class="spinner"></span></div>
+                <div class="col-12 col-lg-5 text-center chart timeline-chart-container">
+                    <%- include ../common/lineGraph.ejs %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<%- include('../common/speakerDetails.ejs',{path:"../"}) %>
+<%- include('../common/feedback.ejs', {page: "Dashboard"}) %>
+<%- include('../common/footer.ejs',{path:"../"}) %>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/js/parallel/dashboard.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/core.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/charts.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/maps.js"></script>
+<script src="https://www.amcharts.com/lib/version/4.9.23/themes/animated.js"></script>
+</body>
+</html>

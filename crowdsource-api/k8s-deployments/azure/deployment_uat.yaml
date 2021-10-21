@@ -14,11 +14,6 @@ spec:
       labels:
         app: vakyansh
     spec:
-      tolerations:
-        - key: "env"
-          operator: "Equal"
-          value: "uat"
-          effect: "NoSchedule"
       containers:
         - image: vakyansh.azurecr.io/vakyansh:uat
           imagePullPolicy: Always
@@ -104,5 +99,5 @@ spec:
 
           resources:
             limits:
-              cpu: 2000m
-              memory: 4Gi
+              cpu: 500m
+              memory: 150Mi

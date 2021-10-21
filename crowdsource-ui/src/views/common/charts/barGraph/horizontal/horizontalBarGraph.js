@@ -1,4 +1,5 @@
 const { calculateTime, formatTime } = require('./utils');
+const { INITIATIVES } = require('./constants');
 
 function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
   const chartReg = {};
@@ -14,7 +15,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
         Number(ele.total_contributions) * 60 * 60,
         true
       );
-      ele.total_contributions_text = type == "suno" || type == "bolo" ? formatTime(hours, minutes, seconds) :  type == "dekho" ? ((ele.total_contribution_count).toString() + " images") : ((ele.total_contribution_count).toString() + " translations");
+      ele.total_contributions_text = type == INITIATIVES.asr.value || type == INITIATIVES.text.value ? formatTime(hours, minutes, seconds) :  type == INITIATIVES.ocr.value ? ((ele.total_contribution_count).toString() + " images") : ((ele.total_contribution_count).toString() + " translations");
     });
   }
   chart.data = response;
@@ -27,7 +28,7 @@ function constructChart(responseData, xAxisLabel, yAxisLabel, type) {
   const valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
   valueAxis.renderer.grid.template.strokeWidth = 0;
   valueAxis.renderer.labels.template.disabled = true;
-  if(type == "likho" || type == "dekho") {
+  if(type == INITIATIVES.parallel.value || type == INITIATIVES.ocr.value) {
     const maxValue = Math.max.apply(Math, chart.data.map(function(o) { return Number(o.total_contribution_count); })) + 50;
     valueAxis.min = 0;
     valueAxis.max = maxValue > 100 ? maxValue : 100;

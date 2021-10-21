@@ -109,13 +109,20 @@ jobs:
     steps:
       - run: echo "Hold for approval"
 
-
   cdn_invalidation:
     executor: azure-cli/default
     parameters:
-      env-name:
+      azure_resource_group:
         description: |
-          Name of the env
+          Name of the resource group
+        type: string
+      azure_profile_name:
+        description: |
+          Name of the cdn profile
+        type: string
+      azure_endpoint_name:
+        description: |
+          Name of the cdn profile
         type: string
       resource-group:
         description: |
@@ -135,7 +142,6 @@ jobs:
           command: |
             az cdn endpoint purge -g << parameters.resource-group >> -n << parameters.env-name >> --profile-name << parameters.profile-name >> --content-paths '/*'
 
-
   aks_deployment_ui:
     executor: azure-aks/default
     parameters:
@@ -147,6 +153,18 @@ jobs:
         description: |
           Name of the env
         type: string
+      azure_resource_group:
+        description: |
+          Name of the resource group
+        type: string
+      azure_login_server_name:
+        description: |
+          Name of the acr
+        type: string
+      azure_repo_api:
+        description: |
+          Name of the image repo
+        type: string
 
     steps:
       - *fast-checkout
@@ -154,7 +172,7 @@ jobs:
           cluster-name: << parameters.cluster-name >>
           install-kubectl: true
           perform-login: true
-          resource-group: ${AZURE_RESOURCE_GROUP}
+          resource-group: << parameters.azure_resource_group >>
       - run:
           name: Deploy container
           command: |
@@ -266,7 +284,6 @@ jobs:
           name: Deploy container
       - run: aws cloudfront create-invalidation --distribution-id ${CUG_DISTRIBUTION_ID} --paths '/*'
 
-
 workflows:
   build_test_deploy:
     jobs:
@@ -319,7 +336,7 @@ workflows:
       #     env-name: dev
       #     requires:
       #       - push_dev_image_next_ui
-      
+
       # - cdn_invalidation:
       #     name: cdn_invalidation_ui_dev
       #     env-name: next-dev

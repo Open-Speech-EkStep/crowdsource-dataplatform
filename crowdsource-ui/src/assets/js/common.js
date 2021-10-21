@@ -47,50 +47,67 @@ function onActiveNavbar(value) {
 const isMobileDevice = () => {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     // true for mobile device
-    return true
+    return true;
   } else {
     // false for not mobile device
     return false;
   }
-}
+};
 
 const showErrorPopup = (status = 500) => {
   const text = getErrorText(status);
   bindErrorText(text);
   const $errorDialog = $('#errorPopup');
   $errorDialog.modal('show');
-}
+};
 
-const getErrorText = (status) => {
-  const errorText = status === ErrorStatusCode.SERVICE_UNAVAILABLE ?
-    translate("We are processing multiple requests at the moment. Please try again after sometime.")
-    : translate("An unexpected error has occurred.");
+const getErrorText = status => {
+  const errorText =
+    status === ErrorStatusCode.SERVICE_UNAVAILABLE
+      ? translate('We are processing multiple requests at the moment. Please try again after sometime.')
+      : translate('An unexpected error has occurred.');
   return errorText;
-}
+};
 
-const bindErrorText = (text) => {
-  const $errorText = $("#error-text");
+const bindErrorText = text => {
+  const $errorText = $('#error-text');
   $errorText.text(text);
-}
+};
 
 const hasUserRegistered = function () {
   const userDetail = localStorage.getItem(SPEAKER_DETAILS_KEY);
   const parsedUserDetails = JSON.parse(userDetail);
   return parsedUserDetails ? true : false;
-}
+};
 
-const safeErrorHandling = (data) => {
+const safeErrorHandling = data => {
   if (data && !data.ok) {
     bindErrorText(data);
     showErrorPopup();
   }
   return data;
-}
+};
 
-const safeJqueryErrorHandling = (e) => {
-  if (e && e.statusText !== "error") {
+const safeJqueryErrorHandling = e => {
+  if (e && e.statusText !== 'error') {
     showErrorPopup();
   }
-}
+};
 
-module.exports = { safeJqueryErrorHandling, showErrorPopup, safeErrorHandling, getContributedAndTopLanguage, onActiveNavbar, isMobileDevice, hasUserRegistered };
+const redirectToHomeForDirectLanding = function () {
+  if (!document.referrer) {
+    location.href = './home.html';
+    return;
+  }
+};
+
+module.exports = {
+  safeJqueryErrorHandling,
+  showErrorPopup,
+  safeErrorHandling,
+  getContributedAndTopLanguage,
+  onActiveNavbar,
+  isMobileDevice,
+  hasUserRegistered,
+  redirectToHomeForDirectLanding,
+};

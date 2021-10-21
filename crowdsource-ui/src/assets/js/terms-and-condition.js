@@ -1,4 +1,4 @@
-const {CONTRIBUTION_LANGUAGE} = require('./constants');
+const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE} = require('./constants');
 const {
     updateLocaleLanguagesDropdown
   } = require('./utils');
@@ -43,7 +43,7 @@ function setupScroll() {
 
 
 $(document).ready(function () {
-    localStorage.setItem("module", "home");
+    localStorage.setItem(CURRENT_MODULE, "home");
     document.body.querySelector('footer').classList.remove('fixed-bottom');
     setupScroll();
     const language = localStorage.getItem(CONTRIBUTION_LANGUAGE) || 'english';

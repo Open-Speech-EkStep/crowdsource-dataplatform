@@ -8,23 +8,21 @@
                 <span class="navbar-toggler-icon" style="height:18px;width:18px"></span>
             </button>
             <div class="d-flex align-items-center">
-                <a class="logo-text text-dark" href="<%- `/${locale}/home` %>">
-                    <h2 class="mb-0" id="bhasini_logo">
-                        <img src="<%- `/img/${locale}-logo.svg` %>" class="d-none d-md-block d-lg-block" alt="Bhaashini" width="200" height="65">
-                        <img src="<%- `/img/${locale}-logo-sm.svg` %>" class="d-block d-sm-block d-md-none d-lg-none mobile-logo" alt="Bhaashini" width="48" height="48">
+                <a class="logo-text text-dark" href="/">
+                    <h2 class="mb-0" id="brand_logo">
+                        <img src="<%- `/img/${locale}-logo.svg` %>" class="d-none d-md-block d-lg-block" alt="Brand" width="200" height="65">
+                        <img src="<%- `/img/${locale}-logo-sm.svg` %>" class="d-block d-sm-block d-md-none d-lg-none mobile-logo" alt="Brand" width="48" height="48">
                     </h2>
                 </a>
                 <div class="vertical-line ml-1 ml-lg-0"></div>
-                <%- include('./bhasadaanLogoText.ejs',{url:`/${locale}/home`}) %>
+                <%- include ./titleLogoText.ejs %>
                 <div id="logo_separator" class="ml-3 mr-0"></div>
             </div>
         </div>
         <div class="row ml-2 pl-1 d-none-mob d-none d-lg-flex">
             <img src="<%= `/img/${locale}-${img}`%>" alt="module_logo" width="50" height="40" id="module_header_logo">
             <a class="m-0 align-self-center text-decoration-none text-primary" style="padding-right:10px;padding-left:10px" href="<%= homePath %>">
-                <%= __(MODULE) %> <span style="color:#ffbf00">
-                        <%= __('India')%>
-                    </span>
+                <%= __(MODULE) %> 
             </a>
             <div id="tilt_line"></div>
             <p class="m-0 align-self-center text-primary">
@@ -36,33 +34,25 @@
                 <li class="nav-item module-item p-2 d-none" value="home"><a href="" class="nav-link text-muted-white">
                         <%= __('Home') %>
                     </a></li>
-                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="suno"><a id="suno_india_tab" href="../sunoIndia/home" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
+                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="<%- `${config.initiativeKey_1}` %>"><a id="asr_initiative_tab" href="../asr/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                         <span>
-                            <%= __('Suno') %>
-                        </span> <span>
-                            <%= __('India') %>
-                        </span>
+                            <%= __(config.initiative_1) %>
+                        </span> 
                     </a></li>
-                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="bolo"><a id="bolo_india_tab" href="../boloIndia/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
+                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="<%- `${config.initiativeKey_2}` %>"><a id="text_initiative_tab" href="../text/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                         <span>
-                            <%= __('Bolo') %>
-                        </span> <span>
-                            <%= __('India') %>
-                        </span>
+                            <%= __(config.initiative_2) %>
+                        </span> 
                     </a></li>
-                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="likho"><a id="likho_india_tab" href="../likhoIndia/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
+                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="<%- `${config.initiativeKey_3}` %>"><a id="parallel_initiative_tab" href="../parallel/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                         <span>
-                            <%= __('Likho') %>
-                        </span> <span>
-                            <%= __('India') %>
-                        </span>
+                            <%= __(config.initiative_3) %>
+                        </span> 
                     </a></li>
-                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="dekho"><a id="dekho_india_tab" href="../dekhoIndia/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
+                <li class="nav-item module-item pl-4 pt-2 pb-2 pr-2 d-flex align-items-center" value="<%- `${config.initiativeKey_4}` %>"><a id="ocr_initiative_tab" href="../ocr/home.html" class="nav-link text-muted-white pl-2 p-lg-2 p-md-2">
                         <span>
-                            <%= __('Dekho') %>
-                        </span> <span>
-                            <%= __('India') %>
-                        </span>
+                            <%= __(config.initiative_4) %>
+                        </span> 
                     </a></li>
             </ul>
         </div>

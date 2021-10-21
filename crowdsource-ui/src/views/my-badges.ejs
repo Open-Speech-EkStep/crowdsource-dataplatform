@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
+  <title><%=`${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})` %></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
-  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -16,8 +16,8 @@
 </head>
 
 <body>
-  <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
-    suno:"./sunoIndia/home",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+  <%- include('common/header/header.ejs',{home:"./home.html", text:"./text/home.html",
+    asr:"./asr/home.html",parallel:"./parallel/home.html",ocr:"./ocr/home.html",path:"./"}); %>
     <div id="content-wrapper" class="container-fluid padding-top-65 pb-2 p-0 bg-light">
       <div class="bg-badge px-lg-3 px-md-3 px-4 pt-5">
       <div class="row">
@@ -40,34 +40,34 @@
             <div class="row m-0">
               <ul class="nav nav-tabs w-100 bg-white" id="my-badge" role="tablist">
                 <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
-                  <a class="nav-link border-0 ml-4 ml-lg-0 ml-md-0 active light-bg font-family-Rowdies" id="suno-tab" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
-                      <%= __('Suno India')%>
+                  <a class="nav-link border-0 ml-4 ml-lg-0 ml-md-0 active light-bg font-family-Rowdies" id="asr-tab" data-toggle="tab" href="#asr" role="tab" aria-controls="asr" aria-selected="true">
+                      <%= __(config.initiative_1)%>
                   </a>
                 </li>
                 <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
-                  <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo-tab" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
-                      <%= __('Bolo India')%>
+                  <a class="nav-link border-0 light-bg font-family-Rowdies" id="text-tab" data-toggle="tab" href="#text" role="tab" aria-controls="text" aria-selected="true">
+                      <%= __(config.initiative_2)%>
                   </a>
                 </li>
                 <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
-                  <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho-tab" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
-                      <%= __('Likho India')%>
+                  <a class="nav-link border-0 light-bg font-family-Rowdies" id="parallel-tab" data-toggle="tab" href="#parallel" role="tab" aria-controls="parallel" aria-selected="true">
+                      <%= __(config.initiative_3)%>
                   </a>
                 </li>
                 <li class="nav-item col-lg-3 col-md-3 p-0 text-center">
-                  <a class="nav-link border-0 light-bg font-family-Rowdies" id="dekho-tab" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
-                      <%= __('Dekho India')%>
+                  <a class="nav-link border-0 light-bg font-family-Rowdies" id="ocr-tab" data-toggle="tab" href="#ocr" role="tab" aria-controls="ocr" aria-selected="true">
+                      <%= __(config.initiative_4)%>
                   </a>
                 </li>
               </ul>
               <div class="tab-content w-100" id="badge-profile-content">
                 <div class="text-center badge-popover" id="badge-popover">
                   <div class="">
-                    <img src="/img/suno_bronze_medal.svg" alt="" class="badge-img-fluid">
+                    <img src="/img/en_asr_badge_1_contribute.svg" alt="" class="badge-img-fluid">
                   </div>
                 </div>
-                <div class="tab-pane fade active show" id="suno" role="tabpanel" aria-labelledby="suno-tab">
-                  <div class="row mx-0 my-4 my-badges-heading" id="suno-type">
+                <div class="tab-pane fade active show" id="asr" role="tabpanel" aria-labelledby="asr-tab">
+                  <div class="row mx-0 my-4 my-badges-heading" id="asr-type">
                     <div class="col-2"></div>
                     <div class="col-5">
                       <h6 class="font-weight-normal font-family-Rowdies">
@@ -80,12 +80,12 @@
                       </h6>
                     </div>
                   </div>
-                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="suno-badge">
+                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="asr-badge">
 
                   </div>
                 </div>
-                <div class="tab-pane fade" id="bolo" role="tabpanel" aria-labelledby="bolo-tab">
-                  <div class="row mx-0 my-4 my-badges-heading" id="bolo-type">
+                <div class="tab-pane fade" id="text" role="tabpanel" aria-labelledby="text-tab">
+                  <div class="row mx-0 my-4 my-badges-heading" id="text-type">
                     <div class="col-2"></div>
                     <div class="col-5">
                       <h6 class="font-weight-normal font-family-Rowdies">
@@ -98,12 +98,12 @@
                       </h6>
                     </div>
                   </div>
-                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="bolo-badge">
+                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="text-badge">
 
                   </div>
                 </div>
-                <div class="tab-pane fade" id="likho" role="tabpanel" aria-labelledby="likho-tab">
-                  <div class="row mx-0 my-4 my-badges-heading" id="likho-type">
+                <div class="tab-pane fade" id="parallel" role="tabpanel" aria-labelledby="parallel-tab">
+                  <div class="row mx-0 my-4 my-badges-heading" id="parallel-type">
                     <div class="col-2"></div>
                     <div class="col-5">
                       <h6 class="font-weight-normal font-family-Rowdies">
@@ -116,12 +116,12 @@
                       </h6>
                     </div>
                   </div>
-                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="likho-badge">
+                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="parallel-badge">
 
                   </div>
                 </div>
-                <div class="tab-pane fade" id="dekho" role="tabpanel" aria-labelledby="dekho-tab">
-                  <div class="row mx-0 my-4 my-badges-heading" id="dekho-type">
+                <div class="tab-pane fade" id="ocr" role="tabpanel" aria-labelledby="ocr-tab">
+                  <div class="row mx-0 my-4 my-badges-heading" id="ocr-type">
                     <div class="col-2"></div>
                     <div class="col-5">
                       <h6 class="font-weight-normal font-family-Rowdies">
@@ -134,7 +134,7 @@
                       </h6>
                     </div>
                   </div>
-                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="dekho-badge">
+                  <div class="row m-0 pl-3 pl-lg-0 badge-section" id="ocr-badge">
 
                   </div>
                 </div>
@@ -148,7 +148,7 @@
             <li>
               <%= __('Please keep contributing actively to stand a chance to get recognised.')%>
             </li>
-            <li>
+            <li class="d-none">
               <%= __('Your contribution will be validated before confirming the badge.')%>
             </li>
             <li>

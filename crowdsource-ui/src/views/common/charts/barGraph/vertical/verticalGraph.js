@@ -1,5 +1,5 @@
 const { calculateTime, formatTime, translate } = require('./utils');
-const { LOCALE_STRINGS } = require('./constants');
+const { LOCALE_STRINGS ,INITIATIVES} = require('./constants');
 const chartReg = {};
 
 const drawTopLanguageChart = (chartData, type, dataType, page) => {
@@ -11,10 +11,10 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     localStorage.getItem(LOCALE_STRINGS)
   ) || {};
   const images = 'Images', translations = 'Translations', sentences = 'Sentences', speakers = 'Speakers';
-  const dekhoToolTipStr = (localStrings[images] || images).toLowerCase();
-  const likhoToolTipStr = (localStrings[translations] || translations).toLowerCase();
-  const sunoToolTipStr = (localStrings[sentences] || sentences).toLowerCase();
-  const boloSpeakerToolTipStr = (localStrings[speakers] || speakers).toLowerCase();
+  const ocrToolTipStr = (localStrings[images] || images).toLowerCase();
+  const parallelToolTipStr = (localStrings[translations] || translations).toLowerCase();
+  const asrToolTipStr = (localStrings[sentences] || sentences).toLowerCase();
+  const textSpeakerToolTipStr = (localStrings[speakers] || speakers).toLowerCase();
   am4core.ready(function () {
     const chart = am4core.create('top-language-chart', am4charts.XYChart);
 
@@ -23,17 +23,17 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       if (currentFunctionalPage == "validate") {
         chartData.forEach(item => {
           item.total_validation_count = item.total_validation_count ? item.total_validation_count : 0;
-          item.contributedHours = type == "suno" || type == "bolo" ? ((item.total_validation_count).toString() + " " + sunoToolTipStr) : type == "dekho" ? ((item.total_validation_count).toString() + " " + dekhoToolTipStr) : ((item.total_validation_count).toString() + " " + likhoToolTipStr);
+          item.contributedHours = type == INITIATIVES.asr.value || type == INITIATIVES.text.value ? ((item.total_validation_count).toString() + " " + asrToolTipStr) : type == INITIATIVES.ocr.value ? ((item.total_validation_count).toString() + " " + ocrToolTipStr) : ((item.total_validation_count).toString() + " " + parallelToolTipStr);
         });
       } else {
         chartData.forEach(item => {
           item.total_contributions = item.total_contributions ? item.total_contributions : 0.000;
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions) * 60 * 60), true);
-          if (type == "bolo") {
+          if (type == INITIATIVES.text.value) {
             item.contributedHours = formatTime(cHours, cMinutes, cSeconds);
           } else {
-            item.contributedHours = type == "suno" ? ((item.total_contribution_count).toString() + " " + sunoToolTipStr) : type == "dekho" ? ((item.total_contribution_count).toString() + " " + dekhoToolTipStr) : ((item.total_contribution_count).toString() + " " + likhoToolTipStr);
+            item.contributedHours = type == INITIATIVES.asr.value ? ((item.total_contribution_count).toString() + " " + asrToolTipStr) : type == INITIATIVES.ocr.value ? ((item.total_contribution_count).toString() + " " + ocrToolTipStr) : ((item.total_contribution_count).toString() + " " + parallelToolTipStr);
           }
         });
       }
@@ -44,17 +44,17 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
           item.total_contributions = item.total_contributions ? item.total_contributions : 0.000;
           item.total_contribution_count = item.total_contribution_count ? item.total_contribution_count : 0;
           const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime((Number(item.total_contributions) * 60 * 60), true);
-          item.contributedHours = type == "suno" || type == "bolo" ? (dataType === "sentences" ? ((item.total_contribution_count || 0).toString() + " " + sunoToolTipStr) : formatTime(cHours, cMinutes, cSeconds)) : type == "dekho" ? ((item.total_contribution_count).toString() + " " + dekhoToolTipStr) : ((item.total_contribution_count).toString() + " " + likhoToolTipStr);
+          item.contributedHours = type == INITIATIVES.asr.value || type == INITIATIVES.text.value ? (dataType === "sentences" ? ((item.total_contribution_count || 0).toString() + " " + asrToolTipStr) : formatTime(cHours, cMinutes, cSeconds)) : type == INITIATIVES.ocr.value ? ((item.total_contribution_count).toString() + " " + ocrToolTipStr) : ((item.total_contribution_count).toString() + " " + parallelToolTipStr);
         });
       } else {
         chartData.forEach(item => {
-          item.contributedHours = ((item.total_speakers).toString() + " " + boloSpeakerToolTipStr);
+          item.contributedHours = ((item.total_speakers).toString() + " " + textSpeakerToolTipStr);
         });
       }
     }
 
     chartData.forEach(data => {
-      if (type === 'likho') {
+      if (type === INITIATIVES.parallel.value) {
         let languages = data.language.split("-")
         let fromLanguage = translate(languages[0]);
         let toLanguage = translate(languages[1]);
@@ -86,13 +86,13 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
     if (page === 'thankyou') {
       const currentFunctionalPage = localStorage.getItem("selectedType");
       if (currentFunctionalPage == "validate") {
-        valueAxis.title.text = type == "suno" || type == "bolo" || type == "likho" ? localStrings["Validation (in sentences)"] : localStrings['Validation (in image labels)'];
+        valueAxis.title.text = type == INITIATIVES.asr.value || type == INITIATIVES.text.value || type == INITIATIVES.parallel.value ? localStrings["Validation (in sentences)"] : localStrings['Validation (in image labels)'];
       } else {
-        if (type == "suno") {
+        if (type == INITIATIVES.asr.value) {
           valueAxis.title.text = localStrings['Transcription (in sentences)'];
-        } else if (type == "bolo") {
+        } else if (type == INITIATIVES.text.value) {
           valueAxis.title.text = localStrings['Recordings (in hours)'];
-        } else if (type == "likho") {
+        } else if (type == INITIATIVES.parallel.value) {
           valueAxis.title.text = localStrings['Translation (in sentences)'];
         } else {
           valueAxis.title.text = localStrings['Labelled (in images)'];
@@ -100,9 +100,9 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       }
     } else {
       if (dataType !== "speaker") {
-        valueAxis.title.text = type == "suno" || type == "bolo" ? (dataType == "sentences" ? localStrings["Contribution (total sentences)"] : localStrings["Contribution (in hours)"]) : type == "dekho" ? localStrings["Contribution (total images)"] : localStrings['Contribution (total translations)'];
+        valueAxis.title.text = type == INITIATIVES.asr.value || type == INITIATIVES.text.value ? (dataType == "sentences" ? localStrings["Contribution (total sentences)"] : localStrings["Contribution (in hours)"]) : type == INITIATIVES.ocr.value ? localStrings["Contribution (total images)"] : localStrings['Contribution (total translations)'];
       } else {
-        valueAxis.title.text = type == "bolo" ? localStrings["Contribution (total speakers)"] : "";
+        valueAxis.title.text = type == INITIATIVES.text.value ? localStrings["Contribution (total speakers)"] : "";
       }
     }
 
@@ -119,11 +119,11 @@ const drawTopLanguageChart = (chartData, type, dataType, page) => {
       if (currentFunctionalPage == "validate") {
         series.dataFields.valueY = 'total_validation_count';
       } else {
-        series.dataFields.valueY = type == "bolo" ? 'total_contributions' : 'total_contribution_count';
+        series.dataFields.valueY = type == INITIATIVES.text.value ? 'total_contributions' : 'total_contribution_count';
       }
     } else {
       if (dataType != "speaker") {
-        series.dataFields.valueY = type == "suno" || type == "bolo" ? (dataType === "sentences" ? 'total_contribution_count' : 'total_contributions') : 'contributedHours';
+        series.dataFields.valueY = type == INITIATIVES.asr.value || type == INITIATIVES.text.value ? (dataType === "sentences" ? 'total_contribution_count' : 'total_contributions') : 'contributedHours';
       } else {
         series.dataFields.valueY = 'contributedHours';
       }

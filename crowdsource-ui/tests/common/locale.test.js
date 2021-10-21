@@ -1,50 +1,50 @@
 const {mockLocalStorage, mockLocation} = require('../utils');
-const {CURRENT_MODULE} = require('../../build/js/common/constants');
+const {CURRENT_MODULE,INITIATIVES} = require('../../build/js/common/constants');
 const {changeLocale} = require('../../build/js/common/locale.js');
 
 
 describe("changeLocale", () => {
-  test("should redirect to boloIndia home page with given localisation language", () => {
+  test("should redirect to text initiative home page with given localisation language", () => {
     mockLocalStorage();
     mockLocation();
-    localStorage.setItem(CURRENT_MODULE, 'bolo');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
     changeLocale('en');
     const localeValue = sessionStorage.getItem("i18n");
-    expect(location.href).toEqual("/en/boloIndia/home.html")
+    expect(location.href).toEqual("/en/text/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
 
   })
 
-  test("should redirect to sunoIndia home page with given localisation language", () => {
+  test("should redirect to asr initiative home page with given localisation language", () => {
     mockLocalStorage();
     mockLocation();
-    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     changeLocale('en');
     const localeValue = sessionStorage.getItem("i18n");
-    expect(location.href).toEqual("/en/sunoIndia/home.html")
+    expect(location.href).toEqual("/en/asr/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
   })
 
-  test("should redirect to dekhoIndia home page with given localisation language", () => {
+  test("should redirect to ocr initiative home page with given localisation language", () => {
     mockLocalStorage();
     mockLocation();
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     changeLocale('en');
     const localeValue = sessionStorage.getItem("i18n");
-    expect(location.href).toEqual("/en/dekhoIndia/home.html")
+    expect(location.href).toEqual("/en/ocr/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
   })
 
-  test("should redirect to likhoIndia home page with given localisation language", () => {
+  test("should redirect to parallel initiative home page with given localisation language", () => {
     mockLocalStorage();
     mockLocation();
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     changeLocale('en');
     const localeValue = sessionStorage.getItem("i18n");
-    expect(location.href).toEqual("/en/likhoIndia/home.html")
+    expect(location.href).toEqual("/en/parallel/home.html")
     expect(localeValue).toEqual("en")
     localStorage.clear();
   })
@@ -64,63 +64,63 @@ describe("changeLocale", () => {
     mockLocalStorage();
     mockLocation();
     location.href = '/'
-    localStorage.setItem(CURRENT_MODULE, 'bolo');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
     const localeValue = sessionStorage.getItem("i18n");
-    expect(location.href).toEqual("/hi/boloIndia/home.html")
+    expect(location.href).toEqual("/hi/text/home.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
   })
 
-  test("should redirect to boloIndia previous page when previous page is not homepage", () => {
+  test("should redirect to text initiative previous page when previous page is not homepage", () => {
     mockLocalStorage();
     mockLocation();
-    location.href = '/en/boloIndia/dashboard.html'
-    localStorage.setItem(CURRENT_MODULE, 'bolo');
+    location.href = '/en/text/dashboard.html'
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
     const localeValue = sessionStorage.getItem("i18n");
-    expect(location.href).toEqual("/hi/boloIndia/dashboard.html")
+    expect(location.href).toEqual("/hi/text/dashboard.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
   })
 
-  test("should redirect to sunoIndia currentPage when current page is not homepage", () => {
+  test("should redirect to asr initiative currentPage when current page is not homepage", () => {
     mockLocalStorage();
     mockLocation();
     location.href = '/en/dashboard.html'
-    localStorage.setItem(CURRENT_MODULE, 'suno');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
     const localeValue = localStorage.getItem("i18n");
-    expect(location.href).toEqual("/hi/sunoIndia/dashboard.html")
+    expect(location.href).toEqual("/hi/asr/dashboard.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
   })
 
-  test("should redirect to dekhoIndia currentPage when current page is not homepage", () => {
+  test("should redirect to ocr initiative currentPage when current page is not homepage", () => {
     mockLocalStorage();
     mockLocation();
     location.href = '/en/dashboard.html'
-    localStorage.setItem(CURRENT_MODULE, 'dekho');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
     const localeValue = localStorage.getItem("i18n");
-    expect(location.href).toEqual("/hi/dekhoIndia/dashboard.html")
+    expect(location.href).toEqual("/hi/ocr/dashboard.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
   })
 
-  test("should redirect to likhoIndia currentPage when current page is not homepage", () => {
+  test("should redirect to parallel initiative currentPage when current page is not homepage", () => {
     mockLocalStorage();
     mockLocation();
-    location.href = '/en/likhoIndia/record.html'
-    localStorage.setItem(CURRENT_MODULE, 'likho');
+    location.href = '/en/parallel/record.html'
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem('i18n', 'hi');
     changeLocale('hi');
     const localeValue = localStorage.getItem("i18n");
-    expect(location.href).toEqual("/hi/likhoIndia/record.html")
+    expect(location.href).toEqual("/hi/parallel/record.html")
     expect(localeValue).toEqual("hi")
     localStorage.clear();
   })

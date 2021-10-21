@@ -85,13 +85,13 @@ const validateUserInfo = function (req, res, next) {
 
     const isValidType = (MEDIA_TYPES.includes(type));
 
-    // console.log(config.get('whitelistingEmail') != "enabled", "config.get('whitelistingEmail') != 'enabled'")
-    // console.log(userName.length > MAX_LENGTH, "userName.length > MAX_LENGTH")
-    // console.log(MOBILE_REGEX.test(userName), "MOBILE_REGEX.test(userName)")
-    // console.log(EMAIL_REGEX.test(userName), "EMAIL_REGEX.test(userName)")
-    // console.log(!isValidType, "!isValidType")
-    // console.log(!language, "!language")
-    // console.log((userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language), "(userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language)")
+    console.log(config.get('whitelistingEmail') != "enabled", "config.get('whitelistingEmail') != 'enabled'")
+    console.log(userName.length > MAX_LENGTH, "userName.length > MAX_LENGTH")
+    console.log(MOBILE_REGEX.test(userName), "MOBILE_REGEX.test(userName)")
+    console.log(EMAIL_REGEX.test(userName), "EMAIL_REGEX.test(userName)")
+    console.log(!isValidType, "!isValidType")
+    console.log(!language, "!language")
+    console.log((userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language), "(userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language)")
 
     if (config.get('whitelistingEmail') != "enabled" && (userName.length > MAX_LENGTH || MOBILE_REGEX.test(userName) || EMAIL_REGEX.test(userName) || !isValidType || !language) ){
         return res.status(400).send("Bad request");

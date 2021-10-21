@@ -2,7 +2,7 @@
 Tags: component
 
 * Open Website
-* Select "suno_india_tab" from header
+* Select "asr_initiative_tab" from header
 
 ## Check Home Page
 * Validate Suno India content
@@ -87,12 +87,12 @@ Tags: component
 * User skips the next "3" sentences user should land on Thank you page in "English"
 * User should see the "Validate More" button
 * Navigate to "Know more" button and click "Know more" button
-* should select "" radio button, "Validate 5 sentences in Kannada and earn Suno India Bronze Bhasha Samarthak badge" text & "bronze","silver","gold","platinum" image exist by default
+* should select "" radio button, "Validate 5 sentences in Kannada and earn Suno India Bronze Bhasha Samarthak badge" text & "badge_1","badge_2","badge_3","badge_4" image exist by default
 * When user clicks on back button, user should land on home page
 
 
 ## Check Dashboard Page
-* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
+* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "Geographical Distribution"
 * user should be able to see "People participated" , "Duration transcribed" , "Duration validated" , "Languages"
 * When user select "ಕನ್ನಡ" Language from dropdown then "Languages" should not visible
 * When user clicks on back button, user should land on home page
@@ -108,7 +108,7 @@ Tags: component
 * Select MyBadges from the dropdown
 * "Congratulations" text should be visible
 * "Badge User" text should be visible
-* when user navigates to "dekho-tab" tab user should see badges 
-* when user navigates to "suno-tab" tab user should see badges 
-* when user navigates to "likho-tab" tab user should see badges 
+* when user navigates to "ocr-tab" tab user should see badges 
+* when user navigates to "asr-tab" tab user should see badges 
+* when user navigates to "parallel-tab" tab user should see badges 
 * When user clicks on back button, user should land on Bhasha Daan home page

@@ -2,7 +2,7 @@ const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = re
 const { redirectToLocalisedPage, changeLocale } = require('./locale');
 const { setDropdownValues } = require('../../../build/js/common/header');
 const { setParticipationDataFromJson } = require('../../../build/js/common/contributionStats.js');
-const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, SPEAKER_DETAILS_KEY, DEFAULT_CON_LANGUAGE,CURRENT_MODULE } = require('./constants');
 const { hasUserRegistered, safeJqueryErrorHandling } = require('./common');
 const { json_url } = require('./env-api');
 
@@ -13,7 +13,7 @@ $(document).ready(function () {
     safeJqueryErrorHandling(e);
   });
 
-  localStorage.setItem('module', 'home');
+  localStorage.setItem(CURRENT_MODULE, 'home');
 
   if (!sessionStorage.getItem("i18n")) {
     localStorage.setItem(CONTRIBUTION_LANGUAGE, DEFAULT_CON_LANGUAGE);

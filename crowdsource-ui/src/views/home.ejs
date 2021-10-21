@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)</title>
+  <head>
+    <title><%= `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU">
-    <meta name="description" content="Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice">
-    <meta property="og:title" content="<%= __('Bhasha Daan: A crowdsourcing initiative for Indian languages') %>">
+    <meta name="description" content="<%- `${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice` %>">
+    <meta property="og:title" content="<%= __(`${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages`) %>">
     <meta property="og:description" content="<%= __('social sharing text without rank') %>">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Bhasha Daan">
-    <meta property="og:url" content="<%- `https://bhashini.gov.in/bhashadaan/${locale}/home.html` %>">
+    <meta property="og:site_name" content="<%- `${config.title_1} ${config.title_2}` %>">
+    <meta property="og:url" content="<%- `https://${config.brand_url}/${locale}/home.html` %>">
     <meta name="image" property="og:image" content="/img/favicon.png">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
-    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -24,111 +23,113 @@
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/home.css">
     <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common.css">
     <link rel="icon" type="image/png" href="/img/favicon.png">
-</head>
+  </head>
 
-<body class="bg-white">
-<%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html", suno:"./sunoIndia/home",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
-<div class="container-fluid supreme-container px-0 padding-top-65">
-    <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto">
-    <div class="row m-0 text-btn-primary" id="banner">
-        <div class="left-bg w-100">
+  <body class="bg-white">
+    <%- include('common/header/header.ejs',{home:"./home.html", text:"./text/home.html",
+    asr:"./asr/home.html",parallel:"./parallel/home.html",ocr:"./ocr/home.html",path:"./"}); %>
+    <div class="container-fluid supreme-container px-0 padding-top-65">
+      <div class="platform-intro-section-cover mb-0 pb-0" style="margin:auto">
+        <div class="row m-0 text-btn-primary" id="banner">
+          <div class="left-bg w-100">
             <div class="right-bg">
-             <div class="container-fluid row m-0 text-center justify-content-center">
-                 <div class="col-md-8 col-lg-8 col-12 p-lg-5 p-md-5 p-3">
-                     <div class="row">
-                         <div class="col-xs-12 col-sm-12">
-                             <h1 class="h1 pt-5 font-family-Rowdies" style="font-weight:300"><%= __('Bhasha') %>&nbsp<span class="yellow"><%= __('Daan') %></span></h1>
-                             <div class="font-size-lg-32 mt-lg-0 mt-md-0 mt-4 mb-lg-0 mb-md-0 mb-2 px-3 px-lg-0 px-md-0">
-                                <%= __('One platform, multiple crowdsourcing initiatives') %>
-                             </div>
-                             <div class="h5 pt-lg-3 pt-4 pt-md-3 font-weight-normal px-3 px-lg-0 px-md-0 mb-0 mb-lg-2 mb-md-2">
-                                <%= __('Help to build an open repository of data to digitally enrich your language') %>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             </div>
-        </div>
-    </div>
-        <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4">
-            <%- include common/platformCardSection/platformCardSection.ejs %>
-        </div>
-    </div>
-    <div class="row m-0" id="contribution_stats">
-        <div class="col-12 p-5 mt-5 text-dark">
-            <div id="contribution-section">
-                <h2 class="font-wt-700 site-blue lh-5 font-family-Rowdies text-center text-lg-left text-md-left">
-                    <%= __('Total Participation') %>
-                </h2>
-                <div class="row mt-3" id="participation-data">
-                    <div class="col-12 col-lg-12 col-md-12">
-                        <div class="row text-center contribution-details contribution-stats" id="contribution-details">
-                            <%- include('common/contributionStats/contributionStats.ejs', {labels :[ __('Suno India').toUpperCase(), __('Bolo India').toUpperCase(), __('Likho India').toUpperCase(), __('Dekho India').toUpperCase()]}) %>
-                        </div>
+              <div class="container-fluid row m-0 text-center justify-content-center">
+                <div class="col-md-8 col-lg-8 col-12 p-lg-5 p-md-5 p-3">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                      <h1 class="h1 pt-5 font-family-Rowdies" style="font-weight:300"><%= __(config.title_1) %>&nbsp<span class="yellow"><%= __(config.title_2) %></span></h1>
+                      <div class="font-size-lg-32 mt-lg-0 mt-md-0 mt-4 mb-lg-0 mb-md-0 mb-2 px-3 px-lg-0 px-md-0">
+                        <%= __('One platform, multiple crowdsourcing initiatives') %>
+                      </div>
+                      <div class="h5 pt-lg-3 pt-4 pt-md-3 font-weight-normal px-3 px-lg-0 px-md-0 mb-0 mb-lg-2 mb-md-2">
+                        <%= __('Help to build an open repository of data to digitally enrich your language')
+                        %>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-
-    </div>
-    <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4 mt-4">
-    <div class="mb-5 pb-3 mt-1" id="badge-section">
-        <div class="row my-2 mx-0 justify-content-center">
+        <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4">
+          <%- include common/platformCardSection/platformCardSection.ejs %>
+        </div>
+      </div>
+      <div class="row m-0" id="contribution_stats">
+        <div class="col-12 p-5 mt-5 text-dark">
+          <div id="contribution-section">
+            <h2 class="font-wt-700 site-blue lh-5 font-family-Rowdies text-center text-lg-left text-md-left">
+              <%= __('Total Participation') %>
+            </h2>
+            <div class="row mt-3" id="participation-data">
+              <div class="col-12 col-lg-12 col-md-12">
+                <div class="row text-center contribution-details contribution-stats" id="contribution-details">
+                  <%- include('common/contributionStats/contributionStats.ejs', {labels :[ __(config.initiative_1).toUpperCase(), __(config.initiative_2).toUpperCase(), __(config.initiative_3).toUpperCase(),
+                  __(config.initiative_4).toUpperCase()]}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 justify-content-center text-center px-lg-5 px-md-5 px-4 mt-4">
+        <div class="mb-5 pb-3 mt-1" id="badge-section">
+          <div class="row my-2 mx-0 justify-content-center">
             <div class="my-4 mt-lg-5 mt-md-5 mb-lg-0 mb-md-0 col-xl home-badge-link p-lg-0 p-md-0">
-                <div class="font-weight-normal home-badge-link-row text-btn-primary text-xl-left text-md-center text-center"> <%= __('Contribute and become a Bhasha Samarthak') %></div>
-                <div class="text-primary text-xl-left text-md-center text-center font-weight-bold home-badge-link-row2 know-more-link mt-4" style="font-family:Rowdies"><a href="./badges.html"><%= __('Know More') %></a></div>
+              <div class="font-weight-normal home-badge-link-row text-btn-primary text-xl-left text-md-center text-center">
+                <%= __(`Contribute and become a ${config.brand_contributor}`) %></div>
+              <div class="text-primary text-xl-left text-md-center text-center font-weight-bold home-badge-link-row2 know-more-link mt-4" style="font-family:Rowdies"><a href="./badges.html"><%= __('Know More') %></a></div>
             </div>
             <div class="d-flex justify-content-center my-4 mt-lg-5 mt-md-5 mb-lg-0 mb-md-0 col-xl home-badge-row text-center">
-                <div class="medal-img"><img src="<%- `/img/${locale}_bolo_bronze_contribute.svg` %>" alt="bronze image"></div>
-                <div class="medal-img"><img src="<%- `/img/${locale}_bolo_silver_contribute.svg` %>" alt="silver image"></div>
-                <div class="medal-img"><img src="<%- `/img/${locale}_bolo_gold_contribute.svg` %>" alt="gold image"></div>
-                <div class="medal-img"><img src="<%- `/img/${locale}_bolo_platinum_contribute.svg` %>" alt="platinum image"></div>
+              <div class="medal-img"><img src="<%- `/img/${locale}_text_badge_1_contribute.svg` %>" alt="badge_1 image"></div>
+              <div class="medal-img"><img src="<%- `/img/${locale}_text_badge_2_contribute.svg` %>" alt="badge_2 image"></div>
+              <div class="medal-img"><img src="<%- `/img/${locale}_text_badge_3_contribute.svg` %>" alt="badge_3 image"></div>
+              <div class="medal-img"><img src="<%- `/img/${locale}_text_badge_4_contribute.svg` %>" alt="badge_4 image"></div>
             </div>
-        </div>
-        <div class="row p-0 mx-4 mx-lg-0 mx-md-0 mt-lg-5 mt-md-0 mt-1" id="badge-section-card-cover">
+          </div>
+          <div class="row p-0 mx-4 mx-lg-0 mx-md-0 mt-lg-5 mt-md-0 mt-1" id="badge-section-card-cover">
             <div class="col-12 row mx-0 px-0" id="badge-section-card">
-                <div class="col-lg-2 col-12 text-lg-left text-md-center text-center badge-card-img-box pt-3">
-                    <img src="<%- `/img/${locale}_bolo_bronze_contribute.svg` %>" alt="bronze image" height="164px" width="135px" class="img-fluid mx-2">
+              <div class="col-lg-2 col-12 text-lg-left text-md-center text-center badge-card-img-box pt-3">
+                <img src="<%- `/img/${locale}_text_badge_1_contribute.svg` %>" alt="badge_1 image" height="164px" width="135px" class="img-fluid mx-2">
+              </div>
+              <div class="col-lg-10 col-md-12 col-12 text-lg-left text-md-center text-center mx-0 px-0 badge-card-text-box">
+                <h2 class="pt-lg-4 pt-3 pl-lg-0 pl-md-3 mt-4 mt-lg-0 mt-md-0 font-family-Rowdies"><%= __(`${config.badge_1.slice(0,1).toUpperCase()+config.badge_1.slice(1)} ${config.brand_contributor} Badge`)%></h2>
+                <h4 class="font-weight-normal mb-lg-2 mb-md-1 pl-lg-0 pl-md-3 mb-5"><%= __('Contribute just 5 sentences in your language')%></h4>
+                <div class="pb-4 pt-3">
+                  <button class="btn btn-custom-primary rounded-pill ml-lg-0 mr-lg-3 mx-1 my-md-2" onclick='location.href="./asr/home.html"'><%= __(config.initiative_1).toUpperCase() %>
+                  </button>
+                  <button class="btn btn-custom-primary rounded-pill ml-lg-4 mr-lg-3 mx-1 my-md-2" onclick='location.href="./text/home.html"'><%= __(config.initiative_2).toUpperCase() %>
+                  </button>
+                  <button class="btn btn-custom-primary rounded-pill ml-lg-4 mr-lg-3 mx-1 my-md-2" onclick='location.href="./parallel/home.html"'><%= __(config.initiative_3).toUpperCase() %>
+                  </button>
+                  <button class="btn btn-custom-primary rounded-pill ml-lg-4 mr-lg-3 mx-1 my-md-2" onclick='location.href="./ocr/home.html"'><%= __(config.initiative_4).toUpperCase() %>
+                  </button>
                 </div>
-                <div class="col-lg-10 col-md-12 col-12 text-lg-left text-md-center text-center mx-0 px-0 badge-card-text-box">
-                    <h2 class="pt-lg-4 pt-3 pl-lg-0 pl-md-3 mt-4 mt-lg-0 mt-md-0 font-family-Rowdies"><%= __('Bronze Bhasha Samarthak Badge')%></h2>
-                    <h4 class="font-weight-normal mb-lg-2 mb-md-1 pl-lg-0 pl-md-3 mb-5"><%= __('Contribute just 5 sentences in your language')%></h4>
-                    <div class="pb-4 pt-3">
-                        <button class="btn btn-custom-primary rounded-pill ml-lg-0 mr-lg-3 mx-1 my-md-2" onclick='location.href="./sunoIndia/home"'><%= __('Suno India').toUpperCase() %>
-                        </button>
-                        <button class="btn btn-custom-primary rounded-pill ml-lg-4 mr-lg-3 mx-1 my-md-2" onclick='location.href="./boloIndia/home.html"'><%= __('Bolo India').toUpperCase() %>
-                        </button>
-                        <button class="btn btn-custom-primary rounded-pill ml-lg-4 mr-lg-3 mx-1 my-md-2" onclick='location.href="./likhoIndia/home.html"'><%= __('Likho India').toUpperCase() %>
-                        </button>
-                        <button class="btn btn-custom-primary rounded-pill ml-lg-4 mr-lg-3 mx-1 my-md-2" onclick='location.href="./dekhoIndia/home.html"'><%= __('Dekho India').toUpperCase() %>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-12 row mx-0 px-0">
-                    <div class="col-4" style="border-bottom:4px solid #f49608"></div>
-                    <div class="col-4" style="border-bottom:4px solid #4d82f7"></div>
-                    <div class="col-4" style="border-bottom:4px solid #42bf2e"></div>
-                </div>
+              </div>
+              <div class="col-12 row mx-0 px-0">
+                <div class="col-4" style="border-bottom:4px solid #f49608"></div>
+                <div class="col-4" style="border-bottom:4px solid #4d82f7"></div>
+                <div class="col-4" style="border-bottom:4px solid #42bf2e"></div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%- include('common/feedback/feedback.ejs', {page:"Home Page"}) %>
-<%- include('common/footer.ejs',{path:"./"}) %>
-<%- include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
-<script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <%- include('common/feedback/feedback.ejs', {page:"Home Page"}) %> <%-
+    include('common/footer.ejs',{path:"./"}) %> <%-
+    include('common/modals/speakerDetails/speakerDetails.ejs',{path:"./"}) %>
+    <script>$("footer").removeClass("fixed-bottom").addClass("bottom")</script>
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script src="/js/landingPage.js" id="home-page" default-lang=""></script>
+    <script src="/js/landingPage.js" id="home-page" default-lang=""></script>
 
-<script src="https://crowdsource1.blob.core.windows.net/vakyansh-json-data/bootstrap-tourist.js"></script>
-<script src="/js/loadFeedback.js"></script>
-</body>
-
+    <script src="https://crowdsource1.blob.core.windows.net/vakyansh-json-data/bootstrap-tourist.js"></script>
+    <script src="/js/loadFeedback.js"></script>
+  </body>
 </html>

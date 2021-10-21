@@ -1,6 +1,6 @@
 const fetch = require('./fetch')
 const { generateIndiaMap } = require('./home-page-charts');
-const { AGE_GROUP } = require('./constants');
+const { AGE_GROUP,INITIATIVES } = require('./constants');
 const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
@@ -186,7 +186,7 @@ function buildGraphs(language, timeframe) {
             drawGenderChart(genderData);
 
             // Draw state chart
-            generateIndiaMap(language);
+            generateIndiaMap(language, INITIATIVES.text);
 
             // Draw age group chart
             drawAgeGroupChart(ageGroupData);

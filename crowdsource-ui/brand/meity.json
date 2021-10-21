@@ -1,0 +1,20 @@
+{
+  "brand": "Meity",
+  "title_1": "Bhasha",
+  "title_2": "Daan",
+  "version": "Beta",
+  "initiative_1": "Suno India",
+  "initiative_2": "Bolo India",
+  "initiative_3": "Likho India",
+  "initiative_4": "Dekho India",
+  "brand_contributor": "Bhasha Samarthak",
+  "badge_1": "bronze",
+  "badge_2": "silver",
+  "badge_3": "gold",
+  "badge_4": "platinum",
+  "brand_url": "bhashini.gov.in/bhashadaan",
+  "initiativeKey_1" :"suno",
+  "initiativeKey_2" :"bolo",
+  "initiativeKey_3" :"likho",
+  "initiativeKey_4" :"dekho"
+}

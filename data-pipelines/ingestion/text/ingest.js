@@ -32,9 +32,10 @@ const ingest1 = async (datasetId, datasetType, client, language, rows, paired) =
 const start = async (connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, language) => {
     const client = conn(connectionString)
     try {
-        const txtContent = fs.readFileSync(localDatasetPath, 'utf8').split('\n');
+        var txtContent = fs.readFileSync(localDatasetPath, 'utf8').split('\n');
+        txtContent = txtContent.slice(0, 10) // TODO remove hardcoding
         console.log('Inserting in master')
-        const id = await insertMaster(params, remote_dataset_bundle_path, client)
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'text')
         const datasetRowIds = await ingest1(id, 'text', client, language, txtContent, paired)
         console.log('Done..', datasetRowIds.length)
     } catch (error) {

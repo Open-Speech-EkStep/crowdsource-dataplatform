@@ -1,7 +1,7 @@
 const { redirectToLocalisedPage } = require('./locale');
 const { onActiveNavbar, onChangeUser, showUserProfile, onOpenUserDropDown } = require('./header');
 const { getStatistics, showByHoursChart, showBySpeakersChart } = require('./home-page-charts');
-const { updateLocaleLanguagesDropdown, getLocaleString } = require('./utils')
+const { updateLocaleLanguagesDropdown, getLocaleString,fetchLocationInfo,safeJson } = require('./utils')
 const {
     setUserModalOnShown,
     setUserNameOnInputFocus,
@@ -21,8 +21,8 @@ const {
     CUMULATIVE_DATA,
     CONTRIBUTION_LANGUAGE,
     ALL_LANGUAGES,
-    MODULE,
-    SPEAKER_DETAILS_KEY
+    SPEAKER_DETAILS_KEY,
+    INITIATIVES,CURRENT_MODULE
 } = require('./constants');
 const { json_url } = require('./env-api');
 const { updateHrsForCards } = require('../../../build/js/common/card');
@@ -41,7 +41,7 @@ const getStatsSummary = function () {
     $.getJSON(`${json_url}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
         const top_languages_by_hours = jsonData.filter(d => d.type == "text");
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
-        const languages = getContributedAndTopLanguage(top_languages_by_hours, MODULE.bolo.value);
+        const languages = getContributedAndTopLanguage(top_languages_by_hours, INITIATIVES.text.value);
         localStorage.setItem(TOP_LANGUAGES_BY_HOURS, JSON.stringify(languages));
         showByHoursChart();
         if (top_languages_by_hours.length === 0) {
@@ -110,7 +110,7 @@ function initializeBlock() {
         localStorage.setItem("selectedType", "contribute");
         if (!hasUserRegistered()) {
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./record.html', MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./record.html', INITIATIVES.text.value);
         } else {
             location.href = './record.html';
         }
@@ -121,7 +121,7 @@ function initializeBlock() {
         localStorage.setItem("selectedType", "validate");
         if (!hasUserRegistered()) {
             $('#userModal').modal('show');
-            setStartRecordingBtnOnClick('./validator-page.html', MODULE.bolo.value);
+            setStartRecordingBtnOnClick('./validator-page.html', INITIATIVES.text.value);
         } else {
             location.href = './validator-page.html';
         }
@@ -143,7 +143,7 @@ function initializeBlock() {
     $startRecordBtnTooltip.tooltip('disable');
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
-    onChangeUser('./home.html', MODULE.bolo.value);
+    onChangeUser('./home.html', INITIATIVES.text.value);
     onOpenUserDropDown();
     if (hasUserRegistered()) {
         const speakerDetails = localStorage.getItem(SPEAKER_DETAILS_KEY);
@@ -151,13 +151,24 @@ function initializeBlock() {
         showUserProfile(localSpeakerDataParsed.userName);
     }
 
-    updateGoalProgressBarFromJson(MODULE.bolo['api-type']);
+    updateGoalProgressBarFromJson(INITIATIVES.text.type);
     getStatsSummary();
 }
 
 $(document).ready(function () {
-    localStorage.setItem('module', 'bolo');
-    onActiveNavbar('bolo');
+    localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
+    onActiveNavbar(INITIATIVES.text.value);
+    fetchLocationInfo()
+    .then(res => {
+      return safeJson(res);
+    })
+    .then(response => {
+      localStorage.setItem('state_region', response.region);
+      localStorage.setItem('country', response.country);
+    })
+    .catch(err => {
+      console.log(err);
+    });
     getLocaleString().then(() => {
         initializeBlock();
     }).catch(err => {

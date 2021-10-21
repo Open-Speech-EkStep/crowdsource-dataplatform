@@ -16,20 +16,32 @@ document.body = stringToHTML(
 );
 
 describe('testUserName', () => {
+  test('should give false for given alphanumeric username start with numbers', () => {
+    expect(testUserName('981user')).toEqual(false);
+  });
+
+  test('should give false for given alphanumeric username ends with numbers', () => {
+    expect(testUserName('user234')).toEqual(false);
+  });
+
+  test('should give false for given alphanumeric username contains numbers', () => {
+    expect(testUserName('user234name')).toEqual(false);
+  });
+
   test('should give true for given mobile number of 10-digits start from 6-9', () => {
     expect(testUserName('9818181818')).toEqual(true);
   });
 
-  test('should give false for given mobile number of less than 10-digits', () => {
-    expect(testUserName('981818181')).toEqual(false);
+  test('should give true for given mobile number of less than 10-digits', () => {
+    expect(testUserName('981818181')).toEqual(true);
   });
 
-  test('should give false for given mobile number of more than 10-digits', () => {
-    expect(testUserName('98181818188')).toEqual(false);
+  test('should give true for given mobile number of more than 10-digits', () => {
+    expect(testUserName('98181818188')).toEqual(true);
   });
 
-  test('should give false for given mobile number of than 10-digits not start from 6-9', () => {
-    expect(testUserName('58181818188')).toEqual(false);
+  test('should give true for given mobile number of than 10-digits not start from 6-9', () => {
+    expect(testUserName('58181818188')).toEqual(true);
   });
 
   test('should give true for given emailId start with string followed by @<String>.<String>', () => {

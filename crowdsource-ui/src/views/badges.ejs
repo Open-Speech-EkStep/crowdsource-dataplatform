@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Bhasha Daan: A crowdsourcing initiative for Indian languages</title>
+    <title><%=`${config.title_1} ${config.title_2}: A crowdsourcing initiative for Indian languages (${config.version})`%></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7K4K1N3R30"></script>
-    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-7K4K1N3R30")</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C"></script>
+    <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-3B78XVT75C")</script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap" rel="stylesheet">
@@ -17,8 +17,8 @@
 </head>
 
 <body class="bg-secondary">
-    <%- include('common/header/header.ejs',{home:"./home.html", bolo:"./boloIndia/home.html",
-        suno:"./sunoIndia/home",likho:"./likhoIndia/home.html",dekho:"./dekhoIndia/home.html",path:"./"}); %>
+    <%- include('common/header/header.ejs',{home:"./home.html", text:"./text/home.html",
+        asr:"./asr/home.html",parallel:"./parallel/home.html",ocr:"./ocr/home.html",path:"./"}); %>
         <div id="content-wrapper" class="content-wrapper container-fluid padding-top-107 bg-tri-color pb-2 px-lg-3 px-md-3 px-0">
             <div class="row px-0 m-0">
                 <%- include('common/buttons/back-btn/back-btn.ejs',{url:`/${locale}/home`}) %>
@@ -27,7 +27,7 @@
                 <div class="row m-0 pb-4 p-l-r-20 px-lg-0 px-md-0">
                     <div class="col-12 p-0">
                         <h2 class="mb-0 badges-detail-heading">
-                            <%= __('How can you win Bhasha Samarthak Badges') %>
+                            <%= __(`How can you win ${config.brand_contributor} Badges`) %>
                         </h2>
                     </div>
                 </div>
@@ -53,24 +53,24 @@
                     <div class="col-12 p-0">
                         <div class="row m-0">
                             <ul class="nav nav-tabs w-100 bg-white" id="initiative" role="tablist">
-                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="sunoTab">
-                                    <a class="nav-link border-0 active light-bg font-family-Rowdies active ml-4 ml-lg-0 ml-md-0 pl-4" id="suno" data-toggle="tab" href="#suno" role="tab" aria-controls="suno" aria-selected="true">
-                                            <%= __('Suno India')%>
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="asrTab">
+                                    <a class="nav-link border-0 active light-bg font-family-Rowdies active ml-4 ml-lg-0 ml-md-0 pl-4" id="asr" data-toggle="tab" href="#asr" role="tab" aria-controls="asr" aria-selected="true">
+                                            <%= __(config.initiative_1)%>
                                     </a>
                                 </li>
-                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="boloTab">
-                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="bolo" data-toggle="tab" href="#bolo" role="tab" aria-controls="bolo" aria-selected="true">
-                                            <%= __('Bolo India')%>
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="textTab">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="text" data-toggle="tab" href="#text" role="tab" aria-controls="text" aria-selected="true">
+                                            <%= __(config.initiative_2)%>
                                     </a>
                                 </li>
-                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="likhoTab">
-                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="likho" data-toggle="tab" href="#likho" role="tab" aria-controls="likho" aria-selected="true">
-                                            <%= __('Likho India')%>
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="parallelTab">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies" id="parallel" data-toggle="tab" href="#parallel" role="tab" aria-controls="parallel" aria-selected="true">
+                                            <%= __(config.initiative_3)%>
                                     </a>
                                 </li>
-                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="dekhoTab">
-                                    <a class="nav-link border-0 light-bg font-family-Rowdies mr-4 ml-lg-0 ml-md-0 pr-4 mr-lg-0 mr-md-0" id="dekho" data-toggle="tab" href="#dekho" role="tab" aria-controls="dekho" aria-selected="true">
-                                            <%= __('Dekho India')%>
+                                <li class="nav-item col-lg-3 col-md-3 p-0 text-center" id="ocrTab">
+                                    <a class="nav-link border-0 light-bg font-family-Rowdies mr-4 ml-lg-0 ml-md-0 pr-4 mr-lg-0 mr-md-0" id="ocr" data-toggle="tab" href="#ocr" role="tab" aria-controls="ocr" aria-selected="true">
+                                            <%= __(config.initiative_4)%>
                                     </a>
                                 </li>
                             </ul>
@@ -85,19 +85,19 @@
                     <div class="col-md-7 col-12 col-md-7 px-0">
                         <div class="row m-0 badge-level-section">
                             <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card1">
-                                <div class="badge-detail-widget badge-detail-widget-loader" id="bronze_participation_badge">
+                                <div class="badge-detail-widget badge-detail-widget-loader" id="badge_1_participation_badge">
                                 </div>
                             </div>
                             <div class="col-3 pl-lg-4 pr-lg-5 pl-1 pl-md-2 pr-2 card2">
-                                <div class="badge-detail-widget badge-detail-widget-loader" id="silver_participation_badge">
+                                <div class="badge-detail-widget badge-detail-widget-loader" id="badge_2_participation_badge">
                                 </div>
                             </div>
                             <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card3">
-                                <div class="badge-detail-widget badge-detail-widget-loader" id="gold_participation_badge">
+                                <div class="badge-detail-widget badge-detail-widget-loader" id="badge_3_participation_badge">
                                 </div>
                             </div>
                             <div class="col-3 pr-lg-5 pl-1 pl-lg-4 pl-md-2 pr-2 card4">
-                                <div class="badge-detail-widget badge-detail-widget-loader" id="platinum_participation_badge">
+                                <div class="badge-detail-widget badge-detail-widget-loader" id="badge_4_participation_badge">
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                 <div class="row mx-0 selected-badge-card">
                         <div class="col-lg-7 col-12 col-md-7 pt-4 px-lg-0 px-md-0 text-order">
                             <h1 class="font-family-Rowdies">
-                                <%- __(`<span id="participation-type"></span> <span id="milestone" class="text-yellow"></span> <span id="text-type" class="text-yellow"></span> in <span id="contribution-language"></span> and earn <span id="initiative-name"></span> <span id="badge-color"></span> Bhasha Samarthak badge`)%>
+                                <%- __(`<span id="participation-type"></span> <span id="milestone" class="text-yellow"></span> <span id="text-type" class="text-yellow"></span> in <span id="contribution-language"></span> and earn <span id="initiative-name"></span> <span id="badge-color"></span> ${config.brand_contributor} badge`)%>
                             </h1>
                         </div>
                         <div class="col-1"></div>
@@ -139,7 +139,7 @@
                         <li>
                             <%= __('Please keep contributing actively to stand a chance to get recognised.')%>
                         </li>
-                        <li>
+                        <li class="d-none">
                             <%= __('Your contribution will be validated before confirming the badge.')%>
                         </li>
                         <li>

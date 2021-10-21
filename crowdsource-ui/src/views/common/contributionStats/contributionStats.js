@@ -1,4 +1,5 @@
 const { calculateTime, formatTime } = require('./utils')
+const { INITIATIVES } = require('./constants')
 
 const getIntValue = (data) => {
   return parseInt(data) || 0;
@@ -20,8 +21,8 @@ const getSpeakersData = (data, lang, moduleType) => {
     if (!lang) {
       speakersData.languages = getIntValue(data[0].total_languages);
       speakersData.speakers = getIntValue(data[0].total_speakers);
-      speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? getFloatValue(data[0].total_contribution_count) : getFloatValue(data[0].total_contributions);
-      speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? getFloatValue(data[0].total_validation_count) : getFloatValue(data[0].total_validations);
+      speakersData.contributions = moduleType === INITIATIVES.parallel.value || moduleType === INITIATIVES.ocr.value ? getFloatValue(data[0].total_contribution_count) : getFloatValue(data[0].total_contributions);
+      speakersData.validations = moduleType === INITIATIVES.parallel.value || moduleType === INITIATIVES.ocr.value ? getFloatValue(data[0].total_validation_count) : getFloatValue(data[0].total_validations);
     }
     else {
       const langSpeakersData = data.filter(item => {
@@ -35,25 +36,11 @@ const getSpeakersData = (data, lang, moduleType) => {
         return speakersData;
       }
       speakersData.speakers = getIntValue(langSpeakersData[0].total_speakers);
-      speakersData.contributions = moduleType === "likho" || moduleType === "dekho" ? getFloatValue(langSpeakersData[0].total_contribution_count) : getFloatValue(langSpeakersData[0].total_contributions);
-      speakersData.validations = moduleType === "likho" || moduleType === "dekho" ? getFloatValue(langSpeakersData[0].total_validation_count) : getFloatValue(langSpeakersData[0].total_validations);
+      speakersData.contributions = moduleType === INITIATIVES.parallel.value || moduleType === INITIATIVES.ocr.value ? getFloatValue(langSpeakersData[0].total_contribution_count) : getFloatValue(langSpeakersData[0].total_contributions);
+      speakersData.validations = moduleType === INITIATIVES.parallel.value || moduleType === INITIATIVES.ocr.value ? getFloatValue(langSpeakersData[0].total_validation_count) : getFloatValue(langSpeakersData[0].total_validations);
     }
   }
   return speakersData;
-}
-
-const setParticipationData = (data) => {
-  const $sunoIndiaParticipation = $('#languages-value');
-  const $boloIndiaParticipation = $('#speaker-value');
-  const $likhoIndiaParticipation = $('#contributed-value');
-  const $dekhoIndiaParticipation = $('#validated-value');
-  const $participationData = $('#participation-data');
-  const $contributionData = $participationData.find('.contribution-data');
-  $boloIndiaParticipation.text(data.bolo_india_participation);
-  $likhoIndiaParticipation.text(data.likho_india_participation);
-  $sunoIndiaParticipation.text(data.suno_india_participation);
-  $dekhoIndiaParticipation.text(data.dekho_india_participation);
-  $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3');
 }
 
 const getCountOrZero = (obj) => {
@@ -61,20 +48,20 @@ const getCountOrZero = (obj) => {
 }
 
 const setParticipationDataFromJson = (data) => {
-  const bData = data.find(d => d.type == 'text');
-  const sData = data.find(d => d.type == 'asr');
-  const lData = data.find(d => d.type == 'parallel');
-  const dData = data.find(d => d.type == 'ocr');
-  const $sunoIndiaParticipation = $('#languages-value');
-  const $boloIndiaParticipation = $('#speaker-value');
-  const $likhoIndiaParticipation = $('#contributed-value');
-  const $dekhoIndiaParticipation = $('#validated-value');
+  const bData = data.find(d => d.type == INITIATIVES.text.type);
+  const sData = data.find(d => d.type == INITIATIVES.asr.type);
+  const lData = data.find(d => d.type == INITIATIVES.parallel.type);
+  const dData = data.find(d => d.type == INITIATIVES.ocr.type);
+  const $asrParticipation = $('#languages-value');
+  const $textParticipation = $('#speaker-value');
+  const $parallelParticipation = $('#contributed-value');
+  const $ocrParticipation = $('#validated-value');
   const $participationData = $('#participation-data');
   const $contributionData = $participationData.find('.contribution-data');
-  $boloIndiaParticipation.text(getCountOrZero(bData));
-  $likhoIndiaParticipation.text(getCountOrZero(lData));
-  $sunoIndiaParticipation.text(getCountOrZero(sData));
-  $dekhoIndiaParticipation.text(getCountOrZero(dData));
+  $textParticipation.text(getCountOrZero(bData));
+  $parallelParticipation.text(getCountOrZero(lData));
+  $asrParticipation.text(getCountOrZero(sData));
+  $ocrParticipation.text(getCountOrZero(dData));
   $contributionData.addClass('col-12 col-md-3 col-lg-3 col-xs-6 col-xl-3');
 }
 
@@ -87,7 +74,7 @@ const setSpeakerData = function (data, language, moduleType) {
   const $speakerDataLanguagesWrapper = $('#languages-wrapper');
   const $speakersData = $('#speaker-data');
   const $speakerContributionData = $speakersData.find('.contribution-data');
-  if (moduleType !== "likho" && moduleType !== "dekho") {
+  if (moduleType !== INITIATIVES.parallel.value && moduleType !== INITIATIVES.ocr.value) {
     const {
       hours: contributedHours,
       minutes: contributedMinutes,
@@ -120,4 +107,4 @@ const setSpeakerData = function (data, language, moduleType) {
   }
 }
 
-module.exports = { setSpeakerData, getSpeakersData, setParticipationData, setParticipationDataFromJson }
+module.exports = { setSpeakerData, getSpeakersData, setParticipationDataFromJson }

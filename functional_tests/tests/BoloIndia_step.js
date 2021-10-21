@@ -46,9 +46,9 @@ beforeSuite(async () => {
     await overridePermissions(testUrl, ['audioCapture']);
 });
 
-afterSuite(async () => {
-    await closeBrowser();
-});
+// afterSuite(async () => {
+//     await closeBrowser();
+// });
 
 gauge.screenshotFn = async function () {
     const screenshotFilePath = path.join(process.env['gauge_screenshots_dir'], `screenshot-${process.hrtime.bigint()}.png`);
@@ -94,7 +94,10 @@ step("User details popup should appear and close button should close the pop up"
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
     await taiko.waitFor(1000)
-    assert.ok(await taiko.textBox({ id: 'username' }).exists())
+    const usernameFiled = taiko.textBox({ id: 'username' })
+    assert.ok(await usernameFiled.exists());
+    await write('1234', into(usernameFiled));
+    await taiko.text(`Please don't use only numerics or email as username`).isVisible();
     assert.ok(await taiko.dropDown({ id: 'mother-tongue' }).exists())
     assert.ok(await taiko.dropDown({ id: 'age' }).exists())
     assert.ok(await taiko.radioButton({ id: 'other-check' }).exists())
@@ -149,7 +152,7 @@ step("user should <arg0> see instructions to record", async function (arg0) {
 });
 
 step("When user click on Lets Go Button for Validate, user should <arg0> see instructions to record", async function (arg0) {
-    await click(taiko.button({ id: 'bolo-proceed-box' }))
+    await click(taiko.button({ id: 'text-proceed-box' }))
     await taiko.waitFor(1500)
 
     if (arg0 == "not") {
@@ -162,9 +165,9 @@ step("When user click on Lets Go Button for Validate, user should <arg0> see ins
 
 step("Add <usrnm> Username for Valiadtion", async function (usrnm) {
     if (await taiko.text('User Details').exists()) {
-        const username = taiko.textBox({ id: 'bolo-username' })
+        const username = taiko.textBox({ id: 'text-username' })
         await taiko.waitFor(700)
-        await clear(taiko.textBox({ id: 'bolo-username' }));
+        await clear(taiko.textBox({ id: 'text-username' }));
         await taiko.waitFor(300)
         await write(usrnm, into(username))
         await taiko.waitFor(500)
