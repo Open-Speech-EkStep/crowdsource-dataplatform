@@ -129,10 +129,7 @@ function fetchLocationInfo() {
         }
       }
       if (ipAddress.length !== 0 && ipAddress !== null) {
-        // return fetch(`/location-info?ip=${ipAddress}`);
-        return fetch(`https://extreme-ip-lookup.com/json`).then(jsonRes => jsonRes.json()).then(response => {
-        return Promise.resolve(response);
-    })
+        return fetch(`/location-info?ip=${ipAddress}`);
   } else {
         return new Promise((resolve, reject) => {
           reject('Ip Address not available');
