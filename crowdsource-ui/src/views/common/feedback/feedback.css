@@ -37,6 +37,21 @@
   border: 1px solid #0f2749;
 }
 
+.feedBack-limit{
+  font-family: Roboto,'Helvetica Neue', Helvetica, Arial, sans-serif;;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: left;
+  color: #0f2749;
+  opacity: 0.63;
+}
+
+.feedBack-limit>span{
+  opacity: 0.63;
+}
+
 .my-float{
   left: 8.33%;
   right: 25%;
