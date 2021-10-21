@@ -10,6 +10,15 @@ describe('SunoTranscribe', () => {
       .calledWith('contributionLanguage')
       .mockImplementation(() => 'Hindi');
 
+    const locationInfo = {
+      country: 'India',
+      regionName: 'National Capital Territory of Delhi',
+    };
+
+    when(localStorage.getItem)
+      .calledWith('locationInfo')
+      .mockImplementation(() => JSON.stringify(locationInfo));
+
     const speakerDetails = {
       userName: 'abc',
       motherTongue: '',
@@ -22,8 +31,6 @@ describe('SunoTranscribe', () => {
     when(localStorage.getItem)
       .calledWith('speakerDetails')
       .mockImplementation(() => JSON.stringify(speakerDetails));
-
-    fetchMock.doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace').mockResponseOnce('ip=103.92.40.39');
 
     fetchMock.doMockOnceIf('/media/asr').mockResponseOnce(
       JSON.stringify({
@@ -66,23 +73,7 @@ describe('SunoTranscribe', () => {
         ],
       })
     );
-
-    fetchMock.doMock('/location-info?ip=103.92.40.39').mockResponse(
-      JSON.stringify({
-        country: 'India',
-        regionName: 'Uttar Pradesh',
-      })
-    );
-
     const renderResult = render(<SunoTranscribe />);
-
-    await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
-    });
-
-    await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/location-info?ip=103.92.40.39');
-    });
 
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/media/asr', {
@@ -201,7 +192,7 @@ describe('SunoTranscribe', () => {
           language: 'Hindi',
           type: 'asr',
           sentenceId: 1248671,
-          state_region: 'Uttar Pradesh',
+          state_region: 'National Capital Territory of Delhi',
           country: 'India',
           device: 'android 11',
           browser: 'Chrome 13',
@@ -257,7 +248,7 @@ describe('SunoTranscribe', () => {
           language: 'Hindi',
           type: 'asr',
           sentenceId: 1248671,
-          state: 'Uttar Pradesh',
+          state: 'National Capital Territory of Delhi',
           country: 'India',
           device: 'android 11',
           browser: 'Chrome 13',
