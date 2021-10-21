@@ -3,6 +3,7 @@ const localStorageConstants = {
   contributionLanguage: 'contributionLanguage',
   translatedLanguage: 'likho_to-language',
   currentModule: 'selectedModule',
+  localtionInfo: 'locationInfo',
 };
 
 export default localStorageConstants;

@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 
@@ -10,10 +12,21 @@ import Feedback from 'components/Feedback';
 import Layout from 'components/Layout';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import { fetchLocationInfo } from 'utils/utils';
 
 type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProps['Component'] };
 
 const MyApp = ({ Component, pageProps }: MyAppProps) => {
+  /* istanbul ignore next */
+  useEffect(() => {
+    if (!localStorage.getItem(localStorageConstants.localtionInfo)) {
+      const getLocationInfo = async () => {
+        localStorage.setItem(localStorageConstants.localtionInfo, JSON.stringify(await fetchLocationInfo()));
+      };
+      getLocationInfo();
+    }
+  }, []);
+
   return (
     <Layout>
       <Component {...pageProps} />

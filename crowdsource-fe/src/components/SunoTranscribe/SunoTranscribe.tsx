@@ -24,7 +24,7 @@ import useFetch from 'hooks/usePostFetch';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import type { SunoIndiaTranscibe, SunoIndiaTranscibeSkip } from 'types/Transcribe';
-import { fetchLocationInfo, getBrowserInfo, getDeviceInfo } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
 
 import styles from './SunoTranscribe.module.scss';
 
@@ -38,6 +38,8 @@ const SunoTranscribe = () => {
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
+
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
 
   const [isDisabled, setIsDisabled] = useState(true);
   const [playAudio, setPlayAudio] = useState(false);
@@ -53,7 +55,6 @@ const SunoTranscribe = () => {
     media_data: '',
     dataset_row_id: '0',
   });
-  const [locationInfo, setLocationInfo] = useState<LocationInfo>();
 
   const { submit } = useSubmit(apiPaths.store);
 
@@ -105,13 +106,6 @@ const SunoTranscribe = () => {
     }
   }, [currentDataIndex, result]);
 
-  useEffect(() => {
-    const getLocationInfo = async () => {
-      setLocationInfo(await fetchLocationInfo());
-    };
-    getLocationInfo();
-  }, []);
-
   const onPlayAudio = () => {
     setShowReplayButton(false);
     setIsDisabled(false);
@@ -140,7 +134,9 @@ const SunoTranscribe = () => {
 
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}/sunoIndia/thank-you.html`, undefined, { locale: currentLocale });
+      router.push(`/${currentLocale}${routePaths.sunoIndiaContributeThankYou}`, undefined, {
+        locale: currentLocale,
+      });
     }
     setCurrentDataIndex(index + 1);
     setShowUIdata(contributionData[index + 1]);
