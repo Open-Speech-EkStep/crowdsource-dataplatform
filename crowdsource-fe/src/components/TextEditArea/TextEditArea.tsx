@@ -125,7 +125,12 @@ const TextEditArea = ({
             />
           </Form.Group>
           <div className={`${styles.keyboardIcon} d-none  d-md-block  position-absolute`}>
-            <Button variant="normal" onClick={() => setShowKeyboard(true)} className="d-flex">
+            <Button
+              disabled={isTextareaDisabled}
+              variant="normal"
+              onClick={() => setShowKeyboard(true)}
+              className="d-flex"
+            >
               <Image src="/images/keyboard_icon.svg" width="24" height="24" alt="keyboardBtn" />
             </Button>
           </div>
