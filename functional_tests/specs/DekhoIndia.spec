@@ -84,7 +84,7 @@ Tags: component
 * User should be able to see bronze Badge after winning with "44" "image label(s)" contribution left
 
 ## Check Dashboard Page
-* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "Geographical Distribution"
+* When user clicks on View all Details buttton user should be able to see "Progress Chart" , "State Wise distribution"
 * user should be able to see "People participated" , "Images labelled" , "Images validated" , "Languages"
 * When user select "ಕನ್ನಡ" Language from dropdown then "Languages" should not visible
 * When user clicks on back button, user should land on Dekho India home page
