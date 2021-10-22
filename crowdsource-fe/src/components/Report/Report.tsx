@@ -10,7 +10,12 @@ import ReportSuccessModal from './ReportSuccessModal';
 
 const ReportModal = dynamic(() => import('./ReportModal'), { ssr: false });
 
-const Report = () => {
+interface ReportProps {
+  onSuccess: () => void;
+  initiativeMediaType: string;
+}
+
+const Report = ({ onSuccess, initiativeMediaType }: ReportProps) => {
   const { t } = useTranslation();
   const [modalShow, setModalShow] = useState(false);
   const [reportSuccess, setReportSuccess] = useState(false);
@@ -21,6 +26,7 @@ const Report = () => {
   const showReportSuccess = () => {
     hideModal();
     setReportSuccess(true);
+    onSuccess();
   };
 
   const hideReportSuccess = () => {
@@ -35,7 +41,14 @@ const Report = () => {
         onClick={showModal}
         altText="reportIconAlt"
       />
-      {modalShow && <ReportModal show={modalShow} onHide={hideModal} onSuccess={showReportSuccess} />}
+      {modalShow && (
+        <ReportModal
+          initiativeMediaType={initiativeMediaType}
+          show={modalShow}
+          onHide={hideModal}
+          onSuccess={showReportSuccess}
+        />
+      )}
       {reportSuccess && (
         <ReportSuccessModal
           show={reportSuccess}

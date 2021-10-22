@@ -6,7 +6,8 @@ import { render, verifyAxeTest, screen, userEvent, waitFor } from 'utils/testUti
 import ReportModal from '../ReportModal';
 
 describe('ReportModal', () => {
-  const setup = () => render(<ReportModal show={true} onHide={() => {}} onSuccess={() => {}} />);
+  const setup = () =>
+    render(<ReportModal show={true} onHide={() => {}} onSuccess={() => {}} initiativeMediaType="sentence" />);
 
   verifyAxeTest(setup());
 

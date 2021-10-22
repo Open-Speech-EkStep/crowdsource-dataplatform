@@ -104,6 +104,7 @@
   "sentences": "Sentence(s)",
   "images": "Image(s)",
   "progressStatus": "<span>{{average}}%</span> of {{initiativeName}} Target Achieved",
+  "progressStatusWithLanguage": "<span>{{average}}%</span> of {{language}} {{initiativeName}} Target Achieved",
   "beta": "Beta",
   "metaTitle": "Bhasha Daan: A crowdsourcing initiative for Indian languages (Beta)",
   "metaDescription": "Bhasha Daan: A crowdsourcing initiative for Indian languages. A speech recognition product, that will be as Indian, as you and I. It will also be free of cost for every Indian. Make it happen by donating your voice",
@@ -152,7 +153,7 @@
   "gujarati": "Gujarati",
   "viewAllDetail": "View all details",
   "reportModalHeading": "Report Content",
-  "reportModalSubHeading": "Help us understand what’s wrong with the image labelled",
+  "reportModalSubHeading": "Help us understand what’s wrong with the {{type}}",
   "offensiveSubtext": "Hateful / Discriminatory / Vulgar language, drugs promotion etc.",
   "specifyReason": "Please specify the reason (Optional)",
   "thankyou": "Thank You",
@@ -179,5 +180,6 @@
   "specialCharacters": "Special characters are not allowed",
   "watchTheVideo": "Watch the video",
   "installNow": "Install Now",
-  "chromeExtensionLabel": "Get Chrome extension to type in any language you choose"
+  "chromeExtensionLabel": "Get Chrome extension to type in any language you choose",
+  "validationGraphYLabel1": "Validation(in hours)"
 }

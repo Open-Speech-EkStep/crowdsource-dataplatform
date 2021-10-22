@@ -12,7 +12,7 @@ describe('Report', () => {
     when(localStorage.getItem)
       .calledWith('speakerDetails')
       .mockImplementation(() => null);
-    const result = render(<Report />);
+    const result = render(<Report onSuccess={() => {}} initiativeMediaType="sentences" />);
     return result;
   };
 

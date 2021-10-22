@@ -208,7 +208,7 @@ const SunoTranscribe = () => {
     <Fragment>
       <ChromeExtension />
       <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader />
+        <FunctionalHeader onSuccess={onSkipContribution} initiativeMediaType="sentence" />
         <Container fluid="lg" className="mt-5">
           <div data-testid="SunoTranscribe" className={`${styles.root}`}>
             <AudioController
