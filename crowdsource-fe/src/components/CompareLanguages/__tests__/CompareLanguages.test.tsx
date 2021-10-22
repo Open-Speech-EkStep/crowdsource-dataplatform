@@ -7,7 +7,7 @@ import { render, screen, waitFor } from 'utils/testUtils';
 import CompareLanguages from '../CompareLanguages';
 
 describe('CompareLanguages', () => {
-  const setup = async (initiative: 'suno' | 'likho' | 'bolo' | 'dekho', source: string) => {
+  const setup = async (initiative: 'suno' | 'likho' | 'bolo' | 'dekho') => {
     const language = 'Hindi';
 
     when(localStorage.getItem)
@@ -80,7 +80,6 @@ describe('CompareLanguages', () => {
     const renderResult = render(
       <CompareLanguages
         initiative={initiative}
-        source={source}
         dataBindigValue="total_contributions"
         graphLabel="totalSentences"
       />
@@ -95,13 +94,13 @@ describe('CompareLanguages', () => {
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup('suno', 'contribute');
+    const { asFragment } = await setup('suno');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should render the chart component after api gives data', async () => {
-    await setup('likho', 'validate');
+    await setup('likho');
 
     expect(screen.getByTestId('CompareLanguages').children.length).toBe(1);
   });

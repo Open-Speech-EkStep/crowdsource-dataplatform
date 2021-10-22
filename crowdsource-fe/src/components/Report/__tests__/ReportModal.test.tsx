@@ -61,7 +61,7 @@ describe('ReportModal', () => {
           language: 'Hindi',
           reportText: 'Offensive',
           sentenceId: 1993205,
-          source: 'contribute',
+          source: 'contribution',
           userName: 'Anonymous',
         }),
       });
@@ -111,7 +111,7 @@ describe('ReportModal', () => {
           language: 'Hindi',
           reportText: 'Offensive - Dummy Text',
           sentenceId: 1993205,
-          source: 'contribute',
+          source: 'contribution',
           userName: 'XYZ',
         }),
       });

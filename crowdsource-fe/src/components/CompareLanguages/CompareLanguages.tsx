@@ -73,7 +73,6 @@ const getTopLanguagesByHoursChartData = (
 
 interface CompareLanguagesProps {
   initiative: Initiative;
-  source: string;
   dataBindigValue: string;
   graphLabel: string;
 }

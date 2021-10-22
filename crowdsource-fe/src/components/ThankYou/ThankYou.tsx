@@ -14,7 +14,7 @@ import {
   INITIATIVES_MEDIA_MAPPING,
 } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
-import { pageSourceConstants } from 'constants/pageRouteConstants';
+import { sourcePageConstants } from 'constants/pageRouteConstants';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
 
@@ -63,7 +63,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
         <TyTargetProgress
           initiative={INITIATIVES_MAPPING.suno}
           initiativeType={INITIATIVES_MEDIA_MAPPING.suno}
-          source={pageSourceConstants[route.asPath] || ''}
+          source={sourcePageConstants[route.asPath] || ''}
           language={contributionLanguage ?? ''}
         />
       </section>
@@ -91,7 +91,6 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               }
               right={
                 <CompareLanguages
-                  source={pageSourceConstants[route.asPath] || ''}
                   initiative={initiative}
                   graphLabel={t('contributionGraphYLabel1')}
                   dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}

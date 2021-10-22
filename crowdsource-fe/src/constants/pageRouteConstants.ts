@@ -15,8 +15,19 @@ export const sourceConstants = {
   validate: 'validate',
 } as const;
 
-export const pageSourceConstants = {
+export const sourcePageConstants = {
   [routePaths.sunoIndiaContribute]: 'contribute',
+  [routePaths.sunoIndiaValidate]: 'validate',
+  [routePaths.boloIndiaContribute]: 'contribute',
+  [routePaths.boloIndiaValidate]: 'validate',
+  [routePaths.likhoIndiaContribute]: 'contribute',
+  [routePaths.likhoIndiaValidate]: 'validate',
+  [routePaths.dekhoIndiaContribute]: 'contribute',
+  [routePaths.dekhoIndiaValidate]: 'validate',
+} as const;
+
+export const pageSourceConstants = {
+  [routePaths.sunoIndiaContribute]: 'contribution',
   [routePaths.sunoIndiaValidate]: 'validate',
   [routePaths.boloIndiaContribute]: 'contribute',
   [routePaths.boloIndiaValidate]: 'validate',
