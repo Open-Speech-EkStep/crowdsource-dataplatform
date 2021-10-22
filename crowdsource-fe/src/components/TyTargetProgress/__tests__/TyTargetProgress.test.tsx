@@ -2,9 +2,9 @@ import { when } from 'jest-when';
 
 import { render, screen, waitFor } from 'utils/testUtils';
 
-import TargetProgress from '../TargetProgress';
+import TyTargetProgress from '../TyTargetProgress';
 
-describe('TargetProgress', () => {
+describe('TyTargetProgress', () => {
   const setup = async (
     initiative: any,
     initiativeMedia: string,
@@ -19,9 +19,10 @@ describe('TargetProgress', () => {
       .calledWith('likho_to-language')
       .mockImplementation(() => 'English');
 
-    fetchMock.doMockOnceIf('/aggregated-json/cumulativeCount.json').mockResponseOnce(
+    fetchMock.doMockOnceIf('/aggregated-json/cumulativeDataByLanguage.json').mockResponseOnce(
       JSON.stringify([
         {
+          language: 'Hindi',
           total_contribution_count: 45,
           total_contributions: 0.031,
           total_languages: 2,
@@ -31,15 +32,17 @@ describe('TargetProgress', () => {
           type: 'asr',
         },
         {
-          total_contribution_count: 9,
+          language: 'English',
+          total_contribution_count: 45,
           total_contributions: 0.0,
           total_languages: 3,
           total_speakers: 11,
-          total_validation_count: 0,
+          total_validation_count: 9,
           total_validations: 0.0,
           type: 'ocr',
         },
         {
+          language: 'Hindi-English',
           total_contribution_count: 45,
           total_contributions: 0.0,
           total_languages: 2,
@@ -49,6 +52,7 @@ describe('TargetProgress', () => {
           type: 'parallel',
         },
         {
+          language: 'English',
           total_contribution_count: 45,
           total_contributions: 6.3,
           total_languages: 2,
@@ -60,24 +64,28 @@ describe('TargetProgress', () => {
       ])
     );
 
-    fetchMock.doMockOnceIf('/aggregated-json/initiativeGoals.json').mockResponseOnce(
+    fetchMock.doMockOnceIf('/aggregated-json/initiativeGoalsByLanguage.json').mockResponseOnce(
       JSON.stringify([
         {
+          language: 'Hindi-English',
           contribution_goal: 60000,
           type: 'parallel',
           validation_goal: 60000,
         },
         {
+          language: 'English',
           contribution_goal: 60000,
           type: 'ocr',
           validation_goal: 60000,
         },
         {
+          language: 'Hindi',
           contribution_goal: 60,
           type: 'asr',
           validation_goal: 60,
         },
         {
+          language: 'Hindi',
           contribution_goal: 60,
           type: 'text',
         },
@@ -85,34 +93,34 @@ describe('TargetProgress', () => {
     );
 
     const renderResult = render(
-      <TargetProgress
+      <TyTargetProgress
         initiative={initiative}
         initiativeType={initiativeMedia}
-        source={source}
-        language={contributionLanguage}
+        source={source ?? ''}
+        language={contributionLanguage ?? ''}
       />
     );
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeCount.json');
+      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     });
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/aggregated-json/initiativeGoals.json');
+      expect(fetchMock).toBeCalledWith('/aggregated-json/initiativeGoalsByLanguage.json');
     });
     return renderResult;
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup('suno', 'asr');
+    const { asFragment } = await setup('suno', 'asr', 'contribute', 'English');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should render the result for suno initiative home page', async () => {
-    await setup('suno', 'asr', 'contribute');
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    await setup('suno', 'asr', 'contribute', 'Hindi');
+    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('1 minutes/60 hours');
@@ -121,18 +129,8 @@ describe('TargetProgress', () => {
   });
 
   it('should render the result for dekho initiative validate', async () => {
-    await setup('dekho', 'ocr', 'validate');
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
-    expect(
-      screen.getByText(content => {
-        return content.includes('0/60000 images');
-      })
-    ).toBeInTheDocument();
-  });
-
-  it('should render the result for dekho initiative contribute', async () => {
-    await setup('dekho', 'ocr', 'contribute');
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    await setup('dekho', 'ocr', 'validate', 'English');
+    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('9/60000 images');
@@ -140,30 +138,39 @@ describe('TargetProgress', () => {
     ).toBeInTheDocument();
   });
 
-  it('should render the result for likho initiative contribute', async () => {
-    await setup('likho', 'parallel', 'contribute');
-
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+  it('should render the result for dekho initiative contribute', async () => {
+    await setup('dekho', 'ocr', 'contribute', 'English');
+    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
-        return content.includes('45/60000 sentences');
+        return content.includes('45/60000 images');
       })
     ).toBeInTheDocument();
   });
 
-  it('should render the result for likho initiative', async () => {
-    await setup('likho', 'parallel');
-
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+  it('should render the result for dekho initiative validate without language', async () => {
+    await setup('dekho', 'ocr', 'validate');
+    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
-        return content.includes('53/120000 sentences');
+        return content.includes('0/60000 images');
+      })
+    ).toBeInTheDocument();
+  });
+
+  it('should render the result for likho initiative contribute', async () => {
+    await setup('likho', 'parallel', undefined, 'English');
+
+    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
+    expect(
+      screen.getByText(content => {
+        return content.includes('0/1 sentences');
       })
     ).toBeInTheDocument();
   });
 
   it('should print goal as 1 if goal is undefined', async () => {
-    await setup('bolo', 'text', 'validate');
+    await setup('bolo', 'text', 'validate', 'Hindi');
 
     expect(
       screen.getByText(content => {

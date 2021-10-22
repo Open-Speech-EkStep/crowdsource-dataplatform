@@ -4,6 +4,7 @@ const apiPaths = {
   languagesWithData: nodeConfig.staticFileUrl + '/aggregated-json/languagesWithData.json',
   enableDisableCards: nodeConfig.staticFileUrl + '/aggregated-json/enableDisableCards.json',
   initiativeGoals: nodeConfig.staticFileUrl + '/aggregated-json/initiativeGoals.json',
+  initiativeGoalsByLanguage: nodeConfig.staticFileUrl + '/aggregated-json/initiativeGoalsByLanguage.json',
   cumulativeCount: nodeConfig.staticFileUrl + '/aggregated-json/cumulativeCount.json',
   topLanguagesByHoursContributed:
     nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesByHoursContributed.json',

@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThankYou should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root mx-auto"
+    data-testid="ThankYou"
+  >
+    <h2
+      class="text-center"
+    >
+      Contribute to your language!
+    </h2>
+    <section
+      class="mt-8"
+    />
+    <section
+      class="mt-8"
+    >
+      <div
+        class="root rounded-20"
+      >
+        <div
+          class="rounded-20 bg-light p-5"
+        >
+          <div>
+            <div
+              class="row"
+            >
+              <div
+                class="pb-4 pb-md-0 col-md-4 col-12"
+              >
+                <div
+                  class="d-md-flex text-center text-md-start h-100 align-items-md-center"
+                >
+                  <h4>
+                    Participate to see  in top 3
+                  </h4>
+                </div>
+              </div>
+              <div
+                class="col-md-auto col-12"
+              >
+                <span
+                  class="d-flex h-100 sep"
+                />
+              </div>
+              <div
+                class="pt-4 pt-md-0 col"
+              />
+            </div>
+          </div>
+          <div
+            class="mt-8 text-center text-md-start"
+          >
+            <div
+              class="socialShare d-inline-flex align-items-center border border-1 border-primary px-4"
+            >
+              <span
+                class="me-3"
+              >
+                Share on
+              </span>
+              <a
+                class="socialShareLink mx-2 d-inline-block ms-0"
+                href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home.html"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="Share on Facebook"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+              </a>
+              <a
+                class="socialShareLink mx-2 d-inline-block"
+                href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home.html"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="Share on LinkedIn"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+              </a>
+              <a
+                class="socialShareLink mx-2 d-inline-block"
+                href="https://twitter.com/intent/tweet?text=socialSharingTextWithoutRank"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="Share on Twitter"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+              </a>
+              <a
+                class="socialShareLink mx-2 d-inline-block me-0"
+                href="https://api.whatsapp.com/send?text=socialSharingTextWithoutRank"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="Share on Whatsapp"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+}
+
+.percentage {
+  font-size: 0.875rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+  }
+}
+
+.count {
+  color: var(--text-orange);
+  font-size: 1.75rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2.5rem;
+  }
+}
+
+.hours {
+  font-size: 0.875rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+.progressBar {
+  filter: drop-shadow(0 4px 12px rgba(15, 39, 73, 0.12));
+}

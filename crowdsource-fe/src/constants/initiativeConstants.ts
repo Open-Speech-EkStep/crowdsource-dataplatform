@@ -1,3 +1,5 @@
+import routePaths from './routePaths';
+
 export const INITIATIVES_MAPPING = {
   suno: 'suno',
   bolo: 'bolo',
@@ -67,4 +69,15 @@ export const INITIATIVE_MEDIA_CONTRIBUTION_MAPPING = {
   [INITIATIVES_MEDIA.text]: 'total_contributions',
   [INITIATIVES_MEDIA.parallel]: 'total_contribution_count',
   [INITIATIVES_MEDIA.ocr]: 'total_contribution_count',
+} as const;
+
+export const CONTRIBUTION_MAPPING = {
+  [routePaths.sunoIndiaContributeThankYou]: 'total_contributions',
+  [routePaths.sunoIndiaValidateThankYou]: 'total_validations',
+  [routePaths.boloIndiaContributeThankYou]: 'total_contributions',
+  [routePaths.boloIndiaValidateThankYou]: 'total_validations',
+  [routePaths.dekhoIndiaContributeThankYou]: 'total_contribution_count',
+  [routePaths.dekhoIndiaValidateThankYou]: 'total_validation_count',
+  [routePaths.likhoIndiaContributeThankYou]: 'total_contribution_count',
+  [routePaths.likhoIndiaValidateThankYou]: 'total_validation_count',
 } as const;

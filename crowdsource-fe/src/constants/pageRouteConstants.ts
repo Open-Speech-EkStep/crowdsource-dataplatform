@@ -10,6 +10,11 @@ export const pageRouteConstants = {
   [routePaths.sunoIndiaContribute]: 'Contributed',
 } as const;
 
+export const sourceConstants = {
+  contribute: 'contribute',
+  validate: 'validate',
+} as const;
+
 export const pageSourceConstants = {
   [routePaths.sunoIndiaContribute]: 'contribute',
   [routePaths.sunoIndiaValidate]: 'validate',
@@ -19,6 +24,14 @@ export const pageSourceConstants = {
   [routePaths.likhoIndiaValidate]: 'validate',
   [routePaths.dekhoIndiaContribute]: 'contribute',
   [routePaths.dekhoIndiaValidate]: 'validate',
+  [routePaths.sunoIndiaContributeThankYou]: sourceConstants.contribute,
+  [routePaths.sunoIndiaValidateThankYou]: sourceConstants.validate,
+  [routePaths.boloIndiaContributeThankYou]: sourceConstants.contribute,
+  [routePaths.boloIndiaValidateThankYou]: sourceConstants.validate,
+  [routePaths.dekhoIndiaContributeThankYou]: sourceConstants.contribute,
+  [routePaths.dekhoIndiaValidateThankYou]: sourceConstants.validate,
+  [routePaths.likhoIndiaContributeThankYou]: sourceConstants.contribute,
+  [routePaths.likhoIndiaValidateThankYou]: sourceConstants.validate,
 } as const;
 
 export const pageInitiativeRouteConstants = {

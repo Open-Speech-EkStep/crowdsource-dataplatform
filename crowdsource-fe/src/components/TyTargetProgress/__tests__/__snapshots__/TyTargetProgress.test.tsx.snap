@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TyTargetProgress should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root d-flex flex-column"
+    data-testid="TargetProgress"
+  >
+    <div
+      class="details d-flex justify-content-between align-items-center"
+    >
+      <div
+        class="percentage font-family-rowdies"
+      >
+        progressStatusWithLanguage
+      </div>
+    </div>
+    <div
+      class="progressBar mt-2 mt-md-1 border border-1 border-info progress"
+    >
+      <div
+        aria-valuemax="100"
+        aria-valuemin="0"
+        aria-valuenow="0.0"
+        class="progress-bar"
+        role="progressbar"
+        style="width: 0%;"
+      />
+    </div>
+    <span
+      class="hours mt-2 align-self-end"
+    >
+      0 seconds/1 hours
+    </span>
+  </div>
+</DocumentFragment>
+`;

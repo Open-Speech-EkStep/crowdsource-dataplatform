@@ -94,7 +94,7 @@ export const fetchLocationInfo = async () => {
       }
       if (ipAddress.length !== 0) {
         const data = await fetch(`/location-info?ip=${ipAddress}`);
-        return data.json();
+        return data && data.json();
       } else {
         return new Promise((resolve, reject) => {
           reject('Ip Address not available');

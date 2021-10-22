@@ -7,7 +7,7 @@ import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 import ContributionTracker from '../ContributionTracker';
 
 describe('ContributionTracker', () => {
-  const setup = async () => {
+  const setup = async (initiative: 'suno' | 'likho' | 'bolo' | 'dekho') => {
     const language = 'Hindi';
 
     when(localStorage.getItem)
@@ -16,7 +16,7 @@ describe('ContributionTracker', () => {
 
     when(localStorage.getItem)
       .calledWith('likho_to-language')
-      .mockImplementation(() => 'Hindi');
+      .mockImplementation(() => 'English');
 
     fetchMock.doMockOnceIf('/aggregated-json/topLanguagesByHoursContributed.json').mockResponseOnce(
       JSON.stringify([
@@ -80,10 +80,15 @@ describe('ContributionTracker', () => {
           total_speakers: 13,
           type: 'asr',
         },
+        {
+          language: 'Hindi-English',
+          total_speakers: 13,
+          type: 'asr',
+        },
       ])
     );
 
-    const renderResult = render(<ContributionTracker initiative="suno" graphTitle="totalSentences" />);
+    const renderResult = render(<ContributionTracker initiative={initiative} graphTitle="totalSentences" />);
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });
@@ -97,19 +102,19 @@ describe('ContributionTracker', () => {
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
+    const { asFragment } = await setup('suno');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should render the chart component after api gives data', async () => {
-    await setup();
+    await setup('likho');
 
     expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
   });
 
   it('should render the chart for speaker data', async () => {
-    await setup();
+    await setup('suno');
 
     userEvent.click(screen.getAllByRole('radio')[1]);
     expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
