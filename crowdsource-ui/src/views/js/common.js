@@ -374,7 +374,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('#next_badge_count').text(data.nextMilestone);
     $('#next_badge_name_1').text(nextBadgeName);
     $('#next_badge_name').text(nextBadgeName);
-    $('#download_pdf').attr('data-badge', data.currentBadgeType.toLowerCase());
+    $('#download_pdf').attr('data-badge', BADGES_STRING[data.currentBadgeType.toLowerCase()]);
     if (functionalFlow === 'validator') {
       $('#reward-img').attr(
         'src',
