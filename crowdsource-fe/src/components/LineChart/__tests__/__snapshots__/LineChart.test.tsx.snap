@@ -1,0 +1,735 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="line_chart"
+    style="width: 100%; height: 500px;"
+  >
+    <div
+      style="width: 100%; height: 100%; position: relative;"
+    >
+      <svg
+        role="group"
+        style="width: 100%; height: 100%; overflow: visible;"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <defs>
+          <clippath
+            id="id-45"
+          >
+            <rect
+              height="0"
+              width="0"
+            />
+          </clippath>
+          <filter
+            filterUnits="objectBoundingBox"
+            height="200%"
+            id="filter-id-50"
+            width="200%"
+            x="-50%"
+            y="-50%"
+          >
+            <fegaussianblur
+              in="SourceGraphic"
+              result="blurOut"
+              stdDeviation="1.5"
+            />
+            <feoffset
+              dx="1"
+              dy="1"
+              result="offsetBlur"
+            />
+            <feflood
+              flood-color="#000000"
+              flood-opacity="0.5"
+            />
+            <fecomposite
+              in2="offsetBlur"
+              operator="in"
+            />
+            <femerge>
+              <femergenode />
+              <femergenode
+                in="SourceGraphic"
+              />
+            </femerge>
+          </filter>
+          <filter
+            filterUnits="objectBoundingBox"
+            height="120%"
+            id="filter-id-61"
+            width="120%"
+            x="-10%"
+            y="-10%"
+          >
+            <fecolormatrix
+              type="saturate"
+              values="0"
+            />
+          </filter>
+          <lineargradient
+            id="gradient-id-64"
+            x1="1%"
+            x2="99%"
+            y1="59%"
+            y2="41%"
+          >
+            <stop
+              offset="0"
+              stop-color="#474758"
+            />
+            <stop
+              offset="0.75"
+              stop-color="#474758"
+              stop-opacity="1"
+            />
+            <stop
+              offset="0.755"
+              stop-color="#3cabff"
+              stop-opacity="1"
+            />
+          </lineargradient>
+          <filter
+            filterUnits="objectBoundingBox"
+            height="200%"
+            id="filter-id-73"
+            width="200%"
+            x="-50%"
+            y="-50%"
+          />
+          <filter
+            filterUnits="objectBoundingBox"
+            height="200%"
+            id="filter-id-94"
+            width="200%"
+            x="-50%"
+            y="-50%"
+          />
+          <clippath
+            id="id-125"
+          />
+          <filter
+            filterUnits="objectBoundingBox"
+            height="200%"
+            id="filter-id-130"
+            width="200%"
+            x="-50%"
+            y="-50%"
+          >
+            <fegaussianblur
+              in="SourceGraphic"
+              result="blurOut"
+              stdDeviation="1.5"
+            />
+            <feoffset
+              dx="1"
+              dy="1"
+              result="offsetBlur"
+            />
+            <feflood
+              flood-color="#000000"
+              flood-opacity="0.5"
+            />
+            <fecomposite
+              in2="offsetBlur"
+              operator="in"
+            />
+            <femerge>
+              <femergenode />
+              <femergenode
+                in="SourceGraphic"
+              />
+            </femerge>
+          </filter>
+          <clippath
+            id="id-141"
+          />
+          <filter
+            filterUnits="objectBoundingBox"
+            height="200%"
+            id="filter-id-146"
+            width="200%"
+            x="-50%"
+            y="-50%"
+          >
+            <fegaussianblur
+              in="SourceGraphic"
+              result="blurOut"
+              stdDeviation="1.5"
+            />
+            <feoffset
+              dx="1"
+              dy="1"
+              result="offsetBlur"
+            />
+            <feflood
+              flood-color="#000000"
+              flood-opacity="0.5"
+            />
+            <fecomposite
+              in2="offsetBlur"
+              operator="in"
+            />
+            <femerge>
+              <femergenode />
+              <femergenode
+                in="SourceGraphic"
+              />
+            </femerge>
+          </filter>
+          <clippath
+            id="id-178"
+          >
+            <rect
+              height="0"
+              width="0"
+            />
+          </clippath>
+        </defs>
+        <g>
+          <g
+            fill="#ffffff"
+            fill-opacity="0"
+          >
+            <rect />
+          </g>
+          <g>
+            <g
+              clip-path="url(\\"#id-45\\")"
+              role="region"
+            >
+              <g>
+                <g>
+                  <g>
+                    <g>
+                      <g>
+                        <g>
+                          <g />
+                        </g>
+                        <g>
+                          <g>
+                            <g>
+                              <g>
+                                <g
+                                  aria-hidden="true"
+                                >
+                                  <g>
+                                    <g
+                                      fill="#142745"
+                                      font-size="14"
+                                      opacity="0.6"
+                                    >
+                                      <g />
+                                    </g>
+                                    <g
+                                      fill="none"
+                                      stroke="#000000"
+                                      stroke-opacity="0.15"
+                                    >
+                                      <path />
+                                    </g>
+                                    <g
+                                      fill="none"
+                                      stroke="#000000"
+                                      stroke-opacity="0"
+                                      style="pointer-events: none;"
+                                    >
+                                      <path />
+                                    </g>
+                                    <g>
+                                      <g>
+                                        <g
+                                          aria-label="L"
+                                          fill="#142745"
+                                          fill-opacity="0"
+                                          font-size="14"
+                                          opacity="0"
+                                          stroke-opacity="0"
+                                          style="pointer-events: none;"
+                                        >
+                                          <g
+                                            style="webkit-user-select: none;"
+                                            transform="translate(10,0)"
+                                          >
+                                            <text
+                                              dy="0"
+                                              x="0"
+                                              y="0"
+                                            >
+                                              <tspan>
+                                                L
+                                              </tspan>
+                                            </text>
+                                          </g>
+                                        </g>
+                                      </g>
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                            <g
+                              style="user-select: none; webkit-user-select: none; webkit-user-drag: none;"
+                            >
+                              <g
+                                fill="#ffffff"
+                                fill-opacity="0"
+                              >
+                                <rect />
+                              </g>
+                              <g>
+                                <g>
+                                  <g>
+                                    <g
+                                      fill="#67b7dc"
+                                      fill-opacity="0"
+                                      role="group"
+                                      stroke="#fcc232"
+                                      stroke-opacity="1"
+                                      stroke-width="3"
+                                    >
+                                      <g>
+                                        <g
+                                          clip-path="url(\\"#id-125\\")"
+                                        >
+                                          <g>
+                                            <g>
+                                              <g />
+                                            </g>
+                                          </g>
+                                        </g>
+                                        <g />
+                                      </g>
+                                    </g>
+                                    <g
+                                      fill="#6794dc"
+                                      fill-opacity="0"
+                                      role="group"
+                                      stroke="#83e661"
+                                      stroke-opacity="1"
+                                      stroke-width="3"
+                                    >
+                                      <g>
+                                        <g
+                                          clip-path="url(\\"#id-141\\")"
+                                        >
+                                          <g>
+                                            <g>
+                                              <g />
+                                            </g>
+                                          </g>
+                                        </g>
+                                        <g />
+                                      </g>
+                                    </g>
+                                  </g>
+                                </g>
+                                <g>
+                                  <g>
+                                    <g>
+                                      <g />
+                                    </g>
+                                    <g>
+                                      <g />
+                                    </g>
+                                  </g>
+                                </g>
+                                <g
+                                  aria-hidden="true"
+                                  focusable="true"
+                                  opacity="0"
+                                  role="button"
+                                  tabindex="0"
+                                  visibility="hidden"
+                                >
+                                  <g
+                                    fill="#6794dc"
+                                    fill-opacity="1"
+                                    stroke="#ffffff"
+                                    stroke-opacity="0"
+                                  >
+                                    <path />
+                                  </g>
+                                  <g>
+                                    <g
+                                      fill="#000000"
+                                      style="pointer-events: none;"
+                                    >
+                                      <g />
+                                    </g>
+                                    <g
+                                      stroke="#ffffff"
+                                      style="pointer-events: none;"
+                                    >
+                                      <path
+                                        d=" M0,0  L11,0 "
+                                      />
+                                    </g>
+                                  </g>
+                                </g>
+                                <g>
+                                  <g>
+                                    <g>
+                                      <g />
+                                    </g>
+                                    <g>
+                                      <g />
+                                    </g>
+                                  </g>
+                                </g>
+                                <g>
+                                  <g />
+                                </g>
+                                <g>
+                                  <g />
+                                </g>
+                                <g>
+                                  <g />
+                                </g>
+                                <g>
+                                  <g />
+                                </g>
+                                <g
+                                  aria-hidden="true"
+                                  clip-path="url(\\"#id-178\\")"
+                                  opacity="0"
+                                  style="user-select: none; webkit-user-select: none; webkit-user-drag: none;"
+                                  visibility="hidden"
+                                >
+                                  <g>
+                                    <g
+                                      fill="#000000"
+                                      fill-opacity="0.2"
+                                      style="pointer-events: none;"
+                                      visibility="hidden"
+                                    >
+                                      <path />
+                                    </g>
+                                    <g
+                                      fill="none"
+                                      stroke="#000000"
+                                      stroke-dasharray="3,3"
+                                      stroke-opacity="0.4"
+                                      style="pointer-events: none;"
+                                    >
+                                      <path />
+                                    </g>
+                                    <g
+                                      fill="none"
+                                      stroke="#000000"
+                                      stroke-dasharray="3,3"
+                                      stroke-opacity="0.4"
+                                      style="pointer-events: none;"
+                                    >
+                                      <path />
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                            <g>
+                              <g />
+                            </g>
+                          </g>
+                        </g>
+                        <g>
+                          <g>
+                            <g
+                              aria-hidden="true"
+                            >
+                              <g>
+                                <g
+                                  fill="#000000"
+                                  font-size="12"
+                                >
+                                  <g />
+                                </g>
+                                <g
+                                  fill="none"
+                                  stroke="#000000"
+                                  stroke-opacity="0.15"
+                                >
+                                  <path />
+                                </g>
+                                <g
+                                  fill="none"
+                                  stroke="#000000"
+                                  stroke-opacity="0"
+                                  style="pointer-events: none;"
+                                >
+                                  <path />
+                                </g>
+                                <g>
+                                  <g>
+                                    <g
+                                      aria-label="L"
+                                      fill="#000000"
+                                      fill-opacity="0"
+                                      font-size="12"
+                                      opacity="0"
+                                      stroke-opacity="0"
+                                      style="pointer-events: none;"
+                                    >
+                                      <g
+                                        style="webkit-user-select: none;"
+                                        transform="translate(0,10)"
+                                      >
+                                        <text
+                                          dy="0"
+                                          x="0"
+                                          y="0"
+                                        >
+                                          <tspan>
+                                            L
+                                          </tspan>
+                                        </text>
+                                      </g>
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                    <g
+                      role="group"
+                    >
+                      <g />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g>
+              <g>
+                <g
+                  opacity="0"
+                  role="tooltip"
+                  visibility="hidden"
+                >
+                  <g
+                    fill="#ffffff"
+                    fill-opacity="0.9"
+                    filter="url(\\"#filter-id-50\\")"
+                    stroke="#ffffff"
+                    stroke-opacity="1"
+                    stroke-width="1"
+                    style="pointer-events: none;"
+                  >
+                    <path />
+                  </g>
+                  <g>
+                    <g
+                      fill="#ffffff"
+                      style="pointer-events: none;"
+                    >
+                      <g
+                        transform="translate(0,7)"
+                      />
+                    </g>
+                  </g>
+                </g>
+                <g
+                  visibility="hidden"
+                >
+                  <g
+                    fill="#ffffff"
+                    opacity="1"
+                  >
+                    <rect />
+                  </g>
+                  <g>
+                    <g>
+                      <g>
+                        <g
+                          fill="#f3f3f3"
+                          fill-opacity="0.8"
+                          stroke-opacity="1"
+                        >
+                          <g>
+                            <g />
+                          </g>
+                        </g>
+                        <g
+                          fill="#000000"
+                          fill-opacity="0.2"
+                          stroke-opacity="1"
+                        >
+                          <g>
+                            <g />
+                          </g>
+                        </g>
+                        <g
+                          fill="#000000"
+                          fill-opacity="0.4"
+                        >
+                          <g />
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g
+                  aria-labelledby="id-61-title"
+                  filter="url(\\"#filter-id-61\\")"
+                  opacity="0.3"
+                  style="cursor: pointer;"
+                >
+                  <g
+                    fill="#ffffff"
+                    opacity="0"
+                  >
+                    <rect />
+                  </g>
+                  <g>
+                    <g
+                      fill="none"
+                      shape-rendering="auto"
+                      stroke="#3cabff"
+                      stroke-opacity="1"
+                      stroke-width="1.7999999999999998"
+                    >
+                      <path
+                        d=" M15,15  C17.4001,15 22.7998,15.0001 27,15 C31.2002,14.9999 33.2999,6 36,6 C38.7001,6 38.6999,10.5 40.5,10.5 C42.3001,10.5 42.2999,6 45,6 C47.7001,6 50.9999,14.9999 54,15 C57.0002,15.0001 58.7999,15 60,15"
+                      />
+                    </g>
+                    <g
+                      fill="none"
+                      shape-rendering="auto"
+                      stroke="url(\\"#gradient-id-64\\")"
+                      stroke-opacity="1"
+                      stroke-width="1.7999999999999998"
+                    >
+                      <path
+                        d=" M6,15  C8.2501,15 9.7498,15.0001 15,15 C20.2502,14.9999 20.7748,3.6 27,3.6 C33.2252,3.6 33.8998,14.9999 39.9,15 C45.9002,15.0001 45.9748,15 51,15 C56.0252,15 57.7499,15 60,15"
+                      />
+                    </g>
+                  </g>
+                  <title
+                    id="id-61-title"
+                  >
+                    Chart created using amCharts library
+                  </title>
+                </g>
+                <g
+                  opacity="0"
+                  role="tooltip"
+                  visibility="hidden"
+                >
+                  <g
+                    fill="#000000"
+                    fill-opacity="1"
+                    stroke="#000000"
+                    stroke-opacity="1"
+                    stroke-width="1"
+                    style="pointer-events: none;"
+                  >
+                    <path />
+                  </g>
+                  <g>
+                    <g
+                      fill="#ffffff"
+                      style="pointer-events: none;"
+                    >
+                      <g
+                        transform="translate(0,7)"
+                      />
+                    </g>
+                  </g>
+                </g>
+                <g
+                  display="none"
+                  opacity="0"
+                  role="tooltip"
+                  visibility="hidden"
+                >
+                  <g
+                    fill="#000000"
+                    fill-opacity="1"
+                    stroke="#000000"
+                    stroke-opacity="1"
+                    stroke-width="1"
+                    style="pointer-events: none;"
+                  >
+                    <path />
+                  </g>
+                  <g>
+                    <g
+                      fill="#ffffff"
+                      style="pointer-events: none;"
+                    >
+                      <g
+                        transform="translate(0,7)"
+                      />
+                    </g>
+                  </g>
+                </g>
+                <g
+                  opacity="0"
+                  role="tooltip"
+                  visibility="hidden"
+                >
+                  <g
+                    fill="rgba(252,194,50,0.2)"
+                    fill-opacity="0.9"
+                    filter="url(\\"#filter-id-130\\")"
+                    stroke="#ffffff"
+                    stroke-opacity="1"
+                    stroke-width="1"
+                    style="pointer-events: none;"
+                  >
+                    <path />
+                  </g>
+                  <g>
+                    <g
+                      fill="#000000"
+                      style="pointer-events: none;"
+                    >
+                      <g
+                        transform="translate(0,7)"
+                      />
+                    </g>
+                  </g>
+                </g>
+                <g
+                  opacity="0"
+                  role="tooltip"
+                  visibility="hidden"
+                >
+                  <g
+                    fill="rgba(131,230,97,0.2)"
+                    fill-opacity="0.9"
+                    filter="url(\\"#filter-id-146\\")"
+                    stroke="#ffffff"
+                    stroke-opacity="1"
+                    stroke-width="1"
+                    style="pointer-events: none;"
+                  >
+                    <path />
+                  </g>
+                  <g>
+                    <g
+                      fill="#000000"
+                      style="pointer-events: none;"
+                    >
+                      <g
+                        transform="translate(0,7)"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;

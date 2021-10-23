@@ -104,6 +104,7 @@
   "sentences": "ବାକ୍ୟ (ଗୁଡ଼ିକ)",
   "images": "ପ୍ରତିଛବି (ଗୁଡ଼ିକ)",
   "progressStatus": "{{initiativeName}} में <span>{{average}}%</span> ର ଲକ୍ଷ୍ୟ ହାସଲ",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "ବିଶେଷ ବର୍ଣ୍ଣଗୁଡ଼ିକୁ ବ୍ୟବହାର କରିବା ସମ୍ଭବ ନୁହେଁ",
   "watchTheVideo": "ଭିଡିଓଟି ଦେଖନ୍ତୁ",
   "installNow": "ଏବେ ଇନଷ୍ଟଲ କରନ୍ତୁ",
-  "chromeExtensionLabel": "ଆପଣ ବାଛିଥିବା ଭାଷାରେ ଟାଇପ୍ କରିବାକୁ କ୍ରୋମ୍ ଏକ୍ସଟେନ୍ସନ୍ ଡାଉନଲୋଡ଼ କରନ୍ତୁ"
+  "chromeExtensionLabel": "ଆପଣ ବାଛିଥିବା ଭାଷାରେ ଟାଇପ୍ କରିବାକୁ କ୍ରୋମ୍ ଏକ୍ସଟେନ୍ସନ୍ ଡାଉନଲୋଡ଼ କରନ୍ତୁ",
+  "validationGraphYLabel1": "",
+  "dashboard": "ଡ୍ୟାସବୋର୍ଡ",
+  "selectLanguagePrompt": "ଏକ ଭାଷା ବାଛନ୍ତୁ",
+  "dataLastUpdated": "ପୂର୍ବ ଡେଟା ଅପଡେଟ",
+  "allLanguages": "ସମସ୍ତ ଭାଷା",
+  "people": "ଲୋକ",
+  "transcribed": "ଟ୍ରାନ୍ସ୍କ୍ରାଇବ୍ଡ୍",
+  "validated": "ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରାଯାଇଥିବା",
+  "mapChartTitle": "",
+  "lineChartTitle": "ପ୍ରଗତି ଚାର୍ଟ"
 }

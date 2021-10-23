@@ -10,16 +10,12 @@ function DataLastUpdated() {
 
   const { data } = useFetch<Array<DataLastUpdatedType>>(apiPaths.lastUpdatedTime);
 
-  if (data) {
-    const lastUpdatedAt = moment(data[0]['timezone']).format('DD-MM-YYYY, h:mm:ss a');
-    return (
-      <div>
-        {t('dataLastUpdated')}: {lastUpdatedAt}
-      </div>
-    );
-  } else {
-    return <div>Hello</div>;
-  }
+  const lastUpdatedAt = data ? moment(data[0]['timezone']).format('DD-MM-YYYY, h:mm:ss a') : '';
+  return (
+    <div>
+      {t('dataLastUpdated')}: {lastUpdatedAt}
+    </div>
+  );
 }
 
 export default DataLastUpdated;

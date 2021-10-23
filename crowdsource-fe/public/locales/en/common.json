@@ -181,5 +181,16 @@
   "watchTheVideo": "Watch the video",
   "installNow": "Install Now",
   "chromeExtensionLabel": "Get Chrome extension to type in any language you choose",
-  "validationGraphYLabel1": "Validation(in hours)"
+  "validationGraphYLabel1": "Validation(in hours)",
+
+  "dashboard": "Dashboard",
+  "selectLanguagePrompt": "Select a language",
+  "dataLastUpdated": "Data Last Updated",
+  "allLanguages": "All Languages",
+  "people": "People",
+  "transcribed": "Transcribed",
+  "validated": "Validated",
+
+  "mapChartTitle": "Geographical Distribution",
+  "lineChartTitle": "Progress Chart"
 }

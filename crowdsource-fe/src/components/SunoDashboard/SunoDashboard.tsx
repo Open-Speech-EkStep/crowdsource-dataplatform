@@ -5,6 +5,7 @@ import ContributionStatsByLanguage from 'components/ContributionStatsByLanguage'
 import DataLastUpdated from 'components/DataLastUpdated';
 import IndiaMapChart from 'components/IndiaMapChart';
 import LanguageSelector from 'components/LanguageSelector';
+import ProgressChart from 'components/ProgressChart';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 
 const SunoDashboard = () => {
@@ -22,6 +23,7 @@ const SunoDashboard = () => {
           <ContributionStatsByLanguage initiative={INITIATIVES_MAPPING.suno} language={language} />
         ))}
       <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.suno} language={language} />
+      <ProgressChart type={INITIATIVES_MEDIA_MAPPING.suno} language={language} />
     </div>
   );
 };

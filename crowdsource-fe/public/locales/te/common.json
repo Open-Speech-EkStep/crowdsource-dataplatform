@@ -104,6 +104,7 @@
   "sentences": "వాక్యాలు",
   "images": "చిత్రాలు",
   "progressStatus": "{{initiativeName}} में <span>{{average}}%</span> సాధించబడింది",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "స్పెషల్ కారెక్టర్స్ ఉండకూడదు",
   "watchTheVideo": "వీడియోను చూడండి",
   "installNow": "ఇప్పుడే ఇన్‌స్టాల్ చేయండి",
-  "chromeExtensionLabel": "మీరు ఎంచుకున్న ఏ భాషలోకైనా టైప్ చేయడానికి క్రోమ్ ఎక్స్‌టెన్షన్ని డౌన్‌లోడ్ చేయండి"
+  "chromeExtensionLabel": "మీరు ఎంచుకున్న ఏ భాషలోకైనా టైప్ చేయడానికి క్రోమ్ ఎక్స్‌టెన్షన్ని డౌన్‌లోడ్ చేయండి",
+  "validationGraphYLabel1": "",
+  "dashboard": "డ్యాష్‌బోర్డ్",
+  "selectLanguagePrompt": "ఒక భాషను ఎంచుకోండి",
+  "dataLastUpdated": "చివరిగా డేటా నవీకరించబడినది",
+  "allLanguages": "అన్ని భాషలు",
+  "people": "వ్యక్తులు",
+  "transcribed": "ట్రాన్స్‌క్రైబ్ చేయబడింది",
+  "validated": "ధృవీకరించబడింది",
+  "mapChartTitle": "",
+  "lineChartTitle": "ప్రోగ్రెస్ చార్ట్"
 }

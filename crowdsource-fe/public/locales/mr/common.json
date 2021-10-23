@@ -104,6 +104,7 @@
   "sentences": "वाक्य",
   "images": "इमेज/इमेजेस",
   "progressStatus": "{{initiativeName}} <span>{{average}}%</span> चे लक्ष्य  साध्य",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "विशिष्ट चिन्हांना अनुमती नाही",
   "watchTheVideo": "व्हिडिओ पाहा",
   "installNow": "आता इंस्टॉल करा",
-  "chromeExtensionLabel": "तुम्हाला हव्या त्या भाषेमध्ये टाईप करण्यासाठी क्रोम एक्सटेंशन डाउनलोड करा"
+  "chromeExtensionLabel": "तुम्हाला हव्या त्या भाषेमध्ये टाईप करण्यासाठी क्रोम एक्सटेंशन डाउनलोड करा",
+  "validationGraphYLabel1": "",
+  "dashboard": "डॅशबोर्ड",
+  "selectLanguagePrompt": "भाषा निवडा",
+  "dataLastUpdated": "मागील डेटा अपडेट",
+  "allLanguages": "सर्व भाषा",
+  "people": "लोक",
+  "transcribed": "ट्रांसक्राइब्ड",
+  "validated": "प्रमाणित केलेले",
+  "mapChartTitle": "",
+  "lineChartTitle": "प्रगती चार्ट"
 }

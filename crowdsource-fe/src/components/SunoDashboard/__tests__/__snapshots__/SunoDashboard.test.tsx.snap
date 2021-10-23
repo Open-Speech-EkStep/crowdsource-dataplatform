@@ -15,7 +15,7 @@ exports[`SunoDashboard changing language from language selector should update st
               class="form-label"
               for="language"
             >
-              Select a Language:
+              selectLanguagePrompt:
             </label>
             <select
               aria-label="Select Language"
@@ -25,7 +25,7 @@ exports[`SunoDashboard changing language from language selector should update st
               <option
                 value="all"
               >
-                All Languages
+                allLanguages
               </option>
               <option
                 value="English"
@@ -166,9 +166,35 @@ exports[`SunoDashboard changing language from language selector should update st
       class="pt-7 pt-md-9 container-lg"
     >
       <h3>
-        Geographical Distribution
+        mapChartTitle
       </h3>
       MapChart
+    </div>
+    <div
+      class="pt-7 pt-md-9 container-lg"
+    >
+      <h3>
+        lineChartTitle
+      </h3>
+      <div
+        class="row"
+      >
+        <button
+          class="info primary btn btn-primary"
+          data-testid="Button"
+          type="button"
+        >
+          monthly
+        </button>
+        <button
+          class="info primary btn btn-primary"
+          data-testid="Button"
+          type="button"
+        >
+          quarterly
+        </button>
+      </div>
+      LineChart
     </div>
   </div>
 </DocumentFragment>
@@ -189,7 +215,7 @@ exports[`SunoDashboard should render snapshot 1`] = `
               class="form-label"
               for="language"
             >
-              Select a Language:
+              selectLanguagePrompt:
             </label>
             <select
               aria-label="Select Language"
@@ -199,7 +225,7 @@ exports[`SunoDashboard should render snapshot 1`] = `
               <option
                 value="all"
               >
-                All Languages
+                allLanguages
               </option>
               <option
                 value="English"
@@ -363,9 +389,35 @@ exports[`SunoDashboard should render snapshot 1`] = `
       class="pt-7 pt-md-9 container-lg"
     >
       <h3>
-        Geographical Distribution
+        mapChartTitle
       </h3>
       MapChart
+    </div>
+    <div
+      class="pt-7 pt-md-9 container-lg"
+    >
+      <h3>
+        lineChartTitle
+      </h3>
+      <div
+        class="row"
+      >
+        <button
+          class="info primary btn btn-primary"
+          data-testid="Button"
+          type="button"
+        >
+          monthly
+        </button>
+        <button
+          class="info primary btn btn-primary"
+          data-testid="Button"
+          type="button"
+        >
+          quarterly
+        </button>
+      </div>
+      LineChart
     </div>
   </div>
 </DocumentFragment>

@@ -21,6 +21,10 @@ const apiPaths = {
   mediaAsr: nodeConfig.apiUrl + '/media/asr',
   store: nodeConfig.apiUrl + '/store',
   skip: nodeConfig.apiUrl + '/skip',
+  monthlyTimelineCumulative: nodeConfig.staticFileUrl + '/aggregated-json/monthlyTimelineCumulative.json',
+  quarterlyTimelineCumulative: nodeConfig.staticFileUrl + '/aggregated-json/quarterlyTimelineCumulative.json',
+  monthlyTimeline: nodeConfig.staticFileUrl + '/aggregated-json/monthlyTimeline.json',
+  quarterlyTimeline: nodeConfig.staticFileUrl + '/aggregated-json/quarterlyTimeline.json',
 };
 
 export default apiPaths;

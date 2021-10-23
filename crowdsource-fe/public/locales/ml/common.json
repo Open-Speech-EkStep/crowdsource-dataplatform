@@ -104,6 +104,7 @@
   "sentences": "വാക്യങ്ങള്‍",
   "images": "ചിത്രം(കള്‍)",
   "progressStatus": "{{initiativeName}} സുനോ ഇന്ത്യ ടാര്‍ഗെറ്റിന്റെ  <span>{{average}}%</span> കൈവരിച്ചു",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "സ്പെഷ്യൽ ക്യാരക്റ്ററുകൾ അനുവദനീയമല്ല",
   "watchTheVideo": "വീഡിയോ കാണുക",
   "installNow": "ഇപ്പോൾ ഇൻസ്റ്റാൾ ചെയ്യുക",
-  "chromeExtensionLabel": "നിങ്ങൾ തിരഞ്ഞെടുക്കുന്ന ഏത് ഭാഷയിലും ടൈപ്പു ചെയ്യാൻ ക്രോം വിപുലീകരണം നേടുക"
+  "chromeExtensionLabel": "നിങ്ങൾ തിരഞ്ഞെടുക്കുന്ന ഏത് ഭാഷയിലും ടൈപ്പു ചെയ്യാൻ ക്രോം വിപുലീകരണം നേടുക",
+  "validationGraphYLabel1": "",
+  "dashboard": "ഡാഷ്ബോ൪ഡ്",
+  "selectLanguagePrompt": "ഒരു ഭാഷ തിരഞ്ഞെടുക്കുക",
+  "dataLastUpdated": "വിവരങ്ങള്‍ അവസാനം അപ്ഡേറ്റ് ചെയ്തത്",
+  "allLanguages": "എല്ലാ ഭാഷകളും",
+  "people": "ജനങ്ങള്‍",
+  "transcribed": "പകര്‍ത്തിയെഴുതിയത്",
+  "validated": "സാധൂകരിച്ചത്",
+  "mapChartTitle": "",
+  "lineChartTitle": "പുരോഗതി പട്ടിക"
 }

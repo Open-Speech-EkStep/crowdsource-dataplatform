@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Container from 'react-bootstrap/Container';
 
 import MapChart from 'components/MapChart';
@@ -49,16 +50,6 @@ const statesInformation = [
 
 const sourceUrl = 'https://crowdsource1.blob.core.windows.net/vakyansh-json-data/india2020Low.json';
 const colors = ['#4061BF', '#6B85CE', '#92A8E8', '#CDD8F6', '#E9E9E9'];
-const tooltipTemplate = `<div style="text-align: left;">
-<h6>{state}</h6>
-<div style="text-align: left;">{speakers} People</div>
-<div style="text-align: left;">
-  Transcribed:  <label style="margin-left: 8px">{contribution}</label>
-</div>
-<div style="text-align: left;">
-  Validated:  <label style="margin-left: 8px">{validation}</label>
-</div>
-</div>`;
 
 const getTotalParticipation = (data: CumulativeDataByLanguageAndState | undefined, type: InitiativeType) => {
   if (type === INITIATIVES_MEDIA_MAPPING.likho || type === INITIATIVES_MEDIA_MAPPING.dekho) {
@@ -68,32 +59,42 @@ const getTotalParticipation = (data: CumulativeDataByLanguageAndState | undefine
 };
 
 const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: string }) => {
+  const { t } = useTranslation();
   const jsonUrl = language ? apiPaths.cumulativeDataByLanguageAndState : apiPaths.cumulativeDataByState;
 
   const { data } = useFetch<Array<CumulativeDataByLanguageAndState>>(jsonUrl);
 
   let statesData = [{}];
-  if (data) {
-    let map_data = data.filter(d => d.type === type) || [];
-    if (language) {
-      map_data = map_data.filter(d => d.language === language) || [];
-    }
-    statesInformation.forEach(state => {
-      const ele = map_data.find(s => state.state === s.state);
-      statesData.push({
-        id: state.id,
-        state: state.state,
-        contribution: convertTimeFormat(ele?.total_contributions || 0),
-        validation: convertTimeFormat(ele?.total_validations || 0),
-        speakers: ele?.total_speakers || 0,
-        value: getTotalParticipation(ele, type),
-      });
-    });
+  let mapData = data?.filter(d => d.type === type) || [];
+  if (language) {
+    mapData = mapData.filter(d => d.language === language) || [];
   }
+  statesInformation.forEach(state => {
+    const ele = mapData.find(s => state.state === s.state);
+    statesData.push({
+      id: state.id,
+      state: t(state.state),
+      contribution: convertTimeFormat(ele?.total_contributions || 0),
+      validation: convertTimeFormat(ele?.total_validations || 0),
+      speakers: ele?.total_speakers || 0,
+      value: getTotalParticipation(ele, type),
+    });
+  });
+
+  const tooltipTemplate = `<div style="text-align: left;">
+<h6>{state}</h6>
+<div style="text-align: left;">{speakers} ${t('people')}</div>
+<div style="text-align: left;">
+${t('transcribed')}:  <label style="margin-left: 8px">{contribution}</label>
+</div>
+<div style="text-align: left;">
+${t('validated')}:  <label style="margin-left: 8px">{validation}</label>
+</div>
+</div>`;
 
   return (
     <Container fluid="lg" className="pt-7 pt-md-9">
-      <h3>Geographical Distribution</h3>
+      <h3>{t('mapChartTitle')}</h3>
       <MapChart
         sourceUrl={sourceUrl}
         colors={colors}

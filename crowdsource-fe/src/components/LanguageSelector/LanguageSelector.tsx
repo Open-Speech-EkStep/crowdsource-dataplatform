@@ -1,6 +1,7 @@
 import type { ChangeEvent } from 'react';
 import { Fragment } from 'react';
 
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -15,6 +16,7 @@ const LanguageSelector = ({
   selectedLanguage: string | undefined;
   updateSelectedLanguage: (language: string | undefined) => void;
 }) => {
+  const { t } = useTranslation();
   const { locales } = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -30,14 +32,14 @@ const LanguageSelector = ({
         <Col>
           <div>
             <Form.Group controlId="language">
-              <Form.Label className={``}>Select a Language:</Form.Label>
+              <Form.Label>{t('selectLanguagePrompt')}:</Form.Label>
               <Form.Select
                 value={selectedLanguage}
                 aria-label="Select Language"
                 onChange={handleChange as any}
               >
                 <option key="all" value="all">
-                  All Languages
+                  {t('allLanguages')}
                 </option>
                 {locales?.map(locale => (
                   <option key={locale} value={RAW_LANGUAGES[locale]}>

@@ -6,7 +6,7 @@ exports[`IndiaMapChart should render the component and matches it against stored
     class="pt-7 pt-md-9 container-lg"
   >
     <h3>
-      Geographical Distribution
+      mapChartTitle
     </h3>
     MapChart
   </div>

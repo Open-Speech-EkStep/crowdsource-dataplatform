@@ -104,6 +104,7 @@
   "sentences": "ವಾಕ್ಯ (ಗಳು)",
   "images": "ಚಿತ್ರ (ಗಳು)",
   "progressStatus": "{{initiativeName}} <span>{{average}}%</span>  ರಷ್ಟು ಸಾಧಿಸಲ್ಪಟ್ಟಿದೆ",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "ಸ್ಪೆಷಲ್ ಕ್ಯಾರೆಕ್ಟರ್‌ಗಳನ್ನು ಬಳಸುವಂತಿಲ್ಲ",
   "watchTheVideo": "ವೀಡಿಯೋವನ್ನು ವೀಕ್ಷಿಸಿ",
   "installNow": "ಈಗಲೇ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ",
-  "chromeExtensionLabel": "ನಿಮ್ಮ ಆಯ್ಕೆಯ ಯಾವುದೇ ಭಾಷೆಯಲ್ಲಿ ಟೈಪ್ ಮಾಡಲು ಕ್ರೋಮ್ ಎಕ್ಸ್‌ಟೆನ್ಷನ್ ಅನ್ನು ಪಡೆದುಕೊಳ್ಳಿ"
+  "chromeExtensionLabel": "ನಿಮ್ಮ ಆಯ್ಕೆಯ ಯಾವುದೇ ಭಾಷೆಯಲ್ಲಿ ಟೈಪ್ ಮಾಡಲು ಕ್ರೋಮ್ ಎಕ್ಸ್‌ಟೆನ್ಷನ್ ಅನ್ನು ಪಡೆದುಕೊಳ್ಳಿ",
+  "validationGraphYLabel1": "",
+  "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+  "selectLanguagePrompt": "ಒಂದು ಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+  "dataLastUpdated": "ಡೇಟಾ ಕೊನೆಯದಾಗಿ ನವೀಕರಿಸಲ್ಪಟ್ಟಿದ್ದು",
+  "allLanguages": "ಎಲ್ಲಾ ಭಾಷೆಗಳು",
+  "people": "ವ್ಯಕ್ತಿಗಳು",
+  "transcribed": "ಪ್ರತಿಲೇಖಿಸಲ್ಪಟ್ಟದ್ದು",
+  "validated": "ಮೌಲ್ಯೀಕರಿಸಲ್ಪಟ್ಟದ್ದು",
+  "mapChartTitle": "",
+  "lineChartTitle": "ಪ್ರಗತಿ ನಕ್ಷೆ"
 }

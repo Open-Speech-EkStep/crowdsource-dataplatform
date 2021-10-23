@@ -104,6 +104,7 @@
   "sentences": "",
   "images": "",
   "progressStatus": "{{initiativeName}} में <span>{{average}}%</span> का लक्ष्य  हासिल",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "বিশেষ বৰ্ণ অনুমোদিত নহয়",
   "watchTheVideo": "ভিডিঅ'টো চাওঁক",
   "installNow": "এতিয়া ইনষ্টল কৰক",
-  "chromeExtensionLabel": "আপুনি বাছনি কৰা যিকোনো ভাষা টাইপ কৰিবলৈ ক্ৰ'ম সম্প্ৰসাৰণ প্ৰাপ্ত কৰক"
+  "chromeExtensionLabel": "আপুনি বাছনি কৰা যিকোনো ভাষা টাইপ কৰিবলৈ ক্ৰ'ম সম্প্ৰসাৰণ প্ৰাপ্ত কৰক",
+  "validationGraphYLabel1": "",
+  "dashboard": "ডেচবোৰ্ড",
+  "selectLanguagePrompt": "এটা ভাষা নিৰ্বাচন কৰক",
+  "dataLastUpdated": "তথ্যৰ শেহতীয়া উন্নীতকৰণ",
+  "allLanguages": "সকলোবোৰ ভাষা",
+  "people": "People",
+  "transcribed": "Transcribed",
+  "validated": "Validated",
+  "mapChartTitle": "",
+  "lineChartTitle": "অগ্ৰগতিৰ তালিকা"
 }

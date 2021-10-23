@@ -104,6 +104,7 @@
   "sentences": "ਵਾਕ",
   "images": "ਇਮੇਜਾਂ",
   "progressStatus": "{{initiativeName}} में <span>{{average}}%</span> ਦਾ ਟੀਚਾ ਹਾਸਿਲ",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "ਵਿਸ਼ੇਸ਼ ਅੱਖਰਾਂ ਦੀ ਵਰਤੋਂ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ",
   "watchTheVideo": "ਵੀਡੀਓ ਦੇਖੋ",
   "installNow": "ਹੁਣੇ ਇੰਸਟਾਲ ਕਰੋ",
-  "chromeExtensionLabel": "ਆਪਣੀ ਚੁਣੀ ਹੋਈ ਕਿਸੇ ਵੀ ਭਾਸ਼ਾ ਵਿੱਚ ਟਾਈਪ ਕਰਨ ਲਈ Chrome ਐਕਸਟੈਂਸ਼ਨ ਡਾਊਨਲੋਡ ਕਰੋ"
+  "chromeExtensionLabel": "ਆਪਣੀ ਚੁਣੀ ਹੋਈ ਕਿਸੇ ਵੀ ਭਾਸ਼ਾ ਵਿੱਚ ਟਾਈਪ ਕਰਨ ਲਈ Chrome ਐਕਸਟੈਂਸ਼ਨ ਡਾਊਨਲੋਡ ਕਰੋ",
+  "validationGraphYLabel1": "",
+  "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+  "selectLanguagePrompt": "ਕੋਈ ਇੱਕ ਭਾਸ਼ਾ ਚੁਣੋ",
+  "dataLastUpdated": "ਪਿਛਲਾ ਅਪਡੇਟ ਕੀਤਾ ਡਾਟਾ",
+  "allLanguages": "ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ",
+  "people": "ਲੋਕ",
+  "transcribed": "ਲਿਪੀਅੰਤਰਣ",
+  "validated": "ਪ੍ਰਮਾਣਿਤ",
+  "mapChartTitle": "",
+  "lineChartTitle": "ਪ੍ਰੋਗਰੈੱਸ ਚਾਰਟ"
 }

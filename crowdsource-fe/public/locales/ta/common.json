@@ -104,6 +104,7 @@
   "sentences": "வாக்கியம்(கள்)",
   "images": "படம்(கள்)",
   "progressStatus": "{{initiativeName}} में <span>{{average}}%</span> கேள் இந்தியா இலக்கு அடையப்பட்டது",
+  "progressStatusWithLanguage": "",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
@@ -179,5 +180,15 @@
   "specialCharacters": "சிறப்பு எழுத்துக்கள் அனுமதிக்கப்படுவதில்லை",
   "watchTheVideo": "காணொளியைக் காண்க",
   "installNow": "இப்போது நிறுவுக",
-  "chromeExtensionLabel": "நீங்கள் தேர்வு செய்யும் எந்த மொழியையும் தட்டச்சு செய்ய க்ரோம் நீட்டிப்பைப் பெறுக"
+  "chromeExtensionLabel": "நீங்கள் தேர்வு செய்யும் எந்த மொழியையும் தட்டச்சு செய்ய க்ரோம் நீட்டிப்பைப் பெறுக",
+  "validationGraphYLabel1": "",
+  "dashboard": "டேஷ்போர்ட்",
+  "selectLanguagePrompt": "ஒரு மொழியைத் தேர்ந்தெடுக்கவும்",
+  "dataLastUpdated": "தரவு கடைசியாக புதுப்பிக்கப்பட்ட நேரம்",
+  "allLanguages": "எல்லா மொழிகளும்",
+  "people": "மக்கள்",
+  "transcribed": "எடுத்தெழுதப்பட்டது",
+  "validated": "சரிபார்க்கப்பட்டது",
+  "mapChartTitle": "",
+  "lineChartTitle": "முன்னேற்ற விளக்கப்படம்"
 }
