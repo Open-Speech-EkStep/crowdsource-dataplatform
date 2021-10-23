@@ -1,24 +1,25 @@
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
+import type { InitiativeType } from 'types/InitiativeType';
+
 import styles from './InitiativeAction.module.scss';
 
 interface InitiativeActionProps {
-  initiative: string;
+  type: InitiativeType;
   actionIcon: string;
   action: 'contribute' | 'validate';
   shadow?: 'Blue' | 'Green';
 }
 
 const InitiativeAction = ({
-  initiative,
+  type,
   actionIcon,
   action = 'contribute',
   shadow = 'Blue',
 }: InitiativeActionProps) => {
   const { t } = useTranslation();
-  const subText =
-    action == 'contribute' ? `${initiative}ContributionSubtext` : `${initiative}ValidationSubtext`;
+  const subText = action == 'contribute' ? `${type}ContributionSubtext` : `${type}ValidationSubtext`;
 
   return (
     <div className={`${styles.action} d-flex flex-column align-items-center text-center display-3`}>

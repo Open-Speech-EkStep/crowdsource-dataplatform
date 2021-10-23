@@ -11,7 +11,6 @@ import {
   INITIATIVE_MEDIA_CONTRIBUTION_MAPPING,
   INITIATIVES_MEDIA,
   INITIATIVES_MEDIA_MAPPING,
-  INITIATIVES_MEDIA_TYPE_MAPPING,
 } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
@@ -65,17 +64,22 @@ const getTopLanguagesByHoursChartData = (
       value: (topLanguageByHours as any)[contributionValue],
       tooltipText: isSunoOrBoloInitiative(initiativeMedia)
         ? convertTimeFormat(topLanguageByHours?.total_contributions)
-        : `${topLanguageByHours?.total_contribution_count} ${INITIATIVES_MEDIA_TYPE_MAPPING[initiativeMedia]}`,
+        : `${topLanguageByHours?.total_contribution_count} ${i18n
+            ?.t(`${initiativeMedia}BarGraphTooltip`)
+            ?.toLocaleLowerCase()}`,
     })) ?? []
   );
 };
 
-const getTopLanguagesBySpeakerChartData = (topLanguagesBySpeaker?: TopLanguagesBySpeaker[]) => {
+const getTopLanguagesBySpeakerChartData = (
+  type: InitiativeType,
+  topLanguagesBySpeaker?: TopLanguagesBySpeaker[]
+) => {
   return (
     topLanguagesBySpeaker?.map(topLanguagesBySpeaker => ({
       category: i18n?.t((topLanguagesBySpeaker?.language).toLowerCase()),
       value: topLanguagesBySpeaker?.total_speakers,
-      tooltipText: topLanguagesBySpeaker?.total_speakers + ' Sentences',
+      tooltipText: (topLanguagesBySpeaker?.total_speakers || '0') + ' ' + i18n?.t(`${type}BarGraphTooltip`),
     })) ?? []
   );
 };
@@ -154,9 +158,11 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
               INITIATIVES_MEDIA_MAPPING[props.initiative],
               topLanguageHrsData
             )
-          : getTopLanguagesBySpeakerChartData(topSpeakersData),
+          : getTopLanguagesBySpeakerChartData(INITIATIVES_MEDIA_MAPPING[props.initiative], topSpeakersData),
       yAxisLabel:
-        chartFilterType === 'byDuration' ? t('contributionGraphYLabel1') : t('contributionGraphYLabel2'),
+        chartFilterType === 'byDuration'
+          ? t(`${INITIATIVES_MEDIA_MAPPING[props.initiative]}ContributionGraphYLabel1`)
+          : t(`${INITIATIVES_MEDIA_MAPPING[props.initiative]}ContributionGraphYLabel2`),
       ...chartLegendDetails,
     }),
     [chartFilterType, chartLegendDetails, props.initiative, t, topLanguageHrsData, topSpeakersData]

@@ -75,7 +75,9 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
             controlId="contribution"
             className="d-flex flex-column flex-md-row align-items-md-center"
           >
-            <Form.Label className={`${styles.label} mb-0 me-md-2`}>{t('selectLanguagePrompt1')}:</Form.Label>
+            <Form.Label className={`${styles.label} mb-0 me-md-2`}>
+              {t('selectContributionLanguagePrompt1')}:
+            </Form.Label>
             <div className="d-flex">
               <Form.Select
                 data-testid="SelectContributionLanguage"

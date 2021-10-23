@@ -85,7 +85,7 @@ exports[`ContributionActions should render the component and matches it against 
                         <p
                           class="text mt-1 mt-md-2 mb-0"
                         >
-                          boloContributionTagline
+                          textContributionTagline
                         </p>
                       </div>
                       <div
@@ -199,7 +199,7 @@ exports[`ContributionActions should render the component and matches it against 
                         <p
                           class="text mt-1 mt-md-2 mb-0"
                         >
-                          boloValidationTagline
+                          textValidationTagline
                         </p>
                       </div>
                       <div

@@ -66,7 +66,7 @@ exports[`ContributionTracker should render the component and matches it against 
         class="d-md-flex justify-content-between display-5 mb-5 mb-md-6"
       >
         <p>
-          totalSentences
+          asrBarGraphTitle
         </p>
         <div
           class="d-flex align-items-center mt-3 mt-md-0 display-6"

@@ -19,7 +19,7 @@ exports[`Suno Actions should render the component and matches it against stored 
             class="label mb-0 me-md-2 form-label"
             for="contribution"
           >
-            selectLanguagePrompt1:
+            selectContributionLanguagePrompt1:
           </label>
           <div
             class="d-flex"

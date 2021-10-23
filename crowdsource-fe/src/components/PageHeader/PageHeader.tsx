@@ -3,11 +3,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import TriColorBorder from 'components/TriColorBorder';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import type { Initiative } from 'types/Initiatives';
 
 import styles from './PageHeader.module.scss';
 
 interface PageHeaderProps {
-  initiative: string;
+  initiative: Initiative;
 }
 
 const PageHeader = ({ initiative }: PageHeaderProps) => {
@@ -31,11 +33,11 @@ const PageHeader = ({ initiative }: PageHeaderProps) => {
               {t(initiative)} {t('india')}
             </h1>
             <p className={`${styles.pageHeaderText} mb-0 d-none d-md-block`}>
-              {t(`${initiative}SloganText`)}
+              {t(`${INITIATIVES_MEDIA_MAPPING[initiative]}SloganText`)}
             </p>
           </div>
         </div>
-        <p className="mt-4 d-md-none mb-0">{t(`${initiative}SloganText`)}</p>
+        <p className="mt-4 d-md-none mb-0">{t(`${INITIATIVES_MEDIA_MAPPING[initiative]}SloganText`)}</p>
       </div>
       <TriColorBorder />
     </div>

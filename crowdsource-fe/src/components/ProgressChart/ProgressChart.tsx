@@ -64,7 +64,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
       <LineChart
         data={timelineData}
         xAxisLabel={t('month')}
-        yAxisLabel={t('contributionGraphYLabel1')}
+        yAxisLabel={t(`${type}ContributionGraphYLabel1`)}
         line1Text={t('transcribed')}
         line2Text={t('validated')}
         line1Tooltip={line1Tooltip}

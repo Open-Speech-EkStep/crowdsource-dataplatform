@@ -3,7 +3,7 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import PageHeader from '../PageHeader';
 
 describe('PageHeadeer', () => {
-  const setup = () => render(<PageHeader initiative="'suno'" />);
+  const setup = () => render(<PageHeader initiative="suno" />);
 
   verifyAxeTest(setup());
 

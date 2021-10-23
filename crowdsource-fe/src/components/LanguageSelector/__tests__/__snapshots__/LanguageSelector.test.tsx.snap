@@ -14,7 +14,7 @@ exports[`LanguageSelector should render snapshot 1`] = `
             class="form-label"
             for="language"
           >
-            Select a Language:
+            selectLanguagePrompt:
           </label>
           <select
             aria-label="Select Language"
@@ -24,7 +24,7 @@ exports[`LanguageSelector should render snapshot 1`] = `
             <option
               value="all"
             >
-              All Languages
+              allLanguages
             </option>
             <option
               value="English"

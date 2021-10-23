@@ -9,7 +9,7 @@ import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initia
 const DekhoIndiaDetails = () => {
   const { t } = useTranslation();
   const initiativeName = `${t('dekho')} ${t('india')}`;
-  const graphTitle = t('imagesLabelledAndValidated');
+  const graphTitle = t('ocrBarGraphTitle');
   return (
     <section data-testid="DekhoIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
       <Container fluid="lg">

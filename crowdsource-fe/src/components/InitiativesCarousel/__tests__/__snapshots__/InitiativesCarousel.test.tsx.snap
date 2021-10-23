@@ -192,7 +192,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        dekhoSloganText
+                                        ocrSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -234,7 +234,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoContributionSubtext
+                                    ocrContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -274,7 +274,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoValidationSubtext
+                                    ocrValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -355,7 +355,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        sunoSloganText
+                                        asrSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -397,7 +397,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    sunoContributionSubtext
+                                    asrContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -437,7 +437,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    sunoValidationSubtext
+                                    asrValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -518,7 +518,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        boloSloganText
+                                        textSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -560,7 +560,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    boloContributionSubtext
+                                    textContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -600,7 +600,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    boloValidationSubtext
+                                    textValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -681,7 +681,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        likhoSloganText
+                                        parallelSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -723,7 +723,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    likhoContributionSubtext
+                                    parallelContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -763,7 +763,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    likhoValidationSubtext
+                                    parallelValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -844,7 +844,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        dekhoSloganText
+                                        ocrSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -886,7 +886,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoContributionSubtext
+                                    ocrContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -926,7 +926,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoValidationSubtext
+                                    ocrValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1007,7 +1007,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        sunoSloganText
+                                        asrSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -1049,7 +1049,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    sunoContributionSubtext
+                                    asrContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1089,7 +1089,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    sunoValidationSubtext
+                                    asrValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1170,7 +1170,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        boloSloganText
+                                        textSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -1212,7 +1212,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    boloContributionSubtext
+                                    textContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1252,7 +1252,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    boloValidationSubtext
+                                    textValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1333,7 +1333,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        likhoSloganText
+                                        parallelSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -1375,7 +1375,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    likhoContributionSubtext
+                                    parallelContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1415,7 +1415,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    likhoValidationSubtext
+                                    parallelValidationSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1496,7 +1496,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderText display-3"
                                       >
-                                        dekhoSloganText
+                                        ocrSloganText
                                       </div>
                                     </div>
                                   </div>
@@ -1538,7 +1538,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoContributionSubtext
+                                    ocrContributionSubtext
                                   </div>
                                 </div>
                               </div>
@@ -1578,7 +1578,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="mt-4"
                                   >
-                                    dekhoValidationSubtext
+                                    ocrValidationSubtext
                                   </div>
                                 </div>
                               </div>

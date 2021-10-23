@@ -17,7 +17,7 @@ describe('LanguageSelector', () => {
 
   it('should contain text', () => {
     setup('English');
-    expect(screen.getByLabelText('Select a Language:')).toBeInTheDocument();
+    expect(screen.getByLabelText('selectLanguagePrompt:')).toBeInTheDocument();
   });
 
   it('should call callback fn when language selected', async () => {

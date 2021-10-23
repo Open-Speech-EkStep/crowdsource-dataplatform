@@ -77,7 +77,7 @@ const ContributionActions = (props: ContributionActionProps) => {
           <ActionCard
             type={'contribute'}
             icon={`${props.initiative}_contribute_icon.svg`}
-            text={t(`${props.initiative}ContributionTagline`)}
+            text={t(`${INITIATIVES_MEDIA_MAPPING[props.initiative]}ContributionTagline`)}
             shadow="Green"
             disabled={isAllContributed}
             warningMsg="contributeWarningMsg"
@@ -88,7 +88,7 @@ const ContributionActions = (props: ContributionActionProps) => {
           <ActionCard
             type={'validate'}
             icon="validate.svg"
-            text={t(`${props.initiative}ValidationTagline`)}
+            text={t(`${INITIATIVES_MEDIA_MAPPING[props.initiative]}ValidationTagline`)}
             shadow="Blue"
             disabled={!hasTarget}
             warningMsg="validateWarningMsg"

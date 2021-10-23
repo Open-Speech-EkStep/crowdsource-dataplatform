@@ -29,7 +29,7 @@ exports[`PageHeadeer should render the component and matches it against stored s
               />
             </div>
             <img
-              alt="'suno'Logo"
+              alt="sunoLogo"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -44,19 +44,19 @@ exports[`PageHeadeer should render the component and matches it against stored s
           <h1
             class="pageHeading mb-0"
           >
-            'suno' india
+            suno india
           </h1>
           <p
             class="pageHeaderText mb-0 d-none d-md-block"
           >
-            'suno'SloganText
+            asrSloganText
           </p>
         </div>
       </div>
       <p
         class="mt-4 d-md-none mb-0"
       >
-        'suno'SloganText
+        asrSloganText
       </p>
     </div>
     <div

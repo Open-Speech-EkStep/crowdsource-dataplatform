@@ -43,7 +43,7 @@ exports[`InitiativeHeader should render the component and matches it against sto
         <div
           class="initiativeHeaderText display-3"
         >
-          sunoSloganText
+          asrSloganText
         </div>
       </div>
     </div>

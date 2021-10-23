@@ -35,7 +35,7 @@ exports[`InitiativeAction should render the component and matches it against sto
     <div
       class="mt-4"
     >
-      sunoContributionSubtext
+      asrContributionSubtext
     </div>
   </div>
 </DocumentFragment>

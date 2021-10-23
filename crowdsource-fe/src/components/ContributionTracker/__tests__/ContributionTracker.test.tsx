@@ -88,7 +88,9 @@ describe('ContributionTracker', () => {
       ])
     );
 
-    const renderResult = render(<ContributionTracker initiative={initiative} graphTitle="totalSentences" />);
+    const renderResult = render(
+      <ContributionTracker initiative={initiative} graphTitle="asrBarGraphTitle" />
+    );
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });

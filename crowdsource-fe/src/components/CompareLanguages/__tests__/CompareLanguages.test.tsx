@@ -81,7 +81,7 @@ describe('CompareLanguages', () => {
       <CompareLanguages
         initiative={initiative}
         dataBindigValue="total_contributions"
-        graphLabel="totalSentences"
+        graphLabel="asrBarGraphTitle"
       />
     );
     await waitFor(() => {

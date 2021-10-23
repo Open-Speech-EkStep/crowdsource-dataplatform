@@ -4,10 +4,13 @@ import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import type { Initiative } from 'types/Initiatives';
+
 import styles from './InitiativeHeader.module.scss';
 
 interface PageHeaderProps {
-  initiative: string;
+  initiative: Initiative;
 }
 
 const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
@@ -33,7 +36,9 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
           md="8"
           className="d-flex justify-content-center justify-content-md-start text-center align-items-md-center text-md-start"
         >
-          <div className={`${styles.initiativeHeaderText} display-3`}>{t(`${initiative}SloganText`)}</div>
+          <div className={`${styles.initiativeHeaderText} display-3`}>
+            {t(`${INITIATIVES_MEDIA_MAPPING[initiative]}SloganText`)}
+          </div>
         </Col>
       </Row>
     </div>

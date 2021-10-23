@@ -1,3 +1,5 @@
+import type { Initiative } from 'types/Initiatives';
+
 import routePaths from './routePaths';
 
 export const INITIATIVES_MAPPING = {
@@ -28,7 +30,7 @@ export const INITIATIVES_MEDIA_TYPE_MAPPING = {
   [INITIATIVES_MEDIA_MAPPING.dekho]: 'Images',
 } as const;
 
-export const INITIATIVES = Object.keys(INITIATIVES_MAPPING);
+export const INITIATIVES = Object.keys(INITIATIVES_MAPPING) as Array<Initiative>;
 
 export const INITIATIVE_ACTIONS = {
   [INITIATIVES_MAPPING.suno]: { contribute: 'transcribe', validate: 'validate' },

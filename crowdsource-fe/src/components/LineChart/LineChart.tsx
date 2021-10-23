@@ -4,15 +4,18 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
 
 interface ChartProps {
-  data: Array<{
-    month: number;
-    category: number;
-    year: number;
-    value1: number;
-    contributionText: string;
-    value2: number;
-    validationText: string;
-  }>;
+  data: Array<
+    | {
+        month: number;
+        category: number;
+        year: number;
+        value1: number;
+        contributionText: string;
+        value2: number;
+        validationText: string;
+      }
+    | {}
+  >;
   xAxisLabel?: string;
   yAxisLabel?: string;
   line1Text?: string;

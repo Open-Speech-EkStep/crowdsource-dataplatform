@@ -11,13 +11,12 @@ import InitiativeAction from 'components/InitiativeAction';
 import InitiativeHeader from 'components/InitiativeHeader';
 import Link from 'components/Link';
 import TriColorBackground from 'components/TriColorBackground';
-import { INITIATIVES } from 'constants/initiativeConstants';
+import { INITIATIVES, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import routePaths from 'constants/routePaths';
 
 import styles from './InitiativesCarousel.module.scss';
 
 const InitiativesCarousel = () => {
-  const initiatives = INITIATIVES;
   const { t } = useTranslation();
   const [sliders, setNavs] = useState({ sliderOne: undefined, sliderTwo: undefined });
   const sliderOneRef = useRef(undefined);
@@ -80,7 +79,7 @@ const InitiativesCarousel = () => {
           <div className={`${styles.initiativesCarousel} slickCarousel pt-6 pb-5 pb-md-3 py-md-8`}>
             <div className={`${styles.labelCarousel} mb-4`}>
               <Slider {...labelCarouselSettings}>
-                {initiatives.map(initiative => (
+                {INITIATIVES.map(initiative => (
                   <div key={initiative}>
                     <span
                       className={`${styles.slideLabel} d-inline-block position-relative pb-2 display-2`}
@@ -91,7 +90,7 @@ const InitiativesCarousel = () => {
             </div>
             <div className="py-md-5">
               <Slider {...initiativeCarouselSettings}>
-                {initiatives.map(initiative => (
+                {INITIATIVES.map(initiative => (
                   <div key={initiative} className="px-5 px-md-9 px-lg-10 px-xl-14 pb-3 pb-md-0">
                     <Row>
                       <Col
@@ -105,7 +104,7 @@ const InitiativesCarousel = () => {
                       <Col xs="6" md="3" lg="4" className="d-flex justify-content-center py-5 ">
                         <InitiativeAction
                           actionIcon={`${initiative}_contribute_icon.svg`}
-                          initiative={initiative}
+                          type={INITIATIVES_MEDIA_MAPPING[initiative]}
                           action="contribute"
                           shadow="Green"
                         />
@@ -113,7 +112,7 @@ const InitiativesCarousel = () => {
                       <Col xs="6" md="3" lg="4" className="d-flex justify-content-center py-5">
                         <InitiativeAction
                           actionIcon="validate.svg"
-                          initiative={initiative}
+                          type={INITIATIVES_MEDIA_MAPPING[initiative]}
                           action="validate"
                         />
                       </Col>
