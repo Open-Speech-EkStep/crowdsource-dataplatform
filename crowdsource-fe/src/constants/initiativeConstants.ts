@@ -39,6 +39,16 @@ export const INITIATIVE_ACTIONS = {
   [INITIATIVES_MAPPING.dekho]: { contribute: 'label', validate: 'validate' },
 } as const;
 
+export const INITIATIVE_ACTIONS_CAPS = {
+  transcribed: 'Transcribed',
+  validated: 'Validated',
+} as const;
+
+export const INITIATIVE_ACTIONS_PAGE_MAPPING = {
+  [routePaths.sunoIndiaContributeThankYou]: INITIATIVE_ACTIONS_CAPS.transcribed,
+  [routePaths.sunoIndiaValidateThankYou]: INITIATIVE_ACTIONS_CAPS.validated,
+} as const;
+
 export const INITIATIVE_CUMULATIVE_VALUE = {
   suno: [
     { languages: 'total_languages', isFormat: 'false' },

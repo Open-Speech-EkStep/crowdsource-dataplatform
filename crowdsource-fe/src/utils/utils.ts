@@ -1,3 +1,4 @@
+import { jsPDF } from 'jspdf';
 import { i18n } from 'next-i18next';
 
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
@@ -112,4 +113,23 @@ export const getDeviceInfo = () => {
 
 export const getBrowserInfo = () => {
   return platform.name + ' ' + platform.version;
+};
+
+export const downloadBadge = (
+  locale: string | undefined,
+  initiative: string,
+  source: string,
+  badgeType: string,
+  badgeId: string
+) => {
+  const pdf = new jsPDF();
+  const img = new Image();
+  img.src = `/images/${locale}/badges/${locale}_${initiative}_${badgeType}_${source}.png`;
+  img.crossOrigin = 'Anonymous';
+  img.onload = function () {
+    pdf.addImage(img, 50, 10, 105, 130);
+    pdf.save(`${badgeType}-badge.pdf`);
+  };
+
+  pdf.text(`Badge Id : ${badgeId}`, 36, 190);
 };

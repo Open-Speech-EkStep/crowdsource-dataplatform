@@ -213,7 +213,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               />
             </div>
             <img
-              alt="Bronze Badge"
+              alt="bronzeDownload"
               data-nimg="intrinsic"
               decoding="async"
               src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=96&q=75"
@@ -240,7 +240,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               />
             </div>
             <img
-              alt="Silver Badge"
+              alt="silverDownload"
               data-nimg="intrinsic"
               decoding="async"
               src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75"
@@ -267,7 +267,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               />
             </div>
             <img
-              alt="Bronze Badge"
+              alt="goldDownload"
               data-nimg="intrinsic"
               decoding="async"
               src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75"
@@ -294,7 +294,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               />
             </div>
             <img
-              alt="Bronze Badge"
+              alt="platinumDownload"
               data-nimg="intrinsic"
               decoding="async"
               src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75"
@@ -360,7 +360,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                 />
               </div>
               <img
-                alt="Bronze Badge"
+                alt="Silver Badge"
                 data-nimg="intrinsic"
                 decoding="async"
                 src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75"
@@ -387,7 +387,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                 />
               </div>
               <img
-                alt="Bronze Badge"
+                alt="Gold Badge"
                 data-nimg="intrinsic"
                 decoding="async"
                 src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75"
@@ -414,7 +414,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                 />
               </div>
               <img
-                alt="Bronze Badge"
+                alt="Platinum Badge"
                 data-nimg="intrinsic"
                 decoding="async"
                 src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75"

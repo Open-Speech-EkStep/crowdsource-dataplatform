@@ -25,7 +25,7 @@ exports[`ContributeMore should render the component and matches it against store
             />
           </div>
           <img
-            alt="Bronze Badge"
+            alt="bronzeDownload"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -51,7 +51,7 @@ exports[`ContributeMore should render the component and matches it against store
             />
           </div>
           <img
-            alt="Silver Badge"
+            alt="silverDownload"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -77,7 +77,7 @@ exports[`ContributeMore should render the component and matches it against store
             />
           </div>
           <img
-            alt="Bronze Badge"
+            alt="goldDownload"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -103,7 +103,7 @@ exports[`ContributeMore should render the component and matches it against store
             />
           </div>
           <img
-            alt="Bronze Badge"
+            alt="platinumDownload"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -167,7 +167,7 @@ exports[`ContributeMore should render the component and matches it against store
               />
             </div>
             <img
-              alt="Bronze Badge"
+              alt="Silver Badge"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -193,7 +193,7 @@ exports[`ContributeMore should render the component and matches it against store
               />
             </div>
             <img
-              alt="Bronze Badge"
+              alt="Gold Badge"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -219,7 +219,7 @@ exports[`ContributeMore should render the component and matches it against store
               />
             </div>
             <img
-              alt="Bronze Badge"
+              alt="Platinum Badge"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

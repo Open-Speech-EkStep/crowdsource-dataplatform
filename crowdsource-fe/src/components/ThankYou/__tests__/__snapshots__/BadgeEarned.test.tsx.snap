@@ -69,7 +69,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               <p
                 class="display-3 mt-5 mt-6"
               >
-                Transcribed 
+                 
                 <strong>
                   5 seentence (s)
                 </strong>
@@ -85,38 +85,43 @@ exports[`BadgeEarned should render the component and matches it against stored s
         <div
           class="d-flex flex-column align-items-center flex-md-row align-items-md-baseline"
         >
-          <a
-            class="download d-inline-flex align-items-center border border-1 border-primary px-4"
-            href="http://test.com"
+          <button
+            class="info normal btn btn-link"
+            data-testid="Button"
+            type="button"
           >
-            Download
-            <span
-              class="d-flex ms-2"
+            <a
+              class="download d-inline-flex align-items-center border border-1 border-primary px-4"
             >
-              <div
-                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+              Download
+              <span
+                class="d-flex ms-2"
               >
                 <div
-                  style="box-sizing: border-box; display: block; max-width: 100%;"
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
                 >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
                   <img
-                    alt=""
-                    aria-hidden="true"
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    alt="download-image"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
+                  <noscript />
                 </div>
-                <img
-                  alt="download-image"
-                  data-nimg="intrinsic"
-                  decoding="async"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                />
-                <noscript />
-              </div>
-            </span>
-          </a>
+              </span>
+            </a>
+          </button>
           <div
             class="mt-4 mt-md-0 ms-md-4"
           >

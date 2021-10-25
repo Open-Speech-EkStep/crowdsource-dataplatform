@@ -119,6 +119,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               contributionCount={rewardData?.contributionCount ?? 0}
               pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
               language={contributionLanguage ?? ''}
+              source={pageSourceConstants[route.asPath]}
             />
             <div className="mt-8 mt-md-9">
               <TwoColumn
@@ -132,7 +133,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                 right={
                   <CompareLanguages
                     initiative={initiative}
-                    graphLabel={t('contributionGraphYLabel1')}
+                    graphLabel={t(`${INITIATIVES_MEDIA_MAPPING[initiative]}ContributionGraphYLabel1`)}
                     dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
                     isTopLanguage={setIsTopLanguage}
                   />
@@ -182,7 +183,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   right={
                     <CompareLanguages
                       initiative={initiative}
-                      graphLabel={t('contributionGraphYLabel1')}
+                      graphLabel={t(`${INITIATIVES_MEDIA_MAPPING[initiative]}ContributionGraphYLabel1`)}
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
                       isTopLanguage={setIsTopLanguage}
                     />

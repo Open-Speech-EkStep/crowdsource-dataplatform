@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, userEvent, verifyAxeTest, screen } from 'utils/testUtils';
 
 import BadgeEarned from '../BadgeEarned';
 
@@ -11,6 +11,7 @@ describe('BadgeEarned', () => {
         contributionCount={5}
         pageMediaTypeStr="seentence (s)"
         language="Hindi"
+        source="contribute"
       />
     );
 
@@ -18,6 +19,8 @@ describe('BadgeEarned', () => {
 
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup();
+
+    userEvent.click(screen.getByRole('button', { name: 'Download download-image' }));
 
     expect(asFragment()).toMatchSnapshot();
   });

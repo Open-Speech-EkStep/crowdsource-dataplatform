@@ -1,10 +1,14 @@
-import Image from 'next/image';
+import React from 'react';
 
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import Button from 'components/Button';
 import ContributionDetails from 'components/ContributionDetails';
-import Link from 'components/Link';
 import SocialShareIcons from 'components/SocialShareIcons';
 import TwoColumn from 'components/TwoColumn';
-import { capitalizeFirstLetter } from 'utils/utils';
+import { INITIATIVE_ACTIONS_PAGE_MAPPING } from 'constants/initiativeConstants';
+import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
 
@@ -28,23 +32,38 @@ const ShareOn = () => (
   </div>
 );
 
-const DownloadAndShare = () => (
-  <div className="d-flex flex-column align-items-center flex-md-row align-items-md-baseline">
-    <Link href="http://test.com">
-      <a
-        className={`${styles.download} d-inline-flex align-items-center border border-1 border-primary px-4`}
-      >
-        Download
-        <span className="d-flex ms-2">
-          <Image src="/images/download_icon.svg" width="12" height="15" alt="download-image" />
-        </span>
-      </a>
-    </Link>
-    <div className="mt-4 mt-md-0 ms-md-4">
-      <ShareOn />
+interface DownloadBadgeProps {
+  initiative: string;
+  badgeType: string;
+  source: string;
+}
+
+const DownloadAndShare = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
+  const { locale: currentLocale } = useRouter();
+
+  const download = (badgeType: string) => {
+    downloadBadge(currentLocale, initiative, source, badgeType, 'abc-xyz');
+  };
+
+  return (
+    <div className="d-flex flex-column align-items-center flex-md-row align-items-md-baseline">
+      <Button variant="normal" onClick={() => download(badgeType)}>
+        <a
+          className={`${styles.download} d-inline-flex align-items-center border border-1 border-primary px-4`}
+        >
+          Download
+          <span className="d-flex ms-2">
+            <Image src="/images/download_icon.svg" width="12" height="15" alt="download-image" />
+          </span>
+        </a>
+      </Button>
+
+      <div className="mt-4 mt-md-0 ms-md-4">
+        <ShareOn />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface BadgeEarnedProps {
   initiative: string;
@@ -52,6 +71,7 @@ interface BadgeEarnedProps {
   contributionCount: number;
   pageMediaTypeStr: string;
   language: string;
+  source: string;
 }
 
 const BadgeEarned = ({
@@ -60,7 +80,10 @@ const BadgeEarned = ({
   contributionCount,
   pageMediaTypeStr,
   language,
+  source,
 }: BadgeEarnedProps) => {
+  const route = useRouter();
+
   return (
     <ContributionDetails
       top={
@@ -73,7 +96,7 @@ const BadgeEarned = ({
                 <span className="text-strong-warning">{badgeType} Bhasha Samarthak</span> badge.
               </h4>
               <p className="display-3 mt-5 mt-6">
-                Transcribed{' '}
+                {INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath]}{' '}
                 <strong>
                   {contributionCount} {pageMediaTypeStr}
                 </strong>{' '}
@@ -84,7 +107,7 @@ const BadgeEarned = ({
           withSep={false}
         />
       }
-      bottom={<DownloadAndShare />}
+      bottom={<DownloadAndShare initiative={initiative} badgeType={badgeType} source={source} />}
     />
   );
 };

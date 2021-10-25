@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Button from 'components/Button';
 import Link from 'components/Link';
 import routePaths from 'constants/routePaths';
-import { capitalizeFirstLetter } from 'utils/utils';
+import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
 
 import styles from './ContributeMore.module.scss';
 
@@ -31,6 +31,10 @@ const ContributeMore = ({
   // const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
+  const download = (badgeType: string) => {
+    downloadBadge(currentLocale, initiative, source, badgeType, 'abc-xyz');
+  };
+
   return (
     <div
       className={`${styles.root} d-flex align-items-md-center flex-column flex-md-row mx-auto justify-content-md-between p-5 py-md-4 px-md-5 bg-light text-center text-md-start`}
@@ -38,34 +42,38 @@ const ContributeMore = ({
       <div className="d-flex flex-column flex-md-row align-items-md-center">
         <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
           <Image
+            onClick={() => download('bronze')}
             src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_bronze_${source}.svg`}
             width="48"
             height="60"
-            alt={`Bronze Badge`}
+            alt={`bronzeDownload`}
           />
         </div>
         <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
           <Image
+            onClick={() => download('silver')}
             src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_silver_${source}.svg`}
             width="48"
             height="60"
-            alt={`Silver Badge`}
+            alt={`silverDownload`}
           />
         </div>
         <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
           <Image
+            onClick={() => download('gold')}
             src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_gold_${source}.svg`}
             width="48"
             height="60"
-            alt={`Bronze Badge`}
+            alt={`goldDownload`}
           />
         </div>
         <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
           <Image
+            onClick={() => download('platinum')}
             src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_platinum_${source}.svg`}
             width="48"
             height="60"
-            alt={`Bronze Badge`}
+            alt={`platinumDownload`}
           />
         </div>
         <p className="mt-3 mt-md-0 ms-md-3 display-4">
@@ -89,7 +97,7 @@ const ContributeMore = ({
               src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_silver_${source}.svg`}
               width="48"
               height="60"
-              alt={`Bronze Badge`}
+              alt={`Silver Badge`}
             />
           </div>
           <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
@@ -97,7 +105,7 @@ const ContributeMore = ({
               src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_gold_${source}.svg`}
               width="48"
               height="60"
-              alt={`Bronze Badge`}
+              alt={`Gold Badge`}
             />
           </div>
           <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
@@ -105,7 +113,7 @@ const ContributeMore = ({
               src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_platinum_${source}.svg`}
               width="48"
               height="60"
-              alt={`Bronze Badge`}
+              alt={`Platinum Badge`}
             />
           </div>
         </div>
