@@ -33,7 +33,7 @@ const routePaths: { [key: string]: string } = {
   likhoIndiaContributeThankYou: `${initiativeBaseRoute.likhoIndia}/thank-you`,
   likhoIndiaValidateThankYou: `${initiativeBaseRoute.likhoIndia}/thank-you-validator`,
   badges: '/badges.html',
-  myBadges: '/my-badges.html',
+  myBadges: '/my-badges',
   termsAndConditions: '/terms-and-conditions.html',
   privacyPolicy: '/terms-and-conditions.html#privacy-policy',
 } as const;

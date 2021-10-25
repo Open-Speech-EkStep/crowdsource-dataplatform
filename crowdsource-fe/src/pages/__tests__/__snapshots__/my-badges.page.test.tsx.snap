@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyBadgesPage should call local storage while rendering 1`] = `
+<DocumentFragment>
+  <section
+    class="root position-relative flex-grow-1"
+    data-testid="FunctionalPageBackground"
+  >
+    <div
+      class="wrapper position-relative"
+    >
+      <header
+        class="d-flex justify-content-between align-items-center px-3 px-md-6"
+      >
+        <a
+          class="d-flex align-items-center text-primary display-4"
+          href="/home"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Left Arrow"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="/_next/image?url=%2Fimages%2Fleft_arrow.svg&w=48&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fleft_arrow.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fleft_arrow.svg&w=48&q=75 2x"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+          <span
+            class="ms-3"
+          >
+            home
+          </span>
+        </a>
+      </header>
+      <div
+        class="mt-5 container-lg"
+      >
+        <div
+          class="root"
+        >
+          <header
+            class="text-center"
+          >
+            <h2>
+              Congratulations 
+              <span
+                class="highlight"
+              >
+                test
+              </span>
+              !
+            </h2>
+            <h3
+              class="mt-3"
+            >
+              Your Medal Gallery
+            </h3>
+          </header>
+          <div
+            class="font-family-rowdies mt-7 mt-md-9"
+          >
+            <ul
+              class="tabs d-flex align-items-center border-bottom border-1 border-primary-60 hide-scrollbar nav nav-tabs"
+              role="tablist"
+            >
+              <li
+                class="nav-item"
+                role="presentation"
+              >
+                <button
+                  aria-controls="uncontrolled-tab-example-tabpane-suno"
+                  aria-selected="true"
+                  class="tabLink position-relative h-100 display-3 px-6 mx-md-0 nav-link active"
+                  data-rr-ui-event-key="suno"
+                  id="uncontrolled-tab-example-tab-suno"
+                  role="tab"
+                  type="button"
+                >
+                  suno india
+                </button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+              >
+                <button
+                  aria-controls="uncontrolled-tab-example-tabpane-bolo"
+                  class="tabLink position-relative h-100 display-3 px-6 mx-md-0 nav-link"
+                  data-rr-ui-event-key="bolo"
+                  id="uncontrolled-tab-example-tab-bolo"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  bolo india
+                </button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+              >
+                <button
+                  aria-controls="uncontrolled-tab-example-tabpane-likho"
+                  class="tabLink position-relative h-100 display-3 px-6 mx-md-0 nav-link"
+                  data-rr-ui-event-key="likho"
+                  id="uncontrolled-tab-example-tab-likho"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  likho india
+                </button>
+              </li>
+              <li
+                class="nav-item"
+                role="presentation"
+              >
+                <button
+                  aria-controls="uncontrolled-tab-example-tabpane-dekho"
+                  class="tabLink position-relative h-100 display-3 px-6 mx-md-0 nav-link"
+                  data-rr-ui-event-key="dekho"
+                  id="uncontrolled-tab-example-tab-dekho"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  dekho india
+                </button>
+              </li>
+            </ul>
+            <div
+              class="tab-content"
+            >
+              <div
+                aria-labelledby="uncontrolled-tab-example-tab-suno"
+                class="tab-pane active"
+                id="uncontrolled-tab-example-tabpane-suno"
+              >
+                <div
+                  class="badgeSection py-5"
+                >
+                  <div
+                    class="p-0 col"
+                  >
+                    <div
+                      class="mx-0 text-center mt-5 row"
+                    >
+                      <h4
+                        class="w-100"
+                      >
+                        No badge earned for suno India
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-labelledby="uncontrolled-tab-example-tab-bolo"
+                class="tab-pane"
+                id="uncontrolled-tab-example-tabpane-bolo"
+              >
+                <div
+                  class="badgeSection py-5"
+                >
+                  <div
+                    class="p-0 col"
+                  >
+                    <div
+                      class="mx-0 text-center mt-5 row"
+                    >
+                      <h4
+                        class="w-100"
+                      >
+                        No badge earned for bolo India
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-labelledby="uncontrolled-tab-example-tab-likho"
+                class="tab-pane"
+                id="uncontrolled-tab-example-tabpane-likho"
+              >
+                <div
+                  class="badgeSection py-5"
+                >
+                  <div
+                    class="p-0 col"
+                  >
+                    <div
+                      class="mx-0 text-center mt-5 row"
+                    >
+                      <h4
+                        class="w-100"
+                      >
+                        No badge earned for likho India
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-labelledby="uncontrolled-tab-example-tab-dekho"
+                class="tab-pane"
+                id="uncontrolled-tab-example-tabpane-dekho"
+              >
+                <div
+                  class="badgeSection py-5"
+                >
+                  <div
+                    class="p-0 col"
+                  >
+                    <div
+                      class="mx-0 text-center mt-5 row"
+                    >
+                      <h4
+                        class="w-100"
+                      >
+                        No badge earned for dekho India
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text"
+          >
+            <p
+              class="m-0"
+            >
+              Please keep contributing actively to stand a chance to get recognised.
+            </p>
+            <p
+              class="m-0"
+            >
+              Your contribution will be validated before confirming the badge.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

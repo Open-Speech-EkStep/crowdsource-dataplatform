@@ -1,0 +1,54 @@
+.root {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.highlight {
+  color: #ffcc35;
+}
+
+.tabs {
+  background-color: var(--text-white);
+  flex-wrap: nowrap;
+  height: 4rem;
+  overflow-x: auto;
+
+  li {
+    flex: 1;
+    height: 100%;
+  }
+}
+
+.tabLink {
+  width: max-content;
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+  }
+
+  &:global(.active)::before {
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+}
+
+.text {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  max-width: 36rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+.badgeSection {
+  min-height: 500px;
+  // overflow: auto;
+}

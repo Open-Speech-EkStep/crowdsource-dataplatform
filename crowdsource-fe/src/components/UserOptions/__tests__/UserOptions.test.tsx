@@ -95,6 +95,6 @@ describe('UserOptions', () => {
 
     userEvent.click(screen.getByRole('link', { name: 'myBadges' }));
 
-    expect(router.pathname).toBe('/my-badges.html');
+    expect(router.pathname).toBe('/my-badges');
   });
 });

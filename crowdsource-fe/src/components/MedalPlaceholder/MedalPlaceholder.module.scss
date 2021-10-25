@@ -1,0 +1,19 @@
+.root {
+  border: 1px dashed var(--primary-color);
+  border-radius: 8px;
+  min-height: 6rem;
+  opacity: 0.5;
+
+  @include media-breakpoint-up(md) {
+    min-height: 7rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 5rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    min-height: 8rem;
+    width: 6.125rem;
+  }
+}
