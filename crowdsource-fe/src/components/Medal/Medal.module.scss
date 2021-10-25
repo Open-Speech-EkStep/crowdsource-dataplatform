@@ -12,9 +12,9 @@
   }
 
   @include media-breakpoint-up(xl) {
+    background-color: #fff;
     min-height: 8rem;
     width: 6.125rem;
-    background-color: #fff;
   }
 
   &.earned {

@@ -1,14 +1,4 @@
-import { when } from 'jest-when';
-import router from 'next/router';
-
-import {
-  render,
-  verifyAxeTest,
-  screen,
-  userEvent,
-  waitFor,
-  waitForElementToBeRemoved,
-} from 'utils/testUtils';
+import { render } from 'utils/testUtils';
 
 import Medal from '../Medal';
 

@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react';
-
-import { render, verifyAxeTest, screen } from 'utils/testUtils';
+import { render, verifyAxeTest } from 'utils/testUtils';
 
 import LanguageMedals from '../LanguageMedals';
 

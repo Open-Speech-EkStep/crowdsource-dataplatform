@@ -1,10 +1,9 @@
-import LanguageMedals from 'components/LanguageMedals';
-import Image from 'next/image';
 import React from 'react';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import styles from './BadgeSection.module.scss';
+import LanguageMedals from 'components/LanguageMedals';
 
 interface BadgeSectionProps {
   languages: Array<string>;

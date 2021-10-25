@@ -3,9 +3,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import Medal from 'components/Medal';
+import MedalPlaceholder from 'components/MedalPlaceholder';
 
 import styles from './LanguageMedals.module.scss';
-import MedalPlaceholder from 'components/MedalPlaceholder';
 
 interface LanguageMedalsProps {
   initiative: string;

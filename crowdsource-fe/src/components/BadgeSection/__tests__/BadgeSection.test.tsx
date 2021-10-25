@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
-
 import { render, verifyAxeTest, screen } from 'utils/testUtils';
 
 import BadgeSection from '../BadgeSection';

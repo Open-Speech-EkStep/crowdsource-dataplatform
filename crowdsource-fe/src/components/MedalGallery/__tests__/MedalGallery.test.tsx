@@ -1,4 +1,4 @@
-import { render, verifyAxeTest, screen, userEvent } from 'utils/testUtils';
+import { render } from 'utils/testUtils';
 
 import MedalGallery from '../MedalGallery';
 

@@ -4,11 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import LanguageMedals from 'components/LanguageMedals';
+import BadgeSection from 'components/BadgeSection';
 
 import styles from './MedalGallery.module.scss';
-import BadgeSection from 'components/BadgeSection';
-import { string } from 'yargs';
 
 interface MedalGalleryProps {
   userName?: string | '';

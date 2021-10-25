@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from 'utils/testUtils';
 import { when } from 'jest-when';
+
+import { render, screen, waitFor } from 'utils/testUtils';
 
 import MyBadgesPage from '../my-badges.page';
 

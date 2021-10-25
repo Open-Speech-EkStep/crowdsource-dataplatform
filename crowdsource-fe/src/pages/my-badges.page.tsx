@@ -5,17 +5,17 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 import Container from 'react-bootstrap/Container';
-import useFetch from 'hooks/useFetch';
 
 import FunctionalPageBackground from 'components/FunctionalPageBackground';
 import Link from 'components/Link';
 import MedalGallery from 'components/MedalGallery';
-import { DEFAULT_LOCALE } from 'constants/localesConstants';
-import routePaths from 'constants/routePaths';
 import apiPaths from 'constants/apiPaths';
-import useLocalStorage from 'hooks/useLocalStorage';
-import SpeakerDetails from 'types/SpeakerDetails';
+import { DEFAULT_LOCALE } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import routePaths from 'constants/routePaths';
+import useFetch from 'hooks/useFetch';
+import useLocalStorage from 'hooks/useLocalStorage';
+import type SpeakerDetails from 'types/SpeakerDetails';
 
 const MyBadgesPage: NextPage = () => {
   const { t } = useTranslation();
@@ -28,7 +28,6 @@ const MyBadgesPage: NextPage = () => {
     revalidateOnMount: true,
   });
 
-  console.log(userBadges);
   return (
     <FunctionalPageBackground>
       <header className="d-flex justify-content-between align-items-center px-3 px-md-6">
