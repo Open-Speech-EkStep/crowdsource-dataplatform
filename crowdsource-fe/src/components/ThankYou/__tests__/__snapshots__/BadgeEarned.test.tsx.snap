@@ -71,7 +71,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               >
                 Transcribed 
                 <strong>
-                  5 sentence(s)
+                  5 seentence (s)
                 </strong>
                  in Hindi
               </p>

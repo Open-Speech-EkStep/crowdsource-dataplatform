@@ -4,6 +4,7 @@ import ContributionDetails from 'components/ContributionDetails';
 import Link from 'components/Link';
 import SocialShareIcons from 'components/SocialShareIcons';
 import TwoColumn from 'components/TwoColumn';
+import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
 
@@ -45,7 +46,21 @@ const DownloadAndShare = () => (
   </div>
 );
 
-const BadgeEarned = () => {
+interface BadgeEarnedProps {
+  initiative: string;
+  badgeType: string;
+  contributionCount: number;
+  pageMediaTypeStr: string;
+  language: string;
+}
+
+const BadgeEarned = ({
+  initiative,
+  badgeType,
+  contributionCount,
+  pageMediaTypeStr,
+  language,
+}: BadgeEarnedProps) => {
   return (
     <ContributionDetails
       top={
@@ -54,11 +69,15 @@ const BadgeEarned = () => {
           right={
             <div className="text-center text-md-start">
               <h4 className="px-8 px-md-0">
-                You’ve earned your Suno India{' '}
-                <span className="text-strong-warning">Bronze Bhasha Samarthak</span> badge.
+                You’ve earned your {capitalizeFirstLetter(initiative)} India{' '}
+                <span className="text-strong-warning">{badgeType} Bhasha Samarthak</span> badge.
               </h4>
               <p className="display-3 mt-5 mt-6">
-                Transcribed <strong>5 sentence(s)</strong> in Hindi
+                Transcribed{' '}
+                <strong>
+                  {contributionCount} {pageMediaTypeStr}
+                </strong>{' '}
+                in {language}
               </p>
             </div>
           }

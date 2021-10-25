@@ -82,6 +82,7 @@ describe('CompareLanguages', () => {
         initiative={initiative}
         dataBindigValue="total_contributions"
         graphLabel="asrBarGraphTitle"
+        isTopLanguage={() => {}}
       />
     );
     await waitFor(() => {

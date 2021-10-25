@@ -5,7 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Container from 'react-bootstrap/Container';
 
 import Breadcrumbs from 'components/Breadcrumbs';
-import ContributeMore from 'components/ContributeMore';
 import FunctionalPageBackground from 'components/FunctionalPageBackground';
 import ThankYou from 'components/ThankYou';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
@@ -21,9 +20,6 @@ const ThankYouPage: NextPage = () => {
           </header>
           <Container fluid="lg" className="mt-5">
             <ThankYou initiative={INITIATIVES_MAPPING.suno} />
-            <section className="mt-8 mt-md-12">
-              <ContributeMore />
-            </section>
           </Container>
         </div>
       </FunctionalPageBackground>

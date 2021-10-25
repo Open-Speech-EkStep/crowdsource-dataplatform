@@ -3,10 +3,11 @@
 exports[`CompareLanguages should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
+    class="chartContainer"
     data-testid="CompareLanguages"
   >
     <div
-      class="chartContainer"
+      class="chart"
     >
       BarChart
     </div>

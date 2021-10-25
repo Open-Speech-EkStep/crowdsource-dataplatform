@@ -24,7 +24,7 @@ export const roundOffValue = (average: any, precision: number) => {
 };
 
 export const capitalizeFirstLetter = (strValue: string) => {
-  return strValue.charAt(0).toUpperCase() + strValue.slice(1);
+  return strValue?.charAt(0).toUpperCase() + strValue?.slice(1);
 };
 
 const translateText = (text: string) => i18n?.t(text);

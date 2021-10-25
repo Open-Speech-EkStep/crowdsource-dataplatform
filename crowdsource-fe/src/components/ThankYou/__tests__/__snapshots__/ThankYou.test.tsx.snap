@@ -34,7 +34,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                   class="d-md-flex text-center text-md-start h-100 align-items-md-center"
                 >
                   <h4>
-                    Participate to see  in top 3
+                    Participate to see English in top 3
                   </h4>
                 </div>
               </div>
@@ -84,7 +84,8 @@ exports[`ThankYou should render the component and matches it against stored snap
                     alt="Share on Facebook"
                     data-nimg="intrinsic"
                     decoding="async"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    src="/_next/image?url=%2Fimages%2Ffb-icon.svg&w=48&q=75"
+                    srcset="/_next/image?url=%2Fimages%2Ffb-icon.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Ffb-icon.svg&w=48&q=75 2x"
                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
                   <noscript />
@@ -113,7 +114,8 @@ exports[`ThankYou should render the component and matches it against stored snap
                     alt="Share on LinkedIn"
                     data-nimg="intrinsic"
                     decoding="async"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    src="/_next/image?url=%2Fimages%2Flinkedin-icon.svg&w=48&q=75"
+                    srcset="/_next/image?url=%2Fimages%2Flinkedin-icon.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Flinkedin-icon.svg&w=48&q=75 2x"
                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
                   <noscript />
@@ -142,7 +144,8 @@ exports[`ThankYou should render the component and matches it against stored snap
                     alt="Share on Twitter"
                     data-nimg="intrinsic"
                     decoding="async"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    src="/_next/image?url=%2Fimages%2Ftwitter-icon.svg&w=48&q=75"
+                    srcset="/_next/image?url=%2Fimages%2Ftwitter-icon.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Ftwitter-icon.svg&w=48&q=75 2x"
                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
                   <noscript />
@@ -171,7 +174,8 @@ exports[`ThankYou should render the component and matches it against stored snap
                     alt="Share on Whatsapp"
                     data-nimg="intrinsic"
                     decoding="async"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    src="/_next/image?url=%2Fimages%2Fwhatsapp.svg&w=48&q=75"
+                    srcset="/_next/image?url=%2Fimages%2Fwhatsapp.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fwhatsapp.svg&w=48&q=75 2x"
                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
                   <noscript />
@@ -183,5 +187,261 @@ exports[`ThankYou should render the component and matches it against stored snap
       </div>
     </section>
   </div>
+  <section
+    class="mt-8 mt-md-12"
+  >
+    <div
+      class="root d-flex align-items-md-center flex-column flex-md-row mx-auto justify-content-md-between p-5 py-md-4 px-md-5 bg-light text-center text-md-start"
+    >
+      <div
+        class="d-flex flex-column flex-md-row align-items-md-center"
+      >
+        <div
+          class="medal d-flex mx-2 flex-shrink-0"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Bronze Badge"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=96&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=96&q=75 2x"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <div
+          class="medal d-flex mx-2 flex-shrink-0"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Silver Badge"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75 2x"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <div
+          class="medal d-flex mx-2 flex-shrink-0"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Bronze Badge"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75 2x"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <div
+          class="medal d-flex mx-2 flex-shrink-0"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Bronze Badge"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75"
+              srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75 2x"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <p
+          class="mt-3 mt-md-0 ms-md-3 display-4"
+        >
+          Contribute 
+          <strong>
+            5 sentence(s)
+          </strong>
+           to earn your Bronze Badge.
+        </p>
+        <div
+          class="disabled d-flex justify-content-center mt-4 mt-md-0"
+        >
+          <div
+            class="medal  d-flex mx-2 flex-shrink-0"
+          >
+            <div
+              style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            >
+              <div
+                style="box-sizing: border-box; display: block; max-width: 100%;"
+              >
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                />
+              </div>
+              <img
+                alt="Bronze Badge"
+                data-nimg="intrinsic"
+                decoding="async"
+                src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=96&q=75"
+                srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=96&q=75 2x"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </div>
+          </div>
+          <div
+            class="medal d-flex mx-2 flex-shrink-0"
+          >
+            <div
+              style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            >
+              <div
+                style="box-sizing: border-box; display: block; max-width: 100%;"
+              >
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                />
+              </div>
+              <img
+                alt="Bronze Badge"
+                data-nimg="intrinsic"
+                decoding="async"
+                src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75"
+                srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75 2x"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </div>
+          </div>
+          <div
+            class="medal d-flex mx-2 flex-shrink-0"
+          >
+            <div
+              style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            >
+              <div
+                style="box-sizing: border-box; display: block; max-width: 100%;"
+              >
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                />
+              </div>
+              <img
+                alt="Bronze Badge"
+                data-nimg="intrinsic"
+                decoding="async"
+                src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75"
+                srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75 2x"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </div>
+          </div>
+          <div
+            class="medal d-flex mx-2 flex-shrink-0"
+          >
+            <div
+              style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+            >
+              <div
+                style="box-sizing: border-box; display: block; max-width: 100%;"
+              >
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                  style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                />
+              </div>
+              <img
+                alt="Bronze Badge"
+                data-nimg="intrinsic"
+                decoding="async"
+                src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75"
+                srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75 2x"
+                style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+              />
+              <noscript />
+            </div>
+          </div>
+        </div>
+        <a
+          class="mt-7 mt-md-0 display-5 ms-md-3 flex-shrink-0"
+          href="/badges.html"
+        >
+          <b>
+            Know More
+          </b>
+        </a>
+      </div>
+      <button
+        class="mt-8 mt-md-0 ms-3 info primary btn btn-primary"
+        data-testid="Button"
+        type="button"
+      >
+        Contribute More
+      </button>
+    </div>
+  </section>
 </DocumentFragment>
 `;
