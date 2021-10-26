@@ -1,12 +1,20 @@
 .root {
+  background-color: var(--light-color);
   height: 2rem;
   opacity: 0.8;
 
   &:hover {
+    box-shadow: 0 4px 12px rgba(15, 39, 73, 0.2);
     opacity: 1;
   }
 }
 
 .text {
   font-size: 0.875rem;
+}
+
+.active {
+  background-color: var(--icon-text-btn-focus-color);
+  box-shadow: 0 0 12px rgba(15, 39, 73, 0.24);
+  opacity: 1;
 }

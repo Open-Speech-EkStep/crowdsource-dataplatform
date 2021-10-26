@@ -66,7 +66,7 @@ exports[`FunctionalHeader should render the component and matches it against sto
       >
         <div>
           <button
-            class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
+            class="root rounded d-flex align-items-center px-3 text-primary text-decoration-none info normal btn btn-link"
             data-testid="IconTextButton"
             type="button"
           >
@@ -106,7 +106,7 @@ exports[`FunctionalHeader should render the component and matches it against sto
             class="position-relative"
           >
             <button
-              class="root rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none info normal btn btn-link"
+              class="root rounded d-flex align-items-center px-3 text-primary text-decoration-none info normal btn btn-link"
               data-testid="IconTextButton"
               type="button"
             >

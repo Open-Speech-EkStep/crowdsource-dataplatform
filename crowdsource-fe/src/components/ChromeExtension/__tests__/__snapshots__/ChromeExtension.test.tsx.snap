@@ -3,11 +3,11 @@
 exports[`Chrome Extension should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root d-none d-md-block d-lg-flex position-relative align-items-md-center bg-secondary px-3 px-md-6 py-3 py-lg-0 border-bottom border-1 border-primary-10"
+    class="root d-none d-md-block d-lg-flex flex-wrap position-relative align-items-md-center bg-secondary px-3 ps-md-6 pe-md-12 py-3 border-bottom border-1 border-primary-10"
     data-testid="ChromeExtension"
   >
     <span
-      class="fst-italic"
+      class="fst-italic me-5"
     >
       chromeExtensionLabel
     </span>
@@ -15,17 +15,17 @@ exports[`Chrome Extension should render the component and matches it against sto
       class="d-flex align-items-center mt-md-2 mt-lg-0"
     >
       <button
-        class="ceBtn mx-lg-5 ms-0 me-5 light secondary btn btn-light"
+        class="ceBtn flex-shrink-0 light secondary btn btn-light"
         data-testid="Button"
         type="button"
       >
         watchTheVideo
       </button>
       <span
-        class="sep d-flex border border-start-0 border-primary w-0"
+        class="sep d-flex border border-start-0 border-primary w-0 mx-5"
       />
       <a
-        class="mx-5"
+        class="flex-shrink-0"
         href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
         rel="noreferrer"
         target="_blank"

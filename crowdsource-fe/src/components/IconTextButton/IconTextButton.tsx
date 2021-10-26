@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Button from 'components/Button';
 
 import styles from './IconTextButton.module.scss';
+import classNames from 'classnames';
 
 interface IconTextButtonProps {
   icon: string;
@@ -11,15 +12,26 @@ interface IconTextButtonProps {
   textDesktop: string;
   onClick: () => void;
   altText: string;
+  active?: boolean;
 }
 
-const IconTextButton = ({ icon, textDesktop, textMobile, onClick, altText }: IconTextButtonProps) => {
+const IconTextButton = ({
+  icon,
+  textDesktop,
+  textMobile,
+  onClick,
+  altText,
+  active = false,
+}: IconTextButtonProps) => {
   const { t } = useTranslation();
 
   return (
     <Button
       data-testid="IconTextButton"
-      className={`${styles.root} rounded d-flex align-items-center px-3 text-primary bg-light text-decoration-none`}
+      className={classNames(
+        `${styles.root} rounded d-flex align-items-center px-3 text-primary text-decoration-none`,
+        { [styles.active]: active }
+      )}
       variant="normal"
       onClick={onClick}
     >

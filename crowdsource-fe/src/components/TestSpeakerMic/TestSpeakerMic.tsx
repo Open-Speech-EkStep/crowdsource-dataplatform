@@ -86,8 +86,9 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         icon="speaker.svg"
         textMobile={t('test')}
         textDesktop={t('testYourSpeaker')}
-        onClick={() => setShowMicSpeaker(true)}
+        onClick={() => setShowMicSpeaker(!showMicSpeaker)}
         altText="testYourSpeaker"
+        active={showMicSpeaker}
       />
       {showMicSpeaker && (
         <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>

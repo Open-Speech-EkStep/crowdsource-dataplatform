@@ -36,21 +36,17 @@ const ChromeExtension = () => {
   return (
     <div
       data-testid="ChromeExtension"
-      className={`${styles.root} d-none d-md-block d-lg-flex position-relative align-items-md-center bg-secondary px-3 px-md-6 py-3 py-lg-0 border-bottom border-1 border-primary-10`}
+      className={`${styles.root} d-none d-md-block d-lg-flex flex-wrap position-relative align-items-md-center bg-secondary px-3 ps-md-6 pe-md-12 py-3 border-bottom border-1 border-primary-10`}
     >
-      <span className="fst-italic">{t('chromeExtensionLabel')}</span>
+      <span className="fst-italic me-5">{t('chromeExtensionLabel')}</span>
       <div className="d-flex align-items-center mt-md-2 mt-lg-0">
-        <Button
-          variant="secondary"
-          className={`${styles.ceBtn} mx-lg-5 ms-0 me-5`}
-          onClick={onShowVideoModal}
-        >
+        <Button variant="secondary" className={`${styles.ceBtn} flex-shrink-0`} onClick={onShowVideoModal}>
           {t('watchTheVideo')}
         </Button>
-        <span className={`${styles.sep} d-flex border border-start-0 border-primary w-0`} />
+        <span className={`${styles.sep} d-flex border border-start-0 border-primary w-0 mx-5`} />
         <a
           href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
-          className="mx-5"
+          className="flex-shrink-0"
           target="_blank"
           rel="noreferrer"
         >
