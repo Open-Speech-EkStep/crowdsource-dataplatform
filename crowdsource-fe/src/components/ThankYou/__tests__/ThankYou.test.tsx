@@ -45,7 +45,12 @@ describe('ThankYou', () => {
     });
 
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/rewards?type=asr&language=English&source=contribute&userName=abc');
+      expect(fetchMock).toBeCalledWith('/rewards?type=asr&language=English&source=contribute&userName=abc', {
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'GET',
+        mode: 'cors',
+      });
     });
 
     return renderResult;
@@ -88,7 +93,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('Contribute to your language!')).toBeInTheDocument();
+    expect(screen.getByText('contributeYourLanguage')).toBeInTheDocument();
 
     expect(screen.getByText('Participate to see English in top 3')).toBeInTheDocument();
   });
@@ -114,7 +119,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('Congratulations on winning a new badge!')).toBeInTheDocument();
+    expect(screen.getByText('congratulationText')).toBeInTheDocument();
 
     expect(screen.getByText('Bronze Bhasha Samarthak')).toBeInTheDocument();
 
@@ -146,7 +151,7 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('Your Badge')).toBeInTheDocument();
 
-    expect(screen.getByText('Bronze contributor')).toBeInTheDocument();
+    expect(screen.getByText('Bronze')).toBeInTheDocument();
   });
 
   it('should test after user earned the silver badge', async () => {
@@ -178,6 +183,6 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('Your Badge')).toBeInTheDocument();
 
-    expect(screen.getByText('Silver contributor')).toBeInTheDocument();
+    expect(screen.getByText('Silver')).toBeInTheDocument();
   });
 });

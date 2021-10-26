@@ -12,6 +12,7 @@ describe('BadgeEarned', () => {
         pageMediaTypeStr="seentence (s)"
         language="Hindi"
         source="contribute"
+        winningBadge={[]}
       />
     );
 

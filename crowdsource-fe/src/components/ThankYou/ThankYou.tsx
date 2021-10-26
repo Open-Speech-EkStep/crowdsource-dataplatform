@@ -17,13 +17,20 @@ import {
   INITIATIVES_MEDIA_MAPPING,
 } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
-import { pageMediaTypeConstants, pageSourceConstants } from 'constants/pageRouteConstants';
+import {
+  pageMediaTypeConstants,
+  pageSourceConstants,
+  pageSourceConstants2,
+  pageSourceConstants3,
+  pageSourceConstants4,
+} from 'constants/pageRouteConstants';
 import routePaths from 'constants/routePaths';
-import useFetch from 'hooks/useFetch';
+import { useFetchWithInit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import type { ThankYouReward } from 'types/ThankYou';
+import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
 
@@ -40,6 +47,7 @@ const ShareOn = () => (
 
 const YourBadge = (props: any) => {
   const { locale: currentLocale } = useRouter();
+  const route = useRouter();
   return (
     <div className="text-center">
       <h5 className="fw-light">Your Badge</h5>
@@ -50,11 +58,12 @@ const YourBadge = (props: any) => {
           }_${props.badgeType.toLowerCase()}_${props.source}.svg`}
           width="94"
           height="120"
-          alt="Bronze Badge en"
+          alt={`${props.badgeType} badge`}
         />
       </div>
       <span className="d-flex justify-content-center mt-3 display-5 font-family-rowdies fw-light">
-        You are a <span className="text-strong-warning ms-1">{props.badgeType} contributor</span>
+        You are a <span className="text-strong-warning ms-1"> {props.badgeType} </span>{' '}
+        {capitalizeFirstLetter(pageSourceConstants4[route.asPath])}
       </span>
     </div>
   );
@@ -73,7 +82,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
-  const { data: rewardData, mutate: rewardMutate } = useFetch<ThankYouReward>(
+  const { data: rewardData, mutate: rewardMutate } = useFetchWithInit<ThankYouReward>(
     `${apiPaths.rewards}?type=${
       INITIATIVES_MEDIA_MAPPING[initiative]
     }&language=${contributionLanguage}&source=${pageSourceConstants[route.asPath]}&userName=${
@@ -93,13 +102,13 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
   return (
     <Fragment>
       <div className={`${styles.root} mx-auto`} data-testid="ThankYou">
-        {rewardData?.isNewBadge && <h2 className="text-center">Congratulations on winning a new badge!</h2>}
+        {rewardData?.isNewBadge && <h2 className="text-center">{t('congratulationText')}</h2>}
         {rewardData?.badges && rewardData?.badges.length === 0 && (
-          <h2 className="text-center">Contribute to your language!</h2>
+          <h2 className="text-center">{t('contributeYourLanguage')}</h2>
         )}
         {rewardData?.badges && rewardData?.badges.length !== 0 && !rewardData.isNewBadge && (
           <h2 className="text-center">
-            You {pageSourceConstants[route.asPath]}d {rewardData?.contributionCount}{' '}
+            You {pageSourceConstants2[route.asPath]} {rewardData?.contributionCount}{' '}
             {pageMediaTypeConstants[route.asPath]} for your language!
           </h2>
         )}
@@ -120,6 +129,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
               language={contributionLanguage ?? ''}
               source={pageSourceConstants[route.asPath]}
+              winningBadge={rewardData?.badges[rewardData?.badges.length - 1]}
             />
             <div className="mt-8 mt-md-9">
               <TwoColumn
@@ -133,7 +143,11 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                 right={
                   <CompareLanguages
                     initiative={initiative}
-                    graphLabel={t(`${INITIATIVES_MEDIA_MAPPING[initiative]}ContributionGraphYLabel1`)}
+                    graphLabel={t(
+                      `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                        pageSourceConstants3[route.asPath]
+                      )}GraphYLabel3`
+                    )}
                     dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
                     isTopLanguage={setIsTopLanguage}
                   />
@@ -157,7 +171,11 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   right={
                     <CompareLanguages
                       initiative={initiative}
-                      graphLabel={t(`${INITIATIVES_MEDIA_MAPPING[initiative]}ContributionGraphYLabel1`)}
+                      graphLabel={t(
+                        `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                          pageSourceConstants3[route.asPath]
+                        )}GraphYLabel3`
+                      )}
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
                       isTopLanguage={setIsTopLanguage}
                     />
@@ -183,7 +201,11 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   right={
                     <CompareLanguages
                       initiative={initiative}
-                      graphLabel={t(`${INITIATIVES_MEDIA_MAPPING[initiative]}ContributionGraphYLabel1`)}
+                      graphLabel={t(
+                        `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                          pageSourceConstants3[route.asPath]
+                        )}GraphYLabel3`
+                      )}
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
                       isTopLanguage={setIsTopLanguage}
                     />
@@ -202,8 +224,11 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           nextMileStone={rewardData?.nextMilestone ?? 0}
           contributionCount={rewardData?.contributionCount ?? 0}
           nextBadgeType={rewardData?.nextBadgeType ?? ''}
-          url={routePaths.sunoIndiaContribute}
+          url={`${
+            routePaths[`${initiative}India${capitalizeFirstLetter(pageSourceConstants[route.asPath])}`]
+          }`}
           pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
+          badges={rewardData?.badges}
         />
       </section>
     </Fragment>

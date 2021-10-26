@@ -9,8 +9,26 @@ describe('ContributeMore', () => {
     nextMileStone: number,
     contributionCount: number,
     nextBadgeType: string
-  ) =>
-    render(
+  ) => {
+    const badgeData = [
+      {
+        generated_badge_id: '4e614ac7-11d8-4126-a3ad-0540fbb4430e',
+        grade: 'Bronze',
+      },
+      {
+        generated_badge_id: '4e614ac7-11d8-4126-a3ad-0540fbb44323',
+        grade: 'Silver',
+      },
+      {
+        generated_badge_id: '4e614ac7-11d8-4126-a3ad-0540fbb44356',
+        grade: 'Gold',
+      },
+      {
+        generated_badge_id: '4e614ac7-11d8-4126-a3ad-0540fbb443124',
+        grade: 'Platinum',
+      },
+    ];
+    return render(
       <ContributeMore
         initiative={initiative}
         source={source}
@@ -19,8 +37,10 @@ describe('ContributeMore', () => {
         nextBadgeType={nextBadgeType}
         url=""
         pageMediaTypeStr="sentence(s)"
+        badges={badgeData}
       />
     );
+  };
 
   verifyAxeTest(setup('suno', 'contribute', 5, 0, 'Bronze'));
 

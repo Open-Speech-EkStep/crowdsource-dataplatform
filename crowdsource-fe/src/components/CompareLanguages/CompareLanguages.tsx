@@ -16,7 +16,7 @@ import type { CumulativeDataByLanguage } from 'types/CumulativeCount';
 import type { Initiative } from 'types/Initiatives';
 import type { InitiativeType } from 'types/InitiativeType';
 import type { TopLanguagesByHours } from 'types/TopLanguages';
-import { convertTimeFormat, isSunoOrBoloInitiative } from 'utils/utils';
+import { convertTimeFormat, isBoloInitiative } from 'utils/utils';
 
 import styles from './CompareLanguages.module.scss';
 
@@ -58,15 +58,16 @@ const translateCategory = (language: string) => {
 const getTopLanguagesByHoursChartData = (
   contributionValue: string,
   initiative: InitiativeType,
+  key: string,
   topLanguagesByHours?: TopLanguagesByHours[]
 ) => {
   return (
-    topLanguagesByHours?.map(topLanguageByHours => ({
+    topLanguagesByHours?.map((topLanguageByHours: any) => ({
       category: translateCategory(topLanguageByHours?.language),
       value: (topLanguageByHours as any)[contributionValue],
-      tooltipText: isSunoOrBoloInitiative(initiative)
+      tooltipText: isBoloInitiative(initiative)
         ? convertTimeFormat(topLanguageByHours?.total_contributions)
-        : `${topLanguageByHours?.total_contribution_count} ${INITIATIVES_MEDIA_TYPE_MAPPING[initiative]}`,
+        : `${topLanguageByHours[key]} ${INITIATIVES_MEDIA_TYPE_MAPPING[initiative]}`,
     })) ?? []
   );
 };
@@ -130,6 +131,7 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
       data: getTopLanguagesByHoursChartData(
         props.dataBindigValue,
         INITIATIVES_MEDIA_MAPPING[props.initiative],
+        props.dataBindigValue,
         topLanguageHrsData
       ),
       yAxisLabel: props.graphLabel,

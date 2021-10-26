@@ -84,8 +84,8 @@ export const INITIATIVE_MEDIA_CONTRIBUTION_MAPPING = {
 } as const;
 
 export const CONTRIBUTION_MAPPING = {
-  [routePaths.sunoIndiaContributeThankYou]: 'total_contributions',
-  [routePaths.sunoIndiaValidateThankYou]: 'total_validations',
+  [routePaths.sunoIndiaContributeThankYou]: 'total_contribution_count',
+  [routePaths.sunoIndiaValidateThankYou]: 'total_validation_count',
   [routePaths.boloIndiaContributeThankYou]: 'total_contributions',
   [routePaths.boloIndiaValidateThankYou]: 'total_validations',
   [routePaths.dekhoIndiaContributeThankYou]: 'total_contribution_count',

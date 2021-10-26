@@ -24,15 +24,30 @@ export const sourceConstants = {
   validate: 'validate',
 } as const;
 
+export const SOURCE_CONSTANT_WITH_D = {
+  contributed: 'contributed',
+  validated: 'validated',
+} as const;
+
+export const SOURCE_CONSTANT_2 = {
+  contribution: 'contribution',
+  validation: 'validation',
+} as const;
+
+export const SOURCE_CONSTANT_3 = {
+  contributor: 'contributor',
+  validatior: 'validator',
+} as const;
+
 export const pageSourceConstants = {
-  [routePaths.sunoIndiaContribute]: 'contribution',
-  [routePaths.sunoIndiaValidate]: 'validation',
-  [routePaths.boloIndiaContribute]: 'contribution',
-  [routePaths.boloIndiaValidate]: 'validation',
-  [routePaths.likhoIndiaContribute]: 'contribution',
-  [routePaths.likhoIndiaValidate]: 'validation',
-  [routePaths.dekhoIndiaContribute]: 'contribution',
-  [routePaths.dekhoIndiaValidate]: 'validation',
+  [routePaths.sunoIndiaContribute]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.sunoIndiaValidate]: SOURCE_CONSTANT_2.validation,
+  [routePaths.boloIndiaContribute]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.boloIndiaValidate]: SOURCE_CONSTANT_2.validation,
+  [routePaths.likhoIndiaContribute]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.likhoIndiaValidate]: SOURCE_CONSTANT_2.validation,
+  [routePaths.dekhoIndiaContribute]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.dekhoIndiaValidate]: SOURCE_CONSTANT_2.validation,
   [routePaths.sunoIndiaContributeThankYou]: sourceConstants.contribute,
   [routePaths.sunoIndiaValidateThankYou]: sourceConstants.validate,
   [routePaths.boloIndiaContributeThankYou]: sourceConstants.contribute,
@@ -41,6 +56,39 @@ export const pageSourceConstants = {
   [routePaths.dekhoIndiaValidateThankYou]: sourceConstants.validate,
   [routePaths.likhoIndiaContributeThankYou]: sourceConstants.contribute,
   [routePaths.likhoIndiaValidateThankYou]: sourceConstants.validate,
+} as const;
+
+export const pageSourceConstants2 = {
+  [routePaths.sunoIndiaContributeThankYou]: SOURCE_CONSTANT_WITH_D.contributed,
+  [routePaths.sunoIndiaValidateThankYou]: SOURCE_CONSTANT_WITH_D.validated,
+  [routePaths.boloIndiaContributeThankYou]: SOURCE_CONSTANT_WITH_D.contributed,
+  [routePaths.boloIndiaValidateThankYou]: SOURCE_CONSTANT_WITH_D.validated,
+  [routePaths.dekhoIndiaContributeThankYou]: SOURCE_CONSTANT_WITH_D.contributed,
+  [routePaths.dekhoIndiaValidateThankYou]: SOURCE_CONSTANT_WITH_D.validated,
+  [routePaths.likhoIndiaContributeThankYou]: SOURCE_CONSTANT_WITH_D.contributed,
+  [routePaths.likhoIndiaValidateThankYou]: SOURCE_CONSTANT_WITH_D.validated,
+} as const;
+
+export const pageSourceConstants3 = {
+  [routePaths.sunoIndiaContributeThankYou]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.sunoIndiaValidateThankYou]: SOURCE_CONSTANT_2.validation,
+  [routePaths.boloIndiaContributeThankYou]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.boloIndiaValidateThankYou]: SOURCE_CONSTANT_2.validation,
+  [routePaths.dekhoIndiaContributeThankYou]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.dekhoIndiaValidateThankYou]: SOURCE_CONSTANT_2.validation,
+  [routePaths.likhoIndiaContributeThankYou]: SOURCE_CONSTANT_2.contribution,
+  [routePaths.likhoIndiaValidateThankYou]: SOURCE_CONSTANT_2.validation,
+} as const;
+
+export const pageSourceConstants4 = {
+  [routePaths.sunoIndiaContributeThankYou]: SOURCE_CONSTANT_3.contributor,
+  [routePaths.sunoIndiaValidateThankYou]: SOURCE_CONSTANT_3.validatior,
+  [routePaths.boloIndiaContributeThankYou]: SOURCE_CONSTANT_3.contributor,
+  [routePaths.boloIndiaValidateThankYou]: SOURCE_CONSTANT_3.validatior,
+  [routePaths.dekhoIndiaContributeThankYou]: SOURCE_CONSTANT_3.contributor,
+  [routePaths.dekhoIndiaValidateThankYou]: SOURCE_CONSTANT_3.validatior,
+  [routePaths.likhoIndiaContributeThankYou]: SOURCE_CONSTANT_3.contributor,
+  [routePaths.likhoIndiaValidateThankYou]: SOURCE_CONSTANT_3.validatior,
 } as const;
 
 export const pageMediaTypeConstants = {
@@ -67,6 +115,11 @@ export const pageInitiativeRouteConstants = {
   [routePaths.boloIndiaContributeThankYou]: INITIATIVES_MAPPING.bolo,
   [routePaths.dekhoIndiaContributeThankYou]: INITIATIVES_MAPPING.dekho,
   [routePaths.likhoIndiaContributeThankYou]: INITIATIVES_MAPPING.likho,
+
+  [routePaths.sunoIndiaValidateThankYou]: INITIATIVES_MAPPING.suno,
+  [routePaths.boloIndiaValidateThankYou]: INITIATIVES_MAPPING.bolo,
+  [routePaths.dekhoIndiaValidateThankYou]: INITIATIVES_MAPPING.dekho,
+  [routePaths.likhoIndiaValidateThankYou]: INITIATIVES_MAPPING.likho,
 } as const;
 
 export default pageRouteConstants;

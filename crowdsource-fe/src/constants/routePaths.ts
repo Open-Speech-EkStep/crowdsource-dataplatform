@@ -10,7 +10,7 @@ const routePaths: { [key: string]: string } = {
   home: '/home',
   sunoIndiaHome: `${initiativeBaseRoute.sunoIndia}/home`,
   sunoIndiaContributeThankYou: `${initiativeBaseRoute.sunoIndia}/thank-you`,
-  sunoIndiaValidateThankYou: `${initiativeBaseRoute.sunoIndia}/thank-you-validator`,
+  sunoIndiaValidateThankYou: `${initiativeBaseRoute.sunoIndia}/validator-thank-you`,
   sunoIndiaContribute: `${initiativeBaseRoute.sunoIndia}/record`,
   sunoIndiaValidate: `${initiativeBaseRoute.sunoIndia}/validator-page`,
   sunoIndiaDashboard: `${initiativeBaseRoute.sunoIndia}/dashboard`,

@@ -87,7 +87,7 @@ const ActionCard = (props: ActionCardProps) => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         doRedirection={true}
-        redirectionUrl={`/${router.locale}${routePaths[`${initiative}India${capitalizeFirstLetter(type)}`]}`}
+        redirectionUrl={`${routePaths[`${initiative}India${capitalizeFirstLetter(type)}`]}`}
       />
     </div>
   );

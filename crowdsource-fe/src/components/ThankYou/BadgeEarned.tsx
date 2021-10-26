@@ -36,18 +36,19 @@ interface DownloadBadgeProps {
   initiative: string;
   badgeType: string;
   source: string;
+  winningBadge: any;
 }
 
-const DownloadAndShare = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
+const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: DownloadBadgeProps) => {
   const { locale: currentLocale } = useRouter();
 
-  const download = (badgeType: string) => {
-    downloadBadge(currentLocale, initiative, source, badgeType, 'abc-xyz');
+  const download = (badgeType: string, badgeId: string) => {
+    downloadBadge(currentLocale, initiative, source, badgeType, badgeId);
   };
 
   return (
     <div className="d-flex flex-column align-items-center flex-md-row align-items-md-baseline">
-      <Button variant="normal" onClick={() => download(badgeType)}>
+      <Button variant="normal" onClick={() => download(badgeType, winningBadge.generated_badge_id)}>
         <a
           className={`${styles.download} d-inline-flex align-items-center border border-1 border-primary px-4`}
         >
@@ -72,6 +73,7 @@ interface BadgeEarnedProps {
   pageMediaTypeStr: string;
   language: string;
   source: string;
+  winningBadge: any;
 }
 
 const BadgeEarned = ({
@@ -81,6 +83,7 @@ const BadgeEarned = ({
   pageMediaTypeStr,
   language,
   source,
+  winningBadge,
 }: BadgeEarnedProps) => {
   const route = useRouter();
 
@@ -107,7 +110,14 @@ const BadgeEarned = ({
           withSep={false}
         />
       }
-      bottom={<DownloadAndShare initiative={initiative} badgeType={badgeType} source={source} />}
+      bottom={
+        <DownloadAndShare
+          initiative={initiative}
+          badgeType={badgeType}
+          source={source}
+          winningBadge={winningBadge}
+        />
+      }
     />
   );
 };

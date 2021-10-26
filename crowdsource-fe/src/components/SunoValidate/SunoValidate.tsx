@@ -136,7 +136,9 @@ const SunoValidate = () => {
 
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}/sunoIndia/validator-thank-you`, undefined, { locale: currentLocale });
+      router.push(`/${currentLocale}${routePaths.sunoIndiaValidateThankYou}`, undefined, {
+        locale: currentLocale,
+      });
     }
     setCurrentDataIndex(index + 1);
     setShowUIdata(contributionData[index + 1]);
