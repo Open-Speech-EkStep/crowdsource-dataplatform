@@ -51,6 +51,7 @@
   font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.75rem;
   line-height: 2.25rem;
+  word-break: break-word;
 
   @include media-breakpoint-up(md) {
     font-size: 2rem;
