@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
+import nodeConfig from 'constants/nodeConfig';
+
 import styles from './AudioController.module.scss';
 
 interface AudoiControllerProps {
@@ -10,9 +12,10 @@ interface AudoiControllerProps {
   onEnded: () => void;
   onPlay: () => void;
   onPause: () => void;
+  type: string;
 }
 
-const AudioController = ({ audioUrl, playAudio, onEnded, onPlay, onPause }: AudoiControllerProps) => {
+const AudioController = ({ audioUrl, playAudio, onEnded, onPlay, onPause, type }: AudoiControllerProps) => {
   const { t } = useTranslation();
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
@@ -40,7 +43,7 @@ const AudioController = ({ audioUrl, playAudio, onEnded, onPlay, onPause }: Audo
 
   return (
     <div className="d-flex flex-column align-items-center text-center">
-      <span className={`${styles.label} display-3`}>{t('audioHeading')}</span>
+      <span className={`${styles.label} display-3`}>{t(`audioHeading${type}`)}</span>
       <div className="mt-2 mt-md-3">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio
@@ -49,7 +52,7 @@ const AudioController = ({ audioUrl, playAudio, onEnded, onPlay, onPause }: Audo
           controls
           className="d-flex shadow-grey rounded-24"
           tabIndex={-1}
-          src={`https://dev-data-crowdsource.azureedge.net/${audioUrl}`}
+          src={`${nodeConfig.cdnUrl}/${audioUrl}`}
           controlsList="nodownload"
           crossOrigin="anonymous"
         ></audio>

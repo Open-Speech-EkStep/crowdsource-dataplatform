@@ -1,7 +1,7 @@
 {
   "fe": {
     "apiUrl": "http://localhost:8080",
-    "cdnUrl": "",
+    "cdnUrl": "https://uat-data-crowdsource.azureedge.net",
     "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-dev",
     "whitelistingEmail": false,
     "showDataSource": false,

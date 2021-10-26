@@ -17,81 +17,82 @@ import apiPaths from 'constants/apiPaths';
 import {
   INITIATIVE_ACTIONS,
   INITIATIVES_MAPPING,
+  INITIATIVES_MEDIA,
   INITIATIVES_MEDIA_MAPPING,
 } from 'constants/initiativeConstants';
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
-import { useSubmit } from 'hooks/useFetch';
+import useFetch, { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
-import useFetch from 'hooks/usePostFetch';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
 
-import styles from './SunoTranscribe.module.scss';
+import styles from './SunoValidate.module.scss';
 
 interface ResultType {
   data: any;
 }
 
-const SunoTranscribe = () => {
+const SunoValidate = () => {
   const { t } = useTranslation();
 
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
-  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
-
-  const [isDisabled, setIsDisabled] = useState(true);
   const [playAudio, setPlayAudio] = useState(false);
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
+  const [showNeedsChangeButton, setShowNeedsChangeButton] = useState(true);
+  const [showCorrectButton, setShowCorrectButton] = useState(true);
+  const [showSubmitButton, setShowSubmitButton] = useState(false);
+  const [showCancelButton, setShowCancelButton] = useState(false);
+  const [needsChangeDisable, setNeedsChangeDisable] = useState(true);
+  const [correctDisable, setCorrectDisable] = useState(true);
+  const [showEditTextArea, setShowEditTextArea] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
-  const [hasError, setHasError] = useState(false);
   const router = useRouter();
   const { locale: currentLocale } = useRouter();
   const [showUIData, setShowUIdata] = useState({
-    media_data: '',
+    sentence: '',
+    contribution: '',
     dataset_row_id: '0',
+    contribution_id: '0',
   });
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
 
   const { submit } = useSubmit(apiPaths.store);
 
+  const { submit: reject } = useSubmit(`${apiPaths.validate}/${showUIData?.contribution_id}/reject`);
+
   const { submit: submitSkip } = useSubmit(apiPaths.skip);
 
-  const [formData, setFormData] = useState<ActionStoreInterface>({
-    userInput: '',
-    speakerDetails: '',
+  const { submit: accept } = useSubmit(`${apiPaths.validate}/${showUIData?.contribution_id}/accept`);
+
+  const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
+    device: getDeviceInfo(),
+    browser: getBrowserInfo(),
+    country: locationInfo?.country ?? '',
+    state: locationInfo?.regionName ?? '',
     language: contributionLanguage ?? '',
     type: INITIATIVES_MEDIA_MAPPING.suno,
     sentenceId: 0,
-    state: '',
-    country: '',
-    device: getDeviceInfo(),
-    browser: getBrowserInfo(),
+    userInput: '',
+    speakerDetails: '',
   });
 
-  const result = useFetch<ResultType>({
-    url: apiPaths.mediaAsr,
-    init: contributionLanguage
-      ? {
-          body: JSON.stringify({
-            language: contributionLanguage,
-            userName: speakerDetails?.userName,
-          }),
-          method: 'POST',
-          credentials: 'include',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-        }
-      : undefined,
-  });
+  const { data: result } = useFetch<ResultType>(
+    contributionLanguage && speakerDetails
+      ? `${apiPaths.contributionsAsr}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`
+      : null
+  );
 
   useEffect(() => {
     if (result && result.data) {
@@ -102,10 +103,10 @@ const SunoTranscribe = () => {
 
   const onPlayAudio = () => {
     setShowReplayButton(false);
-    setIsDisabled(false);
     setPlayAudio(true);
     setShowPauseButton(true);
     setShowPlayButton(false);
+    setNeedsChangeDisable(false);
   };
 
   const onPauseAudio = () => {
@@ -120,37 +121,36 @@ const SunoTranscribe = () => {
   };
 
   const onChangeTextInput = (text: string) => {
-    setFormData({
-      ...formData,
+    setFormDataStore({
+      ...formDataStore,
       userInput: text,
     });
   };
 
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}${routePaths.sunoIndiaContributeThankYou}`, undefined, {
-        locale: currentLocale,
-      });
+      router.push(`/${currentLocale}/sunoIndia/thank-you.html`, undefined, { locale: currentLocale });
     }
     setCurrentDataIndex(index + 1);
     setShowUIdata(contributionData[index + 1]);
   };
 
   const resetState = () => {
-    setIsDisabled(true);
     onCancelContribution();
     setShowPauseButton(false);
     setShowPlayButton(true);
     setShowReplayButton(false);
+    setNeedsChangeDisable(true);
+    setCorrectDisable(true);
   };
 
   const onSubmitContribution = () => {
     setShowThankyouMessage(true);
-    setDataCurrentIndex(currentDataIndex);
     resetState();
+    setShowEditTextArea(true);
     submit(
       JSON.stringify({
-        ...formData,
+        ...formDataStore,
         language: contributionLanguage,
         sentenceId: showUIData.dataset_row_id,
         country: locationInfo?.country,
@@ -160,14 +160,33 @@ const SunoTranscribe = () => {
         }),
       })
     );
+    reject(
+      JSON.stringify({
+        device: getDeviceInfo(),
+        browser: getBrowserInfo(),
+        fromLanguage: contributionLanguage,
+        sentenceId: showUIData.dataset_row_id,
+        country: locationInfo?.country,
+        state: locationInfo?.regionName,
+        userName: speakerDetails?.userName,
+        type: INITIATIVES_MEDIA.asr,
+      })
+    );
     setTimeout(() => {
+      setDataCurrentIndex(currentDataIndex);
       setShowThankyouMessage(false);
+      setShowEditTextArea(false);
     }, 1500);
   };
 
   const onCancelContribution = () => {
-    setFormData({
-      ...formData,
+    setShowCancelButton(false);
+    setShowSubmitButton(false);
+    setShowNeedsChangeButton(true);
+    setShowCorrectButton(true);
+    setShowEditTextArea(false);
+    setFormDataStore({
+      ...formDataStore,
       userInput: '',
     });
   };
@@ -180,9 +199,9 @@ const SunoTranscribe = () => {
         device: getDeviceInfo(),
         browser: getBrowserInfo(),
         userName: speakerDetails?.userName,
-        language: contributionLanguage,
+        fromLanguage: contributionLanguage,
         sentenceId: showUIData.dataset_row_id,
-        state_region: locationInfo?.regionName,
+        state: locationInfo?.regionName,
         country: locationInfo?.country,
         type: INITIATIVES_MEDIA_MAPPING.suno,
       })
@@ -194,6 +213,32 @@ const SunoTranscribe = () => {
     setShowPlayButton(false);
     setShowPauseButton(false);
     setShowReplayButton(true);
+    setCorrectDisable(false);
+  };
+
+  const onNeedsChange = () => {
+    setShowEditTextArea(true);
+    setShowNeedsChangeButton(false);
+    setShowCorrectButton(false);
+    setShowCancelButton(true);
+    setShowSubmitButton(true);
+  };
+
+  const onCorrect = () => {
+    setDataCurrentIndex(currentDataIndex);
+    resetState();
+    accept(
+      JSON.stringify({
+        device: getDeviceInfo(),
+        browser: getBrowserInfo(),
+        userName: speakerDetails?.userName,
+        fromLanguage: contributionLanguage,
+        sentenceId: showUIData.dataset_row_id,
+        state: locationInfo?.regionName,
+        country: locationInfo?.country,
+        type: INITIATIVES_MEDIA_MAPPING.suno,
+      })
+    );
   };
 
   if (!result) {
@@ -208,41 +253,67 @@ const SunoTranscribe = () => {
           onSuccess={onSkipContribution}
           initiativeMediaType="sentence"
           initiative={INITIATIVES_MAPPING.suno}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.suno]['contribute']}
+          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.suno]['validate']}
         />
         <Container fluid="lg" className="mt-5">
-          <div data-testid="SunoTranscribe" className={`${styles.root}`}>
+          <div data-testid="SunoValidate" className={`${styles.root}`}>
             <AudioController
-              audioUrl={showUIData?.media_data}
+              audioUrl={showUIData?.sentence}
               playAudio={playAudio}
               onEnded={onAudioEnd}
               onPlay={onPlayAudio}
               onPause={onPauseAudio}
-              type="Transcribe"
+              type="Validate"
             />
-            <div className="mt-4 mt-md-8">
-              <TextEditArea
-                id="addText"
-                isTextareaDisabled={isDisabled}
-                language={contributionLanguage ?? ''}
-                initiative={INITIATIVES_MAPPING.suno}
-                setTextValue={onChangeTextInput}
-                textValue={formData.userInput}
-                label={`${t('addText')}${
-                  contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                }`}
-                onError={setHasError}
-              />
-            </div>
+            {showEditTextArea ? (
+              <div className="d-md-flex mt-9 mt-md-12">
+                <div className="flex-fill">
+                  <TextEditArea
+                    id="originalText"
+                    isTextareaDisabled={false}
+                    language={contributionLanguage ?? ''}
+                    initiative={INITIATIVES_MAPPING.suno}
+                    setTextValue={() => {}}
+                    textValue={showUIData?.contribution}
+                    roundedLeft
+                    readOnly
+                    label={t('originalText')}
+                    onError={() => {}}
+                  />
+                </div>
+                <div className="flex-fill">
+                  <TextEditArea
+                    id="editText"
+                    isTextareaDisabled={false}
+                    language={contributionLanguage ?? ''}
+                    initiative={INITIATIVES_MAPPING.suno}
+                    setTextValue={onChangeTextInput}
+                    textValue={showUIData?.contribution}
+                    roundedRight
+                    label={`${t('yourEdit')}${
+                      contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                    }`}
+                    onError={setHasError}
+                    showTip
+                  />
+                </div>
+              </div>
+            ) : (
+              <div
+                className={`${styles.text} d-flex justify-content-center align-items-center mt-9 mt-md-12 text-center display-1`}
+              >
+                {showUIData?.contribution}
+              </div>
+            )}
             {showThankyouMessage ? (
               <div className="d-flex align-items-center justify-content-center mt-9 display-1">
                 <span className="me-2 d-flex">
                   <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
                 </span>
-                {t('thankyouForContributing')}
+                {t('thankyouForCorrecting')}
               </div>
             ) : (
-              <div className="mt-2 mt-md-6">
+              <div className="mt-9 mt-md-12">
                 <ButtonControls
                   onPlay={onPlayAudio}
                   onPause={onPauseAudio}
@@ -250,16 +321,24 @@ const SunoTranscribe = () => {
                   playButton={showPlayButton}
                   pauseButton={showPauseButton}
                   replayButton={showReplayButton}
-                  cancelDisable={!formData.userInput}
+                  submitButton={showSubmitButton}
+                  cancelButton={showCancelButton}
+                  needsChangeButton={showNeedsChangeButton}
+                  correctBtn={showCorrectButton}
+                  cancelDisable={false}
                   submitDisable={
                     !showReplayButton ||
-                    !formData.userInput ||
-                    formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
+                    !formDataStore.userInput ||
+                    formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
                     hasError
                   }
+                  needsChangeDisable={needsChangeDisable}
+                  correctDisable={correctDisable}
                   onSubmit={onSubmitContribution}
                   onCancel={onCancelContribution}
                   onSkip={onSkipContribution}
+                  onNeedsChange={onNeedsChange}
+                  onCorrect={onCorrect}
                 />
               </div>
             )}
@@ -289,4 +368,4 @@ const SunoTranscribe = () => {
   );
 };
 
-export default SunoTranscribe;
+export default SunoValidate;

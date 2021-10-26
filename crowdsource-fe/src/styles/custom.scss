@@ -69,11 +69,13 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   --dark-color: #{map-get($theme-colors, 'dark')};
   --link-color: #{$link-color};
   --primary-10-color: #{map-get($custom-colors, 'primary-10')};
+  --primary-20-color: #{map-get($custom-colors, 'primary-20')};
   --primary-40-color: #{map-get($custom-colors, 'primary-40')};
   --primary-60-color: #{map-get($custom-colors, 'primary-60')};
   --primary-80-color: #{map-get($custom-colors, 'primary-80')};
   --primary-4-color: #{map-get($custom-colors, 'primary-4')};
   --strong-warning-color: #{map-get($custom-colors, 'strong-warning')};
+  --text-area-grey-color: #f5f6f8;
   --btn-grey-color: #e7e9ed;
   --btn-primary-disabled-bg-color: #9fa9b6;
   --btn-primary-disabled-text-color: #cfd4da;
@@ -527,6 +529,8 @@ $form-select-focus-border-color: var(--primary-color);
 $btn-close-focus-shadow: none;
 $btn-focus-box-shadow: none;
 $input-color: var(--primary-color);
+$btn-border-width: 0;
+$input-disabled-bg: transparent;
 
 :root {
   /* Z-Indexes */

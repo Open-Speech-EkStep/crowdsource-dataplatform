@@ -11,6 +11,7 @@ describe('AudioController', () => {
         onEnded={() => {}}
         onPlay={() => {}}
         onPause={() => {}}
+        type="transcribe"
       />
     );
 

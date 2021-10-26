@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SunoTranscribe should render the component and matches it against stored snapshot 1`] = `
+exports[`SunoValidate should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
     class="root d-none d-md-block d-lg-flex position-relative align-items-md-center bg-secondary px-3 px-md-6 py-3 py-lg-0 border-bottom border-1 border-primary-10"
@@ -55,8 +55,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           alt="Close Chrome Extension"
           data-nimg="intrinsic"
           decoding="async"
-          src="/_next/image?url=%2Fimages%2Fclose.svg&w=48&q=75"
-          srcset="/_next/image?url=%2Fimages%2Fclose.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fclose.svg&w=48&q=75 2x"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         />
         <noscript />
@@ -101,8 +100,7 @@ exports[`SunoTranscribe should render the component and matches it against store
                     alt="sunoLogo"
                     data-nimg="intrinsic"
                     decoding="async"
-                    src="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75"
-                    srcset="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75 2x"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
                   <noscript />
@@ -123,7 +121,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           <span
             class="display-5"
           >
-            transcribe
+            validate
           </span>
         </div>
         <div
@@ -152,8 +150,7 @@ exports[`SunoTranscribe should render the component and matches it against store
                   alt="reportIconAlt"
                   data-nimg="intrinsic"
                   decoding="async"
-                  src="/_next/image?url=%2Fimages%2Freport.svg&w=48&q=75"
-                  srcset="/_next/image?url=%2Fimages%2Freport.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Freport.svg&w=48&q=75 2x"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                 />
                 <noscript />
@@ -193,8 +190,7 @@ exports[`SunoTranscribe should render the component and matches it against store
                     alt="testYourSpeaker"
                     data-nimg="intrinsic"
                     decoding="async"
-                    src="/_next/image?url=%2Fimages%2Fspeaker.svg&w=48&q=75"
-                    srcset="/_next/image?url=%2Fimages%2Fspeaker.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fspeaker.svg&w=48&q=75 2x"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                   />
                   <noscript />
@@ -220,7 +216,7 @@ exports[`SunoTranscribe should render the component and matches it against store
     >
       <div
         class="root"
-        data-testid="SunoTranscribe"
+        data-testid="SunoValidate"
       >
         <div
           class="d-flex flex-column align-items-center text-center"
@@ -228,7 +224,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           <span
             class="label display-3"
           >
-            audioHeadingTranscribe
+            audioHeadingValidate
           </span>
           <div
             class="mt-2 mt-md-3"
@@ -239,85 +235,55 @@ exports[`SunoTranscribe should render the component and matches it against store
               controlslist="nodownload"
               crossorigin="anonymous"
               data-testid="audioElement"
-              src="/inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav"
+              src="/inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/37_Regional-Shillong-English-0830-202131192011.wav"
               tabindex="-1"
             />
           </div>
         </div>
         <div
-          class="mt-4 mt-md-8"
+          class="text d-flex justify-content-center align-items-center mt-9 mt-md-12 text-center display-1"
         >
-          <div
-            class="position-relative p-4 addText addTextDisabled"
-            data-testid="TextEditArea"
-          >
-            <div
-              class="textAreaDisabled"
-            >
-              <div>
-                <label
-                  class="textareaLabel display-6 form-label"
-                  for="addText"
-                >
-                  addText (hindi)
-                </label>
-                <textarea
-                  class="textarea border-0 p-0 display-3 form-control"
-                  disabled=""
-                  id="addText"
-                  placeholder="typingPlaceholder"
-                />
-              </div>
-              <div
-                class="keyboardIcon d-none  d-md-block  position-absolute"
-              >
-                <button
-                  class="d-flex info normal btn btn-link"
-                  data-testid="Button"
-                  disabled=""
-                  type="button"
-                >
-                  <div
-                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                  >
-                    <div
-                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                    >
-                      <img
-                        alt=""
-                        aria-hidden="true"
-                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                      />
-                    </div>
-                    <img
-                      alt="keyboardBtn"
-                      data-nimg="intrinsic"
-                      decoding="async"
-                      src="/_next/image?url=%2Fimages%2Fkeyboard_icon.svg&w=48&q=75"
-                      srcset="/_next/image?url=%2Fimages%2Fkeyboard_icon.svg&w=32&q=75 1x, /_next/image?url=%2Fimages%2Fkeyboard_icon.svg&w=48&q=75 2x"
-                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                    />
-                    <noscript />
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
+          सोल को अगर आप नहीं देख सकते शीशा लगा करके आप जरूर देखिए
         </div>
         <div
-          class="mt-2 mt-md-6"
+          class="mt-9 mt-md-12"
         >
           <div
             class="d-flex flex-column flex-md-row justify-content-md-center align-items-center"
           >
             <button
-              class="mx-md-6 order-2 order-md-1 my-2 my-md-0 light secondary btn btn-light"
+              class="needsChangeBtn mx-md-6 order-2 order-md-1 my-2 my-md-0 light secondary btn btn-light"
               data-testid="Button"
               disabled=""
               type="button"
             >
-              cancel
+              <span
+                class="d-flex me-2 needsChangeDisabled"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="Edit Icon"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+              </span>
+              needsChange
             </button>
             <button
               class="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0 info normal btn btn-link"
@@ -341,8 +307,7 @@ exports[`SunoTranscribe should render the component and matches it against store
                   alt="Play Icon"
                   data-nimg="intrinsic"
                   decoding="async"
-                  src="/_next/image?url=%2Fimages%2Fplay.svg&w=128&q=75"
-                  srcset="/_next/image?url=%2Fimages%2Fplay.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fplay.svg&w=128&q=75 2x"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                 />
                 <noscript />
@@ -354,12 +319,38 @@ exports[`SunoTranscribe should render the component and matches it against store
               </span>
             </button>
             <button
-              class="mx-md-6 order-3 order-md-3 my-2 my-md-0 info primary btn btn-primary"
+              class="correctBtn mx-md-6 order-3 order-md-3 my-2 my-md-0 light secondary btn btn-light"
               data-testid="Button"
               disabled=""
               type="button"
             >
-              submit
+              <span
+                class="d-flex me-2 correctDisabled"
+              >
+                <div
+                  style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                >
+                  <div
+                    style="box-sizing: border-box; display: block; max-width: 100%;"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                      style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                    />
+                  </div>
+                  <img
+                    alt="Correct Icon"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                  />
+                  <noscript />
+                </div>
+              </span>
+              correct
             </button>
           </div>
           <div
@@ -400,6 +391,36 @@ exports[`SunoTranscribe should render the component and matches it against store
           </span>
         </div>
       </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SunoValidate should show no data text when fetch call gives no data 1`] = `
+<DocumentFragment>
+  <div
+    class="text-center pt-4 px-2 px-lg-0 pb-8 container-lg"
+  >
+    <div
+      class="d-flex flex-column align-items-center"
+    >
+      <h1>
+        thankyouForEnthusiasm
+      </h1>
+      <p
+        class="mt-9"
+      >
+        noDataMessage
+      </p>
+      <a
+        class="mt-9 info primary btn btn-primary"
+        data-testid="Button"
+        href="/sunoIndia/home"
+        role="button"
+        tabindex="0"
+      >
+        backToInitiativePrompt
+      </a>
     </div>
   </div>
 </DocumentFragment>

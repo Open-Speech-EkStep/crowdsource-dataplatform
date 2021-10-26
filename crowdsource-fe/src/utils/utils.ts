@@ -64,6 +64,7 @@ export const isSunoOrBoloInitiative = (value: InitiativeType) => {
 };
 
 export const verifyLanguage = (text: string, currentModule: string, language: string) => {
+  if (!text.length) return;
   const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
   let error: any = KEYBOARD_ERROR.language;
   const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;

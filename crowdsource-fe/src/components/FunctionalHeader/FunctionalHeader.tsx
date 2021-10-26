@@ -1,18 +1,20 @@
 import Breadcrumbs from 'components/Breadcrumbs';
 import Report from 'components/Report';
 import TestSpeakerMic from 'components/TestSpeakerMic';
-import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
+import type { Initiative } from 'types/Initiatives';
 
 interface FunctionalHeaderProps {
   onSuccess: () => void;
   initiativeMediaType: string;
+  initiative: Initiative;
+  action: string;
 }
 
-const FunctionalHeader = ({ onSuccess, initiativeMediaType }: FunctionalHeaderProps) => {
+const FunctionalHeader = ({ onSuccess, initiativeMediaType, initiative, action }: FunctionalHeaderProps) => {
   return (
     <header>
       <div className="d-flex justify-content-between align-items-center px-3 px-md-6">
-        <Breadcrumbs initiative={INITIATIVES_MAPPING.suno} path="transcribe" />
+        <Breadcrumbs initiative={initiative} path={action} />
         <div className="d-flex">
           <div>
             <Report onSuccess={onSuccess} initiativeMediaType={initiativeMediaType} />

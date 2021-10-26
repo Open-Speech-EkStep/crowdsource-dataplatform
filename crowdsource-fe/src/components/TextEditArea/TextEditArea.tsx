@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import Form from 'react-bootstrap/Form';
@@ -16,22 +17,38 @@ import TextErrorMessage from './TextErrorMessage';
 import 'react-simple-keyboard/build/css/index.css';
 
 interface TextEditAreaProps {
+  id: string;
   language: string;
   initiative: string;
   setTextValue: (value: string) => void;
   textValue?: string;
   isTextareaDisabled: boolean;
+  roundedLeft?: boolean;
+  roundedRight?: boolean;
+  readOnly?: boolean;
+  readOnlyActive?: boolean;
+  label: string;
+  onError: (value: boolean) => void;
+  showTip?: boolean;
 }
 
 const TextEditArea = ({
+  id,
   language,
   isTextareaDisabled,
   initiative,
   setTextValue,
   textValue,
+  roundedLeft = false,
+  roundedRight = false,
+  readOnly = false,
+  readOnlyActive = false,
+  label,
+  onError,
+  showTip = false,
 }: TextEditAreaProps) => {
   const { t } = useTranslation();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(textValue);
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [layout, setLayout] = useState<any>();
   const [isUsingPhysicalKeyboard, setIsUsingPhysicalKeyboard] = useState(false);
@@ -40,8 +57,17 @@ const TextEditArea = ({
   const [errorMessage, setErrorMessage] = useState('');
   const nodeRef = useRef(null);
   const chromeExtension = useRef<any>(null);
+  let keyboard: any = useRef();
 
-  let keyboard: any;
+  const keyBoardRef = useCallback(
+    node => {
+      if (node !== null) {
+        node.setInput(input);
+        keyboard.current = node;
+      }
+    },
+    [input]
+  );
 
   useEffect(() => {
     chromeExtension.current = document.getElementById('GOOGLE_INPUT_CHEXT_FLAG');
@@ -54,6 +80,7 @@ const TextEditArea = ({
 
   const onChange = (input: any) => {
     setIsUsingPhysicalKeyboard(false);
+    setTextValue(input);
     setInput(input);
     const error = verifyLanguage(input, initiative, language);
     handleError(error);
@@ -62,13 +89,15 @@ const TextEditArea = ({
   const handleError = (error: any) => {
     if (error && error.type === 'language') {
       setShowError(true);
+      onError(true);
       setErrorMessage(t('typeInChosenLanguage'));
     } else if (error && error.type === 'symbol') {
       setShowError(true);
       setErrorMessage(t('specialCharacters'));
+      onError(true);
     } else {
-      setTextValue(input);
       setShowError(false);
+      onError(false);
     }
   };
 
@@ -87,7 +116,7 @@ const TextEditArea = ({
     handleError(error);
     setTextValue(input);
     setInput(input);
-    keyboard?.setInput(input);
+    keyboard.current.setInput(input);
     if (!input) {
       setShowKeyboard(false);
     }
@@ -97,43 +126,45 @@ const TextEditArea = ({
     <Fragment>
       <div
         data-testid="TextEditArea"
-        className={`
-          position-relative border border-2 border-primary
-          ${styles.addText} ${
-          isTextareaDisabled && `${styles.addTextDisabled} border border-2 border-primary-20`
-        }
-          ${showError && `${styles.addTextError} border border-2 border-danger`} rounded-8  bg-light p-4
-        `}
+        className={classNames('position-relative p-4', styles.addText, {
+          [styles.addTextDisabled]: isTextareaDisabled,
+          [styles.roundedLeft]: roundedLeft,
+          [styles.roundedRight]: roundedRight,
+          [styles.readOnly]: readOnly,
+          [styles.readOnlyActive]: readOnlyActive,
+        })}
       >
+        {showTip && <span className={`${styles.tip} position-absolute`} />}
         <div className={`${isTextareaDisabled && `${styles.textAreaDisabled}`}`}>
-          <Form.Group controlId="textarea">
-            <Form.Label className={`${styles.textareaLabel} display-6`}>
-              {t('addText')} ({t(language.toLowerCase())})
-            </Form.Label>
+          <Form.Group controlId={id}>
+            <Form.Label className={`${styles.textareaLabel} display-6`}>{label}</Form.Label>
             <Form.Control
               as="textarea"
               disabled={isTextareaDisabled}
               value={input}
               onFocus={() => {
-                if (!isUsingPhysicalKeyboard && !chromeExtension.current) {
+                if (!isUsingPhysicalKeyboard && !chromeExtension.current && !readOnly && !readOnlyActive) {
                   setShowKeyboard(true);
                 }
               }}
               onChange={onChangeInput}
+              readOnly={readOnly}
               placeholder={t('typingPlaceholder')}
               className={`${styles.textarea} border-0 p-0 display-3`}
             />
           </Form.Group>
-          <div className={`${styles.keyboardIcon} d-none  d-md-block  position-absolute`}>
-            <Button
-              disabled={isTextareaDisabled}
-              variant="normal"
-              onClick={() => setShowKeyboard(true)}
-              className="d-flex"
-            >
-              <Image src="/images/keyboard_icon.svg" width="24" height="24" alt="keyboardBtn" />
-            </Button>
-          </div>
+          {!(readOnly || readOnlyActive) && (
+            <div className={`${styles.keyboardIcon} d-none  d-md-block  position-absolute`}>
+              <Button
+                disabled={isTextareaDisabled}
+                variant="normal"
+                onClick={() => setShowKeyboard(true)}
+                className="d-flex"
+              >
+                <Image src="/images/keyboard_icon.svg" width="24" height="24" alt="keyboardBtn" />
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}
@@ -159,7 +190,7 @@ const TextEditArea = ({
             </div>
 
             <Keyboard
-              keyboardRef={(r: any) => (keyboard = r)}
+              keyboardRef={keyBoardRef}
               onChange={onChange}
               onKeyPress={onKeyPress}
               layoutName={layoutName}

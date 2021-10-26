@@ -2,3 +2,15 @@
   bottom: -2.635rem;
   width: 12.5rem;
 }
+
+.needsChangeBtn,
+.correctBtn {
+  @include media-breakpoint-up(md) {
+    width: 15rem;
+  }
+}
+
+.needsChangeDisabled,
+.correctDisabled {
+  opacity: 0.4;
+}

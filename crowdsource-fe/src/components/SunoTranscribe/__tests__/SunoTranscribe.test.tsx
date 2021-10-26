@@ -188,14 +188,14 @@ describe('SunoTranscribe', () => {
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
           userName: 'abc',
           language: 'Hindi',
-          type: 'asr',
           sentenceId: 1248671,
           state_region: 'National Capital Territory of Delhi',
           country: 'India',
-          device: 'android 11',
-          browser: 'Chrome 13',
+          type: 'asr',
         }),
       });
     });

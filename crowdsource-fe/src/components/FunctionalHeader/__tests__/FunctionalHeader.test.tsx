@@ -3,7 +3,15 @@ import { render, verifyAxeTest } from 'utils/testUtils';
 import FunctionalHeader from '../FunctionalHeader';
 
 describe('FunctionalHeader', () => {
-  const setup = () => render(<FunctionalHeader onSuccess={() => {}} initiativeMediaType="sentence" />);
+  const setup = () =>
+    render(
+      <FunctionalHeader
+        onSuccess={() => {}}
+        initiative="suno"
+        initiativeMediaType="sentence"
+        action="transcribe"
+      />
+    );
 
   verifyAxeTest(setup());
 

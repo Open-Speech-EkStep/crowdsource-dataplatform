@@ -1,3 +1,6 @@
+import { Fragment } from 'react';
+
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
@@ -12,11 +15,19 @@ interface ButtonControlProps {
   onSubmit: () => void;
   onCancel: () => void;
   onSkip: () => void;
+  onNeedsChange?: () => void;
+  onCorrect?: () => void;
   playButton: boolean;
   pauseButton: boolean;
   replayButton: boolean;
   cancelDisable?: boolean;
   submitDisable?: boolean;
+  cancelButton?: boolean;
+  submitButton?: boolean;
+  needsChangeButton?: boolean;
+  needsChangeDisable?: boolean;
+  correctBtn?: boolean;
+  correctDisable?: boolean;
 }
 
 const ButtonControls = ({
@@ -26,25 +37,48 @@ const ButtonControls = ({
   onSubmit,
   onCancel,
   onSkip,
+  onNeedsChange,
+  onCorrect,
   playButton = true,
   pauseButton = false,
   replayButton = false,
+  cancelButton = true,
+  submitButton = true,
   cancelDisable = true,
   submitDisable = true,
+  needsChangeButton = false,
+  needsChangeDisable = true,
+  correctBtn = false,
+  correctDisable = true,
 }: ButtonControlProps) => {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center py-2 py-md-6">
-        <Button
-          onClick={onCancel}
-          disabled={cancelDisable}
-          variant="secondary"
-          className="mx-md-6 order-2 order-md-1 my-2 my-md-0"
-        >
-          {t('cancel')}
-        </Button>
+    <Fragment>
+      <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center">
+        {cancelButton && (
+          <Button
+            onClick={onCancel}
+            disabled={cancelDisable}
+            variant="secondary"
+            className="mx-md-6 order-2 order-md-1 my-2 my-md-0"
+          >
+            {t('cancel')}
+          </Button>
+        )}
+        {needsChangeButton && (
+          <Button
+            onClick={onNeedsChange}
+            disabled={needsChangeDisable}
+            variant="secondary"
+            className={`${styles.needsChangeBtn} mx-md-6 order-2 order-md-1 my-2 my-md-0`}
+          >
+            <span className={classNames(`d-flex me-2`, { [styles.needsChangeDisabled]: needsChangeDisable })}>
+              <Image src="/images/edit.svg" width="24" height="24" alt="Edit Icon" />
+            </span>
+            {t('needsChange')}
+          </Button>
+        )}
         {playButton && (
           <Button
             variant="normal"
@@ -81,21 +115,35 @@ const ButtonControls = ({
             </span>
           </Button>
         )}
-
-        <Button
-          onClick={onSubmit}
-          disabled={submitDisable}
-          className="mx-md-6 order-3 order-md-3 my-2 my-md-0"
-        >
-          {t('submit')}
-        </Button>
+        {correctBtn && (
+          <Button
+            variant="secondary"
+            onClick={onCorrect}
+            disabled={correctDisable}
+            className={`${styles.correctBtn} mx-md-6 order-3 order-md-3 my-2 my-md-0`}
+          >
+            <span className={classNames(`d-flex me-2`, { [styles.correctDisabled]: correctDisable })}>
+              <Image src="/images/correct.svg" width="24" height="24" alt="Correct Icon" />
+            </span>
+            {t('correct')}
+          </Button>
+        )}
+        {submitButton && (
+          <Button
+            onClick={onSubmit}
+            disabled={submitDisable}
+            className="mx-md-6 order-3 order-md-3 my-2 my-md-0"
+          >
+            {t('submit')}
+          </Button>
+        )}
       </div>
-      <div className="d-flex justify-content-center mt-2 mt-md-11">
+      <div className="d-flex justify-content-center mt-4 mt-md-13">
         <Button onClick={onSkip} variant="tertiary">
           {t('skip')}
         </Button>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
