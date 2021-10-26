@@ -20,7 +20,7 @@ const LanguageMedals = ({ initiative, language }: LanguageMedalsProps) => {
   return (
     <Row className="py-3">
       <Col lg="2" className="d-flex align-items-center fw-light display-3">
-        English
+        {language}
       </Col>
       <Col lg="10">
         <Row>

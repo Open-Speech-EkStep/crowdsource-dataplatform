@@ -9,24 +9,11 @@ import Container from 'react-bootstrap/Container';
 import FunctionalPageBackground from 'components/FunctionalPageBackground';
 import Link from 'components/Link';
 import MedalGallery from 'components/MedalGallery';
-import apiPaths from 'constants/apiPaths';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
-import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
-import useFetch from 'hooks/useFetch';
-import useLocalStorage from 'hooks/useLocalStorage';
-import type SpeakerDetails from 'types/SpeakerDetails';
 
 const MyBadgesPage: NextPage = () => {
   const { t } = useTranslation();
-
-  const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
-
-  const userRewardsApi = `${apiPaths.userRewards}/${speakerDetails?.userName || ''}`;
-
-  const userBadges = useFetch<any>(userRewardsApi, {
-    revalidateOnMount: true,
-  });
 
   return (
     <FunctionalPageBackground>
@@ -39,7 +26,7 @@ const MyBadgesPage: NextPage = () => {
         </Link>
       </header>
       <Container fluid="lg" className="mt-5">
-        <MedalGallery userName={speakerDetails?.userName} userBadges={userBadges} />
+        <MedalGallery/>
       </Container>
     </FunctionalPageBackground>
   );

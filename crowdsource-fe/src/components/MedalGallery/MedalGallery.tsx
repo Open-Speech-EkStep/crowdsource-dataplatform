@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -5,21 +7,36 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import BadgeSection from 'components/BadgeSection';
+import apiPaths from 'constants/apiPaths';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import localStorageConstants from 'constants/localStorageConstants';
+import useFetch from 'hooks/useFetch';
+import useLocalStorage from 'hooks/useLocalStorage';
+import type { Initiative } from 'types/Initiatives';
+import type SpeakerDetails from 'types/SpeakerDetails';
 
 import styles from './MedalGallery.module.scss';
 
-interface MedalGalleryProps {
-  userName?: string | '';
-  userBadges?: any;
-}
+const MedalGallery = () => {
+  const initiatives: Array<Initiative> = ['suno', 'bolo', 'likho', 'dekho'];
 
-const MedalGallery = ({ userName, userBadges }: MedalGalleryProps) => {
-  const initiatives = ['suno', 'bolo', 'likho', 'dekho'];
   const languages = ['en', 'hi'];
   const { t } = useTranslation();
 
-  const hasBadges = () => {
-    return userBadges.length > 0;
+  const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
+
+  const userRewardsApi = `${apiPaths.userRewards}/${speakerDetails?.userName || ''}`;
+
+  const { data: userBadges, mutate } = useFetch<any>(userRewardsApi, { revalidateOnMount: false });
+
+  useEffect(() => {
+    if (speakerDetails) {
+      mutate();
+    }
+  }, [speakerDetails])
+
+  const hasBadges = (initiative: Initiative) => {
+    return userBadges?.some((pair: any) => pair.type === INITIATIVES_MEDIA_MAPPING[initiative]);
   };
 
   function handleTabClick(tab: any, event: any) {
@@ -34,7 +51,7 @@ const MedalGallery = ({ userName, userBadges }: MedalGalleryProps) => {
     <div className={styles.root}>
       <header className="text-center">
         <h2>
-          Congratulations <span className={styles.highlight}>{userName}</span>!
+          Congratulations <span className={styles.highlight}>{speakerDetails?.userName}</span>!
         </h2>
         <h3 className="mt-3">Your Medal Gallery</h3>
       </header>
@@ -45,7 +62,7 @@ const MedalGallery = ({ userName, userBadges }: MedalGalleryProps) => {
           className={`${styles.tabs} d-flex align-items-center border-bottom border-1 border-primary-60 hide-scrollbar`}
           onSelect={handleTabClick}
         >
-          {initiatives.map(initiative => (
+          {initiatives.map((initiative: Initiative) => (
             <Tab
               key={initiative}
               eventKey={initiative}
@@ -53,7 +70,7 @@ const MedalGallery = ({ userName, userBadges }: MedalGalleryProps) => {
               tabClassName={`${styles.tabLink} position-relative h-100 display-3 px-6 mx-md-0`}
             >
               <div className={`${styles.badgeSection} py-5`}>
-                {hasBadges() ? (
+                {hasBadges(initiative) ? (
                   <BadgeSection languages={languages} initiative={initiative} />
                 ) : (
                   <Col className="p-0">
