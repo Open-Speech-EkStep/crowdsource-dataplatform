@@ -281,11 +281,16 @@ const SunoTranscribe = () => {
       </div>
     </Fragment>
   ) : (
-    <NoDataFound
-      url={routePaths.sunoIndiaHome}
-      initiative={INITIATIVES_MAPPING.suno}
-      language={contributionLanguage?.toLowerCase() ?? ''}
-    />
+    <div className="d-flex flex-grow-1 align-items-center">
+      <NoDataFound
+        url={routePaths.sunoIndiaHome}
+        title={t('asrContributeNoDataThankYouMessage')}
+        text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() ?? '' })}
+        buttonLabel={t('backToInitiativePrompt', {
+          initiativeName: `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`,
+        })}
+      />
+    </div>
   );
 };
 

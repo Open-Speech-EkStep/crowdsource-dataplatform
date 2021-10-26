@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -367,11 +367,16 @@ const SunoValidate = () => {
       </div>
     </Fragment>
   ) : (
-    <NoDataFound
-      url={routePaths.sunoIndiaHome}
-      initiative={INITIATIVES_MAPPING.suno}
-      language={contributionLanguage?.toLowerCase() ?? ''}
-    />
+    <div className="d-flex flex-grow-1 align-items-center">
+      <NoDataFound
+        url={routePaths.sunoIndiaHome}
+        title={t('asrValidateNoDataThankYouMessage')}
+        text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() ?? '' })}
+        buttonLabel={t('backToInitiativePrompt', {
+          initiativeName: `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`,
+        })}
+      />
+    </div>
   );
 };
 

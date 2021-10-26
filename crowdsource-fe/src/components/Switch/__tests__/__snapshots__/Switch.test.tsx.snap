@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root d-flex align-items-center rounded-20 text-primary-40"
+    data-testid="Switch"
+  >
+    <button
+      class="option flex-fill px-2 activeOption rounded-12 text-light bg-primary info normal btn btn-link"
+      data-testid="Button"
+      type="button"
+    >
+      optionOne
+    </button>
+    <button
+      class="option flex-fill px-2 info normal btn btn-link"
+      data-testid="Button"
+      type="button"
+    >
+      optionTwo
+    </button>
+  </div>
+</DocumentFragment>
+`;

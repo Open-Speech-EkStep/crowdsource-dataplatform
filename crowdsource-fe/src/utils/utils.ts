@@ -31,9 +31,9 @@ export const capitalizeFirstLetter = (strValue: string) => {
 const translateText = (text: string) => i18n?.t(text);
 
 export const formatTime = (hours: number, minutes = 0, seconds = 0) => {
-  const hrStr = translateText('hours');
-  const minStr = translateText('minutes');
-  const secStr = translateText('seconds');
+  const hrStr = translateText('hours1');
+  const minStr = translateText('minutes1');
+  const secStr = translateText('seconds1');
   let result = '';
   if (hours > 0) {
     result += `${hours} ${hrStr} `;
@@ -56,6 +56,26 @@ export const convertTimeFormat = (value: any) => {
   const { hours, minutes, seconds } = convertIntoHrsFormat(Number(value) * 60 * 60);
   const data = formatTime(hours, minutes, seconds);
   return data;
+};
+
+const roundDuration = (value: number) => {
+  return Math.round(value * 100) / 100;
+};
+
+export const getHoursValue = (value: any) => {
+  return roundDuration(value);
+};
+
+export const getMinutesValue = (value: any) => {
+  return roundDuration(value * 60);
+};
+
+export const getHoursText = (value: any) => {
+  return `${getHoursValue(value)} ${i18n?.t('hours2')}`;
+};
+
+export const getMinutesText = (value: any) => {
+  return `${getMinutesValue(value)} ${i18n?.t('minutes2')}`;
 };
 
 export const isSunoOrBoloInitiative = (value: InitiativeType) => {

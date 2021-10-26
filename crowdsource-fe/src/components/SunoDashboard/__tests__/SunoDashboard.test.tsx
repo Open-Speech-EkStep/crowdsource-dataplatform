@@ -1,4 +1,5 @@
-import { render, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { when } from 'jest-when';
 import { SWRConfig } from 'swr';
 
 import { screen, userEvent } from 'utils/testUtils';
@@ -82,5 +83,54 @@ describe('SunoDashboard', () => {
     expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
     expect(renderRes.asFragment()).toMatchSnapshot();
+  });
+
+  it('changing language from language selector should display nodata message when data not available', async () => {
+    await setup();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'English');
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
+    });
+    await waitFor(() => {
+      expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
+    });
+    expect(screen.queryByText('languages')).not.toBeInTheDocument();
+  });
+
+  it('changing to language where data not available and clicking contribute now should display change user modal for new user', async () => {
+    await setup();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
+    await waitFor(() => {
+      expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
+    });
+    userEvent.click(screen.getByRole('button', { name: 'contributeNow' }));
+    await waitFor(() => expect(screen.getByTestId('ChangeUserForm')).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+    await waitForElementToBeRemoved(() => screen.queryByTestId('ChangeUserModal'));
+  });
+
+  it('changing to language where data not available and clicking contribute now should redirect for existing user', async () => {
+    when(localStorage.getItem)
+      .calledWith('speakerDetails')
+      .mockImplementation(
+        () => '{"userName":"abc","motherTongue":"","age":"","gender":"","language":"English","toLanguage":""}'
+      );
+    when(localStorage.getItem)
+      .calledWith('contributionLanguage')
+      .mockImplementation(() => 'English');
+    await setup();
+    await waitFor(() => {
+      expect(localStorage.getItem).toBeCalled();
+    });
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
+    await waitFor(() => {
+      expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
+    });
+    userEvent.click(screen.getByRole('button', { name: 'contributeNow' }));
+    await waitFor(() => expect(screen.queryByTestId('ChangeUserModal')).not.toBeInTheDocument());
   });
 });

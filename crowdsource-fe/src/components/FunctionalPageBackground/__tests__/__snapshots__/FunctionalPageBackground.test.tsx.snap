@@ -3,11 +3,11 @@
 exports[`FunctionalPageBackground should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="root position-relative flex-grow-1"
+    class="root position-relative d-flex flex-column flex-fill"
     data-testid="FunctionalPageBackground"
   >
     <div
-      class="wrapper position-relative"
+      class="wrapper position-relative d-flex flex-column flex-fill"
     >
       Some Content
     </div>

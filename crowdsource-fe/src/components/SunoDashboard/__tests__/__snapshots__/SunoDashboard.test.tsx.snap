@@ -2,199 +2,328 @@
 
 exports[`SunoDashboard changing language from language selector should update stats 1`] = `
 <DocumentFragment>
-  <div>
-    <div
-      class="row"
+  <div
+    class="pt-4 px-2 px-lg-0 pb-8"
+  >
+    <header
+      class="d-flex justify-content-between align-items-center px-3 px-md-6"
     >
       <div
-        class="col"
+        class="root d-flex align-items-center"
+        data-testid="Breadcrumbs"
       >
-        <div>
-          <div>
-            <label
-              class="form-label"
-              for="language"
-            >
-              selectLanguagePrompt:
-            </label>
-            <select
-              aria-label="Select Language"
-              class="form-select"
-              id="language"
-            >
-              <option
-                value="all"
-              >
-                allLanguages
-              </option>
-              <option
-                value="English"
-              >
-                English
-              </option>
-              <option
-                value="Hindi"
-              >
-                हिंदी
-              </option>
-              <option
-                value="Tamil"
-              >
-                தமிழ்
-              </option>
-              <option
-                value="Telugu"
-              >
-                తెలుగు
-              </option>
-              <option
-                value="Assamese"
-              >
-                অসমীয়া
-              </option>
-              <option
-                value="Bengali"
-              >
-                বাংলা
-              </option>
-              <option
-                value="Gujarati"
-              >
-                ગુજરાતી
-              </option>
-              <option
-                value="Kannada"
-              >
-                ಕನ್ನಡ
-              </option>
-              <option
-                value="Malayalam"
-              >
-                മലയാളം
-              </option>
-              <option
-                value="Marathi"
-              >
-                मराठी
-              </option>
-              <option
-                value="Odia"
-              >
-                ଓଡିଆ
-              </option>
-              <option
-                value="Punjabi"
-              >
-                ਪੰਜਾਬੀ
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    DataLastUpdated
-    <div>
-      <div
-        class="mt-4 mt-md-5"
-      >
-        <div
-          class="root rounded-20 bg-info px-7 px-md-0 py-md-7"
+        <a
+          class="link"
+          href="/sunoIndia/home"
         >
           <div
-            class="m-md-0 row"
-            data-testid="StatsRow"
+            class="d-flex align-items-center cursor-pointer"
           >
             <div
-              class="stat col-md-4 col-12"
+              class="icon d-flex"
             >
               <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
+                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
               >
-                <span
-                  class="count text-warning display-1"
+                <div
+                  style="box-sizing: border-box; display: block; max-width: 100%;"
                 >
-                  9
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
-                >
-                  peopleParticipated
-                </span>
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iNDIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                  />
+                </div>
+                <img
+                  alt="sunoLogo"
+                  data-nimg="intrinsic"
+                  decoding="async"
+                  src="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75"
+                  srcset="/_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=48&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Flogos%2Fen-sunoIndiaLogo.svg&w=96&q=75 2x"
+                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                />
+                <noscript />
               </div>
             </div>
+            <span
+              class="initiative d-none d-md-block ms-1 ms-md-3 font-family-rowdies"
+            >
+              suno india
+            </span>
+          </div>
+        </a>
+        <span
+          class="mx-1 mx-md-3 text-primary-40"
+        >
+          /
+        </span>
+        <span
+          class="display-5"
+        >
+          dashboard
+        </span>
+      </div>
+    </header>
+    <div
+      class="mt-5 container-lg"
+    >
+      <div>
+        <label
+          class="mb-2 mb-md-4 form-label"
+          for="language"
+        >
+          selectLanguagePrompt:
+        </label>
+        <div
+          class="d-md-flex align-items-md-center"
+        >
+          <select
+            aria-label="Select Language"
+            class="dropdown me-5 mb-3 mb-md-0 form-select"
+            id="language"
+          >
+            <option
+              value="all"
+            >
+              allLanguages
+            </option>
+            <option
+              value="English"
+            >
+              English
+            </option>
+            <option
+              value="Hindi"
+            >
+              हिंदी
+            </option>
+            <option
+              value="Tamil"
+            >
+              தமிழ்
+            </option>
+            <option
+              value="Telugu"
+            >
+              తెలుగు
+            </option>
+            <option
+              value="Assamese"
+            >
+              অসমীয়া
+            </option>
+            <option
+              value="Bengali"
+            >
+              বাংলা
+            </option>
+            <option
+              value="Gujarati"
+            >
+              ગુજરાતી
+            </option>
+            <option
+              value="Kannada"
+            >
+              ಕನ್ನಡ
+            </option>
+            <option
+              value="Malayalam"
+            >
+              മലയാളം
+            </option>
+            <option
+              value="Marathi"
+            >
+              मराठी
+            </option>
+            <option
+              value="Odia"
+            >
+              ଓଡିଆ
+            </option>
+            <option
+              value="Punjabi"
+            >
+              ਪੰਜਾਬੀ
+            </option>
+          </select>
+          DataLastUpdated
+        </div>
+      </div>
+      <div
+        class="mt-8"
+      >
+        <div>
+          <div
+            class="mt-4 mt-md-5"
+          >
             <div
-              class="stat col-md-4 col-12"
+              class="root rounded-20 bg-info px-7 px-md-0 py-md-7"
             >
               <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
+                class="m-md-0 row"
+                data-testid="StatsRow"
               >
-                <span
-                  class="count text-warning display-1"
+                <div
+                  class="stat col-md-4 col-12"
                 >
-                  3 minutes
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      9
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      peopleParticipated
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="stat col-md-4 col-12"
                 >
-                  durationTranscribed
-                </span>
-              </div>
-            </div>
-            <div
-              class="stat col-md-4 col-12"
-            >
-              <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
-              >
-                <span
-                  class="count text-warning display-1"
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      3 minutes1
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      durationTranscribed
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="stat col-md-4 col-12"
                 >
-                  4 seconds
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
-                >
-                  durationValidated
-                </span>
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      4 seconds1
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      durationValidated
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="pt-7 pt-md-9 container-lg"
-    >
-      <h3>
-        mapChartTitle
-      </h3>
-      MapChart
-    </div>
-    <div
-      class="pt-7 pt-md-9 container-lg"
-    >
-      <h3>
-        lineChartTitle
-      </h3>
       <div
-        class="row"
+        class="mt-10 row"
       >
-        <button
-          class="info primary btn btn-primary"
-          data-testid="Button"
-          type="button"
+        <div
+          class="col-lg-6"
         >
-          monthly
-        </button>
-        <button
-          class="info primary btn btn-primary"
-          data-testid="Button"
-          type="button"
+          <div
+            class="bg-light 100 rounded-8 p-5 p-md-8"
+          >
+            <p
+              class="mb-3 display-2"
+            >
+              mapChartTitle
+            </p>
+            MapChart
+            <div
+              class="row"
+            >
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG0"
+                />
+                <div>
+                  0 - 15 minutes2
+                </div>
+              </div>
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG1"
+                />
+                <div>
+                  15 - 30 minutes2
+                </div>
+              </div>
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG2"
+                />
+                <div>
+                  30 - 45 minutes2
+                </div>
+              </div>
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG3"
+                />
+                <div>
+                  &gt;45 minutes2
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-6"
         >
-          quarterly
-        </button>
+          <div
+            class="bg-light rounded-8 p-5 p-md-8 mt-8 mt-md-0"
+          >
+            <div
+              class="d-flex justify-content-between"
+            >
+              <p
+                class="display-2 mb-4"
+              >
+                lineChartTitle
+              </p>
+              <div
+                class="root d-flex align-items-center rounded-20 text-primary-40"
+                data-testid="Switch"
+              >
+                <button
+                  class="option flex-fill px-2 activeOption rounded-12 text-light bg-primary info normal btn btn-link"
+                  data-testid="Button"
+                  type="button"
+                >
+                  monthly
+                </button>
+                <button
+                  class="option flex-fill px-2 info normal btn btn-link"
+                  data-testid="Button"
+                  type="button"
+                >
+                  quarterly
+                </button>
+              </div>
+            </div>
+            LineChart
+          </div>
+        </div>
       </div>
-      LineChart
     </div>
   </div>
 </DocumentFragment>
@@ -202,222 +331,347 @@ exports[`SunoDashboard changing language from language selector should update st
 
 exports[`SunoDashboard should render snapshot 1`] = `
 <DocumentFragment>
-  <div>
-    <div
-      class="row"
+  <div
+    class="pt-4 px-2 px-lg-0 pb-8"
+  >
+    <header
+      class="d-flex justify-content-between align-items-center px-3 px-md-6"
     >
       <div
-        class="col"
+        class="root d-flex align-items-center"
+        data-testid="Breadcrumbs"
       >
-        <div>
-          <div>
-            <label
-              class="form-label"
-              for="language"
-            >
-              selectLanguagePrompt:
-            </label>
-            <select
-              aria-label="Select Language"
-              class="form-select"
-              id="language"
-            >
-              <option
-                value="all"
-              >
-                allLanguages
-              </option>
-              <option
-                value="English"
-              >
-                English
-              </option>
-              <option
-                value="Hindi"
-              >
-                हिंदी
-              </option>
-              <option
-                value="Tamil"
-              >
-                தமிழ்
-              </option>
-              <option
-                value="Telugu"
-              >
-                తెలుగు
-              </option>
-              <option
-                value="Assamese"
-              >
-                অসমীয়া
-              </option>
-              <option
-                value="Bengali"
-              >
-                বাংলা
-              </option>
-              <option
-                value="Gujarati"
-              >
-                ગુજરાતી
-              </option>
-              <option
-                value="Kannada"
-              >
-                ಕನ್ನಡ
-              </option>
-              <option
-                value="Malayalam"
-              >
-                മലയാളം
-              </option>
-              <option
-                value="Marathi"
-              >
-                मराठी
-              </option>
-              <option
-                value="Odia"
-              >
-                ଓଡିଆ
-              </option>
-              <option
-                value="Punjabi"
-              >
-                ਪੰਜਾਬੀ
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    DataLastUpdated
-    <div
-      data-testid="ContributionStats"
-    >
-      <header
-        class="d-flex flex-column"
-      />
-      <div
-        class="mt-4 mt-md-5"
-      >
-        <div
-          class="root rounded-20 bg-info px-7 px-md-0 py-md-7"
+        <a
+          class="link"
+          href="/sunoIndia/home"
         >
           <div
-            class="m-md-0 row"
-            data-testid="StatsRow"
+            class="d-flex align-items-center cursor-pointer"
           >
             <div
-              class="stat col-md-3 col-12"
+              class="icon d-flex"
             >
               <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
+                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
               >
-                <span
-                  class="count text-warning display-1"
+                <div
+                  style="box-sizing: border-box; display: block; max-width: 100%;"
                 >
-                  2
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
-                >
-                  languages
-                </span>
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iNDIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                  />
+                </div>
+                <img
+                  alt="sunoLogo"
+                  data-nimg="intrinsic"
+                  decoding="async"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                />
+                <noscript />
               </div>
             </div>
+            <span
+              class="initiative d-none d-md-block ms-1 ms-md-3 font-family-rowdies"
+            >
+              suno india
+            </span>
+          </div>
+        </a>
+        <span
+          class="mx-1 mx-md-3 text-primary-40"
+        >
+          /
+        </span>
+        <span
+          class="display-5"
+        >
+          dashboard
+        </span>
+      </div>
+    </header>
+    <div
+      class="mt-5 container-lg"
+    >
+      <div>
+        <label
+          class="mb-2 mb-md-4 form-label"
+          for="language"
+        >
+          selectLanguagePrompt:
+        </label>
+        <div
+          class="d-md-flex align-items-md-center"
+        >
+          <select
+            aria-label="Select Language"
+            class="dropdown me-5 mb-3 mb-md-0 form-select"
+            id="language"
+          >
+            <option
+              value="all"
+            >
+              allLanguages
+            </option>
+            <option
+              value="English"
+            >
+              English
+            </option>
+            <option
+              value="Hindi"
+            >
+              हिंदी
+            </option>
+            <option
+              value="Tamil"
+            >
+              தமிழ்
+            </option>
+            <option
+              value="Telugu"
+            >
+              తెలుగు
+            </option>
+            <option
+              value="Assamese"
+            >
+              অসমীয়া
+            </option>
+            <option
+              value="Bengali"
+            >
+              বাংলা
+            </option>
+            <option
+              value="Gujarati"
+            >
+              ગુજરાતી
+            </option>
+            <option
+              value="Kannada"
+            >
+              ಕನ್ನಡ
+            </option>
+            <option
+              value="Malayalam"
+            >
+              മലയാളം
+            </option>
+            <option
+              value="Marathi"
+            >
+              मराठी
+            </option>
+            <option
+              value="Odia"
+            >
+              ଓଡିଆ
+            </option>
+            <option
+              value="Punjabi"
+            >
+              ਪੰਜਾਬੀ
+            </option>
+          </select>
+          DataLastUpdated
+        </div>
+      </div>
+      <div
+        class="mt-8"
+      >
+        <div
+          data-testid="ContributionStats"
+        >
+          <div
+            class="mt-4 mt-md-5"
+          >
             <div
-              class="stat col-md-3 col-12"
+              class="root rounded-20 bg-info px-7 px-md-0 py-md-7"
             >
               <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
+                class="m-md-0 row"
+                data-testid="StatsRow"
               >
-                <span
-                  class="count text-warning display-1"
+                <div
+                  class="stat col-md-3 col-12"
                 >
-                  9
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      2
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      languages
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="stat col-md-3 col-12"
                 >
-                  peopleParticipated
-                </span>
-              </div>
-            </div>
-            <div
-              class="stat col-md-3 col-12"
-            >
-              <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
-              >
-                <span
-                  class="count text-warning display-1"
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      9
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      peopleParticipated
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="stat col-md-3 col-12"
                 >
-                  3 minutes
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      3 minutes1
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      durationTranscribed
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="stat col-md-3 col-12"
                 >
-                  durationTranscribed
-                </span>
-              </div>
-            </div>
-            <div
-              class="stat col-md-3 col-12"
-            >
-              <div
-                class="d-flex flex-column align-items-center py-7 py-md-0"
-              >
-                <span
-                  class="count text-warning display-1"
-                >
-                  4 seconds
-                </span>
-                <span
-                  class="text-light mt-1 display-3 text-center"
-                >
-                  durationValidated
-                </span>
+                  <div
+                    class="d-flex flex-column align-items-center py-7 py-md-0"
+                  >
+                    <span
+                      class="count text-warning display-1"
+                    >
+                      4 seconds1
+                    </span>
+                    <span
+                      class="text-light mt-1 display-3 text-center"
+                    >
+                      durationValidated
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="pt-7 pt-md-9 container-lg"
-    >
-      <h3>
-        mapChartTitle
-      </h3>
-      MapChart
-    </div>
-    <div
-      class="pt-7 pt-md-9 container-lg"
-    >
-      <h3>
-        lineChartTitle
-      </h3>
       <div
-        class="row"
+        class="mt-10 row"
       >
-        <button
-          class="info primary btn btn-primary"
-          data-testid="Button"
-          type="button"
+        <div
+          class="col-lg-6"
         >
-          monthly
-        </button>
-        <button
-          class="info primary btn btn-primary"
-          data-testid="Button"
-          type="button"
+          <div
+            class="bg-light 100 rounded-8 p-5 p-md-8"
+          >
+            <p
+              class="mb-3 display-2"
+            >
+              mapChartTitle
+            </p>
+            MapChart
+            <div
+              class="row"
+            >
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG0"
+                />
+                <div>
+                  0 - 15 minutes2
+                </div>
+              </div>
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG1"
+                />
+                <div>
+                  15 - 30 minutes2
+                </div>
+              </div>
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG2"
+                />
+                <div>
+                  30 - 45 minutes2
+                </div>
+              </div>
+              <div
+                class="p-0 col-md-3 col-12"
+              >
+                <div
+                  class="legendsBG3"
+                />
+                <div>
+                  &gt;45 minutes2
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-6"
         >
-          quarterly
-        </button>
+          <div
+            class="bg-light rounded-8 p-5 p-md-8 mt-8 mt-md-0"
+          >
+            <div
+              class="d-flex justify-content-between"
+            >
+              <p
+                class="display-2 mb-4"
+              >
+                lineChartTitle
+              </p>
+              <div
+                class="root d-flex align-items-center rounded-20 text-primary-40"
+                data-testid="Switch"
+              >
+                <button
+                  class="option flex-fill px-2 activeOption rounded-12 text-light bg-primary info normal btn btn-link"
+                  data-testid="Button"
+                  type="button"
+                >
+                  monthly
+                </button>
+                <button
+                  class="option flex-fill px-2 info normal btn btn-link"
+                  data-testid="Button"
+                  type="button"
+                >
+                  quarterly
+                </button>
+              </div>
+            </div>
+            LineChart
+          </div>
+        </div>
       </div>
-      LineChart
     </div>
   </div>
 </DocumentFragment>

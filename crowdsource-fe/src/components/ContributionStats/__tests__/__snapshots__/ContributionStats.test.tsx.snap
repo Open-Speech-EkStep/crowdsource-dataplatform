@@ -9,12 +9,12 @@ exports[`ContributionStats should render the component and matches it against st
       class="d-flex flex-column"
     >
       <h3
-        class="w-100"
+        class="w-100 mb-4"
       >
         Header
       </h3>
       <span
-        class="font-family-rowdies display-3 mt-4 mb-0"
+        class="font-family-rowdies display-3 mb-0"
       >
         Sub Header
       </span>
@@ -74,7 +74,7 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                1 minutes
+                1 minutes1
               </span>
               <span
                 class="text-light mt-1 display-3 text-center"
@@ -92,7 +92,7 @@ exports[`ContributionStats should render the component and matches it against st
               <span
                 class="count text-warning display-1"
               >
-                7 seconds
+                7 seconds1
               </span>
               <span
                 class="text-light mt-1 display-3 text-center"

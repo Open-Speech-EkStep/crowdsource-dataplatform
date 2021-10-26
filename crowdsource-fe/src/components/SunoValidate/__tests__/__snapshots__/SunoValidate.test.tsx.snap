@@ -399,21 +399,23 @@ exports[`SunoValidate should render the component and matches it against stored 
 exports[`SunoValidate should show no data text when fetch call gives no data 1`] = `
 <DocumentFragment>
   <div
-    class="text-center pt-4 px-2 px-lg-0 pb-8 container-lg"
+    class="d-flex flex-grow-1 align-items-center"
   >
     <div
-      class="d-flex flex-column align-items-center"
+      class="root d-flex flex-column align-items-center justify-content-center text-center mx-auto p-5"
     >
-      <h1>
-        thankyouForEnthusiasm
-      </h1>
+      <h4
+        class="mb-5"
+      >
+        asrValidateNoDataThankYouMessage
+      </h4>
       <p
-        class="mt-9"
+        class="display-3"
       >
         noDataMessage
       </p>
       <a
-        class="mt-9 info primary btn btn-primary"
+        class="mt-8 info primary btn btn-primary"
         data-testid="Button"
         href="/sunoIndia/home"
         role="button"

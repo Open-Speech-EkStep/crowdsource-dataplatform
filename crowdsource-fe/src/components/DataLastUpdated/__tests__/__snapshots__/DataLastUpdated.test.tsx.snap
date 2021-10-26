@@ -2,7 +2,9 @@
 
 exports[`DataLastUpdated should render snapshot 1`] = `
 <DocumentFragment>
-  <div>
+  <div
+    class="display-6"
+  >
     dataLastUpdated: 11-10-2021, 1:30:05 pm
   </div>
 </DocumentFragment>

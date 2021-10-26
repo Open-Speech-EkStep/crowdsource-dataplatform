@@ -6,6 +6,7 @@ import * as maps from '@amcharts/amcharts4/maps';
 interface ChartProps {
   sourceUrl: string;
   data: Array<Object>;
+  quarterUnit: number;
   colors?: Array<string>;
   isScrollbar?: boolean;
   tooltipTemplate?: string;
@@ -13,12 +14,11 @@ interface ChartProps {
   yAxisLabel?: string;
 }
 
-const MapChart = ({ sourceUrl, data, colors, tooltipTemplate }: ChartProps) => {
+const MapChart = ({ sourceUrl, data, colors, tooltipTemplate, quarterUnit }: ChartProps) => {
   const chart = useRef({});
 
   useEffect(() => {
     let polygonSeries: any;
-    let quarterVal = 0.25;
     var x = am4core.create('indiaMapChart', maps.MapChart);
     const index = x.series.indexOf(polygonSeries);
     /* istanbul ignore next */
@@ -49,11 +49,11 @@ const MapChart = ({ sourceUrl, data, colors, tooltipTemplate }: ChartProps) => {
     /* istanbul ignore next */
     polygonSeries.mapPolygons.template.adapter.add('fill', function (fill: any, target: any) {
       if (target.dataItem) {
-        if (target.dataItem.value >= quarterVal * 3) {
+        if (target.dataItem.value >= quarterUnit * 3) {
           return am4core.color(colors ? colors[0] : '#4061BF');
-        } else if (target.dataItem.value >= quarterVal * 2) {
+        } else if (target.dataItem.value >= quarterUnit * 2) {
           return am4core.color(colors ? colors[1] : '#6B85CE');
-        } else if (target.dataItem.value >= quarterVal) {
+        } else if (target.dataItem.value >= quarterUnit) {
           return am4core.color(colors ? colors[2] : '#92A8E8');
         } else if (target.dataItem.value > 0) {
           return am4core.color(colors ? colors[3] : '#CDD8F6');
@@ -86,7 +86,7 @@ const MapChart = ({ sourceUrl, data, colors, tooltipTemplate }: ChartProps) => {
     return () => {
       x.dispose();
     };
-  }, [colors, data, sourceUrl, tooltipTemplate]);
+  }, [colors, data, quarterUnit, sourceUrl, tooltipTemplate]);
 
   return <div id="indiaMapChart" style={{ width: '100%', height: '500px' }} />;
 };

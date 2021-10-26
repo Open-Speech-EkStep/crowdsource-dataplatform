@@ -104,7 +104,7 @@ const TyTargetProgress = (props: TyTargetProgressProps) => {
       item => item.type === props.initiativeType && item.language === props.language
     );
     if (props.initiative === INITIATIVES_MAPPING.suno || props.initiative === INITIATIVES_MAPPING.bolo) {
-      initiativeUnit = t('hours');
+      initiativeUnit = t('hours1');
       totalProgress = getSourceCount(
         props.source,
         initiativeCumulativeData?.total_contributions,

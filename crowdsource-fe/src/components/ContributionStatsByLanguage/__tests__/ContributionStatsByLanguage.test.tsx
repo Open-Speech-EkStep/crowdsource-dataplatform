@@ -31,7 +31,7 @@ describe('ContributionStatsByLanguage', () => {
 
     const renderResult = render(
       <SWRConfig value={{ provider: () => new Map() }}>
-        <ContributionStatsByLanguage initiative={initiative} language="Hindi" />
+        <ContributionStatsByLanguage initiative={initiative} language="Hindi" handleNoData={() => {}} />
       </SWRConfig>
     );
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
@@ -53,8 +53,8 @@ describe('ContributionStatsByLanguage', () => {
     expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
     expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
     expect(screen.getByText('durationValidated')).toBeInTheDocument();
-    expect(screen.getByText('1 minutes')).toBeInTheDocument();
-    expect(screen.getByText('3 minutes')).toBeInTheDocument();
+    expect(screen.getByText('1 minutes1')).toBeInTheDocument();
+    expect(screen.getByText('3 minutes1')).toBeInTheDocument();
   });
 
   it('should display zeros when no data found for initiative', async () => {

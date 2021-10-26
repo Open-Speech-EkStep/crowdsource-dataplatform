@@ -1,33 +1,28 @@
-import { useTranslation } from 'next-i18next';
-import Container from 'react-bootstrap/Container';
-
 import Button from 'components/Button';
 import Link from 'components/Link';
-import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
-import type { Initiative } from 'types/Initiatives';
+
+import styles from './NoDataFound.module.scss';
 
 interface NoDataFoundProps {
   url: string;
-  initiative: Initiative;
-  language: string;
+  title?: string;
+  text?: string;
+  buttonLabel: string;
 }
 
-const NoDataFound = ({ url, initiative, language }: NoDataFoundProps) => {
-  const { t } = useTranslation();
-
-  const initiativeName = `${t(INITIATIVES_MAPPING[initiative])} ${t('india')}`;
+const NoDataFound = ({ url, title, text, buttonLabel }: NoDataFoundProps) => {
   return (
-    <Container fluid="lg" className="text-center pt-4 px-2 px-lg-0 pb-8">
-      <div className="d-flex flex-column align-items-center">
-        <h1>{t('thankyouForEnthusiasm')}</h1>
-        <p className="mt-9">{t('noDataMessage', { language })}</p>
-        <Link href={url} passHref>
-          <Button className="mt-9" as="a" variant="primary">
-            {t('backToInitiativePrompt', { initiativeName })}
-          </Button>
-        </Link>
-      </div>
-    </Container>
+    <div
+      className={`${styles.root} d-flex flex-column align-items-center justify-content-center text-center mx-auto p-5`}
+    >
+      {title && <h4 className="mb-5">{title}</h4>}
+      {text && <p className="display-3">{text}</p>}
+      <Link href={url} passHref>
+        <Button className="mt-8" as="a" variant="primary">
+          {buttonLabel}
+        </Button>
+      </Link>
+    </div>
   );
 };
 

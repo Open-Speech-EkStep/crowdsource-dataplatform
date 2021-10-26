@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useTranslation } from 'next-i18next';
 
 import Stats from 'components/Stats';
@@ -12,9 +14,14 @@ interface ContributionStatsByLanguageProps {
   header?: string;
   subHeader?: string;
   language: string;
+  handleNoData: () => any;
 }
 
-const ContributionStatsByLanguage = (props: ContributionStatsByLanguageProps) => {
+const ContributionStatsByLanguage = ({
+  initiative,
+  language,
+  handleNoData,
+}: ContributionStatsByLanguageProps) => {
   const { t } = useTranslation();
   const { data: cumulativeData, error } = useFetch<Array<CumulativeDataByLanguage>>(
     apiPaths.cumulativeDataByLanguage
@@ -26,14 +33,23 @@ const ContributionStatsByLanguage = (props: ContributionStatsByLanguageProps) =>
     label: string;
   }> = [];
 
+  useEffect(() => {
+    if (
+      cumulativeData &&
+      !cumulativeData
+        ?.filter(item => item.type === INITIATIVES_MEDIA_MAPPING[initiative])
+        ?.filter(d => d.language == language)[0]
+    )
+      handleNoData();
+  }, [cumulativeData, handleNoData, initiative, language]);
+
   const initiativeData =
-    cumulativeData &&
-    (cumulativeData.filter(item => item.type === INITIATIVES_MEDIA_MAPPING[props.initiative]) || []);
+    cumulativeData?.filter(item => item.type === INITIATIVES_MEDIA_MAPPING[initiative]) || [];
 
   const languageData =
     !cumulativeData || error
       ? null
-      : initiativeData?.filter(d => d.language == props.language)[0] || {
+      : initiativeData?.filter(d => d.language == language)[0] || {
           total_speakers: 0,
           total_contributions: 0,
           total_validations: 0,

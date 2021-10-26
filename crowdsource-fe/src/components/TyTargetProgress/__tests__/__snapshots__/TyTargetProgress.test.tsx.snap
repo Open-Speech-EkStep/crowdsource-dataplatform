@@ -30,7 +30,7 @@ exports[`TyTargetProgress should render the component and matches it against sto
     <span
       class="hours mt-2 align-self-end"
     >
-      0 seconds/1 hours
+      0 seconds1/1 hours1
     </span>
   </div>
 </DocumentFragment>

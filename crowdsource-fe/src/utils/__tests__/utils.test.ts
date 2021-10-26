@@ -36,42 +36,42 @@ describe('Utils', () => {
   it('should test the convertTimeFormat method', () => {
     const convertedTime = convertTimeFormat('3.456');
 
-    const expectedOutput = '3 hours 27 minutes';
+    const expectedOutput = '3 hours1 27 minutes1';
     expect(convertedTime).toEqual(expectedOutput);
   });
 
   it('should test the format time method', () => {
     const formatedTime = formatTime(3, 45, 23);
 
-    const expectedOutput = '3 hours 45 minutes';
+    const expectedOutput = '3 hours1 45 minutes1';
     expect(formatedTime).toEqual(expectedOutput);
   });
 
   it('should test the format time method with "0"', () => {
     const formatedTime = formatTime(0, 0, 0);
 
-    const expectedOutput = '0 seconds';
+    const expectedOutput = '0 seconds1';
     expect(formatedTime).toEqual(expectedOutput);
   });
 
   it('should test the format time method with hrs & minute "0" but seconds greater than "0"', () => {
     const formatedTime = formatTime(0, 0, 0.45);
 
-    const expectedOutput = '0.45 seconds';
+    const expectedOutput = '0.45 seconds1';
     expect(formatedTime).toEqual(expectedOutput);
   });
 
   it('should test the format time method with "no minutes and seconds" paramter', () => {
     const formatedTime = formatTime(0);
 
-    const expectedOutput = '0 seconds';
+    const expectedOutput = '0 seconds1';
     expect(formatedTime).toEqual(expectedOutput);
   });
 
   it('should test the format time method return the default "english translation string"', () => {
     const formatedTime = formatTime(0, 45, 50);
 
-    const expectedOutput = '45 minutes';
+    const expectedOutput = '45 minutes1';
     expect(formatedTime).toEqual(expectedOutput);
   });
 

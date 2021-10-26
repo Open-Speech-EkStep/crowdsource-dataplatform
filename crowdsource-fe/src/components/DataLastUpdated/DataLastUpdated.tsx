@@ -12,7 +12,7 @@ function DataLastUpdated() {
 
   const lastUpdatedAt = data ? moment(data[0]['timezone']).format('DD-MM-YYYY, h:mm:ss a') : '';
   return (
-    <div>
+    <div className="display-6">
       {t('dataLastUpdated')}: {lastUpdatedAt}
     </div>
   );

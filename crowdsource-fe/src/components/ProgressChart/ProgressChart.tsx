@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 
-import Button from 'components/Button';
 import LineChart from 'components/LineChart';
+import Switch from 'components/Switch';
 import apiPaths from 'constants/apiPaths';
 import useFetch from 'hooks/useFetch';
 import type { ApiPathsKey } from 'types/ApiPathsKey';
@@ -51,16 +49,21 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
   <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
   <div>${t('transcribed')}: <label>{contributionText}</label></div></div>`;
   const line2Tooltip = `<div style="padding: 10px;">
-<h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
-<div style="text-align: left;">${t('validated')}: <label>{validationText}</label></div></div>`;
+  <h6 style="text-align: left; font-weight: bold">{month}/{year}</h6>
+  <div style="text-align: left;">${t('validated')}: <label>{validationText}</label></div></div>`;
 
   return (
-    <Container fluid="lg" className="pt-7 pt-md-9">
-      <h3>{t('lineChartTitle')}</h3>
-      <Row>
-        <Button onClick={() => setTimeframe('monthly')}>{t('monthly')}</Button>
-        <Button onClick={() => setTimeframe('quarterly')}>{t('quarterly')}</Button>
-      </Row>
+    <Fragment>
+      <div className="d-flex justify-content-between">
+        <p className="display-2 mb-4">{t('lineChartTitle')}</p>
+        <Switch
+          optionOne="monthly"
+          optionTwo="quarterly"
+          toggleSwitch={option => {
+            setTimeframe(option);
+          }}
+        />
+      </div>
       <LineChart
         data={timelineData}
         xAxisLabel={t('month')}
@@ -70,7 +73,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
         line1Tooltip={line1Tooltip}
         line2Tooltip={line2Tooltip}
       />
-    </Container>
+    </Fragment>
   );
 };
 

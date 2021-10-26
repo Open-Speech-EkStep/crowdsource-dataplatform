@@ -40,7 +40,7 @@ exports[`ContributionStatsByLanguage should render the component and matches it 
               <span
                 class="count text-warning display-1"
               >
-                1 minutes
+                1 minutes1
               </span>
               <span
                 class="text-light mt-1 display-3 text-center"
@@ -58,7 +58,7 @@ exports[`ContributionStatsByLanguage should render the component and matches it 
               <span
                 class="count text-warning display-1"
               >
-                3 minutes
+                3 minutes1
               </span>
               <span
                 class="text-light mt-1 display-3 text-center"

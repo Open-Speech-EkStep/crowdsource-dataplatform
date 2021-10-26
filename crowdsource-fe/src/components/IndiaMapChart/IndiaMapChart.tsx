@@ -1,13 +1,15 @@
+import { Fragment } from 'react';
+
 import { useTranslation } from 'next-i18next';
-import Container from 'react-bootstrap/Container';
 
 import MapChart from 'components/MapChart';
+import MapLegend from 'components/MapLegend';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
 import type { CumulativeDataByLanguageAndState } from 'types/CumulativeDataByLanguageAndState';
 import type { InitiativeType } from 'types/InitiativeType';
-import { convertTimeFormat } from 'utils/utils';
+import { convertTimeFormat, getHoursText, getHoursValue, getMinutesText, getMinutesValue } from 'utils/utils';
 
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana' },
@@ -92,16 +94,43 @@ ${t('validated')}:  <label style="margin-left: 8px">{validation}</label>
 </div>
 </div>`;
 
+  const maxContribution = Math.max.apply(
+    Math,
+    mapData.map(function (ele) {
+      return getTotalParticipation(ele, type);
+    })
+  );
+
+  const quarterVal = maxContribution > 1 ? maxContribution / 4 : 0.25;
+  const getValue = maxContribution > 1 ? getHoursValue : getMinutesValue;
+  const getText = maxContribution > 1 ? getHoursText : getMinutesText;
+
+  let legendData = [];
+  legendData.push({
+    value: `0 - ${getText(quarterVal)}`,
+  });
+  legendData.push({
+    value: `${getValue(quarterVal)} - ${getText(quarterVal * 2)}`,
+  });
+  legendData.push({
+    value: `${getValue(quarterVal * 2)} - ${getText(quarterVal * 3)}`,
+  });
+  legendData.push({
+    value: `>${getText(quarterVal * 3)}`,
+  });
+
   return (
-    <Container fluid="lg" className="pt-7 pt-md-9">
-      <h3>{t('mapChartTitle')}</h3>
+    <Fragment>
+      <p className="mb-3 display-2">{t('mapChartTitle')}</p>
       <MapChart
         sourceUrl={sourceUrl}
         colors={colors}
         data={statesData}
         tooltipTemplate={tooltipTemplate}
+        quarterUnit={quarterVal}
       ></MapChart>
-    </Container>
+      <MapLegend data={legendData} />
+    </Fragment>
   );
 };
 

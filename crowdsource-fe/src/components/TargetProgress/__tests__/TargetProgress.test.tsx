@@ -115,7 +115,7 @@ describe('TargetProgress', () => {
     expect(screen.getByText('progressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
-        return content.includes('1 minutes/60 hours');
+        return content.includes('1 minutes1/60 hours1');
       })
     ).toBeInTheDocument();
   });

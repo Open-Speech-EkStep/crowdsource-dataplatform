@@ -30,7 +30,7 @@ exports[`TargetProgress should render the component and matches it against store
     <span
       class="hours mt-2 align-self-end"
     >
-      1 minutes/120 hours
+      1 minutes1/120 hours1
     </span>
   </div>
 </DocumentFragment>

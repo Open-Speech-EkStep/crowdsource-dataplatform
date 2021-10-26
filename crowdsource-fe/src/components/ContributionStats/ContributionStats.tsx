@@ -50,12 +50,12 @@ const ContributionStats = (props: ContributionStatsProps) => {
 
   return (
     <div data-testid="ContributionStats">
-      <header className="d-flex flex-column">
-        {props.header && <h3 className="w-100">{props.header}</h3>}
-        {props.subHeader && (
-          <span className={`font-family-rowdies display-3 mt-4 mb-0`}>{props.subHeader}</span>
-        )}
-      </header>
+      {(props.header || props.subHeader) && (
+        <header className="d-flex flex-column">
+          {props.header && <h3 className="w-100 mb-4">{props.header}</h3>}
+          {props.subHeader && <span className={`font-family-rowdies display-3 mb-0`}>{props.subHeader}</span>}
+        </header>
+      )}
       <div className="mt-4 mt-md-5">
         <Stats contents={statsContents} />
       </div>
