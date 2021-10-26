@@ -22,6 +22,7 @@ async function ejs2html(path, information, i18n, targetPath, fileName, locale, c
     html = html.replace(/"\/img\//g, `"${contextRoot}/img/${brand}/`);
     html = html.replace(/"\/js\//g, `"${contextRoot}/js/`);
     html = html.replace(/"\/css\//g, `"${contextRoot}/css/`);
+    html = html.replace(/"\/aud\//g, `"${contextRoot}/aud/`);
 
     fs.mkdirSync(targetPath, { recursive: true });
     fs.writeFile(targetPath + '/' + fileName, html, function (err2) {
