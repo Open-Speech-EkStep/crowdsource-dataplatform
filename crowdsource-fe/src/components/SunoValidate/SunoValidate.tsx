@@ -23,7 +23,7 @@ import {
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
-import useFetch, { useSubmit } from 'hooks/useFetch';
+import { useFetchWithHeader, useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
@@ -88,11 +88,18 @@ const SunoValidate = () => {
     speakerDetails: '',
   });
 
-  const { data: result } = useFetch<ResultType>(
-    contributionLanguage && speakerDetails
-      ? `${apiPaths.contributionsAsr}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`
-      : null
+  const { data: result, mutate } = useFetchWithHeader<ResultType>(
+    `${apiPaths.contributionsAsr}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
+    {
+      revalidateOnMount: false,
+    }
   );
+
+  useEffect(() => {
+    if (contributionLanguage && speakerDetails) {
+      mutate();
+    }
+  }, [contributionLanguage, mutate, speakerDetails]);
 
   useEffect(() => {
     if (result && result.data) {
