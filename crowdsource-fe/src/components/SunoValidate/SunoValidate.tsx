@@ -23,7 +23,7 @@ import {
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
-import { useFetchWithHeader, useSubmit } from 'hooks/useFetch';
+import { useFetchWithInit, useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
@@ -88,7 +88,7 @@ const SunoValidate = () => {
     speakerDetails: '',
   });
 
-  const { data: result, mutate } = useFetchWithHeader<ResultType>(
+  const { data: result, mutate } = useFetchWithInit<ResultType>(
     `${apiPaths.contributionsAsr}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
     {
       revalidateOnMount: false,
@@ -136,7 +136,7 @@ const SunoValidate = () => {
 
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}/sunoIndia/thank-you.html`, undefined, { locale: currentLocale });
+      router.push(`/${currentLocale}/sunoIndia/validator-thank-you`, undefined, { locale: currentLocale });
     }
     setCurrentDataIndex(index + 1);
     setShowUIdata(contributionData[index + 1]);

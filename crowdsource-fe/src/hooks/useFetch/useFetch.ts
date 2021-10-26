@@ -17,7 +17,7 @@ const paramFetcher = (key: string) =>
     headers: { 'Content-Type': 'application/json' },
   }).then(res => res.json());
 
-export const useFetchWithHeader = <Data = any, Error = any>(
+export const useFetchWithInit = <Data = any, Error = any>(
   key: ValueKey | (() => ValueKey),
   options?: SWRConfiguration
 ) => {

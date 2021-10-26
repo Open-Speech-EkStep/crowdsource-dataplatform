@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from 'utils/testUtils';
 
-import useFetch, { useFetchWithHeader } from '../useFetch';
+import useFetch, { useFetchWithInit } from '../useFetch';
 
 describe('#useFetch', () => {
   const setup = (url: string) => {
@@ -32,9 +32,9 @@ describe('#useFetch', () => {
   });
 });
 
-describe('#useFetchWithHeader', () => {
+describe('#useFetchWithInit', () => {
   const setup = (url: string) => {
-    const renderHookResult = renderHook(() => useFetchWithHeader(url, { dedupingInterval: 0 }));
+    const renderHookResult = renderHook(() => useFetchWithInit(url, { dedupingInterval: 0 }));
 
     return renderHookResult;
   };

@@ -9,6 +9,7 @@ import {
   getDeviceInfo,
   getBrowserInfo,
   groupBy,
+  isBoloInitiative,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -78,6 +79,13 @@ describe('Utils', () => {
 
   it('should test the isSunoOrBoloInitiative method', () => {
     const roundValue = isSunoOrBoloInitiative('asr');
+
+    const expectedOutput = true;
+    expect(roundValue).toEqual(expectedOutput);
+  });
+
+  it('should test the isBoloInitiative method', () => {
+    const roundValue = isBoloInitiative('text');
 
     const expectedOutput = true;
     expect(roundValue).toEqual(expectedOutput);

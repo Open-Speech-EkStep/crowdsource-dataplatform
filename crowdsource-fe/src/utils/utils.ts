@@ -83,6 +83,11 @@ export const isSunoOrBoloInitiative = (value: InitiativeType) => {
   return boloOrSuno.includes(value);
 };
 
+export const isBoloInitiative = (value: InitiativeType) => {
+  const boloOrSuno = ['text'];
+  return boloOrSuno.includes(value);
+};
+
 export const verifyLanguage = (text: string, currentModule: string, language: string) => {
   if (!text.length) return;
   const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
