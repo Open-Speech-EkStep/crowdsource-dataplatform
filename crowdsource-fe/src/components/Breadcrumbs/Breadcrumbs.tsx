@@ -19,7 +19,7 @@ const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
   const initiativeName = `${t(initiative)} ${t('india')}`;
 
   return (
-    <div className="d-flex align-items-center" data-testid="Breadcrumbs">
+    <div className={`${styles.root} d-flex align-items-center`} data-testid="Breadcrumbs">
       <Link href={routePaths[`${initiative}IndiaHome`]}>
         <a className={styles.link}>
           <div className="d-flex align-items-center cursor-pointer">

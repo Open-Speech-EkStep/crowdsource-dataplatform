@@ -33,7 +33,7 @@ const MedalGallery = () => {
     if (speakerDetails) {
       mutate();
     }
-  }, [speakerDetails])
+  }, [speakerDetails]);
 
   const hasBadges = (initiative: Initiative) => {
     return userBadges?.some((pair: any) => pair.type === INITIATIVES_MEDIA_MAPPING[initiative]);

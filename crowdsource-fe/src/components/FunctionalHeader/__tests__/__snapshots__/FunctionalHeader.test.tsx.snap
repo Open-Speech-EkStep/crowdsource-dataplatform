@@ -7,7 +7,7 @@ exports[`FunctionalHeader should render the component and matches it against sto
       class="d-flex justify-content-between align-items-center px-3 px-md-6"
     >
       <div
-        class="d-flex align-items-center"
+        class="root d-flex align-items-center"
         data-testid="Breadcrumbs"
       >
         <a

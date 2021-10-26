@@ -3,7 +3,6 @@ import { render, screen } from 'utils/testUtils';
 import MyBadgesPage from '../my-badges.page';
 
 describe('MyBadgesPage', () => {
-
   it('should render the MyBadgesPage', () => {
     render(<MyBadgesPage />);
 

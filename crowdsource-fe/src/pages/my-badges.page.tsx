@@ -26,7 +26,7 @@ const MyBadgesPage: NextPage = () => {
         </Link>
       </header>
       <Container fluid="lg" className="mt-5">
-        <MedalGallery/>
+        <MedalGallery />
       </Container>
     </FunctionalPageBackground>
   );

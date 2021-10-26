@@ -5,21 +5,21 @@ import { render, waitFor } from 'utils/testUtils';
 import MedalGallery from '../MedalGallery';
 
 describe('MedalGallery', () => {
-  const setup = async (apiResponse= [
-    {
-      badge: 'test',
-      type: 'asr',
-    },
-  ]) => {
+  const setup = async (
+    apiResponse = [
+      {
+        badge: 'test',
+        type: 'asr',
+      },
+    ]
+  ) => {
     const dummyObj = { userName: 'testUser' };
 
     when(localStorage.getItem)
       .calledWith('speakerDetails')
       .mockImplementation((): any => dummyObj);
 
-    fetchMock.doMockOnceIf('/user-rewards/testUser').mockResponseOnce(
-      JSON.stringify(apiResponse)
-    );
+    fetchMock.doMockOnceIf('/user-rewards/testUser').mockResponseOnce(JSON.stringify(apiResponse));
 
     const renderResult = render(<MedalGallery />);
     await waitFor(() => {
@@ -30,7 +30,6 @@ describe('MedalGallery', () => {
     });
     return renderResult;
   };
-
 
   it('should render the component and matches it against stored snapshot', async () => {
     const { asFragment } = await setup();
