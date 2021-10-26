@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import Button from 'components/Button';
 
 import styles from './IconTextButton.module.scss';
-import classNames from 'classnames';
 
 interface IconTextButtonProps {
   icon: string;
