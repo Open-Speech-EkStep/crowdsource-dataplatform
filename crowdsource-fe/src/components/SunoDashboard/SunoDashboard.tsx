@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -45,6 +45,16 @@ const SunoDashboard = () => {
     }
   };
 
+  useEffect(() => {
+    let timer: any;
+    if (noData && contributeLanguage) {
+      timer = setTimeout(() => {
+        setNoData(false);
+      }, 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [contributeLanguage, noData]);
+
   return (
     <div className="pt-4 px-2 px-lg-0 pb-8">
       <header className="d-flex justify-content-between align-items-center px-3 px-md-6">
@@ -56,6 +66,7 @@ const SunoDashboard = () => {
           updateSelectedLanguage={(selectedLanguage: string | undefined) => {
             setPreviousSelectedLanguage(language);
             setLanguage(selectedLanguage);
+            setNoData(false);
           }}
         />
         {noData && contributeLanguage && (
@@ -84,12 +95,12 @@ const SunoDashboard = () => {
           </div>
           <Row className="mt-10">
             <Col lg="6">
-              <div className="bg-light 100 rounded-8 p-5 p-md-8">
+              <div className="bg-light 100 rounded-8 p-5 p-md-8 h-100">
                 <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.suno} language={language} />
               </div>
             </Col>
-            <Col lg="6">
-              <div className="bg-light rounded-8 p-5 p-md-8 mt-8 mt-md-0">
+            <Col lg="6" className="mt-8 mt-lg-0">
+              <div className="bg-light rounded-8 p-5 p-md-8 h-100">
                 <ProgressChart type={INITIATIVES_MEDIA_MAPPING.suno} language={language} />
               </div>
             </Col>

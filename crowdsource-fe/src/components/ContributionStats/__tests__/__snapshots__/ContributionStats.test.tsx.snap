@@ -33,10 +33,10 @@ exports[`ContributionStats should render the component and matches it against st
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 2
               </span>
@@ -51,10 +51,10 @@ exports[`ContributionStats should render the component and matches it against st
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 9
               </span>
@@ -69,10 +69,10 @@ exports[`ContributionStats should render the component and matches it against st
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 1 minutes1
               </span>
@@ -87,10 +87,10 @@ exports[`ContributionStats should render the component and matches it against st
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 7 seconds1
               </span>

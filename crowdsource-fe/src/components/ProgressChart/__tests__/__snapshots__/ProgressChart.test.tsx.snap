@@ -3,10 +3,10 @@
 exports[`ProgressChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="d-flex justify-content-between"
+    class="d-flex align-items-center justify-content-between mb-5"
   >
     <p
-      class="display-2 mb-4"
+      class="display-2"
     >
       lineChartTitle
     </p>
@@ -30,6 +30,10 @@ exports[`ProgressChart should render the component and matches it against stored
       </button>
     </div>
   </div>
-  LineChart
+  <div
+    class="chart"
+  >
+    LineChart
+  </div>
 </DocumentFragment>
 `;

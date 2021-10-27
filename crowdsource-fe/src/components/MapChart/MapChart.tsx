@@ -88,7 +88,7 @@ const MapChart = ({ sourceUrl, data, colors, tooltipTemplate, quarterUnit }: Cha
     };
   }, [colors, data, quarterUnit, sourceUrl, tooltipTemplate]);
 
-  return <div id="indiaMapChart" style={{ width: '100%', height: '500px' }} />;
+  return <div id="indiaMapChart" className="h-100" />;
 };
 
 export default MapChart;

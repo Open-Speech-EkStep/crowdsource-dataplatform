@@ -3,53 +3,65 @@
 exports[`IndiaMapChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <p
-    class="mb-3 display-2"
+    class="mb-5 display-2"
   >
     mapChartTitle
   </p>
-  MapChart
   <div
-    class="row"
+    class="chart"
+  >
+    MapChart
+  </div>
+  <div
+    class="d-flex mt-8"
   >
     <div
-      class="p-0 col-md-3 col-12"
+      class="flex-fill"
     >
-      <div
-        class="legendsBG0"
+      <span
+        class="d-flex legend legendsBG0"
       />
-      <div>
+      <span
+        class="d-flex justify-content-center text-center mt-1 display-7"
+      >
         0 - 15 minutes2
-      </div>
+      </span>
     </div>
     <div
-      class="p-0 col-md-3 col-12"
+      class="flex-fill"
     >
-      <div
-        class="legendsBG1"
+      <span
+        class="d-flex legend legendsBG1"
       />
-      <div>
+      <span
+        class="d-flex justify-content-center text-center mt-1 display-7"
+      >
         15 - 30 minutes2
-      </div>
+      </span>
     </div>
     <div
-      class="p-0 col-md-3 col-12"
+      class="flex-fill"
     >
-      <div
-        class="legendsBG2"
+      <span
+        class="d-flex legend legendsBG2"
       />
-      <div>
+      <span
+        class="d-flex justify-content-center text-center mt-1 display-7"
+      >
         30 - 45 minutes2
-      </div>
+      </span>
     </div>
     <div
-      class="p-0 col-md-3 col-12"
+      class="flex-fill"
     >
-      <div
-        class="legendsBG3"
+      <span
+        class="d-flex legend legendsBG3"
       />
-      <div>
+      <span
+        class="d-flex justify-content-center text-center mt-1 display-7"
+      >
         &gt;45 minutes2
-      </div>
+      </span>
     </div>
   </div>
 </DocumentFragment>

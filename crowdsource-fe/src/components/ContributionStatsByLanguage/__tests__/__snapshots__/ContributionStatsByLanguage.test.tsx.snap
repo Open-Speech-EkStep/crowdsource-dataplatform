@@ -17,10 +17,10 @@ exports[`ContributionStatsByLanguage should render the component and matches it 
             class="stat col-md-4 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 6
               </span>
@@ -35,10 +35,10 @@ exports[`ContributionStatsByLanguage should render the component and matches it 
             class="stat col-md-4 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 1 minutes1
               </span>
@@ -53,10 +53,10 @@ exports[`ContributionStatsByLanguage should render the component and matches it 
             class="stat col-md-4 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 3 minutes1
               </span>

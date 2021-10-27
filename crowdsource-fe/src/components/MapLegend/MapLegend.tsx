@@ -1,18 +1,15 @@
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-
 import styles from './MapLegend.module.scss';
 
 const MapLegend = ({ data }: { data: { value: string }[] }) => {
   return (
-    <Row>
+    <div className="d-flex mt-8">
       {data.map((quarter, index) => (
-        <Col key={index} md="3" xs="12" className="p-0">
-          <div className={`${styles[`legendsBG${index}`]}`}></div>
-          <div>{quarter.value}</div>
-        </Col>
+        <div key={quarter.value} className="flex-fill">
+          <span className={`d-flex ${styles.legend} ${styles[`legendsBG${index}`]}`} />
+          <span className="d-flex justify-content-center text-center mt-1 display-7">{quarter.value}</span>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
@@ -27,8 +27,8 @@ interface ChartProps {
 const LineChart = (props: ChartProps) => {
   const chart = useRef({});
 
-  useLayoutEffect(() => {
-    let x = am4core.create('line_chart', am4charts.XYChart);
+  useEffect(() => {
+    let x = am4core.create('LineChart', am4charts.XYChart);
 
     x.paddingRight = 20;
     x.data = props.data;
@@ -54,7 +54,6 @@ const LineChart = (props: ChartProps) => {
     valueAxis.title.fontSize = 14;
     valueAxis.title.lineHeight = 17;
     valueAxis.title.opacity = 0.6;
-    valueAxis.renderer.grid.template.strokeWidth = 0;
 
     // Create series 1
     var lineSeries1: any = x.series.push(new am4charts.LineSeries());
@@ -116,7 +115,7 @@ const LineChart = (props: ChartProps) => {
     props.yAxisLabel,
   ]);
 
-  return <div id="line_chart" style={{ width: '100%', height: '500px' }}></div>;
+  return <div id="LineChart" className="h-100" />;
 };
 
 export default LineChart;

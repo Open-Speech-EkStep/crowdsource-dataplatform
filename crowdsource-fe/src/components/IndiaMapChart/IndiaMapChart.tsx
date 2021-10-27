@@ -11,6 +11,8 @@ import type { CumulativeDataByLanguageAndState } from 'types/CumulativeDataByLan
 import type { InitiativeType } from 'types/InitiativeType';
 import { convertTimeFormat, getHoursText, getHoursValue, getMinutesText, getMinutesValue } from 'utils/utils';
 
+import styles from './IndiaMapChart.module.scss';
+
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana' },
   { id: 'IN-AN', state: 'Andaman and Nicobar Islands' },
@@ -66,7 +68,7 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
 
   const { data } = useFetch<Array<CumulativeDataByLanguageAndState>>(jsonUrl);
 
-  let statesData = [{}];
+  let statesData: {}[] = [];
   let mapData = data?.filter(d => d.type === type) || [];
   if (language) {
     mapData = mapData.filter(d => d.language === language) || [];
@@ -83,16 +85,14 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
     });
   });
 
-  const tooltipTemplate = `<div style="text-align: left;">
-<h6>{state}</h6>
-<div style="text-align: left;">{speakers} ${t('people')}</div>
-<div style="text-align: left;">
-${t('transcribed')}:  <label style="margin-left: 8px">{contribution}</label>
-</div>
-<div style="text-align: left;">
-${t('validated')}:  <label style="margin-left: 8px">{validation}</label>
-</div>
-</div>`;
+  const tooltipTemplate = `
+    <div>
+      <h6>{state}</h6>
+      <div>{speakers} ${t('people')}</div>
+      <div>${t('transcribed')}:  <label>{contribution}</label></div>
+      <div>${t('validated')}:  <label>{validation}</label></div>
+    </div>
+  `;
 
   const maxContribution = Math.max.apply(
     Math,
@@ -121,14 +121,16 @@ ${t('validated')}:  <label style="margin-left: 8px">{validation}</label>
 
   return (
     <Fragment>
-      <p className="mb-3 display-2">{t('mapChartTitle')}</p>
-      <MapChart
-        sourceUrl={sourceUrl}
-        colors={colors}
-        data={statesData}
-        tooltipTemplate={tooltipTemplate}
-        quarterUnit={quarterVal}
-      ></MapChart>
+      <p className="mb-5 display-2">{t('mapChartTitle')}</p>
+      <div className={styles.chart}>
+        <MapChart
+          sourceUrl={sourceUrl}
+          colors={colors}
+          data={statesData}
+          tooltipTemplate={tooltipTemplate}
+          quarterUnit={quarterVal}
+        />
+      </div>
       <MapLegend data={legendData} />
     </Fragment>
   );

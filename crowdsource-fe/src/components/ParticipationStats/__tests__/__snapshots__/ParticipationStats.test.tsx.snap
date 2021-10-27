@@ -26,10 +26,10 @@ exports[`ParticipationStats should render the component and matches it against s
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 9
               </span>
@@ -44,10 +44,10 @@ exports[`ParticipationStats should render the component and matches it against s
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 283
               </span>
@@ -62,10 +62,10 @@ exports[`ParticipationStats should render the component and matches it against s
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 0
               </span>
@@ -80,10 +80,10 @@ exports[`ParticipationStats should render the component and matches it against s
             class="stat col-md-3 col-12"
           >
             <div
-              class="d-flex flex-column align-items-center py-7 py-md-0"
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
             >
               <span
-                class="count text-warning display-1"
+                class="count text-warning display-1 d-flex text-center"
               >
                 53
               </span>

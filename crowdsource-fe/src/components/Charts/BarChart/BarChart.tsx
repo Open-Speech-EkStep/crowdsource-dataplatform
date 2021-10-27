@@ -89,7 +89,7 @@ const BarChart = (props: ChartProps) => {
     };
   }, [props]);
 
-  return <div id={props.id} style={{ width: '100%', height: '100%' }}></div>;
+  return <div id={props.id} className="h-100" />;
 };
 
 export default BarChart;
