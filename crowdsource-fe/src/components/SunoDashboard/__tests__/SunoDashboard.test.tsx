@@ -64,25 +64,18 @@ describe('SunoDashboard', () => {
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     return renderResult;
   };
-
-  it('should render snapshot', async () => {
-    const { asFragment } = await setup();
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('should contain language selector', async () => {
     await setup();
     expect(screen.getByRole('combobox', { name: 'Select Language' })).toBeInTheDocument();
   });
 
   it('changing language from language selector should update stats', async () => {
-    const renderRes = await setup();
+    await setup();
     expect(screen.getByRole('combobox', { name: 'Select Language' })).toBeInTheDocument();
     userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'English');
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
-    expect(renderRes.asFragment()).toMatchSnapshot();
   });
 
   it('changing language from language selector should display nodata message when data not available', async () => {

@@ -45,12 +45,6 @@ describe('MedalGallery', () => {
     return renderResult;
   };
 
-  it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('should render the userName', async () => {
     const { container } = await setup();
 

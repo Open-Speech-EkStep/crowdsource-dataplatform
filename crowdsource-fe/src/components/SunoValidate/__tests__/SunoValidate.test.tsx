@@ -101,12 +101,6 @@ describe('SunoValidate', () => {
     return renderResult;
   };
 
-  it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('needs change and correct button should be disabled initially', async () => {
     await setup();
 
@@ -344,13 +338,15 @@ describe('SunoValidate', () => {
     fetchMock
       .doMockIf('/contributions/asr?from=Hindi&to=&username=abc')
       .mockResponse(JSON.stringify({ data: [] }));
-    const { asFragment } = render(
+    render(
       <SWRConfig value={{ provider: () => new Map() }}>
         <SunoValidate />
       </SWRConfig>
     );
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
-    expect(asFragment()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(screen.getByText('noDataMessage')).toBeInTheDocument();
+    });
   });
 
   it('should go to thank you page after 5 skip sentences', async () => {
