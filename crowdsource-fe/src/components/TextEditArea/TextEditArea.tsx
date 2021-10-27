@@ -169,7 +169,7 @@ const TextEditArea = ({
       </div>
       {showError ? <TextErrorMessage message={errorMessage} /> : null}
       {showKeyboard ? (
-        <Draggable bounds="body" nodeRef={nodeRef}>
+        <Draggable bounds="main" nodeRef={nodeRef}>
           <div
             ref={nodeRef}
             data-testid="virtual-keyboard"
