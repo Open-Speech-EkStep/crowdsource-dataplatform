@@ -141,9 +141,9 @@ describe('Utils', () => {
   });
 
   it('should give empty list of data when provided given list is empty or not a list', () => {
-    const data = [];
+    const data: never[] = [];
     const groupedData = groupBy(data, '1');
-    const expectedOutput = [];
+    const expectedOutput: any[] = [];
     expect(groupedData).toEqual(expectedOutput);
   });
 
@@ -155,7 +155,7 @@ describe('Utils', () => {
       { 1: 'text', 2: '2' },
     ];
     const groupedData = groupBy(data, '3');
-    const expectedOutput = [];
+    const expectedOutput: any[] = [];
     expect(groupedData).toEqual(expectedOutput);
   });
 });
