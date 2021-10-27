@@ -70,11 +70,13 @@ const SunoValidate = () => {
 
   const { submit } = useSubmit(apiPaths.store);
 
-  const { submit: reject } = useSubmit(`${apiPaths.validate}/${showUIData?.contribution_id}/reject`);
+  const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
+  const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
+  const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit: submitSkip } = useSubmit(apiPaths.skip);
-
-  const { submit: accept } = useSubmit(`${apiPaths.validate}/${showUIData?.contribution_id}/accept`);
+  const { submit: reject } = useSubmit(rejectApiUrl);
+  const { submit: submitSkip } = useSubmit(skipApiUrl);
+  const { submit: accept } = useSubmit(acceptApiUrl);
 
   const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
     device: getDeviceInfo(),

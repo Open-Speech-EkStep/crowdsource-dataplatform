@@ -199,7 +199,7 @@ describe('SunoValidate', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'skip' }));
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/skip', {
+      expect(fetchMock).toBeCalledWith('/validate/1717503/skip', {
         body: JSON.stringify({
           device: 'android 11',
           browser: 'Chrome 13',
