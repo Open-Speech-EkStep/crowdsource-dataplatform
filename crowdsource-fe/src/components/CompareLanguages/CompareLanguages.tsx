@@ -77,6 +77,8 @@ interface CompareLanguagesProps {
   dataBindigValue: string;
   graphLabel: string;
   isTopLanguage: any;
+  graphHeading: string;
+  showHeader: boolean;
 }
 
 const CompareLanguages = (props: CompareLanguagesProps) => {
@@ -122,8 +124,8 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
   );
 
   useEffect(() => {
-    const isLanguageTop = topLanguageHrsData && topLanguageHrsData[0].language === contributionLanguage;
-    props.isTopLanguage(isLanguageTop);
+    const isLanguageTop = topLanguageHrsData && topLanguageHrsData.length === 3;
+    props.isTopLanguage(isLanguageTop ? 'keep' : 'see');
   }, [contributionLanguage, props, topLanguageHrsData]);
 
   const barChartData = useMemo(
@@ -142,9 +144,13 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
 
   return barChartData.data.length ? (
     <div data-testid="CompareLanguages" className={styles.chartContainer}>
+      {props.showHeader && <h5 className="fw-light mb-3 text-center">{props.graphHeading}</h5>}
       <div className={styles.chart}>
         <BarChart id="tybar_chart" data={barChartData} />
       </div>
+      <span className="display-6 d-block text-center text-primary-60">
+        {t('contributionVsTopLanguage', { language: contributionLanguage })}
+      </span>
     </div>
   ) : null;
 };

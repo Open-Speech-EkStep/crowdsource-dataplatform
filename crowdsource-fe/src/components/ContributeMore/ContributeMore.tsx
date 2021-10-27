@@ -1,10 +1,15 @@
 // import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import Link from 'components/Link';
+import { LOCALE_LANGUAGES } from 'constants/localesConstants';
+import localStorageConstants from 'constants/localStorageConstants';
+import { pageSourceConstants } from 'constants/pageRouteConstants';
 import routePaths from 'constants/routePaths';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
 
 import styles from './ContributeMore.module.scss';
@@ -18,6 +23,8 @@ interface ContributeMoreProps {
   nextBadgeType: string;
   pageMediaTypeStr: string;
   badges: Array<any> | undefined;
+  isTopLanguage?: string;
+  badgeType?: string;
 }
 
 const ContributeMore = ({
@@ -29,12 +36,16 @@ const ContributeMore = ({
   nextBadgeType,
   pageMediaTypeStr,
   badges,
+  isTopLanguage,
+  badgeType,
 }: ContributeMoreProps) => {
-  // const { t } = useTranslation();
-  const { locale: currentLocale } = useRouter();
+  const { t } = useTranslation();
+  const route = useRouter();
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
 
   const download = (badgeType: string, badgeId: string) => {
-    downloadBadge(currentLocale, initiative, source, badgeType, badgeId);
+    downloadBadge(currentContributionAlias, initiative, source, badgeType, badgeId);
   };
 
   return (
@@ -50,27 +61,43 @@ const ContributeMore = ({
           >
             <Image
               onClick={() => download(item.grade.toLowerCase(), item.generated_badge_id)}
-              src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_${item.grade.toLowerCase()}_${source}.svg`}
+              src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.grade.toLowerCase()}_${source}.svg`}
               width="48"
               height="60"
               alt={`${item.grade.toLowerCase()}Download`}
             />
           </div>
         ))}
-        <p className="mt-3 mt-md-0 ms-md-3 display-4">
-          {capitalizeFirstLetter(source)}{' '}
-          <strong>
-            {nextMileStone - contributionCount} {pageMediaTypeStr}
-          </strong>{' '}
-          to earn your {nextBadgeType} Badge.
-        </p>
+        {badgeType === 'Platinum' ? (
+          <p>
+            {t('afterPlatinumBadgeText', {
+              source: capitalizeFirstLetter(pageSourceConstants[route.asPath]),
+              value: isTopLanguage,
+            })}
+          </p>
+        ) : (
+          <p className="mt-3 mt-md-0 ms-md-3 display-4">
+            <Trans
+              i18nKey="remainingContributionText"
+              defaults="remainingContributionText"
+              values={{
+                source: capitalizeFirstLetter(source),
+                count: nextMileStone - contributionCount,
+                sourceType: pageMediaTypeStr,
+                nextBadgeType: nextBadgeType,
+              }}
+              components={{ strong: <strong /> }}
+            />
+          </p>
+        )}
+
         <div className={`${styles.disabled} d-flex justify-content-center mt-4 mt-md-0`}>
           {!badges ||
           badges.length === 0 ||
           (badges && badges.length !== 0 && badges[0].grade !== 'Bronze') ? (
             <div className={`${styles.medal}  d-flex mx-2 flex-shrink-0`}>
               <Image
-                src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_bronze_${source}.svg`}
+                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_bronze_${source}.svg`}
                 width="48"
                 height="60"
                 alt={`Bronze Badge`}
@@ -82,7 +109,7 @@ const ContributeMore = ({
           (badges && badges.length !== 0 && badges[1]?.grade !== 'Silver') ? (
             <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
               <Image
-                src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_silver_${source}.svg`}
+                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_silver_${source}.svg`}
                 width="48"
                 height="60"
                 alt={`Silver Badge`}
@@ -94,7 +121,7 @@ const ContributeMore = ({
           (badges && badges.length !== 0 && badges[2]?.grade !== 'Gold') ? (
             <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
               <Image
-                src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_gold_${source}.svg`}
+                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_gold_${source}.svg`}
                 width="48"
                 height="60"
                 alt={`Gold Badge`}
@@ -106,7 +133,7 @@ const ContributeMore = ({
           (badges && badges.length !== 0 && badges[3]?.grade !== 'Platinum') ? (
             <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
               <Image
-                src={`/images/${currentLocale}/badges/${currentLocale}_${initiative}_platinum_${source}.svg`}
+                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_platinum_${source}.svg`}
                 width="48"
                 height="60"
                 alt={`Platinum Badge`}
@@ -116,12 +143,14 @@ const ContributeMore = ({
         </div>
         <Link href={routePaths.badges}>
           <a className="mt-7 mt-md-0 display-5 ms-md-3 flex-shrink-0">
-            <b>Know More</b>
+            <b>{t('knowMore')}</b>
           </a>
         </Link>
       </div>
       <Link href={url}>
-        <Button className="mt-8 mt-md-0 ms-3">{capitalizeFirstLetter(source)} More</Button>
+        <Button className="mt-8 mt-md-0 ms-3">
+          {t('moreBtn', { source: capitalizeFirstLetter(source) })}
+        </Button>
       </Link>
     </div>
   );

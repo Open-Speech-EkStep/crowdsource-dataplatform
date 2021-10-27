@@ -1,3 +1,5 @@
+import router from 'next/router';
+
 import { render, verifyAxeTest, userEvent, screen } from 'utils/testUtils';
 
 import ContributeMore from '../ContributeMore';
@@ -8,8 +10,10 @@ describe('ContributeMore', () => {
     source: string,
     nextMileStone: number,
     contributionCount: number,
-    nextBadgeType: string
+    nextBadgeType: string,
+    badgeType: string
   ) => {
+    router.asPath = '/sunoIndia/thank-you';
     const badgeData = [
       {
         generated_badge_id: '4e614ac7-11d8-4126-a3ad-0540fbb4430e',
@@ -38,14 +42,22 @@ describe('ContributeMore', () => {
         url=""
         pageMediaTypeStr="sentence(s)"
         badges={badgeData}
+        isTopLanguage="see"
+        badgeType={badgeType}
       />
     );
   };
 
-  verifyAxeTest(setup('suno', 'contribute', 5, 0, 'Bronze'));
+  verifyAxeTest(setup('suno', 'contribute', 5, 0, 'Bronze', 'Bronze'));
 
   it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup('suno', 'contribute', 5, 0, 'Bronze');
+    const { asFragment } = setup('suno', 'contribute', 5, 0, 'Bronze', 'Bronze');
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('after user earn the platinum badge and should download all the badges', () => {
+    setup('suno', 'contribute', 200, 0, 'Platinum', 'Platinum');
 
     userEvent.click(screen.getByRole('img', { name: 'bronzeDownload' }));
 
@@ -55,6 +67,6 @@ describe('ContributeMore', () => {
 
     userEvent.click(screen.getByRole('img', { name: 'platinumDownload' }));
 
-    expect(asFragment()).toMatchSnapshot();
+    expect(screen.getByText('afterPlatinumBadgeText')).toBeInTheDocument();
   });
 });

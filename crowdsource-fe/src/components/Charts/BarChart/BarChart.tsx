@@ -89,7 +89,7 @@ const BarChart = (props: ChartProps) => {
     };
   }, [props]);
 
-  return <div id={props.id} className="h-100" />;
+  return <div id={props.id} className="h-100"></div>;
 };
 
 export default BarChart;

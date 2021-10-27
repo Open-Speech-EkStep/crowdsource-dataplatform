@@ -7,6 +7,10 @@
   "bhasha": "Bhasha",
   "daan": "Daan",
   "india": "India",
+  "bronze": "bronze",
+  "silver": "silver",
+  "gold": "gold",
+  "platinum": "platinum",
   "heroSecondaryHeading": "One platform, multiple crowdsourcing initiatives",
   "heroText": "Help to build an open repository of data to digitally enrich your language",
   "asrSloganText": "Enrich your language by typing the audio that you hear",
@@ -223,7 +227,6 @@
   "monthly": "Monthly",
   "quarterly": "Quarterly",
   "contributeNow": "Contribute Now",
-
   "stateTG": "Telangana",
   "stateAN": "Andaman and Nicobar Islands",
   "stateAP": "Andhra Pradesh",
@@ -259,5 +262,16 @@
   "stateMZ": "Mizoram",
   "stateNL": "Nagaland",
   "stateDL": "National Capital Territory of Delhi",
-  "stateLK": "Ladakh"
+  "stateLK": "Ladakh",
+  "yourBadge": "Your Badge",
+  "participationText": "Participate to {{value}} {{language}} in top 3",
+  "moreBtn": "{{source}} More",
+  "afterPlatinumBadgeText": "{{source}} to {{value}} your language on top",
+  "download": "Download",
+  "shareOn": "Share on",
+  "textForSomeContribution": "You {{source}} <span>{{count}} {{sourceType}}</span> for your language!",
+  "badgeEarnedText": "You’ve earned your {{initiativeName}} <span>{{badge}} Bhasha Samarthak</span> badge.",
+  "contributedSentences": "{{source}} <strong>{{count}} {{sourceType}}</strong> in {{language}}",
+  "remainingContributionText": "{{source}} <strong>{{count}} {{sourceType}}</strong> to earn your {{nextBadgeType}} Badge.",
+  "contributionVsTopLanguage": "{{language}} vs Top contributed languages"
 }

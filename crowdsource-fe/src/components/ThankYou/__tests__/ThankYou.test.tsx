@@ -95,7 +95,7 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('contributeYourLanguage')).toBeInTheDocument();
 
-    expect(screen.getByText('Participate to see English in top 3')).toBeInTheDocument();
+    expect(screen.getByText('participationText')).toBeInTheDocument();
   });
 
   it('should test when user earned the badge', async () => {
@@ -121,9 +121,9 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('congratulationText')).toBeInTheDocument();
 
-    expect(screen.getByText('Bronze Bhasha Samarthak')).toBeInTheDocument();
+    expect(screen.getByText('badgeEarnedText')).toBeInTheDocument();
 
-    expect(screen.getByText('Participate to see English in top 3')).toBeInTheDocument();
+    expect(screen.getByText('participationText')).toBeInTheDocument();
   });
 
   it('should test after user earned the badge', async () => {
@@ -147,9 +147,9 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('You contributed 6 sentence(s) for your language!')).toBeInTheDocument();
+    expect(screen.getByText('textForSomeContribution')).toBeInTheDocument();
 
-    expect(screen.getByText('Your Badge')).toBeInTheDocument();
+    expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
     expect(screen.getByText('Bronze')).toBeInTheDocument();
   });
@@ -179,9 +179,9 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('You contributed 60 sentence(s) for your language!')).toBeInTheDocument();
+    expect(screen.getByText('textForSomeContribution')).toBeInTheDocument();
 
-    expect(screen.getByText('Your Badge')).toBeInTheDocument();
+    expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
     expect(screen.getByText('Silver')).toBeInTheDocument();
   });

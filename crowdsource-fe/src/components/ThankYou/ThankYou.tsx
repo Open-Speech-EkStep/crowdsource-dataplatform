@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -16,6 +16,7 @@ import {
   INITIATIVES_MAPPING,
   INITIATIVES_MEDIA_MAPPING,
 } from 'constants/initiativeConstants';
+import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import {
   pageMediaTypeConstants,
@@ -46,14 +47,18 @@ const ShareOn = () => (
 );
 
 const YourBadge = (props: any) => {
-  const { locale: currentLocale } = useRouter();
   const route = useRouter();
+  const { t } = useTranslation();
+
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
+
   return (
     <div className="text-center">
-      <h5 className="fw-light">Your Badge</h5>
-      <div className={`${styles.badgeBg} p-3 mt-3`}>
+      <h5 className="fw-light mb-3">{t('yourBadge')}</h5>
+      <div className={`${styles.badgeBg} p-3`}>
         <Image
-          src={`/images/${currentLocale}/badges/${currentLocale}_${
+          src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${
             props.initiative
           }_${props.badgeType.toLowerCase()}_${props.source}.svg`}
           width="94"
@@ -62,7 +67,7 @@ const YourBadge = (props: any) => {
         />
       </div>
       <span className="d-flex justify-content-center mt-3 display-5 font-family-rowdies fw-light">
-        You are a <span className="text-strong-warning ms-1"> {props.badgeType} </span>{' '}
+        You are a <span className="text-strong-warning ms-1 me-1"> {props.badgeType} </span>{' '}
         {capitalizeFirstLetter(pageSourceConstants4[route.asPath])}
       </span>
     </div>
@@ -77,7 +82,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
   const route = useRouter();
   const { t } = useTranslation();
 
-  const [isTopLanguage, setIsTopLanguage] = useState(false);
+  const [isTopLanguage, setIsTopLanguage] = useState('see');
 
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
@@ -103,13 +108,21 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
     <Fragment>
       <div className={`${styles.root} mx-auto`} data-testid="ThankYou">
         {rewardData?.isNewBadge && <h2 className="text-center">{t('congratulationText')}</h2>}
-        {rewardData?.badges && rewardData?.badges.length === 0 && (
+        {rewardData?.badges && rewardData?.badges.length === 0 && rewardData?.contributionCount === 0 && (
           <h2 className="text-center">{t('contributeYourLanguage')}</h2>
         )}
-        {rewardData?.badges && rewardData?.badges.length !== 0 && !rewardData.isNewBadge && (
+        {!rewardData?.isNewBadge && rewardData?.contributionCount !== 0 && (
           <h2 className="text-center">
-            You {pageSourceConstants2[route.asPath]} {rewardData?.contributionCount}{' '}
-            {pageMediaTypeConstants[route.asPath]} for your language!
+            <Trans
+              i18nKey="textForSomeContribution"
+              defaults="textForSomeContribution"
+              values={{
+                source: pageSourceConstants2[route.asPath],
+                count: rewardData?.contributionCount,
+                sourceType: pageMediaTypeConstants[route.asPath],
+              }}
+              components={{ span: <span className={styles.count} /> }}
+            />
           </h2>
         )}
         <section className="mt-8">
@@ -124,8 +137,8 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           <section className="mt-8">
             <BadgeEarned
               initiative={initiative}
-              badgeType={rewardData?.currentBadgeType}
-              contributionCount={rewardData?.contributionCount ?? 0}
+              badgeType={rewardData?.currentBadgeType.toLowerCase()}
+              contributionCount={rewardData?.contributionCount}
               pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
               language={contributionLanguage ?? ''}
               source={pageSourceConstants[route.asPath]}
@@ -136,7 +149,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                 left={
                   <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
                     <h4>
-                      Participate to {isTopLanguage ? `keep` : `see`} {contributionLanguage} in top 3
+                      {t('participationText', { value: isTopLanguage, language: contributionLanguage })}
                     </h4>
                   </div>
                 }
@@ -148,8 +161,13 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                         pageSourceConstants3[route.asPath]
                       )}GraphYLabel3`
                     )}
-                    dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
+                    dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                     isTopLanguage={setIsTopLanguage}
+                    graphHeading={t('participationText', {
+                      value: isTopLanguage,
+                      language: contributionLanguage,
+                    })}
+                    showHeader={false}
                   />
                 }
               />
@@ -164,7 +182,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   left={
                     <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
                       <h4>
-                        Participate to {isTopLanguage ? `keep` : `see`} {contributionLanguage} in top 3
+                        {t('participationText', { value: isTopLanguage, language: contributionLanguage })}
                       </h4>
                     </div>
                   }
@@ -176,8 +194,13 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                           pageSourceConstants3[route.asPath]
                         )}GraphYLabel3`
                       )}
-                      dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
+                      dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                       isTopLanguage={setIsTopLanguage}
+                      graphHeading={t('participationText', {
+                        value: isTopLanguage,
+                        language: contributionLanguage,
+                      })}
+                      showHeader={false}
                     />
                   }
                 />
@@ -195,7 +218,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                     <YourBadge
                       badgeType={rewardData?.currentBadgeType}
                       initiative={INITIATIVES_MAPPING[initiative]}
-                      source={pageSourceConstants[route.asPath] || ''}
+                      source={pageSourceConstants[route.asPath]}
                     />
                   }
                   right={
@@ -206,8 +229,13 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                           pageSourceConstants3[route.asPath]
                         )}GraphYLabel3`
                       )}
-                      dataBindigValue={CONTRIBUTION_MAPPING[route.asPath] || ''}
+                      dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                       isTopLanguage={setIsTopLanguage}
+                      graphHeading={t('participationText', {
+                        value: isTopLanguage,
+                        language: contributionLanguage,
+                      })}
+                      showHeader={true}
                     />
                   }
                 />
@@ -229,6 +257,8 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           }`}
           pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
           badges={rewardData?.badges}
+          isTopLanguage={isTopLanguage}
+          badgeType={rewardData?.currentBadgeType}
         />
       </section>
     </Fragment>

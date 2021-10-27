@@ -21,7 +21,7 @@ describe('BadgeEarned', () => {
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'Download download-image' }));
+    userEvent.click(screen.getByRole('button', { name: 'download download-image' }));
 
     expect(asFragment()).toMatchSnapshot();
   });

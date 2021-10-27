@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Trans, useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -7,43 +8,56 @@ import Button from 'components/Button';
 import ContributionDetails from 'components/ContributionDetails';
 import SocialShareIcons from 'components/SocialShareIcons';
 import TwoColumn from 'components/TwoColumn';
-import { INITIATIVE_ACTIONS_PAGE_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS_PAGE_MAPPING } from 'constants/initiativeConstants';
+import { LOCALE_LANGUAGES } from 'constants/localesConstants';
+import localStorageConstants from 'constants/localStorageConstants';
+import useLocalStorage from 'hooks/useLocalStorage';
+import type { Initiative } from 'types/Initiatives';
 import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
-
-const BadgeImage = () => (
-  <div className={`${styles.medal} mx-auto`}>
-    <Image
-      src={`/images/en/badges/en_bolo_bronze_contribute.svg`}
-      width="140"
-      height="180"
-      alt={`Bronze Badge english`}
-    />
-  </div>
-);
-
-const ShareOn = () => (
-  <div
-    className={`${styles.socialShare} d-inline-flex align-items-center border border-1 border-primary px-4`}
-  >
-    <span className="me-3">Share on</span>
-    <SocialShareIcons />
-  </div>
-);
 
 interface DownloadBadgeProps {
   initiative: string;
   badgeType: string;
   source: string;
-  winningBadge: any;
+  winningBadge?: any;
 }
 
+const BadgeImage = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
+
+  return (
+    <div className={`${styles.medal} mx-auto`}>
+      <Image
+        src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${badgeType}_${source}.svg`}
+        width="140"
+        height="180"
+        alt={`Bronze Badge english`}
+      />
+    </div>
+  );
+};
+
+const ShareOn = () => {
+  const { t } = useTranslation();
+  return (
+    <div
+      className={`${styles.socialShare} d-inline-flex align-items-center border border-1 border-primary px-4`}
+    >
+      <span className="me-3">{t('shareOn')}</span>
+      <SocialShareIcons />
+    </div>
+  );
+};
+
 const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: DownloadBadgeProps) => {
-  const { locale: currentLocale } = useRouter();
+  const { t } = useTranslation();
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const download = (badgeType: string, badgeId: string) => {
-    downloadBadge(currentLocale, initiative, source, badgeType, badgeId);
+    downloadBadge(LOCALE_LANGUAGES[contributionLanguage ?? ''], initiative, source, badgeType, badgeId);
   };
 
   return (
@@ -52,7 +66,7 @@ const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: Downl
         <a
           className={`${styles.download} d-inline-flex align-items-center border border-1 border-primary px-4`}
         >
-          Download
+          {t('download')}
           <span className="d-flex ms-2">
             <Image src="/images/download_icon.svg" width="12" height="15" alt="download-image" />
           </span>
@@ -67,7 +81,7 @@ const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: Downl
 };
 
 interface BadgeEarnedProps {
-  initiative: string;
+  initiative: Initiative;
   badgeType: string;
   contributionCount: number;
   pageMediaTypeStr: string;
@@ -86,24 +100,47 @@ const BadgeEarned = ({
   winningBadge,
 }: BadgeEarnedProps) => {
   const route = useRouter();
+  const { t } = useTranslation();
+
+  const initiativeName = `${t(INITIATIVES_MAPPING[initiative])} ${t('india')}`;
 
   return (
     <ContributionDetails
       top={
         <TwoColumn
-          left={<BadgeImage />}
+          left={
+            <BadgeImage
+              initiative={initiative}
+              badgeType={badgeType}
+              source={source}
+              winningBadge={winningBadge}
+            />
+          }
           right={
             <div className="text-center text-md-start">
               <h4 className="px-8 px-md-0">
-                You’ve earned your {capitalizeFirstLetter(initiative)} India{' '}
-                <span className="text-strong-warning">{badgeType} Bhasha Samarthak</span> badge.
+                <Trans
+                  i18nKey="badgeEarnedText"
+                  defaults="badgeEarnedText"
+                  values={{
+                    initiativeName: initiativeName,
+                    badge: capitalizeFirstLetter(t(badgeType)),
+                  }}
+                  components={{ span: <span className="text-strong-warning" /> }}
+                />
               </h4>
               <p className="display-3 mt-5 mt-6">
-                {INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath]}{' '}
-                <strong>
-                  {contributionCount} {pageMediaTypeStr}
-                </strong>{' '}
-                in {language}
+                <Trans
+                  i18nKey="contributedSentences"
+                  defaults="contributedSentences"
+                  values={{
+                    source: INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath],
+                    count: contributionCount,
+                    sourceType: pageMediaTypeStr,
+                    language: language,
+                  }}
+                  components={{ strong: <strong /> }}
+                />
               </p>
             </div>
           }

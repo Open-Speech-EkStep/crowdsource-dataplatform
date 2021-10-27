@@ -34,7 +34,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                   class="d-md-flex text-center text-md-start h-100 align-items-md-center"
                 >
                   <h4>
-                    Participate to see English in top 3
+                    participationText
                   </h4>
                 </div>
               </div>
@@ -199,11 +199,7 @@ exports[`ThankYou should render the component and matches it against stored snap
         <p
           class="mt-3 mt-md-0 ms-md-3 display-4"
         >
-          Contribute 
-          <strong>
-            5 sentence(s)
-          </strong>
-           to earn your Bronze Badge.
+          remainingContributionText
         </p>
         <div
           class="disabled d-flex justify-content-center mt-4 mt-md-0"
@@ -322,7 +318,7 @@ exports[`ThankYou should render the component and matches it against stored snap
           href="/badges.html"
         >
           <b>
-            Know More
+            knowMore
           </b>
         </a>
       </div>
@@ -331,7 +327,7 @@ exports[`ThankYou should render the component and matches it against stored snap
         data-testid="Button"
         type="button"
       >
-        Contribute More
+        moreBtn
       </button>
     </div>
   </section>

@@ -44,7 +44,7 @@ describe('CompareLanguages', () => {
           total_contributions: 0.058,
           total_speakers: 10,
           total_validation_count: 2,
-          total_validations: 0.001,
+          total_validations: 0.06,
           type: 'text',
         },
         {
@@ -83,6 +83,8 @@ describe('CompareLanguages', () => {
         dataBindigValue="total_contributions"
         graphLabel="asrBarGraphTitle"
         isTopLanguage={() => {}}
+        graphHeading="Participate to keep Bengali in top 3"
+        showHeader={true}
       />
     );
     await waitFor(() => {
@@ -103,6 +105,12 @@ describe('CompareLanguages', () => {
   it('should render the chart component after api gives data', async () => {
     await setup('likho');
 
-    expect(screen.getByTestId('CompareLanguages').children.length).toBe(1);
+    expect(screen.getByTestId('CompareLanguages').children.length).toBe(3);
+  });
+
+  it('should render the chart component for bolo india after api gives data', async () => {
+    await setup('bolo');
+
+    expect(screen.getByTestId('CompareLanguages').children.length).toBe(3);
   });
 });

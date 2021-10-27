@@ -58,22 +58,12 @@ exports[`BadgeEarned should render the component and matches it against stored s
               <h4
                 class="px-8 px-md-0"
               >
-                You’ve earned your Suno India 
-                <span
-                  class="text-strong-warning"
-                >
-                  Bronze Bhasha Samarthak
-                </span>
-                 badge.
+                badgeEarnedText
               </h4>
               <p
                 class="display-3 mt-5 mt-6"
               >
-                 
-                <strong>
-                  5 seentence (s)
-                </strong>
-                 in Hindi
+                contributedSentences
               </p>
             </div>
           </div>
@@ -93,7 +83,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
             <a
               class="download d-inline-flex align-items-center border border-1 border-primary px-4"
             >
-              Download
+              download
               <span
                 class="d-flex ms-2"
               >
@@ -131,7 +121,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               <span
                 class="me-3"
               >
-                Share on
+                shareOn
               </span>
               <a
                 class="socialShareLink mx-2 d-inline-block ms-0"
