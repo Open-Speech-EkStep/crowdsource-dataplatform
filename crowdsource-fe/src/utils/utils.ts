@@ -154,3 +154,13 @@ export const downloadBadge = (
 
   pdf.text(`Badge Id : ${badgeId}`, 36, 190);
 };
+
+export const groupBy = function (list: any, keyName: any) {
+  if (!list || list.length === 0 || !list[0][keyName]) {
+    return [];
+  }
+  return list.reduce(function (pair: any, key: any) {
+    (pair[key[keyName]] = pair[key[keyName]] || []).push(key);
+    return pair;
+  }, {});
+};

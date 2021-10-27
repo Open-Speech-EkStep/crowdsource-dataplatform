@@ -14,13 +14,13 @@ import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
 import type SpeakerDetails from 'types/SpeakerDetails';
+import { groupBy } from 'utils/utils';
 
 import styles from './MedalGallery.module.scss';
 
 const MedalGallery = () => {
   const initiatives: Array<Initiative> = ['suno', 'bolo', 'likho', 'dekho'];
 
-  const languages = ['en', 'hi'];
   const { t } = useTranslation();
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
@@ -34,6 +34,12 @@ const MedalGallery = () => {
       mutate();
     }
   }, [speakerDetails]);
+
+  let groupByInitiative: any = [];
+
+  if (userBadges?.length) {
+    groupByInitiative = groupBy(userBadges, 'type');
+  }
 
   const hasBadges = (initiative: Initiative) => {
     return userBadges?.some((pair: any) => pair.type === INITIATIVES_MEDIA_MAPPING[initiative]);
@@ -71,7 +77,10 @@ const MedalGallery = () => {
             >
               <div className={`${styles.badgeSection} py-5`}>
                 {hasBadges(initiative) ? (
-                  <BadgeSection languages={languages} initiative={initiative} />
+                  <BadgeSection
+                    initiative={initiative}
+                    initiativeBadge={groupByInitiative[INITIATIVES_MEDIA_MAPPING[initiative]]}
+                  />
                 ) : (
                   <Col className="p-0">
                     <Row className="mx-0 text-center mt-5">

@@ -147,7 +147,7 @@ exports[`MedalGallery should render the component and matches it against stored 
               <div
                 class="d-flex align-items-center fw-light display-3 col-lg-2"
               >
-                en
+                Bengali
               </div>
               <div
                 class="col-lg-10"
@@ -171,312 +171,36 @@ exports[`MedalGallery should render the component and matches it against stored 
                           class="medal"
                         >
                           <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
                           >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              bronze
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_bronze_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            Silver
                           </div>
                         </div>
                         <div
                           class="medal"
                         >
                           <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
                           >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              silver
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            Silver
                           </div>
                         </div>
                         <div
                           class="medal"
                         >
                           <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
                           >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              gold
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            Silver
                           </div>
                         </div>
                         <div
                           class="medal"
                         >
                           <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
                           >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              platinum
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            Silver
                           </div>
                         </div>
                       </div>
@@ -525,47 +249,6 @@ exports[`MedalGallery should render the component and matches it against stored 
                           class="medal"
                         >
                           <div
-                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
-                          >
-                            Silver
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="py-3 row"
-            >
-              <div
-                class="d-flex align-items-center fw-light display-3 col-lg-2"
-              >
-                hi
-              </div>
-              <div
-                class="col-lg-10"
-              >
-                <div
-                  class="row"
-                >
-                  <div
-                    class="d-lg-flex py-3 py-lg-0 col-lg-6"
-                  >
-                    <article>
-                      <h6
-                        class="d-lg-none text-primary-60 fw-light"
-                      >
-                        contribute
-                      </h6>
-                      <div
-                        class="d-flex mt-3 mt-lg-0"
-                      >
-                        <div
-                          class="medal"
-                        >
-                          <div
                             class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
                           >
                             <div
@@ -588,8 +271,8 @@ exports[`MedalGallery should render the component and matches it against stored 
                                   alt="Medal"
                                   data-nimg="intrinsic"
                                   decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_bronze_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_bronze_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_bronze_contribute.svg&w=128&q=75 2x"
+                                  src="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_suno_platinum_validate.svg&w=128&q=75"
+                                  srcset="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_suno_platinum_validate.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_suno_platinum_validate.svg&w=128&q=75 2x"
                                   style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                 />
                                 <noscript />
@@ -598,7 +281,7 @@ exports[`MedalGallery should render the component and matches it against stored 
                             <span
                               class="display-5 mt-1 fw-light text-capitalize text-break"
                             >
-                              bronze
+                              Platinum
                             </span>
                             <div
                               class="d-none"
@@ -629,8 +312,8 @@ exports[`MedalGallery should render the component and matches it against stored 
                                       alt="Medal"
                                       data-nimg="intrinsic"
                                       decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_bronze_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_bronze_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_bronze_contribute.svg&w=384&q=75 2x"
+                                      src="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_suno_platinum_validate.svg&w=384&q=75"
+                                      srcset="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_suno_platinum_validate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_suno_platinum_validate.svg&w=384&q=75 2x"
                                       style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                     />
                                     <noscript />
@@ -638,291 +321,6 @@ exports[`MedalGallery should render the component and matches it against stored 
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
-                          >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_silver_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_silver_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_silver_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              silver
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_silver_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_silver_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_silver_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
-                          >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_gold_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_gold_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_gold_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              gold
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_gold_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_gold_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_gold_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
-                          >
-                            <div
-                              class="medalImg d-flex"
-                            >
-                              <div
-                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                              >
-                                <div
-                                  style="box-sizing: border-box; display: block; max-width: 100%;"
-                                >
-                                  <img
-                                    alt=""
-                                    aria-hidden="true"
-                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
-                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                  />
-                                </div>
-                                <img
-                                  alt="Medal"
-                                  data-nimg="intrinsic"
-                                  decoding="async"
-                                  src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_platinum_contribute.svg&w=128&q=75"
-                                  srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_platinum_contribute.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_platinum_contribute.svg&w=128&q=75 2x"
-                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                />
-                                <noscript />
-                              </div>
-                            </div>
-                            <span
-                              class="display-5 mt-1 fw-light text-capitalize text-break"
-                            >
-                              platinum
-                            </span>
-                            <div
-                              class="d-none"
-                            >
-                              <span
-                                class="tip position-absolute bg-light"
-                              />
-                              <div
-                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
-                              >
-                                <div
-                                  class="zoomImg"
-                                >
-                                  <div
-                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
-                                  >
-                                    <div
-                                      style="box-sizing: border-box; display: block; max-width: 100%;"
-                                    >
-                                      <img
-                                        alt=""
-                                        aria-hidden="true"
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
-                                      />
-                                    </div>
-                                    <img
-                                      alt="Medal"
-                                      data-nimg="intrinsic"
-                                      decoding="async"
-                                      src="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_platinum_contribute.svg&w=384&q=75"
-                                      srcset="/_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_platinum_contribute.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fhi%2Fbadges%2Fhi_suno_platinum_contribute.svg&w=384&q=75 2x"
-                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-                                    />
-                                    <noscript />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                  <div
-                    class="d-lg-flex py-3 py-lg-0 col-lg-6"
-                  >
-                    <article>
-                      <h6
-                        class="d-lg-none text-primary-60 fw-light"
-                      >
-                        validate
-                      </h6>
-                      <div
-                        class="d-flex mt-3 mt-lg-0"
-                      >
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
-                          >
-                            Silver
-                          </div>
-                        </div>
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
-                          >
-                            Silver
-                          </div>
-                        </div>
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
-                          >
-                            Silver
-                          </div>
-                        </div>
-                        <div
-                          class="medal"
-                        >
-                          <div
-                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
-                          >
-                            Silver
                           </div>
                         </div>
                       </div>
@@ -965,16 +363,226 @@ exports[`MedalGallery should render the component and matches it against stored 
             class="badgeSection py-5"
           >
             <div
-              class="p-0 col"
+              class="d-none d-lg-flex row"
             >
               <div
-                class="mx-0 text-center mt-5 row"
+                class="col-lg-2"
               >
-                <h4
-                  class="w-100"
+                 
+              </div>
+              <div
+                class="col-lg-10"
+              >
+                <div
+                  class="row"
                 >
-                  No badge earned for likho India
-                </h4>
+                  <div
+                    class="col-lg-6"
+                  >
+                    <h6
+                      class="fw-light"
+                    >
+                      Contribution
+                    </h6>
+                  </div>
+                  <div
+                    class="col-lg-6"
+                  >
+                    <h6
+                      class="fw-light"
+                    >
+                      Validation
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="py-3 row"
+            >
+              <div
+                class="d-flex align-items-center fw-light display-3 col-lg-2"
+              >
+                Bengali
+              </div>
+              <div
+                class="col-lg-10"
+              >
+                <div
+                  class="row"
+                >
+                  <div
+                    class="d-lg-flex py-3 py-lg-0 col-lg-6"
+                  >
+                    <article>
+                      <h6
+                        class="d-lg-none text-primary-60 fw-light"
+                      >
+                        contribute
+                      </h6>
+                      <div
+                        class="d-flex mt-3 mt-lg-0"
+                      >
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                  <div
+                    class="d-lg-flex py-3 py-lg-0 col-lg-6"
+                  >
+                    <article>
+                      <h6
+                        class="d-lg-none text-primary-60 fw-light"
+                      >
+                        validate
+                      </h6>
+                      <div
+                        class="d-flex mt-3 mt-lg-0"
+                      >
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root position-relative d-flex flex-column align-items-center text-center py-2 py-md-3"
+                          >
+                            <div
+                              class="medalImg d-flex"
+                            >
+                              <div
+                                style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                              >
+                                <div
+                                  style="box-sizing: border-box; display: block; max-width: 100%;"
+                                >
+                                  <img
+                                    alt=""
+                                    aria-hidden="true"
+                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                                    style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                  />
+                                </div>
+                                <img
+                                  alt="Medal"
+                                  data-nimg="intrinsic"
+                                  decoding="async"
+                                  src="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_likho_gold_validate.svg&w=128&q=75"
+                                  srcset="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_likho_gold_validate.svg&w=64&q=75 1x, /_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_likho_gold_validate.svg&w=128&q=75 2x"
+                                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                                />
+                                <noscript />
+                              </div>
+                            </div>
+                            <span
+                              class="display-5 mt-1 fw-light text-capitalize text-break"
+                            >
+                              Gold
+                            </span>
+                            <div
+                              class="d-none"
+                            >
+                              <span
+                                class="tip position-absolute bg-light"
+                              />
+                              <div
+                                class="zoom position-absolute d-flex align-items-center justify-content-center bg-light"
+                              >
+                                <div
+                                  class="zoomImg"
+                                >
+                                  <div
+                                    style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                  >
+                                    <div
+                                      style="box-sizing: border-box; display: block; max-width: 100%;"
+                                    >
+                                      <img
+                                        alt=""
+                                        aria-hidden="true"
+                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTcyIiBoZWlnaHQ9IjIyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                                        style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                      />
+                                    </div>
+                                    <img
+                                      alt="Medal"
+                                      data-nimg="intrinsic"
+                                      decoding="async"
+                                      src="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_likho_gold_validate.svg&w=384&q=75"
+                                      srcset="/_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_likho_gold_validate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fbn%2Fbadges%2Fbn_likho_gold_validate.svg&w=384&q=75 2x"
+                                      style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                                    />
+                                    <noscript />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="medal"
+                        >
+                          <div
+                            class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
+                          >
+                            Silver
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

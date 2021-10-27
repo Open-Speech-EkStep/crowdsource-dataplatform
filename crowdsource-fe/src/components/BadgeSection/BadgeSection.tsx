@@ -4,13 +4,15 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import LanguageMedals from 'components/LanguageMedals';
+import { groupBy } from 'utils/utils';
 
 interface BadgeSectionProps {
-  languages: Array<string>;
   initiative: string;
+  initiativeBadge: Array<any>;
 }
 
-const BadgeSection = ({ languages, initiative }: BadgeSectionProps) => {
+const BadgeSection = ({ initiative, initiativeBadge }: BadgeSectionProps) => {
+  const groupByLanguage = groupBy(initiativeBadge, 'language');
   return (
     <>
       <Row className="d-none d-lg-flex">
@@ -26,8 +28,13 @@ const BadgeSection = ({ languages, initiative }: BadgeSectionProps) => {
           </Row>
         </Col>
       </Row>
-      {languages.map(language => (
-        <LanguageMedals initiative={initiative} key={language} language={language} />
+      {Object.keys(groupByLanguage).map(language => (
+        <LanguageMedals
+          initiative={initiative}
+          key={language}
+          language={language}
+          languageBadges={groupByLanguage[language]}
+        />
       ))}
     </>
   );

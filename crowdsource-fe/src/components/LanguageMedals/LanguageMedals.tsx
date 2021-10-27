@@ -4,17 +4,22 @@ import Row from 'react-bootstrap/Row';
 
 import Medal from 'components/Medal';
 import MedalPlaceholder from 'components/MedalPlaceholder';
+import { groupBy } from 'utils/utils';
 
 import styles from './LanguageMedals.module.scss';
 
 interface LanguageMedalsProps {
   initiative: string;
   language: string;
+  languageBadges: any;
 }
 
-const LanguageMedals = ({ initiative, language }: LanguageMedalsProps) => {
+const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedalsProps) => {
   const { t } = useTranslation();
-  const medals = ['bronze', 'silver', 'gold', 'platinum'];
+  const medals = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+
+  const groupByAction = groupBy(languageBadges, 'category');
+
   const actions = ['contribute', 'validate'];
 
   return (
@@ -30,7 +35,12 @@ const LanguageMedals = ({ initiative, language }: LanguageMedalsProps) => {
               <div className="d-flex mt-3 mt-lg-0">
                 {medals.map(medal => (
                   <div key={medal} className={styles.medal}>
-                    <Medal initiative={initiative} medal={medal} action={actions[0]} language={language} />
+                    {groupByAction[actions[0]] &&
+                    groupByAction[actions[0]].some((ele: any) => ele.grade == medal) ? (
+                      <Medal initiative={initiative} medal={medal} action={actions[0]} language={language} />
+                    ) : (
+                      <MedalPlaceholder />
+                    )}
                   </div>
                 ))}
               </div>
@@ -42,8 +52,12 @@ const LanguageMedals = ({ initiative, language }: LanguageMedalsProps) => {
               <div className="d-flex mt-3 mt-lg-0">
                 {medals.map(medal => (
                   <div key={medal} className={styles.medal}>
-                    {/*<Medal initiative={initiative} medal={medal} action={actions[1]} language={language} />*/}
-                    <MedalPlaceholder />
+                    {groupByAction[actions[1]] &&
+                    groupByAction[actions[1]].some((ele: any) => ele.grade == medal) ? (
+                      <Medal initiative={initiative} medal={medal} action={actions[1]} language={language} />
+                    ) : (
+                      <MedalPlaceholder />
+                    )}
                   </div>
                 ))}
               </div>

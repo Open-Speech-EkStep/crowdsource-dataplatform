@@ -7,9 +7,25 @@ describe('LanguageMedals', () => {
     props: {
       initiative: string;
       language: string;
+      languageBadges: any;
     } = {
       initiative: 'title',
       language: 'subTitle',
+      languageBadges: [
+        {
+          Bengali: [
+            {
+              generated_at: '2021-10-22T12:45:10.744Z',
+              generated_badge_id: '25aebf4c-8d74-4bf4-a1d6-8e82b71c8d7c',
+              language: 'Bengali',
+              milestone: 600,
+              type: 'asr',
+              category: 'validate',
+              grade: 'Platinum',
+            },
+          ],
+        },
+      ],
     }
   ) => render(<LanguageMedals {...props}></LanguageMedals>);
 

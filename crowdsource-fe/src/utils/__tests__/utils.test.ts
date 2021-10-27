@@ -8,6 +8,7 @@ import {
   verifyLanguage,
   getDeviceInfo,
   getBrowserInfo,
+  groupBy,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -118,5 +119,43 @@ describe('Utils', () => {
 
     const expectedOutput = 'Chrome 13';
     expect(browserInfo).toEqual(expectedOutput);
+  });
+
+  it('should group the given list of data on the basis of provided key', () => {
+    const data = [
+      { 1: 'asr', 2: 'two' },
+      { 1: 'ocr', 2: '2' },
+      { 1: 'ocr', 2: 'xyz' },
+      { 1: 'text', 2: '2' },
+    ];
+    const groupedData = groupBy(data, '1');
+    const expectedOutput = {
+      asr: [{ '1': 'asr', '2': 'two' }],
+      ocr: [
+        { '1': 'ocr', '2': '2' },
+        { '1': 'ocr', '2': 'xyz' },
+      ],
+      text: [{ '1': 'text', '2': '2' }],
+    };
+    expect(groupedData).toEqual(expectedOutput);
+  });
+
+  it('should give empty list of data when provided given list is empty or not a list', () => {
+    const data = [];
+    const groupedData = groupBy(data, '1');
+    const expectedOutput = [];
+    expect(groupedData).toEqual(expectedOutput);
+  });
+
+  it('should give empty list of data when provided key is not present in given data', () => {
+    const data = [
+      { 1: 'asr', 2: 'two' },
+      { 1: 'ocr', 2: '2' },
+      { 1: 'ocr', 2: 'xyz' },
+      { 1: 'text', 2: '2' },
+    ];
+    const groupedData = groupBy(data, '3');
+    const expectedOutput = [];
+    expect(groupedData).toEqual(expectedOutput);
   });
 });
