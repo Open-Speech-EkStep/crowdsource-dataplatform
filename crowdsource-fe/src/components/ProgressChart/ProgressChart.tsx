@@ -69,15 +69,17 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
 
   return (
     <Fragment>
-      <div className="d-flex align-items-center justify-content-between mb-5">
+      <div className="d-md-flex justify-content-md-between mb-5">
         <p className="display-2">{t('lineChartTitle')}</p>
-        <Switch
-          optionOne="monthly"
-          optionTwo="quarterly"
-          toggleSwitch={option => {
-            setTimeframe(option);
-          }}
-        />
+        <div className="d-flex justify-content-end mt-4 mt-md-0">
+          <Switch
+            optionOne="monthly"
+            optionTwo="quarterly"
+            toggleSwitch={option => {
+              setTimeframe(option);
+            }}
+          />
+        </div>
       </div>
       <div className={styles.chart}>
         <LineChart
