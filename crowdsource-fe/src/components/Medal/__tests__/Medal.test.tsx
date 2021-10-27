@@ -1,9 +1,10 @@
-import { render } from 'utils/testUtils';
+import { render, userEvent, waitFor, screen } from 'utils/testUtils';
 
 import Medal from '../Medal';
 
 describe('Medal', () => {
   const setup = (
+    flag: boolean,
     props: {
       medal: string;
       action: string;
@@ -15,13 +16,35 @@ describe('Medal', () => {
       initiative: 'initiative',
       language: 'language',
     }
-  ) => render(<Medal {...props}></Medal>);
+  ) =>
+    flag
+      ? render(<Medal {...props}></Medal>)
+      : render(
+          <>
+            <Medal {...props}></Medal>
+            <button>Test Button</button>
+          </>
+        );
 
-  setup();
+  setup(true);
 
   it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup();
+    const { asFragment } = setup(true);
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should not render when clicked outside', async () => {
+    const { container } = setup(false);
+
+    expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByAltText('Medal'));
+
+    await waitFor(() => expect(container.querySelector('.position-absolute')).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
+
+    await waitFor(() => expect(container.querySelector('.position-absolute')).not.toBeInTheDocument());
   });
 });

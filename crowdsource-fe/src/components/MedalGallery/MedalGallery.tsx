@@ -33,7 +33,7 @@ const MedalGallery = () => {
     if (speakerDetails) {
       mutate();
     }
-  }, [speakerDetails]);
+  }, [speakerDetails, mutate]);
 
   let groupByInitiative: any = [];
 
