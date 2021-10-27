@@ -39,6 +39,7 @@ const Medal = ({ initiative, medal, action, language }: MedalProps) => {
         className={`${styles.root} d-flex flex-column align-items-center text-center py-2 py-md-3 cursor-pointer`}
         onClick={() => setShowZoomedImage(true)}
         ref={medalRef}
+        aria-hidden="true"
       >
         <div className={`${styles.medalImg} d-flex`}>
           <Image
