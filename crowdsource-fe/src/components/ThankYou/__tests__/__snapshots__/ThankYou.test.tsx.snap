@@ -205,7 +205,7 @@ exports[`ThankYou should render the component and matches it against stored snap
           contributeRemainingText
         </p>
         <div
-          class="disabled d-flex justify-content-center mt-4 mt-md-0 mb-3"
+          class="disabled d-flex justify-content-center mt-4 mt-md-0 mb-3 mb-md-0"
         >
           <div
             class="medal upcomingBadge  d-flex mx-2 flex-shrink-0"

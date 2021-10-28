@@ -110,7 +110,7 @@ const ContributeMore = ({
         )}
 
         {badges && badges.length !== 4 && (
-          <div className={`${styles.disabled} d-flex justify-content-center mt-4 mt-md-0 mb-3`}>
+          <div className={`${styles.disabled} d-flex justify-content-center mt-4 mt-md-0 mb-3 mb-md-0`}>
             {badgeArray.map((item, index) => {
               return !badges ||
                 badges.length === 0 ||

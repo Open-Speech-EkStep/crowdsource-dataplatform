@@ -151,7 +151,7 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
-    expect(screen.getByText('Bronze')).toBeInTheDocument();
+    expect(screen.getByText('contributorAcheived')).toBeInTheDocument();
   });
 
   it('should test after user earned the silver badge', async () => {
@@ -183,6 +183,6 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
-    expect(screen.getByText('Silver')).toBeInTheDocument();
+    expect(screen.getByText('contributorAcheived')).toBeInTheDocument();
   });
 });
