@@ -39,7 +39,7 @@ const Medal = ({ initiative, medal, action, language }: MedalProps) => {
         role="button"
         className={`${styles.root} ${styles.earned} ${
           showZoomedImage ? styles.active : ''
-        } d-flex flex-column align-items-center text-center py-2 py-md-3 cursor-pointer`}
+        } d-flex flex-column align-items-center text-center py-2 py-md-3`}
         onClick={() => setShowZoomedImage(true)}
         onKeyDown={() => setShowZoomedImage(true)}
         ref={medalRef}

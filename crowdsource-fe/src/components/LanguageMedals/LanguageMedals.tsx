@@ -39,7 +39,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
                     groupByAction[actions[0]].some((ele: any) => ele.grade == medal) ? (
                       <Medal initiative={initiative} medal={medal} action={actions[0]} language={language} />
                     ) : (
-                      <MedalPlaceholder />
+                      <MedalPlaceholder medal={medal} />
                     )}
                   </div>
                 ))}
@@ -56,7 +56,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
                     groupByAction[actions[1]].some((ele: any) => ele.grade == medal) ? (
                       <Medal initiative={initiative} medal={medal} action={actions[1]} language={language} />
                     ) : (
-                      <MedalPlaceholder />
+                      <MedalPlaceholder medal={medal} />
                     )}
                   </div>
                 ))}
