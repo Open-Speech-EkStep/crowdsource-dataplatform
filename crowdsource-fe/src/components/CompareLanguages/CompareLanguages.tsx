@@ -4,11 +4,7 @@ import { useTranslation, i18n } from 'next-i18next';
 
 import { BarChart } from 'components/Charts';
 import apiPaths from 'constants/apiPaths';
-import {
-  INITIATIVES_MEDIA,
-  INITIATIVES_MEDIA_MAPPING,
-  INITIATIVES_MEDIA_TYPE_MAPPING,
-} from 'constants/initiativeConstants';
+import { INITIATIVES_MEDIA, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -57,7 +53,7 @@ const translateCategory = (language: string) => {
 
 const getTopLanguagesByHoursChartData = (
   contributionValue: string,
-  initiative: InitiativeType,
+  initiativeType: InitiativeType,
   key: string,
   topLanguagesByHours?: TopLanguagesByHours[]
 ) => {
@@ -65,9 +61,9 @@ const getTopLanguagesByHoursChartData = (
     topLanguagesByHours?.map((topLanguageByHours: any) => ({
       category: translateCategory(topLanguageByHours?.language),
       value: (topLanguageByHours as any)[contributionValue],
-      tooltipText: isBoloInitiative(initiative)
+      tooltipText: isBoloInitiative(initiativeType)
         ? convertTimeFormat(topLanguageByHours?.total_contributions)
-        : `${topLanguageByHours[key]} ${INITIATIVES_MEDIA_TYPE_MAPPING[initiative]}`,
+        : `${topLanguageByHours[key]} ${i18n?.t(`${initiativeType}BarGraphTooltip`)}`,
     })) ?? []
   );
 };
