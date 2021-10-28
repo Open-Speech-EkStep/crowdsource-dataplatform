@@ -102,7 +102,7 @@ const ContributeMore = ({
               values={{
                 count: nextMileStone - contributionCount,
                 sourceType: t(`${pageMediaTypeStr}` as string).toLowerCase(),
-                nextBadgeType: t(nextBadgeType.toLowerCase()),
+                nextBadgeType: capitalizeFirstLetter(t(nextBadgeType.toLowerCase())),
               }}
               components={{ strong: <strong /> }}
             />
