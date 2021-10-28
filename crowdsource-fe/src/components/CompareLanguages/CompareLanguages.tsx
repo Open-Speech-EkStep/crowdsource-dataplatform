@@ -126,7 +126,7 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
   );
 
   useEffect(() => {
-    const isLanguageTop = topLanguageHrsData && topLanguageHrsData.length === 3;
+    const isLanguageTop = topLanguageHrsData && topLanguageHrsData.length <= 3;
     props.isTopLanguage(isLanguageTop ? 'keep' : 'see');
   }, [contributionLanguage, props, topLanguageHrsData]);
 

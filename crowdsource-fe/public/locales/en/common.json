@@ -277,7 +277,7 @@
   "contributedMessage": "You contributed <span>{{count}} {{sourceType}}</span> for your language",
   "validatedMessage": "You validated <span>{{count}} {{sourceType}}</span> for your language",
   "badgeEarnedText": "You’ve earned your {{initiativeName}} <span>{{badge}} Bhasha Samarthak</span> badge.",
-  "contributedEarnedBadgeSubheader": "Contributed <strong>{{count}} {{sourceType}}</strong> in {{language}}",
+  "transcribedEarnedBadgeSubheader": "Transcribed <strong>{{count}} {{sourceType}}</strong> in {{language}}",
   "validatedEarnedBadgeSubheader": "Validated <strong>{{count}} {{sourceType}}</strong> in {{language}}",
   "contributeRemainingText": "Contribute <strong>{{count}} {{sourceType}}</strong> to earn your {{nextBadgeType}} Badge.",
   "validateRemainingText": "Validate <strong>{{count}} {{sourceType}}</strong> to earn your {{nextBadgeType}} Badge.",

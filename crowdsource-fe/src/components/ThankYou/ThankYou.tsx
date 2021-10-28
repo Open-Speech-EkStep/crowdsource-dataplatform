@@ -138,7 +138,11 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               <TwoColumn
                 left={
                   <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
-                    <h4>{t(`${mode}ParticipationText`, { language: contributionLanguage })}</h4>
+                    <h4>
+                      {t(`${mode}ParticipationText`, {
+                        language: t(`${contributionLanguage?.toLowerCase()}`),
+                      })}
+                    </h4>
                   </div>
                 }
                 right={
@@ -168,7 +172,11 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                 <TwoColumn
                   left={
                     <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
-                      <h4>{t(`${mode}ParticipationText`, { language: contributionLanguage })}</h4>
+                      <h4>
+                        {t(`${mode}ParticipationText`, {
+                          language: t(`${contributionLanguage?.toLowerCase()}`),
+                        })}
+                      </h4>
                     </div>
                   }
                   right={

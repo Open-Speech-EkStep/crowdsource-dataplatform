@@ -72,26 +72,30 @@ const ContributeMore = ({
       className={`${styles.root} d-flex align-items-md-center flex-column flex-md-row mx-auto justify-content-md-between p-5 py-md-4 px-md-5 bg-light text-center text-md-start`}
     >
       <div className="d-flex flex-column flex-md-row align-items-md-center">
-        {badges?.map((item, index) => (
-          <Button
-            variant="normal"
-            key={index}
-            title={`Download ${item.grade} Badge`}
-            className={`${styles.medal} d-flex mx-2 flex-shrink-0`}
-          >
-            <Image
-              onClick={() => download(item.grade.toLowerCase(), item.generated_badge_id)}
-              src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.grade.toLowerCase()}_${source}.svg`}
-              width="48"
-              height="60"
-              alt={`${item.grade.toLowerCase()}Download`}
-            />
-          </Button>
-        ))}
+        <div className="d-flex justify-content-center">
+          {badges?.map((item, index) => (
+            <Button
+              variant="normal"
+              key={index}
+              title={`Download ${item.grade} Badge`}
+              className={`${styles.medal} d-flex mx-2 flex-shrink-0`}
+            >
+              <Image
+                onClick={() => download(item.grade.toLowerCase(), item.generated_badge_id)}
+                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.grade.toLowerCase()}_${source}.svg`}
+                width="48"
+                height="60"
+                alt={`${item.grade.toLowerCase()}Download`}
+              />
+            </Button>
+          ))}
+        </div>
         {badgeType === 'Platinum' ? (
-          <p>{t(`${isTopLanguage}${capitalizeFirstLetter(pageSourceConstants[route.asPath])}Text`, {})}</p>
+          <p className={`${styles.text} mt-3 mt-md-0 ms-md-3 display-4`}>
+            {t(`${isTopLanguage}${capitalizeFirstLetter(pageSourceConstants[route.asPath])}Text`, {})}
+          </p>
         ) : (
-          <p className="mt-3 mt-md-0 ms-md-3 display-4">
+          <p className={`${styles.text} mt-3 mt-md-0 ms-md-3 display-4`}>
             <Trans
               i18nKey={`${source}RemainingText`}
               defaults="contributeRemainingText"
@@ -105,36 +109,38 @@ const ContributeMore = ({
           </p>
         )}
 
-        <div className={`${styles.disabled} d-flex justify-content-center mt-4 mt-md-0`}>
-          {badgeArray.map((item, index) => {
-            return !badges ||
-              badges.length === 0 ||
-              !badges[index] ||
-              (badges && badges.length !== 0 && badges[index] && badges[index].grade !== item.type) ? (
-              <div
-                key={index}
-                className={`${styles.medal} ${
-                  index === 0 ? styles.upcomingBadge : styles.otherBadges
-                }  d-flex mx-2 flex-shrink-0`}
-              >
-                <Image
-                  src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.type.toLowerCase()}_${source}.svg`}
-                  width="48"
-                  height="60"
-                  alt={`Bronze Badge`}
-                />
-              </div>
-            ) : null;
-          })}
-        </div>
+        {badges && badges.length !== 4 && (
+          <div className={`${styles.disabled} d-flex justify-content-center mt-4 mt-md-0 mb-3`}>
+            {badgeArray.map((item, index) => {
+              return !badges ||
+                badges.length === 0 ||
+                !badges[index] ||
+                (badges && badges.length !== 0 && badges[index] && badges[index].grade !== item.type) ? (
+                <div
+                  key={index}
+                  className={`${styles.medal} ${
+                    index === 0 ? styles.upcomingBadge : styles.otherBadges
+                  }  d-flex mx-2 flex-shrink-0`}
+                >
+                  <Image
+                    src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.type.toLowerCase()}_${source}.svg`}
+                    width="48"
+                    height="60"
+                    alt={`Bronze Badge`}
+                  />
+                </div>
+              ) : null;
+            })}
+          </div>
+        )}
         <Link href={routePaths.badges}>
-          <a className="mt-7 mt-md-0 display-5 ms-md-3 flex-shrink-0">
+          <a className={`${styles.text} mt-4 mt-md-0 display-5 ms-md-3 flex-shrink-0`}>
             <b>{t('knowMore')}</b>
           </a>
         </Link>
       </div>
       <Link href={url}>
-        <Button className="mt-8 mt-md-0 ms-3">{t(`${source}More`)}</Button>
+        <Button className="mt-8 mt-md-0 ms-md-3">{t(`${source}More`)}</Button>
       </Link>
     </div>
   );

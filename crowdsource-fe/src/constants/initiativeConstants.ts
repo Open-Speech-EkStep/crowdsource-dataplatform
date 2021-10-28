@@ -40,7 +40,7 @@ export const INITIATIVE_ACTIONS = {
 } as const;
 
 export const INITIATIVE_ACTIONS_CAPS = {
-  transcribed: 'Transcribed',
+  transcribed: 'transcribed',
   validated: 'Validated',
 } as const;
 
