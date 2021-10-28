@@ -95,7 +95,7 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('contributeYourLanguage')).toBeInTheDocument();
 
-    expect(screen.getByText('participationText')).toBeInTheDocument();
+    expect(screen.getByText('seeParticipationText')).toBeInTheDocument();
   });
 
   it('should test when user earned the badge', async () => {
@@ -123,7 +123,7 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('badgeEarnedText')).toBeInTheDocument();
 
-    expect(screen.getByText('participationText')).toBeInTheDocument();
+    expect(screen.getByText('seeParticipationText')).toBeInTheDocument();
   });
 
   it('should test after user earned the badge', async () => {
@@ -147,7 +147,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('textForSomeContribution')).toBeInTheDocument();
+    expect(screen.getByText('contributedMessage')).toBeInTheDocument();
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
@@ -179,7 +179,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('textForSomeContribution')).toBeInTheDocument();
+    expect(screen.getByText('contributedMessage')).toBeInTheDocument();
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 

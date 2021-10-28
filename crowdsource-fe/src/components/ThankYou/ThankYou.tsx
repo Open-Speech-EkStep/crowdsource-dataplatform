@@ -82,7 +82,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
   const route = useRouter();
   const { t } = useTranslation();
 
-  const [isTopLanguage, setIsTopLanguage] = useState('see');
+  const [mode, setMode] = useState<string>('see');
 
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
@@ -114,10 +114,8 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
         {!rewardData?.isNewBadge && rewardData?.contributionCount !== 0 && (
           <h2 className="text-center">
             <Trans
-              i18nKey="textForSomeContribution"
-              defaults="textForSomeContribution"
+              i18nKey={`${pageSourceConstants2[route.asPath]}Message`}
               values={{
-                source: pageSourceConstants2[route.asPath],
                 count: rewardData?.contributionCount,
                 sourceType: pageMediaTypeConstants[route.asPath],
               }}
@@ -148,9 +146,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               <TwoColumn
                 left={
                   <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
-                    <h4>
-                      {t('participationText', { value: isTopLanguage, language: contributionLanguage })}
-                    </h4>
+                    <h4>{t(`${mode}ParticipationText`, { language: contributionLanguage })}</h4>
                   </div>
                 }
                 right={
@@ -162,9 +158,8 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                       )}GraphYLabel3`
                     )}
                     dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
-                    isTopLanguage={setIsTopLanguage}
-                    graphHeading={t('participationText', {
-                      value: isTopLanguage,
+                    isTopLanguage={setMode}
+                    graphHeading={t(`${mode}ParticipationText`, {
                       language: contributionLanguage,
                     })}
                     showHeader={false}
@@ -181,9 +176,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                 <TwoColumn
                   left={
                     <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
-                      <h4>
-                        {t('participationText', { value: isTopLanguage, language: contributionLanguage })}
-                      </h4>
+                      <h4>{t(`${mode}ParticipationText`, { language: contributionLanguage })}</h4>
                     </div>
                   }
                   right={
@@ -195,9 +188,8 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                         )}GraphYLabel3`
                       )}
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
-                      isTopLanguage={setIsTopLanguage}
-                      graphHeading={t('participationText', {
-                        value: isTopLanguage,
+                      isTopLanguage={setMode}
+                      graphHeading={t(`${mode}ParticipationText`, {
                         language: contributionLanguage,
                       })}
                       showHeader={false}
@@ -230,9 +222,8 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                         )}GraphYLabel3`
                       )}
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
-                      isTopLanguage={setIsTopLanguage}
-                      graphHeading={t('participationText', {
-                        value: isTopLanguage,
+                      isTopLanguage={setMode}
+                      graphHeading={t(`${mode}ParticipationText`, {
                         language: contributionLanguage,
                       })}
                       showHeader={true}
@@ -257,7 +248,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           }`}
           pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
           badges={rewardData?.badges}
-          isTopLanguage={isTopLanguage}
+          isTopLanguage={mode}
           badgeType={rewardData?.currentBadgeType}
         />
       </section>

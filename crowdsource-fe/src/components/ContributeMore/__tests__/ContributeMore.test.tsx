@@ -67,6 +67,6 @@ describe('ContributeMore', () => {
 
     userEvent.click(screen.getByRole('img', { name: 'platinumDownload' }));
 
-    expect(screen.getByText('afterPlatinumBadgeText')).toBeInTheDocument();
+    expect(screen.getByText('seeContributeText')).toBeInTheDocument();
   });
 });

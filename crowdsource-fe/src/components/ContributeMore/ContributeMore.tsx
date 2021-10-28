@@ -89,19 +89,12 @@ const ContributeMore = ({
           </Button>
         ))}
         {badgeType === 'Platinum' ? (
-          <p>
-            {t('afterPlatinumBadgeText', {
-              source: capitalizeFirstLetter(pageSourceConstants[route.asPath]),
-              value: isTopLanguage,
-            })}
-          </p>
+          <p>{t(`${isTopLanguage}${capitalizeFirstLetter(pageSourceConstants[route.asPath])}Text`, {})}</p>
         ) : (
           <p className="mt-3 mt-md-0 ms-md-3 display-4">
             <Trans
-              i18nKey="remainingContributionText"
-              defaults="remainingContributionText"
+              i18nKey={`${source}RemainingText`}
               values={{
-                source: capitalizeFirstLetter(source),
                 count: nextMileStone - contributionCount,
                 sourceType: pageMediaTypeStr,
                 nextBadgeType: nextBadgeType,

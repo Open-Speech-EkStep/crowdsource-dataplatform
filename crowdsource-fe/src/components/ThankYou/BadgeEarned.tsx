@@ -131,10 +131,8 @@ const BadgeEarned = ({
               </h4>
               <p className="display-3 mt-5 mt-6">
                 <Trans
-                  i18nKey="contributedSentences"
-                  defaults="contributedSentences"
+                  i18nKey={`${INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath]}EarnedBadgeSubheader`}
                   values={{
-                    source: INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath],
                     count: contributionCount,
                     sourceType: pageMediaTypeStr,
                     language: language,
