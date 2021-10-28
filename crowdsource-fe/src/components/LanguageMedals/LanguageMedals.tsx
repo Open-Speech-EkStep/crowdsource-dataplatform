@@ -33,7 +33,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
             <article>
               <h6 className="d-lg-none text-primary-60 fw-light">{t('contribute')}</h6>
               <div className="d-flex mt-3 mt-lg-0">
-                {medals.map(medal => (
+                {medals.map((medal: string) => (
                   <div key={medal} className={styles.medal}>
                     {groupByAction[actions[0]] &&
                     groupByAction[actions[0]].some((ele: any) => ele.grade == medal) ? (
