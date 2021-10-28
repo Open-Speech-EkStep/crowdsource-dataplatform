@@ -289,5 +289,7 @@
   "badgeInfoText2": "பேட்ஜை உறுதிப்படுத்தும் முன் உங்கள் பங்களிப்பு சரிபார்க்கப்படும்.",
   "contribution": "பங்களிப்பு",
   "validation": "சரிபார்ப்பு",
-  "congratulations": "வாழ்த்துக்கள்"
+  "congratulations": "வாழ்த்துக்கள்",
+  "contributorAcheived": "நீங்கள் ஒரு <span>{{badgeType}}</span> பங்களிப்பாளர்",
+  "validatorAcheived": "நீங்கள் ஒரு <span>{{badgeType}}</span> சரிபார்ப்பாளர்"
 }

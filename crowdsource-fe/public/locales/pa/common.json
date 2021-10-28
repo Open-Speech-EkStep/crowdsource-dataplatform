@@ -289,5 +289,7 @@
   "badgeInfoText2": "ਬੈਜ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕੀਤਾ ਜਾਵੇਗਾ।",
   "contribution": "ਯੋਗਦਾਨ",
   "validation": "ਪ੍ਰਮਾਣੀਕਰਨ",
-  "congratulations": "ਵਧਾਈ ਹੋਵੇ"
+  "congratulations": "ਵਧਾਈ ਹੋਵੇ",
+  "contributorAcheived": "ਤੁਸੀਂ ਇੱਕ <span>{{badgeType}}</span> ਯੋਗਦਾਨ ਕਰਤਾ ਹੋ",
+  "validatorAcheived": "ਤੁਸੀਂ ਇੱਕ <span>{{badgeType}}</span> ਪ੍ਰਮਾਣੀਕਰਤਾ ਹੋ"
 }

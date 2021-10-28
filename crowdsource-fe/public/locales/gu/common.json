@@ -276,7 +276,7 @@
   "shareOn": "શેર કરો",
   "contributedMessage": "તમે તમારી ભાષામાં <span>{{count}} {{sourceType}}</span> યોગદાન આપ્યું છો",
   "validatedMessage": "તમે તમારી ભાષા માટે <span>{{count}} {{sourceType}}</span> માન્ય કર્યા",
-  "badgeEarnedText": "તમે તમારું {{initiativeName}} <span>{{badge}} ભાષા સમર્થક</span> બેજ મેળવ્યુ છે .",
+  "badgeEarnedText": "તમે તમારું {{initiativeName}} <span>{{badge}} ભાષા સમર્થક</span> બેજ મેળવ્યુ છે.",
   "contributedEarnedBadgeSubheader": " {{language}} માં <strong>{{count}} {{sourceType}}</strong> યોગદાન થયું",
   "transcribedEarnedBadgeSubheader": " {{language}} માં <strong>{{count}} {{sourceType}}</strong> ટ્રાન્સ્ક્રાઇબ",
   "validatedEarnedBadgeSubheader": " {{language}} માં <strong>{{count}} {{sourceType}}</strong> વેલિડેટ થયા",
@@ -289,5 +289,7 @@
   "badgeInfoText2": "બેજની પુષ્ટિ કરતા પહેલા તમારું યોગદાન ચકાસવામાં આવશે.",
   "contribution": "યોગદાન",
   "validation": "વેલિડેશન",
-  "congratulations": "અભિનંદન"
+  "congratulations": "અભિનંદન",
+  "contributorAcheived": "તમે <span>{{badgeType}}</span> યોગદાનકર્તા છો",
+  "validatorAcheived": "તમે એક <span>{{badgeType}}</span> વેલિડેટેર છો"
 }

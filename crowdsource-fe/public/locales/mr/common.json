@@ -289,5 +289,7 @@
   "badgeInfoText2": "बॅजची पुष्टी करण्यापूर्वी आपले योगदान प्रमाणित केले जाईल.",
   "contribution": "योगदान",
   "validation": "प्रमाणिकरण",
-  "congratulations": "अभिनंदन"
+  "congratulations": "अभिनंदन",
+  "contributorAcheived": "तुम्ही एक <span>{{badgeType}}</span> योगदानकर्ता आहात",
+  "validatorAcheived": "तुम्ही एक <span>{{badgeType}}</span> प्रमाणिकरण कर्ता आहात."
 }

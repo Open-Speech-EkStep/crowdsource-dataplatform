@@ -289,5 +289,7 @@
   "badgeInfoText2": "ବ୍ୟାଜ ନିଶ୍ଚିତ କରିବା ପୂର୍ବରୁ ଆପଣଙ୍କ ଯୋଗଦାନର ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରାଯିବ ।",
   "contribution": "ଯୋଗଦାନ",
   "validation": "ବୈଧୀକରଣ",
-  "congratulations": "ଅଭିନନ୍ଦନ"
+  "congratulations": "ଅଭିନନ୍ଦନ",
+  "contributorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ଯୋଗଦାନକାରୀ",
+  "validatorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ପ୍ରମାଣକାରୀ ଅଟନ୍ତି"
 }

@@ -289,5 +289,7 @@
   "badgeInfoText2": "ബാഡ്ജ് സ്ഥിരീകരിക്കുന്നതിന് മുമ്പ് നിങ്ങളുടെ സംഭാവന സാധൂകരിക്കപ്പെടും.",
   "contribution": "സംഭാവന",
   "validation": "സാധൂകരണം",
-  "congratulations": "അഭിനന്ദനങ്ങള്‍"
+  "congratulations": "അഭിനന്ദനങ്ങള്‍",
+  "contributorAcheived": "നിങ്ങള്‍ ഒരു <span>{{badgeType}}</span> സംഭാവക/ സംഭാവകന്‍ ആണ്",
+  "validatorAcheived": "നിങ്ങള്‍ ഒരു <span>{{badgeType}}</span> വാലിഡേറ്റര്‍ ആണ്"
 }

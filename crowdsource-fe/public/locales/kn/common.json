@@ -289,5 +289,7 @@
   "badgeInfoText2": "ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಕೊಡಲು ನಿರ್ಧರಿಸುವ ಮೊದಲು ನಿಮ್ಮ ಕೊಡುಗೆಯು ಮೌಲ್ಯೀಕರಿಸಲ್ಪಡುತ್ತದೆ.",
   "contribution": "ಕೊಡುಗೆ",
   "validation": "ಮೌಲ್ಯೀಕರಣ",
-  "congratulations": "ಅಭನಂದನೆಗಳು"
+  "congratulations": "ಅಭನಂದನೆಗಳು",
+  "contributorAcheived": "ನೀವು ಒಬ್ಬ <span>{{badgeType}}</span> ಕೊಡುಗೆದಾರರಾಗಿದ್ದೀರಿ",
+  "validatorAcheived": "ನೀವು ಒಬ್ಬ <span>{{badgeType}}</span> ಮೌಲ್ಯಮಾಪಕರಾಗಿದ್ದೀರಿ"
 }

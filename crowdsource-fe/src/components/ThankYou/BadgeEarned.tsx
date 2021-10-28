@@ -124,7 +124,7 @@ const BadgeEarned = ({
                   values={{
                     count: contributionCount,
                     sourceType: t(pageMediaTypeStr),
-                    language: language,
+                    language: t(language.toLowerCase()),
                   }}
                   components={{ strong: <strong /> }}
                 />

@@ -289,5 +289,7 @@
   "badgeInfoText2": "బ్యాడ్జ్‌ను నిర్ధారించే ముందు మీ కాంట్రిబ్యూషన్ ధృవీకరించబడుతుంది.",
   "contribution": "కాంట్రిబ్యూషన్",
   "validation": "ధృవీకరణ",
-  "congratulations": "అభినందనలు"
+  "congratulations": "అభినందనలు",
+  "contributorAcheived": "మీరు <span>{{badgeType}}</span> కాంట్రిబ్యూటర్",
+  "validatorAcheived": "మీరు <span>{{badgeType}}</span> ధృవీకరణదారి"
 }

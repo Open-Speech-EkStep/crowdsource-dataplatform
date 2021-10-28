@@ -289,5 +289,7 @@
   "badgeInfoText2": "Your contribution will be validated before confirming the badge.",
   "contribution": "Contribution",
   "validation": "Validation",
-  "congratulations": "Congratulations"
+  "congratulations": "Congratulations",
+  "contributorAcheived": "You are a <span>{{badgeType}}</span> Contributor",
+  "validatorAcheived": "You are a <span>{{badgeType}}</span> Validator"
 }

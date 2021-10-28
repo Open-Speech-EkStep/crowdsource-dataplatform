@@ -289,5 +289,7 @@
   "badgeInfoText2": "बैज की पुष्टि करने से पहले आपके योगदान को सत्यापित किया जाएगा।",
   "contribution": "योगदान",
   "validation": "सत्यापन",
-  "congratulations": "बधाई हो"
+  "congratulations": "बधाई हो",
+  "contributorAcheived": "आप एक <span>{{badgeType}}</span>  योगदानकर्ता हैं",
+  "validatorAcheived": "आप एक <span>{{badgeType}}</span> सत्यापनकर्ता हैं"
 }

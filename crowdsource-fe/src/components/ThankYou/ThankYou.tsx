@@ -57,8 +57,15 @@ const YourBadge = (props: any) => {
         />
       </div>
       <span className="d-flex justify-content-center mt-3 display-5 font-family-rowdies fw-light">
-        You are a <span className="text-strong-warning ms-1 me-1"> {props.badgeType} </span>{' '}
-        {capitalizeFirstLetter(pageSourceConstants4[route.asPath])}
+        <Trans
+          i18nKey={`${pageSourceConstants4[route.asPath]}Acheived`}
+          defaults="contributorAcheived"
+          values={{
+            badgeType: capitalizeFirstLetter(t(props.badgeType.toLowerCase())),
+            sourceType: capitalizeFirstLetter(t(`${pageSourceConstants4[route.asPath]}`)),
+          }}
+          components={{ span: <span className="text-strong-warning ms-1 me-1" /> }}
+        />
       </span>
     </div>
   );
