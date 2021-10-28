@@ -10,7 +10,7 @@ import BadgeSection from 'components/BadgeSection';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
-import useFetch from 'hooks/useFetch';
+import useFetchWithInit from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
 import type SpeakerDetails from 'types/SpeakerDetails';
@@ -27,7 +27,7 @@ const MedalGallery = () => {
 
   const userRewardsApi = `${apiPaths.userRewards}/${speakerDetails?.userName || ''}`;
 
-  const { data: userBadges, mutate } = useFetch<any>(userRewardsApi, { revalidateOnMount: false });
+  const { data: userBadges, mutate } = useFetchWithInit<any>(userRewardsApi, { revalidateOnMount: false });
 
   useEffect(() => {
     if (speakerDetails) {

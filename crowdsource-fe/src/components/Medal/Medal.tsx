@@ -37,7 +37,9 @@ const Medal = ({ initiative, medal, action, language }: MedalProps) => {
     <div className="position-relative">
       <div
         role="button"
-        className={`${styles.root} d-flex flex-column align-items-center text-center py-2 py-md-3 cursor-pointer`}
+        className={`${styles.root} ${styles.earned} ${
+          showZoomedImage ? styles.active : ''
+        } d-flex flex-column align-items-center text-center py-2 py-md-3 cursor-pointer`}
         onClick={() => setShowZoomedImage(true)}
         onKeyDown={() => setShowZoomedImage(true)}
         ref={medalRef}
