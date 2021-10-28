@@ -122,6 +122,8 @@ export const pageInitiativeRouteConstants = {
   [routePaths.boloIndiaValidateThankYou]: INITIATIVES_MAPPING.bolo,
   [routePaths.dekhoIndiaValidateThankYou]: INITIATIVES_MAPPING.dekho,
   [routePaths.likhoIndiaValidateThankYou]: INITIATIVES_MAPPING.likho,
+
+  [routePaths.myBadges]: 'others',
 } as const;
 
 export default pageRouteConstants;
