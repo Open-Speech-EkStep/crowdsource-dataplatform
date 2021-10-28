@@ -119,6 +119,10 @@ app.use(function (req, res, next) {
 
 app.use(express.static('../crowdsource-ui/target'));
 
+router.get('/get-userid', (req, res) => {
+    res.sandStatus(200);
+})
+
 router.get('/', function (req, res) {
     // #swagger.ignore = true
     res.redirect('en/home.html');
