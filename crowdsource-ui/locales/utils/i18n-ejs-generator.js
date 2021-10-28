@@ -158,7 +158,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
     );
     await ejs2html(
       `${ejsPath}/record.ejs`,
-      { MOTHER_TONGUE, LANGUAGES ,config},
+      { MOTHER_TONGUE, LANGUAGES ,config,contextRoot},
       i18n,
       outputPath,
       'record.html',
@@ -195,7 +195,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
 
     await ejs2html(
       `${ejsPath}/validator-prompt-page.ejs`,
-      { MOTHER_TONGUE, LANGUAGES ,config},
+      { MOTHER_TONGUE, LANGUAGES ,config,contextRoot},
       i18n,
       outputPath,
       'validator-page.html',
@@ -203,24 +203,6 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       contextRoot,brand
     );
 
-    // await ejs2html(
-    //   `${ejsPath}/profanity.ejs`,
-    //   { LANGUAGES,config },
-    //   i18n,
-    //   outputPath,
-    //   'profanity.html',
-    //   locale,
-    //   contextRoot,brand
-    // );
-    // await ejs2html(
-    //   `${ejsPath}/profanity-home.ejs`,
-    //   { LANGUAGES ,config},
-    //   i18n,
-    //   outputPath,
-    //   'profanity-home.html',
-    //   locale,
-    //   contextRoot,brand
-    // );
     await ejs2html(
       `${ejsPath}/profanity.ejs`,
       { LANGUAGES,config },
@@ -230,7 +212,7 @@ const generateLocalisedHtmlFromEjs = function (inputPath, outPath, moduleName, e
       locale,
       contextRoot,brand
     );
-    await ejs2html(`${ejsPath}/key_gen.ejs`, {config}, i18n, outputPath, 'key_gen.html', locale, contextRoot,brand);
+    await ejs2html(`${ejsPath}/key_gen.ejs`, {config,contextRoot}, i18n, outputPath, 'key_gen.html', locale, contextRoot,brand);
   });
 };
 
