@@ -14,15 +14,25 @@ import styles from './NavigationList.module.scss';
 const useNavLink = () => {
   const { asPath: currentRoutePath } = useRouter();
   const getNavLinkProps = useCallback(
-    routePath => ({
-      className: classnames(
-        `${styles.link} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`,
-        {
-          [styles.activeLink]: currentRoutePath === routePath,
-        }
-      ),
-      'aria-current': currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
-    }),
+    routePath => {
+      if (currentRoutePath === routePath || currentRoutePath.includes(routePath)) {
+        return {
+          className: classnames(
+            `${styles.link} ${styles.activeLink} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`
+          ),
+          'aria-current':
+            currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
+        };
+      } else {
+        return {
+          className: classnames(
+            `${styles.link} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`
+          ),
+          'aria-current':
+            currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
+        };
+      }
+    },
     [currentRoutePath]
   );
   return {
