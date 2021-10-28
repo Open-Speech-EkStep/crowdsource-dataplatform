@@ -47,7 +47,6 @@ describe('ThankYou', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/rewards?type=asr&language=English&source=contribute&userName=abc', {
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
         method: 'GET',
         mode: 'cors',
       });
