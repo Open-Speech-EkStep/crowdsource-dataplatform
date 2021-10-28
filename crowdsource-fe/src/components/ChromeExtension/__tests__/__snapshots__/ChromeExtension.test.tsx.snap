@@ -14,16 +14,6 @@ exports[`Chrome Extension should render the component and matches it against sto
     <div
       class="d-flex align-items-center mt-md-2 mt-lg-0"
     >
-      <button
-        class="ceBtn flex-shrink-0 light secondary btn btn-light"
-        data-testid="Button"
-        type="button"
-      >
-        watchTheVideo
-      </button>
-      <span
-        class="sep d-flex border border-start-0 border-primary w-0 mx-5"
-      />
       <a
         class="flex-shrink-0"
         href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
@@ -32,6 +22,16 @@ exports[`Chrome Extension should render the component and matches it against sto
       >
         installNow
       </a>
+      <span
+        class="sep d-flex border border-start-0 border-primary w-0 mx-5"
+      />
+      <button
+        class="ceBtn flex-shrink-0 light secondary btn btn-light"
+        data-testid="Button"
+        type="button"
+      >
+        watchTheVideo
+      </button>
     </div>
     <button
       class="close d-flex position-absolute cursor info normal btn btn-link"

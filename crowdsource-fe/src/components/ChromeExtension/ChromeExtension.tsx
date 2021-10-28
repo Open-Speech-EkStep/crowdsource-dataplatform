@@ -40,10 +40,6 @@ const ChromeExtension = () => {
     >
       <span className="fst-italic me-5">{t('chromeExtensionLabel')}</span>
       <div className="d-flex align-items-center mt-md-2 mt-lg-0">
-        <Button variant="secondary" className={`${styles.ceBtn} flex-shrink-0`} onClick={onShowVideoModal}>
-          {t('watchTheVideo')}
-        </Button>
-        <span className={`${styles.sep} d-flex border border-start-0 border-primary w-0 mx-5`} />
         <a
           href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
           className="flex-shrink-0"
@@ -52,6 +48,10 @@ const ChromeExtension = () => {
         >
           {t('installNow')}
         </a>
+        <span className={`${styles.sep} d-flex border border-start-0 border-primary w-0 mx-5`} />
+        <Button variant="secondary" className={`${styles.ceBtn} flex-shrink-0`} onClick={onShowVideoModal}>
+          {t('watchTheVideo')}
+        </Button>
       </div>
       <Modal show={show} onHide={onHideModal}>
         <video width="100%" height="360px" controls>
