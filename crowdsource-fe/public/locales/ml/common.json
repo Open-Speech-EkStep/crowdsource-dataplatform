@@ -114,7 +114,7 @@
   "sentences": "വാക്യങ്ങള്‍",
   "images": "ചിത്രം(കള്‍)",
   "progressStatus": "{{initiativeName}} സുനോ ഇന്ത്യ ടാര്‍ഗെറ്റിന്റെ  <span>{{average}}%</span> കൈവരിച്ചു",
-  "progressStatusWithLanguage": "",
+  "progressStatusWithLanguage": "{{language}} {{initiativeName}} ടാര്‍ഗെറ്റിന്റെ <span>{{average}}%</span> കൈവരിച്ചിരിക്കുന്നു",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",

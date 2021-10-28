@@ -114,7 +114,7 @@
   "sentences": "ವಾಕ್ಯ (ಗಳು)",
   "images": "ಚಿತ್ರ (ಗಳು)",
   "progressStatus": "{{initiativeName}} <span>{{average}}%</span>  ರಷ್ಟು ಸಾಧಿಸಲ್ಪಟ್ಟಿದೆ",
-  "progressStatusWithLanguage": "",
+  "progressStatusWithLanguage": "{{language}} ಭಾಷೆಯ {{initiativeName}} ಗುರಿಯ <span>{{average}}%</span> ಅಷ್ಟು ಸಾಧಿಸಲ್ಪಟ್ಟಿದೆ",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",

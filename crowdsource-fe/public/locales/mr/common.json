@@ -114,7 +114,7 @@
   "sentences": "वाक्य",
   "images": "इमेज/इमेजेस",
   "progressStatus": "{{initiativeName}} <span>{{average}}%</span> चे लक्ष्य  साध्य",
-  "progressStatusWithLanguage": "",
+  "progressStatusWithLanguage": "{{language}} मध्ये {{initiativeName}} <span>{{average}}%</span>  लक्ष्य साध्य",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",

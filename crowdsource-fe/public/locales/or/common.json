@@ -114,7 +114,7 @@
   "sentences": "ବାକ୍ୟ (ଗୁଡ଼ିକ)",
   "images": "ପ୍ରତିଛବି (ଗୁଡ଼ିକ)",
   "progressStatus": "{{initiativeName}} में <span>{{average}}%</span> ର ଲକ୍ଷ୍ୟ ହାସଲ",
-  "progressStatusWithLanguage": " {{language}}ରେ {{initiativeName}} ପାଇଁ <span>{{average}}%</span>ର ଲକ୍ଷ୍ୟ ହାସଲ",
+  "progressStatusWithLanguage": "{{language}}ରେ {{initiativeName}} ପାଇଁ <span>{{average}}%</span>ର ଲକ୍ଷ୍ୟ ହାସଲ",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",

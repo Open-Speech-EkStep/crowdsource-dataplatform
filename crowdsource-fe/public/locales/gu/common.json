@@ -114,7 +114,7 @@
   "sentences": "વાક્ય",
   "images": "ઇમેજ",
   "progressStatus": "{{initiativeName}} <span>{{average}}%</span> લક્ષ્ય પ્રાપ્ત થયા",
-  "progressStatusWithLanguage": "",
+  "progressStatusWithLanguage": "{{language}} માં {{initiativeName}} માટે  <span>{{average}}%</span> નું લક્ષ હાસિલ થયું છે .",
   "beta": "",
   "metaTitle": "",
   "metaDescription": "",
