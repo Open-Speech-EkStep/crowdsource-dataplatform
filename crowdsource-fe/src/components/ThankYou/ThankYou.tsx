@@ -156,7 +156,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                     dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                     isTopLanguage={setMode}
                     graphHeading={t(`${mode}ParticipationText`, {
-                      language: contributionLanguage,
+                      language: t(`${contributionLanguage?.toLowerCase()}`),
                     })}
                     showHeader={false}
                   />
@@ -190,7 +190,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                       isTopLanguage={setMode}
                       graphHeading={t(`${mode}ParticipationText`, {
-                        language: contributionLanguage,
+                        language: t(`${contributionLanguage?.toLowerCase()}`),
                       })}
                       showHeader={false}
                     />
@@ -224,7 +224,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                       isTopLanguage={setMode}
                       graphHeading={t(`${mode}ParticipationText`, {
-                        language: contributionLanguage,
+                        language: t(`${contributionLanguage?.toLowerCase()}`),
                       })}
                       showHeader={true}
                     />
