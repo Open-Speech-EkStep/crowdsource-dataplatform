@@ -63,14 +63,14 @@ exports[`BadgeEarned should render the component and matches it against stored s
               <p
                 class="display-3 mt-5 mt-6"
               >
-                contributedSentences
+                contributedEarnedBadgeSubheader
               </p>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="mt-8 text-center text-md-start"
+        class="mt-4 text-center text-md-start"
       >
         <div
           class="d-flex flex-column align-items-center flex-md-row align-items-md-baseline"

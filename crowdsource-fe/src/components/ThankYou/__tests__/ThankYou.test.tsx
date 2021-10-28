@@ -147,7 +147,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('contributedMessage')).toBeInTheDocument();
+    expect(screen.getByText('contributedMessage !')).toBeInTheDocument();
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
@@ -179,7 +179,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('contributedMessage')).toBeInTheDocument();
+    expect(screen.getByText('contributedMessage !')).toBeInTheDocument();
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 

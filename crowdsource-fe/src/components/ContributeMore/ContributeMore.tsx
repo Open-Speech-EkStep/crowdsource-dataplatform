@@ -94,10 +94,11 @@ const ContributeMore = ({
           <p className="mt-3 mt-md-0 ms-md-3 display-4">
             <Trans
               i18nKey={`${source}RemainingText`}
+              defaults="contributeRemainingText"
               values={{
                 count: nextMileStone - contributionCount,
-                sourceType: pageMediaTypeStr,
-                nextBadgeType: nextBadgeType,
+                sourceType: t(`${pageMediaTypeStr}` as string).toLowerCase(),
+                nextBadgeType: t(nextBadgeType.toLowerCase()),
               }}
               components={{ strong: <strong /> }}
             />
@@ -133,9 +134,7 @@ const ContributeMore = ({
         </Link>
       </div>
       <Link href={url}>
-        <Button className="mt-8 mt-md-0 ms-3">
-          {t('moreBtn', { source: capitalizeFirstLetter(source) })}
-        </Button>
+        <Button className="mt-8 mt-md-0 ms-3">{t(`${source}More`)}</Button>
       </Link>
     </div>
   );

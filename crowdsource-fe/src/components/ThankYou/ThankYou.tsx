@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import CompareLanguages from 'components/CompareLanguages';
 import ContributeMore from 'components/ContributeMore';
 import ContributionDetails from 'components/ContributionDetails';
-import SocialShareIcons from 'components/SocialShareIcons';
 import TwoColumn from 'components/TwoColumn';
 import TyTargetProgress from 'components/TyTargetProgress';
 import apiPaths from 'constants/apiPaths';
@@ -35,16 +34,7 @@ import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
 
-import { BadgeEarned } from '.';
-
-const ShareOn = () => (
-  <div
-    className={`${styles.socialShare} d-inline-flex align-items-center border border-1 border-primary px-4`}
-  >
-    <span className="me-3">Share on</span>
-    <SocialShareIcons />
-  </div>
-);
+import { BadgeEarned, ShareOn } from '.';
 
 const YourBadge = (props: any) => {
   const route = useRouter();
@@ -115,12 +105,14 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           <h2 className="text-center">
             <Trans
               i18nKey={`${pageSourceConstants2[route.asPath]}Message`}
+              defaults="contributedMessage"
               values={{
                 count: rewardData?.contributionCount,
-                sourceType: pageMediaTypeConstants[route.asPath],
+                sourceType: (t(`${pageMediaTypeConstants[route.asPath]}`) as string).toLowerCase(),
               }}
               components={{ span: <span className={styles.count} /> }}
-            />
+            />{' '}
+            !
           </h2>
         )}
         <section className="mt-8">

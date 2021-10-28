@@ -34,7 +34,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                   class="d-md-flex text-center text-md-start h-100 align-items-md-center"
                 >
                   <h4>
-                    participationText
+                    seeParticipationText
                   </h4>
                 </div>
               </div>
@@ -51,7 +51,7 @@ exports[`ThankYou should render the component and matches it against stored snap
             </div>
           </div>
           <div
-            class="mt-8 text-center text-md-start"
+            class="mt-4 text-center text-md-start"
           >
             <div
               class="socialShare d-inline-flex align-items-center border border-1 border-primary px-4"
@@ -59,7 +59,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               <span
                 class="me-3"
               >
-                Share on
+                shareOn
               </span>
               <a
                 class="socialShareLink mx-2 d-inline-block ms-0"
@@ -199,7 +199,7 @@ exports[`ThankYou should render the component and matches it against stored snap
         <p
           class="mt-3 mt-md-0 ms-md-3 display-4"
         >
-          remainingContributionText
+          contributeRemainingText
         </p>
         <div
           class="disabled d-flex justify-content-center mt-4 mt-md-0"
@@ -327,7 +327,7 @@ exports[`ThankYou should render the component and matches it against stored snap
         data-testid="Button"
         type="button"
       >
-        moreBtn
+        contributeMore
       </button>
     </div>
   </section>

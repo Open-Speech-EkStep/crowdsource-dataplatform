@@ -10,7 +10,7 @@ exports[`ContributionDetails should render the component and matches it against 
     >
       <div />
       <div
-        class="mt-8 text-center text-md-start"
+        class="mt-4 text-center text-md-start"
       />
     </div>
   </div>

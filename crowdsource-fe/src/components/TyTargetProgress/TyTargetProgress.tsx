@@ -135,7 +135,11 @@ const TyTargetProgress = (props: TyTargetProgressProps) => {
           <Trans
             i18nKey="progressStatusWithLanguage"
             defaults="progressStatusWithLanguage"
-            values={{ average: formattedAverage, initiativeName: initiativeName, language: props.language }}
+            values={{
+              average: formattedAverage,
+              initiativeName,
+              language: t(`${props.language?.toLowerCase()}`),
+            }}
             components={{ span: <span className={styles.count} /> }}
           />
         </div>

@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import ContributionDetails from 'components/ContributionDetails';
-import SocialShareIcons from 'components/SocialShareIcons';
 import TwoColumn from 'components/TwoColumn';
 import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS_PAGE_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
@@ -15,6 +14,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
 import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
 
+import ShareOn from './ShareOn';
 import styles from './ThankYou.module.scss';
 
 interface DownloadBadgeProps {
@@ -36,18 +36,6 @@ const BadgeImage = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
         height="180"
         alt={`Bronze Badge english`}
       />
-    </div>
-  );
-};
-
-const ShareOn = () => {
-  const { t } = useTranslation();
-  return (
-    <div
-      className={`${styles.socialShare} d-inline-flex align-items-center border border-1 border-primary px-4`}
-    >
-      <span className="me-3">{t('shareOn')}</span>
-      <SocialShareIcons />
     </div>
   );
 };
@@ -132,9 +120,10 @@ const BadgeEarned = ({
               <p className="display-3 mt-5 mt-6">
                 <Trans
                   i18nKey={`${INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath]}EarnedBadgeSubheader`}
+                  defaults="contributedEarnedBadgeSubheader"
                   values={{
                     count: contributionCount,
-                    sourceType: pageMediaTypeStr,
+                    sourceType: t(pageMediaTypeStr),
                     language: language,
                   }}
                   components={{ strong: <strong /> }}

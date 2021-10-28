@@ -90,6 +90,8 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
     { revalidateOnMount: false }
   );
 
+  const translatedContributionLanguage = t(`${contributionLanguage?.toLowerCase()}`);
+
   useEffect(() => {
     if (contributionLanguage) {
       hrsMutate();
@@ -149,7 +151,7 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
         <BarChart id="tybar_chart" data={barChartData} />
       </div>
       <span className="display-6 d-block text-center text-primary-60">
-        {t('contributionVsTopLanguage', { language: contributionLanguage })}
+        {t('contributionVsTopLanguage', { language: translatedContributionLanguage })}
       </span>
     </div>
   ) : null;

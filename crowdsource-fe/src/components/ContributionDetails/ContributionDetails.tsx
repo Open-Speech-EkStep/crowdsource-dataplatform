@@ -11,7 +11,7 @@ const ContributionDetails = ({ top, bottom }: ContributionDetailsProps) => {
   return (
     <TriColorGradientBg>
       <div>{top}</div>
-      <div className="mt-8 text-center text-md-start">{bottom}</div>
+      <div className="mt-4 text-center text-md-start">{bottom}</div>
     </TriColorGradientBg>
   );
 };

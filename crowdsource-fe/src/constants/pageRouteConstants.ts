@@ -94,8 +94,8 @@ export const pageSourceConstants4 = {
 } as const;
 
 export const pageMediaTypeConstants = {
-  [routePaths.sunoIndiaContributeThankYou]: 'sentence(s)',
-  [routePaths.sunoIndiaValidateThankYou]: 'sentence(s)',
+  [routePaths.sunoIndiaContributeThankYou]: 'sentences',
+  [routePaths.sunoIndiaValidateThankYou]: 'sentences',
   [routePaths.boloIndiaContributeThankYou]: sourceConstants.contribute,
   [routePaths.boloIndiaValidateThankYou]: sourceConstants.validate,
   [routePaths.dekhoIndiaContributeThankYou]: 'image label(s)',
