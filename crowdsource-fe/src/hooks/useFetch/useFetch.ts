@@ -14,7 +14,6 @@ const paramFetcher = (key: string) =>
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
   }).then(res => res.json());
 
 export const useFetchWithInit = <Data = any, Error = any>(
