@@ -111,7 +111,7 @@ app.use(function (req, res, next) {
             maxAge: ONE_YEAR,
             httpOnly: true,
             secure: true,
-            sameSite: "lax"
+            sameSite: "None"
         });
     }
     next();
