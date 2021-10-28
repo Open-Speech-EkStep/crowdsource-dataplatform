@@ -119,7 +119,7 @@ const ContributeMore = ({
                 <div
                   key={index}
                   className={`${styles.medal} ${
-                    index === 0 ? styles.upcomingBadge : styles.otherBadges
+                    index === badges.length ? styles.upcomingBadge : styles.otherBadges
                   }  d-flex mx-2 flex-shrink-0`}
                 >
                   <Image

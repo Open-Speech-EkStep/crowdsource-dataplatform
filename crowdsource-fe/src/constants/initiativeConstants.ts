@@ -41,7 +41,7 @@ export const INITIATIVE_ACTIONS = {
 
 export const INITIATIVE_ACTIONS_CAPS = {
   transcribed: 'transcribed',
-  validated: 'Validated',
+  validated: 'validated',
 } as const;
 
 export const INITIATIVE_ACTIONS_PAGE_MAPPING = {
