@@ -275,7 +275,7 @@
   "download": "ഡൗൺലോഡ്",
   "shareOn": "ഇതിലൂടെ പങ്കുവെക്കുക",
   "medalGalleryText": "Your Medal Gallery",
-  "noBadgeText": "No badge earned for {{initiativeName}} India",
+  "noBadgeText": "No badge earned for {{initiativeName}}",
   "badgeInfoText1": "Please keep contributing actively to stand a chance to get recognised.",
   "badgeInfoText2": "Your contribution will be validated before confirming the badge.",
   "contribution": "Contribution",

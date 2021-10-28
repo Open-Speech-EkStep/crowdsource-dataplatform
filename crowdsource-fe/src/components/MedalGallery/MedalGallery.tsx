@@ -84,7 +84,9 @@ const MedalGallery = () => {
                 ) : (
                   <Col className="p-0">
                     <Row className="mx-0 text-center mt-5">
-                      <h4 className="w-100">{t('noBadgeText', { initiativeName: `${t(initiative)}` })}</h4>
+                      <h4 className="w-100">
+                        {t('noBadgeText', { initiativeName: `${t(initiative)} ${t('india')}` })}
+                      </h4>
                     </Row>
                   </Col>
                 )}

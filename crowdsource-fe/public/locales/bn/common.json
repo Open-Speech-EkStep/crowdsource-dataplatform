@@ -283,7 +283,7 @@
   "validateRemainingText": "{{nextBadgeType}} ব্যাজ অর্জন করার জন্য <strong>{{count}} টি {{sourceType}}</strong> যাচাই করুন।",
   "contributionVsTopLanguage": "{{language}} বনাম শীর্ষ যোগদানকারী ভাষাগুলি",
   "medalGalleryText": "Your Medal Gallery",
-  "noBadgeText": "No badge earned for {{initiativeName}} India",
+  "noBadgeText": "No badge earned for {{initiativeName}}",
   "badgeInfoText1": "Please keep contributing actively to stand a chance to get recognised.",
   "badgeInfoText2": "Your contribution will be validated before confirming the badge.",
   "contribution": "Contribution",
