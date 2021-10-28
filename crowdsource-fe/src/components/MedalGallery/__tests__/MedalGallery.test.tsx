@@ -78,6 +78,6 @@ describe('MedalGallery', () => {
 
     let infoMessage = container.querySelector('[class="w-100"]');
 
-    expect(infoMessage?.innerHTML).toEqual('No badge earned for suno India');
+    expect(infoMessage?.innerHTML).toEqual('noBadgeText');
   });
 });

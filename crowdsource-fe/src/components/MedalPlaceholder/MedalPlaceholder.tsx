@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+
 import styles from './MedalPlaceholder.module.scss';
 
 interface MedalPlaceholderProps {
@@ -5,11 +7,12 @@ interface MedalPlaceholderProps {
 }
 
 const MedalPlaceholder = ({ medal }: MedalPlaceholderProps) => {
+  const { t } = useTranslation();
   return (
     <div
       className={`${styles.root} d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100`}
     >
-      {medal}
+      {t(medal.toLowerCase())}
     </div>
   );
 };

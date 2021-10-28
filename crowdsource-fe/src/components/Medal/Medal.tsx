@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
@@ -14,6 +15,7 @@ interface MedalProps {
 }
 
 const Medal = ({ initiative, medal, action, language }: MedalProps) => {
+  const { t } = useTranslation();
   const languageCode = LOCALE_LANGUAGES[language];
   const [showZoomedImage, setShowZoomedImage] = useState(false);
 
@@ -53,7 +55,7 @@ const Medal = ({ initiative, medal, action, language }: MedalProps) => {
             alt="Medal"
           />
         </div>
-        <span className="display-5 mt-1 fw-light text-capitalize text-break">{medal}</span>
+        <span className="display-5 mt-1 fw-light text-capitalize text-break">{t(medal.toLowerCase())}</span>
       </div>
       {showZoomedImage && (
         <div>

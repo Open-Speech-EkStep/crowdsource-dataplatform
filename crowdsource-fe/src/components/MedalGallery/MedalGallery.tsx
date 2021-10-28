@@ -57,9 +57,9 @@ const MedalGallery = () => {
     <div className={styles.root}>
       <header className="text-center">
         <h2>
-          Congratulations <span className={styles.highlight}>{speakerDetails?.userName}</span>!
+          {t('congratulations')} <span className={styles.highlight}>{speakerDetails?.userName}</span>!
         </h2>
-        <h3 className="mt-3">Your Medal Gallery</h3>
+        <h3 className="mt-3">{t('medalGalleryText')}</h3>
       </header>
       <div className="font-family-rowdies mt-7 mt-md-9">
         <Tabs
@@ -84,7 +84,7 @@ const MedalGallery = () => {
                 ) : (
                   <Col className="p-0">
                     <Row className="mx-0 text-center mt-5">
-                      <h4 className="w-100">No badge earned for {initiative} India</h4>
+                      <h4 className="w-100">{t('noBadgeText', initiative)}</h4>
                     </Row>
                   </Col>
                 )}
@@ -94,8 +94,8 @@ const MedalGallery = () => {
         </Tabs>
       </div>
       <div className={styles.text}>
-        <p className="m-0">Please keep contributing actively to stand a chance to get recognised.</p>
-        <p className="m-0">Your contribution will be validated before confirming the badge.</p>
+        <p className="m-0">{t('badgeInfoText1')}</p>
+        <p className="m-0">{t('badgeInfoText2')}</p>
       </div>
     </div>
   );

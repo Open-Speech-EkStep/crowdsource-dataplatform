@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useTranslation } from 'next-i18next';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -12,6 +13,7 @@ interface BadgeSectionProps {
 }
 
 const BadgeSection = ({ initiative, initiativeBadge }: BadgeSectionProps) => {
+  const { t } = useTranslation();
   const groupByLanguage = groupBy(initiativeBadge, 'language');
   return (
     <>
@@ -20,10 +22,10 @@ const BadgeSection = ({ initiative, initiativeBadge }: BadgeSectionProps) => {
         <Col lg="10">
           <Row>
             <Col lg="6">
-              <h6 className="fw-light">Contribution</h6>
+              <h6 className="fw-light">{t('contribution')}</h6>
             </Col>
             <Col lg="6">
-              <h6 className="fw-light">Validation</h6>
+              <h6 className="fw-light">{t('validation')}</h6>
             </Col>
           </Row>
         </Col>

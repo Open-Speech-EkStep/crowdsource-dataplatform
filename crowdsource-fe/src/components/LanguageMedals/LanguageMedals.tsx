@@ -25,7 +25,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
   return (
     <Row className="py-3">
       <Col lg="2" className="d-flex align-items-center fw-light display-3">
-        {language}
+        {t(language.toLowerCase())}
       </Col>
       <Col lg="10">
         <Row>
