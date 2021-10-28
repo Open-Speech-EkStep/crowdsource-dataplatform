@@ -29,8 +29,8 @@ const Switch = ({ optionOne, optionTwo, toggleSwitch }: SwitchProps) => {
     >
       <Button
         variant="normal"
-        className={classnames(`${styles.option} flex-fill px-2`, {
-          [`${styles.activeOption} rounded-12 text-light bg-primary`]: activeOption === optionOne,
+        className={classnames(`${styles.option} flex-fill px-2 rounded-12`, {
+          [`${styles.activeOption} text-light bg-primary`]: activeOption === optionOne,
         })}
         onClick={() => handleToggleSwitch(optionOne)}
       >
@@ -38,8 +38,8 @@ const Switch = ({ optionOne, optionTwo, toggleSwitch }: SwitchProps) => {
       </Button>
       <Button
         variant="normal"
-        className={classnames(`${styles.option} flex-fill px-2`, {
-          [`${styles.activeOption} rounded-12 text-light bg-primary`]: activeOption === optionTwo,
+        className={classnames(`${styles.option} flex-fill px-2 rounded-12`, {
+          [`${styles.activeOption} text-light bg-primary`]: activeOption === optionTwo,
         })}
         onClick={() => handleToggleSwitch(optionTwo)}
       >

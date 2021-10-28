@@ -7,14 +7,14 @@ exports[`Switch should render the component and matches it against stored snapsh
     data-testid="Switch"
   >
     <button
-      class="option flex-fill px-2 activeOption rounded-12 text-light bg-primary info normal btn btn-link"
+      class="option flex-fill px-2 rounded-12 activeOption text-light bg-primary info normal btn btn-link"
       data-testid="Button"
       type="button"
     >
       optionOne
     </button>
     <button
-      class="option flex-fill px-2 info normal btn btn-link"
+      class="option flex-fill px-2 rounded-12 info normal btn btn-link"
       data-testid="Button"
       type="button"
     >

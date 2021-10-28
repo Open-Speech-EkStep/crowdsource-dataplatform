@@ -3,7 +3,7 @@
 exports[`ProgressChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="d-md-flex justify-content-md-between mb-5"
+    class="d-md-flex justify-content-md-between mb-5 align-items-center"
   >
     <p
       class="display-2"
@@ -18,14 +18,14 @@ exports[`ProgressChart should render the component and matches it against stored
         data-testid="Switch"
       >
         <button
-          class="option flex-fill px-2 activeOption rounded-12 text-light bg-primary info normal btn btn-link"
+          class="option flex-fill px-2 rounded-12 activeOption text-light bg-primary info normal btn btn-link"
           data-testid="Button"
           type="button"
         >
           monthly
         </button>
         <button
-          class="option flex-fill px-2 info normal btn btn-link"
+          class="option flex-fill px-2 rounded-12 info normal btn btn-link"
           data-testid="Button"
           type="button"
         >

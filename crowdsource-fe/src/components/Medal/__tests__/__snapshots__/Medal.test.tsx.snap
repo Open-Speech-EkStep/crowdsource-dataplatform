@@ -6,8 +6,9 @@ exports[`Medal should render the component and matches it against stored snapsho
     class="position-relative"
   >
     <div
-      aria-hidden="true"
       class="root d-flex flex-column align-items-center text-center py-2 py-md-3 cursor-pointer"
+      role="button"
+      tabindex="0"
     >
       <div
         class="medalImg d-flex"

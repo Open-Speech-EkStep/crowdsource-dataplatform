@@ -69,7 +69,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
 
   return (
     <Fragment>
-      <div className="d-md-flex justify-content-md-between mb-5">
+      <div className="d-md-flex justify-content-md-between mb-5 align-items-center">
         <p className="display-2">{t('lineChartTitle')}</p>
         <div className="d-flex justify-content-end mt-4 mt-md-0">
           <Switch

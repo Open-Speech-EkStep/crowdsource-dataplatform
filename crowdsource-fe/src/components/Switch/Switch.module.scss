@@ -6,13 +6,10 @@
 .option {
   color: var(--text-primary-40);
   font-size: 0.75rem;
+  height: 1.375rem;
   min-width: 6.25rem;
 
   &:hover {
     color: var(--text-primary-40);
   }
-}
-
-.activeOption {
-  height: 1.375rem;
 }
