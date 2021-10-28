@@ -205,7 +205,7 @@ exports[`ThankYou should render the component and matches it against stored snap
           class="disabled d-flex justify-content-center mt-4 mt-md-0"
         >
           <div
-            class="medal  d-flex mx-2 flex-shrink-0"
+            class="medal upcomingBadge  d-flex mx-2 flex-shrink-0"
           >
             <div
               style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -232,7 +232,7 @@ exports[`ThankYou should render the component and matches it against stored snap
             </div>
           </div>
           <div
-            class="medal d-flex mx-2 flex-shrink-0"
+            class="medal otherBadges  d-flex mx-2 flex-shrink-0"
           >
             <div
               style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -248,7 +248,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                 />
               </div>
               <img
-                alt="Silver Badge"
+                alt="Bronze Badge"
                 data-nimg="intrinsic"
                 decoding="async"
                 src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_silver_contribute.svg&w=96&q=75"
@@ -259,7 +259,7 @@ exports[`ThankYou should render the component and matches it against stored snap
             </div>
           </div>
           <div
-            class="medal d-flex mx-2 flex-shrink-0"
+            class="medal otherBadges  d-flex mx-2 flex-shrink-0"
           >
             <div
               style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -275,7 +275,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                 />
               </div>
               <img
-                alt="Gold Badge"
+                alt="Bronze Badge"
                 data-nimg="intrinsic"
                 decoding="async"
                 src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_gold_contribute.svg&w=96&q=75"
@@ -286,7 +286,7 @@ exports[`ThankYou should render the component and matches it against stored snap
             </div>
           </div>
           <div
-            class="medal d-flex mx-2 flex-shrink-0"
+            class="medal otherBadges  d-flex mx-2 flex-shrink-0"
           >
             <div
               style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -302,7 +302,7 @@ exports[`ThankYou should render the component and matches it against stored snap
                 />
               </div>
               <img
-                alt="Platinum Badge"
+                alt="Bronze Badge"
                 data-nimg="intrinsic"
                 decoding="async"
                 src="/_next/image?url=%2Fimages%2Fen%2Fbadges%2Fen_suno_platinum_contribute.svg&w=96&q=75"

@@ -131,9 +131,10 @@ const SunoTranscribe = () => {
       router.push(`/${currentLocale}${routePaths.sunoIndiaContributeThankYou}`, undefined, {
         locale: currentLocale,
       });
+    } else {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
     }
-    setCurrentDataIndex(index + 1);
-    setShowUIdata(contributionData[index + 1]);
   };
 
   const resetState = () => {

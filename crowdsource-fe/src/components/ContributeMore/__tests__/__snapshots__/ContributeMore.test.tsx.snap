@@ -8,9 +8,11 @@ exports[`ContributeMore should render the component and matches it against store
     <div
       class="d-flex flex-column flex-md-row align-items-md-center"
     >
-      <div
-        class="medal d-flex mx-2 flex-shrink-0"
+      <button
+        class="medal d-flex mx-2 flex-shrink-0 info normal btn btn-link"
+        data-testid="Button"
         title="Download Bronze Badge"
+        type="button"
       >
         <div
           style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -34,10 +36,12 @@ exports[`ContributeMore should render the component and matches it against store
           />
           <noscript />
         </div>
-      </div>
-      <div
-        class="medal d-flex mx-2 flex-shrink-0"
+      </button>
+      <button
+        class="medal d-flex mx-2 flex-shrink-0 info normal btn btn-link"
+        data-testid="Button"
         title="Download Silver Badge"
+        type="button"
       >
         <div
           style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -61,10 +65,12 @@ exports[`ContributeMore should render the component and matches it against store
           />
           <noscript />
         </div>
-      </div>
-      <div
-        class="medal d-flex mx-2 flex-shrink-0"
+      </button>
+      <button
+        class="medal d-flex mx-2 flex-shrink-0 info normal btn btn-link"
+        data-testid="Button"
         title="Download Gold Badge"
+        type="button"
       >
         <div
           style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -88,10 +94,12 @@ exports[`ContributeMore should render the component and matches it against store
           />
           <noscript />
         </div>
-      </div>
-      <div
-        class="medal d-flex mx-2 flex-shrink-0"
+      </button>
+      <button
+        class="medal d-flex mx-2 flex-shrink-0 info normal btn btn-link"
+        data-testid="Button"
         title="Download Platinum Badge"
+        type="button"
       >
         <div
           style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
@@ -115,7 +123,7 @@ exports[`ContributeMore should render the component and matches it against store
           />
           <noscript />
         </div>
-      </div>
+      </button>
       <p
         class="mt-3 mt-md-0 ms-md-3 display-4"
       >

@@ -27,6 +27,25 @@ interface ContributeMoreProps {
   badgeType?: string;
 }
 
+const badgeArray = [
+  {
+    id: 1,
+    type: 'Bronze',
+  },
+  {
+    id: 2,
+    type: 'Silver',
+  },
+  {
+    id: 3,
+    type: 'Gold',
+  },
+  {
+    id: 4,
+    type: 'Platinum',
+  },
+];
+
 const ContributeMore = ({
   initiative,
   source,
@@ -54,7 +73,8 @@ const ContributeMore = ({
     >
       <div className="d-flex flex-column flex-md-row align-items-md-center">
         {badges?.map((item, index) => (
-          <div
+          <Button
+            variant="normal"
             key={index}
             title={`Download ${item.grade} Badge`}
             className={`${styles.medal} d-flex mx-2 flex-shrink-0`}
@@ -66,7 +86,7 @@ const ContributeMore = ({
               height="60"
               alt={`${item.grade.toLowerCase()}Download`}
             />
-          </div>
+          </Button>
         ))}
         {badgeType === 'Platinum' ? (
           <p>
@@ -92,54 +112,26 @@ const ContributeMore = ({
         )}
 
         <div className={`${styles.disabled} d-flex justify-content-center mt-4 mt-md-0`}>
-          {!badges ||
-          badges.length === 0 ||
-          (badges && badges.length !== 0 && badges[0].grade !== 'Bronze') ? (
-            <div className={`${styles.medal}  d-flex mx-2 flex-shrink-0`}>
-              <Image
-                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_bronze_${source}.svg`}
-                width="48"
-                height="60"
-                alt={`Bronze Badge`}
-              />
-            </div>
-          ) : null}
-          {!badges ||
-          badges.length === 0 ||
-          (badges && badges.length !== 0 && badges[1]?.grade !== 'Silver') ? (
-            <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
-              <Image
-                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_silver_${source}.svg`}
-                width="48"
-                height="60"
-                alt={`Silver Badge`}
-              />
-            </div>
-          ) : null}
-          {!badges ||
-          badges.length === 0 ||
-          (badges && badges.length !== 0 && badges[2]?.grade !== 'Gold') ? (
-            <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
-              <Image
-                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_gold_${source}.svg`}
-                width="48"
-                height="60"
-                alt={`Gold Badge`}
-              />
-            </div>
-          ) : null}
-          {!badges ||
-          badges.length === 0 ||
-          (badges && badges.length !== 0 && badges[3]?.grade !== 'Platinum') ? (
-            <div className={`${styles.medal} d-flex mx-2 flex-shrink-0`}>
-              <Image
-                src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_platinum_${source}.svg`}
-                width="48"
-                height="60"
-                alt={`Platinum Badge`}
-              />
-            </div>
-          ) : null}
+          {badgeArray.map((item, index) => {
+            return !badges ||
+              badges.length === 0 ||
+              !badges[index] ||
+              (badges && badges.length !== 0 && badges[index] && badges[index].grade !== item.type) ? (
+              <div
+                key={index}
+                className={`${styles.medal} ${
+                  index === 0 ? styles.upcomingBadge : styles.otherBadges
+                }  d-flex mx-2 flex-shrink-0`}
+              >
+                <Image
+                  src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.type.toLowerCase()}_${source}.svg`}
+                  width="48"
+                  height="60"
+                  alt={`Bronze Badge`}
+                />
+              </div>
+            ) : null;
+          })}
         </div>
         <Link href={routePaths.badges}>
           <a className="mt-7 mt-md-0 display-5 ms-md-3 flex-shrink-0">
