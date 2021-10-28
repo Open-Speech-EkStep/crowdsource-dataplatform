@@ -76,7 +76,7 @@ exports[`SunoTranscribe should render the component and matches it against store
         >
           <a
             class="link"
-            href="/sunoIndia/home"
+            href="/suno-india"
           >
             <div
               class="d-flex align-items-center cursor-pointer"

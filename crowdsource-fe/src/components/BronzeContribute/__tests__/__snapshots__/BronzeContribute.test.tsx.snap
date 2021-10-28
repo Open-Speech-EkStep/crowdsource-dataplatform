@@ -57,28 +57,28 @@ exports[`BronzeContribute should render the component and matches it against sto
             <a
               class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="sunoHome"
-              href="/sunoIndia/home"
+              href="/suno-india"
             >
               suno india
             </a>
             <a
               class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="boloHome"
-              href="/boloIndia/home"
+              href="/bolo-india"
             >
               bolo india
             </a>
             <a
               class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="likhoHome"
-              href="/likhoIndia/home"
+              href="/likho-india"
             >
               likho india
             </a>
             <a
               class="link rounded-24 bg-primary border-0 text-light display-4 d-flex align-items-center justify-content-center text-uppercase"
               data-testid="dekhoHome"
-              href="/dekhoIndia/home"
+              href="/dekho-india"
             >
               dekho india
             </a>

@@ -10,19 +10,19 @@ const togglePagesMapping = [
   // priority issue while matching last path of `pathname` variable.
   {
     key: 'sunoIndiaHome',
-    pathname: '/sunoIndia/home',
+    pathname: '/suno-india',
   },
   {
     key: 'sunoIndiaDashboard',
-    pathname: '/sunoIndia/dashboard',
+    pathname: '/suno-india/dashboard',
   },
   {
     key: 'boloIndiaHome',
-    pathname: '/boloIndia/home',
+    pathname: '/bolo-india',
   },
   {
     key: 'dekhoIndiaHome',
-    pathname: '/dekhoIndia/home',
+    pathname: '/dekho-india',
   },
   {
     key: 'styleGuide',

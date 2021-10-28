@@ -7,7 +7,7 @@ import ThankYou from '../ThankYou';
 
 describe('ThankYou', () => {
   const setup = async (initiative: 'suno' | 'dekho' | 'bolo' | 'likho', data: any) => {
-    router.asPath = '/sunoIndia/thank-you';
+    router.asPath = '/suno-india/contribute/thank-you';
     const speakerDetails = {
       userName: 'abc',
       motherTongue: '',

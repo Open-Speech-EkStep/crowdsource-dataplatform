@@ -1,11 +1,10 @@
 /* eslint-disable import/no-internal-modules */
 import '__fixtures__/mockComponentsWithSideEffects';
 
+import HomePage from 'pages/dekho-india/index.page';
 import { render, screen } from 'utils/testUtils';
 
-import HomePage from '../../dekhoIndia/home.page';
-
-describe('Dekho Home page', () => {
+describe('Dekho Home Page', () => {
   const setup = () => {
     return render(<HomePage />);
   };

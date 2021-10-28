@@ -1,11 +1,10 @@
 /* eslint-disable import/no-internal-modules */
 import '__fixtures__/mockComponentsWithSideEffects';
 
+import HomePage from 'pages/likho-india/index.page';
 import { render, screen } from 'utils/testUtils';
 
-import HomePage from '../../likhoIndia/home.page';
-
-describe('Likho Home page', () => {
+describe('Likho Home Page', () => {
   const setup = () => {
     return render(<HomePage />);
   };

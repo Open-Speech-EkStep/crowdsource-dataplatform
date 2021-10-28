@@ -1,9 +1,8 @@
 /* eslint-disable import/no-internal-modules */
 import '__fixtures__/mockComponentsWithSideEffects';
 
+import HomePage from 'pages/suno-india/index.page';
 import { render, screen } from 'utils/testUtils';
-
-import HomePage from '../../sunoIndia/home.page';
 
 describe('Suno Home page', () => {
   const setup = () => {

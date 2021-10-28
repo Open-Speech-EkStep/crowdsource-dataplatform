@@ -8,29 +8,29 @@ exports[`NavigationList should render the component and matches it against store
   >
     <a
       class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
-      data-rr-ui-event-key="/sunoIndia/home"
-      href="/sunoIndia/home"
+      data-rr-ui-event-key="/suno-india"
+      href="/suno-india"
     >
       suno india
     </a>
     <a
       class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
-      data-rr-ui-event-key="/boloIndia/home"
-      href="/boloIndia/home"
+      data-rr-ui-event-key="/bolo-india"
+      href="/bolo-india"
     >
       bolo india
     </a>
     <a
       class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
-      data-rr-ui-event-key="/likhoIndia/home"
-      href="/likhoIndia/home"
+      data-rr-ui-event-key="/likho-india"
+      href="/likho-india"
     >
       likho india
     </a>
     <a
       class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
-      data-rr-ui-event-key="/dekhoIndia/home"
-      href="/dekhoIndia/home"
+      data-rr-ui-event-key="/dekho-india"
+      href="/dekho-india"
     >
       dekho india
     </a>

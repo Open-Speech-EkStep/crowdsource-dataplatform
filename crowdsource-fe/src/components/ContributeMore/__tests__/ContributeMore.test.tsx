@@ -13,7 +13,7 @@ describe('ContributeMore', () => {
     nextBadgeType: string,
     badgeType: string
   ) => {
-    router.asPath = '/sunoIndia/thank-you';
+    router.asPath = '/suno-india/contribute/thank-you';
     const badgeData = [
       {
         generated_badge_id: '4e614ac7-11d8-4126-a3ad-0540fbb4430e',

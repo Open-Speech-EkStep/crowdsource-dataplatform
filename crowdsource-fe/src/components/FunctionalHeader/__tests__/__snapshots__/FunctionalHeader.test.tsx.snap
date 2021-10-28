@@ -12,7 +12,7 @@ exports[`FunctionalHeader should render the component and matches it against sto
       >
         <a
           class="link"
-          href="/sunoIndia/home"
+          href="/suno-india"
         >
           <div
             class="d-flex align-items-center cursor-pointer"

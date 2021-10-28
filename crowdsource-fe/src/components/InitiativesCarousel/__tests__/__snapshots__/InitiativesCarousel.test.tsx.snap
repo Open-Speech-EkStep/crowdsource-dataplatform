@@ -284,7 +284,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/dekhoIndia/home"
+                                  href="/dekho-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -447,7 +447,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/sunoIndia/home"
+                                  href="/suno-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -610,7 +610,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/boloIndia/home"
+                                  href="/bolo-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -773,7 +773,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/likhoIndia/home"
+                                  href="/likho-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -936,7 +936,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/dekhoIndia/home"
+                                  href="/dekho-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -1099,7 +1099,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/sunoIndia/home"
+                                  href="/suno-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -1262,7 +1262,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/boloIndia/home"
+                                  href="/bolo-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -1425,7 +1425,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/likhoIndia/home"
+                                  href="/likho-india"
                                   role="button"
                                   tabindex="0"
                                 >
@@ -1588,7 +1588,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                 <a
                                   class="info primary btn btn-primary"
                                   data-testid="StartParticipating"
-                                  href="/dekhoIndia/home"
+                                  href="/dekho-india"
                                   role="button"
                                   tabindex="0"
                                 >

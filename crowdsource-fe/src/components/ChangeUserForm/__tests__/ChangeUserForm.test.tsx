@@ -29,7 +29,7 @@ describe('ChangeUserForm', () => {
   });
 
   it('should handle for valid/invalid username', () => {
-    setup('/sunoIndia', true);
+    setup('/suno-india', true);
 
     expect(screen.queryByText('userNameError')).not.toBeInTheDocument();
     expect(screen.getByText('userNameHint')).toBeInTheDocument();

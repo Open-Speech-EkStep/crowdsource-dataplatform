@@ -3,7 +3,7 @@ import '__fixtures__/mockComponentsWithSideEffects';
 
 import { render, screen } from 'utils/testUtils';
 
-import DashboardPage from '../../sunoIndia/dashboard.page';
+import DashboardPage from '../../suno-india/dashboard.page';
 
 describe('Suno Dashboard page', () => {
   const setup = () => {

@@ -98,7 +98,7 @@ exports[`ContributionTracker should render the component and matches it against 
         <a
           class="info primary btn btn-primary"
           data-testid="ViewAllDetailButton"
-          href="/sunoIndia/dashboard"
+          href="/suno-india/dashboard"
           role="button"
           tabindex="0"
         >

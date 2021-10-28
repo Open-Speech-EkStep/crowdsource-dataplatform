@@ -7,7 +7,7 @@ import FunctionalPageBackground from 'components/FunctionalPageBackground';
 import SunoTranscribe from 'components/SunoTranscribe';
 import { DEFAULT_LOCALE } from 'constants/localesConstants';
 
-const RecordPage: NextPage = () => (
+const ContributePage: NextPage = () => (
   <FunctionalPageBackground>
     <SunoTranscribe />
   </FunctionalPageBackground>
@@ -22,4 +22,4 @@ export const getStaticProps: GetStaticProps = async ({ locale = DEFAULT_LOCALE }
   };
 };
 
-export default RecordPage;
+export default ContributePage;

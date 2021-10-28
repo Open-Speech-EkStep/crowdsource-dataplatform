@@ -1,13 +1,12 @@
 /* eslint-disable import/no-internal-modules */
 import '__fixtures__/mockComponentsWithSideEffects';
 
+import ThankYouValidatePage from 'pages/suno-india/validate/thank-you.page';
 import { render, screen } from 'utils/testUtils';
 
-import ThankYouPage from '../../sunoIndia/thank-you.page';
-
-describe('Suno Thank you page', () => {
+describe('Suno Validate Thank You Page', () => {
   const setup = () => {
-    return render(<ThankYouPage />);
+    return render(<ThankYouValidatePage />);
   };
 
   it('should render the suno india homepage', () => {

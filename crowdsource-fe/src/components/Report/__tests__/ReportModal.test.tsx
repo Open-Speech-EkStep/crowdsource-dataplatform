@@ -40,7 +40,7 @@ describe('ReportModal', () => {
     const successResponse = { k: 'response' };
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
-    await router.push('/sunoIndia/record');
+    await router.push('/suno-india/contribute');
 
     setup();
 
@@ -85,7 +85,7 @@ describe('ReportModal', () => {
     const successResponse = { k: 'response' };
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
-    await router.push('/sunoIndia/record');
+    await router.push('/suno-india/contribute');
 
     setup();
 

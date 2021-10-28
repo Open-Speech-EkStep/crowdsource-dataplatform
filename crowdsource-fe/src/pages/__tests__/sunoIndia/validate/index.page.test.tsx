@@ -1,13 +1,12 @@
 /* eslint-disable import/no-internal-modules */
 import '__fixtures__/mockComponentsWithSideEffects';
 
+import ValidatePage from 'pages/suno-india/validate/index.page';
 import { render, screen } from 'utils/testUtils';
 
-import Validator from '../../sunoIndia/validator-page.page';
-
-describe('Validator page', () => {
+describe('Suno Validate Page', () => {
   const setup = () => {
-    return render(<Validator />);
+    return render(<ValidatePage />);
   };
 
   it('should render the suno india validator component', () => {
