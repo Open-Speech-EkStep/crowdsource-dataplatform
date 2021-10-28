@@ -1,4 +1,4 @@
-import { render, userEvent, waitFor, screen } from 'utils/testUtils';
+import { render, userEvent, waitFor, screen, fireEvent } from 'utils/testUtils';
 
 import Medal from '../Medal';
 
@@ -26,7 +26,7 @@ describe('Medal', () => {
           </>
         );
 
-  setup(true);
+  // setup(true);
 
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup(true);
@@ -40,6 +40,20 @@ describe('Medal', () => {
     expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
 
     userEvent.click(screen.getByAltText('Medal'));
+
+    await waitFor(() => expect(container.querySelector('.position-absolute')).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
+
+    await waitFor(() => expect(container.querySelector('.position-absolute')).not.toBeInTheDocument());
+  });
+
+  it('should render on keydown', async () => {
+    const { container } = setup(false);
+
+    expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
+
+    fireEvent.keyDown(screen.getByAltText('Medal'));
 
     await waitFor(() => expect(container.querySelector('.position-absolute')).toBeInTheDocument());
 

@@ -1,6 +1,6 @@
 import { when } from 'jest-when';
 
-import { render, waitFor } from 'utils/testUtils';
+import { render, waitFor, screen, userEvent } from 'utils/testUtils';
 
 import MedalGallery from '../MedalGallery';
 
@@ -71,6 +71,24 @@ describe('MedalGallery', () => {
 
   it('should not render the badgeSection if userBadges is empty and show info message', async () => {
     const { container } = await setup([]);
+
+    let badgeSectionClass = container.querySelector('[class="fw-light"]');
+
+    expect(badgeSectionClass).toBeNull();
+
+    let infoMessage = container.querySelector('[class="w-100"]');
+
+    expect(infoMessage?.innerHTML).toEqual('noBadgeText');
+  });
+
+  it('should render the if we click in other initiatives', async () => {
+    let scrollIntoViewMock = jest.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
+    const { container } = await setup([]);
+    userEvent.click(screen.getByRole('tab', { name: 'bolo india' }));
+
+    expect(scrollIntoViewMock).toBeCalled();
 
     let badgeSectionClass = container.querySelector('[class="fw-light"]');
 
