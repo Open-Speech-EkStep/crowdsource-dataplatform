@@ -10,6 +10,7 @@ export const pageRouteConstants = {
   [routePaths.sunoIndiaContribute]: 'Transcribe',
   [routePaths.sunoIndiaValidate]: 'Validate',
   [routePaths.sunoIndiaDashboard]: 'Dashboard',
+  [routePaths.dekhoIndiaDashboard]: 'Dashboard',
   [routePaths.sunoIndiaContributeThankYou]: 'Contribution Thank You Page',
   [routePaths.sunoIndiaValidateThankYou]: 'Validation Thank You Page',
   [routePaths.boloIndiaContributeThankYou]: 'Contribution Thank You Page',
@@ -113,6 +114,7 @@ export const pageInitiativeRouteConstants = {
   [routePaths.boloIndiaHome]: INITIATIVES_MAPPING.bolo,
   [routePaths.likhoIndiaHome]: INITIATIVES_MAPPING.likho,
   [routePaths.dekhoIndiaHome]: INITIATIVES_MAPPING.dekho,
+  [routePaths.dekhoIndiaDashboard]: INITIATIVES_MAPPING.dekho,
 
   [routePaths.sunoIndiaContributeThankYou]: INITIATIVES_MAPPING.suno,
   [routePaths.boloIndiaContributeThankYou]: INITIATIVES_MAPPING.bolo,

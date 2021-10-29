@@ -13,6 +13,48 @@ import { convertTimeFormat, getHoursText, getHoursValue, getMinutesText, getMinu
 
 import styles from './IndiaMapChart.module.scss';
 
+const INITIATIVE_STATE_PARTICIPATION_CONFIG = {
+  asr: {
+    contribution: 'total_contributions',
+    contributionText: 'transcribed',
+    validation: 'total_validations',
+    validationText: 'validated',
+    legend: '',
+    format: true,
+    legendDefaultRange: 1,
+  },
+
+  text: {
+    contribution: 'total_contributions',
+    contributionText: 'contributed',
+    validation: 'total_validations',
+    validationText: 'validated',
+    legend: '',
+    format: true,
+    legendDefaultRange: 1,
+  },
+
+  parallel: {
+    contribution: 'total_contribution_count',
+    contributionText: 'translationsDone',
+    validation: 'total_validation_count',
+    validationText: 'translationsValidated',
+    legend: 'parallelBarGraphTooltip',
+    format: false,
+    legendDefaultRange: 500,
+  },
+
+  ocr: {
+    contribution: 'total_contribution_count',
+    contributionText: 'imagesLabelled',
+    validation: 'total_validation_count',
+    validationText: 'imagesValidated',
+    legend: 'ocrBarGraphTooltip',
+    format: false,
+    legendDefaultRange: 500,
+  },
+};
+
 const statesInformation = [
   { id: 'IN-TG', state: 'Telangana' },
   { id: 'IN-AN', state: 'Andaman and Nicobar Islands' },
@@ -73,15 +115,24 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
   if (language) {
     mapData = mapData.filter(d => d.language === language) || [];
   }
+
+  const config = INITIATIVE_STATE_PARTICIPATION_CONFIG[type];
+
   statesInformation.forEach(state => {
-    const ele = mapData.find(s => state.state === s.state);
+    const data = mapData.find(s => state.state === s.state);
+    const contribution = config.contribution as keyof CumulativeDataByLanguageAndState;
+    const contributionData = data ? (data[contribution] as number) : 0;
+    const validation = config.validation as keyof CumulativeDataByLanguageAndState;
+    const validationData = data ? (data[validation] as number) : 0;
+    const stateLabel = `state${state.id.substring(3, 5)}`;
+
     statesData.push({
       id: state.id,
-      state: t(state.state),
-      contribution: convertTimeFormat(ele?.total_contributions || 0),
-      validation: convertTimeFormat(ele?.total_validations || 0),
-      speakers: ele?.total_speakers || 0,
-      value: getTotalParticipation(ele, type),
+      state: t(stateLabel),
+      contribution: config.format ? convertTimeFormat(contributionData) : `${contributionData}`,
+      validation: config.format ? convertTimeFormat(validationData) : `${validationData}`,
+      speakers: data?.total_speakers || 0,
+      value: contributionData + validationData,
     });
   });
 
@@ -89,21 +140,32 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
     <div>
       <h6>{state}</h6>
       <div>{speakers} ${t('people')}</div>
-      <div>${t('transcribed')}:  <label>{contribution}</label></div>
-      <div>${t('validated')}:  <label>{validation}</label></div>
+      <div>${t(config.contributionText)}:  <label>{contribution}</label></div>
+      <div>${t(config.validationText)}:  <label>{validation}</label></div>
     </div>
   `;
 
   const maxContribution = Math.max.apply(
     Math,
-    mapData.map(function (ele) {
-      return getTotalParticipation(ele, type);
+    mapData.map(function (data) {
+      return getTotalParticipation(data, type);
     })
   );
 
-  const quarterVal = maxContribution > 1 ? maxContribution / 4 : 0.25;
-  const getValue = maxContribution > 1 ? getHoursValue : getMinutesValue;
-  const getText = maxContribution > 1 ? getHoursText : getMinutesText;
+  const getValue = (value: number) => {
+    if (config.format) {
+      return maxContribution > 1 ? getHoursValue(value) : getMinutesValue(value);
+    } else return value;
+  };
+
+  const getText = (value: number) => {
+    if (config.format) {
+      return maxContribution > 1 ? getHoursText(value) : getMinutesText(value);
+    } else return `${value} ${t(config.legend)}`;
+  };
+
+  const isGreaterThanLegendDefaultRange = maxContribution > config.legendDefaultRange;
+  const quarterVal = isGreaterThanLegendDefaultRange ? maxContribution / 4 : config.legendDefaultRange / 4;
 
   let legendData = [];
   legendData.push({

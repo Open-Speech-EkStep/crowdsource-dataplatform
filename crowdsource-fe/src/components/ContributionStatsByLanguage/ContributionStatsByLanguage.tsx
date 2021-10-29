@@ -17,6 +17,36 @@ interface ContributionStatsByLanguageProps {
   handleNoData: () => any;
 }
 
+const INITIATIVE_LANGUANGE_PARTICIPATION_CONFIG = {
+  suno: [
+    { key: 'total_speakers', text: 'peopleParticipated' },
+    { key: 'total_contributions', text: 'durationTranscribed' },
+    { key: 'total_validations', text: 'durationValidated' },
+  ],
+  bolo: [
+    { key: 'total_speakers', text: 'peopleParticipated' },
+    { key: 'total_contributions', text: 'durationRecorded' },
+    { key: 'total_validations', text: 'durationValidated' },
+  ],
+  likho: [
+    { key: 'total_speakers', text: 'peopleParticipated' },
+    { key: 'total_contribution_count', text: 'translationsDone' },
+    { key: 'total_validation_count', text: 'translationsValidated' },
+  ],
+  dekho: [
+    { key: 'total_speakers', text: 'peopleParticipated' },
+    { key: 'total_contribution_count', text: 'imagesLabelled' },
+    { key: 'total_validation_count', text: 'imagesValidated' },
+  ],
+};
+
+const getValue = (key: keyof CumulativeDataByLanguage, data: CumulativeDataByLanguage) => {
+  if (key === 'total_contributions' || key === 'total_validations') {
+    return convertTimeFormat(data[key]);
+  }
+  return data[key];
+};
+
 const ContributionStatsByLanguage = ({
   initiative,
   language,
@@ -55,20 +85,13 @@ const ContributionStatsByLanguage = ({
           total_validations: 0,
         };
 
-  statsContents.push({
-    id: '1',
-    stat: languageData && `${languageData?.total_speakers}`,
-    label: t('peopleParticipated'),
-  });
-  statsContents.push({
-    id: '2',
-    stat: languageData && `${convertTimeFormat(languageData?.total_contributions)}`,
-    label: t('durationTranscribed'),
-  });
-  statsContents.push({
-    id: '3',
-    stat: languageData && `${convertTimeFormat(languageData?.total_validations)}`,
-    label: t('durationValidated'),
+  INITIATIVE_LANGUANGE_PARTICIPATION_CONFIG[initiative].forEach(stat => {
+    const key = stat.key as keyof CumulativeDataByLanguage;
+    statsContents.push({
+      id: key,
+      stat: languageData && `${getValue(key, languageData)}`,
+      label: t(stat.text),
+    });
   });
 
   return (

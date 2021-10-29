@@ -7,9 +7,9 @@ import { screen, userEvent } from 'utils/testUtils';
 jest.mock('components/MapChart', () => () => 'MapChart');
 jest.mock('components/LineChart', () => () => 'LineChart');
 jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
-import SunoDashboard from '../SunoDashboard';
+import DekhoDashboard from '../DekhoDashboard';
 
-describe('SunoDashboard', () => {
+describe('DekhoDashboard', () => {
   const setup = async () => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
       JSON.stringify([
@@ -39,7 +39,7 @@ describe('SunoDashboard', () => {
           total_languages: 2,
           total_validation_count: 2,
           total_validations: 0.001,
-          type: 'asr',
+          type: 'ocr',
         },
       ])
     );
@@ -52,13 +52,13 @@ describe('SunoDashboard', () => {
           total_speakers: 9,
           total_validation_count: 2,
           total_validations: 0.001,
-          type: 'asr',
+          type: 'ocr',
         },
       ])
     );
     const renderResult = render(
       <SWRConfig value={{ provider: () => new Map() }}>
-        <SunoDashboard />
+        <DekhoDashboard />
       </SWRConfig>
     );
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
@@ -86,7 +86,7 @@ describe('SunoDashboard', () => {
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     });
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
     });
     await waitFor(() => expect(screen.queryByText('noDataMessageDashboard')).not.toBeInTheDocument());
