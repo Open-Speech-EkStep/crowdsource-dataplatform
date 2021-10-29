@@ -10,14 +10,18 @@ import 'styles/slickCarousel.scss';
 
 import Feedback from 'components/Feedback';
 import Layout from 'components/Layout';
+import apiPaths from 'constants/apiPaths';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import useFetch from 'hooks/useFetch';
 import { fetchLocationInfo } from 'utils/utils';
 
 type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProps['Component'] };
 
 const MyApp = ({ Component, pageProps }: MyAppProps) => {
   /* istanbul ignore next */
+  useFetch(apiPaths.setCookie, { revalidateOnMount: true })
+
   useEffect(() => {
     if (!localStorage.getItem(localStorageConstants.localtionInfo)) {
       const getLocationInfo = async () => {
