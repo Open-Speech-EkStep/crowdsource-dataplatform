@@ -53,7 +53,7 @@
   "typeHere": "ইয়াত টাইপ কৰক",
   "noUsername": "",
   "changeUser": "ব্যৱহাৰকাৰী পৰিৱৰ্তন কৰক",
-  "myBadges": "My Badges",
+  "myBadges": "মোৰ বেজ সমূহ",
   "changeUserModalHeading": "ব্যৱহাৰকাৰীৰ বিৱৰণ",
   "changeUserModalSubHeading": "সকলো ক্ষেত্ৰ বৈকল্পিক কিন্তু আপুনি জনগাঁথনিৰ বিৱৰণ প্ৰদান কৰি আপোনাৰ তথ্যসংহতিত অৱদান সমৃদ্ধ কৰিব পাৰে।",
   "name": "নাম",
@@ -283,11 +283,11 @@
   "contributeRemainingText": "",
   "validateRemainingText": "",
   "contributionVsTopLanguage": "",
-  "medalGalleryText": "Your Medal Gallery",
+  "medalGalleryText": "আপোনাৰ মেডেল সমূহৰ গেলেৰী",
   "noBadgeText": "{{initiativeName}} ৰ বাবে কোনো বেজ অৰ্জন কৰা নাই",
-  "badgeInfoText1": "Please keep contributing actively to stand a chance to get recognised.",
-  "badgeInfoText2": "Your contribution will be validated before confirming the badge.",
-  "contribution": "Contribution",
-  "validation": "Validation",
-  "congratulations": "Congratulations"
+  "badgeInfoText1": "স্বীকৃতি লাভ কৰাৰ এটা সুযোগ পাবলৈ অনুগ্ৰহ কৰি সক্ৰিয়ভাৱে অৰিহণা আগবঢ়াই যাওক৷",
+  "badgeInfoText2": "স্তৰ আৰু বেজ সমূহ আপডাট হ’বলৈ 48 ঘন্টালৈকে সময় লব পাৰে৷",
+  "contribution": "অৱদান",
+  "validation": "বৈধতা প্ৰদান",
+  "congratulations": "অভিনন্দন"
 }
