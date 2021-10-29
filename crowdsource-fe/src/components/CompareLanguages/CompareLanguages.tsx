@@ -122,7 +122,14 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
   );
 
   useEffect(() => {
-    const isLanguageTop = topLanguageHrsData && topLanguageHrsData.length <= 3;
+    const sortingLanguages =
+      topLanguageHrsData &&
+      topLanguageHrsData.sort((a: any, b: any) =>
+        Number(a[props.dataBindigValue]) > Number(b[props.dataBindigValue]) ? -1 : 1
+      );
+    const top3language = sortingLanguages && sortingLanguages.slice(0, 3);
+    const found = top3language?.some(el => el.language === contributionLanguage);
+    const isLanguageTop = found;
     props.isTopLanguage(isLanguageTop ? 'keep' : 'see');
   }, [contributionLanguage, props, topLanguageHrsData]);
 
