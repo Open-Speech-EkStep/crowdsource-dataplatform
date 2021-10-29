@@ -46,8 +46,8 @@ describe('ContributionTracker', () => {
           type: 'text',
         },
         {
-          language: 'English',
-          total_contributions: 1,
+          language: 'English-Hindi',
+          total_contribution_count: 10,
           type: 'parallel',
         },
       ])
@@ -113,6 +113,7 @@ describe('ContributionTracker', () => {
     await setup('likho');
 
     expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
+    expect(screen.getByText('contributionTrackerSubHeader2')).toBeInTheDocument();
   });
 
   it('should render the chart for speaker data', async () => {

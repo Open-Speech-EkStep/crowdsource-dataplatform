@@ -15,7 +15,7 @@ exports[`ContributionTracker should render the component and matches it against 
         class="display-3 mb-0 mb-md-0 font-family-rowdies form-label"
         for="recommended"
       >
-        contributionTrackerSubHeader
+        contributionTrackerSubHeader1
       </label>
       <div
         class="d-md-flex ms-md-9 mt-4 mt-md-0"

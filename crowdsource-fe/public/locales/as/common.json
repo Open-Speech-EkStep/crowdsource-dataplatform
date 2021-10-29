@@ -131,7 +131,8 @@
   "translationsValidated": "টা অনুৱাদ বৈধকৰণ কৰা হৈছে",
   "languagePairs": "টা ভাষাৰ যোৰ",
   "contributionTrackerHeader": "Contribution Tracker",
-  "contributionTrackerSubHeader": "Overall Summary",
+  "contributionTrackerSubHeader1": "Your language and top 3 contributed languages",
+  "contributionTrackerSubHeader2": "আপোনাৰ ভাষা যোৰ আৰু শীৰ্ষ ৩ টা সৰ্বাধিক অৱদান প্ৰাপ্ত ভাষাৰ যোৰ",
   "byHours": "By duration of hours",
   "bySentences": "By number of sentences",
   "asrBarGraphTitle": "Total sentences",
@@ -289,5 +290,7 @@
   "badgeInfoText2": "স্তৰ আৰু বেজ সমূহ আপডাট হ’বলৈ 48 ঘন্টালৈকে সময় লব পাৰে৷",
   "contribution": "অৱদান",
   "validation": "বৈধতা প্ৰদান",
-  "congratulations": "অভিনন্দন"
+  "congratulations": "অভিনন্দন",
+  "contributorAcheived": "",
+  "validatorAcheived": ""
 }

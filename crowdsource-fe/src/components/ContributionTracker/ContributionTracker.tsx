@@ -180,7 +180,9 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         className="mt-4 d-flex flex-column flex-md-row align-items-md-center"
       >
         <Form.Label className="display-3 mb-0 mb-md-0 font-family-rowdies">
-          {t('contributionTrackerSubHeader')}
+          {INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
+            ? t('contributionTrackerSubHeader2')
+            : t('contributionTrackerSubHeader1')}
         </Form.Label>
         {(INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.text ||
           INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.asr) && (
