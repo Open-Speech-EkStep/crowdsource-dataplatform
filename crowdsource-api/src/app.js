@@ -108,10 +108,11 @@ app.use(function (req, res, next) {
     let cookie = req.cookies.userId;
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
+            domain: '.vakyansh.in',
             maxAge: ONE_YEAR,
             httpOnly: true,
             secure: true,
-            sameSite: "None"
+            sameSite: 'none'
         });
     }
     next();
