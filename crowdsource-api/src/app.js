@@ -108,7 +108,6 @@ app.use(function (req, res, next) {
     let cookie = req.cookies.userId;
     if (cookie === undefined) {
         res.cookie('userId', uuidv4(), {
-            domain: '.vakyansh.in',
             maxAge: ONE_YEAR,
             httpOnly: true,
             secure: true,
@@ -121,7 +120,7 @@ app.use(function (req, res, next) {
 app.use(express.static('../crowdsource-ui/target'));
 
 router.get('/get-userid', (req, res) => {
-    res.sandStatus(200);
+    res.sendStatus(200);
 })
 
 router.get('/', function (req, res) {
