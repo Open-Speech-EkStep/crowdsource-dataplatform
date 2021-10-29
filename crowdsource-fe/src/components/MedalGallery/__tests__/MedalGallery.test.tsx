@@ -40,7 +40,7 @@ describe('MedalGallery', () => {
       expect(localStorage.getItem).toBeCalledTimes(1);
     });
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/user-rewards/testUser');
+      expect(fetchMock).toBeCalledWith('/user-rewards/testUser',{"credentials": "include", "method": "GET", "mode": "cors"});
     });
     return renderResult;
   };
