@@ -48,6 +48,11 @@ const UserOptions = () => {
           {!speakerDetails.userName && (
             <Dropdown.Item className={classnames(styles.item, 'disabled')}>({t('noUsername')})</Dropdown.Item>
           )}
+          {speakerDetails.userName && (
+            <Dropdown.Item className={classnames(styles.item, 'd-xl-none disabled')}>
+              {speakerDetails.userName}
+            </Dropdown.Item>
+          )}
           <Dropdown.Item
             className={`${styles.item} text-primary display-5 py-2 px-4`}
             onClick={() => setModalShow(true)}

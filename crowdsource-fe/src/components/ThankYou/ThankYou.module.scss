@@ -44,3 +44,11 @@
 .count {
   color: var(--link-color);
 }
+
+.bar {
+  @include media-breakpoint-up(md) {
+    bottom: 1.5rem;
+    position: sticky;
+    z-index: 1;
+  }
+}

@@ -243,7 +243,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           </section>
         )}
       </div>
-      <section className="mt-8 mt-md-12">
+      <section className={`${styles.bar} mt-8 mt-md-12`}>
         <ContributeMore
           initiative={INITIATIVES_MAPPING.suno}
           source={pageSourceConstants[route.asPath]}

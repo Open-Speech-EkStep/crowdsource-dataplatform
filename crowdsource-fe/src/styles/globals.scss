@@ -9,7 +9,11 @@ body {
 }
 
 .font-family-rowdies {
-  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.font-family-roboto {
+  font-family: Roboto, sans-serif !important;
 }
 
 .form-check {

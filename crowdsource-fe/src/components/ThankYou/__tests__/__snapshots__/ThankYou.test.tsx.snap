@@ -188,7 +188,7 @@ exports[`ThankYou should render the component and matches it against stored snap
     </section>
   </div>
   <section
-    class="mt-8 mt-md-12"
+    class="bar mt-8 mt-md-12"
   >
     <div
       class="root d-flex align-items-md-center flex-column flex-md-row mx-auto justify-content-md-between p-5 py-md-4 px-md-5 bg-light text-center text-md-start"
