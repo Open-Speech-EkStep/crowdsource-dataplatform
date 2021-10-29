@@ -5,7 +5,7 @@ exports[`MedalPlaceholder should render the component and matches it against sto
   <div
     class="root d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100"
   >
-    testmedal
+    Testmedal
   </div>
 </DocumentFragment>
 `;

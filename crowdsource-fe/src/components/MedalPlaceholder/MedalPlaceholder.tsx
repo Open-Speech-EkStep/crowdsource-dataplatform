@@ -1,5 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
+import { capitalizeFirstLetter } from 'utils/utils';
+
 import styles from './MedalPlaceholder.module.scss';
 
 interface MedalPlaceholderProps {
@@ -12,7 +14,7 @@ const MedalPlaceholder = ({ medal }: MedalPlaceholderProps) => {
     <div
       className={`${styles.root} d-flex align-items-center justify-content-center display-5 bg-light fw-light h-100`}
     >
-      {t(medal.toLowerCase())}
+      {capitalizeFirstLetter(t(medal.toLowerCase()))}
     </div>
   );
 };

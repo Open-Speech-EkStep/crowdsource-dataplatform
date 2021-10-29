@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
@@ -82,13 +80,9 @@ const MedalGallery = () => {
                     initiativeBadge={groupByInitiative[INITIATIVES_MEDIA_MAPPING[initiative]]}
                   />
                 ) : (
-                  <Col className="p-0">
-                    <Row className="mx-0 text-center mt-5">
-                      <h4 className="w-100">
-                        {t('noBadgeText', { initiativeName: `${t(initiative)} ${t('india')}` })}
-                      </h4>
-                    </Row>
-                  </Col>
+                  <p className="w-100 display-2 font-family-roboto text-decoration-underline text-primary-80 text-center mt-5">
+                    {t('noBadgeText', { initiativeName: `${t(initiative)} ${t('india')}` })}
+                  </p>
                 )}
               </div>
             </Tab>

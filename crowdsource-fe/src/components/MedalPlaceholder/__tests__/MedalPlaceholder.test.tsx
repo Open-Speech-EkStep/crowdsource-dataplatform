@@ -15,6 +15,6 @@ describe('MedalPlaceholder', () => {
 
   it('should render the given medal name', () => {
     setup();
-    expect(screen.getByText('testmedal')).toBeInTheDocument();
+    expect(screen.getByText('Testmedal')).toBeInTheDocument();
   });
 });

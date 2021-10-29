@@ -76,7 +76,7 @@ describe('MedalGallery', () => {
 
     expect(badgeSectionClass).toBeNull();
 
-    let infoMessage = container.querySelector('[class="w-100"]');
+    let infoMessage = container.querySelector('.text-decoration-underline');
 
     expect(infoMessage?.innerHTML).toEqual('noBadgeText');
   });
@@ -94,7 +94,7 @@ describe('MedalGallery', () => {
 
     expect(badgeSectionClass).toBeNull();
 
-    let infoMessage = container.querySelector('[class="w-100"]');
+    let infoMessage = container.querySelector('.text-decoration-underline');
 
     expect(infoMessage?.innerHTML).toEqual('noBadgeText');
   });

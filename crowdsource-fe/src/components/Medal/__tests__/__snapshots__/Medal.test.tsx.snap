@@ -39,7 +39,7 @@ exports[`Medal should render the component and matches it against stored snapsho
       <span
         class="display-5 mt-1 fw-light text-capitalize text-break"
       >
-        testmedal
+        Testmedal
       </span>
     </div>
   </div>

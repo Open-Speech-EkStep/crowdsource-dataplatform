@@ -41,3 +41,7 @@ body {
   color: var(--primary-color) !important;
   opacity: 0.63 !important; /* Firefox */
 }
+
+::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}

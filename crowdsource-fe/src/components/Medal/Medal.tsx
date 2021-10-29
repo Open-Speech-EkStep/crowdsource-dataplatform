@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
+import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './Medal.module.scss';
 
@@ -55,7 +56,9 @@ const Medal = ({ initiative, medal, action, language }: MedalProps) => {
             alt="Medal"
           />
         </div>
-        <span className="display-5 mt-1 fw-light text-capitalize text-break">{t(medal.toLowerCase())}</span>
+        <span className="display-5 mt-1 fw-light text-capitalize text-break">
+          {capitalizeFirstLetter(t(medal.toLowerCase()))}
+        </span>
       </div>
       {showZoomedImage && (
         <div>
