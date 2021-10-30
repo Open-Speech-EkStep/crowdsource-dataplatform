@@ -3,7 +3,7 @@
 exports[`DashboardNotification should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="root d-flex flex-column flex-md-row justify-content-md-between align-items-center text-center text-md-start p-5 rounded-12 bg-primary"
+    class="root d-flex mt-3 mt-xl-0 flex-column flex-md-row justify-content-md-between align-items-center text-center text-md-start p-5 rounded-12 bg-primary"
   >
     <span
       class="text-light display-4"

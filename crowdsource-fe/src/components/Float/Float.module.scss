@@ -1,0 +1,17 @@
+.root {
+  bottom: 1rem;
+  z-index: 10;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+  }
+
+  @include media-breakpoint-up(lg) {
+    bottom: 1.5rem;
+  }
+}
+
+.float {
+  display: flex;
+  flex-direction: column;
+}

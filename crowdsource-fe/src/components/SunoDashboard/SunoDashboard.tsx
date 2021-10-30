@@ -13,13 +13,12 @@ import ContributionStatsByLanguage from 'components/ContributionStatsByLanguage'
 import DashboardNotification from 'components/DashboardNotification';
 import IndiaMapChart from 'components/IndiaMapChart';
 import LanguageSelector from 'components/LanguageSelector';
+import Portal from 'components/Portal';
 import ProgressChart from 'components/ProgressChart';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
-
-import styles from './SunoDashboard.module.scss';
 
 const SunoDashboard = () => {
   const { t } = useTranslation();
@@ -70,13 +69,13 @@ const SunoDashboard = () => {
           }}
         />
         {noData && contributeLanguage && (
-          <div className={`${styles.notification} position-fixed mx-auto`}>
+          <Portal>
             <DashboardNotification
               text={t('noDataMessageDashboard')}
               buttonLabel={t('contributeNow')}
               onClick={() => contribute(contributeLanguage)}
             />
-          </div>
+          </Portal>
         )}
         <Fragment>
           <div className="mt-8">
