@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenderChart should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <p
+    class="mb-5 display-2"
+  >
+    genderChartTitle
+  </p>
+  <div
+    class="chart"
+  >
+    BarChart
+  </div>
+</DocumentFragment>
+`;

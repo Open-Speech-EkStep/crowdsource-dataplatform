@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AgeChart should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <p
+    class="mb-5 display-2"
+  >
+    ageChartTitle
+  </p>
+  <div
+    class="chart"
+  >
+    PieChart
+  </div>
+</DocumentFragment>
+`;

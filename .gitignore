@@ -6,8 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .idea
-.vscode
 .out/
+.lh
 crowdsource-dataplatform.iml
 .DS_Store
 # Diagnostic reports (https://nodejs.org/api/report.html)
