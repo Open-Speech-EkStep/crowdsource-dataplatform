@@ -16,7 +16,7 @@ const ThankYouValidatePage: NextPage = () => {
       <FunctionalPageBackground>
         <div className="pt-4 px-2 px-lg-0 pb-8">
           <header className="d-flex justify-content-between align-items-center px-3 px-md-6">
-            <Breadcrumbs initiative={INITIATIVES_MAPPING.suno} path="transcribe" />
+            <Breadcrumbs initiative={INITIATIVES_MAPPING.suno} path="validate" />
           </header>
           <Container fluid="lg" className="mt-5">
             <ThankYou initiative={INITIATIVES_MAPPING.suno} />
