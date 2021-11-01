@@ -10,6 +10,12 @@ const apiPaths = {
     nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesByHoursContributed.json',
   topLanguagesBySpeakerContributions:
     nodeConfig.staticFileUrl + '/aggregated-json/topLanguagesBySpeakerContributions.json',
+  genderGroupContributions: nodeConfig.staticFileUrl + '/aggregated-json/genderGroupContributions.json',
+  genderGroupAndLanguageContributions:
+    nodeConfig.staticFileUrl + '/aggregated-json/genderGroupAndLanguageContributions.json',
+  ageGroupContributions: nodeConfig.staticFileUrl + '/aggregated-json/ageGroupContributions.json',
+  ageGroupAndLanguageContributions:
+    nodeConfig.staticFileUrl + '/aggregated-json/ageGroupAndLanguageContributions.json',
   participationStats: nodeConfig.staticFileUrl + '/aggregated-json/participationStats.json',
   lastUpdatedTime: nodeConfig.staticFileUrl + '/aggregated-json/lastUpdatedAtQuery.json',
   cumulativeDataByLanguage: nodeConfig.staticFileUrl + '/aggregated-json/cumulativeDataByLanguage.json',

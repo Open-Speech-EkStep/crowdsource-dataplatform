@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageSelector should render snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <label
+      class="mb-2 mb-md-4 form-label"
+      for="language"
+    >
+      selectLanguagePairPrompt:
+    </label>
+    <div
+      class="d-md-flex align-items-md-center"
+    >
+      <select
+        aria-label="Select From Language"
+        class="dropdown me-5 mb-3 mb-md-0 form-select"
+        id="language"
+      >
+        <option
+          value="all"
+        >
+          allLanguages
+        </option>
+        <option
+          value="English"
+        >
+          English
+        </option>
+        <option
+          value="Hindi"
+        >
+          हिंदी
+        </option>
+        <option
+          value="Tamil"
+        >
+          தமிழ்
+        </option>
+        <option
+          value="Telugu"
+        >
+          తెలుగు
+        </option>
+        <option
+          value="Assamese"
+        >
+          অসমীয়া
+        </option>
+        <option
+          value="Bengali"
+        >
+          বাংলা
+        </option>
+        <option
+          value="Gujarati"
+        >
+          ગુજરાતી
+        </option>
+        <option
+          value="Kannada"
+        >
+          ಕನ್ನಡ
+        </option>
+        <option
+          value="Malayalam"
+        >
+          മലയാളം
+        </option>
+        <option
+          value="Marathi"
+        >
+          मराठी
+        </option>
+        <option
+          value="Odia"
+        >
+          ଓଡିଆ
+        </option>
+        <option
+          value="Punjabi"
+        >
+          ਪੰਜਾਬੀ
+        </option>
+      </select>
+      <span
+        class="d-flex mx-3 mx-md-4 flex-shrink-0"
+      >
+        <div
+          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+        >
+          <div
+            style="box-sizing: border-box; display: block; max-width: 100%;"
+          >
+            <img
+              alt=""
+              aria-hidden="true"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+            />
+          </div>
+          <img
+            alt="Right Arrow"
+            data-nimg="intrinsic"
+            decoding="async"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+          />
+          <noscript />
+        </div>
+      </span>
+      <select
+        aria-label="Select To Language"
+        class="dropdown mx-5 mb-3 mb-md-0 form-select"
+        disabled=""
+        id="language"
+      >
+        <option
+          value="all"
+        >
+          allLanguages
+        </option>
+        <option
+          value="English"
+        >
+          English
+        </option>
+        <option
+          value="Hindi"
+        >
+          हिंदी
+        </option>
+        <option
+          value="Tamil"
+        >
+          தமிழ்
+        </option>
+        <option
+          value="Telugu"
+        >
+          తెలుగు
+        </option>
+        <option
+          value="Assamese"
+        >
+          অসমীয়া
+        </option>
+        <option
+          value="Bengali"
+        >
+          বাংলা
+        </option>
+        <option
+          value="Gujarati"
+        >
+          ગુજરાતી
+        </option>
+        <option
+          value="Kannada"
+        >
+          ಕನ್ನಡ
+        </option>
+        <option
+          value="Malayalam"
+        >
+          മലയാളം
+        </option>
+        <option
+          value="Marathi"
+        >
+          मराठी
+        </option>
+        <option
+          value="Odia"
+        >
+          ଓଡିଆ
+        </option>
+        <option
+          value="Punjabi"
+        >
+          ਪੰਜਾਬੀ
+        </option>
+      </select>
+      <div
+        class="display-6"
+      >
+        dataLastUpdated: 
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

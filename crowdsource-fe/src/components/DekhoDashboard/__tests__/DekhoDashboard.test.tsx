@@ -4,8 +4,8 @@ import { SWRConfig } from 'swr';
 
 import { screen, userEvent } from 'utils/testUtils';
 
-jest.mock('components/MapChart', () => () => 'MapChart');
-jest.mock('components/LineChart', () => () => 'LineChart');
+jest.mock('components/Charts/MapChart', () => () => 'MapChart');
+jest.mock('components/Charts/LineChart', () => () => 'LineChart');
 jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 import DekhoDashboard from '../DekhoDashboard';
 

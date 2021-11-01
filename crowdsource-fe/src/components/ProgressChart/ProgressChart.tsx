@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import LineChart from 'components/LineChart';
+import { LineChart } from 'components/Charts';
 import Switch from 'components/Switch';
 import apiPaths from 'constants/apiPaths';
 import useFetch from 'hooks/useFetch';

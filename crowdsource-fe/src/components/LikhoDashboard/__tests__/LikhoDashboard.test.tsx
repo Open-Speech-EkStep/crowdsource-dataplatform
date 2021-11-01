@@ -7,9 +7,12 @@ import { screen, userEvent } from 'utils/testUtils';
 jest.mock('components/Charts/MapChart', () => () => 'MapChart');
 jest.mock('components/Charts/LineChart', () => () => 'LineChart');
 jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
-import SunoDashboard from '../SunoDashboard';
+import LikhoDashboard from '../LikhoDashboard';
 
-describe('SunoDashboard', () => {
+describe('LikhoDashboard', () => {
+  const fromLanguageElement = () => screen.getByRole('combobox', { name: 'Select From Language' });
+  const toLanguageElement = () => screen.getByRole('combobox', { name: 'Select To Language' });
+
   const setup = async () => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
       JSON.stringify([
@@ -26,7 +29,7 @@ describe('SunoDashboard', () => {
           type: 'ocr',
         },
         {
-          count: null,
+          count: 10,
           type: 'parallel',
         },
       ])
@@ -39,26 +42,26 @@ describe('SunoDashboard', () => {
           total_languages: 2,
           total_validation_count: 2,
           total_validations: 0.001,
-          type: 'asr',
+          type: 'parallel',
         },
       ])
     );
     fetchMock.doMockIf('/aggregated-json/cumulativeDataByLanguage.json').mockResponse(
       JSON.stringify([
         {
-          language: 'English',
+          language: 'English-Hindi',
           total_contribution_count: 36,
           total_contributions: 0.057,
           total_speakers: 9,
           total_validation_count: 2,
           total_validations: 0.001,
-          type: 'asr',
+          type: 'parallel',
         },
       ])
     );
     const renderResult = render(
       <SWRConfig value={{ provider: () => new Map() }}>
-        <SunoDashboard />
+        <LikhoDashboard />
       </SWRConfig>
     );
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
@@ -66,13 +69,16 @@ describe('SunoDashboard', () => {
   };
   it('should contain language selector', async () => {
     await setup();
-    expect(screen.getByRole('combobox', { name: 'Select Language' })).toBeInTheDocument();
+    expect(fromLanguageElement()).toBeInTheDocument();
+    expect(toLanguageElement()).toBeInTheDocument();
+    expect(toLanguageElement()).toBeDisabled();
   });
 
   it('changing language from language selector should update stats', async () => {
     await setup();
-    expect(screen.getByRole('combobox', { name: 'Select Language' })).toBeInTheDocument();
-    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'English');
+    userEvent.selectOptions(fromLanguageElement(), 'English');
+    expect(toLanguageElement()).toBeEnabled();
+    userEvent.selectOptions(toLanguageElement(), 'Hindi');
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
@@ -80,13 +86,14 @@ describe('SunoDashboard', () => {
 
   it('changing language from language selector should display nodata message when data not available', async () => {
     await setup();
-    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'English');
+    userEvent.selectOptions(fromLanguageElement(), 'English');
+    userEvent.selectOptions(toLanguageElement(), 'Hindi');
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
-    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
+    userEvent.selectOptions(toLanguageElement(), 'Bengali');
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     });
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
     });
     await waitFor(() => expect(screen.queryByText('noDataMessageDashboard')).not.toBeInTheDocument());
@@ -95,7 +102,8 @@ describe('SunoDashboard', () => {
 
   it('changing to language where data not available and clicking contribute now should display change user modal for new user', async () => {
     await setup();
-    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
+    userEvent.selectOptions(fromLanguageElement(), 'English');
+    userEvent.selectOptions(toLanguageElement(), 'Bengali');
     await waitFor(() => {
       expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
     });
@@ -120,7 +128,8 @@ describe('SunoDashboard', () => {
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });
-    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
+    userEvent.selectOptions(fromLanguageElement(), 'English');
+    userEvent.selectOptions(toLanguageElement(), 'Bengali');
     await waitFor(() => {
       expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
     });

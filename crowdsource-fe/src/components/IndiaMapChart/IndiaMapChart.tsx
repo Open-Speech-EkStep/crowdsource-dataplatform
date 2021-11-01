@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
-import MapChart from 'components/MapChart';
+import { MapChart } from 'components/Charts';
 import MapLegend from 'components/MapLegend';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
