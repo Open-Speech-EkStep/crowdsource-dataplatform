@@ -116,7 +116,7 @@ const TextEditArea = ({
     handleError(error);
     setTextValue(input);
     setInput(input);
-    keyboard.current.setInput(input);
+    keyboard && keyboard.current && keyboard.current.setInput(input);
     if (!input) {
       setShowKeyboard(false);
     }
