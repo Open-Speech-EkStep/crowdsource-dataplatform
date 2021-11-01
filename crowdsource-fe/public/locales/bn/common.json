@@ -293,5 +293,6 @@
   "validation": "যাচাইকরণ",
   "congratulations": "অভিনন্দন",
   "contributorAcheived": " আপনি একজন <span>{{badgeType}}</span> অবদানকারী",
-  "validatorAcheived": " আপনি একজন <span>{{badgeType}}</span> যাচাইকারী"
+  "validatorAcheived": " আপনি একজন <span>{{badgeType}}</span> যাচাইকারী",
+  "likhoContributionHeading": "প্রদত্ত লেখাটির অনুবাদ টাইপ করুন"
 }

@@ -13,4 +13,5 @@ export interface ActionStoreInterface extends ActionInterface {
   speakerDetails: any;
   language: string;
   userInput: string;
+  fromLanguage?: string;
 }

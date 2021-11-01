@@ -293,5 +293,6 @@
   "validation": "सत्यापन",
   "congratulations": "बधाई हो",
   "contributorAcheived": "आप एक <span>{{badgeType}}</span>  योगदानकर्ता हैं",
-  "validatorAcheived": "आप एक <span>{{badgeType}}</span> सत्यापनकर्ता हैं"
+  "validatorAcheived": "आप एक <span>{{badgeType}}</span> सत्यापनकर्ता हैं",
+  "likhoContributionHeading": "दिए गए टेक्स्ट का अनुवाद टाइप करें"
 }

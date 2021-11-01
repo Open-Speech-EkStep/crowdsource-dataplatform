@@ -9,17 +9,17 @@ import Button from 'components/Button';
 import styles from './ButtonControls.module.scss';
 
 interface ButtonControlProps {
-  onPlay: () => void;
-  onPause: () => void;
-  onReplay: () => void;
+  onPlay?: () => void;
+  onPause?: () => void;
+  onReplay?: () => void;
   onSubmit: () => void;
   onCancel: () => void;
   onSkip: () => void;
   onNeedsChange?: () => void;
   onCorrect?: () => void;
-  playButton: boolean;
-  pauseButton: boolean;
-  replayButton: boolean;
+  playButton?: boolean;
+  pauseButton?: boolean;
+  replayButton?: boolean;
   cancelDisable?: boolean;
   submitDisable?: boolean;
   cancelButton?: boolean;

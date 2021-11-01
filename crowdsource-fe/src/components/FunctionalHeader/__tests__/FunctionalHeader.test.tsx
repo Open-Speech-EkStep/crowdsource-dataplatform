@@ -10,6 +10,7 @@ describe('FunctionalHeader', () => {
         initiative="suno"
         initiativeMediaType="sentence"
         action="transcribe"
+        showSpeaker={true}
       />
     );
 

@@ -8,6 +8,7 @@ export const pageRouteConstants = {
   [routePaths.likhoIndiaHome]: 'Likho India',
   [routePaths.dekhoIndiaHome]: 'Dekho India',
   [routePaths.sunoIndiaContribute]: 'Transcribe',
+  [routePaths.likhoIndiaContribute]: 'Translate',
   [routePaths.sunoIndiaValidate]: 'Validate',
   [routePaths.sunoIndiaDashboard]: 'Dashboard',
   [routePaths.dekhoIndiaDashboard]: 'Dashboard',
@@ -108,13 +109,15 @@ export const pageMediaTypeConstants = {
 export const pageInitiativeRouteConstants = {
   [routePaths.home]: 'Others',
   [routePaths.sunoIndiaHome]: INITIATIVES_MAPPING.suno,
-  [routePaths.sunoIndiaContribute]: INITIATIVES_MAPPING.suno,
-  [routePaths.sunoIndiaValidate]: INITIATIVES_MAPPING.suno,
-  [routePaths.sunoIndiaDashboard]: INITIATIVES_MAPPING.suno,
   [routePaths.boloIndiaHome]: INITIATIVES_MAPPING.bolo,
   [routePaths.likhoIndiaHome]: INITIATIVES_MAPPING.likho,
   [routePaths.dekhoIndiaHome]: INITIATIVES_MAPPING.dekho,
   [routePaths.dekhoIndiaDashboard]: INITIATIVES_MAPPING.dekho,
+
+  [routePaths.sunoIndiaContribute]: INITIATIVES_MAPPING.suno,
+  [routePaths.sunoIndiaValidate]: INITIATIVES_MAPPING.suno,
+  [routePaths.sunoIndiaDashboard]: INITIATIVES_MAPPING.suno,
+  [routePaths.likhoIndiaContribute]: INITIATIVES_MAPPING.likho,
 
   [routePaths.sunoIndiaContributeThankYou]: INITIATIVES_MAPPING.suno,
   [routePaths.boloIndiaContributeThankYou]: INITIATIVES_MAPPING.bolo,

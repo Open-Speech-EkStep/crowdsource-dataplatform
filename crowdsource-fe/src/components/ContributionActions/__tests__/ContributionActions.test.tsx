@@ -5,11 +5,7 @@ import { render, verifyAxeTest, screen, waitFor } from 'utils/testUtils';
 import ContributionActions from '../ContributionActions';
 
 describe('ContributionActions', () => {
-  const setup = async (
-    initiativeType: string,
-    initiative: 'suno' | 'bolo' | 'likho' | 'dekho',
-    language: string
-  ) => {
+  const setup = async (initiative: 'suno' | 'bolo' | 'likho' | 'dekho', language: string) => {
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
@@ -46,7 +42,7 @@ describe('ContributionActions', () => {
           type: 'ocr',
         },
         {
-          language: 'English-Hindi',
+          language: 'English',
           type: 'parallel',
         },
       ])
@@ -95,17 +91,17 @@ describe('ContributionActions', () => {
   };
 
   async () => {
-    verifyAxeTest(await setup('asr', 'suno', 'Hindi'));
+    verifyAxeTest(await setup('suno', 'Hindi'));
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup('text', 'bolo', 'Assamese');
+    const { asFragment } = await setup('bolo', 'Assamese');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should handle both cards enable', async () => {
-    await setup('asr', 'suno', 'Hindi');
+    await setup('suno', 'Hindi');
 
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).toHaveClass('d-none');
@@ -116,7 +112,7 @@ describe('ContributionActions', () => {
   });
 
   it('should handle both cards disable', async () => {
-    await setup('text', 'bolo', 'Assamese');
+    await setup('bolo', 'Assamese');
 
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');
@@ -127,7 +123,7 @@ describe('ContributionActions', () => {
   });
 
   it('should make set he "{}" value when no value found in enable disable card api', async () => {
-    await setup('ocr', 'dekho', 'English');
+    await setup('dekho', 'English');
 
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).toHaveClass('d-none');
@@ -139,7 +135,7 @@ describe('ContributionActions', () => {
   });
 
   it('should test the card enable  disable for likho', async () => {
-    await setup('parallel', 'likho', 'English');
+    await setup('likho', 'English');
 
     await waitFor(() => {
       expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');

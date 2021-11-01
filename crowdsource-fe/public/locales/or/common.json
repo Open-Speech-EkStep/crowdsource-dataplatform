@@ -293,5 +293,6 @@
   "validation": "ବୈଧୀକରଣ",
   "congratulations": "ଅଭିନନ୍ଦନ",
   "contributorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ଯୋଗଦାନକାରୀ",
-  "validatorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ପ୍ରମାଣକାରୀ ଅଟନ୍ତି"
+  "validatorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ପ୍ରମାଣକାରୀ ଅଟନ୍ତି",
+  "likhoContributionHeading": "ଦିଆଯାଇଥିବା ଟେକ୍ସଟ୍ର ଅନୁବାଦ ଟାଇପ୍ କରନ୍ତୁ"
 }

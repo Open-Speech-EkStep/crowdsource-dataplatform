@@ -5,7 +5,46 @@ import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 import SunoTranscribe from '../SunoTranscribe';
 
 describe('SunoTranscribe', () => {
-  const setup = async () => {
+  const resultData = {
+    data: [
+      {
+        dataset_row_id: 1248671,
+        media_data:
+          'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+        source_info:
+          '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+      },
+      {
+        dataset_row_id: 1248672,
+        media_data:
+          'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+        source_info:
+          '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+      },
+      {
+        dataset_row_id: 1248673,
+        media_data:
+          'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+        source_info:
+          '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+      },
+      {
+        dataset_row_id: 1248674,
+        media_data:
+          'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+        source_info:
+          '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+      },
+      {
+        dataset_row_id: 1248675,
+        media_data:
+          'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
+        source_info:
+          '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
+      },
+    ],
+  };
+  const setup = async (resultData: any) => {
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => 'Hindi');
@@ -32,47 +71,7 @@ describe('SunoTranscribe', () => {
       .calledWith('speakerDetails')
       .mockImplementation(() => JSON.stringify(speakerDetails));
 
-    fetchMock.doMockOnceIf('/media/asr').mockResponseOnce(
-      JSON.stringify({
-        data: [
-          {
-            dataset_row_id: 1248671,
-            media_data:
-              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
-            source_info:
-              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
-          },
-          {
-            dataset_row_id: 1248672,
-            media_data:
-              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
-            source_info:
-              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
-          },
-          {
-            dataset_row_id: 1248673,
-            media_data:
-              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
-            source_info:
-              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
-          },
-          {
-            dataset_row_id: 1248674,
-            media_data:
-              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
-            source_info:
-              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
-          },
-          {
-            dataset_row_id: 1248675,
-            media_data:
-              'inbound/asr/English/newsonair.nic.in_09-08-2021_03-37/2_3_Regional-Kohima-English-0725-20198228349.wav',
-            source_info:
-              '["newsonair.nic.in", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3", "http://newsonair.nic.in/writereaddata/Bulletins_Audio/Regional/2019/Aug/Regional-Kohima-English-0725-20198228349.mp3"]',
-          },
-        ],
-      })
-    );
+    fetchMock.doMockOnceIf('/media/asr').mockResponseOnce(JSON.stringify(resultData));
     const renderResult = render(<SunoTranscribe />);
 
     await waitFor(() => {
@@ -92,13 +91,13 @@ describe('SunoTranscribe', () => {
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup();
+    const { asFragment } = await setup(resultData);
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('play button click should play audio and pause button should be enabled', async () => {
-    await setup();
+    await setup(resultData);
 
     expect(screen.getByRole('textbox', { name: 'addText (hindi)' })).toBeDisabled();
 
@@ -111,8 +110,17 @@ describe('SunoTranscribe', () => {
     expect(screen.getByRole('textbox', { name: 'addText (hindi)' })).toBeEnabled();
   });
 
+  it('should show the thank you message when no data present', async () => {
+    const result = { data: [] };
+    await setup(result);
+
+    await waitFor(() => {
+      expect(screen.getByText('asrContributeNoDataThankYouMessage')).toBeInTheDocument();
+    });
+  });
+
   it('pause button click should pause audio and play button should be enabled', async () => {
-    await setup();
+    await setup(resultData);
 
     userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
@@ -124,7 +132,7 @@ describe('SunoTranscribe', () => {
   });
 
   it('should test the textarea text with valid language', async () => {
-    await setup();
+    await setup(resultData);
 
     userEvent.type(screen.getByRole('textbox', { name: 'addText (hindi)' }), 'बपपप');
 
@@ -134,7 +142,7 @@ describe('SunoTranscribe', () => {
   });
 
   it('play button click should play audio and replay button should be enabled after audio stops', async () => {
-    await setup();
+    await setup(resultData);
 
     userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
@@ -151,7 +159,7 @@ describe('SunoTranscribe', () => {
   });
 
   it('should test the cancel button functionality', async () => {
-    await setup();
+    await setup(resultData);
 
     expect(screen.getByRole('button', { name: 'cancel' })).toBeDisabled();
 
@@ -174,7 +182,7 @@ describe('SunoTranscribe', () => {
     const url = '/skip';
     const successResponse = { message: 'Skipped successfully.', statusCode: 200 };
 
-    await setup();
+    await setup(resultData);
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
@@ -205,7 +213,7 @@ describe('SunoTranscribe', () => {
     const url = '/store';
     const successResponse = { success: true };
 
-    await setup();
+    await setup(resultData);
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
 
@@ -256,13 +264,13 @@ describe('SunoTranscribe', () => {
       });
     });
 
-    await waitFor(() => {
-      expect(screen.getByText('thankyouForContributing')).toBeInTheDocument();
-    });
+    await waitFor(() => expect(screen.queryByRole('img', { name: 'check' })).toBeInTheDocument());
+
+    await waitFor(() => expect(screen.queryByRole('img', { name: 'check' })).not.toBeInTheDocument());
   });
 
   it('should go to thank you page after 5 skip sentences', async () => {
-    await setup();
+    await setup(resultData);
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 

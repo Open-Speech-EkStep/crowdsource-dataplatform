@@ -8,9 +8,16 @@ interface FunctionalHeaderProps {
   initiativeMediaType: string;
   initiative: Initiative;
   action: string;
+  showSpeaker?: boolean;
 }
 
-const FunctionalHeader = ({ onSuccess, initiativeMediaType, initiative, action }: FunctionalHeaderProps) => {
+const FunctionalHeader = ({
+  onSuccess,
+  initiativeMediaType,
+  initiative,
+  action,
+  showSpeaker = true,
+}: FunctionalHeaderProps) => {
   return (
     <header>
       <div className="d-flex justify-content-between align-items-center px-3 px-md-6">
@@ -19,9 +26,11 @@ const FunctionalHeader = ({ onSuccess, initiativeMediaType, initiative, action }
           <div>
             <Report onSuccess={onSuccess} initiativeMediaType={initiativeMediaType} />
           </div>
-          <div className="ms-2 ms-md-4">
-            <TestSpeakerMic showSpeaker={true} />
-          </div>
+          {showSpeaker && (
+            <div className="ms-2 ms-md-4">
+              <TestSpeakerMic showSpeaker={true} />
+            </div>
+          )}
         </div>
       </div>
     </header>

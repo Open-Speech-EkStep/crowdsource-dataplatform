@@ -293,5 +293,6 @@
   "validation": "प्रमाणिकरण",
   "congratulations": "अभिनंदन",
   "contributorAcheived": "तुम्ही एक <span>{{badgeType}}</span> योगदानकर्ता आहात",
-  "validatorAcheived": "तुम्ही एक <span>{{badgeType}}</span> प्रमाणिकरण कर्ता आहात."
+  "validatorAcheived": "तुम्ही एक <span>{{badgeType}}</span> प्रमाणिकरण कर्ता आहात.",
+  "likhoContributionHeading": "दिलेल्या टेक्स्टचे भाषांतर टाईप करा"
 }

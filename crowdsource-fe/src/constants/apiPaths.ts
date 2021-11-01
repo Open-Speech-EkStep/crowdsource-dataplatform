@@ -19,6 +19,7 @@ const apiPaths = {
   feedback: nodeConfig.apiUrl + '/feedback',
   report: nodeConfig.apiUrl + '/report',
   mediaAsr: nodeConfig.apiUrl + '/media/asr',
+  mediaParallel: nodeConfig.apiUrl + '/media/parallel',
   contributionsAsr: nodeConfig.apiUrl + '/contributions/asr',
   store: nodeConfig.apiUrl + '/store',
   validate: nodeConfig.apiUrl + '/validate',

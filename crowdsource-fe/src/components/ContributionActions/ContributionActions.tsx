@@ -53,10 +53,10 @@ const ContributionActions = (props: ContributionActionProps) => {
       data.language === `${contributionLanguage}-${translatedLanguage}`,
   };
 
-  const isLanguageAvailable =
-    INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
-      ? !!languageWithData?.find(callbacks[INITIATIVES_MEDIA.parallel])
-      : !!languageWithData?.find(callbacks[INITIATIVES_MEDIA.asr]);
+  const isLanguageAvailable = !!languageWithData?.find(
+    data =>
+      data.type === INITIATIVES_MEDIA_MAPPING[props.initiative] && data.language === contributionLanguage
+  );
 
   let isAllContributed = true;
   let hasTarget = false;
