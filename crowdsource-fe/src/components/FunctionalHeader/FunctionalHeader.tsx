@@ -24,7 +24,7 @@ const FunctionalHeader = ({
         <Breadcrumbs initiative={initiative} path={action} />
         <div className="d-flex">
           <div>
-            <Report onSuccess={onSuccess} initiativeMediaType={initiativeMediaType} />
+            <Report onSuccess={onSuccess} initiative={initiative} initiativeMediaType={initiativeMediaType} />
           </div>
           {showSpeaker && (
             <div className="ms-2 ms-md-4">

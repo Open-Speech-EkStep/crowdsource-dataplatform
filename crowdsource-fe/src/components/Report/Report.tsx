@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 
 import IconTextButton from 'components/IconTextButton';
-import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
+import type { Initiative } from 'types/Initiatives';
 
 import ReportSuccessModal from './ReportSuccessModal';
 
@@ -13,9 +13,10 @@ const ReportModal = dynamic(() => import('./ReportModal'), { ssr: false });
 interface ReportProps {
   onSuccess: () => void;
   initiativeMediaType: string;
+  initiative: Initiative;
 }
 
-const Report = ({ onSuccess, initiativeMediaType }: ReportProps) => {
+const Report = ({ onSuccess, initiativeMediaType, initiative }: ReportProps) => {
   const { t } = useTranslation();
   const [modalShow, setModalShow] = useState(false);
   const [reportSuccess, setReportSuccess] = useState(false);
@@ -50,11 +51,7 @@ const Report = ({ onSuccess, initiativeMediaType }: ReportProps) => {
         />
       )}
       {reportSuccess && (
-        <ReportSuccessModal
-          show={reportSuccess}
-          onHide={hideReportSuccess}
-          initiative={INITIATIVES_MAPPING.suno}
-        />
+        <ReportSuccessModal show={reportSuccess} onHide={hideReportSuccess} initiative={initiative} />
       )}
     </Fragment>
   );
