@@ -47,7 +47,7 @@ const PieChart = (props: ChartProps | any) => {
     };
   }, [props.data.colors, props.data.data, props.id]);
 
-  return <div id={props.id} style={{ width: '100%', height: '500px' }}></div>;
+  return <div id={props.id} className="h-100"></div>;
 };
 
 export default PieChart;

@@ -124,6 +124,9 @@ describe('LikhoDashboard', () => {
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => 'English');
+    when(localStorage.getItem)
+      .calledWith('likho_to-language')
+      .mockImplementation(() => 'Hindi');
     await setup();
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
@@ -135,5 +138,7 @@ describe('LikhoDashboard', () => {
     });
     userEvent.click(screen.getByRole('button', { name: 'contributeNow' }));
     await waitFor(() => expect(screen.queryByTestId('ChangeUserModal')).not.toBeInTheDocument());
+    expect(localStorage.setItem).toBeCalledWith('contributionLanguage', 'English');
+    expect(localStorage.setItem).toBeCalledWith('likho_to-language', 'Bengali');
   });
 });

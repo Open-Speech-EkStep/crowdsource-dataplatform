@@ -1,10 +1,12 @@
 import type { ChangeEvent } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 import DataLastUpdated from 'components/DataLastUpdated';
 import { DISPLAY_LANGUAGES, LOCALE_LANGUAGES, RAW_LANGUAGES } from 'constants/localesConstants';
@@ -12,82 +14,111 @@ import { DISPLAY_LANGUAGES, LOCALE_LANGUAGES, RAW_LANGUAGES } from 'constants/lo
 import styles from './LanguagePairSelector.module.scss';
 
 const LanguagePairSelector = ({
-  // selectedLanguage,
-  updateSelectedLanguage,
+  fromLanguage,
+  toLanguage,
+  updateSelectedLanguages,
 }: {
-  // selectedLanguage: string | undefined;
-  updateSelectedLanguage: (language: string | undefined) => void;
+  fromLanguage: string | undefined;
+  toLanguage: string | undefined;
+  updateSelectedLanguages: (language1: string | undefined, language2: string | undefined) => void;
 }) => {
   const { t } = useTranslation();
   const { locales } = useRouter();
+  const [selectedFromLanguage, setSelectedFromLanguage] = useState<string | undefined>();
+  const [selectedToLanguage, setSelectedToLanguage] = useState<string | undefined>();
 
-  const [fromLanguage, setFromLanguage] = useState<string | undefined>();
-  const [toLanguage, setToLanguage] = useState<string | undefined>();
+  useEffect(() => {
+    if (fromLanguage) {
+      setSelectedFromLanguage(fromLanguage);
+    } else {
+      setSelectedFromLanguage(undefined);
+    }
+  }, [fromLanguage]);
 
-  const remainingLanguages = fromLanguage
-    ? locales?.filter(item => item !== LOCALE_LANGUAGES[fromLanguage])
+  useEffect(() => {
+    if (toLanguage) {
+      setSelectedToLanguage(toLanguage);
+    } else {
+      setSelectedToLanguage(undefined);
+    }
+  }, [toLanguage]);
+
+  const setLanguagePair = (from: string | undefined, to: string | undefined) => {
+    if (from && to) {
+      if (from == 'all' || to === 'all') {
+        updateSelectedLanguages(undefined, undefined);
+      } else {
+        updateSelectedLanguages(from, to);
+      }
+    }
+  };
+
+  const remainingLanguages = selectedFromLanguage
+    ? locales?.filter(item => item !== LOCALE_LANGUAGES[selectedFromLanguage || 'en'])
     : locales;
 
   const handleFromChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-
     if (value === 'all') {
-      setFromLanguage(undefined);
-      setToLanguage(undefined);
-      updateSelectedLanguage(undefined);
-    } else {
-      setFromLanguage(value);
-    }
+      setSelectedFromLanguage(undefined);
+    } else setSelectedFromLanguage(value);
+    setSelectedToLanguage(undefined);
   };
 
   const handleToChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-
-    setToLanguage(value);
-    updateSelectedLanguage(`${fromLanguage}-${value}`);
+    setSelectedToLanguage(e.target.value);
+    setLanguagePair(selectedFromLanguage, e.target.value);
   };
 
-  const toSelectEnabled = !!fromLanguage;
+  const toSelectEnabled = !!selectedFromLanguage;
   return (
     <Form.Group controlId="language">
-      <Form.Label className="mb-2 mb-md-4">{t('selectLanguagePairPrompt')}:</Form.Label>
-      <div className="d-md-flex align-items-md-center">
-        <Form.Select
-          value={fromLanguage || 'all'}
-          aria-label="Select From Language"
-          onChange={handleFromChange as any}
-          className={`${styles.dropdown} me-5 mb-3 mb-md-0`}
-        >
-          <option key="all" value="all">
-            {t('allLanguages')}
-          </option>
-          {locales?.map(locale => (
-            <option key={locale} value={RAW_LANGUAGES[locale]}>
-              {DISPLAY_LANGUAGES[locale]}
-            </option>
-          ))}
-        </Form.Select>
-        <span className="d-flex mx-3 mx-md-4 flex-shrink-0">
-          <Image src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
-        </span>
-        <Form.Select
-          disabled={!toSelectEnabled}
-          value={toLanguage || 'all'}
-          aria-label="Select To Language"
-          className={`${styles.dropdown} mx-5 mb-3 mb-md-0`}
-          onChange={handleToChange as any}
-        >
-          <option key="all" value="all">
-            {t('allLanguages')}
-          </option>
-          {remainingLanguages?.map(locale => (
-            <option key={locale} value={RAW_LANGUAGES[locale]}>
-              {DISPLAY_LANGUAGES[locale]}
-            </option>
-          ))}
-        </Form.Select>
-        <DataLastUpdated />
-      </div>
+      <Form.Label className="mb-2 mb-md-4 ">{t('selectLanguagePairPrompt')}:</Form.Label>
+      <Row>
+        <div className="d-md-flex align-items-md-center">
+          <Col xs="12" md="5">
+            <div className="d-flex">
+              <Form.Select
+                value={selectedFromLanguage || 'all'}
+                aria-label="Select From Language"
+                onChange={handleFromChange as any}
+                className={`${styles.dropdown} mb-3 mb-md-0`}
+              >
+                <option key="all" value="all">
+                  {t('allLanguages')}
+                </option>
+                {locales?.map(locale => (
+                  <option key={locale} value={RAW_LANGUAGES[locale]}>
+                    {DISPLAY_LANGUAGES[locale]}
+                  </option>
+                ))}
+              </Form.Select>
+              <span className="d-flex mb-md-0 mb-3 mx-1 mx-md-4 flex-shrink-0">
+                <Image src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
+              </span>
+              <Form.Select
+                disabled={!toSelectEnabled}
+                value={selectedToLanguage || 'all'}
+                aria-label="Select To Language"
+                className={`${styles.dropdown} mb-3 mb-md-0`}
+                onChange={handleToChange as any}
+              >
+                <option key="all" value="all">
+                  {t('allLanguages')}
+                </option>
+                {remainingLanguages?.map(locale => (
+                  <option key={locale} value={RAW_LANGUAGES[locale]}>
+                    {DISPLAY_LANGUAGES[locale]}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>
+          </Col>
+          <Col xs="12" md="6" className="px-2">
+            <DataLastUpdated />
+          </Col>
+        </div>
+      </Row>
     </Form.Group>
   );
 };

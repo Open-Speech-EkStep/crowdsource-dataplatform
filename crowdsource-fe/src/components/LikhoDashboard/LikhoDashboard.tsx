@@ -24,20 +24,27 @@ import styles from './LikhoDashboard.module.scss';
 const LikhoDashboard = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const [language, setLanguage] = useState<string | undefined>(undefined);
+  const [fromLanguage, setFromLanguage] = useState<string | undefined>(undefined);
+  const [toLanguage, setToLanguage] = useState<string | undefined>(undefined);
 
-  const [previousSelectedLanguage, setPreviousSelectedLanguage] = useState<string | undefined>(undefined);
+  const [previousSelectedFromLanguage, setPreviousSelectedFromLanguage] = useState<string | undefined>(
+    undefined
+  );
+  const [previousSelectedToLanguage, setPreviousSelectedToLanguage] = useState<string | undefined>(undefined);
 
   const [noData, setNoData] = useState(false);
-  const [contributeLanguage, setContributeLanguage] = useState<string | undefined>();
+  const [contributeFromLanguage, setContributeFromLanguage] = useState<string | undefined>();
+  const [contributeToLanguage, setContributeToLanguage] = useState<string | undefined>();
   const [modalShow, setModalShow] = useState(false);
 
   const [speakerDetails] = useLocalStorage<string>(localStorageConstants.speakerDetails);
   const [, setContributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+  const [, setTranslationLanguage] = useLocalStorage<string>(localStorageConstants.translatedLanguage);
   const contributePageUrl = `/${router.locale}${routePaths[`likhoIndiaContribute`]}`;
 
-  const contribute = (language: string) => {
-    setContributionLanguage(language);
+  const contribute = (fromLanguage: string, toLanguage: string) => {
+    setContributionLanguage(fromLanguage);
+    setTranslationLanguage(toLanguage);
     if (!speakerDetails) {
       setModalShow(true);
     } else {
@@ -47,13 +54,13 @@ const LikhoDashboard = () => {
 
   useEffect(() => {
     let timer: any;
-    if (noData && contributeLanguage) {
+    if (noData && contributeFromLanguage && contributeToLanguage) {
       timer = setTimeout(() => {
         setNoData(false);
       }, 5000);
     }
     return () => clearTimeout(timer);
-  }, [contributeLanguage, noData]);
+  }, [contributeFromLanguage, contributeToLanguage, noData]);
 
   return (
     <div className="pt-4 px-2 px-lg-0 pb-8">
@@ -62,32 +69,42 @@ const LikhoDashboard = () => {
       </header>
       <Container fluid="lg" className="mt-5">
         <LanguagePairSelector
-          // selectedLanguage={language}
-          updateSelectedLanguage={(selectedLanguage: string | undefined) => {
-            setPreviousSelectedLanguage(language);
-            setLanguage(selectedLanguage);
+          fromLanguage={fromLanguage}
+          toLanguage={toLanguage}
+          updateSelectedLanguages={(
+            selectedFromLanguage: string | undefined,
+            selectedToLanguage: string | undefined
+          ) => {
+            setPreviousSelectedFromLanguage(fromLanguage);
+            setPreviousSelectedToLanguage(toLanguage);
+            setFromLanguage(selectedFromLanguage);
+            setToLanguage(selectedToLanguage);
             setNoData(false);
           }}
         />
-        {noData && contributeLanguage && (
+        {noData && contributeFromLanguage && contributeToLanguage && (
           <div className={`${styles.notification} position-fixed mx-auto`}>
             <DashboardNotification
               text={t('noDataMessageDashboard')}
               buttonLabel={t('contributeNow')}
-              onClick={() => contribute(contributeLanguage)}
+              onClick={() => contribute(contributeFromLanguage, contributeToLanguage)}
             />
           </div>
         )}
         <Fragment>
           <div className="mt-8">
-            {(!language && <ContributionStats initiative={INITIATIVES_MAPPING.likho} />) ||
-              (language && (
+            {(!(fromLanguage && toLanguage) && (
+              <ContributionStats initiative={INITIATIVES_MAPPING.likho} />
+            )) ||
+              (fromLanguage && toLanguage && (
                 <ContributionStatsByLanguage
                   initiative={INITIATIVES_MAPPING.likho}
-                  language={language}
+                  language={`${fromLanguage}-${toLanguage}`}
                   handleNoData={() => {
-                    setContributeLanguage(language);
-                    setLanguage(previousSelectedLanguage);
+                    setContributeFromLanguage(fromLanguage);
+                    setContributeToLanguage(toLanguage);
+                    setFromLanguage(previousSelectedFromLanguage);
+                    setToLanguage(previousSelectedToLanguage);
                     setNoData(true);
                   }}
                 />
@@ -96,12 +113,18 @@ const LikhoDashboard = () => {
           <Row className="mt-10">
             <Col lg="6">
               <div className="bg-light 100 rounded-8 p-5 p-md-8 h-100">
-                <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.likho} language={language} />
+                <IndiaMapChart
+                  type={INITIATIVES_MEDIA_MAPPING.likho}
+                  language={`${fromLanguage}-${toLanguage}`}
+                />
               </div>
             </Col>
             <Col lg="6" className="mt-8 mt-lg-0">
               <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-                <ProgressChart type={INITIATIVES_MEDIA_MAPPING.likho} language={language} />
+                <ProgressChart
+                  type={INITIATIVES_MEDIA_MAPPING.likho}
+                  language={`${fromLanguage}-${toLanguage}`}
+                />
               </div>
             </Col>
           </Row>
