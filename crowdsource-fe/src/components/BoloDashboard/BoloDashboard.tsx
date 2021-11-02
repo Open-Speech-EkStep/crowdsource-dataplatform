@@ -15,13 +15,12 @@ import DashboardNotification from 'components/DashboardNotification';
 import GenderChart from 'components/GenderChart';
 import IndiaMapChart from 'components/IndiaMapChart';
 import LanguageSelector from 'components/LanguageSelector';
+import Portal from 'components/Portal';
 import ProgressChart from 'components/ProgressChart';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
-
-import styles from './BoloDashboard.module.scss';
 
 const BoloDashboard = () => {
   const { t } = useTranslation();
@@ -72,13 +71,13 @@ const BoloDashboard = () => {
           }}
         />
         {noData && contributeLanguage && (
-          <div className={`${styles.notification} position-fixed mx-auto`}>
+          <Portal>
             <DashboardNotification
               text={t('noDataMessageDashboard')}
               buttonLabel={t('contributeNow')}
               onClick={() => contribute(contributeLanguage)}
             />
-          </div>
+          </Portal>
         )}
         <Fragment>
           <div className="mt-8">

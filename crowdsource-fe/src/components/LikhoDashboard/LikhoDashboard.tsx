@@ -13,13 +13,12 @@ import ContributionStatsByLanguage from 'components/ContributionStatsByLanguage'
 import DashboardNotification from 'components/DashboardNotification';
 import IndiaMapChart from 'components/IndiaMapChart';
 import LanguagePairSelector from 'components/LanguagePairSelector';
+import Portal from 'components/Portal';
 import ProgressChart from 'components/ProgressChart';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
-
-import styles from './LikhoDashboard.module.scss';
 
 const LikhoDashboard = () => {
   const { t } = useTranslation();
@@ -83,13 +82,13 @@ const LikhoDashboard = () => {
           }}
         />
         {noData && contributeFromLanguage && contributeToLanguage && (
-          <div className={`${styles.notification} position-fixed mx-auto`}>
+          <Portal>
             <DashboardNotification
               text={t('noDataMessageDashboard')}
               buttonLabel={t('contributeNow')}
               onClick={() => contribute(contributeFromLanguage, contributeToLanguage)}
             />
-          </div>
+          </Portal>
         )}
         <Fragment>
           <div className="mt-8">
