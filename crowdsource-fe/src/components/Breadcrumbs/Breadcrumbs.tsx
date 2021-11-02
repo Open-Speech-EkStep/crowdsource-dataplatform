@@ -25,8 +25,8 @@ const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
           <div className="d-flex align-items-center cursor-pointer">
             <div className={`${styles.icon} d-flex`}>
               <Image
-                src={`/images/${currentLocale}/logos/${currentLocale}-sunoIndiaLogo.svg`}
-                alt={t(`sunoLogo`)}
+                src={`/images/${currentLocale}/logos/${currentLocale}-${initiative}IndiaLogo.svg`}
+                alt={t(`${initiative}Logo`)}
                 width="47"
                 height="42"
               />

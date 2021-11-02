@@ -60,7 +60,7 @@ const LanguagePairSelector = ({
   const handleFromChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     if (value === 'all') {
-      setSelectedFromLanguage(undefined);
+      updateSelectedLanguages(undefined, undefined);
     } else setSelectedFromLanguage(value);
     setSelectedToLanguage(undefined);
   };
