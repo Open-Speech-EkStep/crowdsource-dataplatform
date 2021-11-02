@@ -27,6 +27,7 @@ const apiPaths = {
   mediaAsr: nodeConfig.apiUrl + '/media/asr',
   mediaParallel: nodeConfig.apiUrl + '/media/parallel',
   contributionsAsr: nodeConfig.apiUrl + '/contributions/asr',
+  contributionsParallel: nodeConfig.apiUrl + '/contributions/parallel',
   store: nodeConfig.apiUrl + '/store',
   validate: nodeConfig.apiUrl + '/validate',
   skip: nodeConfig.apiUrl + '/skip',

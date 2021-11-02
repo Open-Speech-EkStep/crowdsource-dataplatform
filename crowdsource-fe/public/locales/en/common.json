@@ -303,5 +303,6 @@
   "congratulations": "Congratulations",
   "contributorAcheived": "You are a <span>{{badgeType}}</span> Contributor",
   "validatorAcheived": "You are a <span>{{badgeType}}</span> Validator",
-  "likhoContributionHeading": "Type the translation of the given text"
+  "likhoContributionHeading": "Type the translation of the given text",
+  "likhoValidationHeading": "Is the translation correct?"
 }

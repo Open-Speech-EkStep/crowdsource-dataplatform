@@ -28,7 +28,7 @@ const routePaths: { [key: string]: string } = {
   dekhoIndiaValidateThankYou: `${initiativeBaseRoute.dekhoIndia}/validate/thank-you`,
   likhoIndiaHome: `${initiativeBaseRoute.likhoIndia}`,
   likhoIndiaContribute: `${initiativeBaseRoute.likhoIndia}/contribute`,
-  likhoIndiaValidate: `${initiativeBaseRoute.likhoIndia}/validate.html`,
+  likhoIndiaValidate: `${initiativeBaseRoute.likhoIndia}/validate`,
   likhoIndiaDashboard: `${initiativeBaseRoute.likhoIndia}/dashboard`,
   likhoIndiaContributeThankYou: `${initiativeBaseRoute.likhoIndia}/contribute/thank-you`,
   likhoIndiaValidateThankYou: `${initiativeBaseRoute.likhoIndia}/validate/thank-you`,
