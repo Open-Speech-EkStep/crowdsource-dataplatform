@@ -1,6 +1,6 @@
 .dropdown {
+  padding-right: 0.25rem;
   @include media-breakpoint-up(md) {
     width: 225px;
   }
-  padding-right: 0.25rem;
 }
