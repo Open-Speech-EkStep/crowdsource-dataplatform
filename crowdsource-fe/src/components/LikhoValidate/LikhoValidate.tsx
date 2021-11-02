@@ -99,6 +99,12 @@ const LikhoValidate = () => {
   }, [contributionLanguage, mutate, speakerDetails]);
 
   useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
+  useEffect(() => {
     if (result && result.data) {
       setContributionData(result.data);
       setShowUIdata(result.data[currentDataIndex]);

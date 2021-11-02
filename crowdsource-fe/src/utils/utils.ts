@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf';
 import { i18n } from 'next-i18next';
 
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
-import { KEYBOARD_ERROR, LANGUAGE_UNICODE } from 'constants/Keyboard';
+import { KEYBOARD_ERROR, LANGUAGE_UNICODE, OTHER_LANGUAGE_UNICODE } from 'constants/Keyboard';
 import type { InitiativeType } from 'types/InitiativeType';
 
 var platform = require('platform');
@@ -92,11 +92,12 @@ export const verifyLanguage = (text: string, currentModule: string, language: st
   if (!text.length) return;
   const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
   let error: any = KEYBOARD_ERROR.language;
+  const isSunoModule = currentModule === INITIATIVES_MAPPING.suno;
   const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
   if (currentModule === INITIATIVES_MAPPING.suno && specialSymbols.test(newText) === true) {
     return KEYBOARD_ERROR.symbol;
   }
-  Object.entries(LANGUAGE_UNICODE).forEach(([key, value]) => {
+  Object.entries(isSunoModule ? LANGUAGE_UNICODE : OTHER_LANGUAGE_UNICODE).forEach(([key, value]) => {
     if (value.test(newText)) {
       //Check Unicode to see which one is true
       if (key.toLowerCase() === language.toLowerCase()) {

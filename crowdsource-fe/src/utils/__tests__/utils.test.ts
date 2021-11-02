@@ -99,7 +99,7 @@ describe('Utils', () => {
   });
 
   it('should test the verifyLanguage method', () => {
-    const errorType = verifyLanguage('suno', 'suno', 'Hindi');
+    const errorType = verifyLanguage('suno', 'likho', 'Hindi');
 
     const expectedOutput = { type: 'language' };
     expect(errorType).toEqual(expectedOutput);

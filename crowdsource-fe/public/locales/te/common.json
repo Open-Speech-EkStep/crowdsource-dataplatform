@@ -303,5 +303,6 @@
   "congratulations": "అభినందనలు",
   "contributorAcheived": "మీరు <span>{{badgeType}}</span> కాంట్రిబ్యూటర్",
   "validatorAcheived": "మీరు <span>{{badgeType}}</span> ధృవీకరణదారి",
-  "likhoContributionHeading": "ఇవ్వబడిన టెక్స్ట్ యొక్క అనువాదాన్ని టైప్ చేయండి"
+  "likhoContributionHeading": "ఇవ్వబడిన టెక్స్ట్ యొక్క అనువాదాన్ని టైప్ చేయండి",
+  "likhoValidationHeading": "అనువాదం సరయైనదేనా ?"
 }
