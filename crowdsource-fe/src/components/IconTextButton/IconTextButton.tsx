@@ -27,7 +27,7 @@ const IconTextButton = ({
 
   return (
     <Button
-      data-testid="IconTextButton"
+      data-testid={`${altText}_button`}
       className={classNames(
         `${styles.root} rounded d-flex align-items-center px-3 text-primary text-decoration-none`,
         { [styles.active]: active }
