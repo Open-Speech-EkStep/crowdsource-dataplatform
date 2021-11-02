@@ -19,16 +19,17 @@ type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProp
 
 const MyApp = ({ Component, pageProps }: MyAppProps) => {
   /* istanbul ignore next */
-  useFetchWithInit(apiPaths.setCookie, { revalidateOnMount: true });
-  /* istanbul ignore next */
+  const {mutate} = useFetchWithInit(apiPaths.setCookie, { revalidateOnMount: false });
+
   useEffect(() => {
     if (!localStorage.getItem(localStorageConstants.localtionInfo)) {
       const getLocationInfo = async () => {
         localStorage.setItem(localStorageConstants.localtionInfo, JSON.stringify(await fetchLocationInfo()));
       };
       getLocationInfo();
+      mutate()
     }
-  }, []);
+  }, [mutate]);
 
   return (
     <Layout>

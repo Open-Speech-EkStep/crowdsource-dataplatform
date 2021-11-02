@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged
+# npx lint-staged
 # npm test
 # npm start & npm run functional_test -- --env local
 # exit 1
