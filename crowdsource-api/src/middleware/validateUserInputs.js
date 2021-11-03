@@ -14,6 +14,7 @@ const {
     LANGUAGES,
     VALIDATION_ACTIONS,
     SOURCES,
+    REPORT_SOURCES,
     MEDIA_TYPES,
     OPTIONAL_FIELD_MAX_LENGTH,
     FEEDBACK_RESPONSES
@@ -259,7 +260,7 @@ function isTypeInvalid(req) {
 }
 
 function isSourceInvalid(req) {
-    return !(req.body.source && SOURCES.includes(req.body.source))
+    return !(req.body.source && REPORT_SOURCES.includes(req.body.source))
 }
 
 function isStateInvalid(req) {

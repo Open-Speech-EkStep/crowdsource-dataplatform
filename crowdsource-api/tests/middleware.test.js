@@ -966,7 +966,7 @@ describe('middleware test', function () {
         })
 
         test('should call next() if correct inputs are given in params', () => {
-            const req = { body: { sentenceId: '123', reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890 } };
+            const req = { body: { sentenceId: '123', reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validation' }, cookies: { userId: 7890 } };
             validateReportInputs(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -974,7 +974,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if correct user id is not sent', () => {
-            const req = { body: { sentenceId: '123', reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: {  } };
+            const req = { body: { sentenceId: '123', reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validation' }, cookies: {  } };
             validateReportInputs(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -982,7 +982,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if correct sentence id is not sent', () => {
-            const req = { body: { reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890  } };
+            const req = { body: { reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validation' }, cookies: { userId: 7890  } };
             validateReportInputs(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -990,7 +990,7 @@ describe('middleware test', function () {
         });
         
         test('should return 400 if report text is not sent', () => {
-            const req = { body: { sentenceId: '123', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890  } };
+            const req = { body: { sentenceId: '123', language: 'Hindi', userName: 'abcde', source: 'validation' }, cookies: { userId: 7890  } };
             validateReportInputs(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -998,7 +998,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if language is invalid', () => {
-            const req = { body: { sentenceId: '123', reportText: 'Hindi', language: 'invalid', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890  } };
+            const req = { body: { sentenceId: '123', reportText: 'Hindi', language: 'invalid', userName: 'abcde', source: 'validation' }, cookies: { userId: 7890  } };
             validateReportInputs(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -1006,7 +1006,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if username is not sent', () => {
-            const req = { body: { sentenceId: '123', language: 'Hindi', source: 'validate' }, cookies: { userId: 7890  } };
+            const req = { body: { sentenceId: '123', language: 'Hindi', source: 'validation' }, cookies: { userId: 7890  } };
             validateReportInputs(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)

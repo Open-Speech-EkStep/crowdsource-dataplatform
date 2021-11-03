@@ -74,6 +74,7 @@ const OPTIONAL_FIELD_MAX_LENGTH = 50
 const VALIDATION_ACTIONS = ["accept", "reject", "skip"];
 
 const SOURCES = ["contribute", "validate"];
+const REPORT_SOURCES = ["contribution", "validation"];
 
 const MEDIA_TYPES = ['parallel', 'ocr', 'text', 'asr'];
 
@@ -99,6 +100,7 @@ module.exports = {
   FEEDBACK_MAX_LENGTH,
   VALIDATION_ACTIONS,
   SOURCES,
+  REPORT_SOURCES,
   MEDIA_TYPES,
   ROLE_UAT,
   BADGE_SEQUENCE,
