@@ -5,7 +5,8 @@ const { validateUserInputAndFile,
     validateRewardsInput,
     validateRewardsInfoInput,
     validateInputsForValidateEndpoint,
-    validateGetContributionsInput
+    validateGetContributionsInput,
+    validateReportInputs
 } = require('../src/middleware/validateUserInputs')
 
 describe('middleware test', function () {
@@ -101,11 +102,19 @@ describe('middleware test', function () {
         })
 
         test('should call next() once if all params in req are valid', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language }, file: { size: 1024000, mimetype: "audio/wav" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, type: 'asr', audioDuration: 3 }, file: { size: 1024000, mimetype: "audio/wav" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
             expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call send() if audio duration is a string', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, type: 'asr', audioDuration: "ab" }, file: { size: 1024000, mimetype: "audio/wav" } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should call res.send() once if fileSize is greater than 12MB', function () {
@@ -187,7 +196,7 @@ describe('middleware test', function () {
         });
 
         test('should call next() if file object is not present but userInput is present', function () {
-            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "123456" } };
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "123456", type: "asr" } };
             validateUserInputAndFile(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -208,6 +217,58 @@ describe('middleware test', function () {
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
             expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call res.send() if type is not valid', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234text", type: 'xyz' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call res.send() if device length is not greater than allowed', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234text", type: 'asr', device: '123456789012345678901234567890123456789012345678901' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        test('should call res.send() if browser length is not greater than allowed', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234text", type: 'asr', browser: '123456789012345678901234567890123456789012345678901' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        test('should call next() if browser and device length is what is allowed', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "123456", type: "asr", browser: '12345', device: '12345' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call res.send() if country length is not greater than allowed', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234text", type: 'asr', country: '123456789012345678901234567890123456789012345678901' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        test('should call res.send() if state length is not greater than allowed', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "1234text", type: 'xyz', state: '123456789012345678901234567890123456789012345678901' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        test('should call next() if country and state length is what is allowed', function () {
+            const req = { body: { speakerDetails: JSON.stringify(speakerDetail), language: language, userInput: "123456", type: "asr", country: '12345', state: '12345' } };
+            validateUserInputAndFile(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
         });
     });
 
@@ -245,6 +306,90 @@ describe('middleware test', function () {
             validateUserInputForFeedback(req, res, nextSpy);
             expect(nextSpy).toHaveBeenCalledTimes(1)
             expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if recommended field is invalid', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, recommended: 'maybe'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call next() if recommended field is valid', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, recommended: 'yes'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if revisit field is invalid', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'maybe'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should call next() if revisit field is valid', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'yes'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if email field length is greater than allowed', () => {
+            const req = {
+                body: {
+                    email: 'abcdefghijklmnopqrstuvwxyz@abcdefghijklmnopqrstuvwxyz.abcdefghijklmnopqrstuvwxyz', category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if module field length is greater than allowed', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: 'abcdefghijklmnopqrstuvwxyz', target_page: testTargetPage, opinion_rating: testOpinionRating
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if target_page field length is greater than allowed', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz', opinion_rating: testOpinionRating
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should call next() once if category and feedback is empty', () => {
@@ -387,8 +532,8 @@ describe('middleware test', function () {
             jest.clearAllMocks();
         })
 
-        test('should call next() once if username id and sentenceId are valid', () => {
-            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername } };
+        test('should call next() once all fields are valid', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'Hindi', fromLanguage: 'English' } };
             validateInputForSkip(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -396,7 +541,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if userId is not set', () => {
-            const req = { cookies: {}, body: { sentenceId: 123, userName: validUsername } };
+            const req = { cookies: {}, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'Hindi', fromLanguage: 'English'  } };
             validateInputForSkip(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -404,7 +549,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if username is undefined', () => {
-            const req = { cookies: {}, body: { sentenceId: 123 } };
+            const req = { cookies: cookie, body: { sentenceId: 123, type: 'asr', language: 'Hindi', fromLanguage: 'English'  } };
             validateInputForSkip(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -412,7 +557,71 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if sentenceId is falsy', () => {
-            const req = { cookies: {}, body: { userName: validUsername } };
+            const req = { cookies: cookie, body: { userName: validUsername, type: 'asr', language: 'Hindi', fromLanguage: 'English'  } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if type is not sent', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, language: 'Hindi', fromLanguage: 'English' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        
+        test('should return 400 if type is invalid', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'invalid', language: 'Hindi', fromLanguage: 'English' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if language is invalid', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'French', fromLanguage: 'English' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if from language is invalid', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'English', fromLanguage: 'French' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if from browser is invalid length', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'English', fromLanguage: 'Hindi', browser: '123456789012345678901234567890123456789012345678901' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if from device is invalid length', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'English', fromLanguage: 'Hindi', device: '123456789012345678901234567890123456789012345678901' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if from country is invalid length', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'English', fromLanguage: 'Hindi', country: '123456789012345678901234567890123456789012345678901' } };
+            validateInputForSkip(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if from state is invalid length', () => {
+            const req = { cookies: cookie, body: { sentenceId: 123, userName: validUsername, type: 'asr', language: 'English', fromLanguage: 'Hindi', state: '123456789012345678901234567890123456789012345678901' } };
             validateInputForSkip(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -421,16 +630,17 @@ describe('middleware test', function () {
     });
 
     describe('Validate Rewards input', () => {
-        const validLanguage = 'language';
+        const validLanguage = 'Hindi';
         const validSource = 'contribute';
         const validType = 'text';
+        const validUserName = 'abcdefg'
 
         afterEach(() => {
             jest.clearAllMocks();
         })
 
         test('should call next() if language is inputs are valid', () => {
-            const req = { cookies: cookie, query: { type: validType, source: validSource, language: validLanguage } };
+            const req = { cookies: cookie, query: { type: validType, source: validSource, language: validLanguage, userName: validUserName } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -438,7 +648,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if userId is not set', () => {
-            const req = { cookies: {}, query: { type: validType, source: validSource, language: validLanguage } };
+            const req = { cookies: {}, query: { type: validType, source: validSource, language: validLanguage, userName: validUserName } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -446,7 +656,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if type is undefined', () => {
-            const req = { cookies: cookie, query: { source: validSource, language: validLanguage } };
+            const req = { cookies: cookie, query: { source: validSource, language: validLanguage, userName: validUserName } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -454,7 +664,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if source is undefined', () => {
-            const req = { cookies: cookie, query: { type: validType, language: validLanguage } };
+            const req = { cookies: cookie, query: { type: validType, language: validLanguage, userName: validUserName } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -462,7 +672,7 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if language is undefined', () => {
-            const req = { cookies: cookie, query: { type: validType, source: validSource } };
+            const req = { cookies: cookie, query: { type: validType, source: validSource, userName: validUserName } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(0)
@@ -470,14 +680,35 @@ describe('middleware test', function () {
         });
 
         test('should return 400 if type is not from media types', () => {
-            const req = { cookies: cookie, query: { type: 'someType', source: validSource, language: validLanguage } };
+            const req = { cookies: cookie, query: { type: 'someType', source: validSource, language: validLanguage, userName: validUserName } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
         });
 
         test('should return 400 if source is not in the source set', () => {
+            const req = { cookies: cookie, query: { type: validType, source: 'invalidSource', language: validLanguage, userName: validUserName } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if username is not set', () => {
             const req = { cookies: cookie, query: { type: validType, source: 'invalidSource', language: validLanguage } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if language is not set', () => {
+            const req = { cookies: cookie, query: { type: validType, source: 'invalidSource' } };
+            validateRewardsInput(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if language is invalid', () => {
+            const req = { cookies: cookie, query: { type: validType, source: 'invalidSource', language: 'invalid' } };
             validateRewardsInput(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(1)
@@ -544,7 +775,7 @@ describe('middleware test', function () {
         })
 
         test('should call next() if correct inputs are given in params', () => {
-            const req = { params: { action: "accept", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: { userId: 7890 } };
+            const req = { params: { action: "accept", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'userName' }, cookies: { userId: 7890 } };
             validateInputsForValidateEndpoint(req, res, nextSpy);
 
             expect(nextSpy).toHaveBeenCalledTimes(1)
@@ -576,7 +807,7 @@ describe('middleware test', function () {
         });
 
         test('should call next() if action is reject', () => {
-            const req = { params: { action: "reject", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: { userId: 7890 } };
+            const req = { params: { action: "reject", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'userName' }, cookies: { userId: 7890 } };
             validateInputsForValidateEndpoint(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(0)
@@ -584,7 +815,7 @@ describe('middleware test', function () {
         });
 
         test('should call next() if action is skip', () => {
-            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN' }, cookies: { userId: 7890 } };
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'userName' }, cookies: { userId: 7890 } };
             validateInputsForValidateEndpoint(req, res, nextSpy);
 
             expect(res.send).toHaveBeenCalledTimes(0)
@@ -631,6 +862,172 @@ describe('middleware test', function () {
             expect(nextSpy).toHaveBeenCalledTimes(0)
         });
 
+        test('should return 400 if type is not sent', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', userName: 'userName' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if type is not valid', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', userName: 'userName', type: 'not a type' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if from language is not valid', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'French', userName: 'userName', type: 'asr' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if language is not valid', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', language: 'French', userName: 'userName', type: 'asr' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if userName is not sent', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if userName is an email', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'email@domain.com' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if userName is a mobile', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: '9876543210' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if userName is greater than allowed length', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if browser is greater than allowed length', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'userName', browser: '123456789012345678901234567890123456789012345678901' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if device is greater than allowed length', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, state: 'TN', country: 'IN', fromLanguage: 'Hindi', type: 'asr', userName: 'userName', device: '123456789012345678901234567890123456789012345678901' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if country is greater than allowed length', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, fromLanguage: 'Hindi', type: 'asr', userName: 'userName', country: '123456789012345678901234567890123456789012345678901' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if state is greater than allowed length', () => {
+            const req = { params: { action: "skip", contributionId: 123 }, body: { sentenceId: 456, fromLanguage: 'Hindi', type: 'asr', userName: 'userName', state: '123456789012345678901234567890123456789012345678901' }, cookies: { userId: 7890 } };
+            validateInputsForValidateEndpoint(req, res, nextSpy);
+
+            expect(res.send).toHaveBeenCalledTimes(1)
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+        });
+    });
+
+    describe('Validate Get Report Input', () => {
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
+        test('should call next() if correct inputs are given in params', () => {
+            const req = { body: { sentenceId: '123', reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890 } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should return 400 if correct user id is not sent', () => {
+            const req = { body: { sentenceId: '123', reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: {  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if correct sentence id is not sent', () => {
+            const req = { body: { reportText: 'text', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+        
+        test('should return 400 if report text is not sent', () => {
+            const req = { body: { sentenceId: '123', language: 'Hindi', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if language is invalid', () => {
+            const req = { body: { sentenceId: '123', reportText: 'Hindi', language: 'invalid', userName: 'abcde', source: 'validate' }, cookies: { userId: 7890  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if username is not sent', () => {
+            const req = { body: { sentenceId: '123', language: 'Hindi', source: 'validate' }, cookies: { userId: 7890  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if source is not sent', () => {
+            const req = { body: { sentenceId: '123', language: 'Hindi', userName: 'validator' }, cookies: { userId: 7890  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
+
+        test('should return 400 if source is invalid', () => {
+            const req = { body: { sentenceId: '123', language: 'Hindi', userName: 'validator', source: 'google' }, cookies: { userId: 7890  } };
+            validateReportInputs(req, res, nextSpy);
+
+            expect(nextSpy).toHaveBeenCalledTimes(0)
+            expect(res.send).toHaveBeenCalledTimes(1)
+        });
     });
 
     describe('Validate Get Contributions Input', () => {

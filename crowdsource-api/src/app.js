@@ -42,7 +42,8 @@ const {
     validateRewardsInput,
     validateRewardsInfoInput,
     validateInputsForValidateEndpoint,
-    validateGetContributionsInput
+    validateGetContributionsInput,
+    validateReportInputs
 } = require('./middleware/validateUserInputs');
 const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware')
 
@@ -266,7 +267,7 @@ router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoi
     return updateTablesAfterValidation(req, res)
 })
 
-router.post('/report', async (req, res) => {
+router.post('/report', validateReportInputs, async (req, res) => {
     /*  #swagger.tags = ['Support']
         #swagger.description = 'Endpoint to store report entry.',
         #swagger.parameters['userId'] = {
@@ -288,19 +289,12 @@ router.post('/report', async (req, res) => {
                     "source": "contribution"
                 }
         }, */
-    const userId = req.cookies.userId || '';
-    //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
-    const { sentenceId = '', reportText = '', language = '', userName = '', source = '' } = req.body;
-    if (
-        sentenceId === '' ||
-        reportText === '' ||
-        language === '' ||
-        userId === '' ||
-        !['contribution', 'validation'].includes(source)
-    ) {
-        return res.send({ statusCode: 400, message: 'Input values missing' });
-    }
+    
     try {
+        const userId = req.cookies.userId || '';
+        //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
+        const { sentenceId = '', reportText = '', language = '', userName = '', source = '' } = req.body;
+
         await saveReport(userId, sentenceId, reportText, language, userName, source);
     } catch (err) {
         console.log(err);
@@ -340,7 +334,7 @@ router.post('/skip', validateInputForSkip, markContributionSkippedInCache, (req,
         })
         .catch(err => {
             console.log(err);
-            return res.send({ statusCode: 500, message: err.message });
+            return res.send({ statusCode: 500, message: 'Some error occured' });
         });
 });
 

@@ -69,11 +69,15 @@ const CATEGORY_MAX_LENGTH = 256
 
 const FEEDBACK_MAX_LENGTH = 1000
 
+const OPTIONAL_FIELD_MAX_LENGTH = 50
+
 const VALIDATION_ACTIONS = ["accept", "reject", "skip"];
 
 const SOURCES = ["contribute", "validate"];
 
 const MEDIA_TYPES = ['parallel', 'ocr', 'text', 'asr'];
+
+const FEEDBACK_RESPONSES = ['yes', 'no'];
 
 module.exports = {
   MAX_SIZE,
@@ -97,5 +101,7 @@ module.exports = {
   SOURCES,
   MEDIA_TYPES,
   ROLE_UAT,
-  BADGE_SEQUENCE
+  BADGE_SEQUENCE,
+  OPTIONAL_FIELD_MAX_LENGTH,
+  FEEDBACK_RESPONSES
 };
