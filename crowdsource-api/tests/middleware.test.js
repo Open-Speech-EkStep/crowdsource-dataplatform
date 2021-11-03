@@ -312,7 +312,7 @@ describe('middleware test', function () {
             const req = {
                 body: {
                     email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
-                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, recommended: 'maybe'
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, recommended: 'yup'
                 }
             };
             validateUserInputForFeedback(req, res, nextSpy);
@@ -336,7 +336,7 @@ describe('middleware test', function () {
             const req = {
                 body: {
                     email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
-                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'maybe'
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'yup'
                 }
             };
             validateUserInputForFeedback(req, res, nextSpy);

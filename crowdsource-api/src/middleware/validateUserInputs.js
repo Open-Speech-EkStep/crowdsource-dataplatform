@@ -120,8 +120,8 @@ const validateUserInputForFeedback = function (req, res, next) {
     const recommended = req.body.recommended;
     const revisit = req.body.revisit;
 
-    const invalidRecommended = recommended && (recommended.length > 3 || !FEEDBACK_RESPONSES.includes(recommended));
-    const invalidRevisit = revisit && (revisit.length > 3 || !FEEDBACK_RESPONSES.includes(revisit));
+    const invalidRecommended = recommended && (recommended.length > 5 || !FEEDBACK_RESPONSES.includes(recommended));
+    const invalidRevisit = revisit && (revisit.length > 5 || !FEEDBACK_RESPONSES.includes(revisit));
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
@@ -136,11 +136,7 @@ const validateUserInputForFeedback = function (req, res, next) {
     const invalidTargetPage = (!target_page || !target_page.trim().length || target_page.trim().length > 50)
 
     const invalidOpinionRating = (!opinion_rating || !(opinion_rating >= 1) || !(opinion_rating <= 5))
-    console.log('invalidRecommended',invalidRecommended)
-    console.log('invalidRevisit',invalidRevisit)
-    console.log('invalidEmail',invalidEmail)
-    console.log('invalidModule',invalidModule)
-    console.log('invalidTargetPage',invalidTargetPage)
+    
     if (invalidEmail || invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage
         || invalidRecommended || invalidRevisit) {
         return res.status(400).send("Bad request");
