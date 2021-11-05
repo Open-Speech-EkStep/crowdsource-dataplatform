@@ -305,4 +305,11 @@
   "validatorAcheived": "तुम्ही एक <span>{{badgeType}}</span> प्रमाणिकरण कर्ता आहात.",
   "likhoContributionHeading": "दिलेल्या टेक्स्टचे भाषांतर टाईप करा",
   "likhoValidationHeading": "भाषांतर बरोबर आहे का?"
+  "likhoContributionHeading": "दिलेल्या टेक्स्टचे भाषांतर टाईप करा",
+  "badgesDetailPageHeading": "",
+  "selectDropDownLanguagePrompt": "",
+  "selectBadgeLevelPrompt": "",
+  "participation": "",
+  "validateBadgeDetailText": "",
+  "contributeBadgeDetailText": ""
 }

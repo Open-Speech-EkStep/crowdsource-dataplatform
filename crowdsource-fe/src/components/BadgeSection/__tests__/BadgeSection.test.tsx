@@ -41,7 +41,7 @@ describe('BadgeSection', () => {
     const { asFragment } = setup();
 
     expect(asFragment).toMatchSnapshot();
-    expect(screen.getByText('contribution')).toBeInTheDocument();
-    expect(screen.getByText('validation')).toBeInTheDocument();
+    expect(screen.getByText('Contribution')).toBeInTheDocument();
+    expect(screen.getByText('Validation')).toBeInTheDocument();
   });
 });

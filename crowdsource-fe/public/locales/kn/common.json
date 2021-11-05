@@ -305,4 +305,11 @@
   "validatorAcheived": "ನೀವು ಒಬ್ಬ <span>{{badgeType}}</span> ಮೌಲ್ಯಮಾಪಕರಾಗಿದ್ದೀರಿ",
   "likhoContributionHeading": "ಕೊಡಲ್ಪಟ್ಟ ಪಠ್ಯದ ಅನುವಾದವನ್ನು ಟೈಪ್ ಮಾಡಿ",
   "likhoValidationHeading": "ಈ ಅನುವಾದವು ಸರಿಯಾಗಿದೆಯೇ?"
+  "likhoContributionHeading": "ಕೊಡಲ್ಪಟ್ಟ ಪಠ್ಯದ ಅನುವಾದವನ್ನು ಟೈಪ್ ಮಾಡಿ",
+  "badgesDetailPageHeading": "",
+  "selectDropDownLanguagePrompt": "",
+  "selectBadgeLevelPrompt": "",
+  "participation": "",
+  "validateBadgeDetailText": "",
+  "contributeBadgeDetailText": ""
 }

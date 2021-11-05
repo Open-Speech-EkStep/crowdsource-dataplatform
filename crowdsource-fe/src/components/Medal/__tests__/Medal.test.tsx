@@ -3,39 +3,51 @@ import { render, userEvent, waitFor, screen, fireEvent } from 'utils/testUtils';
 import Medal from '../Medal';
 
 describe('Medal', () => {
+  const mockMedalClick = jest.fn();
   const setup = (
-    flag: boolean,
+    isOuterComponentPresent: boolean,
+    isCallBack: boolean = false,
     props: {
       medal: string;
       action: string;
+      selectedMedal: string;
       initiative: string;
       language: string;
+      handleClick?: () => void;
     } = {
       medal: 'testmedal',
       action: 'testaction',
       initiative: 'initiative',
+      selectedMedal: '',
       language: 'language',
     }
   ) =>
-    flag
-      ? render(<Medal {...props}></Medal>)
-      : render(
-          <>
-            <Medal {...props}></Medal>
-            <button>Test Button</button>
-          </>
-        );
+    isOuterComponentPresent
+      ? render(
+          isCallBack ? (
+            <>
+              <Medal {...props} handleClick={mockMedalClick}></Medal>
+              <button>Test Button</button>
+            </>
+          ) : (
+            <>
+              <Medal {...props}></Medal>
+              <button>Test Button</button>
+            </>
+          )
+        )
+      : render(<Medal {...props}></Medal>);
 
   // setup(true);
 
   it('should render the component and matches it against stored snapshot', () => {
-    const { asFragment } = setup(true);
+    const { asFragment } = setup(false, false);
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should not render when clicked outside', async () => {
-    const { container } = setup(false);
+    const { container } = setup(true, false);
 
     expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
 
@@ -49,7 +61,7 @@ describe('Medal', () => {
   });
 
   it('should render on keydown', async () => {
-    const { container } = setup(false);
+    const { container } = setup(true, false);
 
     expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
 
@@ -60,5 +72,29 @@ describe('Medal', () => {
     userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
 
     await waitFor(() => expect(container.querySelector('.position-absolute')).not.toBeInTheDocument());
+  });
+
+  it('should call callback fn when callback is provided', async () => {
+    const { container } = setup(true, true);
+    expect(container.querySelector('.active')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByAltText('Medal'));
+
+    await waitFor(() => expect(mockMedalClick).toBeCalled());
+    await waitFor(() => expect(container.querySelector('.active')).toBeInTheDocument());
+  });
+
+  it('should not add active class when hasMedalActive parameter is false', async () => {
+    const { container } = setup(true, false);
+
+    expect(container.querySelector('.active')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByAltText('Medal'));
+
+    await waitFor(() => expect(container.querySelector('.active')).toBeInTheDocument());
+
+    userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
+
+    await waitFor(() => expect(container.querySelector('.active')).not.toBeInTheDocument());
   });
 });

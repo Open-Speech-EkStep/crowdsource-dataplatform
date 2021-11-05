@@ -38,6 +38,7 @@ const apiPaths = {
   quarterlyTimeline: nodeConfig.staticFileUrl + '/aggregated-json/quarterlyTimeline.json',
   rewards: nodeConfig.apiUrl + '/rewards',
   setCookie: nodeConfig.apiUrl + '/get-userid',
+  rewardInfo: nodeConfig.apiUrl + '/reward-info',
 };
 
 export default apiPaths;

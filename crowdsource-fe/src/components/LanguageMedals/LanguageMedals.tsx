@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 
 import Medal from 'components/Medal';
 import MedalPlaceholder from 'components/MedalPlaceholder';
-import { groupBy } from 'utils/utils';
+import { groupBy, capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './LanguageMedals.module.scss';
 
@@ -25,7 +25,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
   return (
     <Row className="py-3">
       <Col lg="2" className="d-flex align-items-center fw-light display-3">
-        {t(language.toLowerCase())}
+        {capitalizeFirstLetter(t(language.toLowerCase()))}
       </Col>
       <Col lg="10">
         <Row>
@@ -37,7 +37,13 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
                   <div key={medal} className={styles.medal}>
                     {groupByAction[actions[0]] &&
                     groupByAction[actions[0]].some((ele: any) => ele.grade == medal) ? (
-                      <Medal initiative={initiative} medal={medal} action={actions[0]} language={language} />
+                      <Medal
+                        initiative={initiative}
+                        selectedMedal=""
+                        medal={medal}
+                        action={actions[0]}
+                        language={language}
+                      />
                     ) : (
                       <MedalPlaceholder medal={medal} />
                     )}
@@ -54,7 +60,13 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
                   <div key={medal} className={styles.medal}>
                     {groupByAction[actions[1]] &&
                     groupByAction[actions[1]].some((ele: any) => ele.grade == medal) ? (
-                      <Medal initiative={initiative} medal={medal} action={actions[1]} language={language} />
+                      <Medal
+                        initiative={initiative}
+                        selectedMedal=""
+                        medal={medal}
+                        action={actions[1]}
+                        language={language}
+                      />
                     ) : (
                       <MedalPlaceholder medal={medal} />
                     )}

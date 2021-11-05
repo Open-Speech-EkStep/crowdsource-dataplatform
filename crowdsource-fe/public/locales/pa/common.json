@@ -305,4 +305,11 @@
   "validatorAcheived": "ਤੁਸੀਂ ਇੱਕ <span>{{badgeType}}</span> ਪ੍ਰਮਾਣੀਕਰਤਾ ਹੋ",
   "likhoContributionHeading": "ਦਿੱਤੀ ਗਈ ਟੈਕਸਟ ਦਾ ਅਨੁਵਾਦ ਟਾਈਪ ਕਰੋ",
   "likhoValidationHeading": "ਕੀ ਇਹ ਅਨੁਵਾਦ ਸਹੀ ਹੈ?"
+  "likhoContributionHeading": "ਦਿੱਤੀ ਗਈ ਟੈਕਸਟ ਦਾ ਅਨੁਵਾਦ ਟਾਈਪ ਕਰੋ",
+  "badgesDetailPageHeading": "",
+  "selectDropDownLanguagePrompt": "",
+  "selectBadgeLevelPrompt": "",
+  "participation": "",
+  "validateBadgeDetailText": "",
+  "contributeBadgeDetailText": ""
 }
