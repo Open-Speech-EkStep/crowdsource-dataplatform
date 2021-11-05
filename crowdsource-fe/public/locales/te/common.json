@@ -305,11 +305,4 @@
   "validatorAcheived": "మీరు <span>{{badgeType}}</span> ధృవీకరణదారి",
   "likhoContributionHeading": "ఇవ్వబడిన టెక్స్ట్ యొక్క అనువాదాన్ని టైప్ చేయండి",
   "likhoValidationHeading": "అనువాదం సరయైనదేనా ?"
-  "likhoContributionHeading": "ఇవ్వబడిన టెక్స్ట్ యొక్క అనువాదాన్ని టైప్ చేయండి",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
 }

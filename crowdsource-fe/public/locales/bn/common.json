@@ -305,11 +305,4 @@
   "validatorAcheived": " আপনি একজন <span>{{badgeType}}</span> যাচাইকারী",
   "likhoContributionHeading": "প্রদত্ত লেখাটির অনুবাদ টাইপ করুন",
   "likhoValidationHeading": "অনুবাদটি কি সঠিক?"
-  "likhoContributionHeading": "প্রদত্ত লেখাটির অনুবাদ টাইপ করুন",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
 }

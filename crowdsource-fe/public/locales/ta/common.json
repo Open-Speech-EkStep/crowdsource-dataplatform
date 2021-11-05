@@ -305,11 +305,4 @@
   "validatorAcheived": "நீங்கள் ஒரு <span>{{badgeType}}</span> சரிபார்ப்பாளர்",
   "likhoContributionHeading": "கொடுக்கப்பட்ட உரையின் மொழிபெயர்ப்பைத் தட்டச்சு செய்க",
   "likhoValidationHeading": "மொழிபெயர்ப்பு சரியானதா?"
-  "likhoContributionHeading": "கொடுக்கப்பட்ட உரையின் மொழிபெயர்ப்பைத் தட்டச்சு செய்க",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
 }

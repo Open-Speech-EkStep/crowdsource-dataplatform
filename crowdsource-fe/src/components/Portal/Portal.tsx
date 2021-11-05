@@ -32,7 +32,7 @@ const Portal = ({ children }: PortalProps) => {
     return () => {
       portalRoot?.removeChild(el!!);
     };
-  }, [el]);
+  }, []);
 
   return createPortal(children, el!!);
 };

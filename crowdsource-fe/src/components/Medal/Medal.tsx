@@ -12,16 +12,13 @@ interface MedalProps {
   medal: string;
   action: string;
   initiative: string;
-  selectedMedal: string;
   language: string;
-  handleClick?: () => void;
 }
 
-const Medal = ({ initiative, selectedMedal, medal, action, language, handleClick }: MedalProps) => {
+const Medal = ({ initiative, medal, action, language }: MedalProps) => {
   const { t } = useTranslation();
   const languageCode = LOCALE_LANGUAGES[language];
   const [showZoomedImage, setShowZoomedImage] = useState(false);
-  const [hasMedalActive, setMedalActive] = useState(false);
 
   const medalRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +26,6 @@ const Medal = ({ initiative, selectedMedal, medal, action, language, handleClick
     function handleDocumentClick(event: Event) {
       if (!medalRef?.current?.contains(event.target as Node)) {
         setShowZoomedImage(false);
-        setMedalActive(false);
       }
     }
 
@@ -40,20 +36,15 @@ const Medal = ({ initiative, selectedMedal, medal, action, language, handleClick
     };
   }, []);
 
-  const handleMedalClick = function () {
-    setMedalActive(true);
-    return handleClick ? handleClick() : setShowZoomedImage(true);
-  };
-
   return (
     <div className="position-relative">
       <div
         role="button"
         className={`${styles.root} ${styles.earned} ${
-          hasMedalActive || selectedMedal == medal ? styles.active : ''
+          showZoomedImage ? styles.active : ''
         } d-flex flex-column align-items-center text-center py-2 py-md-3`}
-        onClick={handleMedalClick}
-        onKeyDown={handleMedalClick}
+        onClick={() => setShowZoomedImage(true)}
+        onKeyDown={() => setShowZoomedImage(true)}
         ref={medalRef}
         tabIndex={0}
       >

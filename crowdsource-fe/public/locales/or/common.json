@@ -305,11 +305,4 @@
   "validatorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ପ୍ରମାଣକାରୀ ଅଟନ୍ତି",
   "likhoContributionHeading": "ଦିଆଯାଇଥିବା ଟେକ୍ସଟ୍ର ଅନୁବାଦ ଟାଇପ୍ କରନ୍ତୁ",
   "likhoValidationHeading": "ଅନୁବାଦ ସଠିକ୍ କି?"
-  "likhoContributionHeading": "ଦିଆଯାଇଥିବା ଟେକ୍ସଟ୍ର ଅନୁବାଦ ଟାଇପ୍ କରନ୍ତୁ",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
 }

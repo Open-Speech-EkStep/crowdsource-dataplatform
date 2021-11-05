@@ -305,11 +305,4 @@
   "validatorAcheived": "You are a <span>{{badgeType}}</span> Validator",
   "likhoContributionHeading": "Type the translation of the given text",
   "likhoValidationHeading": "Is the translation correct?"
-  "likhoContributionHeading": "Type the translation of the given text",
-  "badgesDetailPageHeading": "How can you win Bhasha Samarthak Badges",
-  "selectDropDownLanguagePrompt": "Your Language",
-  "selectBadgeLevelPrompt": "Select Badge Level",
-  "participation": "Participation",
-  "validateBadgeDetailText": "Validate <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
-  "contributeBadgeDetailText": "Contribute <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge"
 }

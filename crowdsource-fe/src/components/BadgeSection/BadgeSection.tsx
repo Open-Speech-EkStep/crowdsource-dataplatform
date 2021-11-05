@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import LanguageMedals from 'components/LanguageMedals';
-import { groupBy, capitalizeFirstLetter } from 'utils/utils';
+import { groupBy } from 'utils/utils';
 
 interface BadgeSectionProps {
   initiative: string;
@@ -22,10 +22,10 @@ const BadgeSection = ({ initiative, initiativeBadge }: BadgeSectionProps) => {
         <Col lg="10">
           <Row>
             <Col lg="6">
-              <h6 className="fw-light">{capitalizeFirstLetter(t('contribution'))}</h6>
+              <h6 className="fw-light">{t('contribution')}</h6>
             </Col>
             <Col lg="6">
-              <h6 className="fw-light">{capitalizeFirstLetter(t('validation'))}</h6>
+              <h6 className="fw-light">{t('validation')}</h6>
             </Col>
           </Row>
         </Col>

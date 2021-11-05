@@ -93,10 +93,3 @@ export const CONTRIBUTION_MAPPING = {
   [routePaths.likhoIndiaContributeThankYou]: 'total_contribution_count',
   [routePaths.likhoIndiaValidateThankYou]: 'total_validation_count',
 } as const;
-
-export const INITIATIVE_MEDIA_BADGES_MAPPING = {
-  [INITIATIVES_MAPPING.suno]: 'sentences',
-  [INITIATIVES_MAPPING.bolo]: 'recordings',
-  [INITIATIVES_MAPPING.likho]: 'translations',
-  [INITIATIVES_MAPPING.dekho]: 'image labels',
-} as const;
