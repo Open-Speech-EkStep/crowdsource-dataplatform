@@ -304,5 +304,11 @@
   "contributorAcheived": "നിങ്ങള്‍ ഒരു <span>{{badgeType}}</span> സംഭാവക/ സംഭാവകന്‍ ആണ്",
   "validatorAcheived": "നിങ്ങള്‍ ഒരു <span>{{badgeType}}</span> വാലിഡേറ്റര്‍ ആണ്",
   "likhoContributionHeading": "തന്നിരിക്കുന്ന വാചകങ്ങളുടെ പരിഭാഷ ടൈപ്പ് ചെയ്യുക",
-  "likhoValidationHeading": "പരിഭാഷ ശരിയാണോയെന്ന് രേഖപ്പെടുത്തുക"
+  "likhoValidationHeading": "പരിഭാഷ ശരിയാണോയെന്ന് രേഖപ്പെടുത്തുക",
+  "badgesDetailPageHeading": "",
+  "selectDropDownLanguagePrompt": "",
+  "selectBadgeLevelPrompt": "",
+  "participation": "",
+  "validateBadgeDetailText": "",
+  "contributeBadgeDetailText": ""
 }

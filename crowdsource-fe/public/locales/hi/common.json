@@ -304,5 +304,11 @@
   "contributorAcheived": "आप एक <span>{{badgeType}}</span>  योगदानकर्ता हैं",
   "validatorAcheived": "आप एक <span>{{badgeType}}</span> सत्यापनकर्ता हैं",
   "likhoContributionHeading": "दिए गए टेक्स्ट का अनुवाद टाइप करें",
-  "likhoValidationHeading": "क्या यह अनुवाद सही है?"
+  "likhoValidationHeading": "क्या यह अनुवाद सही है?",
+  "badgesDetailPageHeading": "",
+  "selectDropDownLanguagePrompt": "",
+  "selectBadgeLevelPrompt": "",
+  "participation": "",
+  "validateBadgeDetailText": "",
+  "contributeBadgeDetailText": ""
 }

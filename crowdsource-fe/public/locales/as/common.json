@@ -304,5 +304,11 @@
   "contributorAcheived": "",
   "validatorAcheived": "",
   "likhoContributionHeading": "উল্লেখিত পাঠৰ অনুৱাদ টাইপ কৰক",
-  "likhoValidationHeading": "অনুবাদটো শুদ্ধ হয়নে?"
+  "likhoValidationHeading": "অনুবাদটো শুদ্ধ হয়নে?",
+  "badgesDetailPageHeading": "",
+  "selectDropDownLanguagePrompt": "",
+  "selectBadgeLevelPrompt": "",
+  "participation": "",
+  "validateBadgeDetailText": "",
+  "contributeBadgeDetailText": ""
 }
