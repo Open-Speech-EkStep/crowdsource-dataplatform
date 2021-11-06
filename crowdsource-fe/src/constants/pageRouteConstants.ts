@@ -139,6 +139,7 @@ export const pageInitiativeRouteConstants = {
   [routePaths.likhoIndiaValidateThankYou]: INITIATIVES_MAPPING.likho,
 
   [routePaths.myBadges]: 'others',
+  [routePaths.badges]: 'others',
 } as const;
 
 export default pageRouteConstants;

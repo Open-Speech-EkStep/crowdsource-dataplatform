@@ -3,7 +3,7 @@ import { render, verifyAxeTest, screen, userEvent } from 'utils/testUtils';
 import InitiativeBadgeDetail from '../InitiativeBadgeDetail';
 
 describe('InitiativeBadgeDetail', () => {
-  const setup = (initiative: string, language: string, action: string) =>
+  const setup = (initiative: 'suno' | 'likho' | 'bolo' | 'dekho', language: string, action: string) =>
     render(<InitiativeBadgeDetail initiative={initiative} language={language} action={action} />);
 
   verifyAxeTest(setup('suno', 'english', 'contribute'));

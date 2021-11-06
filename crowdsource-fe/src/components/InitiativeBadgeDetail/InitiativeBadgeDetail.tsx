@@ -8,14 +8,16 @@ import Row from 'react-bootstrap/Row';
 
 import Medal from 'components/Medal';
 import TriColorGradientBg from 'components/TriColorGradientBg';
+import { INITIATIVE_MEDIA_BADGES_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
+import type { Initiative } from 'types/Initiatives';
 import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './InitiativeBadgeDetail.module.scss';
 
 interface InitiativeBadgeDetailProps {
   action: string;
-  initiative: string;
+  initiative: Initiative;
   language: string;
 }
 
@@ -115,7 +117,7 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
                       initiativeName: capitalizeFirstLetter(`${t(initiative)} ${t('india')}`),
                       badge: capitalizeFirstLetter(t(selectedMedal.toLowerCase())),
                       language: capitalizeFirstLetter(t(language.toLowerCase())),
-                      sourceType: 'sentences',
+                      sourceType: INITIATIVE_MEDIA_BADGES_MAPPING[initiative],
                       count: 5,
                     }}
                     components={{ span: <span className="text-warning" /> }}
