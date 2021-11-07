@@ -8,8 +8,10 @@ import Row from 'react-bootstrap/Row';
 
 import Medal from 'components/Medal';
 import TriColorGradientBg from 'components/TriColorGradientBg';
-import { INITIATIVE_MEDIA_BADGES_MAPPING } from 'constants/initiativeConstants';
+import apiPaths from 'constants/apiPaths';
+import { INITIATIVES_MEDIA_MAPPING, INITIATIVE_MEDIA_BADGES_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
+import { useFetchWithInit } from 'hooks/useFetch';
 import type { Initiative } from 'types/Initiatives';
 import { capitalizeFirstLetter } from 'utils/utils';
 
@@ -28,10 +30,22 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
 
   const [participatedAction, setParticipatedAction] = useState<string>(action);
   const [selectedMedal, setSelectedMedal] = useState<string>(medals[0]);
+  const { data, mutate: rewardMutate } = useFetchWithInit<Array<{ contributions: number; badge: string }>>(
+    `${apiPaths.rewardInfo}?type=${INITIATIVES_MEDIA_MAPPING[initiative]}&source=${participatedAction}&language=${language}`,
+    {
+      revalidateOnMount: false,
+    }
+  );
 
   useEffect(() => {
     setParticipatedAction(action);
   }, [action]);
+
+  useEffect(() => {
+    rewardMutate();
+  }, [participatedAction, initiative, language, rewardMutate]);
+
+  const contributionCount = data && data[medals.indexOf(selectedMedal)].contributions;
 
   return (
     <div data-testid="InitiativeBadgeDetail">
@@ -118,7 +132,7 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
                       badge: capitalizeFirstLetter(t(selectedMedal.toLowerCase())),
                       language: capitalizeFirstLetter(t(language.toLowerCase())),
                       sourceType: INITIATIVE_MEDIA_BADGES_MAPPING[initiative],
-                      count: 5,
+                      count: contributionCount,
                     }}
                     components={{ span: <span className="text-warning" /> }}
                   />
