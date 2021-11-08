@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Tab from 'react-bootstrap/Tab';
@@ -7,6 +7,10 @@ import Tabs from 'react-bootstrap/Tabs';
 import InitiativeBadgeDetail from 'components/InitiativeBadgeDetail';
 import LanguageDropDown from 'components/LanguageDropDown';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
+import localStorageConstants from 'constants/localStorageConstants';
+import { pageInitiativeRouteConstants, pageSourceConstants } from 'constants/pageRouteConstants';
+import sessionStorageConstants from 'constants/sessionStorageConstants';
+import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
 
 import styles from './BadgeDetail.module.scss';
@@ -14,9 +18,11 @@ import styles from './BadgeDetail.module.scss';
 const BadgeDetail = () => {
   const { t } = useTranslation();
 
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+
   const [language, setLanguage] = useState<string>('English');
   const [defaultInitiative, setDefaultInitiative] = useState<Initiative>(INITIATIVES_MAPPING.suno);
-  const defaultAction = 'contribute';
+  const [defaultAction, setDefaultAction] = useState<string>('contribute');
 
   function handleTabClick(tab: any, event: any) {
     event.target.scrollIntoView({
@@ -26,6 +32,20 @@ const BadgeDetail = () => {
     });
     setDefaultInitiative(tab);
   }
+
+  useEffect(() => {
+    const prevPath = sessionStorage.getItem(sessionStorageConstants.prevPath) || '';
+    const moduleName = pageInitiativeRouteConstants[prevPath] || 'others';
+    const allModules = Object.values(INITIATIVES_MAPPING);
+    if (moduleName.toLowerCase() !== 'others') {
+      const initiativeName =
+        allModules.find(module => module == moduleName.toLowerCase()) || INITIATIVES_MAPPING.suno;
+      const source = prevPath ? pageSourceConstants[prevPath] : 'contribute';
+      setLanguage(contributionLanguage ? contributionLanguage : 'English');
+      setDefaultInitiative(initiativeName);
+      setDefaultAction(source);
+    }
+  }, [contributionLanguage]);
 
   return (
     <div data-testid="BadgeDetail">

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 
 import 'styles/custom.scss';
 import 'styles/theme.scss';
@@ -12,6 +13,7 @@ import Layout from 'components/Layout';
 import apiPaths from 'constants/apiPaths';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import sessionStorageConstants from 'constants/sessionStorageConstants';
 import { useFetchWithInit } from 'hooks/useFetch';
 import { fetchLocationInfo } from 'utils/utils';
 
@@ -19,7 +21,7 @@ type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProp
 
 const MyApp = ({ Component, pageProps }: MyAppProps) => {
   /* istanbul ignore next */
-  const {mutate} = useFetchWithInit(apiPaths.setCookie, { revalidateOnMount: false });
+  const { mutate } = useFetchWithInit(apiPaths.setCookie, { revalidateOnMount: false });
 
   useEffect(() => {
     if (!localStorage.getItem(localStorageConstants.localtionInfo)) {
@@ -27,9 +29,19 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
         localStorage.setItem(localStorageConstants.localtionInfo, JSON.stringify(await fetchLocationInfo()));
       };
       getLocationInfo();
-      mutate()
+      mutate();
     }
   }, [mutate]);
+
+  const router = useRouter();
+
+  useEffect(() => storePathValues(router.asPath), [router.asPath]);
+  function storePathValues(currentUrl: string) {
+    const prevPath = sessionStorage.getItem(sessionStorageConstants.currentPath) || '';
+
+    sessionStorage.setItem(sessionStorageConstants.prevPath, prevPath);
+    sessionStorage.setItem(sessionStorageConstants.currentPath, currentUrl);
+  }
 
   return (
     <Layout>
