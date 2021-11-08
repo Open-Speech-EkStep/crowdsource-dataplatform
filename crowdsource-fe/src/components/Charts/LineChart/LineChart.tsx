@@ -44,11 +44,16 @@ const LineChart = (props: ChartProps) => {
     // dateAxis.dateFormats.setKey("month", "MMMM");
     // dateAxis.periodChangeDateFormats.setKey("month", "MMM");
     // dateAxis.periodChangeDateFormats.setKey("day", "MMMM");
+
     dateAxis.events.on('sizechanged', function (ev) {
       var axis = ev.target;
       var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
       axis.renderer.labels.template.maxWidth = cellWidth;
     });
+
+    x.paddingRight = 50;
+    dateAxis.renderer.minLabelPosition = 0.05;
+    dateAxis.renderer.maxLabelPosition = 0.95;
 
     let valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
