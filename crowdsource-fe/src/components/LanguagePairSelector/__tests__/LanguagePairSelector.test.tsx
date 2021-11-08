@@ -39,9 +39,29 @@ describe('LanguagePairSelector', () => {
     expect(screen.getByRole('combobox', { name: 'Select To Language' })).toBeDisabled();
   });
 
-  it('should show default languages when all languages selected in second dropdown', () => {
+  it('should show default languages when all languages selected in second dropdown', async () => {
     setup();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select From Language' }), 'English');
+    expect(screen.getByRole('combobox', { name: 'Select To Language' })).toBeEnabled();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select To Language' }), 'Hindi');
     userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select To Language' }), 'all');
-    expect(screen.getByRole('combobox', { name: 'Select To Language' })).toBeDisabled();
+    expect(mockLanguageUpdate).toBeCalledWith(undefined, undefined);
+  });
+
+  it('should show all languages when all languages selected in first dropdown', () => {
+    setup();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select From Language' }), 'English');
+    expect(screen.getByRole('combobox', { name: 'Select From Language' })).toHaveValue('English');
+    expect(screen.getByRole('combobox', { name: 'Select To Language' })).toBeEnabled();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select From Language' }), 'all');
+    expect(mockLanguageUpdate).toBeCalledWith(undefined, undefined);
+  });
+
+  it('should show all languages in second dropdown when first dropdown is changed', () => {
+    setup();
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select From Language' }), 'English');
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select To Language' }), 'Hindi');
+    userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select From Language' }), 'Bengali');
+    expect(screen.getByRole('combobox', { name: 'Select To Language' })).toHaveValue('all');
   });
 });

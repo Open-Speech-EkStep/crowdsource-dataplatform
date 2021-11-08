@@ -22,7 +22,6 @@ const BarChart = (props: ChartProps) => {
     const categoryAxis = x.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'category';
     categoryAxis.renderer.minGridDistance = 20;
-    // categoryAxis.renderer.labels.template.fill = rgb(0,0,0);
     categoryAxis.renderer.grid.template.strokeWidth = 0;
     // categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.labels.template.fontSize = 14;
@@ -60,7 +59,6 @@ const BarChart = (props: ChartProps) => {
     valueAxis.title.fontSize = 14;
     valueAxis.title.lineHeight = 17;
     valueAxis.title.opacity = 0.6;
-    valueAxis.renderer.grid.template.strokeWidth = 0;
 
     const series: any = x.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = 'value';
@@ -70,10 +68,7 @@ const BarChart = (props: ChartProps) => {
     columnTemplate.tooltipHTML = `<div>{tooltipText}</div>`;
     columnTemplate.tooltipX = am4core.percent(50);
     columnTemplate.tooltipY = am4core.percent(0);
-    series.tooltip.getFillFromObject = false;
-    series.tooltip.background.fill = am4core.color('#333333');
-    columnTemplate.tooltipX = am4core.percent(50);
-    columnTemplate.tooltipY = am4core.percent(0);
+
     /* istanbul ignore next */
     columnTemplate.adapter.add('fill', (value: any, target: any) => {
       return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);

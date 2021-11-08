@@ -74,7 +74,7 @@ describe('LikhoDashboard', () => {
     expect(toLanguageElement()).toBeDisabled();
   });
 
-  it('changing language from language selector should update stats', async () => {
+  it('changing language in language pair selector should update stats', async () => {
     await setup();
     userEvent.selectOptions(fromLanguageElement(), 'English');
     expect(toLanguageElement()).toBeEnabled();
@@ -82,6 +82,24 @@ describe('LikhoDashboard', () => {
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
+  });
+
+  it('changing from language back to all should show all language stats', async () => {
+    await setup();
+    userEvent.selectOptions(fromLanguageElement(), 'English');
+    expect(toLanguageElement()).toBeEnabled();
+    userEvent.selectOptions(fromLanguageElement(), 'all');
+    expect(fromLanguageElement()).toHaveValue('all');
+    expect(toLanguageElement()).toHaveValue('all');
+  });
+
+  it('should show default languages when all languages selected in to language dropdown', async () => {
+    await setup();
+    userEvent.selectOptions(fromLanguageElement(), 'English');
+    userEvent.selectOptions(toLanguageElement(), 'Hindi');
+    userEvent.selectOptions(toLanguageElement(), 'all');
+    expect(fromLanguageElement()).toHaveValue('all');
+    expect(toLanguageElement()).toHaveValue('all');
   });
 
   it('changing language from language selector should display nodata message when data not available', async () => {

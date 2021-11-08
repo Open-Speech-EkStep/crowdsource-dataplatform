@@ -28,19 +28,11 @@ const LanguagePairSelector = ({
   const [selectedToLanguage, setSelectedToLanguage] = useState<string | undefined>();
 
   useEffect(() => {
-    if (fromLanguage) {
-      setSelectedFromLanguage(fromLanguage);
-    } else {
-      setSelectedFromLanguage(undefined);
-    }
+    setSelectedFromLanguage(fromLanguage);
   }, [fromLanguage]);
 
   useEffect(() => {
-    if (toLanguage) {
-      setSelectedToLanguage(toLanguage);
-    } else {
-      setSelectedToLanguage(undefined);
-    }
+    setSelectedToLanguage(toLanguage);
   }, [toLanguage]);
 
   const setLanguagePair = (from: string | undefined, to: string | undefined) => {
@@ -60,6 +52,7 @@ const LanguagePairSelector = ({
   const handleFromChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     if (value === 'all') {
+      setSelectedFromLanguage(undefined);
       updateSelectedLanguages(undefined, undefined);
     } else setSelectedFromLanguage(value);
     setSelectedToLanguage(undefined);
