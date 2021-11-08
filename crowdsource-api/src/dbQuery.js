@@ -184,7 +184,7 @@ select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type',
 const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media", "device", "browser")
 select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4), $7, $8 
   where (select count(1) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
- (select value from configurations where config_name = 'contribution_count');`;
+ (select value from configurations where config_name = 'contribution_count') returning contribution_id;`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 
