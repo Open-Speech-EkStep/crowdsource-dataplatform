@@ -1,6 +1,5 @@
-import { Fragment } from 'react';
-
 import { useTranslation } from 'next-i18next';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { MapChart } from 'components/Charts';
 import MapLegend from 'components/MapLegend';
@@ -108,7 +107,7 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
   const { t } = useTranslation();
   const jsonUrl = language ? apiPaths.cumulativeDataByLanguageAndState : apiPaths.cumulativeDataByState;
 
-  const { data } = useFetch<Array<CumulativeDataByLanguageAndState>>(jsonUrl);
+  const { data, isValidating } = useFetch<Array<CumulativeDataByLanguageAndState>>(jsonUrl);
 
   let statesData: {}[] = [];
   let mapData = data?.filter(d => d.type === type) || [];
@@ -181,8 +180,12 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
     value: `>${getText(quarterVal * 3)}`,
   });
 
+  if (!data || isValidating) {
+    return <Spinner data-testid="ChartSpinner" animation="border" />;
+  }
+
   return (
-    <Fragment>
+    <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t('mapChartTitle')}</p>
       <div className={styles.chart}>
         <MapChart
@@ -194,7 +197,7 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
         />
       </div>
       <MapLegend data={legendData} />
-    </Fragment>
+    </div>
   );
 };
 

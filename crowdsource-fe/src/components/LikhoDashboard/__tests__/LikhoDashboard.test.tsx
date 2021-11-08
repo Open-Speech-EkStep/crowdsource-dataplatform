@@ -67,6 +67,7 @@ describe('LikhoDashboard', () => {
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     return renderResult;
   };
+
   it('should contain language selector', async () => {
     await setup();
     expect(fromLanguageElement()).toBeInTheDocument();
@@ -98,22 +99,18 @@ describe('LikhoDashboard', () => {
     userEvent.selectOptions(fromLanguageElement(), 'English');
     userEvent.selectOptions(toLanguageElement(), 'Hindi');
     userEvent.selectOptions(toLanguageElement(), 'all');
-    expect(fromLanguageElement()).toHaveValue('all');
-    expect(toLanguageElement()).toHaveValue('all');
+    await waitFor(() => expect(fromLanguageElement()).toHaveValue('all'));
+    await waitFor(() => expect(toLanguageElement()).toHaveValue('all'));
   });
 
-  it('changing language from language selector should display nodata message when data not available', async () => {
+  it('changing language from language pair selector should display nodata message when data not available', async () => {
     await setup();
     userEvent.selectOptions(fromLanguageElement(), 'English');
     userEvent.selectOptions(toLanguageElement(), 'Hindi');
     await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
     userEvent.selectOptions(toLanguageElement(), 'Bengali');
-    await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
-    });
-    await waitFor(async () => {
-      expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument();
-    });
+    await waitFor(() => expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json'));
+    await waitFor(() => expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument());
     await waitFor(() => expect(screen.queryByText('noDataMessageDashboard')).not.toBeInTheDocument());
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
   });

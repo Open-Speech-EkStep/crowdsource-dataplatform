@@ -564,7 +564,7 @@ exports[`BarChart should render the component and matches it against stored snap
                   visibility="hidden"
                 >
                   <g
-                    fill="#333333"
+                    fill="#ffffff"
                     fill-opacity="0.9"
                     filter="url(\\"#filter-id-130\\")"
                     stroke="#ffffff"

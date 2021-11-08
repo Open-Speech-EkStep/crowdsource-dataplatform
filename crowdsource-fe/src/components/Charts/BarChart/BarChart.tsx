@@ -59,6 +59,7 @@ const BarChart = (props: ChartProps) => {
     valueAxis.title.fontSize = 14;
     valueAxis.title.lineHeight = 17;
     valueAxis.title.opacity = 0.6;
+    valueAxis.renderer.grid.template.strokeWidth = props.data.strokeWidth || 0;
 
     const series: any = x.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = 'value';
@@ -68,6 +69,14 @@ const BarChart = (props: ChartProps) => {
     columnTemplate.tooltipHTML = `<div>{tooltipText}</div>`;
     columnTemplate.tooltipX = am4core.percent(50);
     columnTemplate.tooltipY = am4core.percent(0);
+
+    series.tooltip.autoTextColor = false;
+    series.tooltip.label.fill = am4core.color('#fff');
+    /* istanbul ignore next */
+    if (props.data.bgColor) {
+      series.tooltip.getFillFromObject = false;
+      series.tooltip.background.fill = am4core.color(props.data.bgColor);
+    }
 
     /* istanbul ignore next */
     columnTemplate.adapter.add('fill', (value: any, target: any) => {

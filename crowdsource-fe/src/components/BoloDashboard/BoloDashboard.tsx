@@ -96,26 +96,18 @@ const BoloDashboard = () => {
           </div>
           <Row className="mt-10">
             <Col lg="6">
-              <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-                <ProgressChart type={INITIATIVES_MEDIA_MAPPING.bolo} language={language} />
-              </div>
+              <ProgressChart type={INITIATIVES_MEDIA_MAPPING.bolo} language={language} />
             </Col>
             <Col lg="6" className="mt-8 mt-lg-0">
-              <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-                <GenderChart language={language} />
-              </div>
+              <GenderChart language={language} />
             </Col>
           </Row>
           <Row className="mt-10">
             <Col lg="6">
-              <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-                <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.bolo} language={language} />
-              </div>
+              <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.bolo} language={language} />
             </Col>
             <Col lg="6">
-              <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-                <AgeChart language={language} />
-              </div>
+              <AgeChart language={language} />
             </Col>
           </Row>
         </Fragment>

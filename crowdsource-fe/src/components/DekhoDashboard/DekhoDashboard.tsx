@@ -94,14 +94,10 @@ const DekhoDashboard = () => {
           </div>
           <Row className="mt-10">
             <Col lg="6">
-              <div className="bg-light 100 rounded-8 p-5 p-md-8 h-100">
-                <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.dekho} language={language} />
-              </div>
+              <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.dekho} language={language} />
             </Col>
             <Col lg="6" className="mt-8 mt-lg-0">
-              <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-                <ProgressChart type={INITIATIVES_MEDIA_MAPPING.dekho} language={language} />
-              </div>
+              <ProgressChart type={INITIATIVES_MEDIA_MAPPING.dekho} language={language} />
             </Col>
           </Row>
         </Fragment>

@@ -5,4 +5,6 @@ export interface ChartDetails {
   tooltipTemplate?: string;
   xAxisLabel?: string | any;
   yAxisLabel?: string | any;
+  strokeWidth?: number;
+  bgColor?: string;
 }

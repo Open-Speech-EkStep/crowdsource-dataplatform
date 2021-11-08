@@ -2,15 +2,19 @@
 
 exports[`AgeChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <p
-    class="mb-5 display-2"
-  >
-    ageChartTitle
-  </p>
   <div
-    class="chart"
+    class="bg-light rounded-8 p-5 p-md-8 h-100"
   >
-    PieChart
+    <p
+      class="mb-5 display-2"
+    >
+      ageChartTitle
+    </p>
+    <div
+      class="chart"
+    >
+      PieChart
+    </div>
   </div>
 </DocumentFragment>
 `;

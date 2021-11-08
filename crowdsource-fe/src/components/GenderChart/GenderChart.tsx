@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
 import type { FunctionComponent } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { BarChart } from 'components/Charts';
 import apiPaths from 'constants/apiPaths';
@@ -26,7 +26,7 @@ interface GenderChartProps {
 const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
   const { t } = useTranslation();
   const jsonUrl = language ? apiPaths.genderGroupAndLanguageContributions : apiPaths.genderGroupContributions;
-  const { data: jsonData } = useFetch<Array<GenderGroupAndLanguageContributions>>(jsonUrl);
+  const { data: jsonData, isValidating } = useFetch<Array<GenderGroupAndLanguageContributions>>(jsonUrl);
   let genderData = language ? jsonData?.filter(d => d.language == language) : jsonData;
 
   let chartData = [];
@@ -38,7 +38,7 @@ const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
       value: maleData?.hours_contributed || 0,
       tooltipText: `
     <div>
-        <h6>${maleXLabel}</h6>
+        <strong>${maleXLabel}</strong>
         <div>${t('contributed')}: <label>${convertTimeFormat(maleData?.hours_contributed || 0)}</label></div>
         <div>${t('textBarGraphTooltip')}: <label>${maleData?.speakers}</label></div>
     </div>`,
@@ -53,7 +53,7 @@ const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
       value: femaleData?.hours_contributed || 0,
       tooltipText: `
     <div>
-        <h6>${femaleXLabel}</h6>
+        <strong>${femaleXLabel}</strong>
         <div>${t('contributed')}: <label>${convertTimeFormat(
         femaleData?.hours_contributed || 0
       )}</label></div>
@@ -70,7 +70,7 @@ const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
       value: notSpecifiedData?.hours_contributed,
       tooltipText: `
     <div>
-        <h6>${notSpecifiedXLabel}</h6>
+        <strong>${notSpecifiedXLabel}</strong>
         <div>${t('contributed')}: <label>${convertTimeFormat(
         notSpecifiedData?.hours_contributed || 0
       )}</label></div>
@@ -90,15 +90,19 @@ const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
       value: item?.hours_contributed || 0,
       tooltipText: `
       <div>
-          <h6>${t(othersTranslationMap[gender])}</h6>
+          <strong>${t(othersTranslationMap[gender])}</strong>
           <div>${t('contributed')}: <label>${convertTimeFormat(item?.hours_contributed || 0)}</label></div>
           <div>${t('textBarGraphTooltip')}: <label>${item?.speakers}</label></div>
       </div>`,
     });
   });
 
+  if (!jsonData || isValidating) {
+    return <Spinner data-testid="ChartSpinner" animation="border" />;
+  }
+
   return (
-    <Fragment>
+    <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t(chartTitle)}</p>
       <div className={styles.chart}>
         <BarChart
@@ -107,10 +111,11 @@ const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
             data: chartData,
             yAxisLabel: t(chartYLabel),
             colors: ['#5d6d9a', '#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'],
+            strokeWidth: 1,
           }}
         />
       </div>
-    </Fragment>
+    </div>
   );
 };
 

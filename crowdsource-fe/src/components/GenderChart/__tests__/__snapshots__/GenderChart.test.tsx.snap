@@ -2,15 +2,19 @@
 
 exports[`GenderChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <p
-    class="mb-5 display-2"
-  >
-    genderChartTitle
-  </p>
   <div
-    class="chart"
+    class="bg-light rounded-8 p-5 p-md-8 h-100"
   >
-    BarChart
+    <p
+      class="mb-5 display-2"
+    >
+      genderChartTitle
+    </p>
+    <div
+      class="chart"
+    >
+      BarChart
+    </div>
   </div>
 </DocumentFragment>
 `;

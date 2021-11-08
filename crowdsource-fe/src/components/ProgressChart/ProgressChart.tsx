@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { LineChart } from 'components/Charts';
 import Switch from 'components/Switch';
@@ -72,7 +73,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
   const [timeframe, setTimeframe] = useState<'monthly' | 'quarterly'>('monthly');
   const jsonUrl = getTimelineUrl(language, timeframe) as ApiPathsKey;
 
-  const { data } = useFetch<Array<CumulativeDataByDateAndLanguage>>(apiPaths[jsonUrl]);
+  const { data, isValidating } = useFetch<Array<CumulativeDataByDateAndLanguage>>(apiPaths[jsonUrl]);
 
   const config = INITIATIVE_TIMELINE_PARTICIPATION_CONFIG[type];
 
@@ -121,8 +122,12 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
     </div>
   `;
 
+  if (!data || isValidating) {
+    return <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />;
+  }
+
   return (
-    <Fragment>
+    <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <div className="d-md-flex justify-content-md-between mb-5 align-items-center">
         <p className="display-2">{t('lineChartTitle')}</p>
         <div className="d-flex justify-content-end mt-4 mt-md-0">
@@ -146,7 +151,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
           line2Tooltip={line2Tooltip}
         />
       </div>
-    </Fragment>
+    </div>
   );
 };
 

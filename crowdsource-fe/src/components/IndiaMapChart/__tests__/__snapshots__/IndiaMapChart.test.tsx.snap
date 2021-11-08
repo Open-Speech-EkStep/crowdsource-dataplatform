@@ -2,66 +2,70 @@
 
 exports[`IndiaMapChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <p
-    class="mb-5 display-2"
-  >
-    mapChartTitle
-  </p>
   <div
-    class="chart"
+    class="bg-light rounded-8 p-5 p-md-8 h-100"
   >
-    MapChart
-  </div>
-  <div
-    class="d-flex mt-8"
-  >
-    <div
-      class="flex-fill"
+    <p
+      class="mb-5 display-2"
     >
-      <span
-        class="d-flex legend legendsBG0"
-      />
-      <span
-        class="d-flex justify-content-center text-center mt-1 display-7"
-      >
-        0 - 15 minutes2
-      </span>
+      mapChartTitle
+    </p>
+    <div
+      class="chart"
+    >
+      MapChart
     </div>
     <div
-      class="flex-fill"
+      class="d-flex mt-8"
     >
-      <span
-        class="d-flex legend legendsBG1"
-      />
-      <span
-        class="d-flex justify-content-center text-center mt-1 display-7"
+      <div
+        class="flex-fill"
       >
-        15 - 30 minutes2
-      </span>
-    </div>
-    <div
-      class="flex-fill"
-    >
-      <span
-        class="d-flex legend legendsBG2"
-      />
-      <span
-        class="d-flex justify-content-center text-center mt-1 display-7"
+        <span
+          class="d-flex legend legendsBG0"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          0 - 15 minutes2
+        </span>
+      </div>
+      <div
+        class="flex-fill"
       >
-        30 - 45 minutes2
-      </span>
-    </div>
-    <div
-      class="flex-fill"
-    >
-      <span
-        class="d-flex legend legendsBG3"
-      />
-      <span
-        class="d-flex justify-content-center text-center mt-1 display-7"
+        <span
+          class="d-flex legend legendsBG1"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          15 - 30 minutes2
+        </span>
+      </div>
+      <div
+        class="flex-fill"
       >
-        &gt;45 minutes2
-      </span>
+        <span
+          class="d-flex legend legendsBG2"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          30 - 45 minutes2
+        </span>
+      </div>
+      <div
+        class="flex-fill"
+      >
+        <span
+          class="d-flex legend legendsBG3"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          &gt;45 minutes2
+        </span>
+      </div>
     </div>
   </div>
 </DocumentFragment>

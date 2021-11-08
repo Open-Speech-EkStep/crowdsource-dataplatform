@@ -163,6 +163,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         chartFilterType === 'byDuration'
           ? t(`${INITIATIVES_MEDIA_MAPPING[props.initiative]}ContributionGraphYLabel1`)
           : t(`${INITIATIVES_MEDIA_MAPPING[props.initiative]}ContributionGraphYLabel2`),
+      bgColor: '#333',
       ...chartLegendDetails,
     }),
     [chartFilterType, chartLegendDetails, props.initiative, t, topLanguageHrsData, topSpeakersData]
