@@ -82,6 +82,9 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
   const [mode, setMode] = useState<string>('see');
 
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+
+  const [translatedLanguage] = useLocalStorage<string>(localStorageConstants.translatedLanguage);
+
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
   const { data: rewardData, mutate: rewardMutate } = useFetchWithInit<ThankYouReward>(
@@ -94,6 +97,10 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
       revalidateOnMount: false,
     }
   );
+
+  const translatedContributionLanguage = `${t(`${contributionLanguage?.toLowerCase()}`)}${
+    translatedLanguage ? `-${t(`${translatedLanguage?.toLowerCase()}`)}` : ''
+  }`;
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -137,7 +144,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               badgeType={rewardData?.currentBadgeType.toLowerCase()}
               contributionCount={rewardData?.contributionCount}
               pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
-              language={contributionLanguage ?? ''}
+              language={translatedContributionLanguage}
               source={pageSourceConstants[route.asPath]}
               winningBadge={rewardData?.badges[rewardData?.badges.length - 1]}
             />
@@ -147,7 +154,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
                     <h4>
                       {t(`${mode}ParticipationText`, {
-                        language: t(`${contributionLanguage?.toLowerCase()}`),
+                        language: translatedContributionLanguage,
                       })}
                     </h4>
                   </div>
@@ -163,7 +170,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                     dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                     isTopLanguage={setMode}
                     graphHeading={t(`${mode}ParticipationText`, {
-                      language: t(`${contributionLanguage?.toLowerCase()}`),
+                      language: translatedContributionLanguage,
                     })}
                     showHeader={false}
                   />
@@ -181,7 +188,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                     <div className="d-md-flex text-center text-md-start h-100 align-items-md-center">
                       <h4>
                         {t(`${mode}ParticipationText`, {
-                          language: t(`${contributionLanguage?.toLowerCase()}`),
+                          language: translatedContributionLanguage,
                         })}
                       </h4>
                     </div>
@@ -197,7 +204,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                       isTopLanguage={setMode}
                       graphHeading={t(`${mode}ParticipationText`, {
-                        language: t(`${contributionLanguage?.toLowerCase()}`),
+                        language: translatedContributionLanguage,
                       })}
                       showHeader={false}
                     />
@@ -231,7 +238,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                       dataBindigValue={CONTRIBUTION_MAPPING[route.asPath]}
                       isTopLanguage={setMode}
                       graphHeading={t(`${mode}ParticipationText`, {
-                        language: t(`${contributionLanguage?.toLowerCase()}`),
+                        language: translatedContributionLanguage,
                       })}
                       showHeader={true}
                     />

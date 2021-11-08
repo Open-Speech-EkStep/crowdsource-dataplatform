@@ -47,6 +47,8 @@ export const INITIATIVE_ACTIONS_CAPS = {
 export const INITIATIVE_ACTIONS_PAGE_MAPPING = {
   [routePaths.sunoIndiaContributeThankYou]: INITIATIVE_ACTIONS_CAPS.transcribed,
   [routePaths.sunoIndiaValidateThankYou]: INITIATIVE_ACTIONS_CAPS.validated,
+  [routePaths.likhoIndiaContributeThankYou]: INITIATIVE_ACTIONS_CAPS.transcribed,
+  [routePaths.likhoIndiaValidateThankYou]: INITIATIVE_ACTIONS_CAPS.validated,
 } as const;
 
 export const INITIATIVE_CUMULATIVE_VALUE = {

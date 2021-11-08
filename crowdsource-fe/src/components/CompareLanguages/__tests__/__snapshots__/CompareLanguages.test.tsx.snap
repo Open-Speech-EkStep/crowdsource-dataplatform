@@ -19,7 +19,7 @@ exports[`CompareLanguages should render the component and matches it against sto
     <span
       class="display-6 d-block text-center text-primary-60"
     >
-      contributionVsTopLanguage
+      sunocontributionVsTopLanguage
     </span>
   </div>
 </DocumentFragment>

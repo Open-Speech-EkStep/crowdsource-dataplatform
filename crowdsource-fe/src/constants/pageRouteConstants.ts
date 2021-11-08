@@ -105,8 +105,8 @@ export const pageMediaTypeConstants = {
   [routePaths.boloIndiaValidateThankYou]: sourceConstants.validate,
   [routePaths.dekhoIndiaContributeThankYou]: 'image label(s)',
   [routePaths.dekhoIndiaValidateThankYou]: 'image label(s)',
-  [routePaths.likhoIndiaContributeThankYou]: sourceConstants.contribute,
-  [routePaths.likhoIndiaValidateThankYou]: sourceConstants.validate,
+  [routePaths.likhoIndiaContributeThankYou]: 'sentences',
+  [routePaths.likhoIndiaValidateThankYou]: 'sentences',
 } as const;
 
 export const pageInitiativeRouteConstants = {
