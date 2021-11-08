@@ -305,10 +305,10 @@
   "validatorAcheived": "ನೀವು ಒಬ್ಬ <span>{{badgeType}}</span> ಮೌಲ್ಯಮಾಪಕರಾಗಿದ್ದೀರಿ",
   "likhoContributionHeading": "ಕೊಡಲ್ಪಟ್ಟ ಪಠ್ಯದ ಅನುವಾದವನ್ನು ಟೈಪ್ ಮಾಡಿ",
   "likhoValidationHeading": "ಈ ಅನುವಾದವು ಸರಿಯಾಗಿದೆಯೇ?",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
+  "badgesDetailPageHeading": "ನೀವು ಭಾಷಾ ಸಮರ್ಥಕ್ ಬ್ಯಾಡ್ಜ್‌ಗಳನ್ನು ಹೇಗೆ ಗೆಲ್ಲಬಹುದು?",
+  "selectDropDownLanguagePrompt": "ನಿಮ್ಮ ಭಾಷೆ",
+  "selectBadgeLevelPrompt": "ಬ್ಯಾಡ್ಜ್ ಲೆವೆಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "participation": "ಭಾಗವಹಿಸುವಿಕೆ",
   "validateBadgeDetailText": "",
   "contributeBadgeDetailText": ""
 }

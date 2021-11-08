@@ -40,7 +40,7 @@ const BadgeDetail = () => {
     if (moduleName.toLowerCase() !== 'others') {
       const initiativeName =
         allModules.find(module => module == moduleName.toLowerCase()) || INITIATIVES_MAPPING.suno;
-      const source = prevPath ? pageSourceConstants[prevPath] : 'contribute';
+      const source = prevPath ? pageSourceConstants[prevPath] || 'contribute' : 'contribute';
       setLanguage(contributionLanguage ? contributionLanguage : 'English');
       setDefaultInitiative(initiativeName);
       setDefaultAction(source);

@@ -305,10 +305,10 @@
   "validatorAcheived": "നിങ്ങള്‍ ഒരു <span>{{badgeType}}</span> വാലിഡേറ്റര്‍ ആണ്",
   "likhoContributionHeading": "തന്നിരിക്കുന്ന വാചകങ്ങളുടെ പരിഭാഷ ടൈപ്പ് ചെയ്യുക",
   "likhoValidationHeading": "പരിഭാഷ ശരിയാണോയെന്ന് രേഖപ്പെടുത്തുക",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
+  "badgesDetailPageHeading": "നിങ്ങള്‍ക്ക് എങ്ങനെ ഭാഷാ സമര്‍ത്ഥക് ബാഡ്ജുകള്‍ നേടാം",
+  "selectDropDownLanguagePrompt": "നിങ്ങളുടെ ഭാഷ",
+  "selectBadgeLevelPrompt": "ബാഡ്ജ് ലെവല്‍ തിരഞ്ഞെടുക്കുക",
+  "participation": "പങ്കാളിത്തം",
   "validateBadgeDetailText": "",
   "contributeBadgeDetailText": ""
 }

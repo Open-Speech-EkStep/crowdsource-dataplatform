@@ -307,7 +307,7 @@
   "likhoValidationHeading": "Is the translation correct?",
   "badgesDetailPageHeading": "How can you win Bhasha Samarthak Badges",
   "selectDropDownLanguagePrompt": "Your Language",
-  "selectBadgeLevelPrompt": "Select Badge Level",
+  "selectBadgeLevelPrompt": "Select Badge level",
   "participation": "Participation",
   "validateBadgeDetailText": "Validate <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
   "contributeBadgeDetailText": "Contribute <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge"

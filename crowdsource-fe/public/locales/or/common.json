@@ -305,10 +305,10 @@
   "validatorAcheived": "ଆପଣ ଜଣେ <span>{{badgeType}}</span> ପ୍ରମାଣକାରୀ ଅଟନ୍ତି",
   "likhoContributionHeading": "ଦିଆଯାଇଥିବା ଟେକ୍ସଟ୍ର ଅନୁବାଦ ଟାଇପ୍ କରନ୍ତୁ",
   "likhoValidationHeading": "ଅନୁବାଦ ସଠିକ୍ କି?",
-  "badgesDetailPageHeading": "",
-  "selectDropDownLanguagePrompt": "",
-  "selectBadgeLevelPrompt": "",
-  "participation": "",
+  "badgesDetailPageHeading": "ଆପଣ କିପରି ଭାଷା ସମର୍ଥକ ବ୍ୟାଜ ଜିତି ପାରିବେ ?",
+  "selectDropDownLanguagePrompt": "ଆପଣଙ୍କ ଭାଷା",
+  "selectBadgeLevelPrompt": "ବ୍ୟାଜ ସ୍ତର ବାଛନ୍ତୁ",
+  "participation": "ଅଂଶଗ୍ରହଣ",
   "validateBadgeDetailText": "",
   "contributeBadgeDetailText": ""
 }

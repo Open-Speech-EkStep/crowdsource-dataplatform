@@ -1,15 +1,26 @@
+import { when } from 'jest-when';
+
 import { render, screen, userEvent } from 'utils/testUtils';
 
 import BadgeDetail from '../BadgeDetail';
 
 describe('BadgeDetail', () => {
-  const setup = () => render(<BadgeDetail />);
+  const setup = () => {
+    when(localStorage.getItem)
+      .calledWith('contributionLanguage')
+      .mockImplementation(() => 'English');
+
+    when(sessionStorage.getItem)
+      .calledWith('prevPath')
+      .mockImplementation(() => '/suno-india');
+
+    return render(<BadgeDetail />);
+  };
 
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup();
 
     expect(asFragment()).toMatchSnapshot();
-    expect(screen.getByText('badgesDetailPageHeading')).toBeInTheDocument();
   });
 
   it('should render badges in "Assamese" language when Assamese is chosen from language dropdown', async () => {
@@ -24,7 +35,7 @@ describe('BadgeDetail', () => {
     let scrollIntoViewMock = jest.fn();
     window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
 
-    await setup();
+    setup();
     userEvent.click(screen.getByRole('tab', { name: 'bolo india' }));
 
     expect(scrollIntoViewMock).toBeCalled();
