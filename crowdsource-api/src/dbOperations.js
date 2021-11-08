@@ -48,6 +48,7 @@ const {
 const { KIDS_AGE_GROUP, ADULT, KIDS, BADGE_SEQUENCE } = require('./constants');
 
 const cacheOperation = require('./cache/cacheOperations')
+const queueOperations = require('./event_queue/queueOperations')
 
 const envVars = process.env;
 const pgp = require('pg-promise')();
@@ -440,7 +441,7 @@ const updateDbWithUserInput = async (
         device,
         browser
     ])
-        .then(() => {
+        .then((contributionInsertResult) => {
             console.log("/store after contribution insertion" + datasetId)
             db.result(updateMediaWithContributedState, [datasetId]).then(result=>{
                 if(result.rowCount == 0){
@@ -454,7 +455,9 @@ const updateDbWithUserInput = async (
                 language = '';
             }
             console.log("/store after response set " + datasetId);
+            console.log(contributionInsertResult)
             cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
+            queueOperations.sendForAutoValidation(contributionInsertResult[0].contribution_id)
             console.log("/store after cache updated" + datasetId)
         })
         .catch((err) => {
