@@ -124,16 +124,23 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
   );
 
   useEffect(() => {
+    const callbacks = {
+      asr: (data: any) => data.language === contributionLanguage,
+      parallel: (data: any) => data.language === `${contributionLanguage}-${translatedLanguage}`,
+    };
     const sortingLanguages =
       topLanguageHrsData &&
       topLanguageHrsData.sort((a: any, b: any) =>
         Number(a[props.dataBindigValue]) > Number(b[props.dataBindigValue]) ? -1 : 1
       );
     const top3language = sortingLanguages && sortingLanguages.slice(0, 3);
-    const found = top3language?.some(el => el.language === contributionLanguage);
+    const found =
+      INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
+        ? top3language?.some(callbacks[INITIATIVES_MEDIA.parallel])
+        : top3language?.some(callbacks[INITIATIVES_MEDIA.asr]);
     const isLanguageTop = found;
     props.isTopLanguage(isLanguageTop ? 'keep' : 'see');
-  }, [contributionLanguage, props, topLanguageHrsData]);
+  }, [contributionLanguage, props, topLanguageHrsData, translatedLanguage]);
 
   const barChartData = useMemo(
     () => ({
