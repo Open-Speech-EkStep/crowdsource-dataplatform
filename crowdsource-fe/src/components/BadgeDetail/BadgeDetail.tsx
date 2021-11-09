@@ -35,9 +35,9 @@ const BadgeDetail = () => {
 
   useEffect(() => {
     const prevPath = sessionStorage.getItem(sessionStorageConstants.prevPath) || '';
-    const moduleName = pageInitiativeRouteConstants[prevPath] || 'others';
+    const moduleName = pageInitiativeRouteConstants[prevPath] || 'Others';
     const allModules = Object.values(INITIATIVES_MAPPING);
-    if (moduleName.toLowerCase() !== 'others') {
+    if (moduleName.toLowerCase() !== 'Others') {
       const initiativeName =
         allModules.find(module => module == moduleName.toLowerCase()) || INITIATIVES_MAPPING.suno;
       const source = prevPath ? pageSourceConstants[prevPath] || 'contribute' : 'contribute';
