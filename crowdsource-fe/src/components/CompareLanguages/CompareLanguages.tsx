@@ -144,6 +144,7 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
         topLanguageHrsData
       ),
       yAxisLabel: props.graphLabel,
+      bgColor: '#333',
       ...chartLegendDetails,
     }),
     [chartLegendDetails, props.dataBindigValue, props.graphLabel, props.initiative, topLanguageHrsData]
@@ -153,7 +154,7 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
     <div data-testid="CompareLanguages" className={styles.chartContainer}>
       {props.showHeader && <h5 className="fw-light mb-3 text-center">{props.graphHeading}</h5>}
       <div className={styles.chart}>
-        <BarChart id="tybar_chart" data={barChartData} />
+        <BarChart id="tybar_chart" data={barChartData} labelClass="amThankyouXAxisLabel" />
       </div>
       <span className="display-6 d-block text-center text-primary-60">
         {t(`${props.initiative}contributionVsTopLanguage`, { language: translatedContributionLanguage })}

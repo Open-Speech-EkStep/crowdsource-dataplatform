@@ -31,8 +31,16 @@ body {
 }
 
 .amXAxisLabel {
+  font-size: 0.75rem;
   @include media-breakpoint-up(md) {
     font-size: 1rem;
+  }
+}
+
+.amThankyouXAxisLabel {
+  font-size: 0.75rem;
+  @include media-breakpoint-up(md) {
+    font-size: 0.875rem;
   }
 }
 

@@ -8,16 +8,17 @@ import type { ChartDetails } from 'types/Chart';
 interface ChartProps {
   id: string;
   data: ChartDetails;
+  labelClass?: string;
 }
 
-const BarChart = (props: ChartProps) => {
+const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
   const chart = useRef({});
 
   useLayoutEffect(() => {
-    const x = am4core.create(props.id, am4charts.XYChart);
+    const x = am4core.create(id, am4charts.XYChart);
 
     x.paddingRight = 20;
-    x.data = props.data.data;
+    x.data = data.data;
     // Create axes
     const categoryAxis = x.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'category';
@@ -25,7 +26,7 @@ const BarChart = (props: ChartProps) => {
     categoryAxis.renderer.grid.template.strokeWidth = 0;
     // categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.labels.template.fontSize = 14;
-    categoryAxis.renderer.labels.template.html = '<span class="amXAxisLabel">{category}</span>';
+    categoryAxis.renderer.labels.template.html = `<span class=${labelClass}>{category}</span>`;
     categoryAxis.renderer.grid.template.location = 0;
     const label = categoryAxis.renderer.labels.template;
     // label.wrap = true;
@@ -54,12 +55,12 @@ const BarChart = (props: ChartProps) => {
     valueAxis.renderer.labels.template.fontSize = 14;
     valueAxis.tooltip.disabled = true;
     valueAxis.renderer.minWidth = 35;
-    valueAxis.title.text = props.data.yAxisLabel;
+    valueAxis.title.text = data.yAxisLabel;
     valueAxis.title.fill = '#142745';
     valueAxis.title.fontSize = 14;
     valueAxis.title.lineHeight = 17;
     valueAxis.title.opacity = 0.6;
-    valueAxis.renderer.grid.template.strokeWidth = props.data.strokeWidth || 0;
+    valueAxis.renderer.grid.template.strokeWidth = data.strokeWidth || 0;
 
     const series: any = x.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = 'value';
@@ -73,27 +74,27 @@ const BarChart = (props: ChartProps) => {
     series.tooltip.autoTextColor = false;
     series.tooltip.label.fill = am4core.color('#fff');
     /* istanbul ignore next */
-    if (props.data.bgColor) {
+    if (data.bgColor) {
       series.tooltip.getFillFromObject = false;
-      series.tooltip.background.fill = am4core.color(props.data.bgColor);
+      series.tooltip.background.fill = am4core.color(data.bgColor);
     }
 
     /* istanbul ignore next */
     columnTemplate.adapter.add('fill', (value: any, target: any) => {
-      return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
+      return am4core.color(data.colors?.[data.colors.length - 1 - target.dataItem.index]);
     });
     /* istanbul ignore next */
     columnTemplate.adapter.add('stroke', (value: any, target: any) => {
-      return am4core.color(props.data.colors?.[props.data.colors.length - 1 - target.dataItem.index]);
+      return am4core.color(data.colors?.[data.colors.length - 1 - target.dataItem.index]);
     });
     chart.current = x;
 
     return () => {
       x.dispose();
     };
-  }, [props]);
+  }, [id, data, labelClass]);
 
-  return <div id={props.id} className="h-100"></div>;
+  return <div id={id} className="h-100"></div>;
 };
 
 export default BarChart;
