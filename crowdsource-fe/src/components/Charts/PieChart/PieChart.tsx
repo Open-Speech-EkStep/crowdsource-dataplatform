@@ -36,6 +36,8 @@ const PieChart = (props: ChartProps | any) => {
     series.dataFields.category = 'category';
     series.slices.template.cornerRadius = 5;
     // series.colors.step = 3;
+
+    /* istanbul ignore next */
     series.slices.template.adapter.add('fill', (value, target: any) => {
       return am4core.color(props.data.colors[target.dataItem.index]);
     });

@@ -45,6 +45,7 @@ const LineChart = (props: ChartProps) => {
     // dateAxis.periodChangeDateFormats.setKey("month", "MMM");
     // dateAxis.periodChangeDateFormats.setKey("day", "MMMM");
 
+    /* istanbul ignore next */
     dateAxis.events.on('sizechanged', function (ev) {
       var axis = ev.target;
       var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
@@ -100,6 +101,7 @@ const LineChart = (props: ChartProps) => {
     lineSeries2.stroke = am4core.color('#83E661');
     lineSeries2.name = props.line2Text || '';
 
+    /* istanbul ignore next */
     if (props.data.length === 1) {
       const circleBullet = lineSeries1.bullets.push(new am4charts.CircleBullet());
       circleBullet.circle.fill = am4core.color('#FCC232');
