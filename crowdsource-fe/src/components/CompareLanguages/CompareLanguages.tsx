@@ -133,15 +133,12 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
       topLanguageHrsData.sort((a: any, b: any) =>
         Number(a[props.dataBindigValue]) > Number(b[props.dataBindigValue]) ? -1 : 1
       );
-    console.log(sortingLanguages);
     const top3language = sortingLanguages && sortingLanguages.slice(0, 3);
-    console.log(top3language);
     const found =
       INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
         ? top3language?.some(callbacks[INITIATIVES_MEDIA.parallel])
         : top3language?.some(callbacks[INITIATIVES_MEDIA.asr]);
 
-    console.log(found);
     const isLanguageTop = found;
     props.isTopLanguage(isLanguageTop ? 'keep' : 'see');
   }, [contributionLanguage, props, topLanguageHrsData, translatedLanguage]);
