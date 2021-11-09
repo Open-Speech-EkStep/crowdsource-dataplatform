@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "तुमची भाषा",
   "selectBadgeLevelPrompt": "बॅज स्तर निवडा",
   "participation": "भाग घ्या",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}} मध्ये  <span>{{count}} {{sourceType}}</span> {{action}} करा आणि {{initiativeName}} {{badge}}  भाषा समर्थक बॅज मिळवा",
   "thousandCharLimitText": "फक्त १२ वर्णांची संभावना"
 }

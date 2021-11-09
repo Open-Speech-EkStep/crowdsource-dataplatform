@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "ଆପଣଙ୍କ ଭାଷା",
   "selectBadgeLevelPrompt": "ବ୍ୟାଜ ସ୍ତର ବାଛନ୍ତୁ",
   "participation": "ଅଂଶଗ୍ରହଣ",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}}ରେ {{action}} <span>{{count}} {{sourceType}}</span> ଏବଂ {{initiativeName}} {{badge}} ଭାଷା ସମର୍ଥକ ବ୍ୟାଜ ଅର୍ଜନ କରନ୍ତୁ",
   "thousandCharLimitText": "କେବଳ 1000 ଅକ୍ଷର ହିଁ ସମ୍ଭବ "
 }

@@ -503,7 +503,7 @@ exports[`BadgeDetail should render the component and matches it against stored s
                       class="heading"
                     >
                       <h2>
-                        contributeBadgeDetailText
+                        badgeDetailText
                       </h2>
                     </div>
                   </div>

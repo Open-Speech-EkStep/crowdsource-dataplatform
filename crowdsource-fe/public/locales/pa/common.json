@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "ਤੁਹਾਡੀ ਭਾਸ਼ਾ",
   "selectBadgeLevelPrompt": "ਬੈਜ ਪੱਧਰ ਚੁਣੋ",
   "participation": "ਹਿੱਸਾ ਲੈਣਾ",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}} ਵਿੱਚ <span>{{count}} {{sourceType}}</span> {{action}} ਕਰੋ ਅਤੇ {{initiativeName}} {{badge}} ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕਰੋ",
   "thousandCharLimitText": "ਸਿਰਫ 1000 ਅੱਖਰਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ"
 }

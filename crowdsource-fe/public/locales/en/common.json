@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "Your Language",
   "selectBadgeLevelPrompt": "Select Badge level",
   "participation": "Participation",
-  "validateBadgeDetailText": "Validate <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
-  "contributeBadgeDetailText": "Contribute <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
+  "badgeDetailText": "{{action}} <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
   "thousandCharLimitText": "Only 1000 characters allowed"
 }

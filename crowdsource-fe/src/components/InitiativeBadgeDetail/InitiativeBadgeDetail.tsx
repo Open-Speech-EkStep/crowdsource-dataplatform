@@ -125,9 +125,10 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
               <div className={styles.heading}>
                 <h2>
                   <Trans
-                    i18nKey={`${participatedAction}BadgeDetailText`}
-                    defaults={`${participatedAction}BadgeDetailText`}
+                    i18nKey={`badgeDetailText`}
+                    defaults={`badgeDetailText`}
                     values={{
+                      action: t(participatedAction),
                       initiativeName: capitalizeFirstLetter(`${t(initiative)} ${t('india')}`),
                       badge: capitalizeFirstLetter(t(selectedMedal.toLowerCase())),
                       language: capitalizeFirstLetter(t(language.toLowerCase())),

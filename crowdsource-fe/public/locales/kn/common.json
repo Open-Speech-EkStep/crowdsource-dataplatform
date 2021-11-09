@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "ನಿಮ್ಮ ಭಾಷೆ",
   "selectBadgeLevelPrompt": "ಬ್ಯಾಡ್ಜ್ ಲೆವೆಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ",
   "participation": "ಭಾಗವಹಿಸುವಿಕೆ",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}} ಭಾಷೆಯಲ್ಲಿ  <span>{{count}} {{sourceType}}</span> {{action}}  ಮಾಡಿ ಮತ್ತು  {{initiativeName}} {{badge}} ಭಾಷಾ ಸಮರ್ಥಕ್ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಗಳಿಸಿ.",
   "thousandCharLimitText": "ಕೇವಲ 1000 ಅಕ್ಷರಗಳನ್ನು ಮಾತ್ರ ಕೊಡಲು ಸಾಧ್ಯ"
 }

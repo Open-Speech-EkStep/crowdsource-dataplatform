@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "మీ భాష",
   "selectBadgeLevelPrompt": "బ్యాడ్జ్ స్థాయిని ఎంచుకోండి",
   "participation": "పాల్గొనడం",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}} లో  <span>{{count}} {{sourceType}}</span> {{action}} చేయండి మరియు {{initiativeName}} {{badge}} భాషా సమార్థక్ బ్యాడ్జ్ సంపాదించండి",
   "thousandCharLimitText": "1000 అక్షరాలు మాత్రమే ఉండాలి"
 }

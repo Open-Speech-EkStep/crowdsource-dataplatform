@@ -303,7 +303,7 @@ exports[`InitiativeBadgeDetail should render the component and matches it agains
                 class="heading"
               >
                 <h2>
-                  contributeBadgeDetailText
+                  badgeDetailText
                 </h2>
               </div>
             </div>

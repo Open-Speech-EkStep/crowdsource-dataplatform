@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "Your Language",
   "selectBadgeLevelPrompt": "Select Badge level",
   "participation": "Participation",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{action}} <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
   "thousandCharLimitText": "কেৱল ১০০০ টা বৰ্ণৰ অনুমতি দিয়া হ'ব"
 }

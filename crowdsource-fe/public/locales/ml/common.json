@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "നിങ്ങളുടെ ഭാഷ",
   "selectBadgeLevelPrompt": "ബാഡ്ജ് ലെവല്‍ തിരഞ്ഞെടുക്കുക",
   "participation": "പങ്കാളിത്തം",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}}-ല്‍ {{action}} <span>{{count}} {{sourceType}}</span> ചെയ്യൂ {{initiativeName}} {{badge}} ഭാഷാ സമര്‍ത്ഥക് ബാഡ്ജ് നേടൂ",
   "thousandCharLimitText": "1000 പ്രതീകങ്ങൾ മാത്രമേ അനുവദിച്ചിട്ടുള്ളൂ"
 }

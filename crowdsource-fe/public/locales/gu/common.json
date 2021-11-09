@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "તમારી  ભાષા",
   "selectBadgeLevelPrompt": "બેજ સ્તર પસંદ કરો",
   "participation": "ભાગ લેનાર",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}} માં   <span>{{count}} {{sourceType}}</span> {{action}} કરો અને  {{initiativeName}} {{badge}} ભાષા સમર્થક બેજ મેળવો .",
   "thousandCharLimitText": "ફક્ત 1000 અક્ષરોની અનુમતિ છે"
 }

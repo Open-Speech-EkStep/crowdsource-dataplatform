@@ -314,7 +314,6 @@
   "selectDropDownLanguagePrompt": "আপনার ভাষা",
   "selectBadgeLevelPrompt": "ব্যাজ স্তর নির্বাচন করুন",
   "participation": "অংশগ্রহণ",
-  "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": "",
+  "badgeDetailText": "{{language}} তে  <span>{{count}} {{sourceType}}</span> {{action}}  করুন এবং {{initiativeName}} {{badge}} ভাষা সমর্থক ব্যাজ অর্জন করুন",
   "thousandCharLimitText": "শুধুমাত্র ১০০০টি অক্ষর অনুমোদিত"
 }
