@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "బ్యాడ్జ్ స్థాయిని ఎంచుకోండి",
   "participation": "పాల్గొనడం",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "1000 అక్షరాలు మాత్రమే ఉండాలి"
 }

@@ -132,7 +132,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
           <Form.Group className="py-3" controlId="category">
             <Form.Label className="mb-1">
               {t('feedbackCategoryQuestionText')}{' '}
-              <span className={`${styles.grey} fst-italic`}>({t('optional')})</span>
+              <span className="text-primary-40 fst-italic">({t('optional')})</span>
             </Form.Label>
             <Form.Select
               aria-label="Default select example"
@@ -150,7 +150,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
 
           <Form.Group className="py-3" controlId="feedback">
             <Form.Label className="mb-1">
-              {t('feedbackShareText')} <span className={styles.grey}>({t('optional')})</span>
+              {t('feedbackShareText')} <span className="text-primary-40">({t('optional')})</span>
             </Form.Label>
             <Form.Control
               as="textarea"
@@ -160,11 +160,14 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
               name="feedback"
               onChange={handleChange}
             />
+            <span className="text-primary-40 d-flex justify-content-end mt-1">
+              ({t('thousandCharLimitText')})
+            </span>
           </Form.Group>
 
           <Form.Group className="py-3" controlId="recommended">
             <Form.Label className="mb-1 w-100">
-              {t('recommendQuestionText')} <span className={styles.grey}>({t('optional')})</span>
+              {t('recommendQuestionText')} <span className="text-primary-40">({t('optional')})</span>
             </Form.Label>
             <Form.Check
               inline
@@ -200,7 +203,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
 
           <Form.Group className="py-3" controlId="revisit">
             <Form.Label className="mb-1 w-100">
-              {t('revisitQuestionText')} <span className={styles.grey}>({t('optional')})</span>
+              {t('revisitQuestionText')} <span className="text-primary-40">({t('optional')})</span>
             </Form.Label>
             <Form.Check
               inline

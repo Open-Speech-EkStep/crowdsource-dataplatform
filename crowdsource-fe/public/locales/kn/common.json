@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "ಬ್ಯಾಡ್ಜ್ ಲೆವೆಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ",
   "participation": "ಭಾಗವಹಿಸುವಿಕೆ",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "ಕೇವಲ 1000 ಅಕ್ಷರಗಳನ್ನು ಮಾತ್ರ ಕೊಡಲು ಸಾಧ್ಯ"
 }

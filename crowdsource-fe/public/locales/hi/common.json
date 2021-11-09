@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "बैज स्तर चुनें",
   "participation": "प्रतिभागीता",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "केवल 1000 वर्ण संभव"
 }

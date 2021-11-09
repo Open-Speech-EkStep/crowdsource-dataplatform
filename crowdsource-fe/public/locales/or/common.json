@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "ବ୍ୟାଜ ସ୍ତର ବାଛନ୍ତୁ",
   "participation": "ଅଂଶଗ୍ରହଣ",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "କେବଳ 1000 ଅକ୍ଷର ହିଁ ସମ୍ଭବ "
 }

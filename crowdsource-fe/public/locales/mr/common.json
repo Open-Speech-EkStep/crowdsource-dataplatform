@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "बॅज स्तर निवडा",
   "participation": "भाग घ्या",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "फक्त १२ वर्णांची संभावना"
 }

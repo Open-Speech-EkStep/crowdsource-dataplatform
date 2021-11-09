@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "ব্যাজ স্তর নির্বাচন করুন",
   "participation": "অংশগ্রহণ",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "শুধুমাত্র ১০০০টি অক্ষর অনুমোদিত"
 }

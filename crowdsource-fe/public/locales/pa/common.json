@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "ਬੈਜ ਪੱਧਰ ਚੁਣੋ",
   "participation": "ਹਿੱਸਾ ਲੈਣਾ",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "ਸਿਰਫ 1000 ਅੱਖਰਾਂ ਦੀ ਇਜਾਜ਼ਤ ਹੈ"
 }

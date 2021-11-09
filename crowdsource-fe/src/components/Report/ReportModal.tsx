@@ -130,6 +130,9 @@ const ReportModal = ({ onSuccess: showThankyou, initiativeMediaType, ...props }:
               className={`${styles.reasonText} p-3 rounded-8`}
               disabled={formData.reportText === ''}
             />
+            <span className="d-flex justify-content-end mt-1 text-primary-40 display-6">
+              ({t('thousandCharLimitText')})
+            </span>
           </Form.Group>
         </Form>
       </div>

@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "Select Badge level",
   "participation": "Participation",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "কেৱল ১০০০ টা বৰ্ণৰ অনুমতি দিয়া হ'ব"
 }

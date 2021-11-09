@@ -316,5 +316,6 @@
   "selectBadgeLevelPrompt": "બેજ સ્તર પસંદ કરો",
   "participation": "ભાગ લેનાર",
   "validateBadgeDetailText": "",
-  "contributeBadgeDetailText": ""
+  "contributeBadgeDetailText": "",
+  "thousandCharLimitText": "ફક્ત 1000 અક્ષરોની અનુમતિ છે"
 }
