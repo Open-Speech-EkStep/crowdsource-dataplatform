@@ -273,7 +273,7 @@ function executeOnLoad() {
     fetchLocationInfo().then(res => {
         return res.json()
     }).then(response => {
-        localStorage.setItem("state_region", response.region);
+        localStorage.setItem("state_region", response.regionName);
         localStorage.setItem("country", response.country);
     }).catch(console.log);
     try {

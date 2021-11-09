@@ -14,21 +14,23 @@ const {
     LANGUAGES,
     VALIDATION_ACTIONS,
     SOURCES,
-    MEDIA_TYPES
+    REPORT_SOURCES,
+    MEDIA_TYPES,
+    OPTIONAL_FIELD_MAX_LENGTH,
+    FEEDBACK_RESPONSES
 } = require("../constants")
 
+const validLanguages = LANGUAGES.map((item) =>
+        item.value
+    )
 
 const convertIntoMB = (fileSizeInByte) => {
     return Math.round(fileSizeInByte / (1024 * 1000));
 }
 
 function isValidLanguage(language) {
-    const validLanguages = LANGUAGES.map((item) =>
-        item.value
-    )
     return validLanguages.includes(language)
 }
-
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
@@ -50,14 +52,22 @@ const validateUserInputAndFile = function (req, res, next) {
         return res.status(400).send("Bad request username contain email address");
     }
 
-    if (invalidAgeGroup || invalidGender || invalidMotherTongue || invalidLanguage)
+    const invalidBrowser = isBrowserInvalid(req);
+    const invalidDevice = isDeviceInvalid(req);
+    const invalidCountry = isCountryInvalid(req);
+    const invalidState = isStateInvalid(req);
+
+    const invalidType = isTypeInvalid(req);
+
+    if (invalidAgeGroup || invalidGender || invalidMotherTongue || invalidLanguage || invalidType || invalidBrowser || invalidDevice || invalidCountry || invalidState)
         return res.status(400).send("Bad request");
 
     let isInvalidReqParams = false;
     if (req.file) {
         const file = req.file;
         const fileSizeInMB = convertIntoMB(file.size);
-        const isInvalidFileParam = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE;
+        const audioDuration = req.body.audioDuration;
+        const isInvalidFileParam = fileSizeInMB > MAX_SIZE || file.mimetype != VALID_FILE_TYPE || isNaN(audioDuration);
         isInvalidReqParams = isInvalidFileParam || isInvalidParams
     }
     else if (req.body.userInput) {
@@ -108,22 +118,28 @@ const validateUserInputForFeedback = function (req, res, next) {
     const module = req.body.module;
     const target_page = req.body.target_page;
     const opinion_rating = parseInt(req.body.opinion_rating);
+    const recommended = req.body.recommended;
+    const revisit = req.body.revisit;
+
+    const invalidRecommended = recommended && (recommended.length > 5 || !FEEDBACK_RESPONSES.includes(recommended));
+    const invalidRevisit = revisit && (revisit.length > 5 || !FEEDBACK_RESPONSES.includes(revisit));
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
-    const invalidEmail = !email || email.trim().length == 0;
+    const invalidEmail = !email || email.trim().length == 0 || email.trim().length > OPTIONAL_FIELD_MAX_LENGTH;
     const invalidLanguage = !allLanguages.includes(language)
 
     const invalidCategory = (!(category.trim().length == 0 || category.trim().length < CATEGORY_MAX_LENGTH))
     const invalidFeedback = !(feedback || feedback.trim().length == 0) || feedback.trim().length > FEEDBACK_MAX_LENGTH;
 
-    const invalidModule = (!module || !module.trim().length)
+    const invalidModule = (!module || !module.trim().length || module.trim().length > 20)
 
-    const invalidTargetPage = (!target_page || !target_page.trim().length)
+    const invalidTargetPage = (!target_page || !target_page.trim().length || target_page.trim().length > 50)
 
     const invalidOpinionRating = (!opinion_rating || !(opinion_rating >= 1) || !(opinion_rating <= 5))
-
-    if (invalidEmail || invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage) {
+    
+    if (invalidEmail || invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage
+        || invalidRecommended || invalidRevisit) {
         return res.status(400).send("Bad request");
     }
     next()
@@ -134,7 +150,8 @@ const validateInputForSkip = function (req, res, next) {
     const userName = req.body.userName;
     const userId = req.cookies.userId;
 
-    const invalid = !sentenceId || userName == undefined || !userId;
+    const invalid = !sentenceId || userName == undefined || !userId || isLanguageInvalid(req.body.language) || isLanguageInvalid(req.body.fromLanguage) || isTypeInvalid(req) 
+        || isDeviceInvalid(req) || isBrowserInvalid(req) || isCountryInvalid(req) || isStateInvalid(req);
 
     if (invalid) {
         return res.status(400).send("Bad request");
@@ -150,7 +167,9 @@ const validateRewardsInput = (req, res, next) => {
         return res.status(400).send("User Id missing");
     }
 
-    if (!(type && source && language && MEDIA_TYPES.includes(type) && SOURCES.includes(source))) {
+    if (!(type && source && language && MEDIA_TYPES.includes(type) && SOURCES.includes(source))
+        || isUserNameInvalid(req.query.userName)
+        || isLanguageInvalid(language)) {
         return res.status(400).send("Invalid query");
     }
 
@@ -170,7 +189,12 @@ const validateRewardsInfoInput = (req, res, next) => {
 const validateInputsForValidateEndpoint = (req, res, next) => {
     if (!(req.cookies && req.cookies.userId && req.body && req.body.sentenceId
         && req.params && req.params.contributionId && req.params.action
-        && VALIDATION_ACTIONS.includes(req.params.action))) {
+        && VALIDATION_ACTIONS.includes(req.params.action)) 
+        || isTypeInvalid(req) 
+        || isBrowserInvalid(req) || isCountryInvalid(req) || isStateInvalid(req) || isDeviceInvalid(req)
+        || isUserNameInvalid(req.body.userName)
+        || isLanguageInvalid(req.body.fromLanguage)
+        || isLanguageInvalid(req.body.language)) {
         return res.status(400).send('Invalid params.');
     }
     next();
@@ -211,4 +235,56 @@ const validateUserInfoForProfanity = (req, res, next) => {
     next();
 }
 
-module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity }
+const validateReportInputs = (req, res, next) => {
+    const userId = req.cookies.userId || '';
+    const { sentenceId = '', reportText = '', language = '', userName = '' } = req.body;
+    if (
+        sentenceId === '' ||
+        isReportTextInvalid(reportText) ||
+        isLanguageInvalid(language) ||
+        userId === '' ||
+        isSourceInvalid(req)
+        || isUserNameInvalid(userName)
+    ) {
+        return res.send({ statusCode: 400, message: 'Input values missing' });
+    }
+    next();
+}
+
+function isReportTextInvalid(text) {
+    return !(text && text.length < FEEDBACK_MAX_LENGTH); 
+}
+
+function isTypeInvalid(req) {
+    return !(req.body.type && MEDIA_TYPES.includes(req.body.type));
+}
+
+function isSourceInvalid(req) {
+    return !(req.body.source && REPORT_SOURCES.includes(req.body.source))
+}
+
+function isStateInvalid(req) {
+    return req.body.state && req.body.state.length > OPTIONAL_FIELD_MAX_LENGTH;
+}
+
+function isCountryInvalid(req) {
+    return req.body.country && req.body.country.length > OPTIONAL_FIELD_MAX_LENGTH;
+}
+
+function isDeviceInvalid(req) {
+    return req.body.device && req.body.device.length > OPTIONAL_FIELD_MAX_LENGTH;
+}
+
+function isBrowserInvalid(req) {
+    return req.body.browser && req.body.browser.length > OPTIONAL_FIELD_MAX_LENGTH;
+}
+
+function isUserNameInvalid(userName) {
+    return !(userName != undefined && userName.length <= MAX_LENGTH && !MOBILE_REGEX.test(userName) && !EMAIL_REGEX.test(userName));
+} 
+
+function isLanguageInvalid(language) {
+    return language && !validLanguages.includes(language);
+}
+
+module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateUserInfoForProfanity, validateReportInputs }

@@ -65,15 +65,20 @@ const GENDER = ['', 'male', 'female', 'others', 'Transgender - He', 'Transgender
 const WADASNR_BIN_PATH = '/opt/binaries/WadaSNR/Exe'
 const MIN_SNR_LEVEL = 25
 
-const CATEGORY_MAX_LENGTH = 256
+const CATEGORY_MAX_LENGTH = 15
 
 const FEEDBACK_MAX_LENGTH = 1000
+
+const OPTIONAL_FIELD_MAX_LENGTH = 50
 
 const VALIDATION_ACTIONS = ["accept", "reject", "skip"];
 
 const SOURCES = ["contribute", "validate"];
+const REPORT_SOURCES = ["contribution", "validation"];
 
 const MEDIA_TYPES = ['parallel', 'ocr', 'text', 'asr'];
+
+const FEEDBACK_RESPONSES = ['yes', 'no', 'maybe'];
 
 module.exports = {
   MAX_SIZE,
@@ -95,7 +100,10 @@ module.exports = {
   FEEDBACK_MAX_LENGTH,
   VALIDATION_ACTIONS,
   SOURCES,
+  REPORT_SOURCES,
   MEDIA_TYPES,
   ROLE_UAT,
-  BADGE_SEQUENCE
+  BADGE_SEQUENCE,
+  OPTIONAL_FIELD_MAX_LENGTH,
+  FEEDBACK_RESPONSES
 };

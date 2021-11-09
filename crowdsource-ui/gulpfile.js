@@ -97,14 +97,14 @@ gulp.task('html', function () {
 gulp.task('js-config-1', function () {
   return gulp
     .src(['src/assets/js/*.js'])
-    .pipe(replace_sting(/\/brand\/.*.json/, `${settings.contextRoot}/brand/${settings.brand}.json`))
+    .pipe(replace_sting(/\/brand\/.*.json/, `/brand/${settings.brand}.json`))
     .pipe(gulp.dest('src/assets/js'))
 })
 
 gulp.task('js-config-2', function () {
   return gulp
     .src(['src/views/js/*.js'])
-    .pipe(replace_sting(/\/brand\/.*.json/, `${settings.contextRoot}/brand/${settings.brand}.json`))
+    .pipe(replace_sting(/\/brand\/.*.json/, `/brand/${settings.brand}.json`))
     .pipe(gulp.dest('src/views/js'))
 })
 

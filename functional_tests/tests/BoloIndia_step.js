@@ -433,6 +433,7 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
     assert.ok(await text("What is your opinion of this page").isVisible());
     assert.ok(await text("Please select your feedback category").isVisible());
     assert.ok(await text("Share your feedback below").isVisible());
+    assert.ok(await text("Only 1000 characters allowed").isVisible());
     assert.ok(await text("Would you recommend Bhasha Daan to your friends & family?").isVisible());
     assert.ok(await text("Would you revisit Bhasha Daan?").isVisible());
 });
@@ -478,6 +479,7 @@ step("When user clicks on Report Button, user should see Report Content Dialog B
     await click(taiko.button({ id: "report_btn" }))
     await taiko.waitFor(1000);
     assert.ok(await text("Report Content").exists());
+    assert.ok(await text("Only 1000 characters allowed").isVisible());
     assert.ok(await taiko.button({ id: "report_submit_id" }).isDisabled());
 });
 

@@ -1,4 +1,5 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/feedback.css">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
 
 <button id="feedback_button" class="btn float" type="button" data-toggle="modal" data-target="#feedback_modal">
     <img src="/img/feedbackIcon.svg" class="my-float" alt="feedback button">
@@ -19,7 +20,7 @@
                         &times;
                     </button>
                 </div>
-                <div class="modal-body py-3 px-lg-3 px-md-3 px-0">
+                <div class="modal-body py-3 px-lg-3 px-md-3 px-3">
                     <div class="mb-3 email-component" style="display:none">
                         <label class="form-check-label label-color-feedback" for="email">
                             <%= __('Email') %> <span class="required">(<%= __('*required')%>)</span>
@@ -190,7 +191,12 @@
                             </label>
                         </div>
                     </div>
-                    <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-3 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                    <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                    <div class="feedBack-limit mb-3 justify-content-end">
+                        <span class="align-middle">
+                           <%= __('Only 1000 characters allowed')%>
+                        </span>
+                    </div>
     
                     <div class="form-group mb-4">
                         <label for="recommend" class="form-label label-color-feedback mb-0">
