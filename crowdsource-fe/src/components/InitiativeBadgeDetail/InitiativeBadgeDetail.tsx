@@ -132,7 +132,7 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
                       initiativeName: capitalizeFirstLetter(`${t(initiative)} ${t('india')}`),
                       badge: capitalizeFirstLetter(t(selectedMedal.toLowerCase())),
                       language: capitalizeFirstLetter(t(language.toLowerCase())),
-                      sourceType: INITIATIVE_MEDIA_BADGES_MAPPING[initiative],
+                      sourceType: t(INITIATIVE_MEDIA_BADGES_MAPPING[initiative]),
                       count: contributionCount,
                     }}
                     components={{ span: <span className="text-warning" /> }}
