@@ -1,6 +1,6 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import TermsAndConditionsLink from '../TermsAndConditionsLink';
+import TermsAndConditionsLink from './TermsAndConditionsLink';
 
 describe('TermsAndConditionsLink', () => {
   const setup = () => render(<TermsAndConditionsLink />);
