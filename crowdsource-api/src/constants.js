@@ -5,8 +5,8 @@ const ROLE_UAT = "ROLE_UAT"
 const KIDS_AGE_GROUP = 'upto 10'; //should be change when we have data for kids
 const KIDS = 'medium';
 const ADULT = 'medium';
-const MAX_LENGTH = 100;
-const MOBILE_REGEX = /^[6-9]\d{9}$/;
+const MAX_LENGTH = 12;
+const MOBILE_REGEX = /^[0-9]\d{9}$/;
 const EMAIL_REGEX = /^\S+@\S+[\.][0-9a-zA-Z]+$/;
 const MOTHER_TONGUE = [
   'Assamese',
