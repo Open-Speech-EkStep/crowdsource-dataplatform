@@ -83,37 +83,29 @@ const deleteProperties = (obj, properties) => {
 }
 
 const generateValidationResponse = (data, desiredCount, userId, userName) => {
-	console.log('EMPTYERROR: generating validation response')
 	let response = [];
 	if (!data || data.length == 0) {
 		return response;
 	}
-	console.log('EMPTYERROR: after if check')
 	let randomItems = data.slice(0, desiredCount);
 	const itemLength = randomItems.length;
-	console.log('EMPTYERROR: random items selected ' + itemLength)
 	let i = 0;
 	let skipCount = 0;
 	while (response.length < itemLength && skipCount < (data.length - response.length)) {
 		if (isRowSkippedByOrContributedByUser(randomItems[i], userId, userName)) {
-			console.log('EMPTYERROR: inside if')
 			if (itemLength + skipCount < data.length) {
 				randomItems[i] = data[itemLength + skipCount]
-				console.log('EMPTYERROR: inside if if')
 			}
 			else {
 				randomItems.splice(i, 1);
-				console.log('EMPTYERROR: inside if else')
 			}
 			skipCount++;
 		}
 		else {
-			console.log('EMPTYERROR: inside else')
 			response.push(deleteProperties(randomItems[i], ["skipped_by", "contributed_by", "validation_count"]));
 			i++;
 		}
 	}
-	console.log('EMPTYERROR: response length ' + response.length)
 	return response;
 }
 
@@ -234,18 +226,14 @@ const getDataForValidation = async (type, language, toLanguage, userId, userName
 		return null;
 	}
 	try {
-		console.log('EMPTYERROR: inside get validation')
 		let cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
 		if (cacheResponse == null) {
-			console.log('EMPTYERROR: no data from cache')
 			await setValidationDataForCaching(db, type, language, toLanguage)
-			console.log('EMPTYERROR: after set validation data')
 			cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
-			console.log('EMPTYERROR: now cache has ' + cacheResponse.length)
 		}
 
 		const cacheData = JSON.parse(cacheResponse);
-		console.log('EMPTYERROR: cache item numbers ' + cacheData.length)
+
 		return generateValidationResponse(cacheData, 5, userId, userName);
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
