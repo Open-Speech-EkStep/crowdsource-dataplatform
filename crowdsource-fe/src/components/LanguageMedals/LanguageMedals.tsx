@@ -31,7 +31,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
         <Row>
           <Col lg="6" className="d-lg-flex py-3 py-lg-0">
             <article>
-              <h6 className="d-lg-none text-primary-60 fw-light">{t('contribute')}</h6>
+              <h6 className="d-lg-none text-primary-60 fw-light">{t('contribution')}</h6>
               <div className="d-flex mt-3 mt-lg-0">
                 {medals.map((medal: string) => (
                   <div key={medal} className={styles.medal}>
@@ -48,7 +48,7 @@ const LanguageMedals = ({ initiative, language, languageBadges }: LanguageMedals
           </Col>
           <Col lg="6" className="d-lg-flex py-3 py-lg-0">
             <article>
-              <h6 className="d-lg-none text-primary-60 fw-light">{t('validate')}</h6>
+              <h6 className="d-lg-none text-primary-60 fw-light">{t('validation')}</h6>
               <div className="d-flex mt-3 mt-lg-0">
                 {medals.map(medal => (
                   <div key={medal} className={styles.medal}>
