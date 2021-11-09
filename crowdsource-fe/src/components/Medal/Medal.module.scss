@@ -1,6 +1,7 @@
 .root {
-  border: 1px solid var(--primary-60-color);
+  background-color: var(--light-color);
   border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(15, 39, 73, 0.1);
   min-height: 6rem;
 
   @include media-breakpoint-up(md) {
@@ -12,20 +13,14 @@
   }
 
   @include media-breakpoint-up(xl) {
-    background-color: #fff;
     min-height: 8rem;
     width: 6.125rem;
-  }
-
-  &.earned {
-    background-color: var(--light-color);
-    box-shadow: 0 4px 12px rgba(15, 39, 73, 0.25);
   }
 
   &.active {
     background-color: var(--light-color);
     border: 1px solid var(--primary-color);
-    box-shadow: 0 4px 12px rgba(15, 39, 73, 0.25);
+    box-shadow: 0 4px 12px rgba(15, 39, 73, 0.35);
   }
 }
 

@@ -49,7 +49,7 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
     <div className="position-relative">
       <div
         role="button"
-        className={`${styles.root} ${styles.earned} ${
+        className={`${styles.root} ${
           hasMedalActive || selectedMedal == medal ? styles.active : ''
         } d-flex flex-column align-items-center text-center py-2 py-md-3`}
         onClick={handleMedalClick}

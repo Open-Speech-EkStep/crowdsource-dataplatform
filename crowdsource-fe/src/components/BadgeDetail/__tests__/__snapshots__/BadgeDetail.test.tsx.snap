@@ -223,7 +223,7 @@ exports[`BadgeDetail should render the component and matches it against stored s
                   class="position-relative"
                 >
                   <div
-                    class="root earned active d-flex flex-column align-items-center text-center py-2 py-md-3"
+                    class="root active d-flex flex-column align-items-center text-center py-2 py-md-3"
                     role="button"
                     tabindex="0"
                   >
@@ -268,7 +268,7 @@ exports[`BadgeDetail should render the component and matches it against stored s
                   class="position-relative"
                 >
                   <div
-                    class="root earned  d-flex flex-column align-items-center text-center py-2 py-md-3"
+                    class="root  d-flex flex-column align-items-center text-center py-2 py-md-3"
                     role="button"
                     tabindex="0"
                   >
@@ -313,7 +313,7 @@ exports[`BadgeDetail should render the component and matches it against stored s
                   class="position-relative"
                 >
                   <div
-                    class="root earned  d-flex flex-column align-items-center text-center py-2 py-md-3"
+                    class="root  d-flex flex-column align-items-center text-center py-2 py-md-3"
                     role="button"
                     tabindex="0"
                   >
@@ -358,7 +358,7 @@ exports[`BadgeDetail should render the component and matches it against stored s
                   class="position-relative"
                 >
                   <div
-                    class="root earned  d-flex flex-column align-items-center text-center py-2 py-md-3"
+                    class="root  d-flex flex-column align-items-center text-center py-2 py-md-3"
                     role="button"
                     tabindex="0"
                   >
