@@ -10,7 +10,8 @@ const {
   reportSentenceOrRecording,
   getDeviceInfo, 
   getBrowserInfo,
-  translate
+  translate,
+  safeJson
 } = require('../common/utils');
 const {PARALLEL_TO_LANGUAGE, LOCALE_STRINGS, CURRENT_MODULE, CONTRIBUTION_LANGUAGE ,INITIATIVES,config} = require('../common/constants');
 const { showKeyboard, setInput } = require('../common/virtualKeyboard');
@@ -25,7 +26,7 @@ const currentIndexKey = `${config.initiativeKey_3}CurrentIndex`;
 const parallelCountKey = `${config.initiativeKey_3}Count`;
 let localeStrings;
 
-window.likhoIndia = {};
+window.parallelInitiative = {};
 // device-browser
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -33,11 +34,11 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', likhoIndia.editedText);
+  fd.append('userInput', parallelInitiative.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(PARALLEL_TO_LANGUAGE));
   fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', likhoIndia.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', parallelInitiative.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -86,11 +87,11 @@ function disableSkipButton() {
 }
 
 function getNextSentence() {
-  if (currentIndex < likhoIndia.sentences.length - 1) {
+  if (currentIndex < parallelInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, likhoIndia.sentences.length);
-    setSentence(likhoIndia.sentences[currentIndex].media_data);
-    setDataSource(likhoIndia.sentences[currentIndex].source_info);
+    updateProgressBar(currentIndex + 1, parallelInitiative.sentences.length);
+    setSentence(parallelInitiative.sentences[currentIndex].media_data);
+    setDataSource(parallelInitiative.sentences[currentIndex].source_info);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
   } else {
@@ -111,7 +112,7 @@ function markContributionSkipped() {
   const state_region = localStorage.getItem('state_region') || "";
   const country = localStorage.getItem('country') || "";
   const reqObj = {
-    sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
+    sentenceId: parallelInitiative.sentences[currentIndex].dataset_row_id,
     userName: speakerDetails.userName,
     language: contributionLanguage,
     device: getDeviceInfo(),
@@ -176,7 +177,7 @@ function addListeners() {
     hideElement($('#audio-player-btn'))
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
-    likhoIndia.editedText = $("#edit").val();
+    parallelInitiative.editedText = $("#edit").val();
     $("#edit").css('pointer-events', 'none');
     $("#cancel-edit-button").attr("disabled", true);
     const $submitEditButton = $('#submit-edit-button');
@@ -256,7 +257,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: likhoIndia.sentences[currentIndex].dataset_row_id,
+    sentenceId: parallelInitiative.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -298,7 +299,7 @@ function getCurrentIndex(lastIndex) {
 
 let selectedReportVal = '';
 const initialize = function () {
-  const totalItems = likhoIndia.sentences.length;
+  const totalItems = parallelInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
 
@@ -345,7 +346,7 @@ const initialize = function () {
     $("#report_submit_id").attr("disabled", false);
   });
 
-  const translation = likhoIndia.sentences[currentIndex];
+  const translation = parallelInitiative.sentences[currentIndex];
   addListeners();
 
   if (translation) {
@@ -353,7 +354,7 @@ const initialize = function () {
     setDataSource(translation.source_info);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, likhoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, parallelInitiative.sentences.length)
   }
 };
 
@@ -379,7 +380,7 @@ function executeOnLoad() {
   }
 
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
@@ -429,10 +430,10 @@ function executeOnLoad() {
         throw errStatus
       })
         .then((sentenceData) => {
-          likhoIndia.sentences = sentenceData.data ? sentenceData.data : [];
-          localStorage.setItem(parallelCountKey, likhoIndia.sentences.length);
+          parallelInitiative.sentences = sentenceData.data ? sentenceData.data : [];
+          localStorage.setItem(parallelCountKey, parallelInitiative.sentences.length);
           $loader.hide();
-          if (likhoIndia.sentences.length === 0) {
+          if (parallelInitiative.sentences.length === 0) {
             showNoSentencesMessage();
             return;
           }

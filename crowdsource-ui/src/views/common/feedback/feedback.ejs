@@ -1,4 +1,5 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/feedback.css">
+<link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
 
 <button id="feedback_button" class="btn float" type="button" data-toggle="modal" data-target="#feedback_modal">
     <img src="/img/feedbackIcon.svg" class="my-float" alt="feedback button">
@@ -19,7 +20,7 @@
                         &times;
                     </button>
                 </div>
-                <div class="modal-body py-3 px-lg-3 px-md-3 px-0">
+                <div class="modal-body py-3 px-lg-3 px-md-3 px-3">
                     <div class="mb-3 email-component" style="display:none">
                         <label class="form-check-label label-color-feedback" for="email">
                             <%= __('Email') %> <span class="required">(<%= __('*required')%>)</span>
@@ -36,21 +37,21 @@
                     <div class="mb-4 content-component" style="display:none">
                         <div class="form-row">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="bolo_id" value="bolo">
-                                <label class="form-check-label xs-radio-label" for="bolo_id">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="text_id" value="<%- `${config.initiativeKey_2}` %>">
+                                <label class="form-check-label xs-radio-label" for="text_id">
                                     <%= __(config.initiative_2) %>
                                 </label>
                             </div>
     
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="suno_id" value="suno">
-                                <label class="form-check-label xs-radio-label" for="suno_id">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="asr_id" value="<%- `${config.initiativeKey_1}` %>">
+                                <label class="form-check-label xs-radio-label" for="asr_id">
                                     <%= __(config.initiative_1) %>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="likho_id" value="likho">
-                                <label class="form-check-label xs-radio-label" for="likho_id">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="parallel_id" value="<%- `${config.initiativeKey_3}` %>">
+                                <label class="form-check-label xs-radio-label" for="parallel_id">
                                     <%= __(config.initiative_3) %>
                                 </label>
                             </div>
@@ -59,8 +60,8 @@
                     <div class="mb-4 content-component" style="display:none">
                         <div class="form-row">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="dekho_id" value="dekho">
-                                <label class="form-check-label xs-radio-label" for="dekho_id">
+                                <input class="form-check-input" type="radio" name="moduleSelectRadio" id="ocr_id" value="<%- `${config.initiativeKey_4}` %>">
+                                <label class="form-check-label xs-radio-label" for="ocr_id">
                                     <%= __(config.initiative_4) %>
                                 </label>
                             </div>
@@ -190,7 +191,12 @@
                             </label>
                         </div>
                     </div>
-                    <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason mb-3 label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                    <textarea name="feedback_textarea" maxlength="1000" id="feedback_description" class="w-100 p-3 other-reason label-color-feedback" rows="3" placeholder="<%= __('Type here...')%>" style="background-color:#fff;border:1px solid rgba(149,149,149,.6)"></textarea>
+                    <div class="feedBack-limit mb-3 justify-content-end">
+                        <span class="align-middle">
+                           <%= __('Only 1000 characters allowed')%>
+                        </span>
+                    </div>
     
                     <div class="form-group mb-4">
                         <label for="recommend" class="form-label label-color-feedback mb-0">

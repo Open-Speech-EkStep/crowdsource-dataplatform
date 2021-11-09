@@ -12,6 +12,7 @@ const {
   getDeviceInfo,
   getLocaleString,
   translate,
+  safeJson
 } = require('../common/utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, LOCALE_STRINGS,config,INITIATIVES } = require('../common/constants');
@@ -40,7 +41,7 @@ const SKIP_ACTION = 'skip';
 const currentIndexKey = `${config.initiativeKey_1}ValidationCurrentIndex`;
 const asrValidatorCountKey = `${config.initiativeKey_1}ValidatorCount`;
 
-window.sunoIndiaValidator = {};
+window.asrValidator = {};
 
 let playStr = "";
 let pauseStr = "";
@@ -72,10 +73,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', sunoIndiaValidator.editedText);
+  fd.append('userInput', asrValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', sunoIndiaValidator.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', asrValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -229,20 +230,20 @@ let validationCount = 0;
 
 function setSentenceLabel(index) {
   const $sentenceLabel = $('#sentenceLabel');
-  const originalText = sunoIndiaValidator.sentences[index].contribution;
+  const originalText = asrValidator.sentences[index].contribution;
   $sentenceLabel[0].innerText = originalText;
   $('#original-text').text(originalText);
   $('#edit').text(originalText);
 }
 
 function getNextSentence() {
-  if (currentIndex < sunoIndiaValidator.sentences.length - 1) {
+  if (currentIndex < asrValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, sunoIndiaValidator.sentences.length);
-    const encodedUrl = encodeURIComponent(sunoIndiaValidator.sentences[currentIndex].sentence);
+    updateProgressBar(currentIndex + 1, asrValidator.sentences.length);
+    const encodedUrl = encodeURIComponent(asrValidator.sentences[currentIndex].sentence);
     localStorage.setItem("validation_audioPlayed", false);
     loadAudio(`${cdn_url}/${encodedUrl}`);
-    setDataSource(sunoIndiaValidator.sentences[currentIndex].source_info);
+    setDataSource(asrValidator.sentences[currentIndex].source_info);
     resetValidation();
     setSentenceLabel(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -286,8 +287,8 @@ function recordValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = sunoIndiaValidator.sentences[currentIndex].dataset_row_id
-  const contribution_id = sunoIndiaValidator.sentences[currentIndex].contribution_id;
+  const sentenceId = asrValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = asrValidator.sentences[currentIndex].contribution_id;
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
@@ -356,7 +357,7 @@ function addListeners() {
     }
     hideElement($('#sentences-row'));
     openEditor();
-    const originalText = sunoIndiaValidator.sentences[currentIndex].contribution;
+    const originalText = asrValidator.sentences[currentIndex].contribution;
     $('#original-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -396,7 +397,7 @@ function addListeners() {
     hideElement($(skipButton))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'))
-    sunoIndiaValidator.editedText = $("#edit").val();
+    asrValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events', 'none');
     setTimeout(() => {
@@ -487,7 +488,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: sunoIndiaValidator.sentences[currentIndex].dataset_row_id,
+    sentenceId: asrValidator.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -514,9 +515,9 @@ let selectedReportVal = '';
 const initializeComponent = function () {
   showOrHideExtensionCloseBtn();
   hideElement($('#virtualKeyBoardBtn'));
-  const totalItems = sunoIndiaValidator.sentences.length;
+  const totalItems = asrValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const audio = sunoIndiaValidator.sentences[currentIndex];
+  const audio = asrValidator.sentences[currentIndex];
   const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -534,7 +535,7 @@ const initializeComponent = function () {
     setTotalSentenceIndex(totalItems);
     resetValidation();
     setAudioPlayer();
-    updateProgressBar(currentIndex + 1, sunoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, asrValidator.sentences.length)
   }
 }
 
@@ -616,7 +617,7 @@ const executeOnLoad = function () {
   });
 
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
@@ -654,9 +655,9 @@ const executeOnLoad = function () {
       showErrorPopup(errStatus);
       throw errStatus
     }).then((result) => {
-      sunoIndiaValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(asrValidatorCountKey, sunoIndiaValidator.sentences.length);
-      if (sunoIndiaValidator.sentences.length === 0) {
+      asrValidator.sentences = result.data ? result.data : [];
+      localStorage.setItem(asrValidatorCountKey, asrValidator.sentences.length);
+      if (asrValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
       }

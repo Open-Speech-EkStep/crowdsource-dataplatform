@@ -10,7 +10,8 @@ const {
   getDeviceInfo,
   getBrowserInfo,
   getLocaleString,
-  translate
+  translate,
+  safeJson
 } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,LOCALE_STRINGS,config,INITIATIVES} = require('../common/constants');
 const {showKeyboard, setInput} = require('../common/virtualKeyboard');
@@ -64,7 +65,7 @@ function showNoSentencesMessage() {
   $("#validation-container").removeClass("validation-container");
 }
 
-window.likhoIndiaValidator = {};
+window.parallelValidator = {};
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -72,11 +73,11 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', likhoIndiaValidator.editedText);
+  fd.append('userInput', parallelValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(PARALLEL_TO_LANGUAGE));
   fd.append('fromLanguage', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', likhoIndiaValidator.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', parallelValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -111,7 +112,7 @@ let currentIndex;
 let validationCount = 0;
 
 function setCapturedText(index) {
-  const capturedText = likhoIndiaValidator.sentences[index].contribution;
+  const capturedText = parallelValidator.sentences[index].contribution;
   $('#edit').text(capturedText);
 }
 
@@ -121,12 +122,12 @@ function enableButton(element) {
 }
 
 function getNextSentence() {
-  if (currentIndex < likhoIndiaValidator.sentences.length - 1) {
+  if (currentIndex < parallelValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, likhoIndiaValidator.sentences.length)
-    setSentence(likhoIndiaValidator.sentences[currentIndex].sentence);
-    setDataSource(likhoIndiaValidator.sentences[currentIndex].source_info);
-    setTranslation(likhoIndiaValidator.sentences[currentIndex].contribution);
+    updateProgressBar(currentIndex + 1, parallelValidator.sentences.length)
+    setSentence(parallelValidator.sentences[currentIndex].sentence);
+    setDataSource(parallelValidator.sentences[currentIndex].source_info);
+    setTranslation(parallelValidator.sentences[currentIndex].contribution);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -153,8 +154,8 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = likhoIndiaValidator.sentences[currentIndex].dataset_row_id
-  const contribution_id = likhoIndiaValidator.sentences[currentIndex].contribution_id
+  const sentenceId = parallelValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = parallelValidator.sentences[currentIndex].contribution_id
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
@@ -219,7 +220,7 @@ function addListeners() {
     }
     showElement($('#editor-row'));
     openEditor();
-    const originalText = likhoIndiaValidator.sentences[currentIndex].contribution;
+    const originalText = parallelValidator.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -256,7 +257,7 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thank-you-row'));
     showElement($('#progress-row'))
-    likhoIndiaValidator.editedText = $("#edit").val();
+    parallelValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events', 'none');
     setTimeout(() => {
@@ -303,7 +304,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: likhoIndiaValidator.sentences[currentIndex].contribution_id,
+    sentenceId: parallelValidator.sentences[currentIndex].contribution_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -336,9 +337,9 @@ const setTranslation = function (translatedText) {
 const initializeComponent = () => {
   showOrHideExtensionCloseBtn();
   hideElement($('#virtualKeyBoardBtn'));
-  const totalItems = likhoIndiaValidator.sentences.length;
+  const totalItems = parallelValidator.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
-  const validationData = likhoIndiaValidator.sentences[currentIndex];
+  const validationData = parallelValidator.sentences[currentIndex];
   const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
   const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   const localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
@@ -360,13 +361,13 @@ const initializeComponent = () => {
     setCapturedText(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, likhoIndiaValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, parallelValidator.sentences.length)
   }
 }
 
 const getLocationInfo = () => {
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
@@ -466,9 +467,9 @@ const executeOnLoad = function () {
       showErrorPopup(errStatus);
       throw errStatus
     }).then(result => {
-      likhoIndiaValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(parallelValidatorCountKey, likhoIndiaValidator.sentences.length);
-      if (likhoIndiaValidator.sentences.length == 0) {
+      parallelValidator.sentences = result.data ? result.data : [];
+      localStorage.setItem(parallelValidatorCountKey, parallelValidator.sentences.length);
+      if (parallelValidator.sentences.length == 0) {
         showNoSentencesMessage();
         return;
       }

@@ -174,12 +174,12 @@
     display: none;
   }
 
-  #edit-text-suno label {
+  #edit-text-asr label {
     font-size: 10px !important;
   }
 }
 
-#edit-text-suno label {
+#edit-text-asr label {
   font-size: 14px;
   color: #959595;
 }

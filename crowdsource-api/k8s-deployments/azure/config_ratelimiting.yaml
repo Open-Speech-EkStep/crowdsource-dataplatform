@@ -6,6 +6,6 @@ metadata:
    
 data:
   http-snippet : |
-    limit_req_zone prod zone=rd_ingress-hello_rps:10m rate=20000r/m ;
+    limit_req_zone prod zone=rd_ingress-hello_rps:10m rate=2000r/s ;
   location-snippet: |
-      limit_req zone=rd_ingress-hello_rps burst=20 nodelay;
+      limit_req zone=rd_ingress-hello_rps burst=1000 nodelay;

@@ -1,5 +1,5 @@
-const { updateLocaleLanguagesDropdown, getCookie } = require('./utils');
-const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE,MODULE, DEFAULT_CON_LANGUAGE} = require("./constants");
+const { updateLocaleLanguagesDropdown, getCookie,getInitiativeType } = require('./utils');
+const { ALL_LANGUAGES,CONTRIBUTION_LANGUAGE ,CURRENT_MODULE, DEFAULT_CON_LANGUAGE} = require("./constants");
 const { base_url, context_root } = require('./env-api');
 
 const registerEvents = function () {
@@ -38,7 +38,8 @@ const changeLocale = function (locale) {
         location.href = `${context_root}/${locale}/${currentPage}`;
     }
     else {
-        location.href = `${context_root}/${locale}/${MODULE[module].url}/${currentPage}`;
+        const initiativeType = getInitiativeType(module);
+        location.href = `${context_root}/${locale}/${initiativeType}/${currentPage}`;
     }
 }
 
@@ -74,7 +75,7 @@ $(document).ready(function () {
         const currentLocale = splitValues.filter(value => allLocales.includes(value))[0] || 'en';
         sessionStorage.setItem('i18n', currentLocale);
     }
-    $("#bhashadaan_logo").attr('href', base_url);
+    $("#title_logo").attr('href', base_url);
     registerEvents();
 })
 

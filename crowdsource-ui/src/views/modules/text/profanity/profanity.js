@@ -264,8 +264,6 @@ function executeOnLoad() {
     window.crowdSource = {};
     const $loader = $('#loader');
     const $pageContent = $('#page-content');
-    // const $navUser = $('#nav-user');
-    // const $navUserName = $navUser.find('#nav-username');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     localeStrings = JSON.parse(localStorage.getItem(LOCALE_STRINGS));
     if (contributionLanguage) {
@@ -293,12 +291,7 @@ function executeOnLoad() {
         }
 
         showUserProfile(localSpeakerDataParsed.userName)
-
-        // if (localSpeakerDataParsed.userName && localSpeakerDataParsed.userName.length > 0) {
-        //     $navUser.removeClass('d-none');
-        //     $('#nav-login').addClass('d-none');
-        //     $navUserName.text(localSpeakerDataParsed.userName);
-        // }
+        
         const isExistingUser = localSentencesParsed &&
             localSentencesParsed.userName === localSpeakerDataParsed.userName
             &&
@@ -335,7 +328,6 @@ function executeOnLoad() {
                         showNoSentencesMessage();
                     }
                     $pageContent.removeClass('d-none');
-                    // toggleFooterPosition();
                     console.log(sentenceData);
                     crowdSource.sentences = sentenceData.data;
                     crowdSource.count = Number(sentenceData.count);

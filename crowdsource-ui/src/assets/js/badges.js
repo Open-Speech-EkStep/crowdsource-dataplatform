@@ -2,7 +2,8 @@ const {
   performAPIRequest,
   getLocaleString,
   updateLocaleLanguagesDropdown,
-  getLanguageBadge
+  getLanguageBadge,
+  getInitiativeType
 } = require('./utils');
 const {
   CONTRIBUTION_LANGUAGE,
@@ -12,7 +13,7 @@ const {
   INITIATIVES_NAME,config,BADGES_API_TEXT,INITIATIVES,CURRENT_MODULE
 } = require('./constants');
 const {onChangeUser, showUserProfile, onOpenUserDropDown} = require('./header');
-const {hasUserRegistered,getInitiativeType} = require('./common');
+const {hasUserRegistered} = require('./common');
 
 let badgeLevel = 'badge_1_participation_badge';
 

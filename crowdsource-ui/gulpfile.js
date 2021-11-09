@@ -98,14 +98,14 @@ gulp.task('html', function () {
 gulp.task('js-config-1', function () {
   return gulp
     .src(['src/assets/js/*.js'])
-    .pipe(replace_sting(/\/brand\/.*.json/, `${settings.contextRoot}/brand/${settings.brand}.json`))
+    .pipe(replace_sting(/\/brand\/.*.json/, `/brand/${settings.brand}.json`))
     .pipe(gulp.dest('src/assets/js'))
 })
 
 gulp.task('js-config-2', function () {
   return gulp
     .src(['src/views/js/*.js'])
-    .pipe(replace_sting(/\/brand\/.*.json/, `${settings.contextRoot}/brand/${settings.brand}.json`))
+    .pipe(replace_sting(/\/brand\/.*.json/, `/brand/${settings.brand}.json`))
     .pipe(gulp.dest('src/views/js'))
 })
 
@@ -131,8 +131,8 @@ gulp.task('js', function () {
       replace({
         patterns: [
           {
-            match: 'bhashadaanLogoUrl',
-            replacement: settings.bhashadaanLogoUrl,
+            match: 'titleLogoUrl',
+            replacement: settings.titleLogoUrl,
           },
         ],
       })
@@ -255,8 +255,8 @@ function jsGulp(moduleName) {
       replace({
         patterns: [
           {
-            match: 'bhashadaanLogoUrl',
-            replacement: settings.bhashadaanLogoUrl,
+            match: 'titleLogoUrl',
+            replacement: settings.titleLogoUrl,
           },
         ],
       })

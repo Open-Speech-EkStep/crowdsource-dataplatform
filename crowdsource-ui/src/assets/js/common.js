@@ -1,11 +1,7 @@
 const {
-  CONTRIBUTION_LANGUAGE, CURRENT_MODULE, SPEAKER_DETAILS_KEY, ErrorStatusCode,INITIATIVES
+  CONTRIBUTION_LANGUAGE, CURRENT_MODULE, SPEAKER_DETAILS_KEY, ErrorStatusCode
 } = require('./constants');
 const { translate } = require('./utils');
-
-const getInitiativeType = function(initiative){
-  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
-}
 
 const getContributedAndTopLanguage = (topLanguagesData, type) => {
   if (topLanguagesData && topLanguagesData.length) {
@@ -114,5 +110,4 @@ module.exports = {
   isMobileDevice,
   hasUserRegistered,
   redirectToHomeForDirectLanding,
-  getInitiativeType
 };

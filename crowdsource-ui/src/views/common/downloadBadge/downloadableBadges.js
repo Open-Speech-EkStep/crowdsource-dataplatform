@@ -1,4 +1,5 @@
-const {CURRENT_MODULE,CONTRIBUTION_LANGUAGE, ALL_LANGUAGES} = require('./constants.js');
+const {CURRENT_MODULE,CONTRIBUTION_LANGUAGE, ALL_LANGUAGES, BADGES_API_TEXT} = require('./constants.js');
+const {getInitiativeType} = require('./utils.js');
 
 function downloadPdf(badgeType) {
   try {
@@ -6,17 +7,17 @@ function downloadPdf(badgeType) {
     const img = new Image();
     img.onload = function () {
       pdf.addImage(this, 50, 10, 105, 130);
-      pdf.save(`${badgeType}-badge.pdf`);
+      pdf.save(`${BADGES_API_TEXT[badgeType]}-badge.pdf`);
     };
   
     img.crossOrigin = "Anonymous";
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-
+    const initiativeType = getInitiativeType(currentModule);
     const currentFunctionalPage = localStorage.getItem("selectedType");
-    img.src = getPngBadges(contributionLanguage,badgeType, currentFunctionalPage, currentModule);
+    img.src = getPngBadges(contributionLanguage,badgeType, currentFunctionalPage, initiativeType);
     const allBadges = JSON.parse(localStorage.getItem('badges'));
-    const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === badgeType.toLowerCase());
+    const badge = allBadges.find(e => e.grade && e.grade.toLowerCase() === BADGES_API_TEXT[badgeType].toLowerCase());
     if (badge) {
       pdf.text(`Badge Id : ${badge.generated_badge_id}`, 36, 190);
     }

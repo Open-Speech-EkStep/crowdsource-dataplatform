@@ -94,7 +94,10 @@ step("User details popup should appear and close button should close the pop up"
 
 step("Username field, Mother Tongue dropdown ,Age drop down , Gender Radio buttons should be present", async function () {
     await taiko.waitFor(1000)
-    assert.ok(await taiko.textBox({ id: 'username' }).exists())
+    const usernameFiled = taiko.textBox({ id: 'username' })
+    assert.ok(await usernameFiled.exists());
+    await write('1234', into(usernameFiled));
+    await taiko.text(`Please don't use only numerics or email as username`).isVisible();
     assert.ok(await taiko.dropDown({ id: 'mother-tongue' }).exists())
     assert.ok(await taiko.dropDown({ id: 'age' }).exists())
     assert.ok(await taiko.radioButton({ id: 'other-check' }).exists())
@@ -430,6 +433,7 @@ step("When user clicks on the Feedback icon, user should see the feedback popup"
     assert.ok(await text("What is your opinion of this page").isVisible());
     assert.ok(await text("Please select your feedback category").isVisible());
     assert.ok(await text("Share your feedback below").isVisible());
+    assert.ok(await text("Only 1000 characters allowed").isVisible());
     assert.ok(await text("Would you recommend Bhasha Daan to your friends & family?").isVisible());
     assert.ok(await text("Would you revisit Bhasha Daan?").isVisible());
 });
@@ -475,6 +479,7 @@ step("When user clicks on Report Button, user should see Report Content Dialog B
     await click(taiko.button({ id: "report_btn" }))
     await taiko.waitFor(1000);
     assert.ok(await text("Report Content").exists());
+    assert.ok(await text("Only 1000 characters allowed").isVisible());
     assert.ok(await taiko.button({ id: "report_submit_id" }).isDisabled());
 });
 

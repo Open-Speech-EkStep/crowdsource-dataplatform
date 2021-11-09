@@ -1,4 +1,4 @@
-const { base_url } = require('./env-api');
+const { context_root } = require('./env-api');
 
 const hideBackdrop = function (backdrop){
   if(!backdrop){
@@ -50,7 +50,7 @@ $(document).ready(function () {
 const addBaseUrlToVideoSrc = () => {
   const videoElement = $('#extension_video');
   const src = videoElement.find('source').attr('src');
-  videoElement.find('source').attr('src', `${base_url}${src}`);
+  videoElement.find('source').attr('src', `${context_root}${src}`);
   videoElement[0].load();
 }
 

@@ -2,7 +2,7 @@ const fetch = require('../common/fetch')
 const {
   setPageContentHeight,
   // toggleFooterPosition,
-  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate } = require('../common/utils');
+  setFooterPosition, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, getLocaleString, translate,safeJson } = require('../common/utils');
 const {CONTRIBUTION_LANGUAGE, CURRENT_MODULE,LOCALE_STRINGS,config,INITIATIVES} = require('../common/constants');
 const {showKeyboard,setInput} = require('../common/virtualKeyboard');
 const { isKeyboardExtensionPresent,showOrHideExtensionCloseBtn,isMobileDevice,showErrorPopup,redirectToHomeForDirectLanding } = require('../common/common');
@@ -37,7 +37,7 @@ function getCurrentIndex(lastIndex) {
   return getValue(currentIndexInStorage, lastIndex);
 }
 
-window.dekhoIndiaValidator = {};
+window.ocrValidator = {};
 
 function uploadToServer(cb) {
   const fd = new FormData();
@@ -45,10 +45,10 @@ function uploadToServer(cb) {
   const speakerDetails = JSON.stringify({
     userName: localSpeakerDataParsed.userName,
   });
-  fd.append('userInput', dekhoIndiaValidator.editedText);
+  fd.append('userInput', ocrValidator.editedText);
   fd.append('speakerDetails', speakerDetails);
   fd.append('language', localStorage.getItem(CONTRIBUTION_LANGUAGE));
-  fd.append('sentenceId', dekhoIndiaValidator.sentences[currentIndex].dataset_row_id);
+  fd.append('sentenceId', ocrValidator.sentences[currentIndex].dataset_row_id);
   fd.append('state', localStorage.getItem('state_region') || "");
   fd.append('country', localStorage.getItem('country') || "");
   fd.append('device', getDeviceInfo());
@@ -80,19 +80,19 @@ function uploadToServer(cb) {
 
 function setCapturedText(index) {
   const $capturedtext = $('#original-text');
-  const capturedText = dekhoIndiaValidator.sentences[index].contribution;
+  const capturedText = ocrValidator.sentences[index].contribution;
   $capturedtext.text(capturedText);
   $('#captured-text').text(capturedText);
   $('#edit').text(capturedText);
 }
 
 function getNextSentence() {
-  if (currentIndex < dekhoIndiaValidator.sentences.length - 1) {
+  if (currentIndex < ocrValidator.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length);
-    const encodedUrl = encodeURIComponent(dekhoIndiaValidator.sentences[currentIndex].sentence);
+    updateProgressBar(currentIndex + 1,ocrValidator.sentences.length);
+    const encodedUrl = encodeURIComponent(ocrValidator.sentences[currentIndex].sentence);
     setOcrImage(`${cdn_url}/${encodedUrl}`);
-    setDataSource(dekhoIndiaValidator.sentences[currentIndex].source_info);
+    setDataSource(ocrValidator.sentences[currentIndex].source_info);
     setCapturedText(currentIndex);
     localStorage.setItem(currentIndexKey, currentIndex);
     enableButton($('#skip_button'))
@@ -113,8 +113,8 @@ function skipValidation(action) {
   if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
     validationCount++;
   }
-  const sentenceId = dekhoIndiaValidator.sentences[currentIndex].dataset_row_id
-  const contribution_id = dekhoIndiaValidator.sentences[currentIndex].contribution_id
+  const sentenceId = ocrValidator.sentences[currentIndex].dataset_row_id
+  const contribution_id = ocrValidator.sentences[currentIndex].contribution_id
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
   fetch(`/validate/${contribution_id}/${action}`, {
     method: 'POST',
@@ -181,7 +181,7 @@ function addListeners() {
     }
     hideElement($('#textarea-row'));
     openEditor();
-    const originalText = dekhoIndiaValidator.sentences[currentIndex].contribution;
+    const originalText = ocrValidator.sentences[currentIndex].contribution;
     $('#captured-text').text(originalText);
     $('#edit').val('');
     $('#edit').val(originalText);
@@ -219,7 +219,7 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'));
-    dekhoIndiaValidator.editedText = $("#edit").val();
+    ocrValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');
     setTimeout(()=>{
@@ -307,7 +307,7 @@ const handleSubmitFeedback = function () {
   const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
   const reqObj = {
-    sentenceId: dekhoIndiaValidator.sentences[currentIndex].dataset_row_id,
+    sentenceId: ocrValidator.sentences[currentIndex].dataset_row_id,
     reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
     language: contributionLanguage,
     userName: speakerDetails ? speakerDetails.userName : '',
@@ -331,7 +331,7 @@ const handleSubmitFeedback = function () {
 const initializeComponent = () => {
   // showOrHideExtensionCloseBtn();
     hideElement($('#virtualKeyBoardBtn'));
-    const totalItems = dekhoIndiaValidator.sentences.length;
+    const totalItems = ocrValidator.sentences.length;
     currentIndex = getCurrentIndex(totalItems - 1);
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
@@ -341,7 +341,7 @@ const initializeComponent = () => {
     $('#keyboardLayoutName').text(localeLanguage);
 
     addListeners();
-    const validationData = dekhoIndiaValidator.sentences[currentIndex];
+    const validationData = ocrValidator.sentences[currentIndex];
     if (validationData) {
       const encodedUrl = encodeURIComponent(validationData.sentence);
       setOcrImage(`${cdn_url}/${encodedUrl}`);
@@ -349,13 +349,13 @@ const initializeComponent = () => {
       setCapturedText(currentIndex);
       setCurrentSentenceIndex(currentIndex + 1);
       setTotalSentenceIndex(totalItems);
-      updateProgressBar(currentIndex + 1,dekhoIndiaValidator.sentences.length)
+      updateProgressBar(currentIndex + 1,ocrValidator.sentences.length)
     }
 }
 
 const getLocationInfo = () => {
   fetchLocationInfo().then(res => {
-    return res.json()
+    return safeJson(res);
   }).then(response => {
     localStorage.setItem("state_region", response.regionName);
     localStorage.setItem("country", response.country);
@@ -453,9 +453,9 @@ const executeOnLoad = function () {
       showErrorPopup(errStatus);
       throw errStatus
     }).then(result => {
-      dekhoIndiaValidator.sentences = result.data ? result.data : [];
-      localStorage.setItem(ocrValidatorCountKey, dekhoIndiaValidator.sentences.length);
-      if(dekhoIndiaValidator.sentences.length === 0){
+      ocrValidator.sentences = result.data ? result.data : [];
+      localStorage.setItem(ocrValidatorCountKey, ocrValidator.sentences.length);
+      if(ocrValidator.sentences.length === 0){
         showNoSentencesMessage();
         return;
       }

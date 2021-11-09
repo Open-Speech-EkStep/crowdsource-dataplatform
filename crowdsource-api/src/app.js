@@ -42,7 +42,8 @@ const {
     validateRewardsInput,
     validateRewardsInfoInput,
     validateInputsForValidateEndpoint,
-    validateGetContributionsInput
+    validateGetContributionsInput,
+    validateReportInputs
 } = require('./middleware/validateUserInputs');
 const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware')
 
@@ -111,13 +112,17 @@ app.use(function (req, res, next) {
             maxAge: ONE_YEAR,
             httpOnly: true,
             secure: true,
-            sameSite: "lax"
+            sameSite: 'none'
         });
     }
     next();
 });
 
 app.use(express.static('../crowdsource-ui/target'));
+
+router.get('/get-userid', (req, res) => {
+    res.sendStatus(200);
+})
 
 router.get('/', function (req, res) {
     // #swagger.ignore = true
@@ -262,7 +267,7 @@ router.post('/validate/:contributionId/:action', validateInputsForValidateEndpoi
     return updateTablesAfterValidation(req, res)
 })
 
-router.post('/report', async (req, res) => {
+router.post('/report', validateReportInputs, async (req, res) => {
     /*  #swagger.tags = ['Support']
         #swagger.description = 'Endpoint to store report entry.',
         #swagger.parameters['userId'] = {
@@ -284,19 +289,12 @@ router.post('/report', async (req, res) => {
                     "source": "contribution"
                 }
         }, */
-    const userId = req.cookies.userId || '';
-    //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
-    const { sentenceId = '', reportText = '', language = '', userName = '', source = '' } = req.body;
-    if (
-        sentenceId === '' ||
-        reportText === '' ||
-        language === '' ||
-        userId === '' ||
-        !['contribution', 'validation'].includes(source)
-    ) {
-        return res.send({ statusCode: 400, message: 'Input values missing' });
-    }
+    
     try {
+        const userId = req.cookies.userId || '';
+        //in case source is validation, we get the contribution id in the sentenceId field, for easier tracking
+        const { sentenceId = '', reportText = '', language = '', userName = '', source = '' } = req.body;
+
         await saveReport(userId, sentenceId, reportText, language, userName, source);
     } catch (err) {
         console.log(err);
@@ -336,7 +334,7 @@ router.post('/skip', validateInputForSkip, markContributionSkippedInCache, (req,
         })
         .catch(err => {
             console.log(err);
-            return res.send({ statusCode: 500, message: err.message });
+            return res.send({ statusCode: 500, message: 'Some error occured' });
         });
 });
 
@@ -481,14 +479,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'social sharing text without rank',
             'Level',
             'Sentences',
-            'bronze',
-            'silver',
-            'gold',
-            'platinum',
-            'Bolo India',
-            'Suno India',
-            'Dekho India',
-            'Likho India',
             'Recording',
             'Labelling',
             'Transcribing',
@@ -508,7 +498,6 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'English',
             'Bengali',
             'All Languages',
-            'Bhasha Daan: A crowdsourcing initiative for Indian languages',
             'Validation so far in <y> - <x>',
             'Contribution so far in <y> - <x>',
             'minute(s)',
@@ -595,14 +584,16 @@ app.get('/get-locale-strings/:locale', function (req, res) {
             'Images validated',
             'An unexpected error has occurred.',
             'We are processing multiple requests at the moment. Please try again after sometime.',
-            'Initiative_1',
-            'Initiative_2',
-            'Initiative_3',
-            'Initiative_4',
-            'badge_1',
-            'badge_2',
-            'badge_3',
-            'badge_4'
+            'bronze',
+            'silver',
+            'gold',
+            'platinum',
+            'Bolo India',
+            'Suno India',
+            'Dekho India',
+            'Likho India',
+            'Bhasha Daan: A crowdsourcing initiative for Indian languages',
+
         ];
 
         const langSttr = {};

@@ -20,7 +20,7 @@ const speakerDetailsKey = 'profanityUserDetails';
 const asrCountKey = `${config.initiativeKey_1}Count`;
 const currentIndexKey = `${config.initiativeKey_1}CurrentIndex`;
 const sentencesKey = `${config.initiativeKey_1}SentencesKey`;
-window.sunoIndia = {};
+window.asrInitiative = {};
 
 let playStr = "";
 let pauseStr = "";
@@ -116,10 +116,10 @@ function getNextSentence() {
   const cancelButton = isMobileDevice() ? $('#cancel-edit-button_mob') : $('#cancel-edit-button');
   disableButton($submitButton);
   disableButton(cancelButton);
-  if (currentIndex < sunoIndia.sentences.length - 1) {
+  if (currentIndex < asrInitiative.sentences.length - 1) {
     currentIndex++;
-    updateProgressBar(currentIndex + 1, sunoIndia.sentences.length);
-    const encodedUrl = encodeURIComponent(sunoIndia.sentences[currentIndex].media);
+    updateProgressBar(currentIndex + 1, asrInitiative.sentences.length);
+    const encodedUrl = encodeURIComponent(asrInitiative.sentences[currentIndex].media);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     resetValidation();
     localStorage.setItem(currentIndexKey, currentIndex);
@@ -189,7 +189,7 @@ function onProfanityUpdated() {
 
 function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelButton) {
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem(speakerDetailsKey));
-  updateProfanityState(localSpeakerDataParsed.userName, sunoIndia.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
+  updateProfanityState(localSpeakerDataParsed.userName, asrInitiative.sentences[currentIndex].dataset_row_id, localSpeakerDataParsed.language, state)
     .then(() => {
       onProfanityUpdated($skipButton, $submitButton, cancelButton);
     }).catch(err => {
@@ -198,7 +198,7 @@ function invokeProfanityStateUpdate(state, $skipButton, $submitButton, cancelBut
 }
 
 function updateSkipAction() {
-  const sentenceId = sunoIndia.sentences[currentIndex].dataset_row_id;
+  const sentenceId = asrInitiative.sentences[currentIndex].dataset_row_id;
   const localSpeakerDataParsed = JSON.parse(localStorage.getItem('profanityUserDetails'));
   fetch(`/profanity-skip/asr`, {
     method: 'PUT',
@@ -290,14 +290,14 @@ function showNoSentencesMessage() {
 }
 
 const initialize = function () {
-  const totalItems = sunoIndia.sentences.length;
+  const totalItems = asrInitiative.sentences.length;
   currentIndex = getCurrentIndex(totalItems - 1);
   const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
   if (language) {
     updateLocaleLanguagesDropdown(language);
   }
 
-  const audio = sunoIndia.sentences[currentIndex];
+  const audio = asrInitiative.sentences[currentIndex];
   addListeners();
 
   if (audio) {
@@ -307,7 +307,7 @@ const initialize = function () {
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
     setAudioPlayer();
-    updateProgressBar(currentIndex + 1, sunoIndia.sentences.length)
+    updateProgressBar(currentIndex + 1, asrInitiative.sentences.length)
   }
 };
 
@@ -345,7 +345,7 @@ function executeOnLoad() {
       $loader.hide();
       $pageContent.removeClass('d-none');
       setFooterPosition();
-      sunoIndia.sentences = localSentencesParsed.sentences;
+      asrInitiative.sentences = localSentencesParsed.sentences;
       initialize();
     } else {
       localStorage.removeItem(currentIndexKey);
@@ -375,8 +375,8 @@ function executeOnLoad() {
             setFooterPosition();
           }
           $pageContent.removeClass('d-none');
-          sunoIndia.sentences = sentenceData.data;
-          localStorage.setItem(asrCountKey, sunoIndia.sentences.length);
+          asrInitiative.sentences = sentenceData.data;
+          localStorage.setItem(asrCountKey, asrInitiative.sentences.length);
           $loader.hide();
           localStorage.setItem(
             sentencesKey,

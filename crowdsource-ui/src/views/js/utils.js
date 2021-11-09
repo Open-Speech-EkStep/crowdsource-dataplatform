@@ -1,8 +1,14 @@
-const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES } = require('./constants');
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,INITIATIVES } = require('./constants');
 const fetch = require('./fetch');
 const platform = require('./platform');
 const { context_root } = require('./env-api');
 const { ErrorStatusCode } = require('./enum');
+
+const safeJson = res => {
+  if (!res) return res;
+  if (typeof res.json === 'function') return res.json();
+  return res;
+};
 
 function getDeviceInfo() {
   const os = platform.os;
@@ -122,9 +128,9 @@ function fetchLocationInfo() {
           break;
         }
       }
-      if (ipAddress.length !== 0) {
+      if (ipAddress.length !== 0 && ipAddress !== null) {
         return fetch(`/location-info?ip=${ipAddress}`);
-      } else {
+  } else {
         return new Promise((resolve, reject) => {
           reject('Ip Address not available');
         });
@@ -330,6 +336,10 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 };
 
+const getInitiativeType = function(initiative){
+  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
+}
+
 module.exports = {
   setPageContentHeight,
   toggleFooterPosition,
@@ -355,4 +365,6 @@ module.exports = {
   formatTransAndImages,
   translate,
   toPascalCase,
+  getInitiativeType,
+  safeJson
 };
