@@ -126,7 +126,7 @@ const validateUserInputForFeedback = function (req, res, next) {
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
-    const invalidEmail = !email || email.trim().length == 0 || email.trim().length > OPTIONAL_FIELD_MAX_LENGTH;
+    const invalidEmail = !email || isUserNameInvalid(email);
     const invalidLanguage = !allLanguages.includes(language)
 
     const invalidCategory = (!(category.trim().length == 0 || category.trim().length < CATEGORY_MAX_LENGTH))

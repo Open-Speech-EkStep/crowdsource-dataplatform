@@ -290,7 +290,7 @@ describe('middleware test', function () {
         const testModule = 'bolo';
         const testTargetPage = 'Landing Page';
         const testOpinionRating = 4;
-        const testEmail = 'example@gmail.com';
+        const testEmail = 'example';
 
         afterEach(() => {
             jest.clearAllMocks();
