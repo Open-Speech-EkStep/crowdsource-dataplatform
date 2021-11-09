@@ -219,7 +219,7 @@ exports[`ContributionActions should render the component and matches it against 
                             />
                           </div>
                           <img
-                            alt="Contribute Icon"
+                            alt="Validate Icon"
                             data-nimg="intrinsic"
                             decoding="async"
                             src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75"

@@ -67,7 +67,7 @@ describe('ContributionTracker', () => {
         },
         {
           language: 'Hindi',
-          total_speakers: 13,
+          total_speakers: 15,
           type: 'asr',
         },
         {
@@ -81,7 +81,7 @@ describe('ContributionTracker', () => {
           type: 'asr',
         },
         {
-          language: 'Hindi-English',
+          language: 'Punjabi',
           total_speakers: 13,
           type: 'asr',
         },

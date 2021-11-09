@@ -82,6 +82,7 @@ const ContributionActions = (props: ContributionActionProps) => {
             disabled={isAllContributed}
             warningMsg="contributeWarningMsg"
             initiative={props.initiative}
+            altText="Contribute"
           />
         </Col>
         <Col md="6" className="mt-9 mt-md-9">
@@ -93,6 +94,7 @@ const ContributionActions = (props: ContributionActionProps) => {
             disabled={!hasTarget}
             warningMsg="validateWarningMsg"
             initiative={props.initiative}
+            altText="Validate"
           />
         </Col>
       </Row>

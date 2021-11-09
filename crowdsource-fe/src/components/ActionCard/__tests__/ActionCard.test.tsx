@@ -22,6 +22,7 @@ describe('ActionCard', () => {
         text="some-text"
         initiative="suno"
         warningMsg="Only contributions invited for the selected language"
+        altText="Contribute"
       />
     );
     return rendereResult;

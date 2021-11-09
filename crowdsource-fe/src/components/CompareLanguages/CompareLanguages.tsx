@@ -36,11 +36,13 @@ const mapChartData = (
         [value]: 0.0,
       });
     }
+    const topLanguage = data.sort((a: any, b: any) => (Number(a[key]) > Number(b[key]) ? -1 : 1));
+    const isSelectedLanguageTop = topLanguage[0].language === topLanguageArray[0].language;
     let remainingLanguage = data.filter((item: CumulativeDataByLanguage) => item?.language !== langauge);
     remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
       Number(a[key]) > Number(b[key]) ? -1 : 1
     );
-    return topLanguageArray.concat(remainingLanguage.slice(0, 3));
+    return topLanguageArray.concat(remainingLanguage.slice(0, isSelectedLanguageTop ? 2 : 3));
   }
 };
 
