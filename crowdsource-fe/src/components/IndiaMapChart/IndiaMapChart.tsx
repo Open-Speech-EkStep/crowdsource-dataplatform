@@ -184,20 +184,19 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
     <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t('mapChartTitle')}</p>
       <div className={styles.chart}>
-        {
-          !data || isValidating ?
-            <div className="d-flex justify-content-center align-items-center h-100 w-100">
-              <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
-            </div>
-            :
-            <MapChart
-              sourceUrl={sourceUrl}
-              colors={colors}
-              data={statesData}
-              tooltipTemplate={tooltipTemplate}
-              quarterUnit={quarterVal}
-            />
-        }
+        {!data || isValidating ? (
+          <div className="d-flex justify-content-center align-items-center h-100 w-100">
+            <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
+          </div>
+        ) : (
+          <MapChart
+            sourceUrl={sourceUrl}
+            colors={colors}
+            data={statesData}
+            tooltipTemplate={tooltipTemplate}
+            quarterUnit={quarterVal}
+          />
+        )}
       </div>
       <MapLegend data={legendData} />
     </div>

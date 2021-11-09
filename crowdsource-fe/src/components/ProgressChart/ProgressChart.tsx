@@ -137,22 +137,21 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
         </div>
       </div>
       <div className={`${styles.chart}`}>
-        {
-          !data || isValidating ?
-            <div className="d-flex justify-content-center align-items-center h-100 w-100">
-              <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
-            </div>
-          :
-            <LineChart
-              data={timelineData}
-              xAxisLabel={t('month')}
-              yAxisLabel={t(config.yLabel)}
-              line1Text={t(config.xLabel1)}
-              line2Text={t(config.xLabel2)}
-              line1Tooltip={line1Tooltip}
-              line2Tooltip={line2Tooltip}
-            />
-        }
+        {!data || isValidating ? (
+          <div className="d-flex justify-content-center align-items-center h-100 w-100">
+            <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
+          </div>
+        ) : (
+          <LineChart
+            data={timelineData}
+            xAxisLabel={t('month')}
+            yAxisLabel={t(config.yLabel)}
+            line1Text={t(config.xLabel1)}
+            line2Text={t(config.xLabel2)}
+            line1Tooltip={line1Tooltip}
+            line2Tooltip={line2Tooltip}
+          />
+        )}
       </div>
     </div>
   );
