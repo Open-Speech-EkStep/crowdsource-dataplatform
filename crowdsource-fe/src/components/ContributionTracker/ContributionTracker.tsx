@@ -41,7 +41,6 @@ const mapChartData = (data: any, key: string, langauge: string, initiativeMedia:
     const topLanguage = data.sort((a: any, b: any) => (Number(a[key]) > Number(b[key]) ? -1 : 1));
     const isSelectedLanguageTop = topLanguage[0].language === topLanguageArray[0].language;
 
-    console.log(topLanguage, isSelectedLanguageTop);
     let remainingLanguage = data.filter((item: any) => item?.language !== langauge);
     remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
       Number(a[key]) > Number(b[key]) ? -1 : 1
