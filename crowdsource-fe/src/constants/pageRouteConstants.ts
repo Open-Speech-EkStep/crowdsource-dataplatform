@@ -23,7 +23,8 @@ export const pageRouteConstants = {
   [routePaths.dekhoIndiaValidateThankYou]: 'Validation Thank You Page',
   [routePaths.likhoIndiaContributeThankYou]: 'Contribution Thank You Page',
   [routePaths.likhoIndiaValidateThankYou]: 'Validation Thank You Page',
-  [routePaths.myBadges]: 'My badges',
+  [routePaths.myBadges]: 'My Badges',
+  [routePaths.badges]: 'Badges Info',
 } as const;
 
 export const sourceConstants = {
