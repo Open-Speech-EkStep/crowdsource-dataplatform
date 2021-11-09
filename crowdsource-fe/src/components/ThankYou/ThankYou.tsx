@@ -252,7 +252,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
       </div>
       <section className={`${styles.bar} mt-8 mt-md-12`}>
         <ContributeMore
-          initiative={INITIATIVES_MAPPING.suno}
+          initiative={initiative}
           source={pageSourceConstants[route.asPath]}
           nextMileStone={rewardData?.nextMilestone ?? 0}
           contributionCount={rewardData?.contributionCount ?? 0}
