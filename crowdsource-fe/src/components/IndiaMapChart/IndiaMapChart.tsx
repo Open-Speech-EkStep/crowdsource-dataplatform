@@ -180,21 +180,24 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
     value: `>${getText(quarterVal * 3)}`,
   });
 
-  if (!data || isValidating) {
-    return <Spinner data-testid="ChartSpinner" animation="border" />;
-  }
-
   return (
     <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t('mapChartTitle')}</p>
       <div className={styles.chart}>
-        <MapChart
-          sourceUrl={sourceUrl}
-          colors={colors}
-          data={statesData}
-          tooltipTemplate={tooltipTemplate}
-          quarterUnit={quarterVal}
-        />
+        {
+          !data || isValidating ?
+            <div className="d-flex justify-content-center align-items-center h-100 w-100">
+              <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
+            </div>
+            :
+            <MapChart
+              sourceUrl={sourceUrl}
+              colors={colors}
+              data={statesData}
+              tooltipTemplate={tooltipTemplate}
+              quarterUnit={quarterVal}
+            />
+        }
       </div>
       <MapLegend data={legendData} />
     </div>

@@ -42,21 +42,24 @@ const AgeChart: FunctionComponent<AgeChartProps> = ({ language }) => {
     }
   });
 
-  if (!jsonData || isValidating) {
-    return <Spinner data-testid="ChartSpinner" animation="border" />;
-  }
-
   return (
     <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t(chartTitle)}</p>
       <div className={styles.chart}>
-        <PieChart
-          id="pie_chart"
-          data={{
-            data: chartData,
-            colors: ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'],
-          }}
-        />
+        {
+          !jsonData || isValidating ?
+            <div className="d-flex justify-content-center align-items-center h-100 w-100">
+              <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
+            </div>
+            :
+            <PieChart
+              id="pie_chart"
+              data={{
+                data: chartData,
+                colors: ['#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'],
+              }}
+            />
+        }
       </div>
     </div>
   );

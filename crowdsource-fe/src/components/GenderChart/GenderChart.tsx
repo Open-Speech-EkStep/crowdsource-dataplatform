@@ -97,23 +97,26 @@ const GenderChart: FunctionComponent<GenderChartProps> = ({ language }) => {
     });
   });
 
-  if (!jsonData || isValidating) {
-    return <Spinner data-testid="ChartSpinner" animation="border" />;
-  }
-
   return (
     <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t(chartTitle)}</p>
       <div className={styles.chart}>
-        <BarChart
-          id="bar_chart"
-          data={{
-            data: chartData,
-            yAxisLabel: t(chartYLabel),
-            colors: ['#5d6d9a', '#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'],
-            strokeWidth: 1,
-          }}
-        />
+        {
+          !jsonData || isValidating ?
+            <div className="d-flex justify-content-center align-items-center h-100 w-100">
+              <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
+            </div>
+            :
+            <BarChart
+              id="bar_chart"
+              data={{
+                data: chartData,
+                yAxisLabel: t(chartYLabel),
+                colors: ['#5d6d9a', '#85A8F9', '#B7D0FE', '#6C85CE', '#316AFF', '#294691'],
+                strokeWidth: 1,
+              }}
+            />
+        }
       </div>
     </div>
   );
