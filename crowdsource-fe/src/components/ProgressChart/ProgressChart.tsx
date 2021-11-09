@@ -84,7 +84,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
     chartData = chartData.filter(d => d.language === language) || [];
   }
   for (let i = 0; i < chartData.length; i++) {
-    const duration = chartData[i].month || chartData[i].quarter * 3;
+    const duration = chartData[i].month || chartData[i].quarter * 3 - 2;
     const contribution = config.contribution as keyof CumulativeDataByDateAndLanguage;
     const validation = config.validation as keyof CumulativeDataByDateAndLanguage;
     timelineData.push({

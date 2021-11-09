@@ -52,8 +52,10 @@ const LineChart = (props: ChartProps) => {
     });
 
     x.paddingRight = 50;
+    x.paddingLeft = 50;
     dateAxis.renderer.minLabelPosition = 0.05;
     dateAxis.renderer.maxLabelPosition = 0.95;
+    dateAxis.renderer.labels.template.location = 0.5;
 
     let valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
