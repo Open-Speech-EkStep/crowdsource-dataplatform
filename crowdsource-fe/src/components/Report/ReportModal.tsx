@@ -11,8 +11,10 @@ import apiPaths from 'constants/apiPaths';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import { pageSourceConstants } from 'constants/pageRouteConstants';
+import { reportFieldsConstant } from 'constants/reportConstants';
 import { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
+import type { Initiative } from 'types/Initiatives';
 
 import styles from './ReportModal.module.scss';
 
@@ -21,9 +23,15 @@ interface ReportModalProps {
   onSuccess: () => void;
   show: boolean;
   initiativeMediaType: string;
+  initiative: Initiative;
 }
 
-const ReportModal = ({ onSuccess: showThankyou, initiativeMediaType, ...props }: ReportModalProps) => {
+const ReportModal = ({
+  onSuccess: showThankyou,
+  initiative,
+  initiativeMediaType,
+  ...props
+}: ReportModalProps) => {
   const { t } = useTranslation();
 
   const showThankyouRef = useRef(showThankyou);
@@ -91,32 +99,21 @@ const ReportModal = ({ onSuccess: showThankyou, initiativeMediaType, ...props }:
     >
       <div className={styles.form}>
         <Form id="reportForm" onSubmit={handleSubmit} className={`py-2`}>
-          <Form.Group className="py-3" controlId="reportText">
-            <Form.Check
-              inline
-              type="radio"
-              label={t('offensive')}
-              value="Offensive"
-              name="reportText"
-              id="reportFormOffensiveCheckbox"
-              className={`${styles.radio} mb-0 me-0`}
-              onChange={handleChange}
-            />
-            <span className="d-flex mt-1 mb-0 ms-6">{t('offensiveSubtext')}</span>
-          </Form.Group>
-
-          <Form.Group className="py-3" controlId="reportText">
-            <Form.Check
-              inline
-              type="radio"
-              label={t('others')}
-              value="Others"
-              name="reportText"
-              id="reportFormOthersCheckbox"
-              className={`${styles.radio} mb-0 me-0`}
-              onChange={handleChange}
-            />
-          </Form.Group>
+          {(reportFieldsConstant[initiative] as any).map((item: any) => (
+            <Form.Group key={item.value} className="py-3" controlId="reportText">
+              <Form.Check
+                inline
+                type="radio"
+                label={t(item.label)}
+                value={item.value}
+                name="reportText"
+                id={`reportFormCheckbox${item.value}`}
+                className={`${styles.radio} mb-0 me-0`}
+                onChange={handleChange}
+              />
+              {item.isSubtext && <span className="d-flex mt-1 mb-0 ms-6">{t(item.subtext)}</span>}
+            </Form.Group>
+          ))}
 
           <Form.Group className="py-3" controlId="reportText">
             <Form.Control

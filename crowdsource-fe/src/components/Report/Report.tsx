@@ -48,6 +48,7 @@ const Report = ({ onSuccess, initiativeMediaType, initiative }: ReportProps) => 
           show={modalShow}
           onHide={hideModal}
           onSuccess={showReportSuccess}
+          initiative={initiative}
         />
       )}
       {reportSuccess && (
