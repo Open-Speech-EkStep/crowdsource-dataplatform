@@ -93,10 +93,10 @@ const SunoDashboard = () => {
               ))}
           </div>
           <Row className="mt-10">
-            <Col lg="6">
+            <Col lg="6" data-testid="StateWiseDistribution">
               <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.suno} language={language} />
             </Col>
-            <Col lg="6" className="mt-8 mt-lg-0">
+            <Col lg="6" data-testid="ProgressChart" className="mt-8 mt-lg-0">
               <ProgressChart type={INITIATIVES_MEDIA_MAPPING.suno} language={language} />
             </Col>
           </Row>
