@@ -4,7 +4,11 @@ import { useTranslation, i18n } from 'next-i18next';
 
 import { BarChart } from 'components/Charts';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MEDIA, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import {
+  INITIATIVES_MAPPING,
+  INITIATIVES_MEDIA,
+  INITIATIVES_MEDIA_MAPPING,
+} from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -89,7 +93,7 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
   );
 
   const translatedContributionLanguage = `${t(`${contributionLanguage?.toLowerCase()}`)}${
-    translatedLanguage ? `-${t(`${translatedLanguage?.toLowerCase()}`)}` : ''
+    props.initiative === INITIATIVES_MAPPING.likho ? `-${t(`${translatedLanguage?.toLowerCase()}`)}` : ''
   }`;
 
   useEffect(() => {
