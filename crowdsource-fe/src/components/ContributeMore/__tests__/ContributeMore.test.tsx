@@ -7,7 +7,7 @@ import ContributeMore from '../ContributeMore';
 describe('ContributeMore', () => {
   const setup = (
     initiative: string,
-    source: string,
+    source: 'contribute' | 'validate',
     nextMileStone: number,
     contributionCount: number,
     nextBadgeType: string,

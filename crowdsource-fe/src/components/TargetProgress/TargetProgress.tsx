@@ -9,12 +9,13 @@ import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { CumulativeCount } from 'types/CumulativeCount';
+import type { SourceType } from 'types/SourceType';
 import { convertTimeFormat, roundOffValue } from 'utils/utils';
 
 import styles from './TargetProgress.module.scss';
 
 const getSourceCount = (
-  source: string | undefined,
+  source: SourceType | undefined,
   contributionCount: number | undefined,
   validationCount: number | undefined
 ) => {
@@ -39,7 +40,7 @@ const reduceList = (dataList: any) => {
 interface TargetProgressProps {
   initiative: string;
   initiativeType: string;
-  source?: string;
+  source?: SourceType;
   language?: string;
 }
 

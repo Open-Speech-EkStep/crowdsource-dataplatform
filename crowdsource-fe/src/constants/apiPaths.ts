@@ -26,6 +26,7 @@ const apiPaths = {
   report: nodeConfig.apiUrl + '/report',
   mediaAsr: nodeConfig.apiUrl + '/media/asr',
   mediaParallel: nodeConfig.apiUrl + '/media/parallel',
+  mediaOCR: nodeConfig.apiUrl + '/media/ocr',
   contributionsAsr: nodeConfig.apiUrl + '/contributions/asr',
   contributionsParallel: nodeConfig.apiUrl + '/contributions/parallel',
   store: nodeConfig.apiUrl + '/store',

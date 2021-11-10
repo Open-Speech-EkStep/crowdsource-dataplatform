@@ -82,7 +82,6 @@ const TextEditArea = ({
 
   useEffect(() => {
     setShowKeyboard(false);
-    console.log(closeKeyboard);
   }, [closeKeyboard]);
 
   const onChange = (input: any) => {

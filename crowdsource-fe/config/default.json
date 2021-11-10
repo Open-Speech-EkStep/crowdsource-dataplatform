@@ -1,7 +1,7 @@
 {
   "fe": {
     "apiUrl": "http://localhost:8080",
-    "cdnUrl": "https://uat-data-crowdsource.azureedge.net",
+    "cdnUrl": "https://dev-data-crowdsource.azureedge.net",
     "staticFileUrl": "http://localhost:8080",
     "whitelistingEmail": false,
     "showDataSource": false,

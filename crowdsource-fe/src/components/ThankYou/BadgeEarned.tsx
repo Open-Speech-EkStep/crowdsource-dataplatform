@@ -2,12 +2,11 @@ import React from 'react';
 
 import { Trans, useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import ContributionDetails from 'components/ContributionDetails';
 import TwoColumn from 'components/TwoColumn';
-import { INITIATIVES_MAPPING, INITIATIVE_ACTIONS_PAGE_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -87,10 +86,13 @@ const BadgeEarned = ({
   source,
   winningBadge,
 }: BadgeEarnedProps) => {
-  const route = useRouter();
   const { t } = useTranslation();
 
   const initiativeName = `${t(INITIATIVES_MAPPING[initiative])} ${t('india')}`;
+  const subHeaderKey =
+    source === 'contribute'
+      ? `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(source)}EarnedBadgeSubheader`
+      : `${source}EarnedBadgeSubheader`;
 
   return (
     <ContributionDetails
@@ -119,8 +121,8 @@ const BadgeEarned = ({
               </h4>
               <p className="display-3 mt-5 mt-6">
                 <Trans
-                  i18nKey={`${INITIATIVE_ACTIONS_PAGE_MAPPING[route.asPath]}EarnedBadgeSubheader`}
-                  defaults="transcribedEarnedBadgeSubheader"
+                  i18nKey={subHeaderKey}
+                  defaults={subHeaderKey}
                   values={{
                     count: contributionCount,
                     sourceType: t(pageMediaTypeStr),

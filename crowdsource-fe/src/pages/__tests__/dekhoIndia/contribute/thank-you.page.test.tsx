@@ -1,15 +1,15 @@
 /* eslint-disable import/no-internal-modules */
 import '__fixtures__/mockComponentsWithSideEffects';
 
-import ThankYouPage from 'pages/likho-india/contribute/thank-you.page';
+import ThankYouPage from 'pages/dekho-india/contribute/thank-you.page';
 import { render, screen } from 'utils/testUtils';
 
-describe('Likho Contribute Thank You Page', () => {
+describe('Dekho Contribute Thank You Page', () => {
   const setup = () => {
     return render(<ThankYouPage />);
   };
 
-  it('should render the likho india contribute thank you page', () => {
+  it('should render the dekho india contribute thank you page', () => {
     setup();
 
     expect(screen.getByTestId('ThankYou')).toBeInTheDocument();
@@ -19,7 +19,7 @@ describe('Likho Contribute Thank You Page', () => {
   it('should have respective breadcrumb value', () => {
     setup();
 
-    expect(screen.getByText('likho india')).toBeInTheDocument();
-    expect(screen.getByText('translate')).toBeInTheDocument();
+    expect(screen.getByText('dekho india')).toBeInTheDocument();
+    expect(screen.getByText('label')).toBeInTheDocument();
   });
 });

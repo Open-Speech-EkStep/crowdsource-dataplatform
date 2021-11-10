@@ -8,7 +8,7 @@ describe('TargetProgress', () => {
   const setup = async (
     initiative: any,
     initiativeMedia: string,
-    source?: string,
+    source?: 'contribute' | 'validate',
     contributionLanguage?: string
   ) => {
     when(localStorage.getItem)
