@@ -13,11 +13,15 @@ const reportValues = [
   },
 ];
 
-export const reportFieldsConstant = {
-  suno: reportValues,
-  likho: reportValues,
-  dekho: reportValues,
-  bolo: [
+export const reportFieldsConstant: any = {
+  sunocontribution: reportValues,
+  sunovalidation: reportValues,
+  likhocontribution: reportValues,
+  dekhocontribution: reportValues,
+  dekhovalidation: reportValues,
+  bolovalidation: reportValues,
+  likhovalidation: reportValues,
+  bolocontribution: [
     {
       label: 'offensive',
       value: 'Offensive',

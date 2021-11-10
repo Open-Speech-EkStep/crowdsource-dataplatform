@@ -99,7 +99,7 @@ const ReportModal = ({
     >
       <div className={styles.form}>
         <Form id="reportForm" onSubmit={handleSubmit} className={`py-2`}>
-          {(reportFieldsConstant[initiative] as any).map((item: any) => (
+          {reportFieldsConstant[`${initiative}${pageSourceConstants[route.asPath]}`]?.map((item: any) => (
             <Form.Group key={item.value} className="py-3" controlId="reportText">
               <Form.Check
                 inline

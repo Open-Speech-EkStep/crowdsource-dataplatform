@@ -6,8 +6,9 @@ import { render, verifyAxeTest, screen, userEvent, waitFor } from 'utils/testUti
 import ReportModal from '../ReportModal';
 
 describe('ReportModal', () => {
-  const setup = () =>
-    render(
+  const setup = () => {
+    router.asPath = '/suno-india/contribute';
+    return render(
       <ReportModal
         show={true}
         onHide={() => {}}
@@ -16,6 +17,7 @@ describe('ReportModal', () => {
         initiative="suno"
       />
     );
+  };
 
   verifyAxeTest(setup());
 
