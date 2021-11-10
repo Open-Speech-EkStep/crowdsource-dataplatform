@@ -13,6 +13,7 @@ describe('TextEditArea English', () => {
         isTextareaDisabled={false}
         label={`addText (${contributionLanguage})`}
         onError={() => {}}
+        closeKeyboard={true}
       />
     );
 
@@ -123,6 +124,7 @@ describe('TextEditArea Hindi', () => {
         isTextareaDisabled={false}
         label={`addText (${contributionLanguage})`}
         onError={() => {}}
+        closeKeyboard={true}
       />
     );
 

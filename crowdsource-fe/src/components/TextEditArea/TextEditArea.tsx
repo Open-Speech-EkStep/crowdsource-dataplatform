@@ -30,6 +30,7 @@ interface TextEditAreaProps {
   label: string;
   onError: (value: boolean) => void;
   showTip?: boolean;
+  closeKeyboard?: boolean;
 }
 
 const TextEditArea = ({
@@ -46,6 +47,7 @@ const TextEditArea = ({
   label,
   onError,
   showTip = false,
+  closeKeyboard,
 }: TextEditAreaProps) => {
   const { t } = useTranslation();
   const [input, setInput] = useState(textValue);
@@ -77,6 +79,11 @@ const TextEditArea = ({
     setLayout(KeyboardLanguageLayout[language]);
     setInput(textValue ?? '');
   }, [language, textValue]);
+
+  useEffect(() => {
+    setShowKeyboard(false);
+    console.log(closeKeyboard);
+  }, [closeKeyboard]);
 
   const onChange = (input: any) => {
     setIsUsingPhysicalKeyboard(false);

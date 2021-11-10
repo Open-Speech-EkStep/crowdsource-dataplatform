@@ -376,7 +376,7 @@ const SunoValidate = () => {
       <NoDataFound
         url={routePaths.sunoIndiaHome}
         title={t('asrValidateNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() ?? '' })}
+        text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
         buttonLabel={t('backToInitiativePrompt', {
           initiativeName: `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`,
         })}

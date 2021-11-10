@@ -50,6 +50,9 @@ const SunoTranscribe = () => {
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
+
+  const [closeKeyboard, setCloseKeyboard] = useState(false);
+
   const [showPlayButton, setShowPlayButton] = useState(true);
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
@@ -147,6 +150,7 @@ const SunoTranscribe = () => {
 
   const onSubmitContribution = () => {
     setShowThankyouMessage(true);
+    setCloseKeyboard(!closeKeyboard);
     setDataCurrentIndex(currentDataIndex);
     resetState();
     submit(
@@ -175,6 +179,7 @@ const SunoTranscribe = () => {
 
   const onSkipContribution = () => {
     setDataCurrentIndex(currentDataIndex);
+    setCloseKeyboard(!closeKeyboard);
     resetState();
     submitSkip(
       JSON.stringify({
@@ -233,6 +238,7 @@ const SunoTranscribe = () => {
                   contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
                 }`}
                 onError={setHasError}
+                closeKeyboard={closeKeyboard}
               />
             </div>
             {showThankyouMessage ? (
@@ -286,7 +292,7 @@ const SunoTranscribe = () => {
       <NoDataFound
         url={routePaths.sunoIndiaHome}
         title={t('asrContributeNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() })}
+        text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
         buttonLabel={t('backToInitiativePrompt', {
           initiativeName: `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`,
         })}

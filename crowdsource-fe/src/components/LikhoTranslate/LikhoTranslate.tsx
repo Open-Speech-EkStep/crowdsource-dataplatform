@@ -47,6 +47,7 @@ const LikhoTranslate = () => {
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
 
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
+  const [closeKeyboard, setCloseKeyboard] = useState(false);
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
   const [hasError, setHasError] = useState(false);
@@ -128,6 +129,7 @@ const LikhoTranslate = () => {
 
   const onSubmitContribution = () => {
     setShowThankyouMessage(true);
+    setCloseKeyboard(!closeKeyboard);
     setDataCurrentIndex(currentDataIndex);
     resetState();
     submit(
@@ -157,6 +159,7 @@ const LikhoTranslate = () => {
 
   const onSkipContribution = () => {
     setDataCurrentIndex(currentDataIndex);
+    setCloseKeyboard(!closeKeyboard);
     resetState();
     submitSkip(
       JSON.stringify({
@@ -218,6 +221,7 @@ const LikhoTranslate = () => {
                     language={translatedLanguage ?? ''}
                     initiative={INITIATIVES_MAPPING.suno}
                     setTextValue={onChangeTextInput}
+                    closeKeyboard={closeKeyboard}
                     textValue={formData.userInput}
                     roundedRight
                     label={t(`${translatedLanguage?.toLowerCase()}`)}
