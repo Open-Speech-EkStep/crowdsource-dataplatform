@@ -1,4 +1,5 @@
 import { when } from 'jest-when';
+import router from 'next/router';
 
 import { screen, render, verifyAxeTest, userEvent, waitFor } from 'utils/testUtils';
 
@@ -6,6 +7,7 @@ import Report from '../Report';
 
 describe('Report', () => {
   const setup = async () => {
+    router.asPath = '/suno-india/contribute';
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => 'Hindi');
