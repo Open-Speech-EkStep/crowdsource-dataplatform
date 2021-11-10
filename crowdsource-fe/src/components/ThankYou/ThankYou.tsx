@@ -99,7 +99,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
   );
 
   const translatedContributionLanguage = `${t(`${contributionLanguage?.toLowerCase()}`)}${
-    translatedLanguage ? `-${t(`${translatedLanguage?.toLowerCase()}`)}` : ''
+    initiative === INITIATIVES_MAPPING.likho ? `-${t(`${translatedLanguage?.toLowerCase()}`)}` : ''
   }`;
 
   useEffect(() => {
