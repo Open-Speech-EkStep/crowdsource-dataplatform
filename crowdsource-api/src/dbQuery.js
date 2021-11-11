@@ -238,11 +238,12 @@ where contributor_id=$1`;
 const insertRewardQuery = `insert into rewards (contributor_id, milestone_id) 
 select $1, $2 where not exists (select 1 from rewards where contributor_id=$1 and milestone_id=$2) returning generated_badge_id`;
 
-const getContributorIdQuery = 'select contributor_id from contributors where contributor_identifier = $1 and user_name = $2';
-
 const getValidationCountQuery = 'select count(*) from validations where contribution_id = $1 and action != \'skip\'';
 
-const addContributorQuery = 'INSERT INTO "contributors" ("user_name","contributor_identifier","age_group","gender","mother_tongue")  select $2, $1, $3, $4, $5 returning contributor_id';
+const addContributorIfNotExistQuery = `INSERT INTO "contributors" ("user_name","contributor_identifier","age_group","gender","mother_tongue")
+select $2, $1, $3, $4, $5 
+ON CONFLICT("user_name", "contributor_identifier") 
+DO UPDATE SET user_name=$2 RETURNING contributor_id;`;
 
 const getBadges = `select grade, reward_milestone.milestone, id from reward_catalogue, 
 (select milestone,reward_catalogue_id as rid from reward_milestones where milestone <= $1 
@@ -321,7 +322,6 @@ module.exports = {
   getTotalUserValidation,
   findRewardInfo,
   insertRewardQuery,
-  getContributorIdQuery,
   checkCurrentMilestoneQuery,
   checkNextMilestoneQuery,
   markMediaReported,
@@ -330,7 +330,7 @@ module.exports = {
   updateViews,
   getValidationCountQuery,
   getBadges,
-  addContributorQuery,
+  addContributorIfNotExistQuery,
   getContributionHoursForLanguage,
   getContributionAmount,
   getContributionHoursForAsr,
