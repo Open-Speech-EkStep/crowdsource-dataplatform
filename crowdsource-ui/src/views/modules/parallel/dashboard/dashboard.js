@@ -141,14 +141,11 @@ const executeOnLoad = function () {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
-    // const speakerDetailsKey = 'speakerDetails';
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     // eslint-disable-next-line no-unused-vars
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    // const age = document.getElementById('age');
-    // const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -218,7 +215,8 @@ const executeOnLoad = function () {
 
     $('#to-dash-language').on('change', (e) => {
         toLanguage = e.target.value === "" ? "" : e.target.value;
-        if (toLanguage == "" && fromLanguage == "") {
+        if (toLanguage === "") {
+            $("#from-dash-language").val('');
             updateLanguage("");
         }
         else {
@@ -241,7 +239,6 @@ const executeOnLoad = function () {
     });
 
     setUserModalOnShown($userName);
-    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
@@ -253,7 +250,6 @@ const executeOnLoad = function () {
     onChangeUser('./dashboard.html', INITIATIVES.parallel.value);
     onOpenUserDropDown();
 
-    // toggleFooterPosition();
 
 };
 

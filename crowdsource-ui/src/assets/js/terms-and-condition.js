@@ -5,7 +5,6 @@ const {
 
 function setupScroll() {
     const $navRow = $("#nav-row");
-    const navRowPosition = $navRow.offset();
     const navRowHeight = $navRow.height();
     const $termsOfUse = $("#terms-of-use");
     const $termsOfUsePosition = $termsOfUse.offset();
@@ -27,18 +26,8 @@ function setupScroll() {
     };
 
     window.onscroll = () => {
-        if (pageYOffset > navRowPosition.top) {
-            $navRow.addClass("fixed-top");
-            $termsOfUse.css({
-                paddingTop: navRowHeight,
-            });
-        } else {
-            $navRow.removeClass("fixed-top");
-            $termsOfUse.css({
-                paddingTop: 0,
-            });
-        }
-    };
+        $('#navbarSupportedContent').removeClass('show');
+      };
 }
 
 
