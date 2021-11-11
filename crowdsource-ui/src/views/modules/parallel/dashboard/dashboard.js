@@ -206,7 +206,7 @@ const executeOnLoad = function () {
         addToLanguage('to-dash-language', languages);
         $('#to-language option:first-child').attr("selected", "selected");
         toLanguage = $('#to-language option:first-child').val();
-        if (toLanguage == "" && fromLanguage == "") {
+        if ( fromLanguage == "" && (!toLanguage) ) {
             updateLanguage("");
         }
 
