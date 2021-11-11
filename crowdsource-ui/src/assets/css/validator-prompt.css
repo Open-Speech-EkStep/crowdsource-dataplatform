@@ -366,5 +366,7 @@ a {
   border: 2px solid #f44b4b !important;
 }
 
-
-
+.disable-control{
+  opacity: 0.6;
+  pointer-events: none;
+}

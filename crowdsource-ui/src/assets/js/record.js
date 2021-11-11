@@ -657,6 +657,8 @@ function executeOnLoad() {
           $validationInstructionModal.removeClass('d-none');
         }
         $pageContent.removeClass('d-none');
+        $('#startRecord').removeAttr('disabled')
+        $('#skipBtn').removeAttr('disabled')
         // toggleFooterPosition();
 
         setFooterPosition();

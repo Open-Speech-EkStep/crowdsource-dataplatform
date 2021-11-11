@@ -115,7 +115,7 @@
                     <button class="btn btn-custom-outline-primary rounded-pill mr-lg-4 mr-md-4 p-2 mt-3 mt-lg-2 mt-md-2 d-none third" id="cancel-edit-button">
                         <%= __('Cancel') %>
                     </button>
-                    <div class="align-items-center justify-content-center align-items-center mb-2" id="audio-player-btn">
+                    <div class="align-items-center justify-content-center align-items-center mb-2 disable-control" id="audio-player-btn">
                         <div class="audioplayer d-flex justify-content-center align-items-center">
                             <img src="/img/play.svg" alt="play" id="play" class="cursor-pointer" height="60" width="60">
                             <img src="/img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer" height="60" width="60">
@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class="row justify-content-center" id="skip_btn_row">
-                <button class="btn text-primary mt-3 mt-lg-2 mt-md-2 mb-5 mb-lg-2 mb-md-2 btn-transparent" id="skip_button">
+                <button class="btn text-primary mt-3 mt-lg-2 mt-md-2 mb-5 mb-lg-2 mb-md-2 btn-transparent" id="skip_button" disabled="disabled">
                     <%= __('Skip') %>
                 </button>
             </div>

@@ -473,6 +473,10 @@ const executeOnLoad = function () {
         showNoSentencesMessage();
         return;
       }
+      $('#need_change').removeAttr('disabled');
+      $('#like_button').removeAttr('disabled');
+      $('#skip_button').removeAttr('disabled');
+
       setFooterPosition();
 
       initializeComponent();

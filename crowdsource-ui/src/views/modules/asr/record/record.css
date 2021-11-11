@@ -183,3 +183,8 @@
   font-size: 14px;
   color: #959595;
 }
+
+.disable-control{
+  opacity: 0.6;
+  pointer-events: none;
+}
