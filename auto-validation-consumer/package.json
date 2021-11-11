@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/js-levenshtein": "^1.1.0",
     "@types/node": "^16.11.6",
     "nodemon": "^2.0.14",
     "rimraf": "^3.0.2",
@@ -21,6 +22,8 @@
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "kafkajs": "^1.15.0"
+    "js-levenshtein": "^1.1.6",
+    "kafkajs": "^1.15.0",
+    "pg-promise": "^10.11.1"
   }
 }
