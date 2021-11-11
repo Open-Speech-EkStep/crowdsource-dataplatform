@@ -62,7 +62,7 @@ const getParallelValidationDataForCaching = `select con.dataset_row_id, ds.media
 cont.contributor_identifier::text || '-' || cont.user_name as contributed_by, string_agg(cont2.contributor_identifier::text || '-' || cont2.user_name, ', ') as skipped_by, 
 count(distinct val.validation_id) validation_count 
   from contributions con 
-  inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type='parallel' and con.media->>'language'=$3
+  inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type='parallel' and con.media->>'language'=$3 and ds.state <> 'validated'
   left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
   inner join contributors cont on con.contributed_by=cont.contributor_id
   left join validations val2 on val2.contribution_id=con.contribution_id
