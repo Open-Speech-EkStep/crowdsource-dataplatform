@@ -2,6 +2,7 @@
   "whitelistingEmail":"disabled",
   "envName": "local",
   "caching": "disabled",
+  "autoValidation": "disabled",
   "validation_count": "3",
   "cache_timeout": "300",
   "cache_batch_size": "1000"
