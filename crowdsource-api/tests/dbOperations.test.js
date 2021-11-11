@@ -8,14 +8,13 @@ const {
     saveReportQuery,
     markContributionSkippedQuery,
     rewardsInfoQuery,
-    getContributorIdQuery,
     getTotalUserContribution,
     checkCurrentMilestoneQuery,
     checkNextMilestoneQuery,
     findRewardInfo,
     insertRewardQuery,
     getTotalUserValidation,
-    addContributorQuery,
+    addContributorIfNotExistQuery,
     getBadges,
     addValidationQuery,
     updateMediaWithValidatedState,
@@ -58,9 +57,9 @@ describe("Running tests for dbOperations", () => {
     const spyDBany = jest.spyOn(mockDB, 'any');
     const spyDBnone = jest.spyOn(mockDB, 'none');
     const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone');
-    const spyDBmany = jest.spyOn(mockDB, 'many');
     const spyDBone = jest.spyOn(mockDB, 'one');
     const spyDBresult = jest.spyOn(mockDB, 'result');
+    const age = '', gender = '', motherTongue = '';
 
     beforeEach(() => {
         mockpgp.as = jest.fn()
@@ -124,7 +123,7 @@ describe("Running tests for dbOperations", () => {
 
             beforeEach(() => {
                 when(spyDBoneOrNone).calledWith(getDataRowInfo, [testDatasetId]).mockReturnValue({ type: 'text', language: languageOne });
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [testUserId, testUserName]).mockReturnValue({ 'contributor_id': contributor_id });
+                when(spyDBone).calledWith(addContributorIfNotExistQuery, [testUserId, testUserName, age, gender, motherTongue]).mockReturnValue({ 'contributor_id': contributor_id });
                 when(spyDBany).calledWith(updateContributionDetails, [
                     testDatasetId,
                     contributor_id,
@@ -136,7 +135,7 @@ describe("Running tests for dbOperations", () => {
                     device,
                     browser
                 ]).mockReturnValue(Promise.resolve());
-                when(spyDBresult).calledWith(updateMediaWithContributedState, [testDatasetId]).mockReturnValue(Promise.resolve());
+                when(spyDBresult).calledWith(updateMediaWithContributedState, [testDatasetId]).mockReturnValue(Promise.resolve({}));
                 // when(spyDBnone).calledWith(updateMaterializedViews).mockReturnValue(Promise.resolve());
             })
 
@@ -263,7 +262,7 @@ describe("Running tests for dbOperations", () => {
             const testUserInput = 'testPath';
 
             beforeEach(() => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [testUserId, testUserName]).mockReturnValue({ 'contributor_id': contributor_id });
+                when(spyDBone).calledWith(addContributorIfNotExistQuery, [testUserId, testUserName, age, gender, motherTongue]).mockReturnValue({ 'contributor_id': contributor_id });
                 when(spyDBoneOrNone).calledWith(getDataRowInfo, [testDatasetId]).mockReturnValue({ type: 'text', language: languageOne });
                 when(spyDBany).calledWith(updateContributionDetailsWithUserInput,
                     [
@@ -353,7 +352,7 @@ describe("Running tests for dbOperations", () => {
     //     const spyDBany = jest.spyOn(mockDB, 'any')
     //     const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
     //     when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, '']).mockReturnValue(Promise.resolve())
-    //     when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
+    //     when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
 
     //     await dbOperations.getContributionList(req, res);
 
@@ -380,7 +379,7 @@ describe("Running tests for dbOperations", () => {
 
     test('Save Report', async () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
-        const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
+        const spyDBone = jest.spyOn(mockDB, 'one')
         const userId = '123'
         const datasetId = '456'
         const language = 'testLanguage'
@@ -388,7 +387,7 @@ describe("Running tests for dbOperations", () => {
         const userName = 'test user'
         const source = 'contribution'
         const contributor_id = 10
-        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+        when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]).mockReturnValue({ 'contributor_id': contributor_id });
 
         await dbOperations.saveReport(userId, datasetId, reportText, language, userName, source);
 
@@ -397,7 +396,7 @@ describe("Running tests for dbOperations", () => {
 
     test('Mark Skipped Contribution', async () => {
         const spyDBany = jest.spyOn(mockDB, 'any')
-        const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
+        const spyDBone = jest.spyOn(mockDB, 'one')
         const userId = '123'
         const datasetId = '456'
         const userName = 'test user'
@@ -407,7 +406,7 @@ describe("Running tests for dbOperations", () => {
         const state_region = "state";
         const device = "OSX";
         const browser = "CHROME";
-        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+        when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]).mockReturnValue({ 'contributor_id': contributor_id });
 
         await dbOperations.markContributionSkipped(userId, datasetId, userName, language, state_region, country, device, browser);
 
@@ -450,7 +449,7 @@ describe("Running tests for dbOperations", () => {
         // one or None - next Milestone data
 
         beforeEach(() => {
-            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
+            when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]).mockReturnValue({ 'contributor_id': contributor_id });
             when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language, textType]).mockReturnValue([{ 'contribution_id': 1234 }]);
             when(spyDBany).calledWith(getTotalUserValidation, [contributor_id, language, textType]).mockReturnValue([{ 'contribution_id': 1234 }]);
             when(spyDBone).calledWith(getContributionHoursForLanguage, [language]).mockReturnValue(10);
@@ -483,41 +482,31 @@ describe("Running tests for dbOperations", () => {
         test('should call queries for rewards data if user found for contribute', async () => {
             await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
 
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryContribute])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(4, getLanguageGoalQuery, [categoryContribute, textType, language])
+            expect(spyDBone).toHaveBeenNthCalledWith(1, addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryContribute])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, getLanguageGoalQuery, [categoryContribute, textType, language])
             expect(spyDBany).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language, textType])
         });
 
         test('should call queries for rewards data if user found for validate', async () => {
             await dbOperations.getRewards(userId, userName, language, categoryValidate, textType);
 
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, getContributorIdQuery, [userId, userName])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryValidate])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, checkNextMilestoneQuery, [contribution_count, language, categoryValidate, textType])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(4, getLanguageGoalQuery, [categoryValidate, textType, language])
+            expect(spyDBone).toHaveBeenNthCalledWith(1, addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryValidate])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkNextMilestoneQuery, [contribution_count, language, categoryValidate, textType])
+            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, getLanguageGoalQuery, [categoryValidate, textType, language])
             expect(spyDBany).toHaveBeenCalledWith(getTotalUserValidation, [contributor_id, language, textType])
         });
 
         describe('Test get contributor id', () => {
 
-            test('should call addContributorQuery if user not found', async () => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue(null);
-                when(spyDBone).calledWith(addContributorQuery, [userId, userName, '', '', '']).mockReturnValue({ 'contributor_id': contributor_id });
+            test('should call addContributorIfNotExistQuery', async () => {
+                when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, '', '', '']).mockReturnValue({ 'contributor_id': contributor_id });
 
                 await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
 
-                await expect(spyDBone).toBeCalledWith(addContributorQuery, [userId, userName, '', '', '']);
-                jest.clearAllMocks();
-            });
-
-            test('should return contributor id', async () => {
-                when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ 'contributor_id': contributor_id });
-
-                await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
-
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(getContributorIdQuery, [userId, userName])
+                expect(spyDBone).toBeCalledWith(addContributorIfNotExistQuery, [userId, userName, '', '', '']);
                 jest.clearAllMocks();
             });
         })
@@ -664,10 +653,17 @@ describe("Running tests for dbOperations", () => {
         const device = 'mac';
         const browser = 'chrome';
 
+        beforeEach(() => {
+            when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]).mockReturnValue({ contributor_id: contributorId })
+            when(spyDBresult).calledWith(addValidationQuery, expect.anything()).mockReturnValue(Promise.resolve({}))
+            when(spyDBresult).calledWith(updateMediaWithValidatedState, expect.anything()).mockReturnValue(Promise.resolve({}))
+        })
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        })
+
         test('should call addValidationQuery and updateMediaWithValidatedState if action is accept/reject', async () => {
-            spyDBnone.mockReturnValue(Promise.resolve())
-            spyDBresult.mockReturnValue(Promise.resolve())
-            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'accept';
 
             const req = { 'body': { sentenceId: datasetId, state, country, userName, device, browser }, 'cookies': { userId }, params: { action, contributionId } }
@@ -679,9 +675,6 @@ describe("Running tests for dbOperations", () => {
         });
 
         test('should only call addValidationQuery if action is skip', async () => {
-            spyDBnone.mockReturnValue(Promise.resolve())
-            spyDBresult.mockReturnValue(Promise.resolve())
-            when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
             const action = 'skip';
 
             const req = { 'body': { sentenceId: datasetId, state, country, userName, device, browser }, 'cookies': { userId }, params: { action, contributionId } }
@@ -726,7 +719,7 @@ describe("Running tests for dbOperations", () => {
     test('Test getUserRewards', async () => {
         const userId = 123;
         const userName = 'name';
-        when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: 1 })
+        when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]).mockReturnValue({ contributor_id: 1 })
         await dbOperations.getUserRewards(userId, userName);
         expect(spyDBany).toBeCalledWith(getUserRewardsQuery, [1])
     })

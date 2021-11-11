@@ -17,11 +17,10 @@ const {
     checkCurrentMilestoneQuery,
     checkNextMilestoneQuery,
     insertRewardQuery,
-    getContributorIdQuery,
     findRewardInfo,
     markMediaReported,
     markContributionReported,
-    addContributorQuery,
+    addContributorIfNotExistQuery,
     getLanguageGoalQuery,
     getDataRowInfo,
     getOrderedUniqueMediaQuery,
@@ -277,11 +276,7 @@ const markContributionSkipped = async (userId, datasetId, userName, language, st
 }
 
 const getContributorId = async (userId, userName, age = '', gender = '', motherTongue = '') => {
-    let contributorInfo = await db.oneOrNone(getContributorIdQuery, [userId, userName]);
-
-    if (!contributorInfo) {
-        contributorInfo = await db.one(addContributorQuery, [userId, userName, age, gender, motherTongue]);
-    }
+    let contributorInfo = await db.one(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]);
 
     return contributorInfo.contributor_id;
 }
