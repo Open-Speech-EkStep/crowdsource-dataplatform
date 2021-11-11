@@ -332,6 +332,30 @@ describe('middleware test', function () {
             expect(res.send).toHaveBeenCalledTimes(0)
         });
 
+        test('should call next() if recommended field is valid case insensitive', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, recommended: 'YES'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call next() if recommended field is valid capitalized', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, recommended: 'Yes'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
         test('should return 400 if revisit field is invalid', () => {
             const req = {
                 body: {
@@ -349,6 +373,30 @@ describe('middleware test', function () {
                 body: {
                     email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
                     module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'yes'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call next() if revisit field is valid case insensitive', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'YES'
+                }
+            };
+            validateUserInputForFeedback(req, res, nextSpy);
+            expect(nextSpy).toHaveBeenCalledTimes(1)
+            expect(res.send).toHaveBeenCalledTimes(0)
+        });
+
+        test('should call next() if revisit field is valid capitalized', () => {
+            const req = {
+                body: {
+                    email: testEmail, category: testCategory, feedback: testFeedback, language: motherTongue,
+                    module: testModule, target_page: testTargetPage, opinion_rating: testOpinionRating, revisit: 'Yes'
                 }
             };
             validateUserInputForFeedback(req, res, nextSpy);

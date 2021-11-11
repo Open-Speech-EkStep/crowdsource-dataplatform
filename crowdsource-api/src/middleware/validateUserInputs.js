@@ -121,8 +121,8 @@ const validateUserInputForFeedback = function (req, res, next) {
     const recommended = req.body.recommended;
     const revisit = req.body.revisit;
 
-    const invalidRecommended = recommended && (recommended.length > 5 || !FEEDBACK_RESPONSES.includes(recommended));
-    const invalidRevisit = revisit && (revisit.length > 5 || !FEEDBACK_RESPONSES.includes(revisit));
+    const invalidRecommended = recommended && (recommended.length > 5 || !FEEDBACK_RESPONSES.includes(recommended.toLowerCase()));
+    const invalidRevisit = revisit && (revisit.length > 5 || !FEEDBACK_RESPONSES.includes(revisit.toLowerCase()));
 
     const allLanguages = LANGUAGES.map(lang => lang.value)
 
