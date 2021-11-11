@@ -27,6 +27,7 @@ export const pageRouteConstants = {
   [routePaths.likhoIndiaValidateThankYou]: 'Validation Thank You Page',
   [routePaths.myBadges]: 'My Badges',
   [routePaths.badges]: 'Badges Info',
+  [routePaths.termsAndConditions]: 'Terms and Conditions',
 } as const;
 
 export const sourceConstants = {
@@ -143,6 +144,7 @@ export const pageInitiativeRouteConstants = {
 
   [routePaths.myBadges]: 'Others',
   [routePaths.badges]: 'Others',
+  [routePaths.termsAndConditions]: 'Others',
 } as const;
 
 export default pageRouteConstants;

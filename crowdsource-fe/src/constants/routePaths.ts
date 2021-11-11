@@ -34,8 +34,8 @@ const routePaths: { [key: string]: string } = {
   likhoIndiaValidateThankYou: `${initiativeBaseRoute.likhoIndia}/validate/thank-you`,
   badges: '/badges',
   myBadges: '/my-badges',
-  termsAndConditions: '/terms-and-conditions.html',
-  privacyPolicy: '/terms-and-conditions.html#privacy-policy',
+  termsAndConditions: '/terms-and-conditions',
+  privacyPolicy: '/terms-and-conditions#privacy-policy',
 } as const;
 
 export default routePaths;

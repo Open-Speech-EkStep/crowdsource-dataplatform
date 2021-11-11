@@ -1,5 +1,6 @@
 .root {
   bottom: 1rem;
+  right: 0;
   z-index: 10;
 
   @include media-breakpoint-up(md) {

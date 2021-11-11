@@ -10,6 +10,12 @@ jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 import DekhoDashboard from '../DekhoDashboard';
 
 describe('DekhoDashboard', () => {
+  global.document.getElementById = jest.fn().mockReturnValue({
+    style: {
+      width: '50%',
+    },
+  });
+
   const setup = async () => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
       JSON.stringify([

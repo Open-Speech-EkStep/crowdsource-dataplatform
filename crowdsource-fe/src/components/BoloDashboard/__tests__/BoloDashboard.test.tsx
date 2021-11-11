@@ -4,13 +4,20 @@ import { SWRConfig } from 'swr';
 
 import { screen, userEvent } from 'utils/testUtils';
 
+import BoloDashboard from '../BoloDashboard';
+
 jest.mock('components/Charts/MapChart', () => () => 'MapChart');
 jest.mock('components/Charts/LineChart', () => () => 'LineChart');
 jest.mock('components/GenderChart', () => () => 'GenderChart');
 jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
-import BoloDashboard from '../BoloDashboard';
 
 describe('BoloDashboard', () => {
+  global.document.getElementById = jest.fn().mockReturnValue({
+    style: {
+      width: '50%',
+    },
+  });
+
   const setup = async () => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
       JSON.stringify([

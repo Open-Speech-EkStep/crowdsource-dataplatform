@@ -10,6 +10,12 @@ jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 import LikhoDashboard from '../LikhoDashboard';
 
 describe('LikhoDashboard', () => {
+  global.document.getElementById = jest.fn().mockReturnValue({
+    style: {
+      width: '50%',
+    },
+  });
+
   const fromLanguageElement = () => screen.getByRole('combobox', { name: 'Select From Language' });
   const toLanguageElement = () => screen.getByRole('combobox', { name: 'Select To Language' });
 

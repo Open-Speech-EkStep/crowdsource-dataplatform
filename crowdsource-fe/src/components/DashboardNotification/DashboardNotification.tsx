@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Button from 'components/Button';
 
 import styles from './DashboardNotification.module.scss';
@@ -9,6 +11,10 @@ interface DashboardNotificationProps {
 }
 
 const DashboardNotification = ({ text, buttonLabel, onClick }: DashboardNotificationProps) => {
+  useEffect(() => {
+    document.getElementById('float')!!.style.width = '100%';
+  }, []);
+
   return (
     <div
       className={`${styles.root} d-flex mt-3 mt-xl-0 flex-column flex-md-row justify-content-md-between align-items-center text-center text-md-start p-5 rounded-12 bg-primary`}

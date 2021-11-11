@@ -14,14 +14,14 @@ exports[`Footer should render the component and matches it against stored snapsh
       >
         <a
           class="link me-lg-12 py-2 py-lg-0"
-          href="/terms-and-conditions.html"
+          href="/terms-and-conditions"
           target="_blank"
         >
           termsAndConditions
         </a>
         <a
           class="link py-2 py-lg-0"
-          href="/terms-and-conditions.html#privacy-policy"
+          href="/terms-and-conditions#privacy-policy"
           target="_blank"
         >
           privacyPolicy
