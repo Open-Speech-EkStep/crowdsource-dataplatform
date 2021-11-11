@@ -1,5 +1,5 @@
 const moment = require('moment');
-
+const config = require('config');
 const {
     updateContributionDetails,
     updateContributionDetailsWithUserInput,
@@ -70,6 +70,8 @@ let cn = {
 };
 
 const db = pgp(cn);
+
+const autoValidationEnabled = config.autoValidation ? config.autoValidation == "enabled" : false;
 
 const checkLanguageValidity = async (datasetId, language) => {
     const dataRowInfo = await db.oneOrNone(getDataRowInfo, [datasetId]);
@@ -439,7 +441,8 @@ const updateDbWithUserInput = async (
         state,
         country,
         device,
-        browser
+        browser,
+        !autoValidationEnabled
     ])
         .then((contributionInsertResult) => {
             console.log("/store after contribution insertion" + datasetId)

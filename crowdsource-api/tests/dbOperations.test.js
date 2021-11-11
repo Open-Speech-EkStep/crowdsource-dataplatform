@@ -110,7 +110,7 @@ describe("Running tests for dbOperations", () => {
     describe('Update DB methods', () => {
         const testDatasetId = 1, testUserId = 123, contributor_id = 27;
         const testUserName = 'testName', testState = 'testState', testCountry = 'testCountry';
-        const age = '', gender = '', motherTongue = '', device = '', browser = '', type = 'asr';
+        const age = '', gender = '', motherTongue = '', device = '', browser = '', type = 'asr', allowValidation = true;
         const languageOne = 'Tamil', languageTwo = 'Hindi';
         const mockCb = jest.fn();
 
@@ -274,8 +274,9 @@ describe("Running tests for dbOperations", () => {
                         testState,
                         testCountry,
                         device,
-                        browser
-                    ]).mockReturnValue(Promise.resolve());
+                        browser,
+                        allowValidation
+                    ]).mockReturnValue(Promise.resolve([{ 'contribution_id': 97531 }]));
             })
 
             afterEach(() => {
@@ -331,7 +332,8 @@ describe("Running tests for dbOperations", () => {
                         testState,
                         testCountry,
                         device,
-                        browser
+                        browser,
+                        allowValidation
                     ]
                 );
 
@@ -341,25 +343,7 @@ describe("Running tests for dbOperations", () => {
                 )
             });
         })
-    })
-
-    // test('getContributionList should call getContributionListQuery query once with language', async () => {
-    //     const language = 'testLanguage';
-    //     const userId = 123;
-    //     const type = 'text'
-    //     const userName = 'name';
-    //     const contributorId = 1;
-    //     const req = { params: { type: type }, query: { from: language, username: userName }, cookies: { userId } };
-    //     const spyDBany = jest.spyOn(mockDB, 'any')
-    //     const spyDBoneOrNone = jest.spyOn(mockDB, 'oneOrNone')
-    //     when(spyDBany).calledWith(getContributionListQuery, [contributorId, type, language, '']).mockReturnValue(Promise.resolve())
-    //     when(spyDBoneOrNone).calledWith(getContributorIdQuery, [userId, userName]).mockReturnValue({ contributor_id: contributorId })
-
-    //     await dbOperations.getContributionList(req, res);
-
-    //     expect(spyDBany).toHaveBeenCalledWith(getContributionListQuery, [contributorId, type, language, '']);
-    //     jest.clearAllMocks();
-    // });
+    });
 
     test('Insert Feedback', () => {
         const spyDBany = jest.spyOn(mockDB, 'any');

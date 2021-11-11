@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS public.contributions DROP COLUMN IF EXISTS allow_validation;
