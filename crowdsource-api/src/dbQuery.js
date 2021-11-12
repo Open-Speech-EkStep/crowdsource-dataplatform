@@ -136,7 +136,7 @@ and (is_profane=false)
  limit 5`;
 
 const getContributionListQuery = `
-select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, NOT con.is_system auto_validate
+select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, con.is_system auto_validate
 from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
 	and ds.type=$2
@@ -153,7 +153,7 @@ from contributions con
 	limit 5;`
 
 const getContributionListForParallel = `
-select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, NOT con.is_system auto_validate
+select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, con.is_system auto_validate
 from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
 	and ds.type=$2 and con.media->>'language'=$4
