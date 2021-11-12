@@ -1,0 +1,24 @@
+.header {
+  height: 3.5rem;
+  top: 0;
+
+  @include media-breakpoint-up(md) {
+    height: 4.5rem;
+  }
+}
+
+.wrapper {
+  background: url('/images/home_page_bg_mobile.svg') no-repeat top center;
+
+  @include media-breakpoint-up(md) {
+    background: url('/images/home_page_bg.svg') no-repeat top center;
+  }
+}
+
+.content {
+  margin-top: 9rem;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 15.5rem;
+  }
+}

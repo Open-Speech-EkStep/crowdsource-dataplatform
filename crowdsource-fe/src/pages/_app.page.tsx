@@ -46,7 +46,7 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
   return (
     <Layout>
       <Component {...pageProps} />
-      <Float />
+      {router.pathname !== '/404' && <Float />}
     </Layout>
   );
 };

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import Footer from 'components/Footer';
 import Header from 'components/Header';
@@ -12,6 +13,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <div data-testid="Layout" className="d-flex flex-column flex-fill">
@@ -28,9 +30,9 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
         <link rel="icon" type="image/png" href="/img/favicon.png" />
       </Head>
-      <Header />
+      {router.pathname !== '/404' && <Header />}
       <main className="d-flex flex-column flex-grow-1">{children}</main>
-      <Footer />
+      {router.pathname !== '/404' && <Footer />}
     </div>
   );
 };

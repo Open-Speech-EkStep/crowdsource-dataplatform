@@ -321,5 +321,7 @@
   "participation": "Participation",
   "badgeDetailText": "{{action}} <span>{{count}} {{sourceType}}</span> in {{language}} and earn {{initiativeName}} {{badge}} Bhasha Samarthak badge",
   "thousandCharLimitText": "Only 1000 characters allowed",
-  "expandViewText": "Click to open expanded view"
+  "expandViewText": "Click to open expanded view",
+  "visitOur": "Visit our",
+  "404Text": "Seems this page doesn't exist"
 }
