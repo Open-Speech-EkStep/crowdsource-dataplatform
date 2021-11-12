@@ -10,7 +10,7 @@ export class Levenstein implements Validator {
         console.log('mismatchCount', mismatch_count)
         let score = 1 - (mismatch_count / hyp_ocr.length);
         console.log('score', score)
-        return score < LANGUAGE_CONFIG_OCR[language];
+        return score > LANGUAGE_CONFIG_OCR[language];
 
     }
 }
