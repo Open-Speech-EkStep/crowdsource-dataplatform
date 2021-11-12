@@ -7,6 +7,7 @@ function setupScroll() {
     const $navRow = $("#nav-row");
     const navRowHeight = $navRow.height();
     const $termsOfUse = $("#terms-of-use");
+    const navRowPosition = $navRow.offset();
     const $termsOfUsePosition = $termsOfUse.offset();
     const $privacyPolicy = $("#privacy-policy");
     const $privacyPolicyPosition = $privacyPolicy.offset();
@@ -26,8 +27,19 @@ function setupScroll() {
     };
 
     window.onscroll = () => {
-        $('#navbarSupportedContent').removeClass('show');
-      };
+      if (pageYOffset > navRowPosition.top) {
+          $navRow.addClass("fixed-top");
+          $termsOfUse.css({
+              paddingTop: navRowHeight,
+          });
+      } else {
+          $navRow.removeClass("fixed-top");
+          $termsOfUse.css({
+              paddingTop: 0,
+          });
+      }
+    $('#navbarSupportedContent').removeClass('show');
+  };
 }
 
 
