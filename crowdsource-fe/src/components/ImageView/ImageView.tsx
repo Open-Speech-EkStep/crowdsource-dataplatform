@@ -16,9 +16,11 @@ const ImageView: FunctionComponent<ImageViewProps> = ({ imageUrl }) => {
   const { t } = useTranslation();
   const [viewExpand, setViewExpand] = useState(false);
 
+  const url = nodeConfig.cdnUrl + '/' + imageUrl;
+
   return (
     <Fragment>
-      <Image alt="OCR Image Data" src={nodeConfig.cdnUrl + '/' + imageUrl} />
+      <Image alt="OCR Image Data" src={url} />
       <Button
         onClick={() => {
           setViewExpand(true);
@@ -34,7 +36,7 @@ const ImageView: FunctionComponent<ImageViewProps> = ({ imageUrl }) => {
             setViewExpand(false);
           }}
         >
-          <Image alt="OCR Image Data" src={nodeConfig.cdnUrl + '/' + imageUrl} />
+          <Image alt="OCR Image Data" src={url} />
         </Modal>
       )}
     </Fragment>

@@ -228,7 +228,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           <span
             class="label display-3"
           >
-            audioHeadingTranscribe
+            sunoContributionHeading
           </span>
           <div
             class="mt-2 mt-md-3"

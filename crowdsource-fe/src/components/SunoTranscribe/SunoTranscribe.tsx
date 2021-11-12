@@ -43,7 +43,7 @@ const SunoTranscribe = () => {
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
-  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const [isDisabled, setIsDisabled] = useState(true);
   const [playAudio, setPlayAudio] = useState(false);
@@ -224,7 +224,7 @@ const SunoTranscribe = () => {
               onEnded={onAudioEnd}
               onPlay={onPlayAudio}
               onPause={onPauseAudio}
-              type="Transcribe"
+              type="Contribution"
             />
             <div className="mt-4 mt-md-8">
               <TextEditArea

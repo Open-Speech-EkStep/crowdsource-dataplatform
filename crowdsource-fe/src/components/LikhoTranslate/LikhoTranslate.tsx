@@ -44,7 +44,7 @@ const LikhoTranslate = () => {
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
-  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
   const [closeKeyboard, setCloseKeyboard] = useState(false);

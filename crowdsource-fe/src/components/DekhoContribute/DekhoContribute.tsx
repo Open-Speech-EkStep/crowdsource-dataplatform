@@ -43,7 +43,7 @@ const DekhoContribute = () => {
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
-  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
 
@@ -168,7 +168,7 @@ const DekhoContribute = () => {
   };
 
   if (!result) {
-    return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
+    return <Spinner data-testid="PageSpinner" animation="border" variant="light" />;
   }
 
   return contributionData && result?.data?.length !== 0 ? (

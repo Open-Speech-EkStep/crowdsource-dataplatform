@@ -24,9 +24,9 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
   const { mutate } = useFetchWithInit(apiPaths.setCookie, { revalidateOnMount: false });
   /* istanbul ignore next */
   useEffect(() => {
-    if (!localStorage.getItem(localStorageConstants.localtionInfo)) {
+    if (!localStorage.getItem(localStorageConstants.locationInfo)) {
       const getLocationInfo = async () => {
-        localStorage.setItem(localStorageConstants.localtionInfo, JSON.stringify(await fetchLocationInfo()));
+        localStorage.setItem(localStorageConstants.locationInfo, JSON.stringify(await fetchLocationInfo()));
       };
       getLocationInfo();
       mutate();

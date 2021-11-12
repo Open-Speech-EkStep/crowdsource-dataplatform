@@ -7,18 +7,18 @@ import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Spinner from 'react-bootstrap/Spinner';
 
-import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
 import FunctionalHeader from 'components/FunctionalHeader';
+import ImageView from 'components/ImageView';
 import NoDataFound from 'components/NoDataFound';
 import TextEditArea from 'components/TextEditArea';
 import apiPaths from 'constants/apiPaths';
 import {
   INITIATIVE_ACTIONS,
   INITIATIVES_MAPPING,
-  INITIATIVES_MEDIA,
   INITIATIVES_MEDIA_MAPPING,
+  INITIATIVES_MEDIA,
 } from 'constants/initiativeConstants';
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
@@ -30,68 +30,61 @@ import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
 
-import styles from './SunoValidate.module.scss';
+import styles from './DekhoValidate.module.scss';
 
 interface ResultType {
   data: any;
 }
 
-const SunoValidate = () => {
+const DekhoValidate = () => {
   const { t } = useTranslation();
 
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
-
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
-  const [playAudio, setPlayAudio] = useState(false);
-  const [showPauseButton, setShowPauseButton] = useState(false);
-  const [showReplayButton, setShowReplayButton] = useState(false);
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
-  const [showPlayButton, setShowPlayButton] = useState(true);
   const [showNeedsChangeButton, setShowNeedsChangeButton] = useState(true);
   const [showCorrectButton, setShowCorrectButton] = useState(true);
   const [showSubmitButton, setShowSubmitButton] = useState(false);
   const [showCancelButton, setShowCancelButton] = useState(false);
-  const [needsChangeDisable, setNeedsChangeDisable] = useState(true);
-  const [correctDisable, setCorrectDisable] = useState(true);
   const [showEditTextArea, setShowEditTextArea] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [closeKeyboard, setCloseKeyboard] = useState(false);
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
-  const router = useRouter();
-  const { locale: currentLocale } = useRouter();
+  const [hasError, setHasError] = useState(false);
   const [showUIData, setShowUIdata] = useState({
     sentence: '',
     contribution: '',
     dataset_row_id: '0',
     contribution_id: '0',
   });
-  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
+  const [formData, setFormData] = useState<ActionStoreInterface>({
+    userInput: '',
+    speakerDetails: '',
+    language: contributionLanguage ?? '',
+    type: INITIATIVES_MEDIA_MAPPING.dekho,
+    sentenceId: 0,
+    state: '',
+    country: '',
+    device: getDeviceInfo(),
+    browser: getBrowserInfo(),
+  });
 
-  const { submit } = useSubmit(apiPaths.store);
+  const router = useRouter();
+  const { locale: currentLocale } = useRouter();
 
   const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
+  const { submit } = useSubmit(apiPaths.store);
   const { submit: reject } = useSubmit(rejectApiUrl);
   const { submit: submitSkip } = useSubmit(skipApiUrl);
   const { submit: accept } = useSubmit(acceptApiUrl);
 
-  const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
-    device: getDeviceInfo(),
-    browser: getBrowserInfo(),
-    country: locationInfo?.country ?? '',
-    state: locationInfo?.regionName ?? '',
-    language: contributionLanguage ?? '',
-    type: INITIATIVES_MEDIA_MAPPING.suno,
-    sentenceId: 0,
-    userInput: '',
-    speakerDetails: '',
-  });
-
   const { data: result, mutate } = useFetchWithInit<ResultType>(
-    `${apiPaths.contributionsAsr}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
+    `${apiPaths.contributionsOCR}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
     {
       revalidateOnMount: false,
     }
@@ -104,41 +97,28 @@ const SunoValidate = () => {
   }, [contributionLanguage, mutate, speakerDetails]);
 
   useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
+  useEffect(() => {
     if (result && result.data) {
       setContributionData(result.data);
       setShowUIdata(result.data[currentDataIndex]);
     }
   }, [currentDataIndex, result]);
 
-  const onPlayAudio = () => {
-    setShowReplayButton(false);
-    setPlayAudio(true);
-    setShowPauseButton(true);
-    setShowPlayButton(false);
-    setNeedsChangeDisable(false);
-  };
-
-  const onPauseAudio = () => {
-    setShowPauseButton(false);
-    setPlayAudio(false);
-    setShowPlayButton(true);
-  };
-
-  const onReplayAudio = () => {
-    setShowReplayButton(false);
-    onPlayAudio();
-  };
-
   const onChangeTextInput = (text: string) => {
-    setFormDataStore({
-      ...formDataStore,
+    setFormData({
+      ...formData,
       userInput: text,
     });
   };
 
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}${routePaths.sunoIndiaValidateThankYou}`, undefined, {
+      router.push(`/${currentLocale}${routePaths.dekhoIndiaContributeThankYou}`, undefined, {
         locale: currentLocale,
       });
     } else {
@@ -149,20 +129,16 @@ const SunoValidate = () => {
 
   const resetState = () => {
     onCancelContribution();
-    setShowPauseButton(false);
-    setShowPlayButton(true);
-    setShowReplayButton(false);
-    setNeedsChangeDisable(true);
-    setCorrectDisable(true);
   };
 
   const onSubmitContribution = () => {
     setShowThankyouMessage(true);
     resetState();
-    setShowEditTextArea(true);
+    setCloseKeyboard(!closeKeyboard);
+    setDataCurrentIndex(currentDataIndex);
     submit(
       JSON.stringify({
-        ...formDataStore,
+        ...formData,
         language: contributionLanguage,
         sentenceId: showUIData.dataset_row_id,
         country: locationInfo?.country,
@@ -181,7 +157,7 @@ const SunoValidate = () => {
         country: locationInfo?.country,
         state: locationInfo?.regionName,
         userName: speakerDetails?.userName,
-        type: INITIATIVES_MEDIA.asr,
+        type: INITIATIVES_MEDIA.ocr,
       })
     );
     setTimeout(() => {
@@ -197,14 +173,15 @@ const SunoValidate = () => {
     setShowNeedsChangeButton(true);
     setShowCorrectButton(true);
     setShowEditTextArea(false);
-    setFormDataStore({
-      ...formDataStore,
+    setFormData({
+      ...formData,
       userInput: '',
     });
   };
 
   const onSkipContribution = () => {
     setDataCurrentIndex(currentDataIndex);
+    setCloseKeyboard(!closeKeyboard);
     resetState();
     submitSkip(
       JSON.stringify({
@@ -213,19 +190,11 @@ const SunoValidate = () => {
         userName: speakerDetails?.userName,
         fromLanguage: contributionLanguage,
         sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
+        state_region: locationInfo?.regionName,
         country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.suno,
+        type: INITIATIVES_MEDIA_MAPPING.dekho,
       })
     );
-  };
-
-  const onAudioEnd = () => {
-    setPlayAudio(false);
-    setShowPlayButton(false);
-    setShowPauseButton(false);
-    setShowReplayButton(true);
-    setCorrectDisable(false);
   };
 
   const onNeedsChange = () => {
@@ -248,13 +217,13 @@ const SunoValidate = () => {
         sentenceId: showUIData.dataset_row_id,
         state: locationInfo?.regionName,
         country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.suno,
+        type: INITIATIVES_MEDIA_MAPPING.dekho,
       })
     );
   };
 
   if (!result) {
-    return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
+    return <Spinner data-testid="PageSpinner" animation="border" variant="light" />;
   }
 
   return contributionData && result?.data?.length !== 0 ? (
@@ -264,27 +233,28 @@ const SunoValidate = () => {
         <FunctionalHeader
           onSuccess={onSkipContribution}
           initiativeMediaType="sentence"
-          initiative={INITIATIVES_MAPPING.suno}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.suno]['validate']}
+          initiative={INITIATIVES_MAPPING.dekho}
+          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.dekho]['validate']}
+          showSpeaker={false}
         />
         <Container fluid="lg" className="mt-5">
-          <div data-testid="SunoValidate" className={`${styles.root}`}>
-            <AudioController
-              audioUrl={showUIData?.sentence}
-              playAudio={playAudio}
-              onEnded={onAudioEnd}
-              onPlay={onPlayAudio}
-              onPause={onPauseAudio}
-              type="Validation"
-            />
-            {showEditTextArea ? (
-              <div className="d-md-flex mt-9 mt-md-12">
+          <div data-testid="DekhoValidate" className={`${styles.root}`}>
+            <div className="mt-4 mt-md-8">
+              <div className="align-items-center text-center">
+                <span className={`${styles.label} display-3`}>
+                  {t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}
+                </span>
+              </div>
+              <div className="mt-9 mt-md-12">
+                <ImageView imageUrl={showUIData?.sentence} />
+              </div>
+              <div className="mt-9 mt-md-12">
                 <div className="flex-fill">
                   <TextEditArea
                     id="originalText"
                     isTextareaDisabled={false}
                     language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.suno}
+                    initiative={INITIATIVES_MAPPING.dekho}
                     setTextValue={() => {}}
                     textValue={showUIData?.contribution}
                     roundedLeft
@@ -294,58 +264,46 @@ const SunoValidate = () => {
                   />
                 </div>
                 <div className="flex-fill">
-                  <TextEditArea
-                    id="editText"
-                    isTextareaDisabled={false}
-                    language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.suno}
-                    setTextValue={onChangeTextInput}
-                    textValue={showUIData?.contribution}
-                    roundedRight
-                    label={`${t('yourEdit')}${
-                      contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                    }`}
-                    onError={setHasError}
-                    showTip
-                  />
+                  {showEditTextArea && (
+                    <TextEditArea
+                      id="editText"
+                      isTextareaDisabled={false}
+                      language={contributionLanguage ?? ''}
+                      initiative={INITIATIVES_MAPPING.dekho}
+                      setTextValue={onChangeTextInput}
+                      textValue={showUIData?.contribution}
+                      roundedRight
+                      label={`${t('yourEdit')}${
+                        contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                      }`}
+                      onError={setHasError}
+                      showTip
+                    />
+                  )}
                 </div>
               </div>
-            ) : (
-              <div
-                className={`${styles.text} d-flex justify-content-center align-items-center mt-9 mt-md-12 text-center display-1`}
-              >
-                {showUIData?.contribution}
-              </div>
-            )}
+            </div>
             {showThankyouMessage ? (
               <div className="d-flex align-items-center justify-content-center mt-9 display-1">
                 <span className="me-2 d-flex">
                   <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
                 </span>
-                {t('thankyouForCorrecting')}
+                {t('thankyouForContributing')}
               </div>
             ) : (
-              <div className="mt-9 mt-md-12">
+              <div className="mt-2 mt-md-6">
                 <ButtonControls
-                  onPlay={onPlayAudio}
-                  onPause={onPauseAudio}
-                  onReplay={onReplayAudio}
-                  playButton={showPlayButton}
-                  pauseButton={showPauseButton}
-                  replayButton={showReplayButton}
+                  playButton={false}
                   submitButton={showSubmitButton}
                   cancelButton={showCancelButton}
                   needsChangeButton={showNeedsChangeButton}
                   correctBtn={showCorrectButton}
+                  correctDisable={false}
                   cancelDisable={false}
                   submitDisable={
-                    !showReplayButton ||
-                    !formDataStore.userInput ||
-                    formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
-                    hasError
+                    !formData.userInput || formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH || hasError
                   }
-                  needsChangeDisable={needsChangeDisable}
-                  correctDisable={correctDisable}
+                  needsChangeDisable={false}
                   onSubmit={onSubmitContribution}
                   onCancel={onCancelContribution}
                   onSkip={onSkipContribution}
@@ -374,15 +332,15 @@ const SunoValidate = () => {
   ) : (
     <div className="d-flex flex-grow-1 align-items-center">
       <NoDataFound
-        url={routePaths.sunoIndiaHome}
-        title={t('asrValidateNoDataThankYouMessage')}
+        url={routePaths.dekhoIndiaHome}
+        title={t('ocrContributeNoDataThankYouMessage')}
         text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
         buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`,
+          initiativeName: `${t(INITIATIVES_MAPPING.dekho)} ${t('india')}`,
         })}
       />
     </div>
   );
 };
 
-export default SunoValidate;
+export default DekhoValidate;

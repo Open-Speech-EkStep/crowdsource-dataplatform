@@ -29,6 +29,7 @@ const apiPaths = {
   mediaOCR: nodeConfig.apiUrl + '/media/ocr',
   contributionsAsr: nodeConfig.apiUrl + '/contributions/asr',
   contributionsParallel: nodeConfig.apiUrl + '/contributions/parallel',
+  contributionsOCR: nodeConfig.apiUrl + '/contributions/ocr',
   store: nodeConfig.apiUrl + '/store',
   validate: nodeConfig.apiUrl + '/validate',
   skip: nodeConfig.apiUrl + '/skip',

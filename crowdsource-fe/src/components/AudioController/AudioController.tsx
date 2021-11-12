@@ -43,7 +43,7 @@ const AudioController = ({ audioUrl, playAudio, onEnded, onPlay, onPause, type }
 
   return (
     <div className="d-flex flex-column align-items-center text-center">
-      <span className={`${styles.label} display-3`}>{t(`audioHeading${type}`)}</span>
+      <span className={`${styles.label} display-3`}>{t(`suno${type}Heading`)}</span>
       <div className="mt-2 mt-md-3">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio

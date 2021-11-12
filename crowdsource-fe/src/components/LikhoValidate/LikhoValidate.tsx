@@ -61,7 +61,7 @@ const LikhoValidate = () => {
     dataset_row_id: '0',
     contribution_id: '0',
   });
-  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.localtionInfo);
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const { submit } = useSubmit(apiPaths.store);
 

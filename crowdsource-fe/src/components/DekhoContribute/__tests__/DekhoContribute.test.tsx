@@ -72,6 +72,8 @@ describe('DekhoContribute', () => {
       });
     });
 
+    await waitFor(() => expect(screen.queryByTestId('PageSpinner')).not.toBeInTheDocument());
+
     return renderResult;
   };
 

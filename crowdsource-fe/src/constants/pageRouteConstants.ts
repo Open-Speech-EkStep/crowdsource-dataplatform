@@ -131,6 +131,7 @@ export const pageInitiativeRouteConstants = {
   [routePaths.likhoIndiaContribute]: INITIATIVES_MAPPING.likho,
   [routePaths.likhoIndiaValidate]: INITIATIVES_MAPPING.likho,
   [routePaths.dekhoIndiaContribute]: INITIATIVES_MAPPING.dekho,
+  [routePaths.dekhoIndiaValidate]: INITIATIVES_MAPPING.dekho,
 
   [routePaths.sunoIndiaContributeThankYou]: INITIATIVES_MAPPING.suno,
   [routePaths.boloIndiaContributeThankYou]: INITIATIVES_MAPPING.bolo,
