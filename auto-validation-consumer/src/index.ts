@@ -36,7 +36,7 @@ const run = async () => {
       }
       
       console.log(allowValidation);
-      await dbOperations.allowDisallowValidationOnContribution(contributionId, !allowValidation);
+      await dbOperations.allowDisallowValidationOnContribution(contributionId, allowValidation);
     },
   })
 
