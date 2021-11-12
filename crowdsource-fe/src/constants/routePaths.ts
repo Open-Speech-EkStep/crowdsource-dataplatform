@@ -35,7 +35,9 @@ const routePaths: { [key: string]: string } = {
   badges: '/badges',
   myBadges: '/my-badges',
   termsAndConditions: '/terms-and-conditions',
+  termsOfUse: '/terms-and-conditions#terms-of-use',
   privacyPolicy: '/terms-and-conditions#privacy-policy',
+  copyright: '/terms-and-conditions#copyright',
 } as const;
 
 export default routePaths;

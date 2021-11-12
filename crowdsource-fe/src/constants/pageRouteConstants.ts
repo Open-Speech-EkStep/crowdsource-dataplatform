@@ -28,6 +28,9 @@ export const pageRouteConstants = {
   [routePaths.myBadges]: 'My Badges',
   [routePaths.badges]: 'Badges Info',
   [routePaths.termsAndConditions]: 'Terms and Conditions',
+  [routePaths.termsOfUse]: 'Terms and Conditions',
+  [routePaths.privacyPolicy]: 'Terms and Conditions',
+  [routePaths.copyright]: 'Terms and Conditions',
 } as const;
 
 export const sourceConstants = {
@@ -146,6 +149,9 @@ export const pageInitiativeRouteConstants = {
   [routePaths.myBadges]: 'Others',
   [routePaths.badges]: 'Others',
   [routePaths.termsAndConditions]: 'Others',
+  [routePaths.termsOfUse]: 'Others',
+  [routePaths.privacyPolicy]: 'Others',
+  [routePaths.copyright]: 'Others',
 } as const;
 
 export default pageRouteConstants;

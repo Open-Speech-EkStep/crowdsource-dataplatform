@@ -495,10 +495,12 @@ const TermsAndConditions = () => {
             <p className="mb-4">
               Voice recordings, Transcribed Texts, Translated Texts and Labelled Images along with any
               optionally provided demographic data, shall be available in the Website database for public
-              consumption and use under CC0 1.0 Universal (CC0 1.0) Public Domain Dedication. Text prompts,
-              Images and audio clips provided on the Website to create Voice Recordings, Transcribed Texts,
-              Translated Texts and Labelled Images are selected from the following open source resource
-              databases: -
+              consumption and use under CC0 1.0 Universal (CC0 1.0) Public Domain Dedication.
+            </p>
+            <p className="mb-4">
+              Text prompts, Images and audio clips provided on the Website to create Voice Recordings,
+              Transcribed Texts, Translated Texts and Labelled Images are selected from the following open
+              source resource databases: -
             </p>
             <ul className="text-break">
               <li>
