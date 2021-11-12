@@ -101,8 +101,6 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
 
     chart.paddingRight = 50;
     chart.paddingLeft = 50;
-    dateAxis.renderer.minLabelPosition = 0.05;
-    dateAxis.renderer.maxLabelPosition = 0.95;
     dateAxis.renderer.labels.template.location = 0.5;
 
     const hourAxis = chart.yAxes.push(new am4charts.ValueAxis());
