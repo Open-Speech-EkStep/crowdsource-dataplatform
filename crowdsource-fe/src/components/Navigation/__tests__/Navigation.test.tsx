@@ -1,4 +1,4 @@
-import { render, verifyAxeTest, userEvent, screen, waitFor } from 'utils/testUtils';
+import { render, screen, userEvent, verifyAxeTest, waitFor } from 'utils/testUtils';
 
 import Navigation from '../Navigation';
 

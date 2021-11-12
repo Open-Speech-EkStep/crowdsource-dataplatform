@@ -11,6 +11,12 @@ const Navigation = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
+    function handleDocumentScroll() {
+      if (isExpanded) {
+        setIsExpanded(false);
+      }
+    }
+
     function handleDocumentClick(event: Event) {
       if (!navBarRef?.current?.contains(event.target as Node)) {
         setIsExpanded(false);
@@ -18,11 +24,13 @@ const Navigation = () => {
     }
 
     document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('scroll', handleDocumentScroll);
 
     return () => {
       document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('scroll', handleDocumentClick);
     };
-  }, []);
+  }, [isExpanded]);
 
   const handleToggle = useCallback(() => {
     setIsExpanded(!isExpanded);
