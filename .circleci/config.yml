@@ -316,7 +316,7 @@ workflows:
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
-          name: push_comsumer_image_dev
+          name: push_consumer_image_dev
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./auto-validation-consumer
@@ -427,7 +427,7 @@ workflows:
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
-          name: push_comsumer_image_test
+          name: push_consumer_image_test
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./auto-validation-consumer
@@ -515,7 +515,7 @@ workflows:
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
-          name: push_comsumer_image_uat
+          name: push_consumer_image_uat
           login-server-name: ${AZURE_LOGIN_SERVER_NAME}
           registry-name: ${AZURE_REGISTRY}
           path: ./auto-validation-consumer
@@ -586,7 +586,7 @@ workflows:
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
-          name: push_comsumer_image_prod
+          name: push_consumer_image_prod
           login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
           registry-name: ${AZURE_REGISTRY_PROD}
           path: ./auto-validation-consumer
