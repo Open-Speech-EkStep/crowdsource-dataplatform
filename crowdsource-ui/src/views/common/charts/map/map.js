@@ -93,7 +93,6 @@ const statesInformation = [
     total_speakers: 0,
   },
   { id: 'IN-LK', state: 'Ladakh', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
-  { id: 'OTHER', state: 'ANONYMOUS', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
 ];
 
 let polygonSeries = undefined;
