@@ -103,6 +103,12 @@ const SunoTranscribe = () => {
     }
   }, [currentDataIndex, result]);
 
+  useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
   const onPlayAudio = () => {
     setShowReplayButton(false);
     setIsDisabled(false);

@@ -110,6 +110,12 @@ const SunoValidate = () => {
     }
   }, [currentDataIndex, result]);
 
+  useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
   const onPlayAudio = () => {
     setShowReplayButton(false);
     setPlayAudio(true);
