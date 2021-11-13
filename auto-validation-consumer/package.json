@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/config": "^0.0.40",
     "@types/jest": "^27.0.2",
     "@types/js-levenshtein": "^1.1.0",
     "@types/node": "^16.11.6",
@@ -24,6 +25,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "config": "^3.3.6",
     "dotenv": "^10.0.0",
     "js-levenshtein": "^1.1.6",
     "kafkajs": "^1.15.0",

@@ -1,7 +1,7 @@
 import {calculateEditDistance} from "word-error-rate";
 
-import { Validator } from './validator'
-import { LANGUAGE_CONFIG_ASR } from './constants';
+import { Validator } from '../types/validator'
+import { LANGUAGE_CONFIG_ASR } from '../constants/constants';
 
 
 export class Wer implements Validator {
@@ -11,8 +11,8 @@ export class Wer implements Validator {
         let wer = calculateEditDistance(ref, hyp) / wordCount
 
         console.log('WER',wer)
-
-        return wer < LANGUAGE_CONFIG_ASR[language]
+        console.log('config', LANGUAGE_CONFIG_ASR[language])
+        return wer < (LANGUAGE_CONFIG_ASR[language] || 2)
 
     }
 }

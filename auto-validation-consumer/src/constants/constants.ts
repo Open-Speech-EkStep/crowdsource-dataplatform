@@ -1,6 +1,4 @@
-type KeyValue = {
-    [index: string]: number;
-}
+import { KeyValue } from '../types/keyValueType';
 
 export const LANGUAGE_CONFIG_ASR: KeyValue = {
     'English': 0.70,

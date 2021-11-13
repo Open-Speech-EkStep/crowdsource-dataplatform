@@ -14,6 +14,5 @@ ARG NODE_CONFIG_ENV=default
 
 ENV NODE_CONFIG_ENV=${NODE_CONFIG_ENV}
 ENV NODE_ENV=production
-EXPOSE 8080
 
 CMD [ "npm", "start" ]

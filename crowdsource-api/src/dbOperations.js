@@ -453,9 +453,11 @@ const updateDbWithUserInput = async (
                 language = '';
             }
             console.log("/store after response set " + datasetId);
-            console.log(contributionInsertResult)
+            console.log('contributionInsertResult', contributionInsertResult)
             cacheOperation.removeItemFromCache(datasetId, type, fromLanguage, language);
-            queueOperations.sendForAutoValidation(contributionInsertResult[0].contribution_id)
+            if (contributionInsertResult && contributionInsertResult[0] && contributionInsertResult[0].contribution_id) {
+                queueOperations.sendForAutoValidation(contributionInsertResult[0].contribution_id)
+            }
             console.log("/store after cache updated" + datasetId)
         })
         .catch((err) => {

@@ -1,6 +1,6 @@
-import { Validator } from './validator'
+import { Validator } from '../types/validator'
 
-import {LANGUAGE_CONFIG_PARALLEL} from './constants'
+import {LANGUAGE_CONFIG_PARALLEL} from '../constants/constants'
 
 export class BleuScore implements Validator {
     validate(language: string, ref: string, hyp: string): boolean {
