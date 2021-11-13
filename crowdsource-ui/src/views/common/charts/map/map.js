@@ -398,7 +398,6 @@ const generateAnonymousState = function(result, initiative){
 
     const $unspecifiedLocation = $('#unspecifiedLocation');
     const $statePopover = $('#state-popover');
-    const $statePopoverAfter = $('.state-popover:after');
 
     const totalParticipation = getTotalParticipation(anonymousStateData, initiative);
     
@@ -441,7 +440,8 @@ const generateAnonymousState = function(result, initiative){
                                     'Validated'
                                   )}:  <label style="margin-left: 8px">${formatTime(vHours, vMinutes, vSeconds)}</label>
                                 </div>
-                              </div>`
+                              </div>
+                              <span class="bottomTip"></span>`
 
     const asrPopOverContent = `<div style="text-align: left;">
                                 <h6 d="stateName">${translate('Unspecified Location')}</h6>
@@ -458,7 +458,8 @@ const generateAnonymousState = function(result, initiative){
                                     'Validated'
                                   )}:  <label style="margin-left: 8px">${formatTime(vHours, vMinutes, vSeconds)}</label>
                                 </div>
-                              </div>`
+                              </div>
+                              <span class="bottomTip"></span>`
 
   const parallelPopOverContent = `<div style="text-align: left;">
                           <h6 d="stateName">${translate('Unspecified Location')}</h6>
@@ -473,7 +474,9 @@ const generateAnonymousState = function(result, initiative){
                           <div style="text-align: left;">${translate('Translations validated')}:
                             <label style="margin-left: 8px">${anonymousStateData.total_validation_count}</label>
                           </div>
-                        </div>`;
+                        </div>
+                        <span class="bottomTip"></span>`;
+
   const ocrPopOverContent = `<div style="text-align: left;">
                           <h6 id="stateName">${translate('Unspecified Location')}</h6>
                           <div style="text-align: left;">
@@ -487,7 +490,8 @@ const generateAnonymousState = function(result, initiative){
                           <div style="text-align: left;">${translate('Images validated')}:
                             <label style="margin-left: 8px">${anonymousStateData.total_validation_count}</label>
                           </div>
-                        </div>`;
+                        </div>
+                        <span class="bottomTip"></span>`;
               
                         if(initiative === 'asr'){
                           $statePopover.html(asrPopOverContent);
@@ -499,39 +503,41 @@ const generateAnonymousState = function(result, initiative){
                           $statePopover.html(textPopOverContent);
                         }
 
+    const $statePopoverAfter = $('.bottomTip');
+
       if (initiative == INITIATIVES.text.type || initiative == INITIATIVES.asr.type) {
         if (totalParticipation >= quarterVal * 3) {
           $statePopover.css('background-color', '#4061BF');
-          $statePopoverAfter.css('border-color','transparent transparent #4061BF transparent');
+          $statePopoverAfter.css('border-color','#4061BF transparent transparent transparent');
         } else if (totalParticipation >= quarterVal * 2) {
           $statePopover.css('background-color', '#6B85CE');
-          $statePopoverAfter.css('border-color','transparent transparent #6B85CE transparent');
+          $statePopoverAfter.css('border-color','#6B85CE transparent transparent transparent');
         } else if (totalParticipation >= quarterVal) {
           $statePopover.css('background-color', '#92A8E8');
-          $statePopoverAfter.css('border-color','transparent transparent #92A8E8 transparent');
+          $statePopoverAfter.css('border-color','#92A8E8 transparent transparent transparent');
         } else if (totalParticipation > 0) {
           $statePopover.css('background-color', '#CDD8F6');
-          $statePopoverAfter.css('border-color','transparent transparent #CDD8F6 transparent');
+          $statePopoverAfter.css('border-color','#CDD8F6 transparent transparent transparent');
         } else {
           $statePopover.css('background-color', '#E9E9E9');
-          $statePopoverAfter.css('border-color','transparent transparent #E9E9E9 transparent');
+          $statePopoverAfter.css('border-color','#E9E9E9 transparent transparent transparent');
         }
       } else {
         if (totalParticipation >= 500) {
           $statePopover.css('background-color', '#4061BF');
-          $statePopoverAfter.css('border-color','transparent transparent #4061BF transparent');
+          $statePopoverAfter.css('border-color','#4061BF transparent transparent transparent');
         } else if (totalParticipation >= 200) {
           $statePopover.css('background-color', '#6B85CE');
-          $statePopoverAfter.css('border-color','transparent transparent #6B85CE transparent');
+          $statePopoverAfter.css('border-color','#6B85CE transparent transparent transparent');
         } else if (totalParticipation >= 100) {
           $statePopover.css('background-color', '#92A8E8');
-          $statePopoverAfter.css('border-color','transparent transparent #92A8E8 transparent');
+          $statePopoverAfter.css('border-color','#92A8E8 transparent transparent transparent');
         } else if (totalParticipation > 0) {
           $statePopover.css('background-color', '#CDD8F6');
-          $statePopoverAfter.css('border-color','transparent transparent #CDD8F6 transparent');
+          $statePopoverAfter.css('border-color','#CDD8F6 transparent transparent transparent');
         } else {
           $statePopover.css('background-color', '#E9E9E9');
-          $statePopoverAfter.css('border-color','transparent transparent #E9E9E9 transparent');
+          $statePopoverAfter.css('border-color','#E9E9E9 transparent transparent transparent');
         }
       }
 }

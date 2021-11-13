@@ -260,7 +260,7 @@ body.modal-open .supreme-container {
   backdrop-filter: blur(8px);
 }
 
-.state-popover:after {
+.state-popover>.bottomTip {
   content: '';
   position: absolute;
   bottom: -19px;
@@ -313,7 +313,7 @@ body.modal-open .supreme-container {
     background-color: #e9e9e9;
   }
   
-  .state-popover:after  {
+  .state-popover>.bottomTip  {
     left: 26%;
   }
 }
@@ -389,7 +389,7 @@ body.modal-open .supreme-container {
     background-color: #e9e9e9;
   }
 
-  .state-popover:after {
+  .state-popover>.bottomTip {
     left: 15%;
   }
 
