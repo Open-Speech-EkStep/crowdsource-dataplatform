@@ -103,9 +103,9 @@ function updateLanguage(language) {
             getJson(url)
                 .then((data) => {
                     try {
-                        participationData = participationData.find(d => d.type == INITIATIVES.parallel.type);
+                        participationData = participationData.length ? participationData.find(d => d.type == INITIATIVES.parallel.type) : {};
                         const lData = data.filter(d => d.type == INITIATIVES.parallel.type) || [];
-                        if (language == "") {
+                        if (language == "" && lData.length !== 0) {
                             lData[0].total_speakers = participationData.count || 0;
                         }
                         const langaugeExists = isLanguageAvailable(lData, language);
@@ -141,14 +141,11 @@ const executeOnLoad = function () {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     initializeFeedbackModal();
     localStorage.removeItem('previousLanguage');
-    // const speakerDetailsKey = 'speakerDetails';
     if (!localStorage.getItem(LOCALE_STRINGS)) getLocaleString();
     const $startRecordBtn = $('#proceed-box');
     const $startRecordBtnTooltip = $startRecordBtn.parent();
     // eslint-disable-next-line no-unused-vars
     let sentenceLanguage = DEFAULT_CON_LANGUAGE;
-    // const age = document.getElementById('age');
-    // const motherTongue = document.getElementById('mother-tongue');
     const $userName = $('#username');
     updateLanguage('');
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
@@ -209,7 +206,7 @@ const executeOnLoad = function () {
         addToLanguage('to-dash-language', languages);
         $('#to-language option:first-child').attr("selected", "selected");
         toLanguage = $('#to-language option:first-child').val();
-        if (toLanguage == "" && fromLanguage == "") {
+        if ( fromLanguage == "" && (!toLanguage) ) {
             updateLanguage("");
         }
 
@@ -218,7 +215,8 @@ const executeOnLoad = function () {
 
     $('#to-dash-language').on('change', (e) => {
         toLanguage = e.target.value === "" ? "" : e.target.value;
-        if (toLanguage == "" && fromLanguage == "") {
+        if (toLanguage === "") {
+            $("#from-dash-language").val('');
             updateLanguage("");
         }
         else {
@@ -241,7 +239,6 @@ const executeOnLoad = function () {
     });
 
     setUserModalOnShown($userName);
-    // setSpeakerDetails(speakerDetailsKey, age, motherTongue, $userName);
     setGenderRadioButtonOnClick();
     setUserNameOnInputFocus();
     $startRecordBtnTooltip.tooltip('disable');
@@ -253,7 +250,6 @@ const executeOnLoad = function () {
     onChangeUser('./dashboard.html', INITIATIVES.parallel.value);
     onOpenUserDropDown();
 
-    // toggleFooterPosition();
 
 };
 

@@ -38,7 +38,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     const currentModule = localStorage.getItem(CURRENT_MODULE);
     for (let i = 0; i < chartData.length; i++) {
       if (!chartData[i].month) {
-        chartData[i].month = chartData[i].quarter * 3;
+        chartData[i].month = chartData[i].quarter * 3 - 2;
       }
       chartData[i].duration = new Date(chartData[i].year, chartData[i].month - 1, 1);
       chartData[i].year = String(chartData[i].year);
@@ -82,7 +82,6 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
         </div>`;
     }
 
-
     chart.data = chartData;
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
@@ -93,6 +92,16 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     dateAxis.title.text = translate('Month');
     dateAxis.renderer.labels.template.fontSize = 12;
     dateAxis.title.fontSize = 12;
+
+    dateAxis.events.on('sizechanged', function (ev) {
+      const axis = ev.target;
+      const cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+      axis.renderer.labels.template.maxWidth = cellWidth;
+    });
+
+    chart.paddingRight = 50;
+    chart.paddingLeft = 50;
+    dateAxis.renderer.labels.template.location = 0.5;
 
     const hourAxis = chart.yAxes.push(new am4charts.ValueAxis());
     hourAxis.min = 0;

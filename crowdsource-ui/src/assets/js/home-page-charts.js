@@ -1,6 +1,7 @@
 const { calculateTime, formatTime, formatTimeForLegends, getJson, translate } = require('./utils');
 const { drawTopLanguageChart } = require('../../../build/js/common/verticalGraph');
 const { INITIATIVES, TOP_LANGUAGES_BY_HOURS ,TOP_LANGUAGES_BY_SPEAKERS} = require('./constants');
+const {isMobileDevice} = require('./common');
 
 const getTotalParticipation = data => {
   let validation_count = 0;
@@ -75,6 +76,7 @@ const statesInformation = [
     total_speakers: 0,
   },
   { id: 'IN-LK', state: 'Ladakh', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
+  { id: 'OTHER', state: 'ANONYMOUS', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
 ];
 
 var polygonSeries = undefined;
@@ -218,6 +220,7 @@ const generateIndiaMap = function (language = '') {
       data = data.filter(d => d.type == 'text') || [];
       const response = language !== '' ? getLanguageSpecificData(data, language) : data;
       drawMap(response);
+      generateAnonymousState(response, 'text')
     })
     .catch(err => {
       console.log(err);
@@ -265,6 +268,180 @@ function showBySpeakersChart() {
   const chartData = topLanguagesBySpeakers ? JSON.parse(topLanguagesBySpeakers).reverse() : [];
   drawTopLanguageChart(chartData, INITIATIVES.text.value, 'speaker');
 }
+
+const generateAnonymousState = function(result, initiative){
+  const allUnspecifiedState = result.filter(st => !(statesInformation.some(s=> s.state === st.state)));
+
+  const anonymousStateData = allUnspecifiedState.reduce((ctx, st) => {
+    ctx.total_contributions = ctx.total_contributions+st.total_contributions;
+    ctx.total_validations = ctx.total_validations+st.total_validations;
+    ctx.total_contribution_count = ctx.total_contribution_count+st.total_contribution_count;
+    ctx.total_validation_count = ctx.total_validation_count+st.total_validation_count;
+    ctx.total_speakers = ctx.total_speakers+st.total_speakers;
+    return ctx
+  }, {"state": "Unspecified Location",
+    "total_speakers": 0,
+    "total_contributions": 0,
+    "total_validations": 0.0,
+    "total_contribution_count": 0,
+    "total_validation_count": 0})
+
+    const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime(
+      Number(anonymousStateData.total_contributions) * 60 * 60,
+      true
+    );
+    const { hours: vHours, minutes: vMinutes, seconds: vSeconds } = calculateTime(
+      Number(anonymousStateData.total_validations) * 60 * 60,
+      true
+    );
+
+    const $unspecifiedLocation = $('#unspecifiedLocation');
+    const $statePopover = $('#state-popover');
+
+    const totalParticipation = getTotalParticipation(anonymousStateData, initiative);
+
+  $unspecifiedLocation.off( "mouseenter mouseleave" );
+  $unspecifiedLocation.hover(
+    ($event) => {
+      const offset = $($event.currentTarget).offset();
+      $('#state-popover').css({visibility: 'visible', left:isMobileDevice() ? offset.left+ 60: offset.left - 200 });
+    },
+    () => {
+      $('#state-popover').css({visibility: 'hidden'});
+    }
+    );
+
+    const maxContribution = Math.max.apply(
+      Math,
+      result.map(function (ele) {
+        return getTotalParticipation(ele, initiative);
+      })
+    );
+    let quarterVal;
+    if (maxContribution > 1) {
+      quarterVal = maxContribution / 4;
+    } else {
+      quarterVal = 0.25;
+    }
+
+    const textPopOverContent = `<div style="text-align: left;">
+                                <h6 d="stateName">${translate('Unspecified Location')}</h6>
+                                <div style="text-align: left;">
+                                  <label>${anonymousStateData.total_speakers}</label>
+                                  <label style="margin-left: 8px">${translate('Speakers')}</label>
+                                </div>
+                                <div style="text-align: left;">
+                                  <label>${translate('Contributed')}: </label>
+                                  <label style="margin-left: 8px">${formatTime(cHours, cMinutes, cSeconds)}</label>
+                                </div>
+                                <div style="text-align: left;">
+                                  ${translate(
+                                    'Validated'
+                                  )}:  <label style="margin-left: 8px">${formatTime(vHours, vMinutes, vSeconds)}</label>
+                                </div>
+                              </div>
+                              <span class="bottomTip"></span>`
+
+    const asrPopOverContent = `<div style="text-align: left;">
+                                <h6 d="stateName">${translate('Unspecified Location')}</h6>
+                                <div style="text-align: left;">
+                                  <label>${anonymousStateData.total_speakers}</label>
+                                  <label style="margin-left: 8px">${translate('People')}</label>
+                                </div>
+                                <div style="text-align: left;">
+                                  <label>${translate('Transcribed')}: </label>
+                                  <label style="margin-left: 8px">${formatTime(cHours, cMinutes, cSeconds)}</label>
+                                </div>
+                                <div style="text-align: left;">
+                                  ${translate(
+                                    'Validated'
+                                  )}:  <label style="margin-left: 8px">${formatTime(vHours, vMinutes, vSeconds)}</label>
+                                </div>
+                              </div>
+                              <span class="bottomTip"></span>`
+
+  const parallelPopOverContent = `<div style="text-align: left;">
+                          <h6 d="stateName">${translate('Unspecified Location')}</h6>
+                          <div style="text-align: left;">
+                            <label>${anonymousStateData.total_speakers}</label>
+                            <label style="margin-left: 8px">${translate('People')}</label>
+                          </div>
+                          <div style="text-align: left;">
+                            <label>${translate('Translations done')}: </label>
+                            <label style="margin-left: 8px">${anonymousStateData.total_contribution_count}</label>
+                          </div>
+                          <div style="text-align: left;">${translate('Translations validated')}:
+                            <label style="margin-left: 8px">${anonymousStateData.total_validation_count}</label>
+                          </div>
+                        </div>
+                        <span class="bottomTip"></span>`;
+
+  const ocrPopOverContent = `<div style="text-align: left;">
+                          <h6 id="stateName">${translate('Unspecified Location')}</h6>
+                          <div style="text-align: left;">
+                            <label>${anonymousStateData.total_speakers}</label>
+                            <label style="margin-left: 8px">${translate('People')}</label>
+                          </div>
+                          <div style="text-align: left;">
+                            <label>${translate('Images labelled')}: </label>
+                            <label style="margin-left: 8px">${anonymousStateData.total_contribution_count}</label>
+                          </div>
+                          <div style="text-align: left;">${translate('Images validated')}:
+                            <label style="margin-left: 8px">${anonymousStateData.total_validation_count}</label>
+                          </div>
+                        </div>
+                        <span class="bottomTip"></span>`;
+              
+      if(initiative === 'asr'){
+        $statePopover.html(asrPopOverContent);
+      } else if (initiative === 'ocr'){
+        $statePopover.html(ocrPopOverContent);
+      } else  if (initiative === 'parallel'){
+        $statePopover.html(parallelPopOverContent);
+      } else {
+        $statePopover.html(textPopOverContent);
+      }
+
+      const $statePopoverAfter = $('.bottomTip');
+
+      if (initiative == INITIATIVES.text.type || initiative == INITIATIVES.asr.type) {
+        if (totalParticipation >= quarterVal * 3) {
+          $statePopover.css('background-color', '#4061BF');
+          $statePopoverAfter.css('border-color','#4061BF transparent transparent transparent');
+        } else if (totalParticipation >= quarterVal * 2) {
+          $statePopover.css('background-color', '#6B85CE');
+          $statePopoverAfter.css('border-color','#6B85CE transparent transparent transparent');
+        } else if (totalParticipation >= quarterVal) {
+          $statePopover.css('background-color', '#92A8E8');
+          $statePopoverAfter.css('border-color','#92A8E8 transparent transparent transparent');
+        } else if (totalParticipation > 0) {
+          console.log("here");
+          $statePopover.css('background-color', '#CDD8F6');
+          $statePopoverAfter.css('border-color','#CDD8F6 transparent transparent transparent');
+        } else {
+          $statePopover.css('background-color', '#E9E9E9');
+          $statePopoverAfter.css('border-color','#E9E9E9 transparent transparent transparent');
+        }
+      } else {
+        if (totalParticipation >= 500) {
+          $statePopover.css('background-color', '#4061BF');
+          $statePopoverAfter.css('border-color','#4061BF transparent transparent transparent');
+        } else if (totalParticipation >= 200) {
+          $statePopover.css('background-color', '#6B85CE');
+          $statePopoverAfter.css('border-color','#6B85CE transparent transparent transparent');
+        } else if (totalParticipation >= 100) {
+          $statePopover.css('background-color', '#92A8E8');
+          $statePopoverAfter.css('border-color','#92A8E8 transparent transparent transparent');
+        } else if (totalParticipation > 0) {
+          $statePopover.css('background-color', '#CDD8F6');
+          $statePopoverAfter.css('border-color','#CDD8F6 transparent transparent transparent');
+        } else {
+          $statePopover.css('background-color', '#E9E9E9');
+          $statePopoverAfter.css('border-color','#E9E9E9 transparent transparent transparent');
+        }
+      }
+}
+
 
 module.exports = {
   generateIndiaMap,

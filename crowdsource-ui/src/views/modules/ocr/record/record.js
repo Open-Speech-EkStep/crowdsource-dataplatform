@@ -497,6 +497,7 @@ const executeOnLoad = function () {
           showNoSentencesMessage();
           return;
         }
+        $('#skip_button').removeAttr('disabled');
         setFooterPosition();
 
         initializeComponent();

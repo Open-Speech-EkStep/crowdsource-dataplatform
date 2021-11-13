@@ -204,6 +204,15 @@ const showFunctionalCards = (type, fromLanguage, toLanguage) => {
             }
             const filteredData =
               jsonData.filter(data => data.type == type && data.language == language)[0] || {};
+            
+            if(Object.keys(filteredData).length == 0){
+              contributeCard.addClass('cont-validate-disabled');
+              validateCard.addClass('validate-disabled');
+              validateCardRow.addClass('cursor-no-drop');
+              contributeCardRow.addClass('cursor-no-drop');
+              return; 
+            }
+            
             hasTarget = filteredData.hastarget || false;
             isAllContributed = filteredData.isallcontributed || false;
             if (hasTarget && !isAllContributed) {

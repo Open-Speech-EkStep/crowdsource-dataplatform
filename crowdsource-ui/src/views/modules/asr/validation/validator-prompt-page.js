@@ -661,6 +661,8 @@ const executeOnLoad = function () {
         showNoSentencesMessage();
         return;
       }
+      $('#audio-player-btn').removeClass('disable-control');
+      $('#skip_button').removeAttr('disabled');
       setFooterPosition();
 
       initializeComponent();

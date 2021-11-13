@@ -582,6 +582,8 @@ function executeOnLoad() {
         }
 
         $pageContent.removeClass('d-none');
+        $('#skip_button').removeAttr('disabled')
+        $('#audio-player-btn').removeClass('disable-control')
         setFooterPosition();
         initialize();
       })

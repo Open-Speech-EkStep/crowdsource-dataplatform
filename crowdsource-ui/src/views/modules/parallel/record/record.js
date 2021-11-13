@@ -437,6 +437,7 @@ function executeOnLoad() {
             showNoSentencesMessage();
             return;
           }
+          $('#skip_button').removeAttr('disabled');
           $pageContent.removeClass('d-none');
           setFooterPosition();
           initialize();

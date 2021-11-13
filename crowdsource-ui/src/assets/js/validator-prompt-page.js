@@ -440,6 +440,9 @@ $(document).ready(() => {
         return;
       }
 
+      $("#audio-player-btn").removeClass('disable-control');
+      $("#skip_button").removeAttr('disabled');
+
       initializeComponent();
     });
 });

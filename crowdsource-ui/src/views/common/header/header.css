@@ -24,7 +24,7 @@
   }
 
   #user_profile_dropdown {
-    width: 175px;
+    width: max-content;
   }
 
   #locale_language_dropdown .dropdown-menu {
