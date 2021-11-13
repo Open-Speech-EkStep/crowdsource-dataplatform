@@ -1,6 +1,6 @@
-import { Validator } from './validator'
+import { Validator } from '../types/validator'
 import levenshtein from 'js-levenshtein';
-import {LANGUAGE_CONFIG_OCR} from './constants';
+import {LANGUAGE_CONFIG_OCR} from '../constants/constants';
 
 export class Levenstein implements Validator {
     validate(language: string, ref: string, hyp: string): boolean {
@@ -10,7 +10,8 @@ export class Levenstein implements Validator {
         console.log('mismatchCount', mismatch_count)
         let score = 1 - (mismatch_count / hyp_ocr.length);
         console.log('score', score)
-        return score > LANGUAGE_CONFIG_OCR[language];
+        console.log('value', LANGUAGE_CONFIG_OCR[language])
+        return score > (LANGUAGE_CONFIG_OCR[language] || -1);
 
     }
 }
