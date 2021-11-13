@@ -193,7 +193,7 @@ const DekhoContribute = () => {
               <div className="mt-9 mt-md-12">
                 <ImageView imageUrl={showUIData?.media_data} />
               </div>
-              <div className="mt-9 mt-md-12">
+              <div className="mt-4 mt-md-8">
                 <TextEditArea
                   id="addText"
                   isTextareaDisabled={false}
@@ -217,7 +217,7 @@ const DekhoContribute = () => {
                 {t('thankyouForContributing')}
               </div>
             ) : (
-              <div className="mt-2 mt-md-6">
+              <div className="mt-9 mt-md-12">
                 <ButtonControls
                   cancelDisable={!formData.userInput}
                   submitDisable={formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH || hasError}

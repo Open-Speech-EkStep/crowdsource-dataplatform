@@ -2,17 +2,25 @@
 
 exports[`IconTextButton should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
-  <img
-    alt="OCR Image Data"
-    class=""
-    src="/picsum/photos.png"
-  />
-  <button
-    class="info primary btn btn-primary"
-    data-testid="Button"
-    type="button"
+  <div
+    class="d-flex flex-column"
   >
-    expandViewText
-  </button>
+    <div
+      class="bg bg-light p-8 rounded-8 border border-1 border-primary-20 position-relative"
+    >
+      <img
+        alt="OCR Data"
+        class="img-fluid"
+        src="/picsum/photos.png"
+      />
+    </div>
+    <button
+      class="display-6 ms-auto mt-1 text-primary-60 info normal btn btn-link"
+      data-testid="Button"
+      type="button"
+    >
+      expandViewText
+    </button>
+  </div>
 </DocumentFragment>
 `;

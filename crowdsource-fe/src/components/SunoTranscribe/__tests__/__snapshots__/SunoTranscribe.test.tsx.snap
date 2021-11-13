@@ -248,7 +248,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           class="mt-4 mt-md-8"
         >
           <div
-            class="position-relative p-4 addText addTextDisabled"
+            class="position-relative p-4 addText addTextDisabled rounded-8"
             data-testid="TextEditArea"
           >
             <div

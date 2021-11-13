@@ -3,7 +3,7 @@
 exports[`TextEditArea English should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="position-relative p-4 addText"
+    class="position-relative p-4 addText rounded-8"
     data-testid="TextEditArea"
   >
     <div
@@ -62,7 +62,7 @@ exports[`TextEditArea English should render the component and matches it against
 exports[`TextEditArea Hindi should render the component and matches it against stored snapshot in hindi 1`] = `
 <DocumentFragment>
   <div
-    class="position-relative p-4 addText"
+    class="position-relative p-4 addText rounded-8"
     data-testid="TextEditArea"
   >
     <div

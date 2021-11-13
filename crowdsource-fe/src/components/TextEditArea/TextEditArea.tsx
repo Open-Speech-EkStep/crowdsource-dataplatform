@@ -31,6 +31,7 @@ interface TextEditAreaProps {
   onError: (value: boolean) => void;
   showTip?: boolean;
   closeKeyboard?: boolean;
+  readonlyAllBorders?: boolean;
 }
 
 const TextEditArea = ({
@@ -48,6 +49,7 @@ const TextEditArea = ({
   onError,
   showTip = false,
   closeKeyboard,
+  readonlyAllBorders = false,
 }: TextEditAreaProps) => {
   const { t } = useTranslation();
   const [input, setInput] = useState(textValue);
@@ -136,8 +138,10 @@ const TextEditArea = ({
           [styles.addTextDisabled]: isTextareaDisabled,
           [styles.roundedLeft]: roundedLeft,
           [styles.roundedRight]: roundedRight,
+          ['rounded-8']: !roundedLeft && !roundedRight,
           [styles.readOnly]: readOnly,
           [styles.readOnlyActive]: readOnlyActive,
+          ['border border-2 border-primary-10']: readonlyAllBorders,
         })}
       >
         {showTip && <span className={`${styles.tip} position-absolute`} />}

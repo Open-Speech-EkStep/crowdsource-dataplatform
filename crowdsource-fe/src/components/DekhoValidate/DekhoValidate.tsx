@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -239,48 +240,47 @@ const DekhoValidate = () => {
         />
         <Container fluid="lg" className="mt-5">
           <div data-testid="DekhoValidate" className={`${styles.root}`}>
-            <div className="mt-4 mt-md-8">
-              <div className="align-items-center text-center">
-                <span className={`${styles.label} display-3`}>
-                  {t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}
-                </span>
+            <div className="align-items-center text-center">
+              <span className={`${styles.label} display-3`}>
+                {t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}
+              </span>
+            </div>
+            <div className="mt-9 mt-md-12">
+              <ImageView imageUrl={showUIData?.sentence} />
+            </div>
+            <div className={classNames('mt-4 mt-md-8', { ['d-md-flex']: showEditTextArea })}>
+              <div className="flex-fill">
+                <TextEditArea
+                  id="originalText"
+                  isTextareaDisabled={false}
+                  language={contributionLanguage ?? ''}
+                  initiative={INITIATIVES_MAPPING.dekho}
+                  setTextValue={() => {}}
+                  textValue={showUIData?.contribution}
+                  roundedLeft={showEditTextArea}
+                  readOnly
+                  readonlyAllBorders={!showEditTextArea}
+                  label={t('originalText')}
+                  onError={() => {}}
+                />
               </div>
-              <div className="mt-9 mt-md-12">
-                <ImageView imageUrl={showUIData?.sentence} />
-              </div>
-              <div className="mt-9 mt-md-12">
-                <div className="flex-fill">
+              <div className="flex-fill">
+                {showEditTextArea && (
                   <TextEditArea
-                    id="originalText"
+                    id="editText"
                     isTextareaDisabled={false}
                     language={contributionLanguage ?? ''}
                     initiative={INITIATIVES_MAPPING.dekho}
-                    setTextValue={() => {}}
+                    setTextValue={onChangeTextInput}
                     textValue={showUIData?.contribution}
-                    roundedLeft
-                    readOnly
-                    label={t('originalText')}
-                    onError={() => {}}
+                    label={`${t('yourEdit')}${
+                      contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                    }`}
+                    roundedRight
+                    onError={setHasError}
+                    showTip
                   />
-                </div>
-                <div className="flex-fill">
-                  {showEditTextArea && (
-                    <TextEditArea
-                      id="editText"
-                      isTextareaDisabled={false}
-                      language={contributionLanguage ?? ''}
-                      initiative={INITIATIVES_MAPPING.dekho}
-                      setTextValue={onChangeTextInput}
-                      textValue={showUIData?.contribution}
-                      roundedRight
-                      label={`${t('yourEdit')}${
-                        contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                      }`}
-                      onError={setHasError}
-                      showTip
-                    />
-                  )}
-                </div>
+                )}
               </div>
             </div>
             {showThankyouMessage ? (
@@ -291,7 +291,7 @@ const DekhoValidate = () => {
                 {t('thankyouForContributing')}
               </div>
             ) : (
-              <div className="mt-2 mt-md-6">
+              <div className="mt-9 mt-md-12">
                 <ButtonControls
                   playButton={false}
                   submitButton={showSubmitButton}
