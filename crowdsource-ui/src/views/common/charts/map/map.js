@@ -378,14 +378,14 @@ const generateAnonymousState = function(result, initiative){
     ctx.total_validations = ctx.total_validations+st.total_validations;
     ctx.total_contribution_count = ctx.total_contribution_count+st.total_contribution_count;
     ctx.total_validation_count = ctx.total_validation_count+st.total_validation_count;
+    ctx.total_speakers = ctx.total_speakers+st.total_speakers;
     return ctx
   }, {"state": "Unspecified Location",
     "total_speakers": 0,
     "total_contributions": 0,
     "total_validations": 0.0,
     "total_contribution_count": 0,
-    "total_validation_count": 0,
-    "type": "parallel"})
+    "total_validation_count": 0})
 
     const { hours: cHours, minutes: cMinutes, seconds: cSeconds } = calculateTime(
       Number(anonymousStateData.total_contributions) * 60 * 60,
