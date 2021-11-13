@@ -184,6 +184,7 @@ const SunoTranscribe = () => {
   };
 
   const onSkipContribution = () => {
+    setPlayAudio(false);
     setDataCurrentIndex(currentDataIndex);
     setCloseKeyboard(!closeKeyboard);
     resetState();
