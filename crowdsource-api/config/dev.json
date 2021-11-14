@@ -2,7 +2,7 @@
     "whitelistingEmail":"disabled",
     "envName": "dev",
     "caching": "disabled",
-    "autoValidation": "disabled",
+    "autoValidation": "enabled",
     "validation_count": "3",
     "cache_timeout": "600",
     "cache_batch_size": "1000"
