@@ -10,7 +10,7 @@ const getContributionInfo = async (contributionId: number) : Promise<dbResult | 
 }
 
 const allowDisallowValidationOnContribution = async (contributionId: number, allowValidation: boolean) : Promise<void> => {
-    db.none(`update contributions set allowValidation = $2 where contribution_id=$1;`, [contributionId, allowValidation])
+    db.none(`update contributions set allow_validation = $2 where contribution_id=$1;`, [contributionId, allowValidation])
 }
 
 export default { getContributionInfo, allowDisallowValidationOnContribution }
