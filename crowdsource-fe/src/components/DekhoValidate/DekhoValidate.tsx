@@ -241,11 +241,9 @@ const DekhoValidate = () => {
         <Container fluid="lg" className="mt-5">
           <div data-testid="DekhoValidate" className={`${styles.root}`}>
             <div className="align-items-center text-center">
-              <span className={`${styles.label} display-3`}>
-                {t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}
-              </span>
+              <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}</span>
             </div>
-            <div className="mt-9 mt-md-12">
+            <div className="mt-2 mt-md-4">
               <ImageView imageUrl={showUIData?.sentence} />
             </div>
             <div className={classNames('mt-4 mt-md-8', { ['d-md-flex']: showEditTextArea })}>

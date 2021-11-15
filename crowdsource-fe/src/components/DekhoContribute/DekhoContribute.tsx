@@ -184,30 +184,26 @@ const DekhoContribute = () => {
         />
         <Container fluid="lg" className="mt-5">
           <div data-testid="DekhoContribute" className={`${styles.root}`}>
+            <div className="align-items-center text-center">
+              <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ContributionHeading`)}</span>
+            </div>
+            <div className="mt-2 mt-md-4">
+              <ImageView imageUrl={showUIData?.media_data} />
+            </div>
             <div className="mt-4 mt-md-8">
-              <div className="align-items-center text-center">
-                <span className={`${styles.label} display-3`}>
-                  {t(`${INITIATIVES_MAPPING.dekho}ContributionHeading`)}
-                </span>
-              </div>
-              <div className="mt-9 mt-md-12">
-                <ImageView imageUrl={showUIData?.media_data} />
-              </div>
-              <div className="mt-4 mt-md-8">
-                <TextEditArea
-                  id="addText"
-                  isTextareaDisabled={false}
-                  language={contributionLanguage ?? ''}
-                  initiative={INITIATIVES_MAPPING.dekho}
-                  setTextValue={onChangeTextInput}
-                  textValue={formData.userInput}
-                  label={`${t('addText')}${
-                    contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                  }`}
-                  onError={setHasError}
-                  closeKeyboard={closeKeyboard}
-                />
-              </div>
+              <TextEditArea
+                id="addText"
+                isTextareaDisabled={false}
+                language={contributionLanguage ?? ''}
+                initiative={INITIATIVES_MAPPING.dekho}
+                setTextValue={onChangeTextInput}
+                textValue={formData.userInput}
+                label={`${t('addText')}${
+                  contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                }`}
+                onError={setHasError}
+                closeKeyboard={closeKeyboard}
+              />
             </div>
             {showThankyouMessage ? (
               <div className="d-flex align-items-center justify-content-center mt-9 display-1">

@@ -195,11 +195,9 @@ const LikhoTranslate = () => {
           <div data-testid="LikhoTranslate" className={`${styles.root}`}>
             <div className="mt-4 mt-md-8 ">
               <div className="align-items-center text-center">
-                <span className={`${styles.label} display-3`}>
-                  {t(`${INITIATIVES_MAPPING.likho}ContributionHeading`)}
-                </span>
+                <span className="display-3">{t(`${INITIATIVES_MAPPING.likho}ContributionHeading`)}</span>
               </div>
-              <div className="d-md-flex mt-9 mt-md-12">
+              <div className="d-md-flex mt-2 mt-md-4">
                 <div className="flex-fill">
                   <TextEditArea
                     id="originalText"

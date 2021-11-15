@@ -226,7 +226,7 @@ exports[`SunoTranscribe should render the component and matches it against store
           class="d-flex flex-column align-items-center text-center"
         >
           <span
-            class="label display-3"
+            class="display-3"
           >
             sunoContributionHeading
           </span>

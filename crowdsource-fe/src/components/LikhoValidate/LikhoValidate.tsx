@@ -244,11 +244,9 @@ const LikhoValidate = () => {
         <Container fluid="lg" className="mt-5">
           <div data-testid="LikhoValidate" className={`${styles.root}`}>
             <div className="align-items-center text-center">
-              <span className={`${styles.label} display-3`}>
-                {t(`${INITIATIVES_MAPPING.likho}ValidationHeading`)}
-              </span>
+              <span className="display-3">{t(`${INITIATIVES_MAPPING.likho}ValidationHeading`)}</span>
             </div>
-            <div className="d-md-flex mt-9 mt-md-12">
+            <div className="d-md-flex mt-2 mt-md-4">
               <div className="flex-fill">
                 <TextEditArea
                   id="originalText"

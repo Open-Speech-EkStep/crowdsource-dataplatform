@@ -1,3 +1,14 @@
 .bg {
   background: url('/images/ocr_image_bg.svg') repeat;
+  height: 7.5rem;
+}
+
+.close {
+  right: 0;
+  top: -24px;
+  z-index: 1;
+}
+
+.expandText {
+  height: 20px;
 }

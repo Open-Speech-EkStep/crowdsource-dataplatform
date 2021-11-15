@@ -1,9 +1,9 @@
-import { render, userEvent, verifyAxeTest, screen } from 'utils/testUtils';
+import { render, screen, userEvent, verifyAxeTest } from 'utils/testUtils';
 
 import ImageView from '../ImageView';
 
-describe('IconTextButton', () => {
-  const setup = () => render(<ImageView imageUrl="picsum/photos.png" />);
+describe('ImageView', () => {
+  const setup = () => render(<ImageView imageUrl="images/photos.png" />);
 
   verifyAxeTest(setup());
 
@@ -13,16 +13,29 @@ describe('IconTextButton', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should expand view and close when button clicked', async () => {
+  it('should expand and collapse the image', async () => {
     setup();
 
-    expect(screen.getByRole('button', { name: 'expandViewText' })).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button', { name: 'expandViewText' }));
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByTestId('expandedView')).toBeInTheDocument();
+    const collapseViewImage = screen.getByAltText('OCR Data');
+    const expandViewBtn = screen.getByTestId('ExpandView');
 
-    userEvent.click(screen.getByRole('button', { name: 'Close' }));
+    expect(expandViewBtn).toBeInTheDocument();
+    expect(collapseViewImage).toBeInTheDocument();
 
-    expect(screen.queryByTestId('expandedView')).not.toBeInTheDocument();
+    userEvent.click(expandViewBtn);
+
+    expect(expandViewBtn).not.toBeInTheDocument();
+    expect(collapseViewImage).not.toBeInTheDocument();
+
+    const expandViewImage = screen.getByAltText('OCR Data Expanded');
+    const collapseViewBtn = screen.getByTestId('CollapseView');
+
+    expect(collapseViewBtn).toBeInTheDocument();
+    expect(expandViewImage).toBeInTheDocument();
+
+    userEvent.click(collapseViewBtn);
+
+    expect(collapseViewBtn).not.toBeInTheDocument();
+    expect(expandViewImage).not.toBeInTheDocument();
   });
 });
