@@ -387,7 +387,7 @@ workflows:
             # - functional_tests_dev
           filters:
             branches:
-              only: master
+              only: [master, autoValidation]
 
       - db_migrate_azure:
           name: migrate_test_azure
@@ -475,7 +475,7 @@ workflows:
             #- functional_tests_test
           filters:
             branches:
-              only: master
+              only: [master, autoValidation]
 
       - db_migrate_azure:
           name: migrate_uat_azure
