@@ -23,7 +23,7 @@ import useFetch from 'hooks/usePostFetch';
 import type { ActionStoreBoloInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, visualize } from 'utils/utils';
 
 import styles from './BoloSpeak.module.scss';
 
@@ -142,44 +142,6 @@ const BoloSpeak = () => {
     setShowStopRecording(false);
     setShowReRecording(false);
     setShowAudioController(false);
-  };
-
-  const visualize = (visualizer: any, analyser: any) => {
-    const canvasCtx = visualizer.getContext('2d');
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    const WIDTH = visualizer.width;
-    const HEIGHT = visualizer.height;
-    // TODO do we need to limit the number of time visualize refreshes per second
-    // so that it can run on Android processors without causing audio to drop?
-    function draw() {
-      // this is more efficient than calling with processor.onaudioprocess
-      // and sending floatarray with each call...
-      requestAnimationFrame(draw);
-      analyser.getByteTimeDomainData(dataArray);
-      // canvasCtx.fillStyle = 'rgb(255, 255, 255, 0)';
-      // canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-      canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-      canvasCtx.lineWidth = 2;
-      canvasCtx.strokeStyle = 'rgb(0,123,255)';
-      canvasCtx.beginPath();
-      const sliceWidth = (WIDTH * 1.0) / bufferLength;
-      let x = 0;
-      for (let i = 0; i < bufferLength; i++) {
-        let v = dataArray[i] / 128.0; // uint8
-        let y = (v * HEIGHT) / 2; // uint8
-        if (i === 0) {
-          canvasCtx.moveTo(x, y);
-        } else {
-          canvasCtx.lineTo(x, y);
-        }
-        x += sliceWidth;
-      }
-      canvasCtx.lineTo(visualizer.width, visualizer.height / 2);
-      canvasCtx.stroke();
-    }
-
-    draw();
   };
 
   const startTimer = () => {

@@ -80,12 +80,6 @@ describe('BoloSpeak', () => {
     return renderResult;
   };
 
-  it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup(resultData);
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('should start the recording', async () => {
     await setup(resultData);
 
