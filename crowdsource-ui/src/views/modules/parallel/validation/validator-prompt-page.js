@@ -257,6 +257,10 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thank-you-row'));
     showElement($('#progress-row'))
+    hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     parallelValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events', 'none');
