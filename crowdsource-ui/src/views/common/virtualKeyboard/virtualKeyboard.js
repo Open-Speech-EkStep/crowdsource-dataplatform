@@ -8,7 +8,8 @@
 const { keyboardLayout } = require('./keyboardLayout');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES } = require('./constants');
 const { isMobileDevice } = require('./common');
-const { overlap_score } = require('./validations')
+const { getInitiativeType } = require('./utils')
+const AutoValidation = require('./AutoValidation').default;
 
 function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
@@ -208,9 +209,13 @@ function lngtype(text) {
   });
 
   const refText = $('#captured-text').text();
-  if(langdic[contributionLanguage].test(newText)) {
-    if (overlap_score(refText, text)) {
-      return { type: 'auto-validation' }
+  const selectedType = localStorage.getItem('selectedType')
+  if(selectedType === 'validate'){
+    if(langdic[contributionLanguage].test(newText)) {
+      const initiativeType = getInitiativeType(currentModule);
+      if (AutoValidation[initiativeType](contributionLanguage,refText, text)) {
+        return { type: 'auto-validation' }
+      }
     }
   }
 
