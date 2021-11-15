@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -10,6 +10,7 @@ import ButtonControls from 'components/ButtonControls';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
 import apiPaths from 'constants/apiPaths';
+import { AUDIO } from 'constants/Audio';
 import {
   INITIATIVE_ACTIONS,
   INITIATIVES_MAPPING,
@@ -51,7 +52,7 @@ const BoloSpeak = () => {
   const [contributionData, setContributionData] = useState([]);
   const [duration, setDuration] = useState(0);
 
-  const [audioBlob, setAudioBlob] = useState<Blob>();
+  const [remainingSec, setRemainingSec] = useState(AUDIO.WARNING_COUNT_START);
 
   const [recordedAudio, setRecordedAudio] = useState<string | undefined>();
 
@@ -72,14 +73,14 @@ const BoloSpeak = () => {
   let audioCtx: any;
   let input: any;
   let mediaRecorder: any;
-  var chunks: any = [];
+  let chunks: any = [];
 
   const { submit } = useSubmit(apiPaths.store);
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
   const { submit: submitSkip } = useSubmit(apiPaths.skip);
 
-  const [formData] = useState<ActionStoreBoloInterface>({
+  const [formData, setFormData] = useState<ActionStoreBoloInterface>({
     speakerDetails: '',
     language: contributionLanguage ?? '',
     type: INITIATIVES_MEDIA_MAPPING.bolo,
@@ -89,6 +90,7 @@ const BoloSpeak = () => {
     device: getDeviceInfo(),
     browser: getBrowserInfo(),
     audioDuration: 0,
+    audio_data: null,
   });
 
   const result = useFetch<ResultType>({
@@ -116,7 +118,6 @@ const BoloSpeak = () => {
 
   useEffect(() => {
     audio?.addEventListener('loadedmetadata', () => {
-      console.log(audio.duration);
       getAudioDuration(audio.duration);
     });
     return () => {
@@ -144,18 +145,31 @@ const BoloSpeak = () => {
     setShowAudioController(false);
   };
 
+  const setRemainingCount = (value: number) => {
+    if (value) {
+      const interval = setInterval(() => {
+        setRemainingSec(value);
+        value--;
+        if (value < 0) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  };
+
   const startTimer = () => {
     setTimerTimeoutKey(
       setTimeout(() => {
         setShowWarningMsg(true);
-      }, 15 * 1000)
+        setRemainingCount(AUDIO.WARNING_COUNT_START - 1);
+      }, (AUDIO.MAX_DURATION - 6) * 1000)
     );
 
     setClearTimeoutKey(
       setTimeout(() => {
         setShowWarningMsg(false);
         onStopRecording();
-      }, 20 * 1000)
+      }, AUDIO.MAX_DURATION * 1000)
     );
   };
 
@@ -180,12 +194,15 @@ const BoloSpeak = () => {
       //start the recording process
       mediaRecorder.start();
       //automatically click stop button after 30 seconds
-      mediaRecorder.ondataavailable = function (e: any) {
+      mediaRecorder.ondataavailable = (e: any) => {
         chunks.push(e.data);
-        var blob = new Blob(chunks, { type: 'audio/wav' });
+        const blob = new Blob(chunks, { type: 'audio/wav' });
         chunks = [];
-        setAudioBlob(blob);
-        var audioURL = URL.createObjectURL(blob);
+        setFormData({
+          ...formData,
+          audio_data: blob,
+        });
+        const audioURL = URL.createObjectURL(blob);
         setRecordedAudio(audioURL);
       };
       startTimer();
@@ -195,7 +212,7 @@ const BoloSpeak = () => {
   };
 
   const getAudioDuration = (duration: number) => {
-    if (duration < 2) {
+    if (duration < AUDIO.MIN_DURATION) {
       setShowAudioError(true);
     } else {
       setShowAudioError(false);
@@ -244,7 +261,6 @@ const BoloSpeak = () => {
         country: locationInfo?.country,
         state: locationInfo?.regionName,
         audioDuration: duration,
-        audio_data: audioBlob,
         speakerDetails: JSON.stringify({
           userName: speakerDetails?.userName,
         }),
@@ -305,7 +321,13 @@ const BoloSpeak = () => {
                 </div>
               </div>
             )}
-            {audioError && <span> {t('audioValidationMessage')} </span>}
+            {audioError && (
+              <div
+                className={`d-flex text-danger justify-content-center align-items-center my-2 mt-md-2 mb-md-10 text-center display-6`}
+              >
+                <span> {t('audioValidationMessage')} </span>
+              </div>
+            )}
             {!showAudioController && (
               <div
                 className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
@@ -313,7 +335,19 @@ const BoloSpeak = () => {
                 <canvas id="visualizer"></canvas>
               </div>
             )}
-            {showWarningmsg && <span> Recording will automatically stop after {} seconds</span>}
+            {showWarningmsg && (
+              <div
+                className={`d-flex justify-content-center align-items-center my-9 mt-md-9 mb-md-5 text-center display-5`}
+              >
+                <Trans
+                  i18nKey="remainingAudioTextDurationWarning"
+                  defaults="remainingAudioTextDurationWarning"
+                  values={{
+                    remainingSec: remainingSec,
+                  }}
+                />
+              </div>
+            )}
             <div className="mt-12 mt-md-14">
               <ButtonControls
                 playButton={showPlayButton}

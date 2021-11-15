@@ -329,5 +329,6 @@
   "startRecording": "Start Recording",
   "stopRecording": "Stop Recording",
   "reRecord": "Re-record",
-  "audioValidationMessage": "Audio recording is too small. Please Re-record"
+  "audioValidationMessage": "Audio recording is too small. Please Re-record",
+  "remainingAudioTextDurationWarning": "Recording will automatically stop after {{remainingSec}} seconds"
 }

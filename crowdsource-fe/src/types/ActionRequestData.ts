@@ -19,6 +19,6 @@ export interface ActionStoreInterface extends ActionInterface {
 export interface ActionStoreBoloInterface extends ActionInterface {
   speakerDetails: any;
   language: string;
-  audio_data?: Blob;
+  audio_data?: any;
   audioDuration?: number;
 }
