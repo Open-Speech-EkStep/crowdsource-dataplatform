@@ -1,6 +1,12 @@
-.radio label {
-  cursor: pointer;
-  line-height: 1.375rem;
+.radio {
+  label {
+    cursor: pointer;
+    line-height: 1.375rem;
+  }
+
+  input {
+    flex-shrink: 0;
+  }
 }
 
 .chartLabel {
