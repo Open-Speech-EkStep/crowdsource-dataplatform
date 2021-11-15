@@ -324,5 +324,10 @@
   "thousandCharLimitText": "Only 1000 characters allowed",
   "expandViewText": "Click to open expanded view",
   "visitOur": "Visit our",
-  "404Text": "Seems this page doesn't exist"
+  "404Text": "Seems this page doesn't exist",
+  "testYourMicrophoneAndSpeakers": "Test your microphone and speakers",
+  "startRecording": "Start Recording",
+  "stopRecording": "Stop Recording",
+  "reRecord": "Re-record",
+  "audioValidationMessage": "Audio recording is too small. Please Re-record"
 }

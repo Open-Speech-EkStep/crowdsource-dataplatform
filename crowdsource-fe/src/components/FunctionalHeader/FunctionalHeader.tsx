@@ -9,6 +9,7 @@ interface FunctionalHeaderProps {
   initiative: Initiative;
   action: string;
   showSpeaker?: boolean;
+  showMic?: boolean;
 }
 
 const FunctionalHeader = ({
@@ -17,6 +18,7 @@ const FunctionalHeader = ({
   initiative,
   action,
   showSpeaker = true,
+  showMic = false,
 }: FunctionalHeaderProps) => {
   return (
     <header>

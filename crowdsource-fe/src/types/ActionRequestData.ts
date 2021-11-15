@@ -15,3 +15,10 @@ export interface ActionStoreInterface extends ActionInterface {
   userInput: string;
   fromLanguage?: string;
 }
+
+export interface ActionStoreBoloInterface extends ActionInterface {
+  speakerDetails: any;
+  language: string;
+  audio_data?: Blob;
+  audioDuration?: number;
+}

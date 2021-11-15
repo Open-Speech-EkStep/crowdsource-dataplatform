@@ -108,6 +108,7 @@ beforeEach(() => {
   jest.spyOn(Storage.prototype, 'getItem');
   jest.spyOn(Storage.prototype, 'setItem');
   jest.spyOn(Storage.prototype, 'removeItem');
+
   const platform = jest.requireActual('platform');
   Object.defineProperty(platform, 'version', {
     get: () => 13,
@@ -127,6 +128,15 @@ beforeEach(() => {
     get: () => 'android',
     configurable: true,
   });
+  const mockMediaRecorder = {
+    start: jest.fn(),
+    ondataavailable: jest.fn(),
+    onerror: jest.fn(),
+    state: '',
+    stop: jest.fn(),
+  };
+
+  window.MediaRecorder = jest.fn().mockImplementation(() => mockMediaRecorder);
 });
 
 afterEach(() => {
@@ -141,6 +151,18 @@ class SVGPathElement extends HTMLElement {}
 
 window.SVGPathElement = SVGPathElement;
 
+const mockGetUserMedia = jest.fn(async () => {
+  return new Promise(resolve => {
+    resolve();
+  });
+});
+
+Object.defineProperty(global.navigator, 'mediaDevices', {
+  value: {
+    getUserMedia: mockGetUserMedia,
+  },
+});
+
 const mockConnect = jest.fn();
 const mockcreateMediaElementSource = jest.fn(() => {
   return {
@@ -148,11 +170,13 @@ const mockcreateMediaElementSource = jest.fn(() => {
   };
 });
 const mockgetByteFrequencyData = jest.fn();
+const mockgetByteTimeDomainData = jest.fn();
 const mockcreateAnalyser = jest.fn(() => {
   return {
     connect: mockConnect,
     frequencyBinCount: [0, 1, 2],
     getByteFrequencyData: mockgetByteFrequencyData,
+    getByteTimeDomainData: mockgetByteTimeDomainData,
   };
 });
 const mockcreateOscillator = jest.fn(() => {
@@ -171,6 +195,7 @@ window.AudioContext = jest.fn().mockImplementation(() => {
   return {
     createAnalyser: mockcreateAnalyser,
     createMediaElementSource: mockcreateMediaElementSource,
+    createMediaStreamSource: mockcreateMediaElementSource,
     createOscillator: mockcreateOscillator,
     createChannelSplitter: mockcreateChannelSplitter,
   };
@@ -178,10 +203,16 @@ window.AudioContext = jest.fn().mockImplementation(() => {
 
 const mockClearRect = jest.fn();
 const mockFillRect = jest.fn();
+const mockBeginPath = jest.fn();
+const mockMoveTo = jest.fn();
+const mockStroke = jest.fn();
 
 HTMLCanvasElement.prototype.getContext = () => {
   return {
     clearRect: mockClearRect,
     fillRect: mockFillRect,
+    beginPath: mockBeginPath,
+    lineTo: mockMoveTo,
+    stroke: mockStroke,
   };
 };

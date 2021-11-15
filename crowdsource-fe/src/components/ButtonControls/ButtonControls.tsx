@@ -17,6 +17,9 @@ interface ButtonControlProps {
   onSkip: () => void;
   onNeedsChange?: () => void;
   onCorrect?: () => void;
+  onStart?: () => void;
+  onStop?: () => void;
+  onRerecord?: () => void;
   playButton?: boolean;
   pauseButton?: boolean;
   replayButton?: boolean;
@@ -28,6 +31,9 @@ interface ButtonControlProps {
   needsChangeDisable?: boolean;
   correctBtn?: boolean;
   correctDisable?: boolean;
+  startRecordingButton?: boolean;
+  stopRecordingButton?: boolean;
+  reRecordButton?: boolean;
 }
 
 const ButtonControls = ({
@@ -39,6 +45,9 @@ const ButtonControls = ({
   onSkip,
   onNeedsChange,
   onCorrect,
+  onStart,
+  onStop,
+  onRerecord,
   playButton = true,
   pauseButton = false,
   replayButton = false,
@@ -50,6 +59,9 @@ const ButtonControls = ({
   needsChangeDisable = true,
   correctBtn = false,
   correctDisable = true,
+  startRecordingButton = false,
+  stopRecordingButton = false,
+  reRecordButton = false,
 }: ButtonControlProps) => {
   const { t } = useTranslation();
 
@@ -64,6 +76,25 @@ const ButtonControls = ({
             className="mx-md-6 order-2 order-md-1 my-2 my-md-0"
           >
             {t('cancel')}
+          </Button>
+        )}
+        {startRecordingButton && (
+          <Button onClick={onStart} variant="secondary" className="mx-md-6 order-2 order-md-1 my-2 my-md-0">
+            {t('startRecording')}
+          </Button>
+        )}
+        {stopRecordingButton && (
+          <Button onClick={onStop} variant="secondary" className="mx-md-6 order-2 order-md-1 my-2 my-md-0">
+            {t('stopRecording')}
+          </Button>
+        )}
+        {reRecordButton && (
+          <Button
+            onClick={onRerecord}
+            variant="secondary"
+            className="mx-md-6 order-2 order-md-1 my-2 my-md-0"
+          >
+            {t('reRecord')}
           </Button>
         )}
         {needsChangeButton && (

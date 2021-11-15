@@ -1,0 +1,402 @@
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import Container from 'react-bootstrap/Container';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Spinner from 'react-bootstrap/Spinner';
+
+import ButtonControls from 'components/ButtonControls';
+import FunctionalHeader from 'components/FunctionalHeader';
+import NoDataFound from 'components/NoDataFound';
+import apiPaths from 'constants/apiPaths';
+import {
+  INITIATIVE_ACTIONS,
+  INITIATIVES_MAPPING,
+  INITIATIVES_MEDIA_MAPPING,
+} from 'constants/initiativeConstants';
+import localStorageConstants from 'constants/localStorageConstants';
+import routePaths from 'constants/routePaths';
+import { useSubmit } from 'hooks/useFetch';
+import useLocalStorage from 'hooks/useLocalStorage';
+import useFetch from 'hooks/usePostFetch';
+import type { ActionStoreBoloInterface } from 'types/ActionRequestData';
+import type { LocationInfo } from 'types/LocationInfo';
+import type SpeakerDetails from 'types/SpeakerDetails';
+import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
+
+import styles from './BoloSpeak.module.scss';
+
+interface ResultType {
+  data: any;
+}
+
+const BoloSpeak = () => {
+  const { t } = useTranslation();
+
+  const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
+
+  const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
+
+  const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
+
+  const [showPlayButton] = useState(false);
+
+  const [showStartRecording, setShowStartRecording] = useState(true);
+  const [showStopRecording, setShowStopRecording] = useState(false);
+  const [showReRecording, setShowReRecording] = useState(false);
+  const [showWarningmsg, setShowWarningMsg] = useState(false);
+  const [showAudioController, setShowAudioController] = useState(false);
+  const [audioError, setShowAudioError] = useState(false);
+  const [contributionData, setContributionData] = useState([]);
+  const [duration, setDuration] = useState(0);
+
+  const [audioBlob, setAudioBlob] = useState<Blob>();
+
+  const [recordedAudio, setRecordedAudio] = useState<string | undefined>();
+
+  const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
+  const router = useRouter();
+  const { locale: currentLocale } = useRouter();
+  const [showUIData, setShowUIdata] = useState({
+    media_data: '',
+    dataset_row_id: '0',
+  });
+
+  const [gumStream, setGumStream] = useState<MediaStream>();
+
+  const [timerTimeoutKey, setTimerTimeoutKey] = useState<any>();
+
+  const [clearTimeoutKey, setClearTimeoutKey] = useState<any>();
+
+  let audioCtx: any;
+  let input: any;
+  let mediaRecorder: any;
+  var chunks: any = [];
+
+  const { submit } = useSubmit(apiPaths.store);
+  const audioEl: any = useRef<HTMLAudioElement>();
+  const audio = audioEl.current;
+  const { submit: submitSkip } = useSubmit(apiPaths.skip);
+
+  const [formData] = useState<ActionStoreBoloInterface>({
+    speakerDetails: '',
+    language: contributionLanguage ?? '',
+    type: INITIATIVES_MEDIA_MAPPING.bolo,
+    sentenceId: 0,
+    state: '',
+    country: '',
+    device: getDeviceInfo(),
+    browser: getBrowserInfo(),
+    audioDuration: 0,
+  });
+
+  const result = useFetch<ResultType>({
+    url: apiPaths.mediaText,
+    init: contributionLanguage
+      ? {
+          body: JSON.stringify({
+            language: contributionLanguage,
+            userName: speakerDetails?.userName,
+          }),
+          method: 'POST',
+          credentials: 'include',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      : undefined,
+  });
+
+  useEffect(() => {
+    if (result && result.data) {
+      setContributionData(result.data);
+      setShowUIdata(result.data[currentDataIndex]);
+    }
+  }, [currentDataIndex, result]);
+
+  useEffect(() => {
+    audio?.addEventListener('loadedmetadata', () => {
+      console.log(audio.duration);
+      getAudioDuration(audio.duration);
+    });
+    return () => {
+      audio?.removeEventListener('loadedmetadata', () => {
+        getAudioDuration(audio.duration);
+      });
+    };
+  });
+
+  const setDataCurrentIndex = (index: number) => {
+    if (index === contributionData.length - 1) {
+      router.push(`/${currentLocale}${routePaths.boloIndiaContributeThankYou}`, undefined, {
+        locale: currentLocale,
+      });
+    } else {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const resetState = () => {
+    setShowStartRecording(true);
+    setShowStopRecording(false);
+    setShowReRecording(false);
+    setShowAudioController(false);
+  };
+
+  const visualize = (visualizer: any, analyser: any) => {
+    const canvasCtx = visualizer.getContext('2d');
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    const WIDTH = visualizer.width;
+    const HEIGHT = visualizer.height;
+    // TODO do we need to limit the number of time visualize refreshes per second
+    // so that it can run on Android processors without causing audio to drop?
+    function draw() {
+      // this is more efficient than calling with processor.onaudioprocess
+      // and sending floatarray with each call...
+      requestAnimationFrame(draw);
+      analyser.getByteTimeDomainData(dataArray);
+      // canvasCtx.fillStyle = 'rgb(255, 255, 255, 0)';
+      // canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+      canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+      canvasCtx.lineWidth = 2;
+      canvasCtx.strokeStyle = 'rgb(0,123,255)';
+      canvasCtx.beginPath();
+      const sliceWidth = (WIDTH * 1.0) / bufferLength;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        let v = dataArray[i] / 128.0; // uint8
+        let y = (v * HEIGHT) / 2; // uint8
+        if (i === 0) {
+          canvasCtx.moveTo(x, y);
+        } else {
+          canvasCtx.lineTo(x, y);
+        }
+        x += sliceWidth;
+      }
+      canvasCtx.lineTo(visualizer.width, visualizer.height / 2);
+      canvasCtx.stroke();
+    }
+
+    draw();
+  };
+
+  const startTimer = () => {
+    setTimerTimeoutKey(
+      setTimeout(() => {
+        setShowWarningMsg(true);
+      }, 15 * 1000)
+    );
+
+    setClearTimeoutKey(
+      setTimeout(() => {
+        setShowWarningMsg(false);
+        onStopRecording();
+      }, 20 * 1000)
+    );
+  };
+
+  const recordAudio = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      setGumStream(stream);
+      const AudioContext = window.AudioContext;
+      if (audioCtx) {
+        audioCtx.close();
+      }
+      audioCtx = new AudioContext();
+      const audioAnalyser = audioCtx.createAnalyser();
+      //new audio context to help us record
+      input = audioCtx.createMediaStreamSource(stream);
+      input.connect(audioAnalyser);
+      // eslint-disable-next-line no-undef
+      const visualizer: any = document.getElementById('visualizer');
+      visualize(visualizer, audioAnalyser);
+      /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
+      mediaRecorder = new MediaRecorder(stream);
+      //start the recording process
+      mediaRecorder.start();
+      //automatically click stop button after 30 seconds
+      mediaRecorder.ondataavailable = function (e: any) {
+        chunks.push(e.data);
+        var blob = new Blob(chunks, { type: 'audio/wav' });
+        chunks = [];
+        setAudioBlob(blob);
+        var audioURL = URL.createObjectURL(blob);
+        setRecordedAudio(audioURL);
+      };
+      startTimer();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getAudioDuration = (duration: number) => {
+    if (duration < 2) {
+      setShowAudioError(true);
+    } else {
+      setShowAudioError(false);
+    }
+    setDuration(duration);
+  };
+
+  const stopAudio = () => {
+    setShowWarningMsg(false);
+    clearTimeout(clearTimeoutKey);
+    clearTimeout(timerTimeoutKey);
+    mediaRecorder?.stop();
+    gumStream?.getAudioTracks()[0].stop();
+  };
+
+  const onStartRecording = () => {
+    setShowStartRecording(false);
+    setShowStopRecording(true);
+    recordAudio();
+  };
+
+  const onStopRecording = () => {
+    setShowReRecording(true);
+    setShowStopRecording(false);
+    setShowAudioController(true);
+    stopAudio();
+  };
+
+  const onRerecord = () => {
+    setRecordedAudio('');
+    setShowStopRecording(true);
+    setShowAudioError(false);
+    setShowReRecording(false);
+    setShowAudioController(false);
+    recordAudio();
+  };
+
+  const onSubmitContribution = () => {
+    setDataCurrentIndex(currentDataIndex);
+    resetState();
+    submit(
+      JSON.stringify({
+        ...formData,
+        language: contributionLanguage,
+        sentenceId: showUIData.dataset_row_id,
+        country: locationInfo?.country,
+        state: locationInfo?.regionName,
+        audioDuration: duration,
+        audio_data: audioBlob,
+        speakerDetails: JSON.stringify({
+          userName: speakerDetails?.userName,
+        }),
+      })
+    );
+  };
+
+  const onSkipContribution = () => {
+    setDataCurrentIndex(currentDataIndex);
+    resetState();
+    submitSkip(
+      JSON.stringify({
+        device: getDeviceInfo(),
+        browser: getBrowserInfo(),
+        userName: speakerDetails?.userName,
+        language: contributionLanguage,
+        sentenceId: showUIData.dataset_row_id,
+        state_region: locationInfo?.regionName,
+        country: locationInfo?.country,
+        type: INITIATIVES_MEDIA_MAPPING.bolo,
+      })
+    );
+  };
+
+  if (!result) {
+    return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
+  }
+
+  return contributionData && result?.data?.length !== 0 ? (
+    <Fragment>
+      <div className="pt-4 px-2 px-lg-0 pb-8">
+        <FunctionalHeader
+          onSuccess={onSkipContribution}
+          initiativeMediaType="sentence"
+          initiative={INITIATIVES_MAPPING.bolo}
+          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.bolo]['contribute']}
+          showMic={true}
+        />
+        <Container fluid="lg" className="mt-5">
+          <div data-testid="BoloSpeak" className={`${styles.root}`}>
+            <div
+              className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
+            >
+              {showUIData?.media_data}
+            </div>
+            {showAudioController && (
+              <div className="d-flex flex-column align-items-center text-center">
+                <div className="mt-2 mt-md-3">
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <audio
+                    ref={audioEl}
+                    data-testid="boloAudioElement"
+                    controls
+                    className="d-flex shadow-grey rounded-24"
+                    tabIndex={-1}
+                    src={recordedAudio}
+                  ></audio>
+                </div>
+              </div>
+            )}
+            {audioError && <span> {t('audioValidationMessage')} </span>}
+            {!showAudioController && (
+              <div
+                className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
+              >
+                <canvas id="visualizer"></canvas>
+              </div>
+            )}
+            {showWarningmsg && <span> Recording will automatically stop after {} seconds</span>}
+            <div className="mt-12 mt-md-14">
+              <ButtonControls
+                playButton={showPlayButton}
+                submitDisable={!recordedAudio || duration < 2}
+                onSubmit={onSubmitContribution}
+                onCancel={() => {}}
+                onSkip={onSkipContribution}
+                cancelButton={false}
+                startRecordingButton={showStartRecording}
+                stopRecordingButton={showStopRecording}
+                reRecordButton={showReRecording}
+                onStart={onStartRecording}
+                onStop={onStopRecording}
+                onRerecord={onRerecord}
+              />
+            </div>
+
+            <div className="d-flex align-items-center mt-10 mt-md-14">
+              <div className="flex-grow-1">
+                <ProgressBar
+                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                  variant="primary"
+                  className={styles.progress}
+                />
+              </div>
+              <span className="ms-5">
+                {currentDataIndex + 1}/{contributionData.length}
+              </span>
+            </div>
+          </div>
+        </Container>
+      </div>
+    </Fragment>
+  ) : (
+    <div className="d-flex flex-grow-1 align-items-center">
+      <NoDataFound
+        url={routePaths.boloIndiaHome}
+        title={t('textContributeNoDataThankYouMessage')}
+        text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
+        buttonLabel={t('backToInitiativePrompt', {
+          initiativeName: `${t(INITIATIVES_MAPPING.bolo)} ${t('india')}`,
+        })}
+      />
+    </div>
+  );
+};
+
+export default BoloSpeak;
