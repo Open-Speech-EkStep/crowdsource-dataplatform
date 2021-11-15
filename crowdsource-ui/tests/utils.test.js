@@ -8,6 +8,7 @@ const {
   performAPIRequest,
   formatTimeForLegends,
   translate,
+  getDefaultLanguageStat
 } = require('../src/assets/js/utils');
 const { stringToHTML, mockLocalStorage } = require('./utils');
 const { readFileSync } = require('fs');
@@ -332,4 +333,26 @@ describe('test utils', () => {
       localStorage.clear();
     });
   });
+
+  describe('getDefaultLanguageStat',()=>{
+    test("should give an list of language stats for given initiativeType and language",()=>{
+      expect(getDefaultLanguageStat('asr','Hindi')).toEqual([{"language": "Hindi",
+      "total_speakers": 0,
+      "total_contributions": 0.0,
+      "total_validations": 0.0,
+      "total_contribution_count": 0,
+      "total_validation_count": 0,
+      "type": "asr"}])
+    })
+
+    test("should give an list of language pair stats for given initiativeType and language",()=>{
+      expect(getDefaultLanguageStat('asr','Hindi','English')).toEqual([{"language": "Hindi-English",
+      "total_speakers": 0,
+      "total_contributions": 0.0,
+      "total_validations": 0.0,
+      "total_contribution_count": 0,
+      "total_validation_count": 0,
+      "type": "asr"}])
+    })
+  })
 });

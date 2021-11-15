@@ -17,6 +17,7 @@ const {
   hideElement,
   getJson,
   translate,
+  getDefaultLanguageStat
 } = require('../common/utils');
 
 const { downloadPdf } = require('../common/downloadableBadges');
@@ -75,17 +76,7 @@ const getLanguageStats = function () {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
     const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
 
-    const defaultData = [
-      {
-          "language": `${contributionLanguage}-${toLanguage}`,
-          "total_speakers": 0,
-          "total_contributions": 0.0,
-          "total_validations": 0.0,
-          "total_contribution_count": 0,
-          "total_validation_count": 0,
-          "type": INITIATIVES.parallel.type
-      },
-    ]
+    const defaultData = getDefaultLanguageStat(INITIATIVES.parallel.type,contributionLanguage, toLanguage); 
 
     const filteredDataByLanguage = jsonData.filter(d => d.type == INITIATIVES.parallel.type);
     const top_languages_by_hours = filteredDataByLanguage.length ? filteredDataByLanguage : defaultData;

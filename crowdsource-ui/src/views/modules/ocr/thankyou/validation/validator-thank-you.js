@@ -16,6 +16,7 @@ const {
   hideElement,
   getJson,
   translate,
+  getDefaultLanguageStat
 } = require('../common/utils');
 const { downloadPdf } = require('../common/downloadableBadges');
 const {
@@ -71,17 +72,7 @@ const updateShareContent = function (language, rank) {
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const defaultData = [
-      {
-          "language": contributionLanguage,
-          "total_speakers": 0,
-          "total_contributions": 0.0,
-          "total_validations": 0.0,
-          "total_contribution_count": 0,
-          "total_validation_count": 0,
-          "type": INITIATIVES.ocr.type
-      },
-    ]
+    const defaultData = getDefaultLanguageStat(INITIATIVES.ocr.type,contributionLanguage); 
 
     const filteredDataByLanguage = jsonData.filter(d => d.type == INITIATIVES.ocr.type);
     const top_languages_by_hours = filteredDataByLanguage.length ? filteredDataByLanguage : defaultData;

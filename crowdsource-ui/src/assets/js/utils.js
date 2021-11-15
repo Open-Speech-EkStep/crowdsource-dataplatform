@@ -350,6 +350,19 @@ const getInitiativeType = function(initiative){
   return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
 }
 
+const getDefaultLanguageStat = function(initiative, fromLanguage, toLanguage = ''){
+  const contributionLanguage = toLanguage ? `${fromLanguage}-${toLanguage}` : fromLanguage
+  return [{ 
+    "language": contributionLanguage,
+    "total_speakers": 0,
+    "total_contributions": 0.0,
+    "total_validations": 0.0,
+    "total_contribution_count": 0,
+    "total_validation_count": 0,
+    "type": initiative
+  }]
+}
+
 module.exports = {
   safeJsonParse,
   safeJson,
@@ -375,5 +388,6 @@ module.exports = {
   getLanguageBadge,
   translate,
   toPascalCase,
-  getInitiativeType
+  getInitiativeType,
+  getDefaultLanguageStat
 };
