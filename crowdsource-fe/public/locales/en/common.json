@@ -142,6 +142,7 @@
   "contributionTrackerSubHeader2": "Your language pair and top 3 contributed language pairs",
   "byHours": "By duration of hours",
   "bySentences": "By number of sentences",
+  "bySpeakers": "By number of speakers",
   "asrBarGraphTitle": "Total sentences",
   "textBarGraphTitle": "Total recordings",
   "parallelBarGraphTitle": "Total translations",
