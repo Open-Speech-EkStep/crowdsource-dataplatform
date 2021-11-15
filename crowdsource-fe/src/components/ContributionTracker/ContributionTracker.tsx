@@ -212,7 +212,11 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
             <Form.Check
               inline
               type="radio"
-              label={t('bySentences')}
+              label={
+                INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.text
+                  ? t('bySpeakers')
+                  : t('bySentences')
+              }
               value="bySpeaker"
               name="recommended"
               id="feedbackFormNoCheckbox"
