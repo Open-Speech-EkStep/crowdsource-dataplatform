@@ -185,40 +185,6 @@ describe('BoloSpeak', () => {
     });
   });
 
-  // it('should test the submit button', async () => {
-  //   const url = '/store';
-  //   const successResponse = { success: true };
-
-  //   await setup(resultData);
-
-  //   fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
-
-  //   expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
-
-  //   userEvent.click(screen.getByRole('button', { name: 'submit' }));
-
-  //   await waitFor(() => {
-  //     expect(fetchMock).toBeCalledWith(url, {
-  //       method: 'POST',
-  //       credentials: 'include',
-  //       mode: 'cors',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         audio_data: {},
-  //         duration: 0,
-  //         speakerDetails: '{"userName":"abc"}',
-  //         language: 'Hindi',
-  //         type: 'text',
-  //         sentenceId: 371765,
-  //         state: 'National Capital Territory of Delhi',
-  //         country: 'India',
-  //         device: 'android 11',
-  //         browser: 'Chrome 13',
-  //       }),
-  //     });
-  //   });
-  // });
-
   it('should go to thank you page after 5 skip sentences', async () => {
     await setup(resultData);
 

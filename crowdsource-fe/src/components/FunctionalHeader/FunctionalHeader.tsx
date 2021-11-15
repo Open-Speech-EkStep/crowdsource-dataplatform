@@ -18,7 +18,6 @@ const FunctionalHeader = ({
   initiative,
   action,
   showSpeaker = true,
-  showMic = false,
 }: FunctionalHeaderProps) => {
   return (
     <header>
