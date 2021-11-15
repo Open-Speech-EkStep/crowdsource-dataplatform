@@ -75,6 +75,22 @@ const getTopLanguagesByHoursChartData = (
   );
 };
 
+const getTopLanguagesBySentencesChartData = (
+  contributionValue: string,
+  initiativeMedia: InitiativeType,
+  topLanguagesByHours?: TopLanguagesByHours[]
+) => {
+  return (
+    topLanguagesByHours?.map(topLanguageByHours => ({
+      category: translateCategory(topLanguageByHours?.language),
+      value: (topLanguageByHours as any)[contributionValue],
+      tooltipText: `${topLanguageByHours?.total_contribution_count} ${i18n
+        ?.t(`${initiativeMedia}BarGraphTooltip`)
+        ?.toLocaleLowerCase()}`,
+    })) ?? []
+  );
+};
+
 const getTopLanguagesBySpeakerChartData = (
   type: InitiativeType,
   topLanguagesBySpeaker?: TopLanguagesBySpeaker[]
@@ -163,7 +179,7 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
               topLanguageHrsData
             )
           : props.initiative === INITIATIVES_MAPPING.suno
-          ? getTopLanguagesByHoursChartData(
+          ? getTopLanguagesBySentencesChartData(
               INITIATIVE_MEDIA_CONTRIBUTION_MAPPING[INITIATIVES_MEDIA_MAPPING.dekho],
               INITIATIVES_MEDIA_MAPPING[props.initiative],
               topLanguageHrsData
