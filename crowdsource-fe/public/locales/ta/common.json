@@ -189,11 +189,11 @@
   "thankyouForCorrecting": "திருத்தியமைக்கு நன்றி",
   "textContributeNoDataThankYouMessage": "உற்சாகத்துடன் உங்கள் குரலை அளித்ததற்கு நன்றி",
   "asrContributeNoDataThankYouMessage": "உற்சாகத்துடன் பதிவுகளை எடுத்தெழுதியதற்கு நன்றி",
-  "parallelContributeNoDataThankYouMessage": "",
+  "parallelContributeNoDataThankYouMessage": "வாக்கியங்களை மொழிபெயர்க்க உங்கள் உற்சாகத்திற்கு நன்றி.",
   "ocrContributeNoDataThankYouMessage": "உற்சாகத்துடன் படங்களை லேபிள் செய்ததற்கு நன்றி",
   "textValidateNoDataThankYouMessage": "உற்சாகத்துடன் பதிவுகளைச் சரிபார்த்ததற்கு நன்றி",
-  "asrValidateNoDataThankYouMessage": "",
-  "parallelValidateNoDataThankYouMessage": "",
+  "asrValidateNoDataThankYouMessage": "டிரான்ஸ்க்ரிப்ஷன்களை சரிபார்க்க உங்கள் உற்சாகத்திற்கு நன்றி.",
+  "parallelValidateNoDataThankYouMessage": "மொழிபெயர்ப்புகளை சரிபார்க்க உங்கள் உற்சாகத்திற்கு நன்றி.",
   "ocrValidateNoDataThankYouMessage": "உற்சாகத்துடன் பட லேபிள்களை சரிபார்த்ததற்கு நன்றி",
   "cancel": "ரத்துசெய்",
   "play": "இயக்கு",
@@ -322,5 +322,12 @@
   "participation": "பங்கேற்பு",
   "badgeDetailText": "{{language}} இல் {{action}} <span>{{count}} {{sourceType}}</span> மற்றும் {{initiativeName}} {{badge}} பாஷா சமர்த்தக் பேட்ஜைப் பெறுங்கள்",
   "thousandCharLimitText": "1000 எழுத்துக்கள் மட்டுமே அனுமதிக்கப்படுகின்றன",
-  "expandViewText": "விரிவாக்கப்பட்ட தோற்றத்தை திறக்க அழுத்தவும்"
+  "expandViewText": "விரிவாக்கப்பட்ட தோற்றத்தை திறக்க அழுத்தவும்",
+  "visitOur": "",
+  "404Text": "",
+  "testYourMicrophoneAndSpeakers": "",
+  "startRecording": "பதிவு செய்",
+  "stopRecording": "பதிவு செய்வதை நிறுத்து",
+  "reRecord": "மீண்டும் பதிவுசெய்",
+  "audioValidationMessage": "ஆடியோ பதிவு மிகவும் சிறியது. மீண்டும் பதிவுசெய்க"
 }

@@ -189,11 +189,11 @@
   "thankyouForCorrecting": "ସଂଶୋଧନ ପାଇଁ ଧନ୍ୟବାଦ!",
   "textContributeNoDataThankYouMessage": "ନିଜ ସ୍ବରର ଯୋଗଦାନ ପାଇଁ ଦେଖେଇଥିବା ଉତ୍ସାହ ପାଇଁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ",
   "asrContributeNoDataThankYouMessage": "ରେକର୍ଡିଂଗୁଡ଼ିକୁ ଟ୍ରାନ୍ସ୍କ୍ରାଇବ୍ କରିବା ପାଇଁ ଉତ୍ସାହ ଦେଖେଇଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ।",
-  "parallelContributeNoDataThankYouMessage": "",
+  "parallelContributeNoDataThankYouMessage": "ବାକ୍ୟଗୁଡ଼ିକର ଅନୁବାଦ କରିବାକୁ ଦେଖେଇଥିବା ଉତ୍ସାହ ପାଇଁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ ।",
   "ocrContributeNoDataThankYouMessage": "ପ୍ରତିଛବିଗୁଡ଼ିକୁ ଲେବଲ୍ କରିବାକୁ ଦେଖେଇଥିବା ଉତ୍ସାହ ପାଇଁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ",
   "textValidateNoDataThankYouMessage": "ରେକର୍ଡିଂଗୁଡ଼ିକର ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରିବାକୁ ଦେଖେଇଥିବା ଉତ୍ସାହ ପାଇଁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ ।",
-  "asrValidateNoDataThankYouMessage": "",
-  "parallelValidateNoDataThankYouMessage": "",
+  "asrValidateNoDataThankYouMessage": "ଟ୍ରାନ୍ସ୍କ୍ରିପ୍ସନ୍ଗୁଡ଼ିକର ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରିବା ପାଇଁ  ଉତ୍ସାହ ଦେଖେଇଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ।",
+  "parallelValidateNoDataThankYouMessage": "ଅନୁବାଦଗୁଡ଼ିକର ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରିବା ପାଇଁ  ଉତ୍ସାହ ଦେଖେଇଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ।",
   "ocrValidateNoDataThankYouMessage": "ପ୍ରତିଛବି ଲେବଲ୍ ବୈଧ କରିବାକୁ ଆପଣଙ୍କର ଉତ୍ସାହ ପାଇଁ ଧନ୍ୟବାଦ",
   "cancel": "ବାତିଲ୍ କରନ୍ତୁ",
   "play": "ପ୍ଲେ କରନ୍ତୁ",
@@ -322,5 +322,12 @@
   "participation": "ଅଂଶଗ୍ରହଣ",
   "badgeDetailText": "{{language}}ରେ {{action}} <span>{{count}} {{sourceType}}</span> ଏବଂ {{initiativeName}} {{badge}} ଭାଷା ସମର୍ଥକ ବ୍ୟାଜ ଅର୍ଜନ କରନ୍ତୁ",
   "thousandCharLimitText": "କେବଳ 1000 ଅକ୍ଷର ହିଁ ସମ୍ଭବ ",
-  "expandViewText": "ବିସ୍ତାରିତ ଦୃଶ୍ୟ ଦେଖିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ"
+  "expandViewText": "ବିସ୍ତାରିତ ଦୃଶ୍ୟ ଦେଖିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ",
+  "visitOur": "",
+  "404Text": "",
+  "testYourMicrophoneAndSpeakers": "",
+  "startRecording": "ରେକର୍ଡ କରିବା ଆରମ୍ଭ କରନ୍ତୁ",
+  "stopRecording": "ରେକର୍ଡ କରିବା ବନ୍ଦ କରନ୍ତୁ",
+  "reRecord": "ପୁଣି ଥରେ ରେକର୍ଡ କରନ୍ତୁ",
+  "audioValidationMessage": "ଅଡିଓ ରେକର୍ଡିଂ ବହୁତ ଛୋଟ ଅଟେ । ଦୟାକରି ପୁଣି ଥରେ ରେକର୍ଡ କରନ୍ତୁ"
 }

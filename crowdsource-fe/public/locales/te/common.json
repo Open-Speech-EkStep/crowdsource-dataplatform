@@ -189,11 +189,11 @@
   "thankyouForCorrecting": "సరిచేసినందుకు ధన్యవాదాలు!",
   "textContributeNoDataThankYouMessage": "మీ స్వరాన్ని అందించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "asrContributeNoDataThankYouMessage": "రికార్డింగ్లను ట్రాన్స్‌క్రైబ్ చేయడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
-  "parallelContributeNoDataThankYouMessage": "",
+  "parallelContributeNoDataThankYouMessage": "వాక్యాలను అనువదించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "ocrContributeNoDataThankYouMessage": "చిత్రాలను లేబుల్ చేయడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "textValidateNoDataThankYouMessage": "రికార్డులను ధృవీకరించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
-  "asrValidateNoDataThankYouMessage": "",
-  "parallelValidateNoDataThankYouMessage": "",
+  "asrValidateNoDataThankYouMessage": "ట్రాన్స్‌క్రిప్షన్లను ధృవీకరించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
+  "parallelValidateNoDataThankYouMessage": "అనువాదాలను ధృవీకరించంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "ocrValidateNoDataThankYouMessage": "చిత్రాల లేబుళ్ళను ధృవీకరించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "cancel": "క్యాన్సిల్ చేయండి",
   "play": "ప్లే చేయండి",
@@ -322,5 +322,12 @@
   "participation": "పాల్గొనడం",
   "badgeDetailText": "{{language}} లో  <span>{{count}} {{sourceType}}</span> {{action}} చేయండి మరియు {{initiativeName}} {{badge}} భాషా సమార్థక్ బ్యాడ్జ్ సంపాదించండి",
   "thousandCharLimitText": "1000 అక్షరాలు మాత్రమే ఉండాలి",
-  "expandViewText": "పెద్దగా చూడడానికి ఓపెన్ బటన్ పై క్లిక్ చేయండి"
+  "expandViewText": "పెద్దగా చూడడానికి ఓపెన్ బటన్ పై క్లిక్ చేయండి",
+  "visitOur": "",
+  "404Text": "",
+  "testYourMicrophoneAndSpeakers": "",
+  "startRecording": "రికార్డ్ చేయడం ప్రారంభించండి",
+  "stopRecording": "రికార్డ్ చేయడం ఆపండి",
+  "reRecord": "మళ్లీ రికార్డ్ చేయండి",
+  "audioValidationMessage": "ఆడియో రికార్డింగ్ చాలా చిన్నది. దయచేసి తిరిగి రికార్డ్ చేయండి"
 }

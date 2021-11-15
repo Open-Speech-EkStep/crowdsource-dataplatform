@@ -189,11 +189,11 @@
   "thankyouForCorrecting": "ಸರಿಪಡಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು!",
   "textContributeNoDataThankYouMessage": "ನಿಮ್ಮ ಧ್ವನಿಯನ್ನು ಕೊಡುಗೆಯಾಗಿ ನೀಡಲು ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು",
   "asrContributeNoDataThankYouMessage": "ರೆಕಾರ್ಡಿಂಗ್‌ಗಳನ್ನು ಪ್ರತಿಲೇಖಿಸುವಲ್ಲಿ ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
-  "parallelContributeNoDataThankYouMessage": "",
+  "parallelContributeNoDataThankYouMessage": "ವಾಕ್ಯಗಳನ್ನು ಭಾಷಾಂತರಿಸಲು ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
   "ocrContributeNoDataThankYouMessage": "ಚಿತ್ರಗಳನ್ನು ಲೇಬಲ್ ಮಾಡಲು ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
   "textValidateNoDataThankYouMessage": "ರೆಕಾಂರ್ಡಿಂಗ್‌ಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವಲ್ಲಿ ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
-  "asrValidateNoDataThankYouMessage": "",
-  "parallelValidateNoDataThankYouMessage": "",
+  "asrValidateNoDataThankYouMessage": "ಪ್ರತಿಲೇಖನಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವಲ್ಲಿ ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
+  "parallelValidateNoDataThankYouMessage": "ಅನುವಾದಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವಲ್ಲಿ ನೀವು ತೊರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
   "ocrValidateNoDataThankYouMessage": "ಚಿತ್ರಗಳ ಲೇಬಲ್‌ಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವಲ್ಲಿ ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.",
   "cancel": "ರದ್ದುಗೊಳಿಸಿ / ಕ್ಯಾನ್ಸಲ್ ಮಾಡಿ",
   "play": "ಪ್ಲೇ ಮಾಡಿ",
@@ -322,5 +322,12 @@
   "participation": "ಭಾಗವಹಿಸುವಿಕೆ",
   "badgeDetailText": "{{language}} ಭಾಷೆಯಲ್ಲಿ  <span>{{count}} {{sourceType}}</span> {{action}}  ಮಾಡಿ ಮತ್ತು  {{initiativeName}} {{badge}} ಭಾಷಾ ಸಮರ್ಥಕ್ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಗಳಿಸಿ.",
   "thousandCharLimitText": "ಕೇವಲ 1000 ಅಕ್ಷರಗಳನ್ನು ಮಾತ್ರ ಕೊಡಲು ಸಾಧ್ಯ",
-  "expandViewText": "ವಿಸ್ತರಿಸಿ ವೀಕ್ಷಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ"
+  "expandViewText": "ವಿಸ್ತರಿಸಿ ವೀಕ್ಷಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+  "visitOur": "",
+  "404Text": "",
+  "testYourMicrophoneAndSpeakers": "",
+  "startRecording": "ರೆಕಾರ್ಡ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ",
+  "stopRecording": "ರೆಕಾರ್ಡ್ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿ",
+  "reRecord": "ಪುನಃ ರೆಕಾರ್ಡ್ ಮಾಡಿ",
+  "audioValidationMessage": "ಆಡಿಯೋ ರೆಕಾರ್ಡಿಂಗ್ ಬಹಳ ಚುಟುಕಾಗಿದೆ. ದಯವಿಟ್ಟು ಪುನಃ ರೆಕಾರ್ಡ್ ಮಾಡಿ"
 }

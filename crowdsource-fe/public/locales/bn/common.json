@@ -189,11 +189,11 @@
   "thankyouForCorrecting": "সংশোধন করার জন্য আপনাকে ধন্যবাদ!",
   "textContributeNoDataThankYouMessage": "কন্ঠস্বর দানে আপনার উৎসাহের জন্য ধন্যবাদ।",
   "asrContributeNoDataThankYouMessage": "রেকর্ডিংগুলি ট্রান্সক্রাইব করতে আপনার উৎসাহের জন্য আপনাকে ধন্যবাদ।",
-  "parallelContributeNoDataThankYouMessage": "",
+  "parallelContributeNoDataThankYouMessage": "বাক্যগুলি অনুবাদ করতে আপনার উত্সাহের জন্য আপনাকে ধন্যবাদ।",
   "ocrContributeNoDataThankYouMessage": "চিত্রগুলি লেবেল করতে আপনার উৎসাহের জন্য আপনাকে ধন্যবাদ।",
   "textValidateNoDataThankYouMessage": "রেকর্ডিংগুলি যাচাই করার ক্ষেত্রে আপনার উৎসাহের জন্য আপনাকে ধন্যবাদ।",
-  "asrValidateNoDataThankYouMessage": "",
-  "parallelValidateNoDataThankYouMessage": "",
+  "asrValidateNoDataThankYouMessage": "ট্রান্সক্রিপশনগুলি যাচাই করতে আপনার উত্সাহের জন্য আপনাকে ধন্যবাদ।",
+  "parallelValidateNoDataThankYouMessage": "অনুবাদগুলি যাচাই এ আপনার উত্সাহের জন্য আপনাকে ধন্যবাদ।",
   "ocrValidateNoDataThankYouMessage": "চিত্রের লেবেলগুলি যাচাই করতে আপনার উৎসাহের জন্য আপনাকে ধন্যবাদ।",
   "cancel": "বাতিল করুন",
   "play": "শুরু করুন",
@@ -322,5 +322,12 @@
   "participation": "অংশগ্রহণ",
   "badgeDetailText": "{{language}} তে  <span>{{count}} {{sourceType}}</span> {{action}}  করুন এবং {{initiativeName}} {{badge}} ভাষা সমর্থক ব্যাজ অর্জন করুন",
   "thousandCharLimitText": "শুধুমাত্র ১০০০টি অক্ষর অনুমোদিত",
-  "expandViewText": "বড় করে দেখার জন্য ক্লিক করুন"
+  "expandViewText": "বড় করে দেখার জন্য ক্লিক করুন",
+  "visitOur": "",
+  "404Text": "",
+  "testYourMicrophoneAndSpeakers": "",
+  "startRecording": "রেকর্ড করা শুরু করুন",
+  "stopRecording": "রেকর্ড করা বন্ধ করুন",
+  "reRecord": "পুনরায় রেকর্ড করুন",
+  "audioValidationMessage": "অডিও রেকর্ডিংটি খুবই ছোট। অনুগ্রহ করে পুনরায় রেকর্ড করুন"
 }
