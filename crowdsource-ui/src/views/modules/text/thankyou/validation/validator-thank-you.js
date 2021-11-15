@@ -73,9 +73,26 @@ const updateShareContent = function (language, rank) {
 
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
-    const top_languages_by_hours = jsonData.filter(d => d.type == INITIATIVES.text.type);
+
+    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+
+    const defaultData = [
+      {
+          "language": contributionLanguage,
+          "total_speakers": 0,
+          "total_contributions": 0.0,
+          "total_validations": 0.0,
+          "total_contribution_count": 0,
+          "total_validation_count": 0,
+          "type": INITIATIVES.text.type
+      },
+    ]
+
+    const filteredDataByLanguage = jsonData.filter(d => d.type == INITIATIVES.text.type);
+    const top_languages_by_hours = filteredDataByLanguage.length ? filteredDataByLanguage : defaultData;
+
+    console.log("here");
     if (top_languages_by_hours.length > 0) {
-      const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
       const languages = getTopLanguage(
         top_languages_by_hours,
