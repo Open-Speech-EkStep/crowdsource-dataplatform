@@ -12,7 +12,7 @@ class Levenstein {
         let hyp_ocr = hyp.split(' ').join('');
         let mismatch_count = (0, js_levenshtein_1.default)(hyp_ocr, ref_ocr);
         let score = 1 - (mismatch_count / hyp_ocr.length);
-        return score > (constants_1.LANGUAGE_CONFIG_OCR[language] || -1);
+        return score >= (constants_1.LANGUAGE_CONFIG_OCR[language] || -1);
     }
 }
 exports.Levenstein = Levenstein;
