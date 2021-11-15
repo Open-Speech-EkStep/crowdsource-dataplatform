@@ -180,6 +180,10 @@ gulp.task('js', function () {
           {
             match: 'showDataSource',
             replacement: settings.showDataSource,
+          },
+          {
+            match : 'autoValidation',
+            replacement: settings.autoValidation
           }
         ],
       })
@@ -304,6 +308,10 @@ function jsGulp(moduleName) {
           {
             match: 'showDataSource',
             replacement: settings.showDataSource,
+          },
+          {
+            match : 'autoValidation',
+            replacement: settings.autoValidation
           }
         ],
       })

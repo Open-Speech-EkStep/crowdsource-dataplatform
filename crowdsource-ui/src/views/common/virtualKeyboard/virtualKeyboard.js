@@ -6,6 +6,7 @@
  */
 
 const { keyboardLayout } = require('./keyboardLayout');
+const { auto_validation } = require('./env-api');
 const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES ,config} = require('./constants');
 const { isMobileDevice } = require('./common');
 const { getInitiativeType } = require('./utils')
@@ -215,9 +216,9 @@ function lngtype(text) {
   const data = window[`${initiativeType}Validator`] || {sentences:[{}]} ;
   const currentIndexOfData = localStorage.getItem(`${config.initiativeKey_1}ValidationCurrentIndex`) || 0;
 
-  if(selectedType === 'validate' && data.sentences[currentIndexOfData].auto_validate){
+  if(auto_validation === 'enabled' && selectedType === 'validate' && data.sentences[currentIndexOfData].auto_validate){
     if(langdic[contributionLanguage].test(newText)) {
-      if (AutoValidation[initiativeType](contributionLanguage,refText, text)) {
+      if (!(AutoValidation[initiativeType](contributionLanguage,refText, text))) {
         return { type: 'auto-validation' }
       }
     }
