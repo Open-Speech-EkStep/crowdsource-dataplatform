@@ -117,9 +117,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -129,9 +129,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -141,9 +141,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -153,9 +153,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Hindi');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -165,9 +165,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Kannada');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -177,9 +177,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Malayalam');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -189,9 +189,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Marathi');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -201,9 +201,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Odia');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -213,9 +213,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Punjabi');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -225,9 +225,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Tamil');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -237,9 +237,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -249,9 +249,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Assamese');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -261,9 +261,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Bengali');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -273,9 +273,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -286,9 +286,9 @@ describe("lngtype", () => {
 
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Hindi');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -299,9 +299,9 @@ describe("lngtype", () => {
 
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Kannada');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -311,9 +311,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Malayalam');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -323,9 +323,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Marathi');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -335,9 +335,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Odia');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -347,9 +347,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Punjabi');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -371,9 +371,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Telugu');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })
@@ -383,9 +383,9 @@ describe("lngtype", () => {
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
-    localStorage.setItem('selectedType','validate');
+    localStorage.setItem('selectedType','contribute');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
+      expect(lngtype(symbol)).toEqual(null);
     })
     localStorage.clear();
   })

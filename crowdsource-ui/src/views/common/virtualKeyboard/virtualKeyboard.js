@@ -6,7 +6,7 @@
  */
 
 const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES } = require('./constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES ,config} = require('./constants');
 const { isMobileDevice } = require('./common');
 const { getInitiativeType } = require('./utils')
 const AutoValidation = require('./AutoValidation').default;
@@ -209,10 +209,14 @@ function lngtype(text) {
   });
 
   const refText = $('#captured-text').text();
-  const selectedType = localStorage.getItem('selectedType')
-  if(selectedType === 'validate'){
+  const selectedType = localStorage.getItem('selectedType');
+  const initiativeType = getInitiativeType(currentModule);
+
+  const data = window[`${initiativeType}Validator`] || {sentences:[{}]} ;
+  const currentIndexOfData = localStorage.getItem(`${config.initiativeKey_1}ValidationCurrentIndex`) || 0;
+
+  if(selectedType === 'validate' && data.sentences[currentIndexOfData].auto_validate){
     if(langdic[contributionLanguage].test(newText)) {
-      const initiativeType = getInitiativeType(currentModule);
       if (AutoValidation[initiativeType](contributionLanguage,refText, text)) {
         return { type: 'auto-validation' }
       }
