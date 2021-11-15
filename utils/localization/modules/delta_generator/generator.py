@@ -15,7 +15,7 @@ import pandas as pd
 
 # In[2]:
 from helper.ejs_keys_parser import get_keys_with_path
-from helper.utils.utils import extract_and_replace_tags, write_report, extract_and_replace_tags_for_lang
+from helper.utils.utils import extract_and_replace_tags, write_report, extract_and_replace_tags_for_lang, read_sheet_map_file
 
 
 def move_column(dataframe, column_name, index):
@@ -37,7 +37,7 @@ def read_json(json_file_path):
 
 def load_en_key_values(input_base_path):
     language_code = 'en'
-    input_json_path = '{base_path}/{language}.json'.format(base_path=input_base_path, language=language_code)
+    input_json_path = '{base_path}/{language}/common.json'.format(base_path=input_base_path, language=language_code)
     json_data = read_json(input_json_path)
     return json_data
 
@@ -128,7 +128,7 @@ def process_delta(languages, input_base_path, all_keys, keys_without_translation
     keys_with_path_map = get_keys_with_path(ejs_files_base_path)
     language_dfs = {}
     for language_code, language_name in languages.items():
-        input_json_path = '{base_path}/{language}.json'.format(base_path=input_base_path, language=language_code)
+        input_json_path = '{base_path}/{language}/common.json'.format(base_path=input_base_path, language=language_code)
         json_data = read_json(input_json_path)
 
         keys_list = get_data_without_translation(json_data, all_keys)
@@ -137,9 +137,19 @@ def process_delta(languages, input_base_path, all_keys, keys_without_translation
         language_df = process_tags(allowed_replacements, en_data, keys_list, keys_with_path_map, language_name)
         if all_keys:
             language_df = process_tags_for_lang(language_df, json_data, language_name, allowed_replacements)
-
         language_dfs[language_code] = language_df
     return language_dfs
+
+
+def map_sheet(df):
+    maps = read_sheet_map_file()
+    column_name = 'English copy'
+    for i, df_row in df.iterrows():
+        if df_row['Key'] in maps.keys():
+            for from_text, to in maps[df_row['Key']]['replacements'].items():
+                df_row[column_name] = df_row[column_name].replace(to, from_text)
+    print(df[df['Key'] == 'contributorAcheived'])
+    return df
 
 
 def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path, all_keys, keys_without_translation,
@@ -170,6 +180,7 @@ def gen_delta(languages, input_base_path, meta_out_base_path, sme_out_base_path,
             all_df = pd.merge(all_df, df[cols_to_include], how='inner',
                               on=['Key', 'English copy'])
         now = datetime.now()
+        all_df = map_sheet(all_df)
         output_excel_path = '{base_path}/{timestamp}_meta.xlsx'.format(base_path=meta_out_base_path, timestamp=now)
         output_sme_excel_path = '{base_path}/{timestamp}_sme.xlsx'.format(base_path=sme_out_base_path, timestamp=now)
         cols_to_include_in_sme = ['Key', 'English copy'] + language_name_list

@@ -1,0 +1,12 @@
+{
+  "contributorAcheived": {
+    "replacements": {
+      "<badge-color>": "<span>{{badgeType}}</span>"
+    }
+  },
+  "noBadgeText": {
+    "replacements": {
+      "<initiative>": "{{initiativeName}}"
+    }
+  }
+}

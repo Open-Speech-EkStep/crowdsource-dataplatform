@@ -1,5 +1,19 @@
 [
   {
+    "json_key": "contributorAcheived",
+    "excel_key": "contributorAcheived",
+    "replacements": {
+      "<badge-color>": "<span>{{badgeType}}</span>"
+    }
+  },
+  {
+    "json_key": "keepParticipationText",
+    "excel_key": "Participate to see <language> in top 3",
+    "replacements": {
+      "<language>": "{{language}}"
+    }
+  },
+  {
     "json_key": "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!",
     "excel_key": "You contributed <contribution-count> recording(s) for your language!",
     "replacements": {

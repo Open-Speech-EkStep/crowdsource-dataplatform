@@ -22,14 +22,16 @@ def generate_report(removed_keys):
 def clean_locale_keys(languages, input_base_path, output_base_path):
     os.makedirs(output_base_path, exist_ok=True)
     removed_keys = []
-    en_json_path = '{}/en.json'.format(input_base_path)
-    if not os.path.exists(output_base_path + "/en.json"):
-        os.system("cp {} {}".format(en_json_path, output_base_path))
+    en_json_path = '{}/en/common.json'.format(input_base_path)
+    if not os.path.exists(output_base_path + "/en/common.json"):
+        os.makedirs(output_base_path+"/en", exist_ok=True)
+        os.system("cp {} {}".format(en_json_path, output_base_path+ "/en/common.json"))
+    print(os.path.exists(output_base_path + "/en/common.json"))
     en_data = read_json(en_json_path)
 
     for language_code, lang_name in languages.items():
 
-        locale_path = '{input_base_path}/{language_code}.json'.format(input_base_path=input_base_path,
+        locale_path = '{input_base_path}/{language_code}/common.json'.format(input_base_path=input_base_path,
                                                                       language_code=language_code)
         data = read_json(locale_path)
 
@@ -40,7 +42,9 @@ def clean_locale_keys(languages, input_base_path, output_base_path):
                 del data[key]
                 removed_keys.append(key)
 
-        output_file_path = '{output_base_path}/{language_code}.json'.format(output_base_path=output_base_path,
+        os.makedirs('{output_base_path}/{language_code}'.format(output_base_path=output_base_path,
+                                                                            language_code=language_code), exist_ok=True)
+        output_file_path = '{output_base_path}/{language_code}/common.json'.format(output_base_path=output_base_path,
                                                                             language_code=language_code)
 
         with open(output_file_path, 'w') as f:

@@ -33,6 +33,7 @@ class LocaleProcessor:
                             tmp = df_row[self.language_name]
                             df_row[self.language_name] = df_row[self.language_name].replace(replacer_key,
                                                                                             replacements_[replacer_key])
+                            df.loc[i, self.language_name] = df_row[self.language_name]
                             if tmp == df_row[self.language_name]:
                                 print("In", replacer['excel_key'], "=> ", replacer_key, 'is not changed')
                                 print("Out", df_row[self.language_name], "=> ", replacer_key, 'is not changed')
