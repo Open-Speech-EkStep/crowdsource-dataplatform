@@ -4,7 +4,10 @@ import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 
 import IconTextButton from 'components/IconTextButton';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import type { Initiative } from 'types/Initiatives';
+import type { SourceType } from 'types/SourceType';
+import { capitalizeFirstLetter } from 'utils/utils';
 
 import ReportSuccessModal from './ReportSuccessModal';
 
@@ -12,11 +15,11 @@ const ReportModal = dynamic(() => import('./ReportModal'), { ssr: false });
 
 interface ReportProps {
   onSuccess: () => void;
-  initiativeMediaType: string;
+  action: SourceType;
   initiative: Initiative;
 }
 
-const Report = ({ onSuccess, initiativeMediaType, initiative }: ReportProps) => {
+const Report = ({ onSuccess, action, initiative }: ReportProps) => {
   const { t } = useTranslation();
   const [modalShow, setModalShow] = useState(false);
   const [reportSuccess, setReportSuccess] = useState(false);
@@ -34,6 +37,10 @@ const Report = ({ onSuccess, initiativeMediaType, initiative }: ReportProps) => 
     setReportSuccess(false);
   };
 
+  const reportSubheadingText = t(
+    `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(action)}ReportModalSubHeading`
+  );
+
   return (
     <Fragment>
       <IconTextButton
@@ -44,7 +51,7 @@ const Report = ({ onSuccess, initiativeMediaType, initiative }: ReportProps) => 
       />
       {modalShow && (
         <ReportModal
-          initiativeMediaType={initiativeMediaType}
+          reportSubheadingText={reportSubheadingText}
           show={modalShow}
           onHide={hideModal}
           onSuccess={showReportSuccess}

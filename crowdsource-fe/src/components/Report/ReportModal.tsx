@@ -22,14 +22,14 @@ interface ReportModalProps {
   onHide: () => void;
   onSuccess: () => void;
   show: boolean;
-  initiativeMediaType: string;
+  reportSubheadingText: string;
   initiative: Initiative;
 }
 
 const ReportModal = ({
   onSuccess: showThankyou,
   initiative,
-  initiativeMediaType,
+  reportSubheadingText,
   ...props
 }: ReportModalProps) => {
   const { t } = useTranslation();
@@ -90,7 +90,7 @@ const ReportModal = ({
     <Modal
       {...props}
       title={t('reportModalHeading')}
-      subTitle={t('reportModalSubHeading', { type: `${initiativeMediaType}` })}
+      subTitle={reportSubheadingText}
       footer={
         <Button disabled={!isButtonEnabled} form="reportForm" type="submit">
           {t('submit')}

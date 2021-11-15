@@ -13,7 +13,7 @@ describe('ReportModal', () => {
         show={true}
         onHide={() => {}}
         onSuccess={() => {}}
-        initiativeMediaType="sentence"
+        reportSubheadingText="asrContributeReportModalSubHeading"
         initiative="suno"
       />
     );

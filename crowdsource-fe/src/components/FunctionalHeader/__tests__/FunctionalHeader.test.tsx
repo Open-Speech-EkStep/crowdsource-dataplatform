@@ -8,7 +8,7 @@ describe('FunctionalHeader', () => {
       <FunctionalHeader
         onSuccess={() => {}}
         initiative="suno"
-        initiativeMediaType="sentence"
+        type="contribute"
         action="transcribe"
         showSpeaker={true}
       />

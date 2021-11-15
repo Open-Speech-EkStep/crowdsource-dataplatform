@@ -269,7 +269,7 @@ const SunoValidate = () => {
       <div className="pt-4 px-2 px-lg-0 pb-8">
         <FunctionalHeader
           onSuccess={onSkipContribution}
-          initiativeMediaType="sentence"
+          type="validate"
           initiative={INITIATIVES_MAPPING.suno}
           action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.suno]['validate']}
         />
