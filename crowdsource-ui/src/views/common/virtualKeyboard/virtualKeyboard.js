@@ -29,11 +29,21 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
     }
-
     const previousActiveError = $("#edit-error-text .error-active");
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-error-row").addClass('d-none');
     $("#edit-text").add($('#edit-text-asr')).removeClass('edit-error-area').addClass('edit-text');
+  } else if(error && error.type == 'auto-validation'){
+    $submitEditButton.removeAttr('disabled');
+    const $editErrorText = $("#edit-error-text");
+    if ($cancelButton) {
+      $cancelButton.removeAttr('disabled');
+    }
+    const previousActiveError = $editErrorText.find('.error-active');
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
+    $("#edit-text").add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
+    $("#edit-error-row").removeClass('d-none');
   } else {
     if (error && error.type == 'noText') {
       callback2()
@@ -198,9 +208,10 @@ function lngtype(text) {
   });
 
   const refText = $('#captured-text').text();
-  console.log('auto ', overlap_score(refText, text))
-  if (overlap_score(refText, text)) {
-    error = { type: 'auto-validation' }
+  if(langdic[contributionLanguage].test(newText)) {
+    if (overlap_score(refText, text)) {
+      return { type: 'auto-validation' }
+    }
   }
 
   return error;

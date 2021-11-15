@@ -118,7 +118,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -129,7 +129,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Bengali');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -140,7 +140,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -151,18 +151,18 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Hindi');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
 
-  test("should give error as null any module when character is any number for Kannada", () => {
+  test("should give error as auto-validation any module when character is any number for Kannada", () => {
     mockLocalStorage();
     // \=-.,@/<>?';:,"[]{}|+_)(*&^%$#@!~,.\=-`!/।|
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Kannada');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -173,7 +173,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Malayalam');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -184,7 +184,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Marathi');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -195,7 +195,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Odia');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -206,7 +206,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Punjabi');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -217,7 +217,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Tamil');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -228,7 +228,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.asr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
     numbers.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -239,7 +239,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Assamese');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -250,7 +250,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Bengali');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -261,7 +261,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Gujarati');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -273,7 +273,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Hindi');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -285,7 +285,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Kannada');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -296,7 +296,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Malayalam');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -307,7 +307,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Marathi');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -318,7 +318,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Odia');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -329,7 +329,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Punjabi');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -340,7 +340,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Tamil');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -351,7 +351,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.parallel.value);
     localStorage.setItem(PARALLEL_TO_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -362,7 +362,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Telugu');
     specialSymbols.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -380,7 +380,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'Assamese');
     characters.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
@@ -393,7 +393,7 @@ describe("lngtype", () => {
     localStorage.setItem(CURRENT_MODULE, INITIATIVES.ocr.value);
     localStorage.setItem(CONTRIBUTION_LANGUAGE, 'English');
     characters.forEach(symbol => {
-      expect(lngtype(symbol)).toEqual(null);
+      expect(lngtype(symbol)).toEqual({"type": "auto-validation"});
     })
     localStorage.clear();
   })
