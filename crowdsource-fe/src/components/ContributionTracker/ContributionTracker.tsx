@@ -11,6 +11,7 @@ import {
   INITIATIVE_MEDIA_CONTRIBUTION_MAPPING,
   INITIATIVES_MEDIA,
   INITIATIVES_MEDIA_MAPPING,
+  INITIATIVES_MAPPING,
 } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
@@ -158,6 +159,12 @@ const ContributionTracker = (props: ContributionTrackerProps) => {
         chartFilterType === 'byDuration'
           ? getTopLanguagesByHoursChartData(
               INITIATIVE_MEDIA_CONTRIBUTION_MAPPING[INITIATIVES_MEDIA_MAPPING[props.initiative]],
+              INITIATIVES_MEDIA_MAPPING[props.initiative],
+              topLanguageHrsData
+            )
+          : props.initiative === INITIATIVES_MAPPING.suno
+          ? getTopLanguagesByHoursChartData(
+              INITIATIVE_MEDIA_CONTRIBUTION_MAPPING[INITIATIVES_MEDIA_MAPPING.dekho],
               INITIATIVES_MEDIA_MAPPING[props.initiative],
               topLanguageHrsData
             )
