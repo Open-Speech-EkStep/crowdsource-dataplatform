@@ -42,7 +42,7 @@ const run = async () => {
 
         const info = await dbOperations.getContributionInfo(contributionId);
 
-        let allowValidation: boolean = false;
+        let allowValidation: boolean = true;
 
         if (info != null) {
           console.log(info);
