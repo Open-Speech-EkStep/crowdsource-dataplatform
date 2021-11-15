@@ -6,7 +6,7 @@ import ContributeMore from '../ContributeMore';
 
 describe('ContributeMore', () => {
   const setup = (
-    initiative: string,
+    initiative: 'suno' | 'bolo' | 'likho' | 'dekho',
     source: 'contribute' | 'validate',
     nextMileStone: number,
     contributionCount: number,

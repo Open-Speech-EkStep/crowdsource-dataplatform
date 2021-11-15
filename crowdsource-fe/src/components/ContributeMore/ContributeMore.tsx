@@ -5,17 +5,19 @@ import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import Link from 'components/Link';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import { pageSourceConstants } from 'constants/pageRouteConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
+import type { Initiative } from 'types/Initiatives';
 import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
 
 import styles from './ContributeMore.module.scss';
 
 interface ContributeMoreProps {
-  initiative: string;
+  initiative: Initiative;
   source: string;
   url: string;
   nextMileStone: number;
@@ -97,8 +99,12 @@ const ContributeMore = ({
         ) : (
           <p className={`${styles.text} mt-3 mt-md-0 ms-md-3 display-4`}>
             <Trans
-              i18nKey={`${source}RemainingText`}
-              defaults="contributeRemainingText"
+              i18nKey={`${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                source
+              )}RemainingText`}
+              defaults={`${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                source
+              )}RemainingText`}
               values={{
                 count: nextMileStone - contributionCount,
                 sourceType: t(`${pageMediaTypeStr}` as string).toLowerCase(),

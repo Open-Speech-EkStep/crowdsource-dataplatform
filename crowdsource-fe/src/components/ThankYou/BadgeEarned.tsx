@@ -89,10 +89,9 @@ const BadgeEarned = ({
   const { t } = useTranslation();
 
   const initiativeName = `${t(INITIATIVES_MAPPING[initiative])} ${t('india')}`;
-  const subHeaderKey =
-    source === 'contribute'
-      ? `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(source)}EarnedBadgeSubheader`
-      : `${source}EarnedBadgeSubheader`;
+  const subHeaderKey = `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+    source
+  )}EarnedBadgeSubheader`;
 
   return (
     <ContributionDetails

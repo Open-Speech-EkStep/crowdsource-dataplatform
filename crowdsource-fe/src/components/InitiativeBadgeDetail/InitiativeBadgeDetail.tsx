@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Medal from 'components/Medal';
 import TriColorGradientBg from 'components/TriColorGradientBg';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MEDIA_MAPPING, INITIATIVE_MEDIA_BADGES_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import { useFetchWithInit } from 'hooks/useFetch';
 import type { Initiative } from 'types/Initiatives';
@@ -132,7 +132,7 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
                       initiativeName: capitalizeFirstLetter(`${t(initiative)} ${t('india')}`),
                       badge: capitalizeFirstLetter(t(selectedMedal.toLowerCase())),
                       language: capitalizeFirstLetter(t(language.toLowerCase())),
-                      sourceType: t(INITIATIVE_MEDIA_BADGES_MAPPING[initiative]),
+                      sourceType: t(`${INITIATIVES_MEDIA_MAPPING[initiative]}SourceType`).toLocaleLowerCase(),
                       count: contributionCount,
                     }}
                     components={{ span: <span className="text-warning" /> }}

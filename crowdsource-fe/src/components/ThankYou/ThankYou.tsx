@@ -118,11 +118,14 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
         {!rewardData?.isNewBadge && rewardData?.contributionCount !== 0 && (
           <h2 className="text-center">
             <Trans
-              i18nKey={`${pageSourceConstants2[route.asPath]}Message`}
-              defaults="contributedMessage"
+              i18nKey={`${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                pageSourceConstants2[route.asPath]
+              )}Message`}
+              defaults={`${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
+                pageSourceConstants2[route.asPath]
+              )}Message`}
               values={{
                 count: rewardData?.contributionCount,
-                sourceType: (t(`${pageMediaTypeConstants[route.asPath]}`) as string).toLowerCase(),
               }}
               components={{ span: <span className={styles.count} /> }}
             />{' '}

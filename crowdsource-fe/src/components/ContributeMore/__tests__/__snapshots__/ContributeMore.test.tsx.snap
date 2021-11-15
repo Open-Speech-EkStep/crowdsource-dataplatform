@@ -131,7 +131,7 @@ exports[`ContributeMore should render the component and matches it against store
       <p
         class="text mt-3 mt-md-0 ms-md-3 display-4"
       >
-        contributeRemainingText
+        asrContributeRemainingText
       </p>
       <a
         class="text mt-4 mt-md-0 display-5 ms-md-3 flex-shrink-0"

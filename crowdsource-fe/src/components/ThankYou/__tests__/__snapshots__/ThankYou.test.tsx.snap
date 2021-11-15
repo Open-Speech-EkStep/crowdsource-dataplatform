@@ -202,7 +202,7 @@ exports[`ThankYou should render the component and matches it against stored snap
         <p
           class="text mt-3 mt-md-0 ms-md-3 display-4"
         >
-          contributeRemainingText
+          asrContributeRemainingText
         </p>
         <div
           class="disabled d-flex justify-content-center mt-4 mt-md-0 mb-3 mb-md-0"
