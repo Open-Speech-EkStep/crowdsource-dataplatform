@@ -414,7 +414,6 @@ const generateAnonymousState = function(result, initiative){
           $statePopover.css('background-color', '#92A8E8');
           $statePopoverAfter.css('border-color','#92A8E8 transparent transparent transparent');
         } else if (totalParticipation > 0) {
-          console.log("here");
           $statePopover.css('background-color', '#CDD8F6');
           $statePopoverAfter.css('border-color','#CDD8F6 transparent transparent transparent');
         } else {

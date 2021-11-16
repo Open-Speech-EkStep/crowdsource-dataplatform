@@ -82,7 +82,6 @@ const getLanguageStats = function () {
     const filteredDataByLanguage = jsonData.filter(d => d.type == INITIATIVES.text.type);
     const top_languages_by_hours = filteredDataByLanguage.length ? filteredDataByLanguage : defaultData;
 
-    console.log("here");
     if (top_languages_by_hours.length > 0) {
       localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
       const languages = getTopLanguage(

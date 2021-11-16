@@ -381,6 +381,10 @@ body.modal-open .supreme-container {
 }
 
 @media screen and (max-width: 767px) {
+  #back-btn {
+    display: none;
+  }
+  
   .state-popover  {
     width: max-content;
     height: 150px;

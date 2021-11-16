@@ -518,6 +518,10 @@ audio {
 }
 
 @media (max-width: 767px) {
+  #back-btn {
+    display: none;
+  }
+  
   .test-mic-speaker {
     padding: 0;
   }

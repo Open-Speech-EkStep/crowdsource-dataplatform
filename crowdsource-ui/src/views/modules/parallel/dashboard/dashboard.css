@@ -379,6 +379,10 @@ body.modal-open .supreme-container {
 }
 
 @media screen and (max-width: 767px) {
+  #back-btn {
+    display: none;
+  }
+  
   .contribution-details {
     padding: 0 3rem;
   }

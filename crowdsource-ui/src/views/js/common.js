@@ -564,7 +564,6 @@ const hasUserRegistered = function () {
 };
 
 const showOrHideExtensionCloseBtn = function () {
-  // console.log("here")
   // if(!isKeyboardExtensionPresent()){
   //   console.log("not present")
   //   $('#extension-bar-close-btn').addClass('d-none');

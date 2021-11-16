@@ -132,7 +132,7 @@ a {
     left: -4px;
   }
 
-  .top-back-btn .back-text {
+  .top-back-btn .back-text,#back-btn {
     display: none;
   }
 
