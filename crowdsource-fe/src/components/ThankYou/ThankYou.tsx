@@ -176,6 +176,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                       language: translatedContributionLanguage,
                     })}
                     showHeader={false}
+                    source={pageSourceConstants[route.asPath]}
                   />
                 }
               />
@@ -210,6 +211,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                         language: translatedContributionLanguage,
                       })}
                       showHeader={false}
+                      source={pageSourceConstants[route.asPath]}
                     />
                   }
                 />
@@ -244,6 +246,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                         language: translatedContributionLanguage,
                       })}
                       showHeader={true}
+                      source={pageSourceConstants[route.asPath]}
                     />
                   }
                 />

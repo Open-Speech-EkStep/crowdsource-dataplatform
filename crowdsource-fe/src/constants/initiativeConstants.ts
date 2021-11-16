@@ -89,7 +89,7 @@ export const CONTRIBUTION_MAPPING = {
   [routePaths.sunoIndiaContributeThankYou]: 'total_contribution_count',
   [routePaths.sunoIndiaValidateThankYou]: 'total_validation_count',
   [routePaths.boloIndiaContributeThankYou]: 'total_contributions',
-  [routePaths.boloIndiaValidateThankYou]: 'total_validations',
+  [routePaths.boloIndiaValidateThankYou]: 'total_validation_count',
   [routePaths.dekhoIndiaContributeThankYou]: 'total_contribution_count',
   [routePaths.dekhoIndiaValidateThankYou]: 'total_validation_count',
   [routePaths.likhoIndiaContributeThankYou]: 'total_contribution_count',

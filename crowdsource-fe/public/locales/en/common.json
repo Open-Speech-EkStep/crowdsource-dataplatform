@@ -324,7 +324,7 @@
   "asrContributeRemainingText": "Contribute <strong>{{count}}</strong> <strong>sentence(s)</strong> to earn your {{nextBadgeType}} Badge.",
   "ocrContributeRemainingText": "Contribute <strong>{{count}}</strong> <strong>image label(s)</strong> to earn your {{nextBadgeType}} Badge.",
   "parallelContributeRemainingText": "Contribute <strong>{{count}}</strong> <strong>sentence(s)</strong> to earn your {{nextBadgeType}} Badge.",
-  "textValidateRemainingText": "Validate <strong>{{count}}</strong> <strong>recording(s)</strong> to earn your {{nextBadgeType}} Badge.",
+  "textValidateRemainingText": "Validate <strong>{{count}}</strong> <strong>sentence(s)</strong> to earn your {{nextBadgeType}} Badge.",
   "asrValidateRemainingText": "Validate <strong>{{count}}</strong> <strong>sentence(s)</strong> to earn your {{nextBadgeType}} Badge.",
   "ocrValidateRemainingText": "Validate <strong>{{count}}</strong> <strong>image label(s)</strong> to earn your {{nextBadgeType}} Badge.",
   "parallelValidateRemainingText": "Validate <strong>{{count}}</strong> <strong>sentence(s)</strong> to earn your {{nextBadgeType}} Badge.",
@@ -361,5 +361,6 @@
   "stopRecording": "Stop Recording",
   "reRecord": "Re-record",
   "audioValidationMessage": "Audio recording is too small. Please Re-record",
-  "remainingAudioTextDurationWarning": "Recording will automatically stop after {{remainingSec}} seconds"
+  "remainingAudioTextDurationWarning": "Recording will automatically stop after {{remainingSec}} seconds",
+  "incorrect": "Incorrect"
 }

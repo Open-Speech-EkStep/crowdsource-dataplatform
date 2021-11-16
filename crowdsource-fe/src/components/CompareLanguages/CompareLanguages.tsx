@@ -61,6 +61,7 @@ const getTopLanguagesByHoursChartData = (
   contributionValue: string,
   initiativeType: InitiativeType,
   key: string,
+  source: string,
   topLanguagesByHours?: TopLanguagesByHours[]
 ) => {
   return (
@@ -68,7 +69,9 @@ const getTopLanguagesByHoursChartData = (
       category: translateCategory(topLanguageByHours?.language),
       value: (topLanguageByHours as any)[contributionValue],
       tooltipText: isBoloInitiative(initiativeType)
-        ? convertTimeFormat(topLanguageByHours?.total_contributions)
+        ? source === 'contribute'
+          ? convertTimeFormat(topLanguageByHours[key])
+          : `${topLanguageByHours[key]} ${i18n?.t(`asrBarGraphTooltip`)}`
         : `${topLanguageByHours[key]} ${i18n?.t(`${initiativeType}BarGraphTooltip`)}`,
     })) ?? []
   );
@@ -81,6 +84,7 @@ interface CompareLanguagesProps {
   isTopLanguage: any;
   graphHeading: string;
   showHeader: boolean;
+  source: string;
 }
 
 const CompareLanguages = (props: CompareLanguagesProps) => {
@@ -155,13 +159,21 @@ const CompareLanguages = (props: CompareLanguagesProps) => {
         props.dataBindigValue,
         INITIATIVES_MEDIA_MAPPING[props.initiative],
         props.dataBindigValue,
+        props.source,
         topLanguageHrsData
       ),
       yAxisLabel: props.graphLabel,
       bgColor: '#333',
       ...chartLegendDetails,
     }),
-    [chartLegendDetails, props.dataBindigValue, props.graphLabel, props.initiative, topLanguageHrsData]
+    [
+      chartLegendDetails,
+      props.dataBindigValue,
+      props.graphLabel,
+      props.initiative,
+      props.source,
+      topLanguageHrsData,
+    ]
   );
 
   return barChartData.data.length ? (

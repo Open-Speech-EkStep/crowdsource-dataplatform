@@ -7,7 +7,7 @@ import { render, screen, waitFor } from 'utils/testUtils';
 import CompareLanguages from '../CompareLanguages';
 
 describe('CompareLanguages', () => {
-  const setup = async (initiative: 'suno' | 'likho' | 'bolo' | 'dekho') => {
+  const setup = async (initiative: 'suno' | 'likho' | 'bolo' | 'dekho', source: string) => {
     const language = 'Hindi';
 
     when(localStorage.getItem)
@@ -85,6 +85,7 @@ describe('CompareLanguages', () => {
         isTopLanguage={() => {}}
         graphHeading="Participate to keep Bengali in top 3"
         showHeader={true}
+        source={source}
       />
     );
     await waitFor(() => {
@@ -97,19 +98,19 @@ describe('CompareLanguages', () => {
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup('suno');
+    const { asFragment } = await setup('suno', 'contribute');
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should render the chart component after api gives data', async () => {
-    await setup('likho');
+    await setup('likho', 'contribute');
 
     expect(screen.getByTestId('CompareLanguages').children.length).toBe(3);
   });
 
   it('should render the chart component for bolo india after api gives data', async () => {
-    await setup('bolo');
+    await setup('bolo', 'validate');
 
     expect(screen.getByTestId('CompareLanguages').children.length).toBe(3);
   });

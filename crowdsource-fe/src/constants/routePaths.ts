@@ -16,7 +16,7 @@ const routePaths: { [key: string]: string } = {
   sunoIndiaDashboard: `${initiativeBaseRoute.sunoIndia}/dashboard`,
   boloIndiaHome: `${initiativeBaseRoute.boloIndia}`,
   boloIndiaContribute: `${initiativeBaseRoute.boloIndia}/contribute`,
-  boloIndiaValidate: `${initiativeBaseRoute.boloIndia}/validate.html`,
+  boloIndiaValidate: `${initiativeBaseRoute.boloIndia}/validate`,
   boloIndiaDashboard: `${initiativeBaseRoute.boloIndia}/dashboard`,
   boloIndiaContributeThankYou: `${initiativeBaseRoute.boloIndia}/contribute/thank-you`,
   boloIndiaValidateThankYou: `${initiativeBaseRoute.boloIndia}/validate/thank-you`,

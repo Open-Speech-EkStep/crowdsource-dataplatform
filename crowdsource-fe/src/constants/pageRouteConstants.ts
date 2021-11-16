@@ -10,6 +10,7 @@ export const pageRouteConstants = {
   [routePaths.sunoIndiaContribute]: 'Transcribe',
   [routePaths.sunoIndiaValidate]: 'Validate',
   [routePaths.boloIndiaContribute]: 'Speak',
+  [routePaths.boloIndiaValidate]: 'Validate',
   [routePaths.likhoIndiaContribute]: 'Translate',
   [routePaths.likhoIndiaValidate]: 'Validate',
   [routePaths.dekhoIndiaContribute]: 'Label',

@@ -12,14 +12,15 @@ interface ButtonControlProps {
   onPlay?: () => void;
   onPause?: () => void;
   onReplay?: () => void;
-  onSubmit: () => void;
-  onCancel: () => void;
+  onSubmit?: () => void;
+  onCancel?: () => void;
   onSkip: () => void;
   onNeedsChange?: () => void;
   onCorrect?: () => void;
   onStart?: () => void;
   onStop?: () => void;
   onRerecord?: () => void;
+  onIncorrect?: () => void;
   playButton?: boolean;
   pauseButton?: boolean;
   replayButton?: boolean;
@@ -34,6 +35,8 @@ interface ButtonControlProps {
   startRecordingButton?: boolean;
   stopRecordingButton?: boolean;
   reRecordButton?: boolean;
+  incorrectButton?: boolean;
+  incorrectDisable?: boolean;
 }
 
 const ButtonControls = ({
@@ -48,6 +51,7 @@ const ButtonControls = ({
   onStart,
   onStop,
   onRerecord,
+  onIncorrect,
   playButton = true,
   pauseButton = false,
   replayButton = false,
@@ -62,6 +66,8 @@ const ButtonControls = ({
   startRecordingButton = false,
   stopRecordingButton = false,
   reRecordButton = false,
+  incorrectButton = false,
+  incorrectDisable = true,
 }: ButtonControlProps) => {
   const { t } = useTranslation();
 
@@ -76,6 +82,19 @@ const ButtonControls = ({
             className="mx-md-6 order-2 order-md-1 my-2 my-md-0"
           >
             {t('cancel')}
+          </Button>
+        )}
+        {incorrectButton && (
+          <Button
+            onClick={onIncorrect}
+            disabled={incorrectDisable}
+            variant="secondary"
+            className={`${styles.needsChangeBtn} mx-md-6 order-2 order-md-1 my-2 my-md-0`}
+          >
+            <span className={classNames(`d-flex me-2`, { [styles.correctDisabled]: correctDisable })}>
+              <Image src="/images/correct.svg" width="24" height="24" alt="InCorrect Icon" />
+            </span>
+            {t('incorrect')}
           </Button>
         )}
         {startRecordingButton && (

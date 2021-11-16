@@ -29,6 +29,7 @@ const apiPaths = {
   mediaParallel: nodeConfig.apiUrl + '/media/parallel',
   mediaOCR: nodeConfig.apiUrl + '/media/ocr',
   contributionsAsr: nodeConfig.apiUrl + '/contributions/asr',
+  contributionsText: nodeConfig.apiUrl + '/contributions/text',
   contributionsParallel: nodeConfig.apiUrl + '/contributions/parallel',
   contributionsOCR: nodeConfig.apiUrl + '/contributions/ocr',
   store: nodeConfig.apiUrl + '/store',

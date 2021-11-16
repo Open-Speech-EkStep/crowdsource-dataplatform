@@ -85,6 +85,11 @@ describe('ContributionTracker', () => {
           total_speakers: 13,
           type: 'asr',
         },
+        {
+          language: 'Hindi',
+          total_speakers: 13,
+          type: 'text',
+        },
       ])
     );
 
@@ -116,8 +121,15 @@ describe('ContributionTracker', () => {
     expect(screen.getByText('contributionTrackerSubHeader2')).toBeInTheDocument();
   });
 
-  it('should render the chart for speaker data', async () => {
+  it('should render the chart for sentence data', async () => {
     await setup('suno');
+
+    userEvent.click(screen.getAllByRole('radio')[1]);
+    expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
+  });
+
+  it('should render the chart for speaker data', async () => {
+    await setup('bolo');
 
     userEvent.click(screen.getAllByRole('radio')[1]);
     expect(screen.getByTestId('ContributionTracker').children.length).toBe(4);
