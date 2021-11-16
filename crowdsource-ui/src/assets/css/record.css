@@ -278,7 +278,7 @@ audio {
 .validation-instruction {
   background-color: #343a40;
   border-radius: 4px;
-  height: 130px;
+  height: fit-content;
   padding: 20px;
 }
 
@@ -299,7 +299,7 @@ audio {
   color: #ffffff;
   width: 130px;
   font-size: 12px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
 }
@@ -376,6 +376,31 @@ audio {
     top: 27px;
   }
 
+  .fourth {
+    margin-bottom: 16px;
+  }
+
+  .last {
+    width: 140px;
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+
+  .quick-tips-text {
+    margin-top: 0 !important;
+    margin-left: 8px;
+  }
+  .xs-p-16 {
+    padding: 16px;
+  }
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .instruction-box {
+    width: 100px;
+  }
+
   .third:after {
     width: 0% !important;
   }
@@ -396,33 +421,80 @@ audio {
     top: 27px !important;
     left: 100% !important;
   }
-  .quick-tips-text {
-    margin-top: 0 !important;
-    margin-left: 8px;
-  }
-  .xs-p-16 {
-    padding: 16px;
-  }
 }
 
-@media screen and (min-width: 360px) and (max-width: 375px) {
+@media (max-width: 280px){
   .instruction-box {
     width: 100px;
   }
+  .second:after , .fourth:after{
+    width: 0% !important;
+  }
+
+  .fourth, .third {
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+
+  .last {
+    width: 140px;
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
 }
- 
-@media screen and (min-width: 376px) and (max-width: 599px) {
+
+@media screen and (min-width: 415px) and (max-width: 599px) {
   .instruction-box {
     width: 110px;
+  }
+
+  .fourth {
+    margin-bottom: 16px;
+  }
+
+  .fourth:after {
+    width: 0% !important;
+  }
+
+  .last {
+    width: 140px;
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+}
+
+
+@media screen and (min-width: 376px) and (max-width: 414px) {
+  .instruction-box {
+    width: 110px;
+  }
+  .third:after {
+    width: 0% !important;
+  }
+
+  .fourth {
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+
+  .last {
+    width: 140px;
+    margin-top: 25px;
+    margin-bottom: 16px;
+  }
+
+  .fourth:after {
+    width: 80% !important;
+    top: 27px !important;
+    left: 100% !important;
   }
 }
 
 @media screen and (min-width: 599px) and (max-width: 768px) {
   .instruction-box {
-    width: 195px;
+    width: 100px;
   }
 }
-
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .instruction-box:not(.first):before, .instruction-box:not(.last):after  {
