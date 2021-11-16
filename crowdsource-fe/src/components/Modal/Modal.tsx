@@ -15,6 +15,8 @@ interface ModalProps {
   size?: 'sm' | 'lg' | 'xl';
   show?: Boolean;
   onHide?: () => void;
+  backdrop?: string;
+  closeButton?: boolean;
 }
 
 const Modal = ({
@@ -25,6 +27,8 @@ const Modal = ({
   footer = null,
   show = false,
   onHide = noop,
+  backdrop = '',
+  closeButton = true,
   ...rest
 }: ModalProps) => {
   const hasHeader = title || subTitle;
@@ -40,8 +44,9 @@ const Modal = ({
       scrollable
       show={show}
       onHide={onHide}
+      backdrop={backdrop}
     >
-      <ReactBootstrapModal.Header closeButton>
+      <ReactBootstrapModal.Header closeButton={closeButton}>
         {hasHeader && (
           <header className={classnames(styles.header, 'text-center flex-grow-1 pb-2 pb-md-3')}>
             {title && <h3>{title}</h3>}

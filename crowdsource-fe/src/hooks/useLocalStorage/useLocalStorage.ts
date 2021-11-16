@@ -28,15 +28,16 @@ const getItemFromLocalStorage = <T>(key: string, fallbackValue: T) =>
 
 const useLocalStorage = <T = {}>(key: string, initialValue: T | null = null) => {
   const [storedItem, setStoredItem] = useState(initialValue);
+  const [storageObj, setStorageObj] = useState({ oldValue: '', newValue: '', key: '' });
 
   useEffect(() => {
     setStoredItem(getItemFromLocalStorage(key, initialValue));
   }, [initialValue, key]);
 
   useEffect(() => {
-    const storageListener = ({ key: storageKey, newValue }: StorageEvent) => {
+    const storageListener = ({ key: storageKey, oldValue, newValue }: StorageEvent) => {
       if (storageKey === key) {
-        setStoredItem(parseJSON(newValue, initialValue));
+        setStorageObj({ key: storageKey, oldValue: <string>oldValue, newValue: <string>newValue });
       }
     };
 
@@ -79,8 +80,7 @@ const useLocalStorage = <T = {}>(key: string, initialValue: T | null = null) => 
       })
     );
   }, [key, initialValue]);
-
-  return [storedItem, setItem, removeItem] as const;
+  return [storedItem, setItem, removeItem, storageObj] as const;
 };
 
 export default useLocalStorage;

@@ -46,19 +46,24 @@ describe('#useLocalStorage', () => {
   });
 
   it('should update value when "storage" event is dispatched with correct key', () => {
-    const value = 'value';
+    const newValue = 'new value';
+    const oldValue = 'old value';
     const { renderHookResult, localStorageKey } = setup();
 
     act(() => {
       const storageEvent = new StorageEvent('storage', {
         key: localStorageKey,
-        newValue: value,
+        newValue: newValue,
+        oldValue: oldValue,
       });
 
       window.dispatchEvent(storageEvent);
     });
-
-    expect(renderHookResult.result.current[0]).toBe(value);
+    expect(renderHookResult.result.current[renderHookResult.result.current.length - 1]).toEqual({
+      key: localStorageKey,
+      newValue: newValue,
+      oldValue: oldValue,
+    });
   });
 
   it('should not update value when "storage" event is dispatched with different key', () => {
