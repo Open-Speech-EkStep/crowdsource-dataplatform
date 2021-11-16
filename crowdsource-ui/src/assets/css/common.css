@@ -455,15 +455,15 @@ body {
 
   .btn-custom-primary {
     min-width: 240px;
-    max-width: 240px;
+    max-width: max-content;
   }
 
   .btn-custom-outline-primary {
     min-width: 240px;
-    max-width: 240px;
+    max-width: max-content;
   }
   .btn-transparent {
-    max-width: 140px;
+    max-width: max-content;
     min-width: 140px;
     font-size: 18px !important;
   }
