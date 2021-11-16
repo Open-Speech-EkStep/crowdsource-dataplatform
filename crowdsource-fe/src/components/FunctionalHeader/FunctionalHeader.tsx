@@ -19,6 +19,7 @@ const FunctionalHeader = ({
   initiative,
   action,
   showSpeaker = true,
+  showMic = false,
 }: FunctionalHeaderProps) => {
   return (
     <header>
@@ -30,7 +31,7 @@ const FunctionalHeader = ({
           </div>
           {showSpeaker && (
             <div className="ms-2 ms-md-4">
-              <TestSpeakerMic showSpeaker={true} />
+              <TestSpeakerMic showSpeaker={true} showMic={showMic} />
             </div>
           )}
         </div>

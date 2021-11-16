@@ -26,7 +26,7 @@ export const reportFieldsConstant: any = {
       label: 'offensive',
       value: 'Offensive',
       isSubtext: true,
-      subtext: 'Hurting sentiments of religion, community or abusive content etc.',
+      subtext: 'hurtingStatement',
     },
     {
       label: 'Prohibited Content',
@@ -38,13 +38,13 @@ export const reportFieldsConstant: any = {
       label: 'Political Statement',
       value: 'Political Statement',
       isSubtext: true,
-      subtext: 'Hateful Political views, amplifying hate-speech etc.',
+      subtext: 'hatefulPolitical',
     },
     {
       label: 'Misinformation',
       value: 'Misinformation',
       isSubtext: true,
-      subtext: 'Hearsay / Rumors, deliberate falsified facts etc.',
+      subtext: 'herseyRumors',
     },
     {
       label: 'others',

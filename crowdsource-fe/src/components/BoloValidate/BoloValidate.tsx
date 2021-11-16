@@ -289,9 +289,7 @@ const BoloValidate = () => {
         url={routePaths.boloIndiaHome}
         title={t('textValidateNoDataThankYouMessage')}
         text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
-        buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.bolo)} ${t('india')}`,
-        })}
+        buttonLabel={t('textBackToInitiativePrompt')}
       />
     </div>
   );

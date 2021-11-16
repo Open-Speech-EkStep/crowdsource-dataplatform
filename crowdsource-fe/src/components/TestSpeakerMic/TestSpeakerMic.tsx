@@ -16,12 +16,26 @@ interface TestSpeakerProps {
 const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const { t } = useTranslation();
   const [showMicSpeaker, setShowMicSpeaker] = useState(false);
+  const [showTestMicText, setShowTestMicText] = useState(true);
+
+  const [remainingSec, setRemainingSec] = useState(5);
+
   const [speakerText, setSpeakerText] = useState('testSpeakers');
+
+  const [noiseMessage, setNoiseMessage] = useState('Low/No Background Noise');
+
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
   const context: any = useRef<AudioContext>();
   const mediaElementSrc: any = useRef();
   const analyser: any = useRef();
+
+  let microphone: any = null;
+  let javascriptNode: any = null;
+  let audioData: any = [];
+  let recordingLength = 0;
+  let sampleRate = 44100;
+  let micAudio: any;
 
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
@@ -80,6 +94,180 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     playSpeaker();
   };
 
+  /* istanbul ignore next */
+  const writeUTFBytes = function (view: any, offset: any, string: any) {
+    for (let i = 0; i < string.length; i++) {
+      view.setUint8(offset + i, string.charCodeAt(i));
+    }
+  };
+  /* istanbul ignore next */
+  const generateWavBlob = (finalBuffer: any, defaultSampleRate: any) => {
+    const buffer = new ArrayBuffer(44 + finalBuffer.length * 2);
+    const view = new DataView(buffer);
+    // RIFF chunk descriptor
+    writeUTFBytes(view, 0, 'RIFF');
+    view.setUint32(4, 44 + finalBuffer.length * 2, true);
+    writeUTFBytes(view, 8, 'WAVE');
+    // FMT sub-chunk
+    writeUTFBytes(view, 12, 'fmt ');
+    view.setUint32(16, 16, true); // chunkSize
+    view.setUint16(20, 1, true); // wFormatTag
+    view.setUint16(22, 1, true); // wChannels:mono(1 channel) / stereo (2 channels)
+    view.setUint32(24, defaultSampleRate, true); // dwSamplesPerSec
+    view.setUint32(28, defaultSampleRate * 2, true); // dwAvgBytesPerSec
+    view.setUint16(32, 4, true); // wBlockAlign
+    view.setUint16(34, 16, true); // wBitsPerSample
+    // data sub-chunk
+    writeUTFBytes(view, 36, 'data');
+    view.setUint32(40, finalBuffer.length * 2, true);
+    // write the PCM samples
+    let index = 44;
+    const volume = 1;
+    for (let i = 0; i < finalBuffer.length; i++) {
+      view.setInt16(index, finalBuffer[i] * (0x7fff * volume), true);
+      index += 2;
+    }
+    // our final blob
+    return new Blob([view], {
+      type: 'audio/wav',
+    });
+  };
+  /* istanbul ignore next */
+  const flattenArray = (channelBuffer: any, recordingLength: any) => {
+    const result = new Float32Array(recordingLength);
+    let offset = 0;
+    for (let i = 0; i < channelBuffer.length; i++) {
+      const buffer = channelBuffer[i];
+      result.set(buffer, offset);
+      offset += buffer.length;
+    }
+    return result;
+  };
+  /* istanbul ignore next */
+  const showAmbientNoise = (noiseData: any) => {
+    setNoiseMessage(noiseData);
+  };
+  /* istanbul ignore next */
+  const ambienceNoiseCheck = async (audioBlob: any) => {
+    const fd = new FormData();
+    fd.append('audio_data', audioBlob);
+    const init = {
+      body: fd,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    const response = await fetch('/audio/snr', init);
+    // Extract json
+    const rawData: any = await response.json();
+    showAmbientNoise(rawData);
+  };
+
+  /* istanbul ignore next */
+  const getMediaRecorder = () => {
+    let max_level_L = 0;
+    let old_level_L = 0;
+    const start = () => {
+      let constraints = {
+        audio: true,
+      };
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (stream) {
+          // startRecordingTimer();
+          const AudioContext = window.AudioContext;
+          const audioContext = new AudioContext();
+          sampleRate = audioContext.sampleRate;
+          microphone = audioContext.createMediaStreamSource(stream);
+          javascriptNode = audioContext.createScriptProcessor(1024, 1, 1);
+          microphone.connect(javascriptNode);
+          javascriptNode.connect(audioContext.destination);
+          const cnvs: any = document.getElementById('audio-canvas');
+          const cnvs_cntxt = cnvs?.getContext('2d');
+          javascriptNode.onaudioprocess = function (event: any) {
+            let inpt_L = event.inputBuffer.getChannelData(0);
+            recordingLength += 1024;
+            audioData.push(new Float32Array(inpt_L));
+            let sum_L = 0.0;
+            for (let i = 0; i < inpt_L.length; ++i) {
+              sum_L += inpt_L[i] * inpt_L[i];
+            }
+            let instant_L = Math.sqrt(sum_L / inpt_L.length);
+            max_level_L = Math.max(max_level_L, instant_L);
+            instant_L = Math.max(instant_L, old_level_L - 0.008);
+            old_level_L = instant_L;
+            cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
+            cnvs_cntxt.fillStyle = '#83E561';
+            cnvs_cntxt.fillRect(0, 0, cnvs.width * (instant_L / max_level_L), cnvs.height);
+          };
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    };
+
+    const stop = () => {
+      if (microphone !== null) microphone.disconnect();
+      if (javascriptNode !== null) javascriptNode.disconnect();
+      const finalBuffer = flattenArray(audioData, recordingLength);
+      const audioBlob = generateWavBlob(finalBuffer, sampleRate);
+      if (audioBlob !== null) {
+        ambienceNoiseCheck(audioBlob);
+
+        const audioUrl = URL.createObjectURL(audioBlob);
+        micAudio = new Audio(audioUrl);
+        micAudio.onloadedmetadata = function () {
+          const audioDuration = Math.ceil(micAudio.duration * 1000);
+          setTimeout(() => {
+            // resetMicButton();
+          }, audioDuration);
+        };
+        const play = () => {
+          micAudio.play();
+        };
+        return {
+          audioBlob,
+          audioUrl,
+          play,
+        };
+      } else {
+        console.log('No blob present');
+        return null;
+      }
+    };
+    return {
+      start,
+      stop,
+    };
+  };
+
+  /* istanbul ignore next */
+  const setRecordingCount = (value: number) => {
+    if (value) {
+      const interval = setInterval(() => {
+        setRemainingSec(value);
+        value--;
+        if (value < 0) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+  };
+
+  /* istanbul ignore next */
+  const onAudioTest = () => {
+    audioData = [];
+    recordingLength = 0;
+    const media = getMediaRecorder();
+    media.start();
+    setShowTestMicText(false);
+    setRecordingCount(4);
+    setTimeout(() => {
+      const audio = media.stop();
+      setShowTestMicText(true);
+      audio?.play();
+    }, 5000);
+  };
+
   return (
     <div className="position-relative">
       <IconTextButton
@@ -107,28 +295,36 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           </Button>
           <div className={`${styles.heading} d-flex align-items-center mb-3 mt-3 mt-md-0`}>
             <Image src="/images/speaker.svg" width="24" height="24" alt="Speaker Icon" />
-            {showMic && <p className="ms-2">Test your microphone and speakers</p>}
-            {showSpeaker && <p className="ms-2">{t('testYourSpeaker')}</p>}
+            {showMic && <p className="ms-2">{t('testYourMicrophoneAndSpeakers')}</p>}
+            {showSpeaker && !showMic && <p className="ms-2">{t('testYourSpeaker')}</p>}
           </div>
           {showMic && (
             <div className="d-md-flex flex-column flex-md-row align-items-center py-3">
               <Button
                 variant="normal"
+                onClick={onAudioTest}
                 className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
               >
                 <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
-                <span className="d-flex ms-2">Test Mic</span>
+                {showTestMicText && <span className="d-flex ms-2">Test Mic</span>}
+                {!showTestMicText && (
+                  <span className="d-flex ms-2">Recording for {remainingSec} seconds</span>
+                )}
               </Button>
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">
                 <div
                   className={`${styles.bar} rounded-16 d-flex align-items-center border border-1 border-primary-20 px-1`}
                 >
-                  <span className={`${styles.progress} rounded-16 bg-success w-50`}>&nbsp;</span>
+                  <canvas
+                    id="audio-canvas"
+                    data-testid="audioCanvas"
+                    className={`${styles.progress} rounded-16 w-100`}
+                  ></canvas>
                 </div>
                 <div
                   className={`${styles.text} d-flex align-items-center mt-1 mt-md-0 justify-content-center justify-content-md-start`}
                 >
-                  Please speak clearly
+                  {noiseMessage && <span> {noiseMessage} </span>}
                 </div>
               </div>
             </div>

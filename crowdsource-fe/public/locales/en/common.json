@@ -380,5 +380,8 @@
   "reRecord": "Re-record",
   "audioValidationMessage": "Audio recording is too small. Please Re-record",
   "remainingAudioTextDurationWarning": "Recording will automatically stop after {{remainingSec}} seconds",
-  "incorrect": "Incorrect"
+  "incorrect": "Incorrect",
+  "hurtingStatement": "Hurting sentiments of religion, community or abusive content etc.",
+  "hatefulPolitical": "Hateful Political views, amplifying hate-speech etc.",
+  "herseyRumors": "Hearsay / Rumors, deliberate falsified facts etc."
 }
