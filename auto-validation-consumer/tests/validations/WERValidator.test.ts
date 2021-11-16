@@ -17,7 +17,7 @@ describe('Wer', () => {
     it('should call validate with a language that does not exist in the constant should return true', () => {
         expect(wer).toBeInstanceOf(Wer);
 
-        let result = wer.validate('Tamil', "test", "ball")
+        let result = wer.validate('French', "test", "ball")
 
         expect(result).toBeTruthy()
 

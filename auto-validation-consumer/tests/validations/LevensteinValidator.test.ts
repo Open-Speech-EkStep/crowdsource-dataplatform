@@ -16,7 +16,7 @@ describe('Levenstein', () => {
         const levenstein = new Levenstein()
         expect(levenstein).toBeInstanceOf(Levenstein);
 
-        let result = levenstein.validate('Tamil', "test", "test1234567890")
+        let result = levenstein.validate('Marathi', "test", "test1234567890")
 
         expect(result).toBeTruthy()
 
