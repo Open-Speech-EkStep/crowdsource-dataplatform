@@ -219,6 +219,10 @@ function addListeners() {
     hideElement($('#skip_button'))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'));
+    hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     ocrValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events','none');

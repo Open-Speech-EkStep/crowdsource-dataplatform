@@ -8,6 +8,7 @@ const browserify = require('gulp-browserify');
 const replace = require('gulp-replace-task');
 const replace_sting = require('gulp-replace');
 var uglify = require('gulp-uglify');
+const terser = require('gulp-terser')
 const args = require('yargs').argv;
 const fs = require('fs');
 const generateLocalisedHtmlFromEjs = require('./locales/utils/i18n-ejs-generator');
@@ -189,6 +190,10 @@ gulp.task('js', function () {
           {
             match: 'showDataSource',
             replacement: settings.showDataSource,
+          },
+          {
+            match : 'autoValidation',
+            replacement: settings.autoValidation
           }
         ],
       })
@@ -343,11 +348,15 @@ function jsGulp(moduleName) {
           {
             match: 'showDataSource',
             replacement: settings.showDataSource,
+          },
+          {
+            match : 'autoValidation',
+            replacement: settings.autoValidation
           }
         ],
       })
     )
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(gulp.dest(`target/js/${moduleName}`));
 }
 

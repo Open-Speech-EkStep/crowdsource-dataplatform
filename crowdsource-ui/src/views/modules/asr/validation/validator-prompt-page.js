@@ -397,6 +397,10 @@ function addListeners() {
     hideElement($(skipButton))
     showElement($('#thankyou-text'));
     showElement($('#progress-row'))
+    hideElement($('#edit-error-row'))
+    const previousActiveError = $("#edit-error-text .error-active");
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $("#edit-text").removeClass('edit-error-area').addClass('edit-text');
     asrValidator.editedText = $("#edit").val();
     uploadToServer();
     $("#edit").css('pointer-events', 'none');

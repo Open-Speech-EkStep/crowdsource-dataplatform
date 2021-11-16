@@ -37,7 +37,7 @@ and coalesce(mds.is_active, true) = true
 
 const getValidationDataForCaching = `select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, null as source_info, 
 cont.contributor_identifier::text || '-' || cont.user_name as contributed_by, string_agg(cont2.contributor_identifier::text || '-' || cont2.user_name, ', ') as skipped_by,
-count(distinct val.validation_id) as validation_count
+count(distinct val.validation_id) as validation_count, con.is_system auto_validate
     from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id 
 	and ds.type=$1 and con.media->>'language'=$2 and ds.state <> 'validated'
@@ -60,7 +60,7 @@ count(distinct val.validation_id) as validation_count
 
 const getParallelValidationDataForCaching = `select con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, con.contribution_id, null as source_info, 
 cont.contributor_identifier::text || '-' || cont.user_name as contributed_by, string_agg(cont2.contributor_identifier::text || '-' || cont2.user_name, ', ') as skipped_by, 
-count(distinct val.validation_id) validation_count 
+count(distinct val.validation_id) validation_count, con.is_system auto_validate
   from contributions con 
   inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and ds.type='parallel' and con.media->>'language'=$3 and ds.state <> 'validated'
   left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id

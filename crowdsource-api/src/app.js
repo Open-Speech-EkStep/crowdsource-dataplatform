@@ -51,10 +51,10 @@ const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware
 // const ddos = new Ddos({ burst: 12, limit: 70 })
 // app.use(ddos.express);
 app.use(bodyParser.json());
-morganBody(app, {
-  logAllReqHeader: true,
-  noColors: true,
-});
+// morganBody(app, {
+//     logAllReqHeader: true,
+//     noColors: true
+// });
 
 app.enable('trust proxy');
 
