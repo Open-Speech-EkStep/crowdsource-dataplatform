@@ -366,6 +366,12 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     nextBadgeLink.removeClass('disable');
 
     $('.participation-msg-section').addClass('d-flex align-items-center');
+    if(!isMobileDevice()){
+      $('.downloadable_badges').css('margin-left','10px')
+      if(data.currentBadgeType.toLowerCase() == 'platinum'){
+        $('.badges_information').css('margin-left','0px')
+      }
+    }
 
     $('#milestone_text').removeClass('d-none');
     const currentBadgeName = localeStrings[BADGES_NAME[data.currentBadgeType.toLowerCase()]];
@@ -394,6 +400,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('#contribution_text').removeClass('d-none');
   } else {
     if (data.badges && data.badges.length) {
+      !isMobileDevice() && $('.downloadable_badges').css('margin-left','10px')
       $('#showAfterBadge').removeClass('d-none');
       $('.participation-msg-section').removeClass('pt-lg-3').removeClass('pt-md-3').addClass('pt-0');
       const participateMsgWeb = $('.web-view');
@@ -492,6 +499,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('.downloadable_badges').append($badge_3_Badge);
     $('.downloadable_badges').append($badge_4_Badge);
     $badge_4_BadgeLink.removeClass('mr-3');
+    if(!isMobileDevice()){
+      $('.downloadable_badges').css('margin-left','10px')
+      $('.badges_information').css('margin-left','0px')
+    }
     $('#sentence_away_msg').addClass('d-none');
     if (isLanguageOnTop) {
       $('#badge_4_reward_msg_1').removeClass('d-none');

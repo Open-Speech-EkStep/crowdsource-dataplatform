@@ -128,10 +128,6 @@ h4,
   padding: 0 1.5rem 1.5rem 1.5rem;
 }
 
-#sentence_away_msg {
-  width: 100%;
-}
-
 .sentence_away_msg {
   font-weight: 400;
   font-size: 18px;
@@ -216,7 +212,7 @@ h4,
 }
 
 .thankyou-Know-More {
-  width: 30%;
+  margin: 10px;
   font-size: 16px;
   line-height: 19px;
   color: #007bff;
@@ -224,14 +220,6 @@ h4,
 
 #cardWithoutBadge {
   padding-top: 24px;
-}
-
-@media screen and (min-width: 599px) {
-  .badges_information {
-    /* position: absolute; */
-
-    /* bottom: 36px; */
-  }
 }
 
 @media screen and (max-width: 767px) {
@@ -378,6 +366,10 @@ h4,
 }
 
 @media screen and (min-width: 768px) {
+  .badges_information{
+    margin-left: 10px;
+  }
+  
   .thankyou-content-wrapper {
     margin-top: 65px;
   }

@@ -6,6 +6,9 @@
   bottom: 0;
   border-radius: 20px;
   padding: 3px 12px 7px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 
 /* mobile */
@@ -20,6 +23,13 @@
 
   .share-on {
     line-height: 21px;
+  }
+}
+
+@media (min-width: 768px) {
+  .social-share-block {
+    flex-wrap: wrap;
+    max-width: 230px;
   }
 }
 
