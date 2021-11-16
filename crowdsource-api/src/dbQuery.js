@@ -136,7 +136,7 @@ and (is_profane=false)
  limit 5`;
 
 const getContributionListQuery = `
-select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info
+select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, con.is_system auto_validate
 from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
 	and ds.type=$2
@@ -153,7 +153,7 @@ from contributions con
 	limit 5;`
 
 const getContributionListForParallel = `
-select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info
+select con.contribution_id, con.dataset_row_id, ds.media->>'data' as sentence, con.media->>'data' as contribution, null as source_info, con.is_system auto_validate
 from contributions con 
     inner join dataset_row ds on ds.dataset_row_id=con.dataset_row_id and con.contributed_by!=$1
 	and ds.type=$2 and con.media->>'language'=$4
@@ -181,10 +181,10 @@ select 'completed', $1, now(), $2, $6, $7, json_build_object('data', $3, 'type',
   where (select count(1) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
  (select value from configurations where config_name = 'contribution_count');`;
 
-const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media", "device", "browser")
-select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4), $7, $8 
+const updateContributionDetailsWithUserInput = `insert into "contributions" ("action","dataset_row_id", "date", "contributed_by", "state_region", "country", "media", "device", "browser", "allow_validation")
+select 'completed', $1, now(), $2, $5, $6, json_build_object('data', $3, 'type', 'text', 'language', $4), $7, $8, $9 
   where (select count(1) from contributions where dataset_row_id=$1 and media ->> 'language' = $4 and action='completed') < 
- (select value from configurations where config_name = 'contribution_count');`;
+ (select value from configurations where config_name = 'contribution_count') returning contribution_id;`;
 
 const updateMaterializedViews = 'REFRESH MATERIALIZED VIEW contributions_and_demo_stats;REFRESH MATERIALIZED VIEW daily_stats_complete;REFRESH MATERIALIZED VIEW gender_group_contributions;REFRESH MATERIALIZED VIEW age_group_contributions;REFRESH MATERIALIZED VIEW language_group_contributions;REFRESH MATERIALIZED VIEW state_group_contributions;REFRESH MATERIALIZED VIEW language_and_state_group_contributions;'
 

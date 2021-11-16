@@ -6,8 +6,11 @@
  */
 
 const { keyboardLayout } = require('./keyboardLayout');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES } = require('./constants');
+const { auto_validation } = require('./env-api');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES ,config} = require('./constants');
 const { isMobileDevice } = require('./common');
+const { getInitiativeType } = require('./utils')
+const AutoValidation = require('./AutoValidation').default;
 
 function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
@@ -28,11 +31,21 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
     }
-
     const previousActiveError = $("#edit-error-text .error-active");
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $("#edit-error-row").addClass('d-none');
     $("#edit-text").add($('#edit-text-asr')).removeClass('edit-error-area').addClass('edit-text');
+  } else if(error && error.type == 'auto-validation'){
+    $submitEditButton.removeAttr('disabled');
+    const $editErrorText = $("#edit-error-text");
+    if ($cancelButton) {
+      $cancelButton.removeAttr('disabled');
+    }
+    const previousActiveError = $editErrorText.find('.error-active');
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
+    $("#edit-text").add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
+    $("#edit-error-row").removeClass('d-none');
   } else {
     if (error && error.type == 'noText') {
       callback2()
@@ -195,6 +208,22 @@ function lngtype(text) {
       }
     }
   });
+
+  const refText = $('#captured-text').text();
+  const selectedType = localStorage.getItem('selectedType');
+  const initiativeType = getInitiativeType(currentModule);
+
+  const data = window[`${initiativeType}Validator`] || {sentences:[{}]} ;
+  const currentIndexOfData = localStorage.getItem(`${config.initiativeKey_1}ValidationCurrentIndex`) || 0;
+
+  if(auto_validation === 'enabled' && selectedType === 'validate' && data.sentences[currentIndexOfData].auto_validate){
+    if(langdic[contributionLanguage].test(newText)) {
+      if (!(AutoValidation[initiativeType](contributionLanguage,refText, text))) {
+        return { type: 'auto-validation' }
+      }
+    }
+  }
+
   return error;
 }
 
