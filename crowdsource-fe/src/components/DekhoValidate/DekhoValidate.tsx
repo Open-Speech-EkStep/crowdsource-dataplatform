@@ -119,7 +119,7 @@ const DekhoValidate = () => {
 
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}${routePaths.dekhoIndiaContributeThankYou}`, undefined, {
+      router.push(`/${currentLocale}${routePaths.dekhoIndiaValidateThankYou}`, undefined, {
         locale: currentLocale,
       });
     } else {
