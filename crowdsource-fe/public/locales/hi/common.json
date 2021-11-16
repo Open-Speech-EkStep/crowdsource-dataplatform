@@ -264,6 +264,7 @@
   "correct": "ठीक है",
   "needsChange": "बदलने की जरूरत है",
   "originalText": "मूल टेक्स्ट",
+  "capturedText": "कैप्चर किया गया टेक्स्ट",
   "yourEdit": "आपके द्वारा किए गए  बदलाव",
   "congratulationText": "नया बैज जीतने पर बधाई!",
   "contributeYourLanguage": "अपनी भाषा के लिए योगदान दें!",
@@ -378,5 +379,6 @@
   "stopRecording": "रिकॉर्ड करना बंद करें",
   "reRecord": "फिर से रिकॉर्ड करें",
   "audioValidationMessage": "ऑडियो रिकॉर्डिंग बहुत छोटी है। कृपया फिर से रिकॉर्ड करें",
-  "remainingAudioTextDurationWarning": "रिकॉर्डिंग {{remainingSec}} सेकंड के बाद अपने आप बंद हो जाएगी"
+  "remainingAudioTextDurationWarning": "रिकॉर्डिंग {{remainingSec}} सेकंड के बाद अपने आप बंद हो जाएगी",
+  "incorrect": "सही नहीं"
 }

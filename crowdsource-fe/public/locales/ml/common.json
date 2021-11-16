@@ -264,6 +264,7 @@
   "correct": "ശരിയാണ്",
   "needsChange": "മാറ്റങ്ങൾ ആവശ്യമാണ്",
   "originalText": "യഥാ൪ത്ഥ വാചകം",
+  "capturedText": "പിടിച്ചെടുത്ത വാചകം",
   "yourEdit": "നിങ്ങളുടെ എഡിറ്റ്",
   "congratulationText": "പുതിയ ബാഡ്ജ് നേടിയതിന് അഭിനന്ദനങ്ങള്‍!",
   "contributeYourLanguage": "നിങ്ങളുടെ ഭാഷയ്ക്കുവേണ്ടി സംഭാവന ചെയ്യൂ!",
@@ -378,5 +379,6 @@
   "stopRecording": "റെക്കോര്‍ഡിംഗ് നിർത്തുക",
   "reRecord": "വീണ്ടും റെക്കോർഡ് ചെയ്യുക",
   "audioValidationMessage": "ഓഡിയോ റെക്കോ൪ഡിംഗ് വളരെ ചെറുതാണ്. ദയവായി വീണ്ടും റെക്കോ൪ഡു ചെയ്യുക",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} സെക്കൻ്റിന് ശേഷം റെക്കോർഡിംഗ് താനേ അവസാനിക്കും"
+  "remainingAudioTextDurationWarning": "{{remainingSec}} സെക്കൻ്റിന് ശേഷം റെക്കോർഡിംഗ് താനേ അവസാനിക്കും",
+  "incorrect": "തെറ്റായത്"
 }

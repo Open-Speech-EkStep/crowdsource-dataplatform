@@ -258,7 +258,7 @@ const DekhoValidate = () => {
                   roundedLeft={showEditTextArea}
                   readOnly
                   readonlyAllBorders={!showEditTextArea}
-                  label={t('originalText')}
+                  label={t('capturedText')}
                   onError={() => {}}
                 />
               </div>

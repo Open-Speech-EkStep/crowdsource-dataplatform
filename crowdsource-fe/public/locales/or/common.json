@@ -264,6 +264,7 @@
   "correct": "ସଠିକ୍",
   "needsChange": "ପରିବର୍ତ୍ତନ ଆବଶ୍ୟକ",
   "originalText": "ମୂଳ ଟେକ୍ସଟ୍",
+  "capturedText": "କ୍ୟାପଚର ହୋଇଥିବା ଟେକ୍ସଟ୍",
   "yourEdit": "ଆପଣଙ୍କ ଦ୍ୱାରା କରାଯାଇଥିବା ପରିବର୍ତ୍ତନ",
   "congratulationText": "ନୂଆ ବ୍ୟାଜ ଜିତିଥିବାରୁ ଆପଣଙ୍କୁ ଅଭିନନ୍ଦନ !",
   "contributeYourLanguage": "ନିଜ ଭାଷା ପାଇଁ ଯୋଗଦାନ କରନ୍ତୁ !",
@@ -378,5 +379,6 @@
   "stopRecording": "ରେକର୍ଡ କରିବା ବନ୍ଦ କରନ୍ତୁ",
   "reRecord": "ପୁଣି ଥରେ ରେକର୍ଡ କରନ୍ତୁ",
   "audioValidationMessage": "ଅଡିଓ ରେକର୍ଡିଂ ବହୁତ ଛୋଟ ଅଟେ । ଦୟାକରି ପୁଣି ଥରେ ରେକର୍ଡ କରନ୍ତୁ",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} ସେକେଣ୍ଡ ପରେ ରେକର୍ଡିଂ ଆପେ ଆପେ  ଭାବରେ ବନ୍ଦ ହୋଇଯିବ"
+  "remainingAudioTextDurationWarning": "{{remainingSec}} ସେକେଣ୍ଡ ପରେ ରେକର୍ଡିଂ ଆପେ ଆପେ  ଭାବରେ ବନ୍ଦ ହୋଇଯିବ",
+  "incorrect": "ଠିକ ନାହିଁ"
 }

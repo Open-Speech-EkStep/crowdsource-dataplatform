@@ -264,6 +264,7 @@
   "correct": "ਸਹੀ",
   "needsChange": "ਬਦਲਣ ਦੀ ਲੋੜ ਹੈ",
   "originalText": "ਮੂਲ ਟੈਕਸਟ",
+  "capturedText": "ਕੈਪਚਰ ਕੀਤੀ ਗਈ ਟੈਕਸਟ",
   "yourEdit": "ਤੁਹਾਡੇ ਵੱਲੋਂ ਕੀਤੀ ਗਈ ਸੋਧ",
   "congratulationText": "ਨਵਾਂ ਬੈਜ ਜਿੱਤਣ 'ਤੇ ਵਧਾਈ!",
   "contributeYourLanguage": "ਆਪਣੀ ਭਾਸ਼ਾ ਦੇ ਲਈ ਯੋਗਦਾਨ ਪਾਓ!",
@@ -378,5 +379,6 @@
   "stopRecording": "ਰਿਕਾਰਡ ਕਰਨਾ ਬੰਦ ਕਰੋ",
   "reRecord": "ਮੁੜ ਰਿਕਾਰਡ ਕਰੋ",
   "audioValidationMessage": "ਆਡੀਓ ਰਿਕਾਰਡਿੰਗ ਬਹੁਤ ਛੋਟੀ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਰਿਕਾਰਡ ਕਰੋ",
-  "remainingAudioTextDurationWarning": "ਰਿਕਾਰਡਿੰਗ {{remainingSec}}ਸਕਿੰਟ ਬਾਅਦ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋ ਜਾਵੇਗੀ"
+  "remainingAudioTextDurationWarning": "ਰਿਕਾਰਡਿੰਗ {{remainingSec}}ਸਕਿੰਟ ਬਾਅਦ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋ ਜਾਵੇਗੀ",
+  "incorrect": "ਗਲਤ"
 }

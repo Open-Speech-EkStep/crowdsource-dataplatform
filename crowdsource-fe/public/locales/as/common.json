@@ -264,6 +264,7 @@
   "correct": "শুদ্ধ",
   "needsChange": "পৰিবৰ্তনৰ প্ৰয়োজন",
   "originalText": "মূল পাঠ",
+  "capturedText": "সংগ্ৰহ কৰা পাঠ",
   "yourEdit": "আপোনাৰ সম্পাদনা",
   "congratulationText": "Congratulations on winning a new badge!",
   "contributeYourLanguage": "Contribute to your language!",
@@ -378,5 +379,6 @@
   "stopRecording": "বাণীবদ্ধকৰণ বন্ধ কৰক",
   "reRecord": "পুনৰ বাণীবদ্ধকৰণ কৰক",
   "audioValidationMessage": "অডিঅ' ৰেকৰ্ডিং অতি সৰু। অনুগ্ৰহ কৰি পুনৰ ৰেকৰ্ড কৰক",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} ছেকেণ্ডৰ পিছত ৰেকৰ্ডিং আপোনা-আপুনি বন্ধ হ'ব"
+  "remainingAudioTextDurationWarning": "{{remainingSec}} ছেকেণ্ডৰ পিছত ৰেকৰ্ডিং আপোনা-আপুনি বন্ধ হ'ব",
+  "incorrect": "অশুদ্ধ"
 }

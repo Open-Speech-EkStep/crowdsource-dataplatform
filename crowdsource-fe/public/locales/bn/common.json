@@ -264,6 +264,7 @@
   "correct": "ঠিক আছে",
   "needsChange": "পরিবর্তন প্রয়োজন",
   "originalText": "মূল বাক্যাংশ",
+  "capturedText": "ধৃত লেখা",
   "yourEdit": "আপনার সম্পাদন",
   "congratulationText": "নতুন ব্যাজটি জেতার জন্য অভিনন্দন!",
   "contributeYourLanguage": "আপনার ভাষার জন্য যোগদান দিন !",
@@ -378,5 +379,6 @@
   "stopRecording": "রেকর্ড করা বন্ধ করুন",
   "reRecord": "পুনরায় রেকর্ড করুন",
   "audioValidationMessage": "অডিও রেকর্ডিংটি খুবই ছোট। অনুগ্রহ করে পুনরায় রেকর্ড করুন",
-  "remainingAudioTextDurationWarning": "রেকর্ডিং {{remainingSec}} সেকেন্ড পরে স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে"
+  "remainingAudioTextDurationWarning": "রেকর্ডিং {{remainingSec}} সেকেন্ড পরে স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে",
+  "incorrect": "ত্রুটিপূর্ণ"
 }

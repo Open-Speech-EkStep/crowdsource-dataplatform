@@ -264,6 +264,7 @@
   "correct": "સુધારો",
   "needsChange": "ફેરફાર કરવાની જરૂર છે",
   "originalText": "મૂળ લખાણ",
+  "capturedText": "કેપ્ચર થયેલ ટેક્સ્ટ",
   "yourEdit": "આપના દ્વારા થયેલા બદલાવ",
   "congratulationText": "નવા બેજેસ જીતી માટે અભિનંદન!",
   "contributeYourLanguage": "તમારી ભાષામાં ફાળો આપો!",
@@ -378,5 +379,6 @@
   "stopRecording": "રેકોર્ડિંગ બંધ કરો",
   "reRecord": "ફરીથી-રેકોર્ડ કરો",
   "audioValidationMessage": "થયેલુ ઑડિયો રેકોર્ડિંગ ખુબ નાનું છે. કૃપા કરીને ફરીથી રેકોર્ડ કરો",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} સેકન્ડ પછી રેકોર્ડિંગ આપોઆપ અટકી જશે"
+  "remainingAudioTextDurationWarning": "{{remainingSec}} સેકન્ડ પછી રેકોર્ડિંગ આપોઆપ અટકી જશે",
+  "incorrect": "સાચું નથી"
 }

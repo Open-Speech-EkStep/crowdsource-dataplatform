@@ -264,6 +264,7 @@
   "correct": "சரி",
   "needsChange": "மாற்றம் தேவை",
   "originalText": "அசல் எழுத்துவடிவம்",
+  "capturedText": "எழுத்துவடிவக் கவர்வு",
   "yourEdit": "உங்கள் திருத்தம்",
   "congratulationText": "புதிய பேட்ஜ் வென்றதற்கு வாழ்த்துக்கள்!",
   "contributeYourLanguage": "உங்கள் மொழிக்கு பங்களிப்பு செய்யுங்கள்!",
@@ -378,5 +379,6 @@
   "stopRecording": "பதிவு செய்வதை நிறுத்து",
   "reRecord": "மீண்டும் பதிவுசெய்",
   "audioValidationMessage": "ஆடியோ பதிவு மிகவும் சிறியது. மீண்டும் பதிவுசெய்க",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} விநாடிகளுக்குப் பிறகு பதிவு தானாகவே நின்றுவிடும்"
+  "remainingAudioTextDurationWarning": "{{remainingSec}} விநாடிகளுக்குப் பிறகு பதிவு தானாகவே நின்றுவிடும்",
+  "incorrect": "தவறு"
 }

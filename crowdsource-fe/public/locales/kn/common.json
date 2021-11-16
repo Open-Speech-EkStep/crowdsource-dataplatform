@@ -264,6 +264,7 @@
   "correct": "ಸರಿಯಾಗಿದೆ",
   "needsChange": "ಬದಲಾವಣೆಯ ಅಗತ್ಯವಿದೆ",
   "originalText": "ಮೂಲ ಪಠ್ಯ",
+  "capturedText": "ಸೆರೆಹಿಡಿಯಲ್ಪಟ್ಟ ಪಠ್ಯ",
   "yourEdit": "ನಿಮ್ಮ ತಿದ್ದುಪಡಿ",
   "congratulationText": "ಒಂದು ಹೊಸ ಬ್ಯಾಡ್ಜ್ ಗೆದ್ದಿದ್ದಕ್ಕೆ ಅಭಿನಂದನೆಗಳು!",
   "contributeYourLanguage": "ನಿಮ್ಮ ಭಾಷೆಗಾಗಿ ಕೊಡುಗೆ ನೀಡಿ!",
@@ -378,5 +379,6 @@
   "stopRecording": "ರೆಕಾರ್ಡ್ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿ",
   "reRecord": "ಪುನಃ ರೆಕಾರ್ಡ್ ಮಾಡಿ",
   "audioValidationMessage": "ಆಡಿಯೋ ರೆಕಾರ್ಡಿಂಗ್ ಬಹಳ ಚುಟುಕಾಗಿದೆ. ದಯವಿಟ್ಟು ಪುನಃ ರೆಕಾರ್ಡ್ ಮಾಡಿ",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} ಸೆಕೆಂಡುಗಳ ನಂತರ ರೆಕಾರ್ಡಿಂಗ್ ತಾನೇ ತಾನಾಗಿ ನಿಲ್ಲುತ್ತದೆ."
+  "remainingAudioTextDurationWarning": "{{remainingSec}} ಸೆಕೆಂಡುಗಳ ನಂತರ ರೆಕಾರ್ಡಿಂಗ್ ತಾನೇ ತಾನಾಗಿ ನಿಲ್ಲುತ್ತದೆ.",
+  "incorrect": "ತಪ್ಪು"
 }

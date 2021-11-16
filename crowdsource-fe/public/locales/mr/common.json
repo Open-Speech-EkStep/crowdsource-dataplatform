@@ -264,6 +264,7 @@
   "correct": "बरोबर आहे",
   "needsChange": "बदलाची गरज आहे",
   "originalText": "मूळ टेक्स्ट",
+  "capturedText": "कॅप्चर केलेला मजकूर",
   "yourEdit": "तुमच्याद्वारे केलेले बदल",
   "congratulationText": "नवीन बॅज जिंकल्याबद्दल अभिनंदन!",
   "contributeYourLanguage": "आपल्या भाषेसाठी योगदान करा!",
@@ -378,5 +379,6 @@
   "stopRecording": "रेकॉर्ड करणे बंद करा",
   "reRecord": "पुन्हा रेकॉर्ड करा",
   "audioValidationMessage": "ऑडिओ रेकॉर्डिंग अतिशय कमी आहे. कृपया पुन्हा रेकॉर्डिंग करा",
-  "remainingAudioTextDurationWarning": "{{remainingSec}} सेकंदनंतर रेकॉर्डिंग  आपोआप बंद होईल"
+  "remainingAudioTextDurationWarning": "{{remainingSec}} सेकंदनंतर रेकॉर्डिंग  आपोआप बंद होईल",
+  "incorrect": "त्रुटीपूर्ण"
 }
