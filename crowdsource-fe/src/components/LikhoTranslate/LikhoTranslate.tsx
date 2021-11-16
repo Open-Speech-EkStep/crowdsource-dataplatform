@@ -272,9 +272,7 @@ const LikhoTranslate = () => {
         url={routePaths.likhoIndiaHome}
         title={t('parallelContributeNoDataThankYouMessage')}
         text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
-        buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.likho)} ${t('india')}`,
-        })}
+        buttonLabel={t('parallelBackToInitiativePrompt')}
       />
     </div>
   );

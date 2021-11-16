@@ -348,9 +348,7 @@ const LikhoValidate = () => {
         url={routePaths.likhoIndiaHome}
         title={t('parallelValidateNoDataThankYouMessage')}
         text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() })}
-        buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.likho)} ${t('india')}`,
-        })}
+        buttonLabel={t('parallelBackToInitiativePrompt')}
       />
     </div>
   );

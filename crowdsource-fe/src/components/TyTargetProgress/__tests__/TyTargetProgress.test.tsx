@@ -7,7 +7,7 @@ import TyTargetProgress from '../TyTargetProgress';
 describe('TyTargetProgress', () => {
   const setup = async (
     initiative: any,
-    initiativeMedia: string,
+    initiativeMedia: 'asr' | 'ocr' | 'parallel' | 'text',
     source?: string,
     contributionLanguage?: string
   ) => {
@@ -120,7 +120,7 @@ describe('TyTargetProgress', () => {
 
   it('should render the result for suno initiative home page', async () => {
     await setup('suno', 'asr', 'contribute', 'Hindi');
-    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
+    expect(screen.getByText('asrProgressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('1 minutes1/60 hours1');
@@ -130,7 +130,7 @@ describe('TyTargetProgress', () => {
 
   it('should render the result for dekho initiative validate', async () => {
     await setup('dekho', 'ocr', 'validate', 'English');
-    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
+    expect(screen.getByText('ocrProgressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('9/60000 images');
@@ -140,7 +140,7 @@ describe('TyTargetProgress', () => {
 
   it('should render the result for dekho initiative contribute', async () => {
     await setup('dekho', 'ocr', 'contribute', 'English');
-    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
+    expect(screen.getByText('ocrProgressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('45/60000 images');
@@ -150,7 +150,7 @@ describe('TyTargetProgress', () => {
 
   it('should render the result for dekho initiative validate without language', async () => {
     await setup('dekho', 'ocr', 'validate');
-    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
+    expect(screen.getByText('ocrProgressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('0/60000 images');
@@ -161,7 +161,7 @@ describe('TyTargetProgress', () => {
   it('should render the result for likho initiative contribute', async () => {
     await setup('likho', 'parallel', undefined, 'English');
 
-    expect(screen.getByText('progressStatusWithLanguage')).toBeInTheDocument();
+    expect(screen.getByText('parallelProgressStatusWithLanguage')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('0/1 sentences');

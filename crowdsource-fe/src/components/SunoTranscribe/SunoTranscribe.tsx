@@ -300,9 +300,7 @@ const SunoTranscribe = () => {
         url={routePaths.sunoIndiaHome}
         title={t('asrContributeNoDataThankYouMessage')}
         text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
-        buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`,
-        })}
+        buttonLabel={t('asrBackToInitiativePrompt')}
       />
     </div>
   );

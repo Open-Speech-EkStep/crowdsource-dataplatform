@@ -23,7 +23,6 @@ interface ContributeMoreProps {
   nextMileStone: number;
   contributionCount: number;
   nextBadgeType: string;
-  pageMediaTypeStr: string;
   badges: Array<any> | undefined;
   isTopLanguage?: string;
   badgeType?: string;
@@ -55,7 +54,6 @@ const ContributeMore = ({
   url,
   contributionCount,
   nextBadgeType,
-  pageMediaTypeStr,
   badges,
   isTopLanguage,
   badgeType,
@@ -107,7 +105,6 @@ const ContributeMore = ({
               )}RemainingText`}
               values={{
                 count: nextMileStone - contributionCount,
-                sourceType: t(`${pageMediaTypeStr}` as string).toLowerCase(),
                 nextBadgeType: capitalizeFirstLetter(t(nextBadgeType.toLowerCase())),
               }}
               components={{ strong: <strong /> }}

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Button from 'components/Button';
 import ContributionDetails from 'components/ContributionDetails';
 import TwoColumn from 'components/TwoColumn';
-import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -71,7 +71,6 @@ interface BadgeEarnedProps {
   initiative: Initiative;
   badgeType: string;
   contributionCount: number;
-  pageMediaTypeStr: string;
   language: string;
   source: string;
   winningBadge: any;
@@ -81,14 +80,12 @@ const BadgeEarned = ({
   initiative,
   badgeType,
   contributionCount,
-  pageMediaTypeStr,
   language,
   source,
   winningBadge,
 }: BadgeEarnedProps) => {
   const { t } = useTranslation();
 
-  const initiativeName = `${t(INITIATIVES_MAPPING[initiative])} ${t('india')}`;
   const subHeaderKey = `${INITIATIVES_MEDIA_MAPPING[initiative]}${capitalizeFirstLetter(
     source
   )}EarnedBadgeSubheader`;
@@ -109,10 +106,9 @@ const BadgeEarned = ({
             <div className="text-center text-md-start">
               <h4 className="px-8 px-md-0">
                 <Trans
-                  i18nKey="badgeEarnedText"
-                  defaults="badgeEarnedText"
+                  i18nKey={`${INITIATIVES_MEDIA_MAPPING[initiative]}BadgeEarnedText`}
+                  defaults={`${INITIATIVES_MEDIA_MAPPING[initiative]}BadgeEarnedText`}
                   values={{
-                    initiativeName: initiativeName,
                     badge: capitalizeFirstLetter(t(badgeType)),
                   }}
                   components={{ span: <span className="text-strong-warning" /> }}
@@ -124,7 +120,6 @@ const BadgeEarned = ({
                   defaults={subHeaderKey}
                   values={{
                     count: contributionCount,
-                    sourceType: t(pageMediaTypeStr),
                     language: language,
                   }}
                   components={{ strong: <strong /> }}

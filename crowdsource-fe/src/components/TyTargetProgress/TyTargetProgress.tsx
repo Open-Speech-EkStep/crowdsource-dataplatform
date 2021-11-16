@@ -4,11 +4,7 @@ import { Trans, useTranslation } from 'next-i18next';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import apiPaths from 'constants/apiPaths';
-import {
-  INITIATIVES_MAPPING,
-  INITIATIVES_MEDIA,
-  INITIATIVES_MEDIA_MAPPING,
-} from 'constants/initiativeConstants';
+import { INITIATIVES_MAPPING, INITIATIVES_MEDIA } from 'constants/initiativeConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import { sourceConstants } from 'constants/pageRouteConstants';
 import useFetch from 'hooks/useFetch';
@@ -16,6 +12,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import type { CumulativeDataByLanguage } from 'types/CumulativeCount';
 import type { InitiativeGoal } from 'types/InitiativeGoal';
 import type { Initiative } from 'types/Initiatives';
+import type { InitiativeType } from 'types/InitiativeType';
 import { convertTimeFormat, roundOffValue } from 'utils/utils';
 
 import styles from './TyTargetProgress.module.scss';
@@ -53,7 +50,7 @@ const languageFilter = (data: Array<InitiativeGoal>, type: string, language: str
 
 interface TyTargetProgressProps {
   initiative: Initiative;
-  initiativeType: string;
+  initiativeType: InitiativeType;
   source: string;
   language: string | null;
 }
@@ -89,11 +86,7 @@ const TyTargetProgress = (props: TyTargetProgressProps) => {
 
   const getInitiativeGoal = (data: any) => {
     const goalDataList = data.filter((d: any) => d.type === props.initiativeType) || [];
-    const filterdLanguageData = languageFilter(
-      goalDataList,
-      INITIATIVES_MEDIA_MAPPING[props.initiative],
-      props.language ?? ''
-    );
+    const filterdLanguageData = languageFilter(goalDataList, props.initiativeType, props.language ?? '');
     const goalData = reduceList(filterdLanguageData);
     const totalGoal = getSourceCount(props.source, goalData.contribution_goal, goalData.validation_goal) || 1;
     return totalGoal;
@@ -125,19 +118,16 @@ const TyTargetProgress = (props: TyTargetProgressProps) => {
     formattedAverage = roundOffValue((totalProgress / initiativeGoal) * 100, 1);
   }
 
-  const initiativeName = `${t(props.initiative)} ${t('india')}`;
-
   if (!cumulativeCountData) return null;
   return (
     <div className={`${styles.root} d-flex flex-column`} data-testid="TargetProgress">
       <div className={`${styles.details} d-flex justify-content-between align-items-center`}>
         <div className={`${styles.percentage} font-family-rowdies`}>
           <Trans
-            i18nKey="progressStatusWithLanguage"
-            defaults="progressStatusWithLanguage"
+            i18nKey={`${props.initiativeType}ProgressStatusWithLanguage`}
+            defaults={`${props.initiativeType}ProgressStatusWithLanguage`}
             values={{
               average: formattedAverage,
-              initiativeName,
               language: t(`${props.language?.toLowerCase()}`),
             }}
             components={{ span: <span className={styles.count} /> }}

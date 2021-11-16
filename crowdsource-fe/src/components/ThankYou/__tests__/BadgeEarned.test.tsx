@@ -9,7 +9,6 @@ describe('BadgeEarned', () => {
         initiative="suno"
         badgeType="Bronze"
         contributionCount={5}
-        pageMediaTypeStr="seentence (s)"
         language="Hindi"
         source="contribute"
         winningBadge={[]}

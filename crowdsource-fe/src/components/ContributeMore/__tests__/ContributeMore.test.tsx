@@ -40,7 +40,6 @@ describe('ContributeMore', () => {
         contributionCount={contributionCount}
         nextBadgeType={nextBadgeType}
         url=""
-        pageMediaTypeStr="sentence(s)"
         badges={badgeData}
         isTopLanguage="see"
         badgeType={badgeType}

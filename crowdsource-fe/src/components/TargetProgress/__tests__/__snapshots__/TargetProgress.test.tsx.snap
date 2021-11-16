@@ -12,7 +12,7 @@ exports[`TargetProgress should render the component and matches it against store
       <div
         class="percentage font-family-rowdies"
       >
-        progressStatus
+        asrProgressStatus
       </div>
     </div>
     <div

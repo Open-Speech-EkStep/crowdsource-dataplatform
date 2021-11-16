@@ -10,7 +10,6 @@ import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initia
 
 const SunoIndiaDetails = () => {
   const { t } = useTranslation();
-  const initiativeName = `${t(INITIATIVES_MAPPING.suno)} ${t('india')}`;
   const graphTitle = t('asrBarGraphTitle');
   return (
     <section data-testid="SunoIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
@@ -24,7 +23,7 @@ const SunoIndiaDetails = () => {
         <section className="mt-9 mt-md-12">
           <ContributionStats
             initiative={INITIATIVES_MAPPING.suno}
-            header={t('contributionStatsHeader', { initiativeName })}
+            header={t('asrContributionStatsHeader')}
             subHeader={t('contributionStatsSubHeader')}
           />
         </section>

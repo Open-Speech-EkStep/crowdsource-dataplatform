@@ -55,10 +55,10 @@ describe('Report', () => {
     expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled();
 
     await waitFor(() => {
-      expect(screen.getByText('reportSubmitSuccess')).toBeInTheDocument();
+      expect(screen.getByText('parallelReportSubmitSuccess')).toBeInTheDocument();
     });
 
     userEvent.click(screen.getByRole('button', { name: 'Close' }));
-    expect(screen.queryByText('reportSubmitSuccess')).not.toBeInTheDocument();
+    expect(screen.queryByText('parallelReportSubmitSuccess')).not.toBeInTheDocument();
   });
 });

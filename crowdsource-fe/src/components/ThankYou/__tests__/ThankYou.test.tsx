@@ -120,7 +120,7 @@ describe('ThankYou', () => {
 
     expect(screen.getByText('congratulationText')).toBeInTheDocument();
 
-    expect(screen.getByText('badgeEarnedText')).toBeInTheDocument();
+    expect(screen.getByText('asrBadgeEarnedText')).toBeInTheDocument();
 
     expect(screen.getByText('seeParticipationText')).toBeInTheDocument();
   });
@@ -146,7 +146,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('asrContributedMessage !')).toBeInTheDocument();
+    expect(screen.getByText('asrContributedMessage')).toBeInTheDocument();
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 
@@ -178,7 +178,7 @@ describe('ThankYou', () => {
     };
     await setup('suno', data);
 
-    expect(screen.getByText('asrContributedMessage !')).toBeInTheDocument();
+    expect(screen.getByText('asrContributedMessage')).toBeInTheDocument();
 
     expect(screen.getByText('yourBadge')).toBeInTheDocument();
 

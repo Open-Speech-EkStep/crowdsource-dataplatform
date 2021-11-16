@@ -18,7 +18,6 @@ import {
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
 import {
-  pageMediaTypeConstants,
   pageSourceConstants,
   pageSourceConstants2,
   pageSourceConstants3,
@@ -59,10 +58,9 @@ const YourBadge = (props: any) => {
       <span className="d-flex justify-content-center mt-3 display-5 font-family-rowdies fw-light">
         <Trans
           i18nKey={`${pageSourceConstants4[route.asPath]}Acheived`}
-          defaults="contributorAcheived"
+          defaults={`${pageSourceConstants4[route.asPath]}Acheived`}
           values={{
             badgeType: capitalizeFirstLetter(t(props.badgeType.toLowerCase())),
-            sourceType: capitalizeFirstLetter(t(`${pageSourceConstants4[route.asPath]}`)),
           }}
           components={{ span: <span className="text-strong-warning ms-1 me-1" /> }}
         />
@@ -128,8 +126,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                 count: rewardData?.contributionCount,
               }}
               components={{ span: <span className={styles.count} /> }}
-            />{' '}
-            !
+            />
           </h2>
         )}
         <section className="mt-8">
@@ -146,7 +143,6 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               initiative={initiative}
               badgeType={rewardData?.currentBadgeType.toLowerCase()}
               contributionCount={rewardData?.contributionCount}
-              pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
               language={translatedContributionLanguage}
               source={pageSourceConstants[route.asPath]}
               winningBadge={rewardData?.badges[rewardData?.badges.length - 1]}
@@ -266,7 +262,6 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
           url={`${
             routePaths[`${initiative}India${capitalizeFirstLetter(pageSourceConstants[route.asPath])}`]
           }`}
-          pageMediaTypeStr={pageMediaTypeConstants[route.asPath]}
           badges={rewardData?.badges}
           isTopLanguage={mode}
           badgeType={rewardData?.currentBadgeType}

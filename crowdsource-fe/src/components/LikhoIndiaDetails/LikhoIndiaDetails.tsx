@@ -8,7 +8,6 @@ import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initia
 
 const LikhoIndiaDetails = () => {
   const { t } = useTranslation();
-  const initiativeName = `${t(INITIATIVES_MAPPING.likho)} ${t('india')}`;
   const graphTitle = t('parallelBarGraphTitle');
   return (
     <section data-testid="LikhoIndiaDetails" className="py-9 py-md-11 px-2 px-lg-0">
@@ -22,7 +21,7 @@ const LikhoIndiaDetails = () => {
         <section className="mt-9 mt-md-12">
           <ContributionStats
             initiative={INITIATIVES_MAPPING.likho}
-            header={t('contributionStatsHeader', { initiativeName })}
+            header={t('parallelContributionStatsHeader')}
             subHeader={t('contributionStatsSubHeader')}
           />
         </section>

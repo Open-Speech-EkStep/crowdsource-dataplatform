@@ -58,7 +58,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               <h4
                 class="px-8 px-md-0"
               >
-                badgeEarnedText
+                asrBadgeEarnedText
               </h4>
               <p
                 class="display-3 mt-5 mt-6"

@@ -247,9 +247,7 @@ const DekhoContribute = () => {
         url={routePaths.dekhoIndiaHome}
         title={t('ocrContributeNoDataThankYouMessage')}
         text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
-        buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.dekho)} ${t('india')}`,
-        })}
+        buttonLabel={t('ocrBackToInitiativePrompt')}
       />
     </div>
   );

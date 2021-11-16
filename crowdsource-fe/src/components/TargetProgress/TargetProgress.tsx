@@ -9,6 +9,8 @@ import localStorageConstants from 'constants/localStorageConstants';
 import useFetch from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { CumulativeCount } from 'types/CumulativeCount';
+import type { Initiative } from 'types/Initiatives';
+import type { InitiativeType } from 'types/InitiativeType';
 import type { SourceType } from 'types/SourceType';
 import { convertTimeFormat, roundOffValue } from 'utils/utils';
 
@@ -38,8 +40,8 @@ const reduceList = (dataList: any) => {
 };
 
 interface TargetProgressProps {
-  initiative: string;
-  initiativeType: string;
+  initiative: Initiative;
+  initiativeType: InitiativeType;
   source?: SourceType;
   language?: string;
 }
@@ -103,17 +105,15 @@ const TargetProgress = (props: TargetProgressProps) => {
     formattedAverage = roundOffValue((totalProgress / initiativeGoal) * 100, 1);
   }
 
-  const initiativeName = `${t(props.initiative)} ${t('india')}`;
-
   if (!cumulativeCountData) return null;
   return (
     <div className={`${styles.root} d-flex flex-column`} data-testid="TargetProgress">
       <div className={`${styles.details} d-flex justify-content-between align-items-center`}>
         <div className={`${styles.percentage} font-family-rowdies`}>
           <Trans
-            i18nKey="progressStatus"
-            defaults="progressStatus"
-            values={{ average: formattedAverage, initiativeName }}
+            i18nKey={`${props.initiativeType}ProgressStatus`}
+            defaults={`${props.initiativeType}ProgressStatus`}
+            values={{ average: formattedAverage }}
             components={{ span: <span className={styles.count} /> }}
           />
         </div>

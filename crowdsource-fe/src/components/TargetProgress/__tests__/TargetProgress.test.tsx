@@ -7,7 +7,7 @@ import TargetProgress from '../TargetProgress';
 describe('TargetProgress', () => {
   const setup = async (
     initiative: any,
-    initiativeMedia: string,
+    initiativeMedia: 'asr' | 'ocr' | 'parallel' | 'text',
     source?: 'contribute' | 'validate',
     contributionLanguage?: string
   ) => {
@@ -112,7 +112,7 @@ describe('TargetProgress', () => {
 
   it('should render the result for suno initiative home page', async () => {
     await setup('suno', 'asr', 'contribute');
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    expect(screen.getByText('asrProgressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('1 minutes1/60 hours1');
@@ -122,7 +122,7 @@ describe('TargetProgress', () => {
 
   it('should render the result for dekho initiative validate', async () => {
     await setup('dekho', 'ocr', 'validate');
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    expect(screen.getByText('ocrProgressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('0/60000 images');
@@ -132,7 +132,7 @@ describe('TargetProgress', () => {
 
   it('should render the result for dekho initiative contribute', async () => {
     await setup('dekho', 'ocr', 'contribute');
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    expect(screen.getByText('ocrProgressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('9/60000 images');
@@ -143,7 +143,7 @@ describe('TargetProgress', () => {
   it('should render the result for likho initiative contribute', async () => {
     await setup('likho', 'parallel', 'contribute');
 
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    expect(screen.getByText('parallelProgressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('45/60000 sentences');
@@ -154,7 +154,7 @@ describe('TargetProgress', () => {
   it('should render the result for likho initiative', async () => {
     await setup('likho', 'parallel');
 
-    expect(screen.getByText('progressStatus')).toBeInTheDocument();
+    expect(screen.getByText('parallelProgressStatus')).toBeInTheDocument();
     expect(
       screen.getByText(content => {
         return content.includes('53/120000 sentences');

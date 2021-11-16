@@ -387,9 +387,7 @@ const BoloSpeak = () => {
         url={routePaths.boloIndiaHome}
         title={t('textContributeNoDataThankYouMessage')}
         text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
-        buttonLabel={t('backToInitiativePrompt', {
-          initiativeName: `${t(INITIATIVES_MAPPING.bolo)} ${t('india')}`,
-        })}
+        buttonLabel={t('textBackToInitiativePrompt')}
       />
     </div>
   );
