@@ -102,7 +102,8 @@ def main():
         all_languages_report[languages[language_code]] = report
 
     write_report(all_languages_report, 'locale_generation')
-    os.system("cp {} {}".format(os.path.join(input_json_path, 'en.json'), output_base_path))
+    os.makedirs('{base_path}/en'.format(base_path=output_base_path), exist_ok=True)
+    os.system("cp {} {}".format(os.path.join(input_json_path, 'en', 'common.json'), '{base_path}/en/common.json'.format(base_path=output_base_path)))
 
     if os.path.isdir(tmp_cleaned_json_path):
         os.system("rm -rf " + tmp_cleaned_json_path)

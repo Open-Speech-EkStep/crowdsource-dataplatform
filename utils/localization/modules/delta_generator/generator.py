@@ -146,9 +146,12 @@ def map_sheet(df):
     column_name = 'English copy'
     for i, df_row in df.iterrows():
         if df_row['Key'] in maps.keys():
-            for from_text, to in maps[df_row['Key']]['replacements'].items():
-                df_row[column_name] = df_row[column_name].replace(to, from_text)
-    print(df[df['Key'] == 'contributorAcheived'])
+            if 'update_text' in maps[df_row['Key']].keys():
+                df_row[column_name] = maps[df_row['Key']]['update_text']
+                continue
+            if 'replacements' in maps[df_row['Key']].keys():
+                for from_text, to in maps[df_row['Key']]['replacements'].items():
+                    df_row[column_name] = df_row[column_name].replace(to, from_text)
     return df
 
 

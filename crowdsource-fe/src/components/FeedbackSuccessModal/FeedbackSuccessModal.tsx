@@ -26,7 +26,7 @@ const FeedbackSuccessModal = (props: FeedbackSuccessModalProps) => {
           <Image src="/images/success.svg" width="48" height="48" alt="success" />
         </div>
         <div className="text-center pt-2">{t('submitSuccess')}</div>
-        <div className="text-center">{t('feedbackThankYou')}!</div>
+        <div className="text-center">{t('feedbackThankYou')}</div>
       </Modal.Body>
     </Modal>
   );
