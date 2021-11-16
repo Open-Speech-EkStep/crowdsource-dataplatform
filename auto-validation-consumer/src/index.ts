@@ -36,7 +36,7 @@ const run = async () => {
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`
-      console.log(`- ${prefix} ${message.key}#${message.value}`)
+      console.log(`- ${prefix} #${message.value}`)
       try {
         const contributionId = Number(message.value);
 

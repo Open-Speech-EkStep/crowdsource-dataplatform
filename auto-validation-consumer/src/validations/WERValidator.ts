@@ -12,7 +12,7 @@ export class Wer implements Validator {
 
         console.log('WER',wer)
         console.log('config', LANGUAGE_CONFIG_ASR[language])
-        return wer < (LANGUAGE_CONFIG_ASR[language] || 2)
+        return wer <= (LANGUAGE_CONFIG_ASR[language] || 2)
 
     }
 }
