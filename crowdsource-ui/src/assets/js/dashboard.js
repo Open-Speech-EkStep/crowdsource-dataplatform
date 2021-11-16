@@ -114,6 +114,9 @@ function updateLanguage(language) {
             : {};
           const bData = data.filter(d => d.type == INITIATIVES.text.type) || [];
           if (language == '' && bData.length !== 0) {
+            if(!participationData){
+              participationData = {}
+            }
             bData[0].total_speakers = participationData.count || 0;
           }
           const langaugeExists = isLanguageAvailable(bData, language);

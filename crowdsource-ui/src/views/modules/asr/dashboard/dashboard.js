@@ -68,6 +68,9 @@ function updateLanguage(language) {
                         participationData = participationData.length ? participationData.find(d => d.type == INITIATIVES.asr.type) : {};
                         const sData = data.filter(d => d.type == INITIATIVES.asr.type) || [];
                         if (language == "" && sData.length !== 0) {
+                            if(!participationData){
+                                participationData = {}
+                              }
                             sData[0].total_speakers = participationData.count || 0;
                         }
                         const langaugeExists = isLanguageAvailable(sData, language);
