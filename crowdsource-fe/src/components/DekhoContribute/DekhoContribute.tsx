@@ -98,6 +98,12 @@ const DekhoContribute = () => {
     }
   }, [currentDataIndex, result]);
 
+  useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
   const onChangeTextInput = (text: string) => {
     setFormData({
       ...formData,

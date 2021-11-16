@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -17,6 +17,10 @@ interface ImageViewProps {
 const ImageView: FunctionComponent<ImageViewProps> = ({ imageUrl }) => {
   const { t } = useTranslation();
   const [viewExpand, setViewExpand] = useState(false);
+
+  useEffect(() => {
+    setViewExpand(false);
+  }, [imageUrl]);
 
   const url = nodeConfig.cdnUrl + '/' + imageUrl;
 
