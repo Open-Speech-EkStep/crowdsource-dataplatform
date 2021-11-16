@@ -62,9 +62,12 @@ function updateLanguage(language) {
             getJson(url)
                 .then((data) => {
                     try {
-                        participationData = participationData.find(d => d.type == INITIATIVES.ocr.type);
+                        participationData = participationData.length ? participationData.find(d => d.type == INITIATIVES.ocr.type): {};
                         const dData = data.filter(d => d.type == INITIATIVES.ocr.type) || [];
-                        if (language == "") {
+                        if (language == "" && dData.length !== 0) {
+                            if(!participationData){
+                                participationData = {}
+                              }
                             dData[0].total_speakers = participationData.count || 0;
                         }
                         const langaugeExists = isLanguageAvailable(dData, language);

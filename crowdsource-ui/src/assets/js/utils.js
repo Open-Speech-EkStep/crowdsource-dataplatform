@@ -356,6 +356,21 @@ const getInitiativeType = function (initiative) {
     : INITIATIVES.text.type;
 };
 
+const getDefaultLanguageStat = function (initiative, fromLanguage, toLanguage = '') {
+  const contributionLanguage = toLanguage ? `${fromLanguage}-${toLanguage}` : fromLanguage;
+  return [
+    {
+      language: contributionLanguage,
+      total_speakers: 0,
+      total_contributions: 0.0,
+      total_validations: 0.0,
+      total_contribution_count: 0,
+      total_validation_count: 0,
+      type: initiative,
+    },
+  ];
+};
+
 module.exports = {
   safeJsonParse,
   safeJson,
@@ -382,4 +397,5 @@ module.exports = {
   translate,
   toPascalCase,
   getInitiativeType,
+  getDefaultLanguageStat,
 };

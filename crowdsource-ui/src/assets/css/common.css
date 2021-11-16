@@ -455,15 +455,15 @@ body {
 
   .btn-custom-primary {
     min-width: 240px;
-    max-width: 240px;
+    max-width: max-content;
   }
 
   .btn-custom-outline-primary {
     min-width: 240px;
-    max-width: 240px;
+    max-width: max-content;
   }
   .btn-transparent {
-    max-width: 140px;
+    max-width: max-content;
     min-width: 140px;
     font-size: 18px !important;
   }
@@ -643,16 +643,7 @@ body {
   .text-btn-control {
     flex-direction: column;
   }
-  .second {
-    order: 1;
-  }
-  .first {
-    order: 1;
-  }
-  .third {
-    order: 2;
-  }
-
+  
   .asr #report_btn {
     margin-right: 1rem !important;
   }
