@@ -98,6 +98,10 @@ a{
 }
 
 @media (max-width: 767px) {
+  #back-btn {
+    display: none;
+  }
+  
   .original-text {
     padding: 16px !important;
     min-height: 120px !important;

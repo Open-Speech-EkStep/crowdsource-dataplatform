@@ -387,6 +387,10 @@ body.modal-open .supreme-container {
 }
 
 @media screen and (max-width: 767px) {
+  #back-btn {
+    display: none;
+  }
+  
   .container {
     padding-top: 25px;
   }

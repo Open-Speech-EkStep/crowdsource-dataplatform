@@ -69,6 +69,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  #back-btn {
+    display: none;
+  }
+  
   .validation-instruction {
     height: auto;
     flex-direction: column;

@@ -58,9 +58,6 @@
   }
 
   .progress-metric {
-    position: absolute;
-    bottom: -27px;
-    right: -14px;
     font-size: 14px;
   }
 }
