@@ -1,408 +1,427 @@
-const fetch = require('./fetch')
-const { showInstructions } = require('./validator-instructions')
-const Visualizer = require('./visualizer')
-const { showUserProfile,onOpenUserDropDown } = require('../../../build/js/common/header');
-const { setCurrentSentenceIndex, setTotalSentenceIndex ,updateProgressBar } = require('../../../build/js/common/progressBar');
-const { setPageContentHeight, updateLocaleLanguagesDropdown, showElement, hideElement, fetchLocationInfo, reportSentenceOrRecording, getDeviceInfo, getBrowserInfo, translate,safeJson} = require('./utils');
+const fetch = require('./fetch');
+const { showInstructions } = require('./validator-instructions');
+const Visualizer = require('./visualizer');
+const { showUserProfile, onOpenUserDropDown } = require('../../../build/js/common/header');
+const {
+  setCurrentSentenceIndex,
+  setTotalSentenceIndex,
+  updateProgressBar,
+} = require('../../../build/js/common/progressBar');
+const {
+  setPageContentHeight,
+  updateLocaleLanguagesDropdown,
+  showElement,
+  hideElement,
+  fetchLocationInfo,
+  reportSentenceOrRecording,
+  getDeviceInfo,
+  getBrowserInfo,
+  translate,
+  safeJson,
+} = require('./utils');
 const { cdn_url } = require('./env-api');
 const { onChangeUser } = require('./header');
-const { CURRENT_MODULE,INITIATIVES ,config,CONTRIBUTION_LANGUAGE} = require('./constants');
+const { CURRENT_MODULE, INITIATIVES, config, CONTRIBUTION_LANGUAGE } = require('./constants');
 const { setDataSource } = require('../../../build/js/common/sourceInfo');
-const { showErrorPopup,redirectToHomeForDirectLanding } = require('./common');
+const { showErrorPopup, redirectToHomeForDirectLanding } = require('./common');
 const visualizer = new Visualizer();
 const speakerDetailsKey = 'speakerDetails';
 const ACCEPT_ACTION = 'accept';
 const REJECT_ACTION = 'reject';
 const SKIP_ACTION = 'skip';
 
-const currentIndexKey = `${config.initiativeKey_2}ValidationCurrentIndex`;
+const currentIndexKey = `${config.initiativeKey_2}ValidatorCurrentIndex`;
 const textValidatorCountKey = `${config.initiativeKey_2}ValidatorCount`;
 
 window.textValidator = {};
 
 function getValue(number, maxValue) {
-    return number < 0
-      ? 0
-      : number > maxValue
-        ? maxValue
-        : number;
+  return number < 0 ? 0 : number > maxValue ? maxValue : number;
 }
 
 function getCurrentIndex(lastIndex) {
-    const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
-    return getValue(currentIndexInStorage, lastIndex);
+  const currentIndexInStorage = Number(localStorage.getItem(currentIndexKey));
+  return getValue(currentIndexInStorage, lastIndex);
 }
-
 
 const showInstructionsPopup = () => {
-    hideElement($("#validator-page-content"));
-    // toggleFooterPosition();
-    showInstructions();
-}
+  hideElement($('#validator-page-content'));
+  // toggleFooterPosition();
+  showInstructions();
+};
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let context, src;
 
 function startVisualizer() {
-    const $canvas = document.getElementById('myCanvas');
-    const audio = document.getElementById('my-audio');
-    context = context || new AudioContext();
-    src = src || context.createMediaElementSource(audio);
-    const analyser = context.createAnalyser();
-    src.connect(analyser);
-    analyser.connect(context.destination);
-    visualizer.visualize($canvas, analyser);
+  const $canvas = document.getElementById('myCanvas');
+  const audio = document.getElementById('my-audio');
+  context = context || new AudioContext();
+  src = src || context.createMediaElementSource(audio);
+  const analyser = context.createAnalyser();
+  src.connect(analyser);
+  analyser.connect(context.destination);
+  visualizer.visualize($canvas, analyser);
 }
 
 function enableButton(element) {
-    element.children().removeAttr("opacity")
-    element.removeAttr("disabled")
+  element.children().removeAttr('opacity');
+  element.removeAttr('disabled');
 }
 
 const setAudioPlayer = function () {
-    const myAudio = document.getElementById('my-audio');
-    const play = $('#play');
-    const pause = $('#pause');
-    const replay = $('#replay');
-    const resume = $('#resume');
-    const textPlay = $('#audioplayer-text_play');
-    const textReplay = $('#audioplayer-text_replay');
-    const textPause = $('#audioplayer-text_pause');
-    const textResume = $('#audioplayer-text_resume');
+  const myAudio = document.getElementById('my-audio');
+  const play = $('#play');
+  const pause = $('#pause');
+  const replay = $('#replay');
+  const resume = $('#resume');
+  const textPlay = $('#audioplayer-text_play');
+  const textReplay = $('#audioplayer-text_replay');
+  const textPause = $('#audioplayer-text_pause');
+  const textResume = $('#audioplayer-text_resume');
 
+  myAudio.addEventListener('ended', () => {
+    enableValidation();
+    hideElement(pause);
+    hideElement(resume);
+    hideElement(play);
+    showElement(replay);
+    hideElement(textPause);
+    hideElement(textPlay);
+    hideElement(textResume);
+    showElement(textReplay);
+  });
 
-    myAudio.addEventListener("ended", () => {
-        enableValidation();
-        hideElement(pause)
-        hideElement(resume)
-        hideElement(play)
-        showElement(replay)
-        hideElement(textPause);
-        hideElement(textPlay);
-        hideElement(textResume);
-        showElement(textReplay);
-    });
+  play.on('click', () => {
+    hideElement($('#default_line'));
+    playAudio();
+    startVisualizer();
+  });
 
-    play.on('click', () => {
-        hideElement($('#default_line'))
-        playAudio();
-        startVisualizer();
-    });
+  pause.on('click', pauseAudio);
 
-    pause.on('click', pauseAudio);
+  replay.on('click', () => {
+    replayAudio();
+    startVisualizer();
+  });
 
-    replay.on('click', () => {
-        replayAudio();
-        startVisualizer();
-    });
+  resume.on('click', () => {
+    resumeAudio();
+    // startVisualizer();
+  });
 
-    resume.on('click', () => {
-        resumeAudio();
-        // startVisualizer();
-    });
+  function playAudio() {
+    myAudio.load();
+    hideElement(play);
+    hideElement(resume);
+    hideElement(replay);
+    showElement(pause);
+    hideElement(textPlay);
+    hideElement(textResume);
+    hideElement(textReplay);
+    showElement(textPause);
+    myAudio.play();
+  }
 
-    function playAudio() {
-        myAudio.load();
-        hideElement(play)
-        hideElement(resume)
-        hideElement(replay)
-        showElement(pause)
-        hideElement(textPlay);
-        hideElement(textResume);
-        hideElement(textReplay);
-        showElement(textPause);
-        myAudio.play();
-    }
+  function pauseAudio() {
+    hideElement(pause);
+    hideElement(replay);
+    hideElement(play);
+    showElement(resume);
+    hideElement(textPause);
+    hideElement(textPlay);
+    hideElement(textReplay);
+    showElement(textResume);
+    // enableValidation();
+    myAudio.pause();
+  }
 
-    function pauseAudio() {
-        hideElement(pause)
-        hideElement(replay)
-        hideElement(play)
-        showElement(resume)
-        hideElement(textPause)
-        hideElement(textPlay)
-        hideElement(textReplay)
-        showElement(textResume)
-        // enableValidation();
-        myAudio.pause();
-    }
+  function resumeAudio() {
+    showElement(pause);
+    hideElement(replay);
+    hideElement(play);
+    hideElement(resume);
+    showElement(textPause);
+    hideElement(textPlay);
+    hideElement(textReplay);
+    hideElement(textResume);
+    // enableValidation();
+    myAudio.play();
+  }
 
+  function replayAudio() {
+    myAudio.load();
+    hideElement(replay);
+    hideElement(resume);
+    hideElement(play);
+    showElement(pause);
+    hideElement(textReplay);
+    hideElement(textResume);
+    hideElement(textPlay);
+    showElement(textPause);
+    // disableValidation();
+    myAudio.play();
+  }
 
-    function resumeAudio() {
-        showElement(pause)
-        hideElement(replay)
-        hideElement(play)
-        hideElement(resume)
-        showElement(textPause)
-        hideElement(textPlay)
-        hideElement(textReplay)
-        hideElement(textResume)
-        // enableValidation();
-        myAudio.play();
-    }
-
-    function replayAudio() {
-        myAudio.load();
-        hideElement(replay)
-        hideElement(resume)
-        hideElement(play)
-        showElement(pause)
-        hideElement(textReplay);
-        hideElement(textResume);
-        hideElement(textPlay);
-        showElement(textPause);
-        // disableValidation();
-        myAudio.play();
-    }
-
-    function enableValidation() {
-        const likeButton = $("#like_button");
-        const dislikeButton = $("#dislike_button");
-        enableButton(likeButton)
-        enableButton(dislikeButton)
-    }
-}
+  function enableValidation() {
+    const likeButton = $('#like_button');
+    const dislikeButton = $('#dislike_button');
+    enableButton(likeButton);
+    enableButton(dislikeButton);
+  }
+};
 
 // eslint-disable-next-line no-unused-vars
-let currentIndex = 0, validationCount = 0;
-
+let currentIndex = 0;
+// eslint-disable-next-line no-unused-vars
+let validationCount = 0;
 
 function setSentenceLabel(index) {
-    const $sentenceLabel = $('#sentenceLabel')
-    $sentenceLabel[0].innerText = textValidator.sentences[index].sentence;
-    setDataSource(textValidator.sentences[index].source_info);
+  const $sentenceLabel = $('#sentenceLabel');
+  $sentenceLabel[0].innerText = textValidator.sentences[index].sentence;
+  setDataSource(textValidator.sentences[index].source_info);
 }
 
 function getNextSentence() {
-    if (currentIndex < textValidator.sentences.length - 1) {
-        currentIndex++;
-        updateProgressBar(currentIndex + 1,textValidator.sentences.length);
-        const encodedUrl = encodeURIComponent(textValidator.sentences[currentIndex].contribution);
-        loadAudio(`${cdn_url}/${encodedUrl}`)
-        resetValidation();
-        setSentenceLabel(currentIndex);
-        localStorage.setItem(currentIndexKey,currentIndex);
-    } else {
-        localStorage.setItem(currentIndexKey, currentIndex);
-        resetValidation();
-        setTimeout(showThankYou, 1000);
-    }
+  if (currentIndex < textValidator.sentences.length - 1) {
+    currentIndex++;
+    updateProgressBar(currentIndex + 1, textValidator.sentences.length);
+    const encodedUrl = encodeURIComponent(textValidator.sentences[currentIndex].contribution);
+    loadAudio(`${cdn_url}/${encodedUrl}`);
+    resetValidation();
+    setSentenceLabel(currentIndex);
+    localStorage.setItem(currentIndexKey, currentIndex);
+  } else {
+    localStorage.setItem(currentIndexKey, currentIndex);
+    resetValidation();
+    setTimeout(showThankYou, 1000);
+  }
 }
 
 function disableButton(button) {
-    button.children().attr("opacity", "50%");
-    button.attr("disabled", "disabled");
+  button.children().attr('opacity', '50%');
+  button.attr('disabled', 'disabled');
 }
 
 function disableValidation() {
-    const dislikeButton = $("#dislike_button");
-    const likeButton = $("#like_button");
-    disableButton(likeButton)
-    disableButton(dislikeButton)
+  const dislikeButton = $('#dislike_button');
+  const likeButton = $('#like_button');
+  disableButton(likeButton);
+  disableButton(dislikeButton);
 }
 
 function resetValidation() {
-    disableValidation();
-    const textPlay = $('#audioplayer-text_play');
-    const textReplay = $('#audioplayer-text_replay');
-    const textPause = $('#audioplayer-text_pause');
-    const textResume = $('#audioplayer-text_resume');
-    hideElement(textPause);
-    hideElement(textReplay);
-    hideElement(textResume);
-    showElement(textPlay);
+  disableValidation();
+  const textPlay = $('#audioplayer-text_play');
+  const textReplay = $('#audioplayer-text_replay');
+  const textPause = $('#audioplayer-text_pause');
+  const textResume = $('#audioplayer-text_resume');
+  hideElement(textPause);
+  hideElement(textReplay);
+  hideElement(textResume);
+  showElement(textPlay);
 
-    hideElement($("#replay"))
-    hideElement($('#pause'))
-    hideElement($('#resume'))
-    showElement($("#play"))
-    showElement($('#default_line'))
+  hideElement($('#replay'));
+  hideElement($('#pause'));
+  hideElement($('#resume'));
+  showElement($('#play'));
+  showElement($('#default_line'));
 }
 
 function recordValidation(action) {
-    if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
-        validationCount++;
-    }
-    const sentenceId = textValidator.sentences[currentIndex].dataset_row_id
-    const contribution_id = textValidator.sentences[currentIndex].contribution_id;
-    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
-    fetch(`/validate/${contribution_id}/${action}`, {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        body: JSON.stringify({
-            sentenceId: sentenceId,
-            state: localStorage.getItem('state_region') || "",
-            country: localStorage.getItem('country') || "",
-            userName: speakerDetails && speakerDetails.userName,
-            device: getDeviceInfo(),
-            browser: getBrowserInfo(),
-            type: INITIATIVES.text.type,
-            fromLanguage: localStorage.getItem(CONTRIBUTION_LANGUAGE)
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
+  if (action === REJECT_ACTION || action === ACCEPT_ACTION) {
+    validationCount++;
+  }
+  const sentenceId = textValidator.sentences[currentIndex].dataset_row_id;
+  const contribution_id = textValidator.sentences[currentIndex].contribution_id;
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  fetch(`/validate/${contribution_id}/${action}`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    body: JSON.stringify({
+      sentenceId: sentenceId,
+      state: localStorage.getItem('state_region') || '',
+      country: localStorage.getItem('country') || '',
+      userName: speakerDetails && speakerDetails.userName,
+      device: getDeviceInfo(),
+      browser: getBrowserInfo(),
+      type: INITIATIVES.text.type,
+      fromLanguage: localStorage.getItem(CONTRIBUTION_LANGUAGE),
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
     .then(data => {
-        if (!data.ok) {
-          throw (data.status || 500);
-        } else {
-            return Promise.resolve(data.json());
-        }
-      })
-      .catch(errStatus => {
-        showErrorPopup(errStatus);
-        throw errStatus
-      })
+      if (!data.ok) {
+        throw data.status || 500;
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus;
+    });
 }
 
 function addListeners() {
-    $("#instructions-link").on('click', () => {
-        showInstructionsPopup();
-    });
+  $('#instructions-link').on('click', () => {
+    showInstructionsPopup();
+  });
 
-    const $validatorInstructionsModal = $('#validator-instructions-modal');
+  const $validatorInstructionsModal = $('#validator-instructions-modal');
 
-    $validatorInstructionsModal.on('hidden.bs.modal', function () {
-        showElement($("#validator-page-content"));
-        // toggleFooterPosition();
-    });
+  $validatorInstructionsModal.on('hidden.bs.modal', function () {
+    showElement($('#validator-page-content'));
+    // toggleFooterPosition();
+  });
 
-    const likeButton = $("#like_button");
-    const dislikeButton = $("#dislike_button");
-    const $skipButton = $('#skip_button');
+  const likeButton = $('#like_button');
+  const dislikeButton = $('#dislike_button');
+  const $skipButton = $('#skip_button');
 
-    dislikeButton.on('click', () => {
-        if($('#pause').hasClass('d-none')){
-            $('#pause').trigger('click');
-        }
-        recordValidation(REJECT_ACTION)
-        getNextSentence();
-    })
+  dislikeButton.on('click', () => {
+    if ($('#pause').hasClass('d-none')) {
+      $('#pause').trigger('click');
+    }
+    recordValidation(REJECT_ACTION);
+    getNextSentence();
+  });
 
-    likeButton.on('click', () => {
-        if($('#pause').hasClass('d-none')){
-            $('#pause').trigger('click');
-        }
-        recordValidation(ACCEPT_ACTION)
-        getNextSentence();
-    })
+  likeButton.on('click', () => {
+    if ($('#pause').hasClass('d-none')) {
+      $('#pause').trigger('click');
+    }
+    recordValidation(ACCEPT_ACTION);
+    getNextSentence();
+  });
 
-    $skipButton.on('click', () => {
-        if($('#pause').hasClass('d-none')){
-            $('#pause').trigger('click');
-        }
-        recordValidation(SKIP_ACTION)
-        getNextSentence();
-    })
+  $skipButton.on('click', () => {
+    if ($('#pause').hasClass('d-none')) {
+      $('#pause').trigger('click');
+    }
+    recordValidation(SKIP_ACTION);
+    getNextSentence();
+  });
 }
 
 const loadAudio = function (audioLink) {
-    $('#my-audio').attr('src', audioLink)
+  $('#my-audio').attr('src', audioLink);
 };
 
 function showThankYou() {
-    window.location.href = './validator-thank-you.html'
+  window.location.href = './validator-thank-you.html';
 }
 
 function showNoSentencesMessage() {
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    $('#spn-validation-language').html(translate(contributionLanguage));
-    hideElement($('#instructions-row'));
-    hideElement($('#sentences-row'));
-    hideElement($('#audio-row'))
-    hideElement($('#validation-button-row'))
-    hideElement($('#progress-row'))
-    showElement($('#no-sentences-row'));
-    hideElement($('#mic-report-row'));
-    hideElement($('#skip_btn_row'));
-    hideElement($('#validation-container'));
-    hideElement($('#report_btn'));
-    hideElement($("#test-mic-speakers"));
-    $("#validation-container").removeClass("validation-container");
-    $('#start-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  $('#spn-validation-language').html(translate(contributionLanguage));
+  hideElement($('#instructions-row'));
+  hideElement($('#sentences-row'));
+  hideElement($('#audio-row'));
+  hideElement($('#validation-button-row'));
+  hideElement($('#progress-row'));
+  showElement($('#no-sentences-row'));
+  hideElement($('#mic-report-row'));
+  hideElement($('#skip_btn_row'));
+  hideElement($('#validation-container'));
+  hideElement($('#report_btn'));
+  hideElement($('#test-mic-speakers'));
+  $('#validation-container').removeClass('validation-container');
+  $('#start-validation-language').html(localStorage.getItem(CONTRIBUTION_LANGUAGE));
 }
 
 const handleSubmitFeedback = function () {
-    const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const otherText = $("#other_text").val();
-    const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
+  const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const otherText = $('#other_text').val();
+  const speakerDetails = JSON.parse(localStorage.getItem(speakerDetailsKey));
 
-    const reqObj = {
-        sentenceId: textValidator.sentences[currentIndex].contribution_id,
-        reportText: (otherText !== "" && otherText !== undefined) ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
-        language: contributionLanguage,
-        userName: speakerDetails ? speakerDetails.userName : '',
-        source: "validation"
-    };
-    reportSentenceOrRecording(reqObj).then(function (resp) {
-        if (resp.statusCode === 200) {
-            $("#report_recording_modal").modal('hide');
-            $("#report_sentence_thanks_modal").modal('show');
-            $("#report_submit_id").attr("disabled", true);
-            $("input[type=radio][name=reportRadio]").each(function () {
-                $(this).prop("checked", false);
-            });
-            $("#other_text").val("");
-        } else {
-            $("#report_recording_modal").modal('hide');
-        }
-    }).catch(()=> { $("#report_recording_modal").modal('hide');});
-}
+  const reqObj = {
+    sentenceId: textValidator.sentences[currentIndex].contribution_id,
+    reportText:
+      otherText !== '' && otherText !== undefined ? `${selectedReportVal} - ${otherText}` : selectedReportVal,
+    language: contributionLanguage,
+    userName: speakerDetails ? speakerDetails.userName : '',
+    source: 'validation',
+  };
+  reportSentenceOrRecording(reqObj)
+    .then(function (resp) {
+      if (resp.statusCode === 200) {
+        $('#report_recording_modal').modal('hide');
+        $('#report_sentence_thanks_modal').modal('show');
+        $('#report_submit_id').attr('disabled', true);
+        $('input[type=radio][name=reportRadio]').each(function () {
+          $(this).prop('checked', false);
+        });
+        $('#other_text').val('');
+      } else {
+        $('#report_recording_modal').modal('hide');
+      }
+    })
+    .catch(() => {
+      $('#report_recording_modal').modal('hide');
+    });
+};
 
 let selectedReportVal = '';
 $(document).ready(() => {
-    redirectToHomeForDirectLanding();
-    localStorage.setItem(CURRENT_MODULE,INITIATIVES.text.value);
-    // toggleFooterPosition();
-    setPageContentHeight();
-    const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    if (language) {
-        updateLocaleLanguagesDropdown(language);
+  redirectToHomeForDirectLanding();
+  localStorage.setItem(CURRENT_MODULE, INITIATIVES.text.value);
+  // toggleFooterPosition();
+  setPageContentHeight();
+  const language = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  if (language) {
+    updateLocaleLanguagesDropdown(language);
+  }
+
+  $('#start_contributing_id').on('click', function () {
+    const data = localStorage.getItem('speakerDetails');
+    if (data !== null) {
+      const speakerDetails = JSON.parse(data);
+      speakerDetails.language = language;
+      localStorage.setItem('speakerDetails', JSON.stringify(speakerDetails));
     }
+    location.href = './record.html';
+  });
 
-    $("#start_contributing_id").on('click', function () {
-        const data = localStorage.getItem("speakerDetails");
-        if (data !== null) {
-            const speakerDetails = JSON.parse(data);
-            speakerDetails.language = language;
-            localStorage.setItem("speakerDetails", JSON.stringify(speakerDetails));
-        }
-        location.href = './record.html';
+  const $reportModal = $('#report_recording_modal');
+
+  $('#report_submit_id').on('click', handleSubmitFeedback);
+
+  $('#report_btn').on('click', function () {
+    $reportModal.modal('show');
+  });
+
+  $('#report_close_btn').on('click', function () {
+    $reportModal.modal('hide');
+  });
+
+  $('#report_sentence_thanks_close_id').on('click', function () {
+    $('#report_sentence_thanks_modal').modal('hide');
+    $('#skip_button').click();
+  });
+
+  $('input[type=radio][name=reportRadio]').on('change', function () {
+    selectedReportVal = this.value;
+    $('#report_submit_id').attr('disabled', false);
+  });
+
+  fetchLocationInfo()
+    .then(res => {
+      return safeJson(res);
+    })
+    .then(response => {
+      localStorage.setItem('state_region', response.regionName);
+      localStorage.setItem('country', response.country);
+    })
+    .catch(err => {
+      console.log(err);
     });
 
-    const $reportModal = $("#report_recording_modal");
-
-    $("#report_submit_id").on('click', handleSubmitFeedback);
-
-    $("#report_btn").on('click', function () {
-        $reportModal.modal('show');
-    });
-
-    $("#report_close_btn").on("click", function () {
-        $reportModal.modal('hide');
-    });
-
-    $("#report_sentence_thanks_close_id").on("click", function () {
-        $("#report_sentence_thanks_modal").modal('hide');
-        $('#skip_button').click();
-    });
-
-    $("input[type=radio][name=reportRadio]").on("change", function () {
-        selectedReportVal = this.value;
-        $("#report_submit_id").attr("disabled", false);
-    });
-
-    fetchLocationInfo().then(res => {
-        return safeJson(res);
-    }).then(response => {
-        localStorage.setItem("state_region", response.regionName);
-        localStorage.setItem("country", response.country);
-    }).catch((err) => {console.log(err)});
-
-    const localSpeakerData = localStorage.getItem(speakerDetailsKey);
-    const localSpeakerDataParsed = JSON.parse(localSpeakerData);
+  const localSpeakerData = localStorage.getItem(speakerDetailsKey);
+  const localSpeakerDataParsed = JSON.parse(localSpeakerData);
 
   if (!localSpeakerDataParsed) {
     location.href = './home.html';
@@ -410,38 +429,40 @@ $(document).ready(() => {
   }
 
   showUserProfile(localSpeakerDataParsed.userName);
-  onChangeUser('./validator-page.html',INITIATIVES.text.value);
-    onOpenUserDropDown();
+  onChangeUser('./validator-page.html', INITIATIVES.text.value);
+  onOpenUserDropDown();
 
-    localStorage.removeItem(currentIndexKey);
-    const type = 'text';
-    const toLanguage = ""; //can be anything
-    fetch(`/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`, {
+  localStorage.removeItem(currentIndexKey);
+  const type = 'text';
+  const toLanguage = ''; //can be anything
+  fetch(
+    `/contributions/${type}?from=${language}&to=${toLanguage}&username=${localSpeakerDataParsed.userName}`,
+    {
       credentials: 'include',
-      mode: 'cors'
-    })
+      mode: 'cors',
+    }
+  )
     .then(data => {
-        if (!data.ok) {
-          throw (data.status || 500);
-        } else {
-          return Promise.resolve(data.json());
-        }
-      })
-      .catch(errStatus => {
-        showErrorPopup(errStatus);
-        throw errStatus
-      })
-        .then((sentenceData) => {
-
-        textValidator.sentences = sentenceData.data ? sentenceData.data : [];
-        localStorage.setItem(textValidatorCountKey, textValidator.sentences.length);
+      if (!data.ok) {
+        throw data.status || 500;
+      } else {
+        return Promise.resolve(data.json());
+      }
+    })
+    .catch(errStatus => {
+      showErrorPopup(errStatus);
+      throw errStatus;
+    })
+    .then(sentenceData => {
+      textValidator.sentences = sentenceData.data ? sentenceData.data : [];
+      localStorage.setItem(textValidatorCountKey, textValidator.sentences.length);
       if (textValidator.sentences.length === 0) {
         showNoSentencesMessage();
         return;
       }
 
-      $("#audio-player-btn").removeClass('disable-control');
-      $("#skip_button").removeAttr('disabled');
+      $('#audio-player-btn').removeClass('disable-control');
+      $('#skip_button').removeAttr('disabled');
 
       initializeComponent();
     });
@@ -454,23 +475,23 @@ const initializeComponent = function () {
   hideElement($('#loader-play-btn'));
   addListeners();
   if (sentence) {
-      const encodedUrl = encodeURIComponent(sentence.contribution);
+    const encodedUrl = encodeURIComponent(sentence.contribution);
     loadAudio(`${cdn_url}/${encodedUrl}`);
     setSentenceLabel(currentIndex);
     setCurrentSentenceIndex(currentIndex + 1);
     setTotalSentenceIndex(totalItems);
-    updateProgressBar(currentIndex + 1, textValidator.sentences.length)
+    updateProgressBar(currentIndex + 1, textValidator.sentences.length);
     // updateValidationCount();
     resetValidation();
     setAudioPlayer();
     const $canvas = document.getElementById('myCanvas');
     visualizer.drawCanvasLine($canvas);
   }
-}
+};
 
 module.exports = {
   setSentenceLabel,
   setAudioPlayer,
   addListeners,
-  startVisualizer
+  startVisualizer,
 };

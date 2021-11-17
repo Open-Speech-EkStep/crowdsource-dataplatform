@@ -6,7 +6,8 @@ const {
   CURRENT_MODULE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   AGGREGATED_DATA_BY_LANGUAGE,
-  config,INITIATIVES
+  config,
+  INITIATIVES,
 } = require('../common/constants');
 
 const {
@@ -17,7 +18,7 @@ const {
   hideElement,
   getJson,
   translate,
-  getDefaultLanguageStat
+  getDefaultLanguageStat,
 } = require('../common/utils');
 
 const { downloadPdf } = require('../common/downloadableBadges');
@@ -28,13 +29,13 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
-  redirectToHomeForDirectLanding
+  redirectToHomeForDirectLanding,
 } = require('../common/common');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 
 const { initializeFeedbackModal } = require('../common/feedback');
 
-const CURRENT_INDEX = `${config.initiativeKey_2}ValidationCurrentIndex`;
+const CURRENT_INDEX = `${config.initiativeKey_2}ValidatorCurrentIndex`;
 const SPEAKER_DETAILS = 'speakerDetails';
 const textValidatorCountKey = `${config.initiativeKey_2}ValidatorCount`;
 const totalSentence = Number(localStorage.getItem(textValidatorCountKey));
@@ -60,7 +61,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeText.replace('<y>', rank);
     localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_2]);
   }
-  
+
   const $whatsappShare = $('#whatsapp_share');
   $whatsappShare.attr('href', `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $('#twitter_share');
@@ -74,10 +75,9 @@ const updateShareContent = function (language, rank) {
 
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
-
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
-    const defaultData = getDefaultLanguageStat(INITIATIVES.text.type,contributionLanguage);  
+    const defaultData = getDefaultLanguageStat(INITIATIVES.text.type, contributionLanguage);
 
     const filteredDataByLanguage = jsonData.filter(d => d.type == INITIATIVES.text.type);
     const top_languages_by_hours = filteredDataByLanguage.length ? filteredDataByLanguage : defaultData;

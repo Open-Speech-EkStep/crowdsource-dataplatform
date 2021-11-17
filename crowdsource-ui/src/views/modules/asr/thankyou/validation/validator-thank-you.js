@@ -6,7 +6,8 @@ const {
   CURRENT_MODULE,
   AGGREGATED_DATA_BY_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
-  config,INITIATIVES
+  config,
+  INITIATIVES,
 } = require('../common/constants');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('../common/header');
 
@@ -18,7 +19,7 @@ const {
   hideElement,
   getJson,
   translate,
-  getDefaultLanguageStat
+  getDefaultLanguageStat,
 } = require('../common/utils');
 
 const { downloadPdf } = require('../common/downloadableBadges');
@@ -28,10 +29,10 @@ const {
   updateGoalProgressBarFromJson,
   replaceSubStr,
   getTopLanguage,
-  redirectToHomeForDirectLanding
+  redirectToHomeForDirectLanding,
 } = require('../common/common');
 
-const CURRENT_INDEX = `${config.initiativeKey_1}ValidationCurrentIndex`;
+const CURRENT_INDEX = `${config.initiativeKey_1}ValidatorCurrentIndex`;
 const SPEAKER_DETAILS = 'speakerDetails';
 const asrValidatorCountKey = `${config.initiativeKey_1}ValidatorCount`;
 const totalSentence = Number(localStorage.getItem(asrValidatorCountKey));
@@ -58,7 +59,7 @@ const updateShareContent = function (language, rank) {
     localeText = localeText.replace('<y>', rank);
     localeText = localeText.replace('<initiative name>', localeStrings[config.initiative_1]);
   }
-  
+
   const $whatsappShare = $('#whatsapp_share');
   $whatsappShare.attr('href', `https://api.whatsapp.com/send?text=${localeText}`);
   const $twitterShare = $('#twitter_share');
@@ -73,7 +74,7 @@ const updateShareContent = function (language, rank) {
 const getLanguageStats = function () {
   return getJson('/aggregated-json/cumulativeDataByLanguage.json').then(jsonData => {
     const contributionLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
-    const defaultData = getDefaultLanguageStat(INITIATIVES.asr.type,contributionLanguage)
+    const defaultData = getDefaultLanguageStat(INITIATIVES.asr.type, contributionLanguage);
 
     const filteredDataByLanguage = jsonData.filter(d => d.type == INITIATIVES.asr.type);
     const top_languages_by_hours = filteredDataByLanguage.length ? filteredDataByLanguage : defaultData;
