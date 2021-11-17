@@ -47,9 +47,6 @@ const {
 } = require('./middleware/validateUserInputs');
 const { markContributionSkippedInCache } = require('./middleware/cacheMiddleware');
 
-// const Ddos = require('ddos');
-// const ddos = new Ddos({ burst: 12, limit: 70 })
-// app.use(ddos.express);
 app.use(bodyParser.json());
 // morganBody(app, {
 //     logAllReqHeader: true,
