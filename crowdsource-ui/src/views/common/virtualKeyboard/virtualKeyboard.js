@@ -7,13 +7,7 @@
 
 const { keyboardLayout } = require('./keyboardLayout');
 const { auto_validation } = require('./env-api');
-const {
-  CONTRIBUTION_LANGUAGE,
-  CURRENT_MODULE,
-  PARALLEL_TO_LANGUAGE,
-  INITIATIVES,
-  INITIATIVES_NAME,
-} = require('./constants');
+const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE, INITIATIVES } = require('./constants');
 const { isMobileDevice } = require('./common');
 const { getInitiativeType } = require('./utils');
 const AutoValidation = require('./AutoValidation').default;
@@ -220,9 +214,10 @@ function lngtype(text) {
   const selectedType = localStorage.getItem('selectedType');
   const initiativeType = getInitiativeType(currentModule);
 
+  const currentIndexKey = `${INITIATIVES[initiativeType].value}ValidatorCurrentIndex`;
+
   const data = window[`${initiativeType}Validator`] || { sentences: [{}] };
-  const currentIndexOfData =
-    localStorage.getItem(`${INITIATIVES_NAME[initiativeType]}ValidationCurrentIndex`) || 0;
+  const currentIndexOfData = Number(localStorage.getItem(currentIndexKey)) || 0;
   const refText = data.sentences[currentIndexOfData].contribution;
 
   if (
