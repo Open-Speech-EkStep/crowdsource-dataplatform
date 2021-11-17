@@ -3,6 +3,7 @@ const { calculateTime, formatTime, getJson, translate } = require('./utils');
 const { CURRENT_MODULE,INITIATIVES } = require('./constants');
 import origFetch from 'node-fetch';
 const { context_root } = require('./env-api');
+const {isMobileDevice} = require('./common');
 
 const $timelineLoader = $('#timeline-loader');
 const $timelineChart = $('#timeline');
@@ -121,9 +122,13 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series.tooltipHTML = contributeTooltip;
     series.tooltip.getFillFromObject = false;
     series.tooltip.autoTextColor = false;
-    series.tooltip.background.fill = am4core.color("rgba(252,194,50,0.2)");
+    series.tooltip.background.fill = am4core.color("rgba(252,194,50,1)");
     series.tooltip.label.fill = am4core.color("#000000");
     series.sequencedInterpolation = true;
+    if(isMobileDevice()){
+      series.tooltip.label.maxWidth = 150;
+      series.tooltip.label.wrap = true;
+    }
     series.stroke = am4core.color("#FCC232");
     series.name = translate(series1Name);
 
@@ -136,8 +141,12 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     series2.tooltipHTML = validateTooltip;
     series2.tooltip.getFillFromObject = false;
     series2.tooltip.autoTextColor = false;
-    series2.tooltip.background.fill = am4core.color("rgba(131,230,97,0.2)");
+    series2.tooltip.background.fill = am4core.color("rgba(131,230,97,1)");
     series2.tooltip.label.fill = am4core.color("#000000");
+    if(isMobileDevice()){
+      series2.tooltip.label.maxWidth = 150;
+      series2.tooltip.label.wrap = true;
+    }
     series2.strokeWidth = 3;
     series2.stroke = am4core.color("#83E661");
     series2.name = translate(series2Name);

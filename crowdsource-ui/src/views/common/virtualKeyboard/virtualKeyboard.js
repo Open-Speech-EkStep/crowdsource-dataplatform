@@ -209,12 +209,13 @@ function lngtype(text) {
     }
   });
 
-  const refText = $('#captured-text').text();
   const selectedType = localStorage.getItem('selectedType');
   const initiativeType = getInitiativeType(currentModule);
 
   const data = window[`${initiativeType}Validator`] || {sentences:[{}]} ;
   const currentIndexOfData = localStorage.getItem(`${config.initiativeKey_1}ValidationCurrentIndex`) || 0;
+  const refText = data.sentences[currentIndexOfData].contribution;
+
 
   if(auto_validation === 'enabled' && selectedType === 'validate' && data.sentences[currentIndexOfData].auto_validate){
     if(langdic[contributionLanguage].test(newText)) {

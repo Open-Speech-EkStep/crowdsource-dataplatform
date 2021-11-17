@@ -2,6 +2,7 @@ const fetch = require('./fetch')
 const { generateIndiaMap } = require('./home-page-charts');
 const { AGE_GROUP,INITIATIVES } = require('./constants');
 const { calculateTime, formatTime, getJson, translate } = require('./utils');
+const { isMobileDevice } = require('./common');
 const $chartRow = $('.chart-row');
 const $chartLoaders = $chartRow.find('.loader');
 const $charts = $chartRow.find('.chart');
@@ -62,9 +63,9 @@ const getGenderData = (genderData) => {
                         gender: translate("Others"),
                         tooltipText: `
                                 <div>
-                                    <h6 style="text-align: left; font-weight: bold">${translate(item.gender)}</h6>
+                                    <h6 class="text-sm-center text-lg-left text-md-left" style="font-weight: bold">${translate(item.gender)}</h6>
                                     <div>${translate('Contributed')}: <label>${contributedHours}</label></div>
-                                    <div style="text-align: left;">${translate('Speakers')}: <label>${item.speakers}</label></div>
+                                    <div class="text-sm-center text-lg-left text-md-left">${translate('Speakers')}: <label>${item.speakers}</label></div>
                                 </div>`
                     });
                 } else {
@@ -73,9 +74,9 @@ const getGenderData = (genderData) => {
                         gender: translate(genderType),
                         tooltipText: `
                                 <div>
-                                    <h6 style="text-align: left; font-weight: bold">${translate(genderType)}</h6>
+                                    <h6 class="text-sm-center text-lg-left text-md-left" style="font-weight: bold">${translate(genderType)}</h6>
                                     <div>${translate('Contributed')}: <label>${contributedHours}</label></div>
-                                    <div style="text-align: left;">${translate('Speakers')}: <label>${item.speakers}</label></div>
+                                    <div class="text-sm-center text-lg-left text-md-left">${translate('Speakers')}: <label>${item.speakers}</label></div>
                                 </div>`
                     });
                 }
@@ -297,6 +298,10 @@ const drawGenderChart = (chartData) => {
         columnTemplate.tooltipHTML = `<div> {tooltipText}</div>`;
         columnTemplate.tooltipX = am4core.percent(50);
         columnTemplate.tooltipY = am4core.percent(0);
+        if(isMobileDevice()){
+            series.tooltip.label.maxWidth = 160;
+            series.tooltip.label.wrap = true;
+        }
 
         columnTemplate.adapter.add('fill', function (fill, target) {
             return chartColors[chartColors.length - 1 - target.dataItem.index];
@@ -386,9 +391,13 @@ const drawTimelineChart = (timelineData) => {
             </div>`;
         series.tooltip.getFillFromObject = false;
         series.tooltip.autoTextColor = false;
-        series.tooltip.background.fill = am4core.color("rgba(252,194,50,0.2)");
+        series.tooltip.background.fill = am4core.color("rgba(252,194,50,1)");
         series.tooltip.label.fill = am4core.color("#000000");
         series.sequencedInterpolation = true;
+        if(isMobileDevice()){
+            series.tooltip.label.maxWidth = 150;
+            series.tooltip.label.wrap = true;
+          }
         series.stroke = am4core.color("#FCC232");
         series.name = translate("Contributed");
 
@@ -406,8 +415,12 @@ const drawTimelineChart = (timelineData) => {
         </div>`;
         series2.tooltip.getFillFromObject = false;
         series2.tooltip.autoTextColor = false;
-        series2.tooltip.background.fill = am4core.color("rgba(131,230,97,0.2)");
+        series2.tooltip.background.fill = am4core.color("rgba(131,230,97,1)");
         series2.tooltip.label.fill = am4core.color("#000000");
+        if(isMobileDevice()){
+            series2.tooltip.label.maxWidth = 150;
+            series2.tooltip.label.wrap = true;
+          }
         series2.stroke = am4core.color("#83E661");
         series2.name = translate("Validated");
 
