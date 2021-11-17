@@ -1,15 +1,15 @@
-.font-size-lg-32{
+.font-size-lg-32 {
   font-size: 2rem;
 }
 
-.platform-intro-section-cover{
+.platform-intro-section-cover {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('/img/landing_bg.svg');
   background-size: cover;
 }
 
-.platform-intro-section{
+.platform-intro-section {
   max-width: 1200px;
   margin: auto;
 }
@@ -28,17 +28,17 @@
   font-size: 32px;
 }
 
-.platform-intro-section-text{
+.platform-intro-section-text {
   margin-top: 60px !important;
   margin-bottom: 60px !important;
 }
 
-.platform-intro-section-text h4{
+.platform-intro-section-text h4 {
   color: #111111;
   font-size: 32px;
 }
 
-.platform-intro-section-text p{
+.platform-intro-section-text p {
   color: #666666;
   font-size: 20px;
   line-height: 32px;
@@ -52,13 +52,13 @@
   box-shadow: 0 0 32px rgb(0 123 255 / 40%);
 }
 
-.platform-card-section-heading{
+.platform-card-section-heading {
   color: #111111;
   font-size: 32px;
   margin-top: 40px !important;
 }
 
-.platform-card-section-para{
+.platform-card-section-para {
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -66,14 +66,14 @@
   color: #666666;
 }
 
-.platform-intro-section-text button{
-  height:48px;
+.platform-intro-section-text button {
+  height: 48px;
   font-size: 18px;
 }
 
-.monthly-goal-section{
-  padding-top:11px;
-  margin:auto;
+.monthly-goal-section {
+  padding-top: 11px;
+  margin: auto;
   max-width: 1200px;
   height: 56px;
   background: #ffffff;
@@ -84,7 +84,7 @@
   color: #666666;
 }
 
-.monthly-goal-section span{
+.monthly-goal-section span {
   font-weight: bold;
   font-size: 20px;
   line-height: 32px;
@@ -93,7 +93,7 @@
 
 #badge-section-card-cover {
   border-radius: 12px;
-  background:#eff5ff;;
+  background: #eff5ff;
 }
 
 #badge-section-card {
@@ -103,17 +103,17 @@
   background-position: right;
 }
 
-#badge-section-card button{
-  min-width:180px;
-  height:48px;
+#badge-section-card button {
+  min-width: 180px;
+  height: 48px;
   font-size: 18px;
 }
 
-.home-badge-row img{
+.home-badge-row img {
   filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));
 }
 
-#badge-section-card img{
+#badge-section-card img {
   filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));
 }
 
@@ -156,12 +156,12 @@
   padding: 8px 6% 0 6%;
 }
 
-.carousel-item{
+.carousel-item {
   padding-right: 4px;
   padding-left: 4px;
 }
 
-.label-text{
+.label-text {
   line-height: 32px;
   font-weight: 400;
   font-size: 20px;
@@ -182,7 +182,7 @@
   text-align: center;
 }
 
-.platform_button{
+.platform_button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -213,33 +213,33 @@
   white-space: nowrap;
   text-align: center;
   position: relative;
-  background: #dddddd
+  background: #dddddd;
 }
 
-.home-badge-link{
-  font-style:normal;
-  font-size:28px;
-  max-width:579px;
+.home-badge-link {
+  font-style: normal;
+  font-size: 28px;
+  max-width: 579px;
 }
 
-.home-badge-link-row{
-  line-height:50px;
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+.home-badge-link-row {
+  line-height: 50px;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding-right: 20px;
   font-size: 40px;
 }
-.home-badge-link-row2{
+.home-badge-link-row2 {
   font-size: 24px;
   line-height: 146%;
 }
 
-.badge-card-text-box h4{
+.badge-card-text-box h4 {
   font-size: 20px;
 }
 
-#badge-section{
-  max-width:1200px;
-  margin:auto;
+#badge-section {
+  max-width: 1200px;
+  margin: auto;
 }
 
 #carouselExampleIndicators .nav-tabs {
@@ -251,43 +251,43 @@
   overflow-x: auto;
   -ms-overflow-style: none; /* // IE 10+ */
   scrollbar-width: none; /* // Firefox */
-  overflow: -moz-scrollbars-none;/* // Firefox */}
+  overflow: -moz-scrollbars-none; /* // Firefox */
+}
 
-
-#carouselExampleIndicators .nav-tabs>li {
+#carouselExampleIndicators .nav-tabs > li {
   margin: 0 80px 0 18px;
 }
 
-#carouselExampleIndicators .nav-tabs>li.active>a,
-#carouselExampleIndicators .nav-tabs>li.active>a:focus,
-#carouselExampleIndicators .nav-tabs>li.active>a:hover {
+#carouselExampleIndicators .nav-tabs > li.active > a,
+#carouselExampleIndicators .nav-tabs > li.active > a:focus,
+#carouselExampleIndicators .nav-tabs > li.active > a:hover {
   border-width: 0;
 }
-#carouselExampleIndicators .nav-tabs>li>a {
+#carouselExampleIndicators .nav-tabs > li > a {
   font-size: 24px;
   line-height: 29px;
-  opacity: .7;
+  opacity: 0.7;
   font-weight: 400;
   width: max-content;
 }
 
-#carouselExampleIndicators .nav-tabs>li.active>a {
+#carouselExampleIndicators .nav-tabs > li.active > a {
   font-weight: 400;
   opacity: 1;
 }
 
-#carouselExampleIndicators .nav-tabs>li>a:after {
+#carouselExampleIndicators .nav-tabs > li > a:after {
   content: '';
   height: 2px;
   position: absolute;
   width: 100%;
   left: 0;
 }
-#carouselExampleIndicators .nav-tabs>li.active>a:after,
-#carouselExampleIndicators .nav-tabs>li:hover>a:after {
+#carouselExampleIndicators .nav-tabs > li.active > a:after,
+#carouselExampleIndicators .nav-tabs > li:hover > a:after {
   transform: scale(1);
 }
-.tab-nav>li>a:after {
+.tab-nav > li > a:after {
   background: #21527d none repeat scroll 0% 0%;
   color: #ffffff;
 }
@@ -296,17 +296,17 @@
   display: none; /* Safari and Chrome */
 }
 
-#carouselExampleIndicators .nav>li>a {
+#carouselExampleIndicators .nav > li > a {
   position: relative;
   display: block;
   margin: 9px 20px 10px 20px;
 }
 
-#carouselExampleIndicators .nav{
+#carouselExampleIndicators .nav {
   flex-wrap: inherit;
 }
 
-.monthly-goal-text{
+.monthly-goal-text {
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -319,7 +319,7 @@
   margin: 0 12px;
 }
 
-.separator{
+.separator {
   position: static;
   width: 32px;
   height: 0;
@@ -330,7 +330,7 @@
   order: 2;
   flex-grow: 0;
 }
-.language-goal-box{
+.language-goal-box {
   flex: none;
   order: 3;
   flex-grow: 0;
@@ -338,7 +338,7 @@
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
-  .home-badge-row img{
+  .home-badge-row img {
     height: 153px;
   }
 
@@ -347,12 +347,11 @@
     padding-left: 45px !important;
   }
 
-  #badge-section-card button{
+  #badge-section-card button {
     max-width: 160px;
     min-width: 160px;
     height: 48px;
     font-size: 16px;
-
   }
   .platform-intro-section-text {
     padding-left: 45px !important;
@@ -365,7 +364,7 @@
     padding-left: 45px !important;
   }
 
-  #badge-section-card button{
+  #badge-section-card button {
     max-width: 160px;
     min-width: 160px;
     height: 48px;
@@ -376,20 +375,20 @@
     text-align: center !important;
   }
 
-  .badge-card-text-box{
+  .badge-card-text-box {
     margin-left: 20px !important;
   }
 
-  .badge-card-text-box button{
+  .badge-card-text-box button {
     margin-top: 12px !important;
   }
 
-  .badge-card-text-box h4{
+  .badge-card-text-box h4 {
     color: #666666;
     padding-left: 10px !important;
   }
 
-  .image-text{
+  .image-text {
     width: 240px;
   }
 
@@ -399,31 +398,29 @@
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .label-text{
+  .label-text {
     width: 240px;
   }
 
-  .image-text{
+  .image-text {
     width: 240px;
   }
 
-  .badge-card-text-box h2{
+  .badge-card-text-box h2 {
     padding-left: 10px;
   }
 
-  .badge-card-text-box h4{
+  .badge-card-text-box h4 {
     padding-left: 10px;
   }
 
-  .platform_button{
+  .platform_button {
     margin-bottom: 20px !important;
   }
-
 }
 
-
 @media (min-width: 700px) and (max-width: 768px) {
-  #platform_inner{
+  #platform_inner {
     padding: 8px 3% 0 3%;
   }
 
@@ -432,7 +429,7 @@
     padding-left: 45px !important;
   }
 
-  #badge-section-card button{
+  #badge-section-card button {
     max-width: 140px;
     min-width: 140px;
     height: 40px;
@@ -443,46 +440,46 @@
     text-align: center !important;
   }
 
-  .badge-card-text-box{
+  .badge-card-text-box {
     margin-left: 0 !important;
   }
 
-  .badge-card-text-box button{
+  .badge-card-text-box button {
     margin-top: 12px !important;
   }
 
-  .home-badge-link-row2{
+  .home-badge-link-row2 {
     text-align: center !important;
     margin-top: 32px !important;
   }
 
-  .label-text{
+  .label-text {
     width: 200px;
     font-size: 16px;
   }
 
-  .image-text{
+  .image-text {
     margin: 0 !important;
     width: 200px;
     font-size: 16px;
   }
 
-  .asr-cont-image{
-    width: 100px ;
-    height: 100px ;
-  }
-
-  .asr-cont-image img{
+  .asr-cont-image {
     width: 100px;
     height: 100px;
   }
 
-  .asr-val-image{
+  .asr-cont-image img {
     width: 100px;
     height: 100px;
   }
 
-  .asr-val-image img{
+  .asr-val-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .asr-val-image img {
     width: 100px;
     height: 100px;
   }
@@ -491,39 +488,39 @@
     padding-left: 45px !important;
   }
 
-  .platform_button{
+  .platform_button {
     margin-bottom: 20px;
   }
 }
 
 @media screen and (max-width: 699px) {
-  .platform-intro-section-cover{
+  .platform-intro-section-cover {
     background-repeat: no-repeat;
     background-position: inherit;
     background-image: url('/img/landingpage_bg_sm.svg') !important;
     background-size: cover;
   }
-  #banner .h1{
+  #banner .h1 {
     font-size: 32px;
   }
 
-  .font-size-lg-32{
+  .font-size-lg-32 {
     font-size: 22px !important;
   }
 
-  .separator{
+  .separator {
     opacity: 0.1;
   }
 
-  .home-banner{
+  .home-banner {
     height: 300px !important;
   }
 
-  .home-banner h2{
+  .home-banner h2 {
     font-size: 20px !important;
   }
 
-  #platform_section{
+  #platform_section {
     margin-top: 46px;
   }
 
@@ -537,7 +534,7 @@
   }
 
   #badge-section {
-    margin: auto
+    margin: auto;
   }
 
   .landing-img-logo {
@@ -545,9 +542,9 @@
     height: 55px !important;
   }
 
-  #badge-section-card button{
-    max-width: 144px;
-    min-width: 144px;
+  #badge-section-card button {
+    max-width: max-content;
+    min-width: 170px;
     height: 44px;
     font-size: 16px;
     justify-content: center;
@@ -556,26 +553,26 @@
     margin: 4px 6px;
   }
 
-  #badge-section-card h2{
+  #badge-section-card h2 {
     font-weight: bold;
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 12px;
   }
 
-  #badge-section-card h4{
+  #badge-section-card h4 {
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
   }
 
-  #badge-section-card img{
+  #badge-section-card img {
     width: 82px;
     height: 100px;
     filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));
   }
 
-  .home-badge-link-row{
+  .home-badge-link-row {
     font-size: 18px;
     line-height: 24px;
     text-align: center;
@@ -583,12 +580,12 @@
     padding-top: 9px;
   }
 
-  .home-badge-row img{
+  .home-badge-row img {
     height: 83px;
     filter: drop-shadow(0 4px 12px rgba(0, 123, 255, 0.2));
   }
 
-  .platform-intro-section button{
+  .platform-intro-section button {
     min-width: 165px;
     max-width: 165px;
     height: 44px !important;
@@ -596,29 +593,29 @@
     margin-top: 20px !important;
   }
 
-  .platform-intro-section-text{
+  .platform-intro-section-text {
     margin-top: 20px !important;
     margin-bottom: 40px !important;
   }
 
-  .platform-intro-section-text h4{
+  .platform-intro-section-text h4 {
     font-size: 20px !important;
     line-height: 24px !important;
     color: #111111;
   }
 
-  .platform-intro-section-text p  {
+  .platform-intro-section-text p {
     font-size: 16px;
     line-height: 20px;
     color: #666666;
   }
 
-  .home-badge-link-row2{
+  .home-badge-link-row2 {
     font-size: 18px;
     line-height: 28px;
   }
 
-  .platform-card-section-heading{
+  .platform-card-section-heading {
     font-style: normal;
     font-weight: bold;
     font-size: 20px !important;
@@ -626,7 +623,7 @@
     margin-top: 36px !important;
   }
 
-  .platform-card-section-para{
+  .platform-card-section-para {
     font-style: normal;
     font-weight: normal;
     font-size: 16px !important;
@@ -635,16 +632,16 @@
     margin-bottom: 28px;
   }
 
-  .monthly-goal-section{
-    padding-top:11px;
-    margin:auto;
+  .monthly-goal-section {
+    padding-top: 11px;
+    margin: auto;
     height: 72px;
     border-radius: 12px;
     margin-bottom: 32px !important;
     margin-top: 16px !important;
   }
 
-  .monthly-goal-section span{
+  .monthly-goal-section span {
     font-size: 14px;
     line-height: 20px;
   }
@@ -653,17 +650,17 @@
     padding: 0;
   }
 
-  #carouselExampleIndicators .nav>li>a {
+  #carouselExampleIndicators .nav > li > a {
     margin: 6px 16px 7px 16px;
   }
 
-  #carouselExampleIndicators .nav-tabs>li>a {
+  #carouselExampleIndicators .nav-tabs > li > a {
     font-size: 16px;
     line-height: 19px;
     width: max-content;
   }
 
-  #carouselExampleIndicators .nav-tabs>li {
+  #carouselExampleIndicators .nav-tabs > li {
     margin: 0 10px 0 8px;
   }
 
@@ -685,7 +682,7 @@
     padding: 16px 4px 0 4px;
   }
 
-  .platform_button{
+  .platform_button {
     padding: 6px 20px !important;
     min-width: 240px;
     max-width: 240px;
@@ -698,27 +695,27 @@
     border-radius: 50%;
     background-color: #42b2c6;
     height: 80px;
-    width: 80px
+    width: 80px;
   }
 
-  .asr-cont-image img{
+  .asr-cont-image img {
     height: 80px;
-    width: 80px
+    width: 80px;
   }
 
   .asr-val-image {
     border-radius: 50%;
     background-color: #3e6dd4;
     height: 80px;
-    width: 80px
+    width: 80px;
   }
 
-  .asr-val-image img{
+  .asr-val-image img {
     height: 80px;
-    width: 80px
+    width: 80px;
   }
 
-  .monthly-goal-text{
+  .monthly-goal-text {
     display: flex;
     justify-content: center;
     margin-bottom: 8px !important;
@@ -726,7 +723,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  .platform_button{
+  .platform_button {
     height: 44px !important;
     font-size: 16px !important;
     min-width: 280px !important;
@@ -737,17 +734,15 @@
     padding-left: 20px !important;
     margin-top: 20px !important;
   }
-
 }
 
 @media screen and (max-width: 320px) {
-  .platform_button{
+  .platform_button {
     height: 40px !important;
     font-size: 12px !important;
     min-width: 240px !important;
     max-width: 240px !important;
   }
-
 }
 
 #banner {
@@ -759,56 +754,56 @@
 /* body{
 
  } */
-.img-border{
+.img-border {
   /* border: solid 7px #3A4245; */
   border-radius: 23px;
   display: block;
   height: auto;
   max-width: 100%;
 }
-.h1{
+.h1 {
   font-size: 50px;
   line-height: 48px;
   font-weight: 500;
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.h2{
+.h2 {
   font-size: 50px;
   font-weight: 500;
   line-height: 45px;
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.h3{
+.h3 {
   font-size: 45px;
   line-height: 64px;
   font-weight: 500;
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.h4{
+.h4 {
   font-size: 25px;
   line-height: 64px;
   font-weight: 500;
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.h6{
+.h6 {
   font-size: 25px;
   line-height: 36px;
   font-weight: 500;
-  font-family: Rowdies,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.p-5{
+.p-5 {
   padding: 3rem;
 }
-.pt-3{
+.pt-3 {
   padding-top: 3rem;
 }
-.pt-6{
+.pt-6 {
   padding-top: 6rem;
 }
-.yellow{
+.yellow {
   color: #ffbf00;
 }
-.bh-btn-primary{
+.bh-btn-primary {
   background: #2961ad;
   border-radius: 24px;
   border: none;
