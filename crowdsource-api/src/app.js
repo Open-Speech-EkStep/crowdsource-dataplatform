@@ -58,16 +58,6 @@ app.use(bodyParser.json());
 
 app.enable('trust proxy');
 
-// const privateKey = fs.readFileSync('./vakyansh.key', 'utf8');
-// const certificate = fs.readFileSync('./vakyansh_in.crt', 'utf8');
-// const ca = fs.readFileSync('./vakyansh_in.ca-bundle', 'utf8');
-
-// const credentials = {
-//     key: privateKey,
-//     cert: certificate,
-//     ca: ca
-// };
-
 const randomString = () => {
     return (Math.random() + 1).toString(36).substring(2, 10);
 };
