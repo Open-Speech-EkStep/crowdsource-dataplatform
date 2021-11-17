@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
@@ -24,23 +24,28 @@ type MyAppProps = Partial<Exclude<AppProps, 'Component'>> & { Component: AppProp
 
 const MyApp = ({ Component, pageProps }: MyAppProps) => {
   const router = useRouter();
+  const routerRef = useRef(router);
+  routerRef.current = router;
+
   const [, setContributionLanguage, , storageObj] = useLocalStorage<string>(
     localStorageConstants.contributionLanguage
   );
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const isInitiativePage = INITIATIVES.some(initiative => router.pathname.includes(`${initiative}-india`));
+    const isInitiativePage = INITIATIVES.some(initiative =>
+      routerRef.current.pathname.includes(`${initiative}-india`)
+    );
 
     if (
       storageObj.key === localStorageConstants.contributionLanguage &&
       storageObj.oldValue !== storageObj.newValue &&
       isInitiativePage &&
-      router.pathname !== '/404'
+      routerRef.current.pathname !== '/404'
     ) {
       setShowModal(true);
     }
-  }, [router.pathname, storageObj]);
+  }, [storageObj]);
 
   /* istanbul ignore next */
   const { mutate } = useFetchWithInit(apiPaths.setCookie, { revalidateOnMount: false });
