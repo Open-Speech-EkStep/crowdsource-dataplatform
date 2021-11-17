@@ -1,5 +1,4 @@
 /* Replace with your SQL commands */
-/* Replace with your SQL commands */
 DROP MATERIALIZED VIEW public.language_and_state_group_contributions;
 CREATE MATERIALIZED VIEW public.language_and_state_group_contributions
  AS
