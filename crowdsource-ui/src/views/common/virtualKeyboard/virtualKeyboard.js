@@ -7,15 +7,21 @@
 
 const { keyboardLayout } = require('./keyboardLayout');
 const { auto_validation } = require('./env-api');
-const { CONTRIBUTION_LANGUAGE, CURRENT_MODULE, PARALLEL_TO_LANGUAGE,INITIATIVES ,config} = require('./constants');
+const {
+  CONTRIBUTION_LANGUAGE,
+  CURRENT_MODULE,
+  PARALLEL_TO_LANGUAGE,
+  INITIATIVES,
+  INITIATIVES_NAME,
+} = require('./constants');
 const { isMobileDevice } = require('./common');
-const { getInitiativeType } = require('./utils')
+const { getInitiativeType } = require('./utils');
 const AutoValidation = require('./AutoValidation').default;
 
-function showAndHideEditError(inputTextLength, error, callback1 = () => { }, callback2 = () => { }, flow) {
+function showAndHideEditError(inputTextLength, error, callback1 = () => {}, callback2 = () => {}, flow) {
   const currentModule = localStorage.getItem(CURRENT_MODULE);
-  const $submitEditButton = $("#submit-edit-button");
-  const $cancelButton = isMobileDevice() ? $("#cancel-edit-button") : null;
+  const $submitEditButton = $('#submit-edit-button');
+  const $cancelButton = isMobileDevice() ? $('#cancel-edit-button') : null;
   if (inputTextLength > 2 && error == null) {
     callback1();
     const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
@@ -31,51 +37,48 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => { }, cal
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
     }
-    const previousActiveError = $("#edit-error-text .error-active");
+    const previousActiveError = $('#edit-error-text .error-active');
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
-    $("#edit-error-row").addClass('d-none');
-    $("#edit-text").add($('#edit-text-asr')).removeClass('edit-error-area').addClass('edit-text');
-  } else if(error && error.type == 'auto-validation'){
+    $('#edit-error-row').addClass('d-none');
+    $('#edit-text').add($('#edit-text-asr')).removeClass('edit-error-area').addClass('edit-text');
+  } else if (error && error.type == 'auto-validation') {
     $submitEditButton.removeAttr('disabled');
-    const $editErrorText = $("#edit-error-text");
+    const $editErrorText = $('#edit-error-text');
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
     }
     const previousActiveError = $editErrorText.find('.error-active');
     previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
     $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
-    $("#edit-text").add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
-    $("#edit-error-row").removeClass('d-none');
+    $('#edit-text').add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
+    $('#edit-error-row').removeClass('d-none');
   } else {
     if (error && error.type == 'noText') {
-      callback2()
+      callback2();
       if ($cancelButton) {
         $cancelButton.attr('disabled', true);
       }
     } else {
-      callback1()
+      callback1();
       if ($cancelButton) {
         $cancelButton.removeAttr('disabled');
       }
     }
-      $submitEditButton.attr('disabled', true);
-      const $editErrorText = $("#edit-error-text");
-      const previousActiveError = $editErrorText.find('.error-active');
-      previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
-      $("#edit-error-row").removeClass('d-none');
-    if(error && error.type) {
+    $submitEditButton.attr('disabled', true);
+    const $editErrorText = $('#edit-error-text');
+    const previousActiveError = $editErrorText.find('.error-active');
+    previousActiveError && previousActiveError.removeClass('error-active').addClass('d-none');
+    $('#edit-error-row').removeClass('d-none');
+    if (error && error.type) {
       $(`#edit-${error.type}-error`).removeClass('d-none').addClass('error-active');
-      $("#edit-text").add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
+      $('#edit-text').add($('#edit-text-asr')).addClass('edit-error-area').removeClass('edit-text');
     }
   }
 }
 
-
 let keyboard;
 
-const showKeyboard = function (language, callBack1 = () => {
-}, callBack2 = () => {
-}, flow = '') {
+const showKeyboard = function (language, callBack1 = () => {}, callBack2 = () => {}, flow = '') {
   let Keyboard = window.SimpleKeyboard.default;
 
   /**
@@ -88,39 +91,39 @@ const showKeyboard = function (language, callBack1 = () => {
     onChange: input => onChange(input),
     onKeyPress: button => onKeyPress(button),
     syncInstanceInputs: true,
-    ...layout
+    ...layout,
   });
 
   /**
    * Update simple-keyboard when input is changed directly
    */
-  document.querySelector(".edit-area").addEventListener("input", event => {
+  document.querySelector('.edit-area').addEventListener('input', event => {
     keyboard.setInput(event.target.value);
     const error = event.target.value ? lngtype(event.target.value) : { type: 'noText' };
-    localStorage.setItem("physicalKeyboard", true);
+    localStorage.setItem('physicalKeyboard', true);
     $('#keyboardBox').addClass('d-none');
     const inputText = event.target.value && event.target.value.trim();
-    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
+    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow);
   });
 
   function onChange(input) {
-    document.querySelector(".edit-area").value = input;
+    document.querySelector('.edit-area').value = input;
     const error = input ? lngtype(input) : { type: 'noText' };
-    localStorage.setItem("physicalKeyboard", false);
+    localStorage.setItem('physicalKeyboard', false);
     const inputText = input && input.trim();
-    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow)
+    showAndHideEditError(inputText.length, error, callBack1, callBack2, flow);
   }
 
   function onKeyPress(button) {
     /**
      * If you want to handle the shift and caps lock buttons
      */
-    if (button === "{shift}" || button === "{lock}") handleShift();
+    if (button === '{shift}' || button === '{lock}') handleShift();
   }
 
   function handleShift() {
     const currentLayout = keyboard.options.layoutName;
-    const shiftToggle = currentLayout === "default" ? "shift" : "default";
+    const shiftToggle = currentLayout === 'default' ? 'shift' : 'default';
 
     keyboard.setOptions({
       layoutName: shiftToggle,
@@ -129,66 +132,66 @@ const showKeyboard = function (language, callBack1 = () => {
   }
 
   const toggleCapsLock = function () {
-    const capsLockBtn = $(".hg-layout-shift .hg-row .hg-button-lock")[0];
+    const capsLockBtn = $('.hg-layout-shift .hg-row .hg-button-lock')[0];
     if (capsLockBtn && capsLockBtn.style) {
-      capsLockBtn.style.backgroundColor = "greenYellow";
+      capsLockBtn.style.backgroundColor = 'greenYellow';
     }
-  }
-}
+  };
+};
 
 function lngtype(text) {
   const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
   //Dictionary for Unicode range of the languages
   const currentModule = localStorage.getItem(CURRENT_MODULE);
   let langdic = {
-    "Assamese": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Bengali": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "English": /^[\u0020-\u007F]+$/,
-    "Gujarati": /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Hindi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Kannada": /^[\u0C80-\u0CFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Malayalam": /^[\u0D00-\u0D7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Odia": /^[\u0B00-\u0B7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Marathi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Punjabi": /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Tamil": /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Telugu": /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Sanskrit": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Kashmiri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Sindhi": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Konkani": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Bodo": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Manipuri": /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Dogri": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Nepali": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
-    "Santali": /^[\u0020-\u007F]+$/,
-    "Maithili": /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/
-  }
+    Assamese: /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Bengali: /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    English: /^[\u0020-\u007F]+$/,
+    Gujarati: /^[\u0A80-\u0AFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Hindi: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Kannada: /^[\u0C80-\u0CFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Malayalam: /^[\u0D00-\u0D7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Odia: /^[\u0B00-\u0B7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Marathi: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Punjabi: /^[\u0A00-\u0A7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Tamil: /^[\u0B80-\u0BFF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Telugu: /^[\u0C00-\u0C7F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Sanskrit: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Kashmiri: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Sindhi: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Konkani: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Bodo: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Manipuri: /^[\u0980-\u09FF\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Dogri: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Nepali: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+    Santali: /^[\u0020-\u007F]+$/,
+    Maithili: /^[\u0900-\u097F\u0020-\u0040\u005B-\u0060\u007B-\u007F\u0964-\u0965]+$/,
+  };
   if (currentModule == INITIATIVES.asr.value) {
     langdic = {
-      "Assamese": /^[\u0980-\u09FF\u0030-\u0039]+$/,
-      "Bengali": /^[\u0980-\u09FF\u0030-\u0039]+$/,
-      "English": /^[\u0020-\u007F]+$/,
-      "Gujarati": /^[\u0A80-\u0AFF\u0030-\u0039]+$/,
-      "Hindi": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Kannada": /^[\u0C80-\u0CFF\u0030-\u0039]+$/,
-      "Malayalam": /^[\u0D00-\u0D7F\u0030-\u0039]+$/,
-      "Odia": /^[\u0B00-\u0B7F\u0030-\u0039]+$/,
-      "Marathi": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Punjabi": /^[\u0A00-\u0A7F\u0030-\u0039]+$/,
-      "Tamil": /^[\u0B80-\u0BFF\u0030-\u0039]+$/,
-      "Telugu": /^[\u0C00-\u0C7F\u0030-\u0039]+$/,
-      "Sanskrit": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Kashmiri": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Sindhi": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Konkani": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Bodo": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Manipuri": /^[\u0980-\u09FF\u0030-\u0039]+$/,
-      "Dogri": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Nepali": /^[\u0900-\u097F\u0030-\u0039]+$/,
-      "Santali": /^[\u0020-\u007F]+$/,
-      "Maithili": /^[\u0900-\u097F\u0030-\u0039]+$/
-    }
+      Assamese: /^[\u0980-\u09FF\u0030-\u0039]+$/,
+      Bengali: /^[\u0980-\u09FF\u0030-\u0039]+$/,
+      English: /^[\u0020-\u007F]+$/,
+      Gujarati: /^[\u0A80-\u0AFF\u0030-\u0039]+$/,
+      Hindi: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Kannada: /^[\u0C80-\u0CFF\u0030-\u0039]+$/,
+      Malayalam: /^[\u0D00-\u0D7F\u0030-\u0039]+$/,
+      Odia: /^[\u0B00-\u0B7F\u0030-\u0039]+$/,
+      Marathi: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Punjabi: /^[\u0A00-\u0A7F\u0030-\u0039]+$/,
+      Tamil: /^[\u0B80-\u0BFF\u0030-\u0039]+$/,
+      Telugu: /^[\u0C00-\u0C7F\u0030-\u0039]+$/,
+      Sanskrit: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Kashmiri: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Sindhi: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Konkani: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Bodo: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Manipuri: /^[\u0980-\u09FF\u0030-\u0039]+$/,
+      Dogri: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Nepali: /^[\u0900-\u097F\u0030-\u0039]+$/,
+      Santali: /^[\u0020-\u007F]+$/,
+      Maithili: /^[\u0900-\u097F\u0030-\u0039]+$/,
+    };
   }
 
   let error = { type: 'language' };
@@ -196,13 +199,18 @@ function lngtype(text) {
   const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
 
   if (currentModule == INITIATIVES.asr.value && specialSymbols.test(newText) == true) {
-    return { type: 'symbol' }
+    return { type: 'symbol' };
   }
 
-  const contributionLanguage = currentModule === INITIATIVES.parallel.value ? localStorage.getItem(PARALLEL_TO_LANGUAGE) : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const contributionLanguage =
+    currentModule === INITIATIVES.parallel.value
+      ? localStorage.getItem(PARALLEL_TO_LANGUAGE)
+      : localStorage.getItem(CONTRIBUTION_LANGUAGE);
 
-  Object.entries(langdic).forEach(([key, value]) => {// loop to read all the dictionary items if not true
-    if (value.test(newText) == true) {   //Check Unicode to see which one is true
+  Object.entries(langdic).forEach(([key, value]) => {
+    // loop to read all the dictionary items if not true
+    if (value.test(newText) == true) {
+      //Check Unicode to see which one is true
       if (key.toLowerCase() == contributionLanguage.toLowerCase()) {
         error = null;
       }
@@ -212,14 +220,19 @@ function lngtype(text) {
   const selectedType = localStorage.getItem('selectedType');
   const initiativeType = getInitiativeType(currentModule);
 
-  const data = window[`${initiativeType}Validator`] || {sentences:[{}]} ;
-  const currentIndexOfData = localStorage.getItem(`${config.initiativeKey_1}ValidationCurrentIndex`) || 0;
+  const data = window[`${initiativeType}Validator`] || { sentences: [{}] };
+  const currentIndexOfData =
+    localStorage.getItem(`${INITIATIVES_NAME[initiativeType]}ValidationCurrentIndex`) || 0;
   const refText = data.sentences[currentIndexOfData].contribution;
 
-  if(auto_validation === 'enabled' && selectedType === 'validate' && data.sentences[currentIndexOfData].auto_validate){
-    if(langdic[contributionLanguage].test(newText)) {
-      if (!(AutoValidation[initiativeType](contributionLanguage,refText, text))) {
-        return { type: 'auto-validation' }
+  if (
+    auto_validation === 'enabled' &&
+    selectedType === 'validate' &&
+    data.sentences[currentIndexOfData].auto_validate
+  ) {
+    if (langdic[contributionLanguage].test(newText)) {
+      if (!AutoValidation[initiativeType](contributionLanguage, refText, text)) {
+        return { type: 'auto-validation' };
       }
     }
   }
@@ -229,17 +242,20 @@ function lngtype(text) {
 
 const closeKeyboard = function () {
   keyboard.destroy();
-}
+};
 
-const setInput = (text) => {
+const setInput = text => {
   keyboard.setInput(text);
-}
+};
 
 function dragElement(elmnt) {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "Header")) {
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  if (document.getElementById(elmnt.id + 'Header')) {
     /* if present, the header is where you move the DIV from:*/
-    document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+    document.getElementById(elmnt.id + 'Header').onmousedown = dragMouseDown;
   } else {
     /* otherwise, move the DIV from anywhere inside the DIV:*/
     elmnt.onmousedown = dragMouseDown;
@@ -265,8 +281,8 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
+    elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
   }
 
   function closeDragElement() {
@@ -277,16 +293,15 @@ function dragElement(elmnt) {
 }
 
 try {
-  $("#keyboardBox").draggable({
-    containment: "body"
+  $('#keyboardBox').draggable({
+    containment: 'body',
   });
 } catch (e) {
-  dragElement(document.getElementById("keyboardBox"));
+  dragElement(document.getElementById('keyboardBox'));
 }
 
 $('#keyboardCloseBtn').on('click', () => {
   $('#keyboardBox').addClass('d-none');
-})
+});
 
-module.exports = { showKeyboard, closeKeyboard, setInput, lngtype, showAndHideEditError }
-
+module.exports = { showKeyboard, closeKeyboard, setInput, lngtype, showAndHideEditError };
