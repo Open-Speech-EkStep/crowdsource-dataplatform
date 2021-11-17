@@ -7,10 +7,10 @@ SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT ag
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT age_group, contributions, hours_contributed, hours_validated, speakers, language from age_group_and_language_contributions)t;
 
 \o genderGroupContributions.json 
-SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  gender, contributions, hours_contributed, hours_validated, speakers from gender_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  gender, contributions, ROUND(hours_contributed, 3), ROUND(hours_validated, 3), speakers from gender_group_contributions)t;
 
 \o genderGroupAndLanguageContributions.json 
-SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  gender, contributions, hours_contributed, hours_validated, speakers, language from gender_and_language_group_contributions)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  gender, contributions, ROUND(hours_contributed, 3), ROUND(hours_validated, 3), speakers, language from gender_and_language_group_contributions)t;
 
 \o dailyTimeline.json
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select day, month, year, language, ROUND(cumulative_contribution_duration::decimal/3600, 3) as cumulative_contributions,ROUND(cumulative_validation_duration::decimal/3600, 3) as cumulative_validations, cumulative_contributions total_contribution_count, cumulative_validations total_validation_count, type from daily_cumulative_stats_per_language)t;
@@ -42,7 +42,6 @@ ROUND((sum(contribution_audio_duration) FILTER (WHERE audio_row_num_per_contribu
 
 \o cumulativeDataByState.json 
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select state, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from state_group_contributions)t;
-
 
 \o cumulativeDataByLanguage.json 
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, total_speakers, total_contributions, total_validations, total_contribution_count, total_validation_count, type from language_group_contributions)t;
