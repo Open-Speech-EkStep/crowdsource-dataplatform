@@ -298,9 +298,9 @@
   "Participate to keep <language> in top 3": "ਸਿਖਰ 3 ਵਿੱਚ <language> ਨੂੰ ਬਣਾਈ ਰੱਖਣ ਲਈ ਹਿੱਸਾ ਲਓ",
   "<language> vs Top contributed languages": "<language> ਬਨਾਮ ਪ੍ਰਮੁੱਖ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੀਆਂ ਭਾਸ਼ਾਵਾਂ",
   "<contribution-done>/<contribution-goal> Sentence(s)": "<contribution-done>/<contribution-goal> ਵਾਕ",
-  "Participate to see <from-language>-<to-language> in top 3": "<from-language> - <to-language> ਨੂੰ ਚੋਟੀ ਦੀਆਂ 3 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਦੇਖਣ ਲਈ ਹਿੱਸਾ ਲਵੋ",
-  "Participate to keep <from-language>-<to-language> in top 3": "<from-language> -  <to-language> ਨੂੰ ਚੋਟੀ ਦੀਆਂ 3 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਰੱਖਣ ਲਈ ਹਿੱਸਾ ਲਵੋ",
-  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language> -  <to-language> ਬਨਾਮ ਚੋਟੀ ਦੀਆਂ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੀਆਂ ਭਾਸ਼ਾ ਜੋੜੀਆਂ",
+  "Participate to see <from-language>-<to-language> in top 3": "<from-language>-<to-language> ਨੂੰ ਚੋਟੀ ਦੀਆਂ 3 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਦੇਖਣ ਲਈ ਹਿੱਸਾ ਲਵੋ",
+  "Participate to keep <from-language>-<to-language> in top 3": "<from-language>-<to-language> ਨੂੰ ਚੋਟੀ ਦੀਆਂ 3 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਰੱਖਣ ਲਈ ਹਿੱਸਾ ਲਵੋ",
+  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> ਬਨਾਮ ਚੋਟੀ ਦੀਆਂ ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲੀਆਂ ਭਾਸ਼ਾ ਜੋੜੀਆਂ",
   "<contribution-done>/<contribution-goal> Image(s)": "<contribution-done>/<contribution-goal>ਇਮੇਜਾਂ",
   "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "ਤੁਸੀਂ ਆਪਣੀ ਭਾਸ਼ਾ ਦੇ ਲਈ<span id=\"user-contribution-count\"></span><span>ਰਿਕਾਰਡਿੰਗਾਂ</span> ਦਾ ਯੋਗਦਾਨ ਦਿੱਤਾ ਹੈ!",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved": "<span id=\"metric-language\"></span> ਵਿੱਚ ਬੋਲੋ ਇੰਡੀਆ ਦੇ ਲਈ <span id=\"totalAverage\"></span> ਦਾ ਟੀਚਾ ਹਾਸਿਲ",
@@ -422,5 +422,6 @@
   "Thank you for your enthusiasm to validate the transcriptions.": "ਪੂਰੇ ਉਤਸ਼ਾਹ ਨਾਲ ਲਿਪੀਅੰਤਰਣਾਂ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਸ਼ੁਕਰੀਆ।",
   "Thank you for your enthusiasm to translate the sentences.": "ਵਾਕਾਂਂ ਦਾ ਅਨੁਵਾਦ ਕਰਨ ਵਿੱਚ ਤੁਹਾਡੇ ਵੱਲੋਂ ਦਿਖਾਏ ਗਏ ਉਤਸ਼ਾਹ ਲਈ ਸ਼ੁਕਰੀਆ।",
   "Thank you for your enthusiasm to validate the translations.": "ਪੂਰੇ ਉਤਸ਼ਾਹ ਨਾਲ ਅਨੁਵਾਦਾਂ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਲਈ ਤੁਹਾਡਾ ਸ਼ੁਕਰੀਆ।",
-  "Unspecified location": "Unspecified location"
+  "Unspecified location": "Unspecified location",
+  "We feel the text you entered doesn't match the original text, are you sure about your edit?": "We feel the text you entered doesn't match the original text, are you sure about your edit?"
 }

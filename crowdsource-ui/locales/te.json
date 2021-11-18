@@ -298,9 +298,9 @@
   "Participate to keep <language> in top 3": "<language> ను మెదటి 3 స్ధానాలలో ఉంచడానికి పాల్గొనండి",
   "<language> vs Top contributed languages": "<language> vs కాంట్రిబ్యూట్ చేయబడిన అగ్ర భాషలు",
   "<contribution-done>/<contribution-goal> Sentence(s)": "<contribution-done> / <contribution-goal> వాక్యాలు",
-  "Participate to see <from-language>-<to-language> in top 3": "ప్రముఖ 3 భాషలలో <from-language> - <to-language> చూడటానికి పాల్గొనండి",
-  "Participate to keep <from-language>-<to-language> in top 3": "<from-language> - <to-language> ను మెుదటి 3 స్ధానాలలో ఉంచడానికి పాల్గొనండి",
-  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language> - <to-language> vs కాంట్రిబ్యూట్ అందించబడ్డ అగ్ర భాషా జతలు",
+  "Participate to see <from-language>-<to-language> in top 3": "ప్రముఖ 3 భాషలలో <from-language>-<to-language> చూడటానికి పాల్గొనండి",
+  "Participate to keep <from-language>-<to-language> in top 3": "<from-language>-<to-language> ను మెుదటి 3 స్ధానాలలో ఉంచడానికి పాల్గొనండి",
+  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> vs కాంట్రిబ్యూట్ అందించబడ్డ అగ్ర భాషా జతలు",
   "<contribution-done>/<contribution-goal> Image(s)": "<contribution-done> / <contribution-goal> చిత్రాలు",
   "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "మీరు మీ భాషలో <span id=\"user-contribution-count\"></span> <span>రికార్డింగ్లను</span> కాంట్రిబ్యూట్ చేసారు!",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved": "<span id=\"metric-language\"></span> లో <span id=\"totalAverage\"></span> మాట్లాడు ఇండియా టార్గెట్ సాధించబడింది",
@@ -422,5 +422,6 @@
   "Thank you for your enthusiasm to validate the transcriptions.": "ట్రాన్స్‌క్రిప్షన్లను ధృవీకరించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "Thank you for your enthusiasm to translate the sentences.": "వాక్యాలను అనువదించడంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
   "Thank you for your enthusiasm to validate the translations.": "అనువాదాలను ధృవీకరించంలో మీ ఉత్సాహానికి ధన్యవాదాలు.",
-  "Unspecified location": "Unspecified location"
+  "Unspecified location": "నిర్ధేశించబడని ప్రదేశం",
+  "We feel the text you entered doesn't match the original text, are you sure about your edit?": "మీరు నమోదు చేసిన వచనం అసలు వచనంతో సరిపోలడం లేదని మేము భావిస్తున్నాము, మీరు మీ సవరణ గురించి ఖచ్చితంగా ఉన్నారా?"
 }

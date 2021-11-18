@@ -60,7 +60,7 @@
   "Enrich your language by labelling images": "દેખાતા ટેક્સ્ટ લખીને તમારી ભાષાને સમૃદ્ધ બનાવો",
   "Enrich your language by transcribing audio into text": "ઓડિયો સાંભળી, અને ટાઇપ કરી તમારી ભાષાને સમૃદ્ધ કરો",
   "Enrich your language by translating text": "ટેક્સ્ટ અનુવાદ કરીને આપની ભાષાને સમૃદ્ધ બનાવો",
-  "Ensure there is <b>no background noise</b>": "ખાતરી કરો કે <b >કોઈ બેકગ્રાઉન્ડ નોઇઝ ના હોઈ</b>.",
+  "Ensure there is <b>no background noise</b>": "ખાતરી કરો કે <b>કોઈ બેકગ્રાઉન્ડ નોઇઝ ના હોઈ</b>.",
   "Enter username": "યુઝરનેમ અહીં લખો",
   "FROM": "માંથી",
   "Female": "સ્ત્રી",
@@ -298,9 +298,9 @@
   "Participate to keep <language> in top 3": "ટોપ 3 માં  <language> ને બનાવી રાખવા માટે ભાગ લો",
   "<language> vs Top contributed languages": "<language> વિરુદ્વ  પ્રમુખ યોગદાન પામેલી ભાષાઓ",
   "<contribution-done>/<contribution-goal> Sentence(s)": "<contribution-done>/<contribution-goal>  વાક્ય",
-  "Participate to see <from-language>-<to-language> in top 3": "<from-language> -  <to-language> ને ટોચની 3 ભાષાઓમાં જોવા માટે ભાગ લો",
-  "Participate to keep <from-language>-<to-language> in top 3": "<from-language> -  <to-language> ને ટોચની 3 ભાષાઓમાં જોવા માટે ભાગ લો",
-  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language> -  <to-language> વિરૃદ્ધ સૌથી વધુ યોગદાન વાળી ભાષા જોડી",
+  "Participate to see <from-language>-<to-language> in top 3": "<from-language>-<to-language> ને ટોચની 3 ભાષાઓમાં જોવા માટે ભાગ લો",
+  "Participate to keep <from-language>-<to-language> in top 3": "<from-language>-<to-language> ને ટોચની 3 ભાષાઓમાં જોવા માટે ભાગ લો",
+  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> વિરૃદ્ધ સૌથી વધુ યોગદાન વાળી ભાષા જોડી",
   "<contribution-done>/<contribution-goal> Image(s)": "<contribution-done>/<contribution-goal> ઇમેજ",
   "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "તમે તમારી ભાષા માટે <span id=\"user-contribution-count\"></span> <span>રેકોર્ડિંગ્સ</span> નું યોગદાન કર્યું .",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved": "<span id=\"metric-language\"></span> માં બોલો ઇન્ડિયા માટે <span id=\"totalAverage\"></span> નું લક્ષ પ્રાપ્ત થયું",
@@ -422,5 +422,6 @@
   "Thank you for your enthusiasm to validate the transcriptions.": "સંપૂર્ણ ઉત્સાહ સાથે ટ્રાન્સક્રિપ્શનની ચકાસણી બદલ  આભાર.",
   "Thank you for your enthusiasm to translate the sentences.": "વાક્યોનું ભાષાંતર કરવામાં માટે  ઉત્સાહ માટે આભાર.",
   "Thank you for your enthusiasm to validate the translations.": "સંપૂર્ણ ઉત્સાહ સાથે અનુવાદોની ચકાસણી માટે આભાર!",
-  "Unspecified location": "Unspecified location"
+  "Unspecified location": "અસ્પષ્ટ વેબ પેજ યુઆરએલ",
+  "We feel the text you entered doesn't match the original text, are you sure about your edit?": "અમને લાગે છે કે તમે દાખલ કરેલ ટેક્સ્ટ મૂળ ટેક્સ્ટ સાથે મેળ ખાતી નથી, શું તમે તમારા સંપાદન વિશે ચોક્કસ છો?"
 }

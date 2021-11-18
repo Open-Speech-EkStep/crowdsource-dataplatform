@@ -298,9 +298,9 @@
   "Participate to keep <language> in top 3": "<language> முதல் 3 இடங்களில் வைக்க பங்கேற்கவும்",
   "<language> vs Top contributed languages": "<language> எதிராக சிறந்த பங்களிப்பு மொழிகள்",
   "<contribution-done>/<contribution-goal> Sentence(s)": "<contribution-done>/<contribution-goal> வாக்கியங்கள்",
-  "Participate to see <from-language>-<to-language> in top 3": "முதல் 3 இல் <from-language> - <to-language> ஐப் பார்க்க பங்கேற்கவும்",
-  "Participate to keep <from-language>-<to-language> in top 3": "<from-language> - <to-language> ஐ முதல் 3 இடங்களில் வைக்க பங்கேற்கவும்",
-  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language> - <to-language> எதிராக சிறந்த பங்களிப்பு மொழி ஜோடிகள்",
+  "Participate to see <from-language>-<to-language> in top 3": "முதல் 3 இல் <from-language>-<to-language> ஐப் பார்க்க பங்கேற்கவும்",
+  "Participate to keep <from-language>-<to-language> in top 3": "<from-language>-<to-language> ஐ முதல் 3 இடங்களில் வைக்க பங்கேற்கவும்",
+  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> எதிராக சிறந்த பங்களிப்பு மொழி ஜோடிகள்",
   "<contribution-done>/<contribution-goal> Image(s)": "<contribution-done>/<contribution-goal> படங்கள்",
   "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "உங்கள் மொழிக்காக நீங்கள் <span id=\"user-contribution-count\"></span> <span>பதிவுகளை</span> வழங்கியுள்ளீர்கள்!",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved": "<span id=\"metric-language\"></span> இன் பேசு இந்தியா இலக்கு <span id=\"totalAverage\"></span> அடையப்பட்டது",
@@ -422,5 +422,6 @@
   "Thank you for your enthusiasm to validate the transcriptions.": "டிரான்ஸ்க்ரிப்ஷன்களை சரிபார்க்க உங்கள் உற்சாகத்திற்கு நன்றி.",
   "Thank you for your enthusiasm to translate the sentences.": "வாக்கியங்களை மொழிபெயர்க்க உங்கள் உற்சாகத்திற்கு நன்றி.",
   "Thank you for your enthusiasm to validate the translations.": "மொழிபெயர்ப்புகளை சரிபார்க்க உங்கள் உற்சாகத்திற்கு நன்றி.",
-  "Unspecified location": "Unspecified location"
+  "Unspecified location": "Unspecified location",
+  "We feel the text you entered doesn't match the original text, are you sure about your edit?": "We feel the text you entered doesn't match the original text, are you sure about your edit?"
 }
