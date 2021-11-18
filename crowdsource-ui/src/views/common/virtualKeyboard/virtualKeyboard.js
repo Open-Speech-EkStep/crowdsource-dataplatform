@@ -36,7 +36,16 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => {}, call
     $('#edit-error-row').addClass('d-none');
     $('#edit-text').add($('#edit-text-asr')).removeClass('edit-error-area').addClass('edit-text');
   } else if (error && error.type == 'auto-validation') {
-    $submitEditButton.removeAttr('disabled');
+    const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
+    if (currentModule == INITIATIVES.asr.value) {
+      if (isAudioPlayed == 'true') {
+        $submitEditButton.removeAttr('disabled');
+      } else {
+        $submitEditButton.attr('disabled', true);
+      }
+    } else {
+      $submitEditButton.removeAttr('disabled');
+    }
     const $editErrorText = $('#edit-error-text');
     if ($cancelButton) {
       $cancelButton.removeAttr('disabled');
