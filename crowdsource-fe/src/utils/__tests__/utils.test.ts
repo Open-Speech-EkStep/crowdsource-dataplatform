@@ -5,7 +5,7 @@ import {
   formatTime,
   isSunoOrBoloInitiative,
   capitalizeFirstLetter,
-  verifyLanguage,
+  findInputError,
   getDeviceInfo,
   getBrowserInfo,
   groupBy,
@@ -99,18 +99,18 @@ describe('Utils', () => {
     expect(capitalizeValue).toEqual(expectedOutput);
   });
 
-  it('should test the verifyLanguage method', () => {
-    const errorType = verifyLanguage('suno', 'likho', 'Hindi');
+  it('should test the findInputError method', () => {
+    const errorType = findInputError('suno', 'likho', 'Hindi');
 
     const expectedOutput = { type: 'language' };
     expect(errorType).toEqual(expectedOutput);
 
-    const errorType2 = verifyLanguage('abc', 'suno', 'English');
+    const errorType2 = findInputError('abc', 'suno', 'English');
 
     const expectedOutput2 = { type: '' };
     expect(errorType2).toEqual(expectedOutput2);
 
-    const errorType3 = verifyLanguage('abc@', 'suno', 'English');
+    const errorType3 = findInputError('abc@', 'suno', 'English');
 
     const expectedOutput3 = { type: 'symbol' };
     expect(errorType3).toEqual(expectedOutput3);

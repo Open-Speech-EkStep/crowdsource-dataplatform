@@ -1,6 +1,7 @@
 export const KEYBOARD_ERROR = {
   language: { type: 'language' },
   symbol: { type: 'symbol' },
+  validation: { type: 'validation' },
   noError: { type: '' },
 } as const;
 

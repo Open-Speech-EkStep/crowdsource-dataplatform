@@ -24,6 +24,7 @@
       "si",
       "kok"
     ],
+    "autoValidation": false,
     "enabledPages": {
       "error": false,
       "home": true,

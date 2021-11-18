@@ -9,7 +9,7 @@ import Keyboard from 'react-simple-keyboard';
 
 import Button from 'components/Button';
 import { KeyboardLanguageLayout } from 'constants/Keyboard';
-import { verifyLanguage } from 'utils/utils';
+import { findInputError } from 'utils/utils';
 
 import styles from './TextEditArea.module.scss';
 import TextErrorMessage from './TextErrorMessage';
@@ -90,7 +90,7 @@ const TextEditArea = ({
     setIsUsingPhysicalKeyboard(false);
     setTextValue(input);
     setInput(input);
-    const error = verifyLanguage(input, initiative, language);
+    const error = findInputError(input, initiative, language);
     handleError(error);
   };
 
@@ -120,7 +120,7 @@ const TextEditArea = ({
   const onChangeInput = (event: any) => {
     setIsUsingPhysicalKeyboard(true);
     const input = event.target.value;
-    const error = verifyLanguage(input, initiative, language);
+    const error = findInputError(input, initiative, language);
     handleError(error);
     setTextValue(input);
     setInput(input);

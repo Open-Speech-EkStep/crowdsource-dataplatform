@@ -91,7 +91,7 @@ export const isBoloInitiative = (value: InitiativeType) => {
   return boloOrSuno.includes(value);
 };
 
-export const verifyLanguage = (text: string, currentModule: string, language: string) => {
+export const findInputError = (text: string, currentModule: string, language: string) => {
   if (!text.length) return;
   const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
   let error: any = KEYBOARD_ERROR.language;
