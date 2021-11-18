@@ -155,7 +155,7 @@ const setAudioPlayer = function () {
     showElement(textReplay);
     localStorage.setItem('validation_audioPlayed', true);
     const previousActiveError = $('#edit-error-text .error-active');
-    if ($('#edit').val()) {
+    if ($('#edit').val().trim() > 2) {
       if (!previousActiveError[0] || previousActiveError[0].id === 'edit-auto-validation-error') {
         $submitButton.removeAttr('disabled');
       }
