@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
+import getBlobDuration from 'get-blob-duration';
 import { Trans, useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
@@ -77,7 +78,10 @@ const BoloSpeak = () => {
   let mediaRecorder: any;
   let chunks: any = [];
 
-  const { submit } = useSubmit(apiPaths.store);
+  const { submit } = useSubmit(apiPaths.store, {
+    method: 'POST',
+    headers: { 'Content-Type': 'multipart/form-data:boundary=something' },
+  });
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
   const { submit: submitSkip } = useSubmit(apiPaths.skip);
@@ -118,17 +122,6 @@ const BoloSpeak = () => {
     }
   }, [currentDataIndex, result]);
 
-  useEffect(() => {
-    audio?.addEventListener('loadedmetadata', () => {
-      getAudioDuration(audio.duration);
-    });
-    return () => {
-      audio?.removeEventListener('loadedmetadata', () => {
-        getAudioDuration(audio.duration);
-      });
-    };
-  });
-
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
       router.push(`/${currentLocale}${routePaths.boloIndiaContributeThankYou}`, undefined, {
@@ -141,6 +134,8 @@ const BoloSpeak = () => {
   };
 
   const resetState = () => {
+    setRecordedAudio('');
+    setDuration(0);
     setShowStartRecording(true);
     setShowStopRecording(false);
     setShowReRecording(false);
@@ -176,10 +171,9 @@ const BoloSpeak = () => {
     );
   };
 
-  const onRecordingStop = () => {
+  const onRecordingStop = async () => {
     audioController?.current?.classList.remove('d-none');
     setShowAudioController(true);
-
     const blob = new Blob(chunks, { type: 'audio/wav' });
     chunks = [];
     setFormData({
@@ -188,6 +182,22 @@ const BoloSpeak = () => {
     });
     const audioURL = URL.createObjectURL(blob);
     setRecordedAudio(audioURL);
+    audio.onloadedmetadata = async () => {
+      // it should already be available here
+      // handle chrome's bug
+      if (audio.duration === Infinity) {
+        // set it to bigger than the actual duration
+        audio.currentTime = 1e101;
+        audio.ontimeupdate = () => {
+          audio.ontimeupdate = () => {};
+          // setting player currentTime back to 0 can be buggy too, set it first to .1 sec
+          audio.currentTime = 0.1;
+          audio.currentTime = 0;
+        };
+      }
+      const duration = await getBlobDuration(blob);
+      validateAudioDuration(duration);
+    };
   };
 
   const recordAudio = async () => {
@@ -225,7 +235,7 @@ const BoloSpeak = () => {
     }
   };
 
-  const getAudioDuration = (duration: number) => {
+  const validateAudioDuration = (duration: number) => {
     if (duration < AUDIO.MIN_DURATION) {
       setShowAudioError(true);
     } else {
@@ -264,22 +274,30 @@ const BoloSpeak = () => {
     recordAudio();
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
-    submit(
+    const fd = new FormData();
+    fd.append('language', `${contributionLanguage}`);
+    fd.append('sentenceId', showUIData.dataset_row_id);
+    fd.append('country', `${locationInfo?.country}`);
+    fd.append('state', `${locationInfo?.regionName}`);
+    fd.append('audioDuration', `${duration}`);
+    fd.append(
+      'speakerDetails',
       JSON.stringify({
-        ...formData,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        audioDuration: duration,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
+        userName: speakerDetails?.userName,
+        age: speakerDetails?.age,
+        motherTongue: speakerDetails?.motherTongue,
+        gender: speakerDetails?.gender,
       })
     );
+    fd.append('audio_data', formData.audio_data);
+    fd.append('device', getDeviceInfo());
+    fd.append('browser', getBrowserInfo());
+    fd.append('type', INITIATIVES_MEDIA_MAPPING.bolo);
+
+    submit(fd);
   };
 
   const onSkipContribution = () => {
