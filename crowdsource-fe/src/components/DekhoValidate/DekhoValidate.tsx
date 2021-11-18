@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -10,6 +10,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
+import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import ImageView from 'components/ImageView';
 import NoDataFound from 'components/NoDataFound';
@@ -29,7 +30,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, getErrorMsg } from 'utils/utils';
 
 import styles from './DekhoValidate.module.scss';
 
@@ -54,6 +55,7 @@ const DekhoValidate = () => {
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
   const [hasError, setHasError] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [showUIData, setShowUIdata] = useState({
     sentence: '',
     contribution: '',
@@ -79,10 +81,10 @@ const DekhoValidate = () => {
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit } = useSubmit(apiPaths.store);
-  const { submit: reject } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip } = useSubmit(skipApiUrl);
-  const { submit: accept } = useSubmit(acceptApiUrl);
+  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
+  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
 
   const { data: result, mutate } = useFetchWithInit<ResultType>(
     `${apiPaths.contributionsOCR}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
@@ -90,6 +92,12 @@ const DekhoValidate = () => {
       revalidateOnMount: false,
     }
   );
+
+  useEffect(() => {
+    if (skipError || acceptError || rejectError || submitError) {
+      setShowErrorModal(true);
+    }
+  }, [skipError, acceptError, rejectError, submitError]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -227,115 +235,128 @@ const DekhoValidate = () => {
     return <Spinner data-testid="PageSpinner" animation="border" variant="light" />;
   }
 
-  return contributionData && result?.data?.length !== 0 ? (
+  return (
     <Fragment>
-      <ChromeExtension />
-      <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader
-          onSuccess={onSkipContribution}
-          type="validate"
-          initiative={INITIATIVES_MAPPING.dekho}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.dekho]['validate']}
-          showSpeaker={false}
-        />
-        <Container fluid="lg" className="mt-5">
-          <div data-testid="DekhoValidate" className={`${styles.root}`}>
-            <div className="align-items-center text-center">
-              <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}</span>
-            </div>
-            <div className="mt-2 mt-md-4">
-              <ImageView imageUrl={showUIData?.sentence} />
-            </div>
-            <div className={classNames('mt-4 mt-md-8', { ['d-md-flex']: showEditTextArea })}>
-              <div className="flex-fill">
-                <TextEditArea
-                  id="originalText"
-                  isTextareaDisabled={false}
-                  language={contributionLanguage ?? ''}
-                  initiative={INITIATIVES_MAPPING.dekho}
-                  setTextValue={() => {}}
-                  textValue={showUIData?.contribution}
-                  roundedLeft={showEditTextArea}
-                  readOnly
-                  readonlyAllBorders={!showEditTextArea}
-                  label={t('capturedText')}
-                  onError={() => {}}
-                />
-              </div>
-              <div className="flex-fill">
-                {showEditTextArea && (
-                  <TextEditArea
-                    id="editText"
-                    isTextareaDisabled={false}
-                    language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.dekho}
-                    setTextValue={onChangeTextInput}
-                    textValue={showUIData?.contribution}
-                    label={`${t('yourEdit')}${
-                      contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                    }`}
-                    roundedRight
-                    onError={setHasError}
-                    showTip
-                  />
+      {contributionData && result?.data?.length !== 0 ? (
+        <Fragment>
+          <ChromeExtension />
+          <div className="pt-4 px-2 px-lg-0 pb-8">
+            <FunctionalHeader
+              onSuccess={onSkipContribution}
+              type="validate"
+              initiative={INITIATIVES_MAPPING.dekho}
+              action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.dekho]['validate']}
+              showSpeaker={false}
+            />
+            <Container fluid="lg" className="mt-5">
+              <div data-testid="DekhoValidate" className={`${styles.root}`}>
+                <div className="align-items-center text-center">
+                  <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}</span>
+                </div>
+                <div className="mt-2 mt-md-4">
+                  <ImageView imageUrl={showUIData?.sentence} />
+                </div>
+                <div className={classNames('mt-4 mt-md-8', { ['d-md-flex']: showEditTextArea })}>
+                  <div className="flex-fill">
+                    <TextEditArea
+                      id="originalText"
+                      isTextareaDisabled={false}
+                      language={contributionLanguage ?? ''}
+                      initiative={INITIATIVES_MAPPING.dekho}
+                      setTextValue={() => {}}
+                      textValue={showUIData?.contribution}
+                      roundedLeft={showEditTextArea}
+                      readOnly
+                      readonlyAllBorders={!showEditTextArea}
+                      label={t('capturedText')}
+                      onError={() => {}}
+                    />
+                  </div>
+                  <div className="flex-fill">
+                    {showEditTextArea && (
+                      <TextEditArea
+                        id="editText"
+                        isTextareaDisabled={false}
+                        language={contributionLanguage ?? ''}
+                        initiative={INITIATIVES_MAPPING.dekho}
+                        setTextValue={onChangeTextInput}
+                        textValue={showUIData?.contribution}
+                        label={`${t('yourEdit')}${
+                          contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                        }`}
+                        roundedRight
+                        onError={setHasError}
+                        showTip
+                      />
+                    )}
+                  </div>
+                </div>
+                {showThankyouMessage ? (
+                  <div className="d-flex align-items-center justify-content-center mt-9 display-1">
+                    <span className="me-2 d-flex">
+                      <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+                    </span>
+                    {t('thankyouForContributing')}
+                  </div>
+                ) : (
+                  <div className="mt-9 mt-md-12">
+                    <ButtonControls
+                      playButton={false}
+                      submitButton={showSubmitButton}
+                      cancelButton={showCancelButton}
+                      needsChangeButton={showNeedsChangeButton}
+                      correctBtn={showCorrectButton}
+                      correctDisable={false}
+                      cancelDisable={false}
+                      submitDisable={
+                        !formData.userInput ||
+                        formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
+                        hasError
+                      }
+                      needsChangeDisable={false}
+                      onSubmit={onSubmitContribution}
+                      onCancel={onCancelContribution}
+                      onSkip={onSkipContribution}
+                      onNeedsChange={onNeedsChange}
+                      onCorrect={onCorrect}
+                    />
+                  </div>
                 )}
-              </div>
-            </div>
-            {showThankyouMessage ? (
-              <div className="d-flex align-items-center justify-content-center mt-9 display-1">
-                <span className="me-2 d-flex">
-                  <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
-                </span>
-                {t('thankyouForContributing')}
-              </div>
-            ) : (
-              <div className="mt-9 mt-md-12">
-                <ButtonControls
-                  playButton={false}
-                  submitButton={showSubmitButton}
-                  cancelButton={showCancelButton}
-                  needsChangeButton={showNeedsChangeButton}
-                  correctBtn={showCorrectButton}
-                  correctDisable={false}
-                  cancelDisable={false}
-                  submitDisable={
-                    !formData.userInput || formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH || hasError
-                  }
-                  needsChangeDisable={false}
-                  onSubmit={onSubmitContribution}
-                  onCancel={onCancelContribution}
-                  onSkip={onSkipContribution}
-                  onNeedsChange={onNeedsChange}
-                  onCorrect={onCorrect}
-                />
-              </div>
-            )}
 
-            <div className="d-flex align-items-center mt-10 mt-md-14">
-              <div className="flex-grow-1">
-                <ProgressBar
-                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                  variant="primary"
-                  className={styles.progress}
-                />
+                <div className="d-flex align-items-center mt-10 mt-md-14">
+                  <div className="flex-grow-1">
+                    <ProgressBar
+                      now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                      variant="primary"
+                      className={styles.progress}
+                    />
+                  </div>
+                  <span className="ms-5">
+                    {currentDataIndex + 1}/{contributionData.length}
+                  </span>
+                </div>
               </div>
-              <span className="ms-5">
-                {currentDataIndex + 1}/{contributionData.length}
-              </span>
-            </div>
+            </Container>
           </div>
-        </Container>
-      </div>
+        </Fragment>
+      ) : (
+        <div className="d-flex flex-grow-1 align-items-center">
+          <NoDataFound
+            url={routePaths.dekhoIndiaHome}
+            title={t('ocrContributeNoDataThankYouMessage')}
+            text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
+            buttonLabel={t('ocrBackToInitiativePrompt')}
+          />
+        </div>
+      )}
+      {(skipError || rejectError || acceptError || submitError) && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(skipError || rejectError || acceptError || submitError)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
-  ) : (
-    <div className="d-flex flex-grow-1 align-items-center">
-      <NoDataFound
-        url={routePaths.dekhoIndiaHome}
-        title={t('ocrContributeNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
-        buttonLabel={t('ocrBackToInitiativePrompt')}
-      />
-    </div>
   );
 };
 

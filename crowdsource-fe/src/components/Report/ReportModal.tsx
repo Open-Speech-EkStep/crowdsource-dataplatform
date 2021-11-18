@@ -24,12 +24,14 @@ interface ReportModalProps {
   show: boolean;
   reportSubheadingText: string;
   initiative: Initiative;
+  onError: (error: any) => any;
 }
 
 const ReportModal = ({
   onSuccess: showThankyou,
   initiative,
   reportSubheadingText,
+  onError,
   ...props
 }: ReportModalProps) => {
   const { t } = useTranslation();
@@ -46,7 +48,7 @@ const ReportModal = ({
 
   const [reportText, setReportText] = useState('');
 
-  const { isLoading, data, submit } = useSubmit(apiPaths.report);
+  const { isLoading, data, submit, error } = useSubmit(apiPaths.report);
 
   const route = useRouter();
 
@@ -73,6 +75,12 @@ const ReportModal = ({
       })
     );
   };
+
+  useEffect(() => {
+    if (error) {
+      onError(error);
+    }
+  }, [error, onError]);
 
   useEffect(() => {
     showThankyouRef.current = showThankyou;

@@ -90,12 +90,6 @@ describe('SunoTranscribe', () => {
     return renderResult;
   };
 
-  it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup(resultData);
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('play button click should play audio and pause button should be enabled', async () => {
     await setup(resultData);
 
@@ -116,6 +110,37 @@ describe('SunoTranscribe', () => {
 
     await waitFor(() => {
       expect(screen.getByText('asrContributeNoDataThankYouMessage')).toBeInTheDocument();
+    });
+  });
+
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/media/asr';
+    const errorResponse = new Error('Some error');
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    render(<SunoTranscribe />);
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/media/asr', {
+        body: JSON.stringify({
+          language: 'Hindi',
+          userName: 'abc',
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
     });
   });
 

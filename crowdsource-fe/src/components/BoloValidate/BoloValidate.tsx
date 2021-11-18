@@ -7,6 +7,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Spinner from 'react-bootstrap/Spinner';
 
 import ButtonControls from 'components/ButtonControls';
+import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
 import apiPaths from 'constants/apiPaths';
@@ -23,7 +24,7 @@ import { useFetchWithInit, useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo, visualize } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, getErrorMsg, visualize } from 'utils/utils';
 
 import styles from './BoloValidate.module.scss';
 
@@ -43,7 +44,7 @@ const BoloValidate = () => {
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
   const [incorrectDisable, setIncorrectDisable] = useState(true);
-
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
   const [correctDisable, setCorrectDisable] = useState(true);
   const [contributionData, setContributionData] = useState([]);
@@ -66,9 +67,9 @@ const BoloValidate = () => {
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit: reject } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip } = useSubmit(skipApiUrl);
-  const { submit: accept } = useSubmit(acceptApiUrl);
+  const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
+  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
 
   const { data: result, mutate } = useFetchWithInit<ResultType>(
     `${apiPaths.contributionsText}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
@@ -76,6 +77,12 @@ const BoloValidate = () => {
       revalidateOnMount: false,
     }
   );
+
+  useEffect(() => {
+    if (skipError || acceptError || rejectError) {
+      setShowErrorModal(true);
+    }
+  }, [skipError, acceptError, rejectError]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -210,88 +217,99 @@ const BoloValidate = () => {
     return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
   }
 
-  return contributionData && result?.data?.length !== 0 ? (
+  return (
     <Fragment>
-      <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader
-          onSuccess={onSkipContribution}
-          type="validate"
-          initiative={INITIATIVES_MAPPING.bolo}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.bolo]['validate']}
-        />
-        <Container fluid="lg" className="mt-5">
-          <div data-testid="BoloValidate" className={`${styles.root}`}>
-            <div
-              className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
-            >
-              {showUIData?.sentence}
-            </div>
-            <div className="d-none d-flex flex-column align-items-center text-center">
-              <div className="mt-2 mt-md-3">
-                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <audio
-                  ref={audioEl}
-                  data-testid="boloValidateAudioElement"
-                  controls
-                  className="d-flex shadow-grey rounded-24"
-                  tabIndex={-1}
-                  src={`${nodeConfig.cdnUrl}/${showUIData?.contribution}`}
-                  controlsList="nodownload"
-                  crossOrigin="anonymous"
-                ></audio>
-              </div>
-            </div>
-            <div
-              className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
-            >
-              <canvas id="visualizer"></canvas>
-            </div>
-            <div className="mt-12 mt-md-14">
-              <ButtonControls
-                onPlay={onPlayAudio}
-                onPause={onPauseAudio}
-                onReplay={onReplayAudio}
-                playButton={showPlayButton}
-                pauseButton={showPauseButton}
-                replayButton={showReplayButton}
-                correctBtn={true}
-                submitButton={false}
-                correctDisable={correctDisable}
-                submitDisable={true}
-                onSkip={onSkipContribution}
-                cancelButton={false}
-                incorrectButton={true}
-                incorrectDisable={incorrectDisable}
-                onCorrect={onCorrect}
-                onIncorrect={onIncorrect}
-              />
-            </div>
+      {contributionData && result?.data?.length !== 0 ? (
+        <Fragment>
+          <div className="pt-4 px-2 px-lg-0 pb-8">
+            <FunctionalHeader
+              onSuccess={onSkipContribution}
+              type="validate"
+              initiative={INITIATIVES_MAPPING.bolo}
+              action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.bolo]['validate']}
+            />
+            <Container fluid="lg" className="mt-5">
+              <div data-testid="BoloValidate" className={`${styles.root}`}>
+                <div
+                  className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
+                >
+                  {showUIData?.sentence}
+                </div>
+                <div className="d-none d-flex flex-column align-items-center text-center">
+                  <div className="mt-2 mt-md-3">
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio
+                      ref={audioEl}
+                      data-testid="boloValidateAudioElement"
+                      controls
+                      className="d-flex shadow-grey rounded-24"
+                      tabIndex={-1}
+                      src={`${nodeConfig.cdnUrl}/${showUIData?.contribution}`}
+                      controlsList="nodownload"
+                      crossOrigin="anonymous"
+                    ></audio>
+                  </div>
+                </div>
+                <div
+                  className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
+                >
+                  <canvas id="visualizer"></canvas>
+                </div>
+                <div className="mt-12 mt-md-14">
+                  <ButtonControls
+                    onPlay={onPlayAudio}
+                    onPause={onPauseAudio}
+                    onReplay={onReplayAudio}
+                    playButton={showPlayButton}
+                    pauseButton={showPauseButton}
+                    replayButton={showReplayButton}
+                    correctBtn={true}
+                    submitButton={false}
+                    correctDisable={correctDisable}
+                    submitDisable={true}
+                    onSkip={onSkipContribution}
+                    cancelButton={false}
+                    incorrectButton={true}
+                    incorrectDisable={incorrectDisable}
+                    onCorrect={onCorrect}
+                    onIncorrect={onIncorrect}
+                  />
+                </div>
 
-            <div className="d-flex align-items-center mt-10 mt-md-14">
-              <div className="flex-grow-1">
-                <ProgressBar
-                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                  variant="primary"
-                  className={styles.progress}
-                />
+                <div className="d-flex align-items-center mt-10 mt-md-14">
+                  <div className="flex-grow-1">
+                    <ProgressBar
+                      now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                      variant="primary"
+                      className={styles.progress}
+                    />
+                  </div>
+                  <span className="ms-5">
+                    {currentDataIndex + 1}/{contributionData.length}
+                  </span>
+                </div>
               </div>
-              <span className="ms-5">
-                {currentDataIndex + 1}/{contributionData.length}
-              </span>
-            </div>
+            </Container>
           </div>
-        </Container>
-      </div>
+        </Fragment>
+      ) : (
+        <div className="d-flex flex-grow-1 align-items-center">
+          <NoDataFound
+            url={routePaths.boloIndiaHome}
+            title={t('textValidateNoDataThankYouMessage')}
+            text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
+            buttonLabel={t('textBackToInitiativePrompt')}
+          />
+        </div>
+      )}
+      {(skipError || rejectError || acceptError) && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(skipError || rejectError || acceptError)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
-  ) : (
-    <div className="d-flex flex-grow-1 align-items-center">
-      <NoDataFound
-        url={routePaths.boloIndiaHome}
-        title={t('textValidateNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
-        buttonLabel={t('textBackToInitiativePrompt')}
-      />
-    </div>
   );
 };
 

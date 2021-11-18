@@ -5,7 +5,9 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import Button from 'components/Button';
+import ErrorPopup from 'components/ErrorPopup';
 import FeedbackSuccessModal from 'components/FeedbackSuccessModal';
+import { getErrorMsg } from 'utils/utils';
 
 import styles from './Feedback.module.scss';
 
@@ -16,8 +18,17 @@ const Feedback = () => {
   const [modalShow, setModalShow] = useState(false);
   const [feedbackSuccess, setFeedbackSuccess] = useState(false);
 
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [error, setError] = useState();
+
   const showModal = () => setModalShow(true);
   const hideModal = () => setModalShow(false);
+
+  const showError = (error: any) => {
+    setError(error);
+    setModalShow(false);
+    setShowErrorModal(true);
+  };
 
   const showFeedbackSuccess = () => {
     hideModal();
@@ -37,8 +48,22 @@ const Feedback = () => {
       >
         <Image src="/images/feedback_icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>
-      {modalShow && <FeedbackModal show={modalShow} onHide={hideModal} onSuccess={showFeedbackSuccess} />}
+      {modalShow && (
+        <FeedbackModal
+          show={modalShow}
+          onHide={hideModal}
+          onSuccess={showFeedbackSuccess}
+          onError={error => showError(error)}
+        />
+      )}
       {feedbackSuccess && <FeedbackSuccessModal show={feedbackSuccess} onHide={hideFeedbackSuccess} />}
+      {showErrorModal && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(error)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
   );
 };

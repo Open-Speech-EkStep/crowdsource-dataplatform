@@ -1,17 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-
-import { appWithTranslation } from 'next-i18next';
-import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
 
 import 'styles/custom.scss';
 import 'styles/theme.scss';
 import 'styles/globals.scss';
 import 'styles/slickCarousel.scss';
+
+import { appWithTranslation } from 'next-i18next';
+import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { SWRConfig } from 'swr';
+
+import ErrorPopup from 'components/ErrorPopup';
 import Float from 'components/Float';
 import LanguageChangeNotification from 'components/LanguageChangeNotification';
 import Layout from 'components/Layout';
 import apiPaths from 'constants/apiPaths';
+import { ErrorStatusCode } from 'constants/errorStatusCode';
 import { INITIATIVES } from 'constants/initiativeConstants';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
@@ -31,6 +35,8 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
     localStorageConstants.contributionLanguage
   );
   const [showModal, setShowModal] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     const isInitiativePage = INITIATIVES.some(initiative =>
@@ -67,23 +73,48 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
     sessionStorage.setItem(sessionStorageConstants.prevPath, prevPath);
     sessionStorage.setItem(sessionStorageConstants.currentPath, currentUrl);
   }
-
+  /* istanbul ignore next */
   const closeModal = () => {
     setShowModal(false);
     setContributionLanguage(storageObj.newValue);
   };
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-      {router.pathname !== '/404' && <Float />}
-      <LanguageChangeNotification
-        show={showModal}
-        onHide={closeModal}
-        oldValue={storageObj.oldValue}
-        newValue={storageObj.newValue}
-      />
-    </Layout>
+    <SWRConfig
+      value={{
+        /* istanbul ignore next */
+        onError: error => {
+          /* istanbul ignore next */
+          if (error) {
+            setHasError(true);
+            if (error.status && error.status === ErrorStatusCode.TOO_MANY_REQUEST) {
+              setErrorMsg('multipleRequestApiError');
+            } else {
+              setErrorMsg('apiFailureError');
+            }
+          }
+        },
+      }}
+    >
+      <Layout>
+        <Component {...pageProps} />
+        {router.pathname !== '/404' && <Float />}
+        <LanguageChangeNotification
+          show={showModal}
+          onHide={closeModal}
+          oldValue={storageObj.oldValue}
+          newValue={storageObj.newValue}
+        />
+        <ErrorPopup
+          show={hasError}
+          onHide={() => {
+            /* istanbul ignore next */
+            setHasError(false);
+          }}
+          errorMsg={errorMsg}
+        />
+      </Layout>
+    </SWRConfig>
   );
 };
 

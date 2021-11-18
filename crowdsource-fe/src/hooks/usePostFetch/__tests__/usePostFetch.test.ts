@@ -26,7 +26,8 @@ describe('#usePostFetch', () => {
 
     const { result } = setup(url);
 
-    await waitFor(() => expect(result.current).toStrictEqual(successResponse));
+    await waitFor(() => expect(result.current.data).toStrictEqual(successResponse));
+    await waitFor(() => expect(result.current.error).toStrictEqual(undefined));
   });
 
   it('should use fetch and gets the failed response', async () => {

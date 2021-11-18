@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
+import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import ImageView from 'components/ImageView';
 import NoDataFound from 'components/NoDataFound';
@@ -28,7 +29,7 @@ import useFetch from 'hooks/usePostFetch';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, getErrorMsg } from 'utils/utils';
 
 import styles from './DekhoContribute.module.scss';
 
@@ -52,6 +53,8 @@ const DekhoContribute = () => {
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
   const [hasError, setHasError] = useState(false);
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const router = useRouter();
   const { locale: currentLocale } = useRouter();
   const [showUIData, setShowUIdata] = useState({
@@ -59,9 +62,9 @@ const DekhoContribute = () => {
     dataset_row_id: '0',
   });
 
-  const { submit } = useSubmit(apiPaths.store);
+  const { submit, error: submitError } = useSubmit(apiPaths.store);
 
-  const { submit: submitSkip } = useSubmit(apiPaths.skip);
+  const { submit: submitSkip, error: skipError } = useSubmit(apiPaths.skip);
 
   const [formData, setFormData] = useState<ActionStoreInterface>({
     userInput: '',
@@ -75,7 +78,7 @@ const DekhoContribute = () => {
     browser: getBrowserInfo(),
   });
 
-  const result = useFetch<ResultType>({
+  const { data: result, error } = useFetch<ResultType>({
     url: apiPaths.mediaOCR,
     init: contributionLanguage
       ? {
@@ -90,6 +93,12 @@ const DekhoContribute = () => {
         }
       : undefined,
   });
+
+  useEffect(() => {
+    if (error || submitError || skipError) {
+      setShowErrorModal(true);
+    }
+  }, [error, skipError, submitError]);
 
   useEffect(() => {
     if (result && result.data) {
@@ -173,89 +182,100 @@ const DekhoContribute = () => {
     );
   };
 
-  if (!result) {
+  if (!result && !error) {
     return <Spinner data-testid="PageSpinner" animation="border" variant="light" />;
   }
 
-  return contributionData && result?.data?.length !== 0 ? (
+  return (
     <Fragment>
-      <ChromeExtension />
-      <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader
-          onSuccess={onSkipContribution}
-          type="contribute"
-          initiative={INITIATIVES_MAPPING.dekho}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.dekho]['contribute']}
-          showSpeaker={false}
-        />
-        <Container fluid="lg" className="mt-5">
-          <div data-testid="DekhoContribute" className={`${styles.root}`}>
-            <div className="align-items-center text-center">
-              <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ContributionHeading`)}</span>
-            </div>
-            <div className="mt-2 mt-md-4">
-              <ImageView imageUrl={showUIData?.media_data} />
-            </div>
-            <div className="mt-4 mt-md-8">
-              <TextEditArea
-                id="addText"
-                isTextareaDisabled={false}
-                language={contributionLanguage ?? ''}
-                initiative={INITIATIVES_MAPPING.dekho}
-                setTextValue={onChangeTextInput}
-                textValue={formData.userInput}
-                label={`${t('addText')}${
-                  contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                }`}
-                onError={setHasError}
-                closeKeyboard={closeKeyboard}
-              />
-            </div>
-            {showThankyouMessage ? (
-              <div className="d-flex align-items-center justify-content-center mt-9 display-1">
-                <span className="me-2 d-flex">
-                  <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
-                </span>
-                {t('thankyouForContributing')}
-              </div>
-            ) : (
-              <div className="mt-9 mt-md-12">
-                <ButtonControls
-                  cancelDisable={!formData.userInput}
-                  submitDisable={formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH || hasError}
-                  onSubmit={onSubmitContribution}
-                  onCancel={onCancelContribution}
-                  onSkip={onSkipContribution}
-                  playButton={false}
-                />
-              </div>
-            )}
+      {contributionData && result?.data?.length !== 0 ? (
+        <Fragment>
+          <ChromeExtension />
+          <div className="pt-4 px-2 px-lg-0 pb-8">
+            <FunctionalHeader
+              onSuccess={onSkipContribution}
+              type="contribute"
+              initiative={INITIATIVES_MAPPING.dekho}
+              action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.dekho]['contribute']}
+              showSpeaker={false}
+            />
+            <Container fluid="lg" className="mt-5">
+              <div data-testid="DekhoContribute" className={`${styles.root}`}>
+                <div className="align-items-center text-center">
+                  <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ContributionHeading`)}</span>
+                </div>
+                <div className="mt-2 mt-md-4">
+                  <ImageView imageUrl={showUIData?.media_data} />
+                </div>
+                <div className="mt-4 mt-md-8">
+                  <TextEditArea
+                    id="addText"
+                    isTextareaDisabled={false}
+                    language={contributionLanguage ?? ''}
+                    initiative={INITIATIVES_MAPPING.dekho}
+                    setTextValue={onChangeTextInput}
+                    textValue={formData.userInput}
+                    label={`${t('addText')}${
+                      contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                    }`}
+                    onError={setHasError}
+                    closeKeyboard={closeKeyboard}
+                  />
+                </div>
+                {showThankyouMessage ? (
+                  <div className="d-flex align-items-center justify-content-center mt-9 display-1">
+                    <span className="me-2 d-flex">
+                      <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+                    </span>
+                    {t('thankyouForContributing')}
+                  </div>
+                ) : (
+                  <div className="mt-9 mt-md-12">
+                    <ButtonControls
+                      cancelDisable={!formData.userInput}
+                      submitDisable={formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH || hasError}
+                      onSubmit={onSubmitContribution}
+                      onCancel={onCancelContribution}
+                      onSkip={onSkipContribution}
+                      playButton={false}
+                    />
+                  </div>
+                )}
 
-            <div className="d-flex align-items-center mt-10 mt-md-14">
-              <div className="flex-grow-1">
-                <ProgressBar
-                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                  variant="primary"
-                  className={styles.progress}
-                />
+                <div className="d-flex align-items-center mt-10 mt-md-14">
+                  <div className="flex-grow-1">
+                    <ProgressBar
+                      now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                      variant="primary"
+                      className={styles.progress}
+                    />
+                  </div>
+                  <span className="ms-5">
+                    {currentDataIndex + 1}/{contributionData.length}
+                  </span>
+                </div>
               </div>
-              <span className="ms-5">
-                {currentDataIndex + 1}/{contributionData.length}
-              </span>
-            </div>
+            </Container>
           </div>
-        </Container>
-      </div>
+        </Fragment>
+      ) : (
+        <div className="d-flex flex-grow-1 align-items-center">
+          <NoDataFound
+            url={routePaths.dekhoIndiaHome}
+            title={t('ocrContributeNoDataThankYouMessage')}
+            text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
+            buttonLabel={t('ocrBackToInitiativePrompt')}
+          />
+        </div>
+      )}
+      {(error || submitError || skipError) && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(error || submitError || skipError)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
-  ) : (
-    <div className="d-flex flex-grow-1 align-items-center">
-      <NoDataFound
-        url={routePaths.dekhoIndiaHome}
-        title={t('ocrContributeNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
-        buttonLabel={t('ocrBackToInitiativePrompt')}
-      />
-    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
+import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
 import TextEditArea from 'components/TextEditArea';
@@ -27,7 +28,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, getErrorMsg } from 'utils/utils';
 
 import styles from './LikhoValidate.module.scss';
 
@@ -63,15 +64,17 @@ const LikhoValidate = () => {
   });
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
-  const { submit } = useSubmit(apiPaths.store);
+  const { submit, error: submitError } = useSubmit(apiPaths.store);
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit: reject } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip } = useSubmit(skipApiUrl);
-  const { submit: accept } = useSubmit(acceptApiUrl);
+  const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
+  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
 
   const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
     device: getDeviceInfo(),
@@ -91,6 +94,12 @@ const LikhoValidate = () => {
       revalidateOnMount: false,
     }
   );
+
+  useEffect(() => {
+    if (skipError || acceptError || rejectError || submitError) {
+      setShowErrorModal(true);
+    }
+  }, [skipError, acceptError, rejectError, submitError]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -230,127 +239,138 @@ const LikhoValidate = () => {
     return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
   }
 
-  return contributionData && result?.data?.length !== 0 ? (
+  return (
     <Fragment>
-      <ChromeExtension />
-      <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader
-          onSuccess={onSkipContribution}
-          type="validate"
-          initiative={INITIATIVES_MAPPING.likho}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.likho]['validate']}
-          showSpeaker={false}
-        />
-        <Container fluid="lg" className="mt-5">
-          <div data-testid="LikhoValidate" className={`${styles.root}`}>
-            <div className="align-items-center text-center">
-              <span className="display-3">{t(`${INITIATIVES_MAPPING.likho}ValidationHeading`)}</span>
-            </div>
-            <div className="d-md-flex mt-2 mt-md-4">
-              <div className="flex-fill">
-                <TextEditArea
-                  id="originalText"
-                  isTextareaDisabled={false}
-                  language={contributionLanguage ?? ''}
-                  initiative={INITIATIVES_MAPPING.likho}
-                  setTextValue={() => {}}
-                  textValue={showUIData?.sentence}
-                  roundedLeft
-                  readOnly
-                  label={t(`${contributionLanguage?.toLowerCase()}`)}
-                  onError={() => {}}
-                />
-              </div>
-              <div className="flex-fill">
-                <TextEditArea
-                  id="editText"
-                  isTextareaDisabled={false}
-                  language={translatedLanguage ?? ''}
-                  initiative={INITIATIVES_MAPPING.likho}
-                  setTextValue={onChangeTextInput}
-                  textValue={showUIData?.contribution}
-                  roundedRight
-                  label={t(`${translatedLanguage?.toLowerCase()}`)}
-                  onError={setHasError}
-                  showTip
-                  readOnlyActive
-                  readOnly
-                />
-              </div>
-            </div>
-            {showEditTextArea && (
-              <div className="mt-4 mt-md-8">
-                <TextEditArea
-                  id="addText"
-                  isTextareaDisabled={false}
-                  language={translatedLanguage ?? ''}
-                  initiative={INITIATIVES_MAPPING.likho}
-                  setTextValue={onChangeTextInput}
-                  textValue={showUIData?.contribution}
-                  label={`${t('yourEdit')}${
-                    translatedLanguage && ` (${t(translatedLanguage.toLowerCase())})`
-                  }`}
-                  onError={setHasError}
-                />
-              </div>
-            )}
-            {showThankyouMessage ? (
-              <div className="d-flex align-items-center justify-content-center mt-9 display-1">
-                <span className="me-2 d-flex">
-                  <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
-                </span>
-                {t('thankyouForCorrecting')}
-              </div>
-            ) : (
-              <div className="mt-9 mt-md-12">
-                <ButtonControls
-                  playButton={false}
-                  submitButton={showSubmitButton}
-                  cancelButton={showCancelButton}
-                  needsChangeButton={showNeedsChangeButton}
-                  correctBtn={showCorrectButton}
-                  correctDisable={false}
-                  cancelDisable={false}
-                  submitDisable={
-                    !formDataStore.userInput ||
-                    formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
-                    hasError
-                  }
-                  needsChangeDisable={false}
-                  onSubmit={onSubmitContribution}
-                  onCancel={onCancelContribution}
-                  onSkip={onSkipContribution}
-                  onNeedsChange={onNeedsChange}
-                  onCorrect={onCorrect}
-                />
-              </div>
-            )}
+      {contributionData && result?.data?.length !== 0 ? (
+        <Fragment>
+          <ChromeExtension />
+          <div className="pt-4 px-2 px-lg-0 pb-8">
+            <FunctionalHeader
+              onSuccess={onSkipContribution}
+              type="validate"
+              initiative={INITIATIVES_MAPPING.likho}
+              action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.likho]['validate']}
+              showSpeaker={false}
+            />
+            <Container fluid="lg" className="mt-5">
+              <div data-testid="LikhoValidate" className={`${styles.root}`}>
+                <div className="align-items-center text-center">
+                  <span className="display-3">{t(`${INITIATIVES_MAPPING.likho}ValidationHeading`)}</span>
+                </div>
+                <div className="d-md-flex mt-2 mt-md-4">
+                  <div className="flex-fill">
+                    <TextEditArea
+                      id="originalText"
+                      isTextareaDisabled={false}
+                      language={contributionLanguage ?? ''}
+                      initiative={INITIATIVES_MAPPING.likho}
+                      setTextValue={() => {}}
+                      textValue={showUIData?.sentence}
+                      roundedLeft
+                      readOnly
+                      label={t(`${contributionLanguage?.toLowerCase()}`)}
+                      onError={() => {}}
+                    />
+                  </div>
+                  <div className="flex-fill">
+                    <TextEditArea
+                      id="editText"
+                      isTextareaDisabled={false}
+                      language={translatedLanguage ?? ''}
+                      initiative={INITIATIVES_MAPPING.likho}
+                      setTextValue={onChangeTextInput}
+                      textValue={showUIData?.contribution}
+                      roundedRight
+                      label={t(`${translatedLanguage?.toLowerCase()}`)}
+                      onError={setHasError}
+                      showTip
+                      readOnlyActive
+                      readOnly
+                    />
+                  </div>
+                </div>
+                {showEditTextArea && (
+                  <div className="mt-4 mt-md-8">
+                    <TextEditArea
+                      id="addText"
+                      isTextareaDisabled={false}
+                      language={translatedLanguage ?? ''}
+                      initiative={INITIATIVES_MAPPING.likho}
+                      setTextValue={onChangeTextInput}
+                      textValue={showUIData?.contribution}
+                      label={`${t('yourEdit')}${
+                        translatedLanguage && ` (${t(translatedLanguage.toLowerCase())})`
+                      }`}
+                      onError={setHasError}
+                    />
+                  </div>
+                )}
+                {showThankyouMessage ? (
+                  <div className="d-flex align-items-center justify-content-center mt-9 display-1">
+                    <span className="me-2 d-flex">
+                      <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+                    </span>
+                    {t('thankyouForCorrecting')}
+                  </div>
+                ) : (
+                  <div className="mt-9 mt-md-12">
+                    <ButtonControls
+                      playButton={false}
+                      submitButton={showSubmitButton}
+                      cancelButton={showCancelButton}
+                      needsChangeButton={showNeedsChangeButton}
+                      correctBtn={showCorrectButton}
+                      correctDisable={false}
+                      cancelDisable={false}
+                      submitDisable={
+                        !formDataStore.userInput ||
+                        formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
+                        hasError
+                      }
+                      needsChangeDisable={false}
+                      onSubmit={onSubmitContribution}
+                      onCancel={onCancelContribution}
+                      onSkip={onSkipContribution}
+                      onNeedsChange={onNeedsChange}
+                      onCorrect={onCorrect}
+                    />
+                  </div>
+                )}
 
-            <div className="d-flex align-items-center mt-10 mt-md-14">
-              <div className="flex-grow-1">
-                <ProgressBar
-                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                  variant="primary"
-                  className={styles.progress}
-                />
+                <div className="d-flex align-items-center mt-10 mt-md-14">
+                  <div className="flex-grow-1">
+                    <ProgressBar
+                      now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                      variant="primary"
+                      className={styles.progress}
+                    />
+                  </div>
+                  <span className="ms-5">
+                    {currentDataIndex + 1}/{contributionData.length}
+                  </span>
+                </div>
               </div>
-              <span className="ms-5">
-                {currentDataIndex + 1}/{contributionData.length}
-              </span>
-            </div>
+            </Container>
           </div>
-        </Container>
-      </div>
+        </Fragment>
+      ) : (
+        <div className="d-flex flex-grow-1 align-items-center">
+          <NoDataFound
+            url={routePaths.likhoIndiaHome}
+            title={t('parallelValidateNoDataThankYouMessage')}
+            text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() })}
+            buttonLabel={t('parallelBackToInitiativePrompt')}
+          />
+        </div>
+      )}
+      {(skipError || rejectError || acceptError || submitError) && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(skipError || rejectError || acceptError || submitError)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
-  ) : (
-    <div className="d-flex flex-grow-1 align-items-center">
-      <NoDataFound
-        url={routePaths.likhoIndiaHome}
-        title={t('parallelValidateNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: contributionLanguage?.toLowerCase() })}
-        buttonLabel={t('parallelBackToInitiativePrompt')}
-      />
-    </div>
   );
 };
 

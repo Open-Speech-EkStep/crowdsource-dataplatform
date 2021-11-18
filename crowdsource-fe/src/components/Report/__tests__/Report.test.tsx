@@ -61,4 +61,39 @@ describe('Report', () => {
     userEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(screen.queryByText('parallelReportSubmitSuccess')).not.toBeInTheDocument();
   });
+
+  it('should show error popup when api returns error', async () => {
+    const url = '/report';
+    const errorResponse = new Error('Some error');
+
+    await setup();
+
+    userEvent.click(screen.getByRole('button', { name: 'reportIconAlt report' }));
+
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    userEvent.click(screen.getAllByRole('radio')[0]);
+
+    expect(screen.getByRole('button', { name: /submit/i })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+    expect(screen.getByRole('button', { name: /submit/i })).toBeDisabled();
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
 });

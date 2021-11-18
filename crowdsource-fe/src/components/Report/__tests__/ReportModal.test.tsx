@@ -15,6 +15,7 @@ describe('ReportModal', () => {
         onSuccess={() => {}}
         reportSubheadingText="asrContributeReportModalSubHeading"
         initiative="suno"
+        onError={() => {}}
       />
     );
   };

@@ -10,6 +10,7 @@ import {
   getBrowserInfo,
   groupBy,
   isBoloInitiative,
+  getErrorMsg,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -165,5 +166,25 @@ describe('Utils', () => {
     const groupedData = groupBy(data, '3');
     const expectedOutput: any[] = [];
     expect(groupedData).toEqual(expectedOutput);
+  });
+
+  it('should return the error meessage on the basis of error code', () => {
+    const error = {
+      status: 404,
+    };
+
+    const multipleRequestError = {
+      status: 429,
+    };
+
+    const errorMsg = getErrorMsg(error);
+
+    const multipleRequestErrorMsg = getErrorMsg(multipleRequestError);
+
+    const expectedOutput = 'apiFailureError';
+    const expectedMultipleRequestOutput = 'multipleRequestApiError';
+    expect(errorMsg).toEqual(expectedOutput);
+
+    expect(multipleRequestErrorMsg).toEqual(expectedMultipleRequestOutput);
   });
 });

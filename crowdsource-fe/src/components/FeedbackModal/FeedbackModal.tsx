@@ -22,10 +22,11 @@ const opinions = [1, 2, 3, 4, 5];
 interface FeedbackModalProps {
   onHide: () => void;
   onSuccess: () => void;
+  onError: (error: any) => any;
   show: Boolean;
 }
 
-const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps) => {
+const FeedbackModal = ({ onSuccess: showThankyou, onError, ...props }: FeedbackModalProps) => {
   const { t } = useTranslation();
 
   const showThankyouRef = useRef(showThankyou);
@@ -38,7 +39,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
     revisit: '',
   });
 
-  const { isLoading, data, submit } = useSubmit(apiPaths.feedback);
+  const { isLoading, data, submit, error } = useSubmit(apiPaths.feedback);
 
   const route = useRouter();
 
@@ -65,6 +66,12 @@ const FeedbackModal = ({ onSuccess: showThankyou, ...props }: FeedbackModalProps
       })
     );
   };
+
+  useEffect(() => {
+    if (error) {
+      onError(error);
+    }
+  }, [error, onError]);
 
   useEffect(() => {
     showThankyouRef.current = showThankyou;

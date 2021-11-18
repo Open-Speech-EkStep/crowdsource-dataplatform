@@ -193,6 +193,50 @@ describe('LikhoValidate', () => {
     expect(screen.getByText('2/5')).toBeInTheDocument();
   });
 
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/validate/1719084/accept';
+    const errorResponse = new Error('Some error');
+    await setup();
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    expect(screen.getByRole('button', { name: 'Correct Icon correct' })).toBeEnabled();
+    userEvent.click(screen.getByRole('button', { name: 'Correct Icon correct' }));
+    await waitFor(() =>
+      expect(fetchMock).toBeCalledWith(url, {
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          fromLanguage: 'Hindi',
+          language: 'English',
+          sentenceId: 1323119,
+          state: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'parallel',
+        }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      })
+    );
+
+    expect(screen.getByRole('button', { name: 'Edit Icon needsChange' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Correct Icon correct' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+    expect(screen.getByText('2/5')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should call /store and /validate endpoint when a correction is done', async () => {
     await setup();
 

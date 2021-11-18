@@ -104,6 +104,38 @@ describe('LikhoTranslate', () => {
     });
   });
 
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/media/parallel';
+    const errorResponse = new Error('Some error');
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    render(<LikhoTranslate />);
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/media/parallel', {
+        body: JSON.stringify({
+          language: 'Hindi',
+          toLanguage: 'English',
+          userName: 'abc',
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: 'proceed' })).not.toBeInTheDocument();
+    });
+  });
+
   it('should test the cancel button functionality', async () => {
     await setup(resultData);
 

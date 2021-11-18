@@ -1,6 +1,7 @@
 import { jsPDF } from 'jspdf';
 import { i18n } from 'next-i18next';
 
+import { ErrorStatusCode } from 'constants/errorStatusCode';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { KEYBOARD_ERROR, LANGUAGE_UNICODE, OTHER_LANGUAGE_UNICODE } from 'constants/Keyboard';
 import type { InitiativeType } from 'types/InitiativeType';
@@ -210,4 +211,12 @@ export const visualize = (visualizer: any, analyser: any) => {
   }
 
   draw();
+};
+
+export const getErrorMsg = (error: any) => {
+  if (error && error.status === ErrorStatusCode.TOO_MANY_REQUEST) {
+    return 'multipleRequestApiError';
+  } else {
+    return 'apiFailureError';
+  }
 };

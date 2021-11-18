@@ -248,6 +248,50 @@ describe('BoloValidate', () => {
     });
   });
 
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/validate/1717503/accept';
+    const errorResponse = new Error('Some error');
+    await setup(contributionsData);
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
+
+    await waitFor(() =>
+      screen.getByTestId('boloValidateAudioElement').dispatchEvent(new window.Event('ended'))
+    );
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    expect(screen.getByRole('img', { name: 'Correct Icon' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('img', { name: 'Correct Icon' }));
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          fromLanguage: 'Hindi',
+          sentenceId: 1248712,
+          state: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'text',
+        }),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should test the incorrect functionality', async () => {
     const url = '/validate/1717503/reject';
     const successResponse = { message: 'Validate successfully.', statusCode: 200 };

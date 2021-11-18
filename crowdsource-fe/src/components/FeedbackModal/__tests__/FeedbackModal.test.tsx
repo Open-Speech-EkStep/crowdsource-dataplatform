@@ -6,7 +6,8 @@ import { screen, render, verifyAxeTest, userEvent, waitFor } from 'utils/testUti
 import FeedbackModal from '../FeedbackModal';
 
 describe('FeedbackModal', () => {
-  const setup = () => render(<FeedbackModal show={true} onHide={() => {}} onSuccess={() => {}} />);
+  const setup = () =>
+    render(<FeedbackModal show={true} onHide={() => {}} onError={() => {}} onSuccess={() => {}} />);
 
   verifyAxeTest(setup());
 

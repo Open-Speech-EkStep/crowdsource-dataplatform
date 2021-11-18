@@ -70,6 +70,8 @@ const BoloSpeak = () => {
 
   const [clearTimeoutKey, setClearTimeoutKey] = useState<any>();
 
+  const audioController = useRef<any>();
+
   let audioCtx: any;
   let input: any;
   let mediaRecorder: any;
@@ -93,7 +95,7 @@ const BoloSpeak = () => {
     audio_data: null,
   });
 
-  const result = useFetch<ResultType>({
+  const { data: result } = useFetch<ResultType>({
     url: apiPaths.mediaText,
     init: contributionLanguage
       ? {
@@ -143,6 +145,7 @@ const BoloSpeak = () => {
     setShowStopRecording(false);
     setShowReRecording(false);
     setShowAudioController(false);
+    audioController?.current?.classList.add('d-none');
   };
 
   const setRemainingCount = (value: number) => {
@@ -173,6 +176,20 @@ const BoloSpeak = () => {
     );
   };
 
+  const onRecordingStop = () => {
+    audioController?.current?.classList.remove('d-none');
+    setShowAudioController(true);
+
+    const blob = new Blob(chunks, { type: 'audio/wav' });
+    chunks = [];
+    setFormData({
+      ...formData,
+      audio_data: blob,
+    });
+    const audioURL = URL.createObjectURL(blob);
+    setRecordedAudio(audioURL);
+  };
+
   const recordAudio = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -193,17 +210,14 @@ const BoloSpeak = () => {
       mediaRecorder = new MediaRecorder(stream);
       //start the recording process
       mediaRecorder.start();
+
       //automatically click stop button after 30 seconds
       mediaRecorder.ondataavailable = (e: any) => {
         chunks.push(e.data);
-        const blob = new Blob(chunks, { type: 'audio/wav' });
-        chunks = [];
-        setFormData({
-          ...formData,
-          audio_data: blob,
-        });
-        const audioURL = URL.createObjectURL(blob);
-        setRecordedAudio(audioURL);
+      };
+
+      mediaRecorder.onstop = () => {
+        onRecordingStop();
       };
       startTimer();
     } catch (e) {
@@ -237,12 +251,12 @@ const BoloSpeak = () => {
   const onStopRecording = () => {
     setShowReRecording(true);
     setShowStopRecording(false);
-    setShowAudioController(true);
     stopAudio();
   };
 
   const onRerecord = () => {
     setRecordedAudio('');
+    audioController?.current?.classList.add('d-none');
     setShowStopRecording(true);
     setShowAudioError(false);
     setShowReRecording(false);
@@ -306,21 +320,19 @@ const BoloSpeak = () => {
             >
               {showUIData?.media_data}
             </div>
-            {showAudioController && (
-              <div className="d-flex flex-column align-items-center text-center">
-                <div className="mt-2 mt-md-3">
-                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                  <audio
-                    ref={audioEl}
-                    data-testid="boloAudioElement"
-                    controls
-                    className="d-flex shadow-grey rounded-24"
-                    tabIndex={-1}
-                    src={recordedAudio}
-                  ></audio>
-                </div>
+            <div ref={audioController} className="d-flex d-none flex-column align-items-center text-center">
+              <div className="mt-2 mt-md-3">
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                <audio
+                  ref={audioEl}
+                  data-testid="boloAudioElement"
+                  controls
+                  className="d-flex shadow-grey rounded-24"
+                  tabIndex={-1}
+                  src={recordedAudio}
+                ></audio>
               </div>
-            )}
+            </div>
             {audioError && (
               <div
                 className={`d-flex text-danger justify-content-center align-items-center my-2 mt-md-2 mb-md-10 text-center display-6`}
@@ -353,7 +365,6 @@ const BoloSpeak = () => {
                 playButton={showPlayButton}
                 submitDisable={!recordedAudio || duration < 2}
                 onSubmit={onSubmitContribution}
-                onCancel={() => {}}
                 onSkip={onSkipContribution}
                 cancelButton={false}
                 startRecordingButton={showStartRecording}

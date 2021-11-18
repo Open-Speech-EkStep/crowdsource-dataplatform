@@ -92,6 +92,37 @@ describe('DekhoContribute', () => {
     });
   });
 
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/media/ocr';
+    const errorResponse = new Error('Some error');
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    render(<DekhoContribute />);
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/media/ocr', {
+        body: JSON.stringify({
+          language: 'Hindi',
+          userName: 'abc',
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: 'proceed' })).not.toBeInTheDocument();
+    });
+  });
+
   it('should test the textarea text with valid language', async () => {
     await setup(resultData);
 

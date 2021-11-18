@@ -258,6 +258,52 @@ describe('SunoValidate', () => {
     expect(screen.getByText('2/5')).toBeInTheDocument();
   });
 
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/validate/1717503/accept';
+    const errorResponse = new Error('Some error');
+    await setup();
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
+    await waitFor(() => screen.getByTestId('audioElement').dispatchEvent(new window.Event('ended')));
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Correct Icon correct' })).toBeEnabled());
+    userEvent.click(screen.getByRole('button', { name: 'Correct Icon correct' }));
+    await waitFor(() =>
+      expect(fetchMock).toBeCalledWith(url, {
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          fromLanguage: 'Hindi',
+          sentenceId: 1248712,
+          state: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'asr',
+        }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      })
+    );
+
+    expect(screen.getByRole('button', { name: 'Edit Icon needsChange' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Correct Icon correct' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Play Icon play' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+    expect(screen.getByText('2/5')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should call /store and /validate endpoint when a correction is done', async () => {
     await setup();
 

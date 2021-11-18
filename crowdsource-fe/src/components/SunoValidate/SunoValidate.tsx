@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -10,6 +10,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
+import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
 import TextEditArea from 'components/TextEditArea';
@@ -28,7 +29,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import type { ActionStoreInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, getErrorMsg } from 'utils/utils';
 
 import styles from './SunoValidate.module.scss';
 
@@ -56,6 +57,9 @@ const SunoValidate = () => {
   const [correctDisable, setCorrectDisable] = useState(true);
   const [showEditTextArea, setShowEditTextArea] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
   const router = useRouter();
@@ -68,15 +72,15 @@ const SunoValidate = () => {
   });
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
-  const { submit } = useSubmit(apiPaths.store);
+  const { submit, error: submitError } = useSubmit(apiPaths.store);
 
   const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit: reject } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip } = useSubmit(skipApiUrl);
-  const { submit: accept } = useSubmit(acceptApiUrl);
+  const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
+  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
 
   const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
     device: getDeviceInfo(),
@@ -96,6 +100,12 @@ const SunoValidate = () => {
       revalidateOnMount: false,
     }
   );
+
+  useEffect(() => {
+    if (skipError || acceptError || rejectError || submitError) {
+      setShowErrorModal(true);
+    }
+  }, [skipError, acceptError, rejectError, submitError]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -263,129 +273,140 @@ const SunoValidate = () => {
     return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
   }
 
-  return contributionData && result?.data?.length !== 0 ? (
+  return (
     <Fragment>
-      <ChromeExtension />
-      <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader
-          onSuccess={onSkipContribution}
-          type="validate"
-          initiative={INITIATIVES_MAPPING.suno}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.suno]['validate']}
-        />
-        <Container fluid="lg" className="mt-5">
-          <div data-testid="SunoValidate" className={`${styles.root}`}>
-            <AudioController
-              audioUrl={showUIData?.sentence}
-              playAudio={playAudio}
-              onEnded={onAudioEnd}
-              onPlay={onPlayAudio}
-              onPause={onPauseAudio}
-              type="Validation"
+      {contributionData && result?.data?.length !== 0 ? (
+        <Fragment>
+          <ChromeExtension />
+          <div className="pt-4 px-2 px-lg-0 pb-8">
+            <FunctionalHeader
+              onSuccess={onSkipContribution}
+              type="validate"
+              initiative={INITIATIVES_MAPPING.suno}
+              action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.suno]['validate']}
             />
-            {showEditTextArea ? (
-              <div className="d-md-flex mt-9 mt-md-12">
-                <div className="flex-fill">
-                  <TextEditArea
-                    id="originalText"
-                    isTextareaDisabled={false}
-                    language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.suno}
-                    setTextValue={() => {}}
-                    textValue={showUIData?.contribution}
-                    roundedLeft
-                    readOnly
-                    label={t('originalText')}
-                    onError={() => {}}
-                  />
-                </div>
-                <div className="flex-fill">
-                  <TextEditArea
-                    id="editText"
-                    isTextareaDisabled={false}
-                    language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.suno}
-                    setTextValue={onChangeTextInput}
-                    textValue={showUIData?.contribution}
-                    roundedRight
-                    label={`${t('yourEdit')}${
-                      contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                    }`}
-                    onError={setHasError}
-                    showTip
-                  />
-                </div>
-              </div>
-            ) : (
-              <div
-                className={`${styles.text} d-flex justify-content-center align-items-center mt-9 mt-md-12 text-center display-1`}
-              >
-                {showUIData?.contribution}
-              </div>
-            )}
-            {showThankyouMessage ? (
-              <div className="d-flex align-items-center justify-content-center mt-9 display-1">
-                <span className="me-2 d-flex">
-                  <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
-                </span>
-                {t('thankyouForCorrecting')}
-              </div>
-            ) : (
-              <div className="mt-9 mt-md-12">
-                <ButtonControls
+            <Container fluid="lg" className="mt-5">
+              <div data-testid="SunoValidate" className={`${styles.root}`}>
+                <AudioController
+                  audioUrl={showUIData?.sentence}
+                  playAudio={playAudio}
+                  onEnded={onAudioEnd}
                   onPlay={onPlayAudio}
                   onPause={onPauseAudio}
-                  onReplay={onReplayAudio}
-                  playButton={showPlayButton}
-                  pauseButton={showPauseButton}
-                  replayButton={showReplayButton}
-                  submitButton={showSubmitButton}
-                  cancelButton={showCancelButton}
-                  needsChangeButton={showNeedsChangeButton}
-                  correctBtn={showCorrectButton}
-                  cancelDisable={false}
-                  submitDisable={
-                    !showReplayButton ||
-                    !formDataStore.userInput ||
-                    formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
-                    hasError
-                  }
-                  needsChangeDisable={needsChangeDisable}
-                  correctDisable={correctDisable}
-                  onSubmit={onSubmitContribution}
-                  onCancel={onCancelContribution}
-                  onSkip={onSkipContribution}
-                  onNeedsChange={onNeedsChange}
-                  onCorrect={onCorrect}
+                  type="Validation"
                 />
-              </div>
-            )}
+                {showEditTextArea ? (
+                  <div className="d-md-flex mt-9 mt-md-12">
+                    <div className="flex-fill">
+                      <TextEditArea
+                        id="originalText"
+                        isTextareaDisabled={false}
+                        language={contributionLanguage ?? ''}
+                        initiative={INITIATIVES_MAPPING.suno}
+                        setTextValue={() => {}}
+                        textValue={showUIData?.contribution}
+                        roundedLeft
+                        readOnly
+                        label={t('originalText')}
+                        onError={() => {}}
+                      />
+                    </div>
+                    <div className="flex-fill">
+                      <TextEditArea
+                        id="editText"
+                        isTextareaDisabled={false}
+                        language={contributionLanguage ?? ''}
+                        initiative={INITIATIVES_MAPPING.suno}
+                        setTextValue={onChangeTextInput}
+                        textValue={showUIData?.contribution}
+                        roundedRight
+                        label={`${t('yourEdit')}${
+                          contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                        }`}
+                        onError={setHasError}
+                        showTip
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={`${styles.text} d-flex justify-content-center align-items-center mt-9 mt-md-12 text-center display-1`}
+                  >
+                    {showUIData?.contribution}
+                  </div>
+                )}
+                {showThankyouMessage ? (
+                  <div className="d-flex align-items-center justify-content-center mt-9 display-1">
+                    <span className="me-2 d-flex">
+                      <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+                    </span>
+                    {t('thankyouForCorrecting')}
+                  </div>
+                ) : (
+                  <div className="mt-9 mt-md-12">
+                    <ButtonControls
+                      onPlay={onPlayAudio}
+                      onPause={onPauseAudio}
+                      onReplay={onReplayAudio}
+                      playButton={showPlayButton}
+                      pauseButton={showPauseButton}
+                      replayButton={showReplayButton}
+                      submitButton={showSubmitButton}
+                      cancelButton={showCancelButton}
+                      needsChangeButton={showNeedsChangeButton}
+                      correctBtn={showCorrectButton}
+                      cancelDisable={false}
+                      submitDisable={
+                        !showReplayButton ||
+                        !formDataStore.userInput ||
+                        formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||
+                        hasError
+                      }
+                      needsChangeDisable={needsChangeDisable}
+                      correctDisable={correctDisable}
+                      onSubmit={onSubmitContribution}
+                      onCancel={onCancelContribution}
+                      onSkip={onSkipContribution}
+                      onNeedsChange={onNeedsChange}
+                      onCorrect={onCorrect}
+                    />
+                  </div>
+                )}
 
-            <div className="d-flex align-items-center mt-10 mt-md-14">
-              <div className="flex-grow-1">
-                <ProgressBar
-                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                  variant="primary"
-                  className={styles.progress}
-                />
+                <div className="d-flex align-items-center mt-10 mt-md-14">
+                  <div className="flex-grow-1">
+                    <ProgressBar
+                      now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                      variant="primary"
+                      className={styles.progress}
+                    />
+                  </div>
+                  <span className="ms-5">
+                    {currentDataIndex + 1}/{contributionData.length}
+                  </span>
+                </div>
               </div>
-              <span className="ms-5">
-                {currentDataIndex + 1}/{contributionData.length}
-              </span>
-            </div>
+            </Container>
           </div>
-        </Container>
-      </div>
+        </Fragment>
+      ) : (
+        <div className="d-flex flex-grow-1 align-items-center">
+          <NoDataFound
+            url={routePaths.sunoIndiaHome}
+            title={t('asrValidateNoDataThankYouMessage')}
+            text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
+            buttonLabel={t('asrBackToInitiativePrompt')}
+          />
+        </div>
+      )}
+      {(skipError || rejectError || acceptError || submitError) && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(skipError || rejectError || acceptError || submitError)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
-  ) : (
-    <div className="d-flex flex-grow-1 align-items-center">
-      <NoDataFound
-        url={routePaths.sunoIndiaHome}
-        title={t('asrValidateNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: t(`${contributionLanguage?.toLowerCase()}`) })}
-        buttonLabel={t('asrBackToInitiativePrompt')}
-      />
-    </div>
   );
 };
 

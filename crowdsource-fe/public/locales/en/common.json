@@ -385,5 +385,8 @@
   "hatefulPolitical": "Hateful Political views, amplifying hate-speech etc.",
   "herseyRumors": "Hearsay / Rumors, deliberate falsified facts etc.",
   "languageChangeNotification": "You have changed the contribution language from {{fromLanguage}} to {{toLanguage}}, we will be redirecting you to homepage to start participating again.",
-  "proceed": "Proceed"
+  "proceed": "Proceed",
+  "apiFailureError": "An unexpected error has occurred.",
+  "multipleRequestApiError": "We are processing multiple requests at the moment. Please try again after sometime.",
+  "close": "Close"
 }

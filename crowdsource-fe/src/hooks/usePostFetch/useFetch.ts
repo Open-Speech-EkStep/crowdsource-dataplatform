@@ -10,6 +10,8 @@ const useFetch = <T>({ url, init, processData }: RequestProps<T>) => {
   // Response state
   const [data, setData] = useState<T>();
 
+  const [error, setError] = useState<any>();
+
   // Turn objects into strings for useCallback & useEffect dependencies
   const [stringifiedUrl, stringifiedInit] = [JSON.stringify(url), JSON.stringify(init)];
 
@@ -30,8 +32,9 @@ const useFetch = <T>({ url, init, processData }: RequestProps<T>) => {
         const rawData: any = await response.json();
         const processedData = processJson(rawData);
         setData(processedData);
+        setError(undefined);
       } catch (error) {
-        console.error(`Error ${error}`);
+        setError(error);
       }
     };
     // Call async function
@@ -39,7 +42,7 @@ const useFetch = <T>({ url, init, processData }: RequestProps<T>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stringifiedUrl, stringifiedInit, processJson]);
 
-  return data;
+  return { data, error };
 };
 
 export default useFetch;
