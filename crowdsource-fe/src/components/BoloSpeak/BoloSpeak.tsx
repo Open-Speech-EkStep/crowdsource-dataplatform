@@ -80,7 +80,7 @@ const BoloSpeak = () => {
 
   const { submit } = useSubmit(apiPaths.store, {
     method: 'POST',
-    headers: { 'Content-Type': 'multipart/form-data:boundary=something' },
+    headers: { 'Content-Type': 'multipart/form-data;boundary=something1232423' },
   });
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
