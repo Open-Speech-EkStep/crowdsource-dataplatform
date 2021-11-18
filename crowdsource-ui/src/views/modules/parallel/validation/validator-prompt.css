@@ -138,6 +138,11 @@ a{
   .record-btn-container .test-mic-speaker {
     margin-top: 15px;
   }
+
+  #cancel-edit-button , #submit-edit-button, #need_change{
+    width:max-content;
+  }
+
   #cancel-edit-button > svg {
     height: 80px;
     width: 160px;
