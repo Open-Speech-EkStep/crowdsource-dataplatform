@@ -15,7 +15,7 @@ const useSubmit = <Data = any, Error = any>(key: string, withHeaders: boolean = 
           credentials: 'include',
           mode: 'cors',
           body,
-          headers: withHeaders ? { 'Content-type': 'application/json' } : undefined,
+          headers: withHeaders ? { 'Content-Type': 'application/json' } : undefined,
         });
 
         setIsLoading(false);
