@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Button from 'components/Button';
 import IconTextButton from 'components/IconTextButton';
 
+import apiPaths from '../../constants/apiPaths';
+
 import styles from './TestSpeakerMic.module.scss';
 
 interface TestSpeakerProps {
@@ -155,7 +157,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
       body: fd,
       method: 'POST',
     };
-    const response = await fetch('/audio/snr', init);
+    const response = await fetch(apiPaths.audioSnr, init);
     // Extract json
     const rawData: any = await response.json();
     showAmbientNoise(rawData);

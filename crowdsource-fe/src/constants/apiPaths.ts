@@ -43,6 +43,8 @@ const apiPaths = {
   rewards: nodeConfig.apiUrl + '/rewards',
   setCookie: nodeConfig.apiUrl + '/get-userid',
   rewardInfo: nodeConfig.apiUrl + '/rewards-info',
+  audioSnr: nodeConfig.apiUrl + '/audio/snr',
+  locationInfo: nodeConfig.apiUrl + '/location-info',
 };
 
 export default apiPaths;

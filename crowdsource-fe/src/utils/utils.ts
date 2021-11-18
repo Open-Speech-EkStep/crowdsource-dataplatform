@@ -5,6 +5,8 @@ import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { KEYBOARD_ERROR, LANGUAGE_UNICODE, OTHER_LANGUAGE_UNICODE } from 'constants/Keyboard';
 import type { InitiativeType } from 'types/InitiativeType';
 
+import apiPaths from '../constants/apiPaths';
+
 var platform = require('platform');
 
 export const convertIntoHrsFormat = (data: any, isSeconds = true) => {
@@ -121,7 +123,7 @@ export const fetchLocationInfo = async () => {
         }
       }
       if (ipAddress.length !== 0) {
-        const data = await fetch(`/location-info?ip=${ipAddress}`);
+        const data = await fetch(`${apiPaths.locationInfo}?ip=${ipAddress}`);
         return data && data.json();
       } else {
         return new Promise((resolve, reject) => {
