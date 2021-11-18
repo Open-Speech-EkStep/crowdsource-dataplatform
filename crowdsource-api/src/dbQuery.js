@@ -142,6 +142,7 @@ from contributions con
 	and ds.type=$2
     left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
     where  con.action='completed' 
+      and con.allow_validation=true
 			and ds.media->>'language'=$3 
 			and con.media->>'language'=$3
 			and coalesce(mds.is_active, true) = true
@@ -159,6 +160,7 @@ from contributions con
 	and ds.type=$2 and con.media->>'language'=$4
     left join master_dataset mds on ds.master_dataset_id=mds.master_dataset_id
     where  con.action='completed' 
+      and con.allow_validation=true
 			and ds.media->>'language'=$3
 			and coalesce(mds.is_active, true) = true
 			and (is_profane=false)
