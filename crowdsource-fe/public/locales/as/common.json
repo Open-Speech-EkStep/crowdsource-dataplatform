@@ -380,5 +380,14 @@
   "reRecord": "পুনৰ বাণীবদ্ধকৰণ কৰক",
   "audioValidationMessage": "অডিঅ' ৰেকৰ্ডিং অতি সৰু। অনুগ্ৰহ কৰি পুনৰ ৰেকৰ্ড কৰক",
   "remainingAudioTextDurationWarning": "{{remainingSec}} ছেকেণ্ডৰ পিছত ৰেকৰ্ডিং আপোনা-আপুনি বন্ধ হ'ব",
-  "incorrect": "অশুদ্ধ"
+  "incorrect": "অশুদ্ধ",
+  "hurtingStatement": "ধৰ্ম, সম্প্ৰদায় বা অপমানজনক সমল আদিৰ অনুভুতিত আঘাত কৰা",
+  "hatefulPolitical": "ঘৃণনীয় ৰাজনৈতিক মতামত, ঘৃণাৰ-ভাষণ প্ৰচাৰ ইত্যাদি।",
+  "herseyRumors": "শুনা কথা / উৰা-বাতৰি, ইচ্ছাকৃত ভাৱে ভুৱা তথ্য ইত্যাদি।",
+  "languageChangeNotification": "",
+  "proceed": "আগুৱাওক",
+  "apiFailureError": "এটা অবাঞ্চিত ত্ৰুটি সংঘটিত হৈছে৷",
+  "multipleRequestApiError": "আমি এই সময়ত একাধিক অনুৰোধৰ ওপৰত কাৰ্য কৰি আছো৷ অনুগ্ৰহ কৰি কিছু সময় পিছত পুনৰ চেষ্টা কৰক৷",
+  "close": "বন্ধ কৰক",
+  "validationWarningText": ""
 }

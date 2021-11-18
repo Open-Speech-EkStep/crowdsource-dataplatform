@@ -373,12 +373,21 @@
   "thousandCharLimitText": "फक्त 1000 वर्णांची अनुमती",
   "expandViewText": "विस्तारित दृश्य बघण्यासाठी क्लिक करा",
   "visitOur": "",
-  "404Text": "",
+  "404Text": "असे दिसते की हे पृष्ठ अस्तित्वात नाही",
   "testYourMicrophoneAndSpeakers": "तुमच्या मायक्रोफोन आणि स्पीकर्सची तपासणी करा",
   "startRecording": "रेकॉर्ड करणे सुरू करा",
   "stopRecording": "रेकॉर्ड करणे बंद करा",
   "reRecord": "पुन्हा रेकॉर्ड करा",
   "audioValidationMessage": "ऑडिओ रेकॉर्डिंग अतिशय कमी आहे. कृपया पुन्हा रेकॉर्डिंग करा",
   "remainingAudioTextDurationWarning": "{{remainingSec}} सेकंदनंतर रेकॉर्डिंग  आपोआप बंद होईल",
-  "incorrect": "त्रुटीपूर्ण"
+  "incorrect": "त्रुटीपूर्ण",
+  "hurtingStatement": "धर्म, समुदायाच्या भावनांना दुखवणारा किंवा अपमानास्पद मजकूर इ.",
+  "hatefulPolitical": "द्वेषपूर्ण राजकीय मते, भडकावू वक्तव्य इ.",
+  "herseyRumors": "ऐकीव गोष्टी / अफवा, जाणूनबूजून दिलेली खोटी माहिती इ.",
+  "languageChangeNotification": "",
+  "proceed": "पुढे चला",
+  "apiFailureError": "अनपेक्षित चूक झाली आहे.",
+  "multipleRequestApiError": "आम्ही याक्षणी एकाधिक विनंत्यांवर प्रक्रिया करत आहोत. कृपया थोड्या वेळाने पुन्हा प्रयत्न करा.",
+  "close": "बंद करा",
+  "validationWarningText": "तुम्ही घातलेला मजकूर मूळ मजकुराशी जुळत नाही असे आम्हाला वाटते, तुम्हाला तुमच्या संपादनाबद्दल खात्री आहे का?"
 }

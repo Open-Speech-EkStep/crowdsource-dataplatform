@@ -373,12 +373,21 @@
   "thousandCharLimitText": "ફક્ત 1000 અક્ષરોની અનુમતિ છે",
   "expandViewText": "વિસ્તૃત વ્યૂને ખોલવા માટે ક્લિક કરો",
   "visitOur": "",
-  "404Text": "",
+  "404Text": "એવું લાગે છે કે આ પેજ અસ્તિત્વમાં નથી",
   "testYourMicrophoneAndSpeakers": "તમારું માઇક્રોફોન અને સ્પીકર્સ તપાસો",
   "startRecording": "રેકોર્ડિંગ શરૂ કરો",
   "stopRecording": "રેકોર્ડિંગ બંધ કરો",
   "reRecord": "ફરીથી-રેકોર્ડ કરો",
   "audioValidationMessage": "થયેલુ ઑડિયો રેકોર્ડિંગ ખુબ નાનું છે. કૃપા કરીને ફરીથી રેકોર્ડ કરો",
   "remainingAudioTextDurationWarning": "{{remainingSec}} સેકન્ડ પછી રેકોર્ડિંગ આપોઆપ અટકી જશે",
-  "incorrect": "સાચું નથી"
+  "incorrect": "સાચું નથી",
+  "hurtingStatement": "ધર્મ, સમુદાયની લાગણી દુભાવવી અથવા અપમાનજનક કન્ટેન્ટ વગેરે.",
+  "hatefulPolitical": "દ્વેષપૂર્ણ રાજકીય મંતવ્યો, ઉશ્કેરણીજનક નિવેદનો વગેરે.",
+  "herseyRumors": "ઉડતી વાતો/ અફવાઓ, ઇરાદાપૂર્વક ખોટા ઉભા કરેલા તથ્યો વગેરે",
+  "languageChangeNotification": "",
+  "proceed": "આગળ વધો",
+  "apiFailureError": "એક અનપેક્ષિત ભૂલ આવી છે.",
+  "multipleRequestApiError": "અમે હાલમાં ઘણી વિનંતીઓ પર પ્રક્રિયા કરી રહ્યા છીએ. કૃપા કરીને થોડો સમય પછી ફરી પ્રયાસ કરો.",
+  "close": "બંધ કરો",
+  "validationWarningText": "અમને લાગે છે કે તમે દાખલ કરેલ ટેક્સ્ટ મૂળ ટેક્સ્ટ સાથે મેળ ખાતી નથી, શું તમે તમારા સંપાદન વિશે ચોક્કસ છો?"
 }

@@ -100,19 +100,18 @@ describe('Utils', () => {
   });
 
   it('should test the findInputError method', () => {
-    const errorType = findInputError('suno', 'likho', 'Hindi');
+    const errorType = findInputError('suno', 'parallel', 'Hindi');
 
-    const expectedOutput = { type: 'language' };
+    const expectedOutput = { type: 'language', errorTextKey: expect.anything() };
     expect(errorType).toEqual(expectedOutput);
 
-    const errorType2 = findInputError('abc', 'suno', 'English');
+    const errorType2 = findInputError('abc', 'asr', 'English');
 
-    const expectedOutput2 = { type: '' };
-    expect(errorType2).toEqual(expectedOutput2);
+    expect(errorType2).toEqual(undefined);
 
-    const errorType3 = findInputError('abc@', 'suno', 'English');
+    const errorType3 = findInputError('abc@', 'asr', 'English');
 
-    const expectedOutput3 = { type: 'symbol' };
+    const expectedOutput3 = { type: 'symbol', errorTextKey: expect.anything() };
     expect(errorType3).toEqual(expectedOutput3);
   });
 

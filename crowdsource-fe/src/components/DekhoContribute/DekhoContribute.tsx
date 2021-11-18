@@ -212,7 +212,7 @@ const DekhoContribute = () => {
                     id="addText"
                     isTextareaDisabled={false}
                     language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.dekho}
+                    initiative={INITIATIVES_MEDIA_MAPPING.dekho}
                     setTextValue={onChangeTextInput}
                     textValue={formData.userInput}
                     label={`${t('addText')}${

@@ -1,13 +1,14 @@
-export const KEYBOARD_ERROR = {
-  language: { type: 'language' },
-  symbol: { type: 'symbol' },
-  validation: { type: 'validation' },
-  noError: { type: '' },
+export const TEXT_INPUT_ERROR_CONFIG = {
+  language: { type: 'language', errorTextKey: 'typeInChosenLanguage' },
+  symbol: { type: 'symbol', errorTextKey: 'specialCharacters' },
+  validation: { type: 'validation', errorTextKey: 'validationWarningText' },
 } as const;
 
 export const TEXT_INPUT_LENGTH = {
   LENGTH: 3,
 };
+
+export const SPECIAL_CHARACTERS = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
 
 export const LANGUAGE_UNICODE = {
   Assamese: /^[\u0980-\u09FF\u0030-\u0039]+$/,

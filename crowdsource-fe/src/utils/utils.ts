@@ -2,8 +2,13 @@ import { jsPDF } from 'jspdf';
 import { i18n } from 'next-i18next';
 
 import { ErrorStatusCode } from 'constants/errorStatusCode';
-import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
-import { KEYBOARD_ERROR, LANGUAGE_UNICODE, OTHER_LANGUAGE_UNICODE } from 'constants/Keyboard';
+import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import {
+  TEXT_INPUT_ERROR_CONFIG,
+  LANGUAGE_UNICODE,
+  OTHER_LANGUAGE_UNICODE,
+  SPECIAL_CHARACTERS,
+} from 'constants/Keyboard';
 import type { InitiativeType } from 'types/InitiativeType';
 
 import apiPaths from '../constants/apiPaths';
@@ -91,24 +96,37 @@ export const isBoloInitiative = (value: InitiativeType) => {
   return boloOrSuno.includes(value);
 };
 
-export const findInputError = (text: string, currentModule: string, language: string) => {
-  if (!text.length) return;
-  const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
-  let error: any = KEYBOARD_ERROR.language;
-  const isSunoModule = currentModule === INITIATIVES_MAPPING.suno;
-  const specialSymbols = /[\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E\u0964-\u0965]/;
-  if (currentModule === INITIATIVES_MAPPING.suno && specialSymbols.test(newText) === true) {
-    return KEYBOARD_ERROR.symbol;
-  }
-  Object.entries(isSunoModule ? LANGUAGE_UNICODE : OTHER_LANGUAGE_UNICODE).forEach(([key, value]) => {
-    if (value.test(newText)) {
-      //Check Unicode to see which one is true
-      if (key.toLowerCase() === language.toLowerCase()) {
-        error = KEYBOARD_ERROR.noError;
-      }
+const hasSpecialCharacters = (text: string) => {
+  return SPECIAL_CHARACTERS.test(text) === true;
+};
+
+const hasIncorrectLanguageText = (
+  language: string,
+  text: string,
+  languagePattern: typeof LANGUAGE_UNICODE
+) => {
+  let flag = true;
+  Object.entries(languagePattern).forEach(([languageText, languageUnicode]) => {
+    if (languageText.toLowerCase() === language.toLowerCase() && languageUnicode.test(text)) {
+      flag = false;
     }
   });
-  return error;
+  return flag;
+};
+
+export const findInputError = (text: string, currentModule: InitiativeType, language: string) => {
+  if (!text.length) return;
+  const newText = text.replace(/\s/g, ''); //read input value, and remove "space" by replace \s
+  const isSunoModule = currentModule === INITIATIVES_MEDIA_MAPPING.suno;
+
+  if (isSunoModule && hasSpecialCharacters(newText)) {
+    return TEXT_INPUT_ERROR_CONFIG.symbol;
+  }
+  const unicode = isSunoModule ? LANGUAGE_UNICODE : OTHER_LANGUAGE_UNICODE;
+  if (hasIncorrectLanguageText(language, newText, unicode)) {
+    return TEXT_INPUT_ERROR_CONFIG.language;
+  }
+  return;
 };
 
 export const fetchLocationInfo = async () => {

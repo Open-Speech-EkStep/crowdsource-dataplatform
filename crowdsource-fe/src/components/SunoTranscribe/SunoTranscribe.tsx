@@ -244,7 +244,7 @@ const SunoTranscribe = () => {
                     id="addText"
                     isTextareaDisabled={isDisabled}
                     language={contributionLanguage ?? ''}
-                    initiative={INITIATIVES_MAPPING.suno}
+                    initiative={INITIATIVES_MEDIA_MAPPING.suno}
                     setTextValue={onChangeTextInput}
                     textValue={formData.userInput}
                     label={`${t('addText')}${

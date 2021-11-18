@@ -262,7 +262,7 @@ const DekhoValidate = () => {
                       id="originalText"
                       isTextareaDisabled={false}
                       language={contributionLanguage ?? ''}
-                      initiative={INITIATIVES_MAPPING.dekho}
+                      initiative={INITIATIVES_MEDIA_MAPPING.dekho}
                       setTextValue={() => {}}
                       textValue={showUIData?.contribution}
                       roundedLeft={showEditTextArea}
@@ -278,7 +278,7 @@ const DekhoValidate = () => {
                         id="editText"
                         isTextareaDisabled={false}
                         language={contributionLanguage ?? ''}
-                        initiative={INITIATIVES_MAPPING.dekho}
+                        initiative={INITIATIVES_MEDIA_MAPPING.dekho}
                         setTextValue={onChangeTextInput}
                         textValue={showUIData?.contribution}
                         label={`${t('yourEdit')}${

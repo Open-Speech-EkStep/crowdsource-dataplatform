@@ -380,5 +380,14 @@
   "reRecord": "ਮੁੜ ਰਿਕਾਰਡ ਕਰੋ",
   "audioValidationMessage": "ਆਡੀਓ ਰਿਕਾਰਡਿੰਗ ਬਹੁਤ ਛੋਟੀ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਰਿਕਾਰਡ ਕਰੋ",
   "remainingAudioTextDurationWarning": "ਰਿਕਾਰਡਿੰਗ {{remainingSec}}ਸਕਿੰਟ ਬਾਅਦ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋ ਜਾਵੇਗੀ",
-  "incorrect": "ਗਲਤ"
+  "incorrect": "ਗਲਤ",
+  "hurtingStatement": "ਧਰਮ, ਸਮੁਦਾਇ ਦੀਆਂ ਭਾਵਨਾਵਾਂ ਨੂੰ ਠੇਸ ਪਹੁੰਚਾਉਣ ਵਾਲਾ ਜਾਂ ਅਪਮਾਨਜਨਕ ਕੰਟੈਂਟ",
+  "hatefulPolitical": "ਨਫ਼ਰਤ ਫੈਲਾਉਣ ਵਾਲੀ ਸਿਆਸੀ ਸੋਚ, ਨਫ਼ਰਤ ਵਧਾਉਣ ਵਾਲਾ ਬਿਆਨ ਆਦਿ",
+  "herseyRumors": "ਸੁਣੀ-ਸੁਣਾਈ/ਅਫਵਾਹਾਂ, ਜਾਣ-ਬੁੱਝ ਕੇ ਦੱਸੇ ਗਏ ਝੂਠੇ ਤੱਥ ਆਦਿ",
+  "languageChangeNotification": "",
+  "proceed": "ਅੱਗੇ ਵਧੋ",
+  "apiFailureError": "ਇੱਕ ਅਣ-ਕਿਆਸੀ ਗਲਤੀ ਹੋਈ ਹੈ।",
+  "multipleRequestApiError": "ਅਸੀਂ ਇਸ ਸਮੇਂ ਕਈ ਰਿਕੁਐਸਟਾਂ ਨੂੰ ਪ੍ਰੋਸੈੱਸ ਕਰ ਰਹੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਕੁਝ ਦੇਰ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+  "close": "ਬੰਦ ਕਰੋੋ",
+  "validationWarningText": ""
 }

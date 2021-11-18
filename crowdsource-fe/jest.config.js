@@ -6,6 +6,7 @@ module.exports = {
     '!src/pages/index.page.js',
     '!src/**/index.{js,jsx,ts,tsx}',
     '!src/utils/testUtils.tsx',
+    '!src/utils/validations/*.ts',
     '!src/pages/_document.page.tsx',
     '!src/pages/style-guide.page.tsx',
   ],

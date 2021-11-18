@@ -373,12 +373,21 @@
   "thousandCharLimitText": "केवल 1000 वर्ण संभव",
   "expandViewText": "बड़ा करके देखने के लिए क्लिक करें",
   "visitOur": "",
-  "404Text": "",
+  "404Text": "ऐसा लगता है कि यह पेज मौजूद नहीं है",
   "testYourMicrophoneAndSpeakers": "अपने माइक्रोफ़ोन और स्पीकर की जांच कर लें",
   "startRecording": "रिकॉर्ड करना शुरू करें",
   "stopRecording": "रिकॉर्ड करना बंद करें",
   "reRecord": "फिर से रिकॉर्ड करें",
   "audioValidationMessage": "ऑडियो रिकॉर्डिंग बहुत छोटी है। कृपया फिर से रिकॉर्ड करें",
   "remainingAudioTextDurationWarning": "रिकॉर्डिंग {{remainingSec}} सेकंड के बाद अपने आप बंद हो जाएगी",
-  "incorrect": "सही नहीं"
+  "incorrect": "सही नहीं",
+  "hurtingStatement": "धर्म, समुदाय की भावनाओं को ठेस पहुँचाने वाला या अपमानजनक कॉन्टेंट",
+  "hatefulPolitical": "नफ़रत फ़ैलाने वाली राजनीतिक सोच, नफ़रत बढ़ाने वाले बयान आदि",
+  "herseyRumors": "सुना सुनाया / अफवाहें, जानबूझकर बताए गए झूठे तथ्य आदि",
+  "languageChangeNotification": "",
+  "proceed": "आगे बढ़ें",
+  "apiFailureError": "एक अनपेक्षित गलती हुई है।",
+  "multipleRequestApiError": "हम इस समय कई अनुरोधों को प्रॉसेस कर रहे हैं। कृपया कुछ समय बाद पुन: प्रयास करें।",
+  "close": "बंद करें",
+  "validationWarningText": "हमें लगता है कि आपके द्वारा एन्टर किया गया टेक्स्ट मूल टेक से मेल नहीं खा रहा, क्या आप अपने संपादन के बारे में निश्चित हैं?"
 }

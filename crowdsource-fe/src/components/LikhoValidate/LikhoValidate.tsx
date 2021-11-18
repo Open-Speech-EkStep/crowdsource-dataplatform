@@ -263,7 +263,7 @@ const LikhoValidate = () => {
                       id="originalText"
                       isTextareaDisabled={false}
                       language={contributionLanguage ?? ''}
-                      initiative={INITIATIVES_MAPPING.likho}
+                      initiative={INITIATIVES_MEDIA_MAPPING.likho}
                       setTextValue={() => {}}
                       textValue={showUIData?.sentence}
                       roundedLeft
@@ -277,7 +277,7 @@ const LikhoValidate = () => {
                       id="editText"
                       isTextareaDisabled={false}
                       language={translatedLanguage ?? ''}
-                      initiative={INITIATIVES_MAPPING.likho}
+                      initiative={INITIATIVES_MEDIA_MAPPING.likho}
                       setTextValue={onChangeTextInput}
                       textValue={showUIData?.contribution}
                       roundedRight
@@ -295,7 +295,7 @@ const LikhoValidate = () => {
                       id="addText"
                       isTextareaDisabled={false}
                       language={translatedLanguage ?? ''}
-                      initiative={INITIATIVES_MAPPING.likho}
+                      initiative={INITIATIVES_MEDIA_MAPPING.likho}
                       setTextValue={onChangeTextInput}
                       textValue={showUIData?.contribution}
                       label={`${t('yourEdit')}${

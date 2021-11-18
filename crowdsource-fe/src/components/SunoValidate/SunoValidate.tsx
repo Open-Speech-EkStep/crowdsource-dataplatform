@@ -10,10 +10,10 @@ import Spinner from 'react-bootstrap/Spinner';
 import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
+import EditTextBlock from 'components/EditTextBlock';
 import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
-import TextEditArea from 'components/TextEditArea';
 import apiPaths from 'constants/apiPaths';
 import {
   INITIATIVE_ACTIONS,
@@ -69,6 +69,7 @@ const SunoValidate = () => {
     contribution: '',
     dataset_row_id: '0',
     contribution_id: '0',
+    auto_validate: false,
   });
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
@@ -145,7 +146,7 @@ const SunoValidate = () => {
     onPlayAudio();
   };
 
-  const onChangeTextInput = (text: string) => {
+  const updateFormInput = (text: string) => {
     setFormDataStore({
       ...formDataStore,
       userInput: text,
@@ -297,36 +298,19 @@ const SunoValidate = () => {
                 />
                 {showEditTextArea ? (
                   <div className="d-md-flex mt-9 mt-md-12">
-                    <div className="flex-fill">
-                      <TextEditArea
-                        id="originalText"
-                        isTextareaDisabled={false}
-                        language={contributionLanguage ?? ''}
-                        initiative={INITIATIVES_MAPPING.suno}
-                        setTextValue={() => {}}
-                        textValue={showUIData?.contribution}
-                        roundedLeft
-                        readOnly
-                        label={t('originalText')}
-                        onError={() => {}}
-                      />
-                    </div>
-                    <div className="flex-fill">
-                      <TextEditArea
-                        id="editText"
-                        isTextareaDisabled={false}
-                        language={contributionLanguage ?? ''}
-                        initiative={INITIATIVES_MAPPING.suno}
-                        setTextValue={onChangeTextInput}
-                        textValue={showUIData?.contribution}
-                        roundedRight
-                        label={`${t('yourEdit')}${
-                          contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                        }`}
-                        onError={setHasError}
-                        showTip
-                      />
-                    </div>
+                    <EditTextBlock
+                      initiative={INITIATIVES_MEDIA_MAPPING.suno}
+                      fromLanguage={contributionLanguage}
+                      toLanguage={contributionLanguage}
+                      text={showUIData?.contribution}
+                      leftTextAreaLabel={t('originalText')}
+                      rightTextAreaLabel={`${t('yourEdit')}${
+                        contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                      }`}
+                      setHasError={setHasError}
+                      updateText={updateFormInput}
+                      validate={showUIData?.auto_validate}
+                    />
                   </div>
                 ) : (
                   <div

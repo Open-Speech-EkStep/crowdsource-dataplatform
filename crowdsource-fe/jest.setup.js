@@ -45,6 +45,7 @@ global.CROWDSOURCE_FE_NODE_CONFIG = {
     feedbackTopComponent: false,
     contextRoot: '',
     enabled_languages: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+    autoValidation: true,
     enabledPages: {},
   },
 };

@@ -9,6 +9,7 @@ import Keyboard from 'react-simple-keyboard';
 
 import Button from 'components/Button';
 import { KeyboardLanguageLayout } from 'constants/Keyboard';
+import type { InitiativeType } from 'types/InitiativeType';
 import { findInputError } from 'utils/utils';
 
 import styles from './TextEditArea.module.scss';
@@ -19,7 +20,7 @@ import 'react-simple-keyboard/build/css/index.css';
 interface TextEditAreaProps {
   id: string;
   language: string;
-  initiative: string;
+  initiative: InitiativeType;
   setTextValue: (value: string) => void;
   textValue?: string;
   isTextareaDisabled: boolean;
@@ -32,6 +33,7 @@ interface TextEditAreaProps {
   showTip?: boolean;
   closeKeyboard?: boolean;
   readonlyAllBorders?: boolean;
+  validationError?: { errorTextKey: string };
 }
 
 const TextEditArea = ({
@@ -50,6 +52,7 @@ const TextEditArea = ({
   showTip = false,
   closeKeyboard,
   readonlyAllBorders = false,
+  validationError,
 }: TextEditAreaProps) => {
   const { t } = useTranslation();
   const [input, setInput] = useState(textValue);
@@ -86,27 +89,32 @@ const TextEditArea = ({
     setShowKeyboard(false);
   }, [closeKeyboard]);
 
+  const toggleError = (state: boolean) => {
+    setShowError(state);
+    onError(state);
+  };
+
+  const handleError = (input: string) => {
+    const error = findInputError(input, initiative, language);
+    if (error) {
+      setErrorMessage(t(error.errorTextKey));
+      toggleError(true);
+    } else if (validationError) {
+      setErrorMessage(t(validationError.errorTextKey));
+      setShowError(true);
+      onError(false);
+    } else toggleError(false);
+  };
+
+  useEffect(() => {
+    handleError(input || '');
+  }, [input]);
+
   const onChange = (input: any) => {
     setIsUsingPhysicalKeyboard(false);
     setTextValue(input);
     setInput(input);
-    const error = findInputError(input, initiative, language);
-    handleError(error);
-  };
-
-  const handleError = (error: any) => {
-    if (error && error.type === 'language') {
-      setShowError(true);
-      onError(true);
-      setErrorMessage(t('typeInChosenLanguage'));
-    } else if (error && error.type === 'symbol') {
-      setShowError(true);
-      setErrorMessage(t('specialCharacters'));
-      onError(true);
-    } else {
-      setShowError(false);
-      onError(false);
-    }
+    handleError(input);
   };
 
   const onKeyPress = (button: any) => {
@@ -120,8 +128,7 @@ const TextEditArea = ({
   const onChangeInput = (event: any) => {
     setIsUsingPhysicalKeyboard(true);
     const input = event.target.value;
-    const error = findInputError(input, initiative, language);
-    handleError(error);
+    handleError(input);
     setTextValue(input);
     setInput(input);
     keyboard && keyboard.current && keyboard.current.setInput(input);

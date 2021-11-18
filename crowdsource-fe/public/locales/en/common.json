@@ -388,5 +388,6 @@
   "proceed": "Proceed",
   "apiFailureError": "An unexpected error has occurred.",
   "multipleRequestApiError": "We are processing multiple requests at the moment. Please try again after sometime.",
-  "close": "Close"
+  "close": "Close",
+  "validationWarningText": "We feel the text you entered doesn't match the original text, are you sure about your edit?"
 }

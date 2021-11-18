@@ -8,7 +8,7 @@ describe('TextEditArea English', () => {
       <TextEditArea
         id="textarea"
         language={contributionLanguage}
-        initiative="suno"
+        initiative="asr"
         setTextValue={value => value}
         isTextareaDisabled={false}
         label={`addText (${contributionLanguage})`}
@@ -119,7 +119,7 @@ describe('TextEditArea Hindi', () => {
       <TextEditArea
         id="textarea"
         language={contributionLanguage}
-        initiative="suno"
+        initiative="asr"
         setTextValue={value => value}
         isTextareaDisabled={false}
         label={`addText (${contributionLanguage})`}

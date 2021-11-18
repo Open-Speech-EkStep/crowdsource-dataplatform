@@ -213,7 +213,7 @@ const LikhoTranslate = () => {
                         id="originalText"
                         isTextareaDisabled={false}
                         language={contributionLanguage ?? ''}
-                        initiative={INITIATIVES_MAPPING.suno}
+                        initiative={INITIATIVES_MEDIA_MAPPING.likho}
                         setTextValue={() => {}}
                         textValue={showUIData?.media_data}
                         roundedLeft
@@ -227,7 +227,7 @@ const LikhoTranslate = () => {
                         id="editText"
                         isTextareaDisabled={false}
                         language={translatedLanguage ?? ''}
-                        initiative={INITIATIVES_MAPPING.suno}
+                        initiative={INITIATIVES_MEDIA_MAPPING.likho}
                         setTextValue={onChangeTextInput}
                         closeKeyboard={closeKeyboard}
                         textValue={formData.userInput}
