@@ -23,8 +23,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const [remainingSec, setRemainingSec] = useState(5);
 
   const [speakerText, setSpeakerText] = useState('testSpeakers');
-
-  const [noiseMessage, setNoiseMessage] = useState('Low/No Background Noise');
+  const [showPlayingbackAudio, setShowPlayingbackAudio] = useState(false);
+  const [noiseMessage, setNoiseMessage] = useState(false);
 
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
@@ -147,7 +147,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   };
   /* istanbul ignore next */
   const showAmbientNoise = (noiseData: any) => {
-    setNoiseMessage(noiseData);
+    setNoiseMessage(noiseData.ambient_noise);
   };
   /* istanbul ignore next */
   const ambienceNoiseCheck = async (audioBlob: any) => {
@@ -167,6 +167,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const getMediaRecorder = () => {
     let max_level_L = 0;
     let old_level_L = 0;
+    let audioContext: any;
+    let cnvs_cntxt: any;
+    let cnvs: any;
+    let instant_L: any;
     const start = () => {
       let constraints = {
         audio: true,
@@ -176,14 +180,14 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         .then(function (stream) {
           // startRecordingTimer();
           const AudioContext = window.AudioContext;
-          const audioContext = new AudioContext();
+          audioContext = new AudioContext();
           sampleRate = audioContext.sampleRate;
           microphone = audioContext.createMediaStreamSource(stream);
           javascriptNode = audioContext.createScriptProcessor(1024, 1, 1);
           microphone.connect(javascriptNode);
           javascriptNode.connect(audioContext.destination);
-          const cnvs: any = document.getElementById('audio-canvas');
-          const cnvs_cntxt = cnvs?.getContext('2d');
+          cnvs = document.getElementById('audio-canvas');
+          cnvs_cntxt = cnvs?.getContext('2d');
           javascriptNode.onaudioprocess = function (event: any) {
             let inpt_L = event.inputBuffer.getChannelData(0);
             recordingLength += 1024;
@@ -192,7 +196,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
             for (let i = 0; i < inpt_L.length; ++i) {
               sum_L += inpt_L[i] * inpt_L[i];
             }
-            let instant_L = Math.sqrt(sum_L / inpt_L.length);
+            instant_L = Math.sqrt(sum_L / inpt_L.length);
             max_level_L = Math.max(max_level_L, instant_L);
             instant_L = Math.max(instant_L, old_level_L - 0.008);
             old_level_L = instant_L;
@@ -219,7 +223,13 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         micAudio.onloadedmetadata = function () {
           const audioDuration = Math.ceil(micAudio.duration * 1000);
           setTimeout(() => {
-            // resetMicButton();
+            setShowTestMicText(true);
+            setShowPlayingbackAudio(false);
+            if (audioContext) {
+              audioContext.close();
+              audioContext = undefined;
+            }
+            cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
           }, audioDuration);
         };
         const play = () => {
@@ -263,8 +273,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     setShowTestMicText(false);
     setRecordingCount(4);
     setTimeout(() => {
+      setShowPlayingbackAudio(true);
       const audio = media.stop();
-      setShowTestMicText(true);
       audio?.play();
     }, 5000);
   };
@@ -308,8 +318,11 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
               >
                 <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
                 {showTestMicText && <span className="d-flex ms-2">Test Mic</span>}
-                {!showTestMicText && (
+                {!showTestMicText && !showPlayingbackAudio && (
                   <span className="d-flex ms-2">Recording for {remainingSec} seconds</span>
+                )}
+                {!showTestMicText && showPlayingbackAudio && (
+                  <span className="d-flex ms-2">Playingback Audio</span>
                 )}
               </Button>
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">
@@ -325,7 +338,14 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 <div
                   className={`${styles.text} d-flex align-items-center mt-1 mt-md-0 justify-content-center justify-content-md-start`}
                 >
-                  {noiseMessage && <span> {noiseMessage} </span>}
+                  {showPlayingbackAudio && (
+                    <span>
+                      {noiseMessage && showPlayingbackAudio
+                        ? 'Background Noise Detected'
+                        : 'Low/No Background Noise'}
+                    </span>
+                  )}
+                  <span>{!showTestMicText && !showPlayingbackAudio && 'Please speak clearly'}</span>
                 </div>
               </div>
             </div>
