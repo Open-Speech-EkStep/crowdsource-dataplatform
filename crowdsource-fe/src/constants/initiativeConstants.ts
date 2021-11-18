@@ -23,6 +23,13 @@ export const INITIATIVES_MEDIA_MAPPING = {
   [INITIATIVES_MAPPING.dekho]: 'ocr',
 } as const;
 
+export const INITIATIVES_REVERSE_MEDIA_MAPPING = {
+  [INITIATIVES_MEDIA.asr]: 'suno',
+  [INITIATIVES_MEDIA.text]: 'bolo',
+  [INITIATIVES_MEDIA.parallel]: 'likho',
+  [INITIATIVES_MEDIA.ocr]: 'dekho',
+} as const;
+
 export const INITIATIVES_MEDIA_TYPE_MAPPING = {
   [INITIATIVES_MEDIA_MAPPING.suno]: 'Sentences',
   [INITIATIVES_MEDIA_MAPPING.bolo]: 'Sentences',

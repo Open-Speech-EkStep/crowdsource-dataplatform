@@ -318,7 +318,7 @@ exports[`ThankYou should render the component and matches it against stored snap
         </div>
         <a
           class="text mt-4 mt-md-0 display-5 ms-md-3 flex-shrink-0"
-          href="/badges"
+          href="/badges?initiative=asr&language=English&source=contribute"
         >
           <b>
             knowMore

@@ -19,7 +19,6 @@ import { ErrorStatusCode } from 'constants/errorStatusCode';
 import { INITIATIVES } from 'constants/initiativeConstants';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
-import sessionStorageConstants from 'constants/sessionStorageConstants';
 import { useFetchWithInit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
 import { fetchLocationInfo } from 'utils/utils';
@@ -66,13 +65,6 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
     }
   }, [mutate]);
 
-  useEffect(() => storePathValues(router.asPath), [router.asPath]);
-  function storePathValues(currentUrl: string) {
-    const prevPath = sessionStorage.getItem(sessionStorageConstants.currentPath) || '';
-
-    sessionStorage.setItem(sessionStorageConstants.prevPath, prevPath);
-    sessionStorage.setItem(sessionStorageConstants.currentPath, currentUrl);
-  }
   /* istanbul ignore next */
   const closeModal = () => {
     setShowModal(false);

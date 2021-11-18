@@ -6,7 +6,9 @@
   background-color: var(--text-white);
   flex-wrap: nowrap;
   height: 4rem;
+  -ms-overflow-style: none; /* IE and Edge */
   overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
 
   li {
     flex: 1;
