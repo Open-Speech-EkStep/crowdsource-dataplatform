@@ -39,6 +39,9 @@ const mockDB = {
     oneOrNone: jest.fn(() => Promise.resolve()),
     result: jest.fn(() => Promise.resolve()),
 }
+jest.mock('config', () => ({
+    "autoValidation": "disabled",
+}));
 
 const mockpgPromise = jest.fn(() => mockpgp)
 
