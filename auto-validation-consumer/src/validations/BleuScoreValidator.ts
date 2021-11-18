@@ -9,6 +9,6 @@ export class BleuScore implements Validator {
     validate(language: string, ref: string, hyp: string): boolean {
         let bleuScore = scoreSegment(hyp, ref)
         console.log(bleuScore)
-        return bleuScore >= (LANGUAGE_CONFIG_PARALLEL[language] || 1)
+        return bleuScore >= (LANGUAGE_CONFIG_PARALLEL[language] || -1)
     }
 }

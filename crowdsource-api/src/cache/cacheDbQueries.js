@@ -49,7 +49,7 @@ count(distinct val.validation_id) as validation_count, con.is_system auto_valida
 	inner join configurations conf on conf.config_name='validation_count' 
   inner join configurations conf2 on conf2.config_name='include_profane' 
   inner join configurations conf3 on conf3.config_name='show_demo_data'
-    where  con.action='completed' and ds.media->>'language'=$2
+    where  con.action='completed' and con.allow_validation=true and ds.media->>'language'=$2
     and coalesce(mds.is_active, true) = true
     and (conf2.value=1 or is_profane=false)
     and (conf3.value=0 or for_demo=true)
@@ -71,7 +71,7 @@ count(distinct val.validation_id) validation_count, con.is_system auto_validate
   inner join configurations conf on conf.config_name='validation_count' 
   inner join configurations conf2 on conf2.config_name='include_profane' 
   inner join configurations conf3 on conf3.config_name='show_demo_data'
-  where  con.action='completed' and ds.media->>'language'=$2
+  where  con.action='completed' and con.allow_validation=true and ds.media->>'language'=$2
   and coalesce(mds.is_active, true) = true
   and (conf2.value=1 or is_profane=false) 
   and (conf3.value=0 or for_demo=true)
