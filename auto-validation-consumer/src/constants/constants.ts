@@ -30,11 +30,11 @@ export const LANGUAGE_CONFIG_OCR: KeyValue = {
     'Hindi': 0.90,
     'Bengali': 0.70,
     'English': 0.90,
-    'Assamese': 60,
-    'Gujarati': 60,
-    'Punjabi': 60,
-    'Marathi': 60,
-    'Odia': 60
+    'Assamese': 0.60,
+    'Gujarati': 0.60,
+    'Punjabi': 0.60,
+    'Marathi': 0.60,
+    'Odia': 0.60
 }
 
 export const LANGUAGE_CONFIG_PARALLEL: KeyValue = {
