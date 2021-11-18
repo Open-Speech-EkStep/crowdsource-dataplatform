@@ -94,6 +94,16 @@ spec:
                 secretKeyRef:
                   name: vakyansh-secret
                   key: REDISCACHEKEY
+            - name: BROKER_URL                                                                                                                                                                                                                 │
+              valueFrom:                                                                                                                                                                                                                       │
+                secretKeyRef:                                                                                                                                                                                                                  │
+                  key: BROKER_URL                                                                                                                                                                                                              │
+                  name: vakyansh-secret                                                                                                                                                                                                        │
+            - name: TOPIC                                                                                                                                                                                                                      │
+              valueFrom:                                                                                                                                                                                                                       │
+                secretKeyRef:                                                                                                                                                                                                                  │
+                  key: TOPIC                                                                                                                                                                                                                   │
+                  name: vakyansh-secret
           ports:
             - containerPort: 8080
 
