@@ -38,13 +38,17 @@ function showAndHideEditError(inputTextLength, error, callback1 = () => {}, call
   } else if (error && error.type == 'auto-validation') {
     const isAudioPlayed = flow ? localStorage.getItem(flow) : 'false';
     if (currentModule == INITIATIVES.asr.value) {
-      if (isAudioPlayed == 'true') {
+      if (isAudioPlayed == 'true' && inputTextLength > 2) {
         $submitEditButton.removeAttr('disabled');
       } else {
         $submitEditButton.attr('disabled', true);
       }
     } else {
-      $submitEditButton.removeAttr('disabled');
+      if (inputTextLength > 2) {
+        $submitEditButton.removeAttr('disabled');
+      } else {
+        $submitEditButton.attr('disabled', true);
+      }
     }
     const $editErrorText = $('#edit-error-text');
     if ($cancelButton) {
