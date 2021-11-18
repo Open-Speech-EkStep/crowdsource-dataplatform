@@ -154,7 +154,6 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     const init = {
       body: fd,
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
     };
     const response = await fetch('/audio/snr', init);
     // Extract json
