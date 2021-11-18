@@ -78,10 +78,7 @@ const BoloSpeak = () => {
   let mediaRecorder: any;
   let chunks: any = [];
 
-  const { submit } = useSubmit(apiPaths.store, {
-    method: 'POST',
-    headers: { 'Content-Type': 'multipart/form-data;boundary=something1232423' },
-  });
+  const { submit } = useSubmit(apiPaths.store, false);
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
   const { submit: submitSkip } = useSubmit(apiPaths.skip);

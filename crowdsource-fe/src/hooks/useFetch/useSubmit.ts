@@ -1,9 +1,6 @@
 import { useCallback, useState } from 'react';
 
-const useSubmit = <Data = any, Error = any>(
-  key: string,
-  { method = 'POST', headers = { 'Content-Type': 'application/json' } } = {}
-) => {
+const useSubmit = <Data = any, Error = any>(key: string, withHeaders: boolean = true) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<Data>();
   const [error, setError] = useState<Error>();
@@ -14,11 +11,11 @@ const useSubmit = <Data = any, Error = any>(
         setIsLoading(true);
 
         const res = await fetch(key, {
-          method,
+          method: 'POST',
           credentials: 'include',
           mode: 'cors',
           body,
-          headers,
+          headers: withHeaders ? { 'Content-type': 'application/json' } : undefined,
         });
 
         setIsLoading(false);
@@ -30,7 +27,7 @@ const useSubmit = <Data = any, Error = any>(
         setError(err);
       }
     },
-    [key, method, headers]
+    [key, withHeaders]
   );
 
   return {
