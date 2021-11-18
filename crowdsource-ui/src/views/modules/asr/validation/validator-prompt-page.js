@@ -155,8 +155,10 @@ const setAudioPlayer = function () {
     showElement(textReplay);
     localStorage.setItem('validation_audioPlayed', true);
     const previousActiveError = $('#edit-error-text .error-active');
-    if ($('#edit').val() && !previousActiveError[0]) {
-      $submitButton.removeAttr('disabled');
+    if ($('#edit').val()) {
+      if (!previousActiveError[0] || previousActiveError[0].id === 'edit-auto-validation-error') {
+        $submitButton.removeAttr('disabled');
+      }
     }
   });
 
