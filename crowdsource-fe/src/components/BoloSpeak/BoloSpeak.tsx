@@ -43,7 +43,9 @@ const BoloSpeak = () => {
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
-
+  const [lastSpeakerDetail, setLastSpeakerDetails] = useLocalStorage<SpeakerDetails | null>(
+    localStorageConstants.lastSpeakerDetails
+  );
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const [showPlayButton] = useState(false);
@@ -52,6 +54,7 @@ const BoloSpeak = () => {
   const [showStopRecording, setShowStopRecording] = useState(false);
   const [showReRecording, setShowReRecording] = useState(false);
   const [showWarningmsg, setShowWarningMsg] = useState(false);
+  const [showQuickTips, setShowQuickTips] = useState(false);
   const [showAudioController, setShowAudioController] = useState(false);
   const [audioError, setShowAudioError] = useState(false);
   const [contributionData, setContributionData] = useState([]);
@@ -122,6 +125,15 @@ const BoloSpeak = () => {
       setShowErrorModal(true);
     }
   }, [skipError, submitError, error]);
+
+  useEffect(() => {
+    if (result && result.data) {
+      if (lastSpeakerDetail?.userName !== speakerDetails?.userName) {
+        setShowQuickTips(true);
+      }
+      setLastSpeakerDetails(speakerDetails);
+    }
+  }, [result, lastSpeakerDetail, speakerDetails, setLastSpeakerDetails]);
 
   useEffect(() => {
     if (result && result.data) {
@@ -336,7 +348,7 @@ const BoloSpeak = () => {
     <Fragment>
       {contributionData && result?.data?.length !== 0 ? (
         <Fragment>
-          <QuickTips showQuickTips={true} />
+          <QuickTips showQuickTips={showQuickTips} />
           <div className="pt-4 px-2 px-lg-0 pb-8">
             <FunctionalHeader
               onSuccess={onSkipContribution}
