@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -43,6 +44,7 @@ const BoloValidate = () => {
 
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
+  const [startAudioPlayer, setStartAudioPlayer] = useState(false);
   const [incorrectDisable, setIncorrectDisable] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
@@ -62,6 +64,7 @@ const BoloValidate = () => {
   const mediaElementSrc: any = useRef();
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
+  const waveVisualizer: any = useRef();
 
   const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
@@ -136,7 +139,9 @@ const BoloValidate = () => {
   };
 
   const resetState = () => {
+    waveVisualizer?.current?.classList.add('d-none');
     setShowPauseButton(false);
+    setStartAudioPlayer(false);
     setShowPlayButton(true);
     setShowReplayButton(false);
     setCorrectDisable(true);
@@ -144,6 +149,8 @@ const BoloValidate = () => {
   };
 
   const onPlayAudio = () => {
+    waveVisualizer?.current?.classList.remove('d-none');
+    setStartAudioPlayer(true);
     setShowReplayButton(false);
     setShowPauseButton(true);
     setShowPlayButton(false);
@@ -235,25 +242,31 @@ const BoloValidate = () => {
                 >
                   {showUIData?.sentence}
                 </div>
-                <div className="d-none d-flex flex-column align-items-center text-center">
-                  <div className="mt-2 mt-md-3">
-                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                    <audio
-                      ref={audioEl}
-                      data-testid="boloValidateAudioElement"
-                      controls
-                      className="d-flex shadow-grey rounded-24"
-                      tabIndex={-1}
-                      src={`${nodeConfig.cdnUrl}/${showUIData?.contribution}`}
-                      controlsList="nodownload"
-                      crossOrigin="anonymous"
-                    ></audio>
+                <div className={`${styles.audioWrapper} d-flex flex-column justify-content-center`}>
+                  <div className="d-none d-flex flex-column align-items-center text-center">
+                    <div className="mt-2 mt-md-3">
+                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                      <audio
+                        ref={audioEl}
+                        data-testid="boloValidateAudioElement"
+                        controls
+                        className="d-flex shadow-grey rounded-24"
+                        tabIndex={-1}
+                        src={`${nodeConfig.cdnUrl}/${showUIData?.contribution}`}
+                        controlsList="nodownload"
+                        crossOrigin="anonymous"
+                      ></audio>
+                    </div>
                   </div>
-                </div>
-                <div
-                  className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
-                >
-                  <canvas id="visualizer"></canvas>
+                  <div ref={waveVisualizer} className={`d-flex d-none align-items-center`}>
+                    <div
+                      className={`${styles.mic} d-flex justify-content-center align-items-center rounded-50 bg-danger`}
+                    >
+                      <Image src="/images/mic_white.svg" width="40" height="40" alt="Mic Icon" />
+                    </div>
+                    <canvas id="visualizer" className={`${styles.visualizer} ms-5 flex-fill`} />
+                  </div>
+                  {!startAudioPlayer && <span className={`${styles.audioLine} d-flex w-100`} />}
                 </div>
                 <div className="mt-12 mt-md-14">
                   <ButtonControls

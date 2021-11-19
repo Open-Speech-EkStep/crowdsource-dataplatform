@@ -5,3 +5,20 @@
 .progress {
   height: 0.625rem;
 }
+
+.audioWrapper,
+.visualizer {
+  height: 7.5rem;
+}
+
+.mic {
+  box-shadow: 0 0 15px 2px #bdc3c7;
+  height: 4rem;
+  width: 4rem;
+}
+
+.audioLine {
+  background-color: var(--link-color);
+  border-radius: 2px;
+  height: 5px;
+}
