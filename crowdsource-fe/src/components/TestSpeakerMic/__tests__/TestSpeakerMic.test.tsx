@@ -55,4 +55,25 @@ describe('TestSpeakerMic', () => {
       expect(screen.queryByTestId('speakerbtn')).not.toBeInTheDocument();
     });
   });
+
+  it('should test the mic', async () => {
+    setup(true, true);
+    userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker test testYourSpeaker' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('testMicButton')).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByRole('button', { name: 'Mic Icon testMic' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('recordingButton')).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: 'Mic' })).not.toBeInTheDocument();
+    });
+  });
 });

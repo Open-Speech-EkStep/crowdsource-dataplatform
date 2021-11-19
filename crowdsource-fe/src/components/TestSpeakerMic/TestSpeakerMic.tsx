@@ -326,20 +326,22 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
             <div className="d-md-flex flex-column flex-md-row align-items-center py-3">
               {showTestMicText && (
                 <Button
+                  data-testid="testMicButton"
                   variant="normal"
                   onClick={onAudioTest}
                   className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
-                  <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  <Image src="/images/mic.svg" width="24" height="24" alt="Mic Icon" />
                   <span className="d-flex ms-2">{t('testMic')}</span>
                 </Button>
               )}
               {!showTestMicText && !showPlayingbackAudio && (
                 <Button
                   variant="normal"
+                  data-testid="recordingButton"
                   className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
-                  <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  <Image src="/images/mic.svg" width="24" height="24" alt="Recording Icon" />
                   <span className="d-flex ms-2">
                     <Trans
                       i18nKey="recordingCountValidationMsg"
