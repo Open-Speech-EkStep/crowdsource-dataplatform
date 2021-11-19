@@ -57,13 +57,22 @@ describe('BoloSpeak', () => {
       toLanguage: '',
     };
 
+    const lastSpeakerDetails = {
+      userName: 'abc1',
+      motherTongue: '',
+      age: '',
+      gender: '',
+      language: 'Hindi',
+      toLanguage: '',
+    };
+
     when(localStorage.getItem)
       .calledWith('speakerDetails')
       .mockImplementation(() => JSON.stringify(speakerDetails));
 
     when(localStorage.getItem)
       .calledWith('lastSpeakerDetails')
-      .mockImplementation(() => JSON.stringify(speakerDetails));
+      .mockImplementation(() => JSON.stringify(lastSpeakerDetails));
 
     fetchMock.doMockOnceIf('/media/text').mockResponseOnce(JSON.stringify(resultData));
     const renderResult = render(<BoloSpeak />);
