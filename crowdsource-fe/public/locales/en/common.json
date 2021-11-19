@@ -395,5 +395,11 @@
   "speakClearly": "Please speak clearly",
   "recordingCountValidationMsg": "Recording for {{remainingSec}} seconds",
   "backgroundNoise": "Background Noise Detected",
-  "lowBackgroundNoise": "Low/No Background Noise"
+  "lowBackgroundNoise": "Low/No Background Noise",
+  "quickTips": "Quick Tips",
+  "tipOne": "Please test your Microphone",
+  "tipTwo": "Please test your Speakers",
+  "tipThree": "Ensure there is no background noise",
+  "tipFour": "Read once before recording it",
+  "tipFive": "Get started by clicking on Record button"
 }

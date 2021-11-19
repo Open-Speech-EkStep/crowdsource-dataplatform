@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuickTips should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root position-relative d-flex flex-column flex-xl-row px-5 py-2 text-light mx-3 mx-md-6 mt-3 mt-md-6"
+    data-testid="QuickTips"
+  >
+    <button
+      class="close d-flex position-absolute bg-dark rounded-50 p-1 border border-1 border-primary-40 info normal btn btn-link"
+      data-testid="Button"
+      type="button"
+    >
+      <div
+        style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+      >
+        <div
+          style="box-sizing: border-box; display: block; max-width: 100%;"
+        >
+          <img
+            alt=""
+            aria-hidden="true"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+            style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+          />
+        </div>
+        <img
+          alt="Close"
+          data-nimg="intrinsic"
+          decoding="async"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+        />
+        <noscript />
+      </div>
+    </button>
+    <div
+      class="label rounded-4 d-flex flex-xl-column justify-content-center align-items-center display-6 flex-shrink-0 my-3 py-3 py-xl-0"
+    >
+      <div
+        style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+      >
+        <div
+          style="box-sizing: border-box; display: block; max-width: 100%;"
+        >
+          <img
+            alt=""
+            aria-hidden="true"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+            style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+          />
+        </div>
+        <img
+          alt="Microphone Icon"
+          class="labelIcon flex-shrink-0"
+          data-nimg="intrinsic"
+          decoding="async"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+        />
+        <noscript />
+      </div>
+      <span
+        class="mt-lg-2 ms-3 ms-xl-0"
+      >
+        quickTips
+      </span>
+    </div>
+    <div
+      class="d-flex display-6 flex-fill flex-wrap px-xl-9 justify-content-start"
+    >
+      <div
+        class="tip d-flex flex-shrink-0 flex-column align-items-center text-center my-3"
+      >
+        <div
+          class="icon d-flex justify-content-center align-items-center rounded-50"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Microphone Icon"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <span
+          class="mt-2"
+        >
+          tipOne
+        </span>
+      </div>
+      <span
+        class="sep flex-fill mt-9"
+      />
+      <div
+        class="tip d-flex flex-shrink-0 flex-column align-items-center text-center my-3"
+      >
+        <div
+          class="icon d-flex justify-content-center align-items-center rounded-50"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Speaker Icon"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <span
+          class="mt-2"
+        >
+          tipTwo
+        </span>
+      </div>
+      <span
+        class="sep flex-fill mt-9"
+      />
+      <div
+        class="tip d-flex flex-shrink-0 flex-column align-items-center text-center my-3"
+      >
+        <div
+          class="icon d-flex justify-content-center align-items-center rounded-50"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Equalizer Icon"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <span
+          class="mt-2"
+        >
+          tipThree
+        </span>
+      </div>
+      <span
+        class="sep flex-fill mt-9"
+      />
+      <div
+        class="tip d-flex flex-shrink-0 flex-column align-items-center text-center my-3"
+      >
+        <div
+          class="icon d-flex justify-content-center align-items-center rounded-50"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Record Voice Icon"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <span
+          class="mt-2"
+        >
+          tipFour
+        </span>
+      </div>
+      <span
+        class="sep flex-fill mt-9"
+      />
+      <div
+        class="tip d-flex flex-shrink-0 flex-column align-items-center text-center my-3"
+      >
+        <div
+          class="icon d-flex justify-content-center align-items-center rounded-50"
+        >
+          <div
+            style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+          >
+            <div
+              style="box-sizing: border-box; display: block; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+                style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+              />
+            </div>
+            <img
+              alt="Play Icon"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </div>
+        </div>
+        <span
+          class="mt-2"
+        >
+          tipFive
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

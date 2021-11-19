@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import getBlobDuration from 'get-blob-duration';
 import { Trans, useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -27,6 +28,8 @@ import type { ActionStoreBoloInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import { getBrowserInfo, getDeviceInfo, getErrorMsg, visualize } from 'utils/utils';
+
+import QuickTips from '../QuickTips';
 
 import styles from './BoloSpeak.module.scss';
 
@@ -333,6 +336,7 @@ const BoloSpeak = () => {
     <Fragment>
       {contributionData && result?.data?.length !== 0 ? (
         <Fragment>
+          <QuickTips showQuickTips={true} />
           <div className="pt-4 px-2 px-lg-0 pb-8">
             <FunctionalHeader
               onSuccess={onSkipContribution}
@@ -348,11 +352,11 @@ const BoloSpeak = () => {
                 >
                   {showUIData?.media_data}
                 </div>
-                <div
-                  ref={audioController}
-                  className="d-flex d-none flex-column align-items-center text-center"
-                >
-                  <div className="mt-2 mt-md-3">
+                <div className={`${styles.audioWrapper} d-flex flex-column justify-content-center`}>
+                  <div
+                    ref={audioController}
+                    className="position-relative d-flex d-none flex-column align-items-center text-center pb-8"
+                  >
                     {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                     <audio
                       ref={audioEl}
@@ -362,22 +366,26 @@ const BoloSpeak = () => {
                       tabIndex={-1}
                       src={recordedAudio}
                     ></audio>
+                    {audioError && (
+                      <div
+                        className={`${styles.erroMsg} position-absolute d-flex text-danger justify-content-center align-items-center mt-md-2 text-center display-6`}
+                      >
+                        <span> {t('audioValidationMessage')} </span>
+                      </div>
+                    )}
                   </div>
+                  {!showAudioController && !showStartRecording && (
+                    <div className="d-flex align-items-center">
+                      <div
+                        className={`${styles.mic} d-flex justify-content-center align-items-center rounded-50 bg-danger`}
+                      >
+                        <Image src="/images/mic_white.svg" width="40" height="40" alt="Mic Icon" />
+                      </div>
+                      <canvas id="visualizer" className={`${styles.visualizer} ms-5 flex-fill`} />
+                    </div>
+                  )}
+                  {showStartRecording && <span className={`${styles.audioLine} d-flex w-100`} />}
                 </div>
-                {audioError && (
-                  <div
-                    className={`d-flex text-danger justify-content-center align-items-center my-2 mt-md-2 mb-md-10 text-center display-6`}
-                  >
-                    <span> {t('audioValidationMessage')} </span>
-                  </div>
-                )}
-                {!showAudioController && (
-                  <div
-                    className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
-                  >
-                    <canvas id="visualizer"></canvas>
-                  </div>
-                )}
                 {showWarningmsg && (
                   <div
                     className={`d-flex justify-content-center align-items-center my-9 mt-md-9 mb-md-5 text-center display-5`}
