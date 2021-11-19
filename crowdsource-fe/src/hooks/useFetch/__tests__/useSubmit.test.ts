@@ -3,8 +3,8 @@ import { act, renderHook, waitFor } from 'utils/testUtils';
 import useSubmit from '../useSubmit';
 
 describe('#useSubmit', () => {
-  const setup = (url: string) => {
-    const renderHookResult = renderHook(() => useSubmit(url));
+  const setup = (url: string, withHeaders: boolean) => {
+    const renderHookResult = renderHook(() => useSubmit(url, withHeaders));
 
     return renderHookResult;
   };
@@ -15,7 +15,7 @@ describe('#useSubmit', () => {
 
     fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
 
-    const { result } = setup(url);
+    const { result } = setup(url, true);
 
     act(() => {
       result.current.submit();
@@ -32,7 +32,7 @@ describe('#useSubmit', () => {
 
     fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
 
-    const { result } = setup(url);
+    const { result } = setup(url, false);
 
     act(() => {
       result.current.submit();

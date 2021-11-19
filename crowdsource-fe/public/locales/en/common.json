@@ -389,5 +389,11 @@
   "apiFailureError": "An unexpected error has occurred.",
   "multipleRequestApiError": "We are processing multiple requests at the moment. Please try again after sometime.",
   "close": "Close",
-  "validationWarningText": "We feel the text you entered doesn't match the original text, are you sure about your edit?"
+  "validationWarningText": "We feel the text you entered doesn't match the original text, are you sure about your edit?",
+  "testMic": "Test Mic",
+  "playingBackAudio": "Playingback Audio",
+  "speakClearly": "Please speak clearly",
+  "recordingCountValidationMsg": "Recording for {{remainingSec}} seconds",
+  "backgroundNoise": "Background Noise Detected",
+  "lowBackgroundNoise": "Low/No Background Noise"
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { useTranslation } from 'next-i18next';
+import { useTranslation, Trans } from 'next-i18next';
 import Image from 'next/image';
 
 import Button from 'components/Button';
@@ -22,6 +22,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
 
   const [remainingSec, setRemainingSec] = useState(5);
 
+  const [testMicSpeakerInterval, setTestMicSpeakerInterval] = useState<any>();
+
   const [speakerText, setSpeakerText] = useState('testSpeakers');
   const [showPlayingbackAudio, setShowPlayingbackAudio] = useState(false);
   const [noiseMessage, setNoiseMessage] = useState(false);
@@ -31,13 +33,15 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const context: any = useRef<AudioContext>();
   const mediaElementSrc: any = useRef();
   const analyser: any = useRef();
+  const media: any = useRef();
+  const mediaAudio: any = useRef();
+  const micAudio: any = useRef();
 
   let microphone: any = null;
   let javascriptNode: any = null;
   let audioData: any = [];
   let recordingLength = 0;
   let sampleRate = 44100;
-  let micAudio: any;
 
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
@@ -219,9 +223,9 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         ambienceNoiseCheck(audioBlob);
 
         const audioUrl = URL.createObjectURL(audioBlob);
-        micAudio = new Audio(audioUrl);
-        micAudio.onloadedmetadata = function () {
-          const audioDuration = Math.ceil(micAudio.duration * 1000);
+        micAudio.current = new Audio(audioUrl);
+        micAudio.current.onloadedmetadata = function () {
+          const audioDuration = Math.ceil(micAudio.current?.duration * 1000);
           setTimeout(() => {
             setShowTestMicText(true);
             setShowPlayingbackAudio(false);
@@ -233,7 +237,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           }, audioDuration);
         };
         const play = () => {
-          micAudio.play();
+          micAudio.current?.play();
         };
         return {
           audioBlob,
@@ -258,7 +262,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         setRemainingSec(value);
         value--;
         if (value < 0) {
+          setRemainingSec(5);
           clearInterval(interval);
+          mediaAudio.current = media.current?.stop();
+          mediaAudio.current?.play();
         }
       }, 1000);
     }
@@ -268,15 +275,15 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const onAudioTest = () => {
     audioData = [];
     recordingLength = 0;
-    const media = getMediaRecorder();
-    media.start();
+    media.current = getMediaRecorder();
+    media.current.start();
     setShowTestMicText(false);
     setRecordingCount(4);
-    setTimeout(() => {
-      setShowPlayingbackAudio(true);
-      const audio = media.stop();
-      audio?.play();
-    }, 5000);
+    setTestMicSpeakerInterval(
+      setTimeout(() => {
+        setShowPlayingbackAudio(true);
+      }, 5000)
+    );
   };
 
   return (
@@ -293,11 +300,17 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>
           <Button
             onClick={() => {
+              clearTimeout(testMicSpeakerInterval);
               setSpeakerText('testSpeakers');
               setShowMicSpeaker(false);
+              setShowTestMicText(true);
+              setShowPlayingbackAudio(false);
               context.current = null;
               mediaElementSrc.current = null;
               analyser.current = null;
+              media.current = null;
+              mediaAudio.current = null;
+              micAudio.current = null;
             }}
             variant="normal"
             className={`${styles.close} d-flex position-absolute`}
@@ -311,20 +324,42 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           </div>
           {showMic && (
             <div className="d-md-flex flex-column flex-md-row align-items-center py-3">
-              <Button
-                variant="normal"
-                onClick={onAudioTest}
-                className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
-              >
-                <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
-                {showTestMicText && <span className="d-flex ms-2">Test Mic</span>}
-                {!showTestMicText && !showPlayingbackAudio && (
-                  <span className="d-flex ms-2">Recording for {remainingSec} seconds</span>
-                )}
-                {!showTestMicText && showPlayingbackAudio && (
-                  <span className="d-flex ms-2">Playingback Audio</span>
-                )}
-              </Button>
+              {showTestMicText && (
+                <Button
+                  variant="normal"
+                  onClick={onAudioTest}
+                  className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
+                >
+                  <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  <span className="d-flex ms-2">{t('testMic')}</span>
+                </Button>
+              )}
+              {!showTestMicText && !showPlayingbackAudio && (
+                <Button
+                  variant="normal"
+                  className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
+                >
+                  <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  <span className="d-flex ms-2">
+                    <Trans
+                      i18nKey="recordingCountValidationMsg"
+                      defaults="recordingCountValidationMsg"
+                      values={{
+                        remainingSec: remainingSec,
+                      }}
+                    />
+                  </span>
+                </Button>
+              )}
+              {!showTestMicText && showPlayingbackAudio && (
+                <Button
+                  variant="normal"
+                  className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
+                >
+                  <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  <span className="d-flex ms-2">{t('playingBackAudio')}</span>
+                </Button>
+              )}
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">
                 <div
                   className={`${styles.bar} rounded-16 d-flex align-items-center border border-1 border-primary-20 px-1`}
@@ -340,12 +375,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 >
                   {showPlayingbackAudio && (
                     <span>
-                      {noiseMessage && showPlayingbackAudio
-                        ? 'Background Noise Detected'
-                        : 'Low/No Background Noise'}
+                      {noiseMessage && showPlayingbackAudio ? t('backgroundNoise') : t('lowBackgroundNoise')}
                     </span>
                   )}
-                  <span>{!showTestMicText && !showPlayingbackAudio && 'Please speak clearly'}</span>
+                  <span>{!showTestMicText && !showPlayingbackAudio && t('speakClearly')}</span>
                 </div>
               </div>
             </div>
