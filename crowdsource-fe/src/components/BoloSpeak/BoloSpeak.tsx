@@ -8,6 +8,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Spinner from 'react-bootstrap/Spinner';
 
 import ButtonControls from 'components/ButtonControls';
+import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import NoDataFound from 'components/NoDataFound';
 import apiPaths from 'constants/apiPaths';
@@ -25,7 +26,7 @@ import useFetch from 'hooks/usePostFetch';
 import type { ActionStoreBoloInterface } from 'types/ActionRequestData';
 import type { LocationInfo } from 'types/LocationInfo';
 import type SpeakerDetails from 'types/SpeakerDetails';
-import { getBrowserInfo, getDeviceInfo, visualize } from 'utils/utils';
+import { getBrowserInfo, getDeviceInfo, getErrorMsg, visualize } from 'utils/utils';
 
 import styles from './BoloSpeak.module.scss';
 
@@ -78,10 +79,11 @@ const BoloSpeak = () => {
   let mediaRecorder: any;
   let chunks: any = [];
 
-  const { submit } = useSubmit(apiPaths.store, false);
+  const { submit, error: submitError } = useSubmit(apiPaths.store, false);
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
-  const { submit: submitSkip } = useSubmit(apiPaths.skip);
+  const { submit: submitSkip, error: skipError } = useSubmit(apiPaths.skip);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const [formData, setFormData] = useState<ActionStoreBoloInterface>({
     speakerDetails: '',
@@ -96,7 +98,7 @@ const BoloSpeak = () => {
     audio_data: null,
   });
 
-  const { data: result } = useFetch<ResultType>({
+  const { data: result, error } = useFetch<ResultType>({
     url: apiPaths.mediaText,
     init: contributionLanguage
       ? {
@@ -111,6 +113,12 @@ const BoloSpeak = () => {
         }
       : undefined,
   });
+
+  useEffect(() => {
+    if (skipError || submitError || error) {
+      setShowErrorModal(true);
+    }
+  }, [skipError, submitError, error]);
 
   useEffect(() => {
     if (result && result.data) {
@@ -314,108 +322,122 @@ const BoloSpeak = () => {
     );
   };
 
-  if (!result) {
+  if (!result && !error) {
     return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
   }
 
-  return contributionData && result?.data?.length !== 0 ? (
+  return (
     <Fragment>
-      <div className="pt-4 px-2 px-lg-0 pb-8">
-        <FunctionalHeader
-          onSuccess={onSkipContribution}
-          type="contribute"
-          initiative={INITIATIVES_MAPPING.bolo}
-          action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.bolo]['contribute']}
-          showMic={true}
-        />
-        <Container fluid="lg" className="mt-5">
-          <div data-testid="BoloSpeak" className={`${styles.root}`}>
-            <div
-              className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
-            >
-              {showUIData?.media_data}
-            </div>
-            <div ref={audioController} className="d-flex d-none flex-column align-items-center text-center">
-              <div className="mt-2 mt-md-3">
-                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <audio
-                  ref={audioEl}
-                  data-testid="boloAudioElement"
-                  controls
-                  className="d-flex shadow-grey rounded-24"
-                  tabIndex={-1}
-                  src={recordedAudio}
-                ></audio>
-              </div>
-            </div>
-            {audioError && (
-              <div
-                className={`d-flex text-danger justify-content-center align-items-center my-2 mt-md-2 mb-md-10 text-center display-6`}
-              >
-                <span> {t('audioValidationMessage')} </span>
-              </div>
-            )}
-            {!showAudioController && (
-              <div
-                className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
-              >
-                <canvas id="visualizer"></canvas>
-              </div>
-            )}
-            {showWarningmsg && (
-              <div
-                className={`d-flex justify-content-center align-items-center my-9 mt-md-9 mb-md-5 text-center display-5`}
-              >
-                <Trans
-                  i18nKey="remainingAudioTextDurationWarning"
-                  defaults="remainingAudioTextDurationWarning"
-                  values={{
-                    remainingSec: remainingSec,
-                  }}
-                />
-              </div>
-            )}
-            <div className="mt-12 mt-md-14">
-              <ButtonControls
-                playButton={showPlayButton}
-                submitDisable={!recordedAudio || duration < 2}
-                onSubmit={onSubmitContribution}
-                onSkip={onSkipContribution}
-                cancelButton={false}
-                startRecordingButton={showStartRecording}
-                stopRecordingButton={showStopRecording}
-                reRecordButton={showReRecording}
-                onStart={onStartRecording}
-                onStop={onStopRecording}
-                onRerecord={onRerecord}
-              />
-            </div>
+      {contributionData && result?.data?.length !== 0 ? (
+        <Fragment>
+          <div className="pt-4 px-2 px-lg-0 pb-8">
+            <FunctionalHeader
+              onSuccess={onSkipContribution}
+              type="contribute"
+              initiative={INITIATIVES_MAPPING.bolo}
+              action={INITIATIVE_ACTIONS[INITIATIVES_MAPPING.bolo]['contribute']}
+              showMic={true}
+            />
+            <Container fluid="lg" className="mt-5">
+              <div data-testid="BoloSpeak" className={`${styles.root}`}>
+                <div
+                  className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
+                >
+                  {showUIData?.media_data}
+                </div>
+                <div
+                  ref={audioController}
+                  className="d-flex d-none flex-column align-items-center text-center"
+                >
+                  <div className="mt-2 mt-md-3">
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio
+                      ref={audioEl}
+                      data-testid="boloAudioElement"
+                      controls
+                      className="d-flex shadow-grey rounded-24"
+                      tabIndex={-1}
+                      src={recordedAudio}
+                    ></audio>
+                  </div>
+                </div>
+                {audioError && (
+                  <div
+                    className={`d-flex text-danger justify-content-center align-items-center my-2 mt-md-2 mb-md-10 text-center display-6`}
+                  >
+                    <span> {t('audioValidationMessage')} </span>
+                  </div>
+                )}
+                {!showAudioController && (
+                  <div
+                    className={`d-flex justify-content-center align-items-center my-9 mt-md-12 mb-md-10 text-center display-1`}
+                  >
+                    <canvas id="visualizer"></canvas>
+                  </div>
+                )}
+                {showWarningmsg && (
+                  <div
+                    className={`d-flex justify-content-center align-items-center my-9 mt-md-9 mb-md-5 text-center display-5`}
+                  >
+                    <Trans
+                      i18nKey="remainingAudioTextDurationWarning"
+                      defaults="remainingAudioTextDurationWarning"
+                      values={{
+                        remainingSec: remainingSec,
+                      }}
+                    />
+                  </div>
+                )}
+                <div className="mt-12 mt-md-14">
+                  <ButtonControls
+                    playButton={showPlayButton}
+                    submitDisable={!recordedAudio || duration < 2}
+                    onSubmit={onSubmitContribution}
+                    onSkip={onSkipContribution}
+                    cancelButton={false}
+                    startRecordingButton={showStartRecording}
+                    stopRecordingButton={showStopRecording}
+                    reRecordButton={showReRecording}
+                    onStart={onStartRecording}
+                    onStop={onStopRecording}
+                    onRerecord={onRerecord}
+                  />
+                </div>
 
-            <div className="d-flex align-items-center mt-10 mt-md-14">
-              <div className="flex-grow-1">
-                <ProgressBar
-                  now={(currentDataIndex + 1) * (100 / contributionData.length)}
-                  variant="primary"
-                  className={styles.progress}
-                />
+                <div className="d-flex align-items-center mt-10 mt-md-14">
+                  <div className="flex-grow-1">
+                    <ProgressBar
+                      now={(currentDataIndex + 1) * (100 / contributionData.length)}
+                      variant="primary"
+                      className={styles.progress}
+                    />
+                  </div>
+                  <span className="ms-5">
+                    {currentDataIndex + 1}/{contributionData.length}
+                  </span>
+                </div>
               </div>
-              <span className="ms-5">
-                {currentDataIndex + 1}/{contributionData.length}
-              </span>
-            </div>
+            </Container>
           </div>
-        </Container>
-      </div>
+        </Fragment>
+      ) : (
+        <div className="d-flex flex-grow-1 align-items-center">
+          <NoDataFound
+            url={routePaths.boloIndiaHome}
+            title={t('textContributeNoDataThankYouMessage')}
+            text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
+            buttonLabel={t('textBackToInitiativePrompt')}
+          />
+        </div>
+      )}
+      {(skipError || error || submitError) && (
+        <ErrorPopup
+          show={showErrorModal}
+          errorMsg={getErrorMsg(skipError || error || submitError)}
+          onHide={() => setShowErrorModal(false)}
+        />
+      )}
     </Fragment>
-  ) : (
-    <div className="d-flex flex-grow-1 align-items-center">
-      <NoDataFound
-        url={routePaths.boloIndiaHome}
-        title={t('textContributeNoDataThankYouMessage')}
-        text={t('noDataMessage', { language: t(`${contributionLanguage}`) })}
-        buttonLabel={t('textBackToInitiativePrompt')}
-      />
-    </div>
   );
 };
 

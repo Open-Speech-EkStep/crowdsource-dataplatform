@@ -179,6 +179,45 @@ describe('BoloSpeak', () => {
     });
   });
 
+  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+    const url = '/skip';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          language: 'Hindi',
+          sentenceId: 371765,
+          state_region: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'text',
+        }),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should go to thank you page after 5 skip sentences', async () => {
     await setup(resultData);
 
