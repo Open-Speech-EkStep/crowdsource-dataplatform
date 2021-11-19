@@ -61,6 +61,10 @@ describe('BoloSpeak', () => {
       .calledWith('speakerDetails')
       .mockImplementation(() => JSON.stringify(speakerDetails));
 
+    when(localStorage.getItem)
+      .calledWith('lastSpeakerDetails')
+      .mockImplementation(() => JSON.stringify(speakerDetails));
+
     fetchMock.doMockOnceIf('/media/text').mockResponseOnce(JSON.stringify(resultData));
     const renderResult = render(<BoloSpeak />);
 
