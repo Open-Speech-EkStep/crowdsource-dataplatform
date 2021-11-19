@@ -129,14 +129,23 @@ beforeEach(() => {
     get: () => 'android',
     configurable: true,
   });
+  global.URL.createObjectURL = jest.fn();
+  const event = {
+    data: {
+      size: 12816,
+      type: 'audio/webm;codecs=opus',
+    },
+  };
   const mockMediaRecorder = {
     start: jest.fn(),
-    ondataavailable: jest.fn(),
+    ondataavailable: jest.fn(event => event),
     onerror: jest.fn(),
     state: '',
+    onstop: jest.fn(() => {
+      return {};
+    }),
     stop: jest.fn(),
   };
-
   window.MediaRecorder = jest.fn().mockImplementation(() => mockMediaRecorder);
 });
 
@@ -192,6 +201,14 @@ const mockcreateChannelSplitter = jest.fn(() => {
   };
 });
 
+const mockcreateScriptProcessor = jest.fn(() => {
+  return {
+    connect: mockChannelSplitterConnect,
+  };
+});
+
+const mockClose = jest.fn();
+
 window.AudioContext = jest.fn().mockImplementation(() => {
   return {
     createAnalyser: mockcreateAnalyser,
@@ -199,6 +216,8 @@ window.AudioContext = jest.fn().mockImplementation(() => {
     createMediaStreamSource: mockcreateMediaElementSource,
     createOscillator: mockcreateOscillator,
     createChannelSplitter: mockcreateChannelSplitter,
+    createScriptProcessor: mockcreateScriptProcessor,
+    close: mockClose,
   };
 });
 

@@ -73,10 +73,10 @@ const BoloSpeak = () => {
   const [clearTimeoutKey, setClearTimeoutKey] = useState<any>();
 
   const audioController = useRef<any>();
+  const mediaRecorder = useRef<any>();
+  const audioCtx = useRef<any>();
 
-  let audioCtx: any;
   let input: any;
-  let mediaRecorder: any;
   let chunks: any = [];
 
   const { submit, error: submitError } = useSubmit(apiPaths.store, false);
@@ -176,6 +176,7 @@ const BoloSpeak = () => {
     );
   };
 
+  /* istanbul ignore next */
   const onRecordingStop = async () => {
     audioController?.current?.classList.remove('d-none');
     setShowAudioController(true);
@@ -210,28 +211,29 @@ const BoloSpeak = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       setGumStream(stream);
       const AudioContext = window.AudioContext;
-      if (audioCtx) {
-        audioCtx.close();
+      if (audioCtx && audioCtx.current) {
+        audioCtx.current.close();
       }
-      audioCtx = new AudioContext();
-      const audioAnalyser = audioCtx.createAnalyser();
+      audioCtx.current = new AudioContext();
+      const audioAnalyser = audioCtx.current.createAnalyser();
       //new audio context to help us record
-      input = audioCtx.createMediaStreamSource(stream);
+      input = audioCtx.current.createMediaStreamSource(stream);
       input.connect(audioAnalyser);
       // eslint-disable-next-line no-undef
       const visualizer: any = document.getElementById('visualizer');
       visualize(visualizer, audioAnalyser);
       /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
-      mediaRecorder = new MediaRecorder(stream);
-      //start the recording process
-      mediaRecorder.start();
+      mediaRecorder.current = new MediaRecorder(stream);
 
-      //automatically click stop button after 30 seconds
-      mediaRecorder.ondataavailable = (e: any) => {
-        chunks.push(e.data);
+      //start the recording process
+      mediaRecorder.current.start();
+
+      //automatically click stop button after 20 seconds
+      mediaRecorder.current.ondataavailable = (e: any) => {
+        chunks.push(e?.data);
       };
 
-      mediaRecorder.onstop = () => {
+      mediaRecorder.current.onstop = () => {
         onRecordingStop();
       };
       startTimer();
@@ -253,7 +255,7 @@ const BoloSpeak = () => {
     setShowWarningMsg(false);
     clearTimeout(clearTimeoutKey);
     clearTimeout(timerTimeoutKey);
-    mediaRecorder?.stop();
+    mediaRecorder?.current.stop();
     gumStream?.getAudioTracks()[0].stop();
   };
 
@@ -279,6 +281,7 @@ const BoloSpeak = () => {
     recordAudio();
   };
 
+  /* istanbul ignore next */
   const onSubmitContribution = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
