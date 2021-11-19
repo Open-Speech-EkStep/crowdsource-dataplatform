@@ -14,13 +14,8 @@ interface ErrorPopupProps {
 const ErrorPopup = ({ onHide, errorMsg, ...rest }: ErrorPopupProps) => {
   const { t } = useTranslation();
   return (
-    <Modal
-      footer={<Button onClick={onHide}>{t('proceed')}</Button>}
-      backdrop="static"
-      closeButton={false}
-      {...rest}
-    >
-      <div className="px-5 px-md-9">{t(errorMsg)}</div>
+    <Modal footer={<Button onClick={onHide}>{t('close')}</Button>} closeButton={false} {...rest}>
+      <div className="px-5 px-md-9 justify-content-center d-flex text-center mb-4">{t(errorMsg)}</div>
     </Modal>
   );
 };

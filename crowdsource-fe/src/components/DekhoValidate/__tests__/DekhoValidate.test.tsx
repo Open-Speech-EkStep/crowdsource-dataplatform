@@ -203,7 +203,7 @@ describe('DekhoValidate', () => {
     });
 
     await waitFor(() => {
-      userEvent.click(screen.getByRole('button', { name: 'proceed' }));
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
     });
 
     await waitFor(() => {

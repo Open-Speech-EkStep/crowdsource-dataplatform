@@ -35,7 +35,6 @@ const LanguageChangeNotification = ({
           </Button>
         </Link>
       }
-      backdrop="static"
       closeButton={false}
       {...rest}
     >

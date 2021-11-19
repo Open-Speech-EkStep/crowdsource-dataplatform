@@ -165,7 +165,7 @@ const BoloSpeak = () => {
       setTimeout(() => {
         setShowWarningMsg(true);
         setRemainingCount(AUDIO.WARNING_COUNT_START - 1);
-      }, (AUDIO.MAX_DURATION - 6) * 1000)
+      }, (AUDIO.MAX_DURATION - 5) * 1000)
     );
 
     setClearTimeoutKey(

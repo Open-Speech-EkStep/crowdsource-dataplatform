@@ -40,7 +40,7 @@ exports[`Modal should render the component and matches it against stored snapsho
       class="modal-footer"
     >
       <footer
-        class="d-flex justify-content-center w-100 m-0 pt-4 pt-2"
+        class="d-flex justify-content-center w-100 m-0 pt-md-4 pt-2"
       >
         <button
           type="submit"

@@ -27,7 +27,7 @@ const Modal = ({
   footer = null,
   show = false,
   onHide = noop,
-  backdrop = '',
+  backdrop = 'static',
   closeButton = true,
   ...rest
 }: ModalProps) => {
@@ -57,7 +57,7 @@ const Modal = ({
       <ReactBootstrapModal.Body>{children}</ReactBootstrapModal.Body>
       {footer && (
         <ReactBootstrapModal.Footer>
-          <footer className="d-flex justify-content-center w-100 m-0 pt-4 pt-2">{footer}</footer>
+          <footer className="d-flex justify-content-center w-100 m-0 pt-md-4 pt-2">{footer}</footer>
         </ReactBootstrapModal.Footer>
       )}
     </ReactBootstrapModal>
