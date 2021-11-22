@@ -64,8 +64,10 @@
   }
 
   &:hover {
-    box-shadow: 0 8px 20px rgba(15, 39, 73, 0.2);
-    color: var(--info-color);
+    @include media-breakpoint-up(md) {
+      box-shadow: 0 8px 20px rgba(15, 39, 73, 0.2);
+      color: var(--info-color);
+    }
   }
 
   &:disabled {
