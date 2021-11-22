@@ -26,7 +26,7 @@ def clean_locale_keys(languages, input_base_path, output_base_path):
     if not os.path.exists(output_base_path + "/en/common.json"):
         os.makedirs(output_base_path+"/en", exist_ok=True)
         os.system("cp {} {}".format(en_json_path, output_base_path+ "/en/common.json"))
-    print(os.path.exists(output_base_path + "/en/common.json"))
+
     en_data = read_json(en_json_path)
 
     for language_code, lang_name in languages.items():
@@ -41,6 +41,11 @@ def clean_locale_keys(languages, input_base_path, output_base_path):
             if key not in en_data.keys():
                 del data[key]
                 removed_keys.append(key)
+
+        for key, value in en_data.items():
+            if key not in data_copy.keys():
+                data[key] = value
+                print(f'{language_code} is missing in {key}'.format(language_code=language_code, key=key))
 
         os.makedirs('{output_base_path}/{language_code}'.format(output_base_path=output_base_path,
                                                                             language_code=language_code), exist_ok=True)

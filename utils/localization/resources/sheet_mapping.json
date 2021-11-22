@@ -244,6 +244,12 @@
       "<badge-color>": "{{badge}}"
     }
   },
+  "languageChangeNotification": {
+    "replacements": {
+      "<old language>": "{{fromLanguage}}",
+      "<new language>": "{{toLanguage}}"
+    }
+  },
   "remainingAudioTextDurationWarning": {
     "replacements": {
       "<u>": "{{remainingSec}}"
@@ -321,6 +327,11 @@
       "</s>": "</span>"
     }
   },
+  "recordingCountValidationMsg": {
+    "replacements": {
+      "<count>": "{{remainingSec}}"
+    }
+  },
   "noUsername": {
     "update_text": "(No Username)",
     "replacements": {
@@ -357,5 +368,8 @@
   },
   "peopleParticipated": {
     "update_text": "People Participated"
+  },
+  "testMic": {
+    "update_text": "Test mic"
   }
 }

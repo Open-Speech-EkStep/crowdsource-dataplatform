@@ -111,6 +111,8 @@ def process_tags_for_lang(language_df, json_data, language_name, allowed_replace
     for i, row in language_df.iterrows():
         key = row['Key']
         columns = list(row.index)
+        if key not in json_data.keys():
+            continue
         if not is_translation_not_present(key, json_data[key]):
             replacements = {}
             for replacement in allowed_replacements:
@@ -134,6 +136,8 @@ def process_delta(languages, input_base_path, all_keys, keys_without_translation
         keys_list = get_data_without_translation(json_data, all_keys)
         keys_without_translation[language_name] = keys_list
 
+        if all_keys:
+            keys_list = list(en_data.keys())
         language_df = process_tags(allowed_replacements, en_data, keys_list, keys_with_path_map, language_name)
         if all_keys:
             language_df = process_tags_for_lang(language_df, json_data, language_name, allowed_replacements)
