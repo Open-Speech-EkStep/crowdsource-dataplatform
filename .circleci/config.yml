@@ -298,50 +298,137 @@ workflows:
             branches:
               only: [master, nextjs-basic-setup]
 
-      # - azure-acr/build-and-push-image:
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_dev_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: ${AZURE_REPO_UI}
+          tag: dev
+          checkout: false
+          requires:
+            - create-workspace
+
+      # - aws-ecr/build-and-push-image:
       #     pre-steps:
       #       - *fast-checkout
       #     name: push_dev_image_next_ui
+      #     repo: ${AZURE_REPO_UI}
+      #     tag: dev
+      #     path: ./
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+      #     checkout: false
+      #     requires:
+      #       - create-workspace
+
+      - aks_deployment_ui:
+          name: dev_ui_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+          env-name: dev
+          requires:
+            - push_dev_image_next_ui
+
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_dev
+          env-name: next-dev
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - dev_ui_deployment_aks
+
+      # - eks_fargate_deployment:
+      #     name: dev_ui_deployment_eks
+      #     cluster-name: ${CLUSTER_NAME}
+      #     env-name: dev
+      #     requires:
+      #       - push_dev_image_next_ui
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_test_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: ${AZURE_REPO_UI}
+          tag: test
+          checkout: false
+          requires:
+            - dev_ui_deployment_aks
+
+      - aks_deployment_ui:
+          name: test_ui_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+          env-name: test
+          requires:
+            - push_test_image_next_ui
+
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_test
+          env-name: next-test
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - test_ui_deployment_aks
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_uat_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: ${AZURE_REPO_UI}
+          tag: uat
+          checkout: false
+          requires:
+            - dev_ui_deployment_aks
+
+      - aks_deployment_ui:
+          name: uat_ui_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+          env-name: uat
+          requires:
+            - push_uat_image_next_ui
+
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_uat
+          env-name: next-uat
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - uat_ui_deployment_aks
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_prod_image_next_ui
       #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
       #     registry-name: ${AZURE_REGISTRY}
       #     path: ./
       #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
       #     repo: ${AZURE_REPO_UI}
-      #     tag: dev
+      #     tag: prod
       #     checkout: false
-      #     requires:
-      #       - create-workspace
-
-      - aws-ecr/build-and-push-image:
-          pre-steps:
-            - *fast-checkout
-          name: push_dev_image_next_ui
-          repo: ${AZURE_REPO_UI}
-          tag: dev
-          path: ./
-          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-          checkout: false
-          requires:
-            - create-workspace
-
-      # - aks_deployment_ui:
-      #     name: dev_ui_deployment_aks
-      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
-      #     env-name: dev
-      #     requires:
-      #       - push_dev_image_next_ui
-
-      # - cdn_invalidation:
-      #     name: cdn_invalidation_ui_dev
-      #     env-name: next-dev
-      #     resource-group: ${AZURE_RESOURCE_GROUP}
-      #     profile-name: ${AZURE_PROFILE_NAME}
       #     requires:
       #       - dev_ui_deployment_aks
 
-      - eks_fargate_deployment:
-          name: dev_ui_deployment_eks
-          cluster-name: ${CLUSTER_NAME}
-          env-name: dev
-          requires:
-            - push_dev_image_next_ui
+      # - aks_deployment_ui:
+      #     name: prod_ui_deployment_aks
+      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
+      #     env-name: prod
+      #     requires:
+      #       - push_prod_image_next_ui
+
+      # - cdn_invalidation:
+      #     name: cdn_invalidation_ui_prod
+      #     env-name: next-prod
+      #     resource-group: ${AZURE_RESOURCE_GROUP}
+      #     profile-name: ${AZURE_PROFILE_NAME}
+      #     requires:
+      #       - prod_ui_deployment_aks
