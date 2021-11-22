@@ -70,7 +70,7 @@ describe('LikhoDashboard', () => {
         <LikhoDashboard />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     return renderResult;
   };
 
@@ -86,7 +86,7 @@ describe('LikhoDashboard', () => {
     userEvent.selectOptions(fromLanguageElement(), 'English');
     expect(toLanguageElement()).toBeEnabled();
     userEvent.selectOptions(toLanguageElement(), 'Hindi');
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
   });
@@ -113,7 +113,7 @@ describe('LikhoDashboard', () => {
     await setup();
     userEvent.selectOptions(fromLanguageElement(), 'English');
     userEvent.selectOptions(toLanguageElement(), 'Hindi');
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     userEvent.selectOptions(toLanguageElement(), 'Bengali');
     await waitFor(() => expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json'));
     await waitFor(() => expect(screen.getByText('noDataMessageDashboard')).toBeInTheDocument());

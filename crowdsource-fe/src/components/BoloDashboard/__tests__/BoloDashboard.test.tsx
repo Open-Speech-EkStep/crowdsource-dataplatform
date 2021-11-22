@@ -69,7 +69,7 @@ describe('BoloDashboard', () => {
         <BoloDashboard />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     return renderResult;
   };
   it('should contain language selector', async () => {
@@ -81,7 +81,7 @@ describe('BoloDashboard', () => {
     await setup();
     expect(screen.getByRole('combobox', { name: 'Select Language' })).toBeInTheDocument();
     userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'English');
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');
     expect(screen.queryByText('languages')).not.toBeInTheDocument();
   });
@@ -89,7 +89,7 @@ describe('BoloDashboard', () => {
   it('changing language from language selector should display nodata message when data not available', async () => {
     await setup();
     userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'English');
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     userEvent.selectOptions(screen.getByRole('combobox', { name: 'Select Language' }), 'Bengali');
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeDataByLanguage.json');

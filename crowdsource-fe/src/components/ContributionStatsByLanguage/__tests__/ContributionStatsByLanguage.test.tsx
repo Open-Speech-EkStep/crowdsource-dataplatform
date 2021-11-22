@@ -34,7 +34,7 @@ describe('ContributionStatsByLanguage', () => {
         <ContributionStatsByLanguage initiative={initiative} language="Hindi" handleNoData={() => {}} />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     return renderResult;
   };
 

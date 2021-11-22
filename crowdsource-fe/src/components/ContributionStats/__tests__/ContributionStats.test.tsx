@@ -64,7 +64,7 @@ describe('ContributionStats', () => {
         <ContributionStats initiative={value} header="Header" subHeader="Sub Header" />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     return renderResult;
   };
 

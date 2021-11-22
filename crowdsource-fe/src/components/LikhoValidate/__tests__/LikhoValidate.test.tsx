@@ -95,7 +95,7 @@ describe('LikhoValidate', () => {
       </SWRConfig>
     );
 
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
 
     return renderResult;
   };
@@ -325,7 +325,7 @@ describe('LikhoValidate', () => {
         <LikhoValidate />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     await waitFor(() => {
       expect(screen.getByText('noDataMessage')).toBeInTheDocument();
     });

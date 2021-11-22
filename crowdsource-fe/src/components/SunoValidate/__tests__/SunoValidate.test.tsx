@@ -96,7 +96,7 @@ describe('SunoValidate', () => {
       </SWRConfig>
     );
 
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
 
     return renderResult;
   };
@@ -389,7 +389,7 @@ describe('SunoValidate', () => {
         <SunoValidate />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     await waitFor(() => {
       expect(screen.getByText('noDataMessage')).toBeInTheDocument();
     });

@@ -96,7 +96,7 @@ describe('BoloValidate', () => {
       </SWRConfig>
     );
 
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
 
     return renderResult;
   };

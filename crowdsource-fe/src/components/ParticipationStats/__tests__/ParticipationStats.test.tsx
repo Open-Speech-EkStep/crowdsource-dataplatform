@@ -32,7 +32,7 @@ describe('ParticipationStats', () => {
         <ParticipationStats />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('StatsSpinner'));
+    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     return renderResult;
   };
 

@@ -214,7 +214,7 @@ const SunoTranscribe = () => {
   };
 
   if (!result && !error) {
-    return <Spinner data-testid="StatsSpinner" animation="border" variant="light" />;
+    return <Spinner data-testid="Loader" animation="border" className="loader" />;
   }
 
   return (

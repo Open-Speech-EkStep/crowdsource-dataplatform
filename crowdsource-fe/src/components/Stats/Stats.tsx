@@ -30,7 +30,7 @@ const Stats = ({ contents }: StatsProps) => {
                 {stat ? (
                   <span className={`${styles.count} text-warning display-1 d-flex text-center`}>{stat}</span>
                 ) : (
-                  <Spinner data-testid="StatsSpinner" animation="border" variant="primary" />
+                  <Spinner data-testid="Loader" animation="border" variant="light" />
                 )}
                 <span className="text-light mt-1 display-3 text-center">{content.label}</span>
               </div>
