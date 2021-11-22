@@ -29,19 +29,19 @@ export const reportFieldsConstant: any = {
       subtext: 'hurtingStatement',
     },
     {
-      label: 'Prohibited Content',
+      label: 'prohibitedContent',
       value: 'Prohibited Content',
       isSubtext: true,
       subtext: 'offensiveSubtext',
     },
     {
-      label: 'Political Statement',
+      label: 'politicalStatement',
       value: 'Political Statement',
       isSubtext: true,
       subtext: 'hatefulPolitical',
     },
     {
-      label: 'Misinformation',
+      label: 'misinformation',
       value: 'Misinformation',
       isSubtext: true,
       subtext: 'herseyRumors',
