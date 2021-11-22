@@ -47,7 +47,7 @@ exports[`BronzeContribute should render the component and matches it against sto
             bronzeBhashaSamarthakBadge
           </h2>
           <p
-            class="text display-3 mt-5 mt-md-3 mb-0"
+            class="display-3 mt-5 mt-md-3 mb-0"
           >
             bronzeContributeFive
           </p>

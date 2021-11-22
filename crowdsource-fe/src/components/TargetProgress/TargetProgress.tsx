@@ -108,7 +108,7 @@ const TargetProgress = (props: TargetProgressProps) => {
   if (!cumulativeCountData) return null;
   return (
     <div className={`${styles.root} d-flex flex-column`} data-testid="TargetProgress">
-      <div className={`${styles.details} d-flex justify-content-between align-items-center`}>
+      <div className="d-flex justify-content-between align-items-center">
         <div className={`${styles.percentage} font-family-rowdies`}>
           <Trans
             i18nKey={`${props.initiativeType}ProgressStatus`}

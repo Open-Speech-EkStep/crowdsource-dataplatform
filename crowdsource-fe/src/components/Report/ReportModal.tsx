@@ -116,7 +116,7 @@ const ReportModal = ({
                 value={item.value}
                 name="reportText"
                 id={`reportFormCheckbox${item.value}`}
-                className={`${styles.radio} mb-0 me-0`}
+                className="mb-0 me-0"
                 onChange={handleChange}
               />
               {item.isSubtext && <span className="d-flex mt-1 mb-0 ms-6">{t(item.subtext)}</span>}

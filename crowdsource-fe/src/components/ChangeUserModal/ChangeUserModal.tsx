@@ -167,7 +167,7 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
                 id="male"
                 label={t('male')}
                 name="gender"
-                className={`${styles.radio} me-8 mb-0`}
+                className="me-8 mb-0"
                 onChange={handleGenderChange}
                 value="male"
               />
@@ -177,7 +177,7 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
                 id="female"
                 label={t('female')}
                 name="gender"
-                className={`${styles.radio} me-8 mb-0`}
+                className="me-8 mb-0"
                 onChange={handleGenderChange}
                 value="female"
               />
@@ -186,7 +186,7 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
                 type="radio"
                 id="others"
                 label={t('others')}
-                className={`${styles.radio} me-8 mb-0`}
+                className="me-8 mb-0"
                 name="gender"
                 onChange={handleOtherGenderChange}
                 value=""
@@ -200,7 +200,7 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
                   id="transgenderMale"
                   label={t('transgenderMale')}
                   name="otherGender"
-                  className={`${styles.radio} me-8 mb-0`}
+                  className="me-8 mb-0"
                   onChange={handleChange}
                   value="Transgender - He"
                 />
@@ -210,7 +210,7 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
                   id="transgenderFemale"
                   label={t('transgenderFemale')}
                   name="otherGender"
-                  className={`${styles.radio} me-8 mb-0`}
+                  className="me-8 mb-0"
                   onChange={handleChange}
                   value="Transgender - She"
                 />
@@ -220,7 +220,7 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
                   id="ratherNotSayGender"
                   label={t('ratherNotSayGender')}
                   name="otherGender"
-                  className={`${styles.radio} me-8 mb-0`}
+                  className="me-8 mb-0"
                   onChange={handleChange}
                   value="Rather Not Say"
                   defaultChecked
