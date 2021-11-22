@@ -112,15 +112,7 @@ jobs:
   cdn_invalidation:
     executor: azure-cli/default
     parameters:
-      azure_resource_group:
-        description: |
-          Name of the resource group
-        type: string
-      azure_profile_name:
-        description: |
-          Name of the cdn profile
-        type: string
-      azure_endpoint_name:
+      env-name:
         description: |
           Name of the cdn profile
         type: string
@@ -160,10 +152,6 @@ jobs:
       azure_login_server_name:
         description: |
           Name of the acr
-        type: string
-      azure_repo_api:
-        description: |
-          Name of the image repo
         type: string
 
     steps:
@@ -328,6 +316,8 @@ workflows:
           name: dev_ui_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME_UI}
           env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
           requires:
             - push_dev_image_next_ui
 
@@ -364,6 +354,8 @@ workflows:
           name: test_ui_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME_UI}
           env-name: test
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
           requires:
             - push_test_image_next_ui
 
@@ -393,6 +385,8 @@ workflows:
           name: uat_ui_deployment_aks
           cluster-name: ${AZURE_CLUSTER_NAME_UI}
           env-name: uat
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
           requires:
             - push_uat_image_next_ui
 
