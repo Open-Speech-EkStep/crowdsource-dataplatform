@@ -8,7 +8,6 @@ const {
 } = require('./utils');
 
 const {INITIATIVES} = require('./constants')
-const {isMobileDevice} = require('./common');
 
 const getTotalParticipation = (data, moduleType) => {
   let validation_count = 0;
@@ -403,9 +402,8 @@ const generateAnonymousState = function(result, initiative){
     
     $unspecifiedLocation.off( "mouseenter mouseleave" );
     $unspecifiedLocation.hover(
-    ($event) => {
-      const offset = $($event.currentTarget).offset();
-      $('#state-popover').css({visibility: 'visible', left:isMobileDevice() ? offset.left+ 60: offset.left - 200});
+    () => {
+      $('#state-popover').css({visibility: 'visible'});
     },
     () => {
       $('#state-popover').css({visibility: 'hidden'});
