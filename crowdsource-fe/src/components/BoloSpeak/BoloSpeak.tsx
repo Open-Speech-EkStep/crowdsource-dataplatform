@@ -11,6 +11,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import ButtonControls from 'components/ButtonControls';
 import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
+import Modal from 'components/Modal';
 import NoDataFound from 'components/NoDataFound';
 import apiPaths from 'constants/apiPaths';
 import { AUDIO } from 'constants/Audio';
@@ -49,6 +50,10 @@ const BoloSpeak = () => {
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const [showPlayButton] = useState(false);
+
+  const [audioPermissionDenied, setAudioPermissionDenied] = useState(false);
+
+  const [showAudioPermissionModal, setShowAudioPermissionModal] = useState(false);
 
   const [showStartRecording, setShowStartRecording] = useState(true);
   const [showStopRecording, setShowStopRecording] = useState(false);
@@ -156,6 +161,8 @@ const BoloSpeak = () => {
   const resetState = () => {
     setRecordedAudio('');
     setDuration(0);
+    clearTimeout(clearTimeoutKey);
+    clearTimeout(timerTimeoutKey);
     setShowStartRecording(true);
     setShowStopRecording(false);
     setShowReRecording(false);
@@ -163,6 +170,7 @@ const BoloSpeak = () => {
     audioController?.current?.classList.add('d-none');
   };
 
+  /* istanbul ignore next */
   const setRemainingCount = (value: number) => {
     if (value) {
       const interval = setInterval(() => {
@@ -175,6 +183,7 @@ const BoloSpeak = () => {
     }
   };
 
+  /* istanbul ignore next */
   const startTimer = () => {
     setTimerTimeoutKey(
       setTimeout(() => {
@@ -221,8 +230,11 @@ const BoloSpeak = () => {
     };
   };
 
+  /* istanbul ignore next */
   const recordAudio = async () => {
     try {
+      setAudioPermissionDenied(false);
+      setShowAudioPermissionModal(false);
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       setGumStream(stream);
       const AudioContext = window.AudioContext;
@@ -253,10 +265,13 @@ const BoloSpeak = () => {
       };
       startTimer();
     } catch (e) {
-      console.log(e);
+      setAudioPermissionDenied(true);
+      setShowAudioPermissionModal(true);
+      resetState();
     }
   };
 
+  /* istanbul ignore next */
   const validateAudioDuration = (duration: number) => {
     if (duration < AUDIO.MIN_DURATION) {
       setShowAudioError(true);
@@ -270,7 +285,7 @@ const BoloSpeak = () => {
     setShowWarningMsg(false);
     clearTimeout(clearTimeoutKey);
     clearTimeout(timerTimeoutKey);
-    mediaRecorder?.current.stop();
+    mediaRecorder?.current?.stop();
     gumStream?.getAudioTracks()[0].stop();
   };
 
@@ -283,6 +298,7 @@ const BoloSpeak = () => {
   const onStopRecording = () => {
     setShowReRecording(true);
     setShowStopRecording(false);
+    setShowStartRecording(false);
     stopAudio();
   };
 
@@ -424,6 +440,7 @@ const BoloSpeak = () => {
                     onStart={onStartRecording}
                     onStop={onStopRecording}
                     onRerecord={onRerecord}
+                    // submitButton={!audioPermissionDenied}
                   />
                 </div>
 
@@ -459,6 +476,17 @@ const BoloSpeak = () => {
           errorMsg={getErrorMsg(skipError || error || submitError)}
           onHide={() => setShowErrorModal(false)}
         />
+      )}
+      {audioPermissionDenied && (
+        <Modal
+          footer={<> </>}
+          onHide={() => setShowAudioPermissionModal(false)}
+          show={showAudioPermissionModal}
+        >
+          <div className="px-5 px-md-9 justify-content-center d-flex text-center mb-4">
+            {t('warningAudioPermissionMsg')}
+          </div>
+        </Modal>
       )}
     </Fragment>
   );

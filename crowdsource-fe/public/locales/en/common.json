@@ -374,7 +374,7 @@
   "expandViewText": "Click to open expanded view",
   "visitOur": "Visit our",
   "404Text": "Seems this page doesn't exist",
-  "testYourMicrophoneAndSpeakers": "Test your microphone and speakers",
+  "testYourMicrophoneAndSpeakers": "Test your Microphone and Speakers",
   "startRecording": "Start Recording",
   "stopRecording": "Stop Recording",
   "reRecord": "Re-record",
@@ -401,5 +401,6 @@
   "tipTwo": "Please test your Speakers",
   "tipThree": "Ensure there is no background noise",
   "tipFour": "Read once before recording it",
-  "tipFive": "Get started by clicking on Record button"
+  "tipFive": "Get started by clicking on Record button",
+  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission"
 }
