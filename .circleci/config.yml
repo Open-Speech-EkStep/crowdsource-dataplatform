@@ -323,7 +323,7 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_ui_dev
-          env-name: next-dev
+          env-name: next-dev-ui
           resource-group: ${AZURE_RESOURCE_GROUP}
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
@@ -361,7 +361,7 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_ui_test
-          env-name: next-test
+          env-name: next-test-ui
           resource-group: ${AZURE_RESOURCE_GROUP}
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
@@ -392,7 +392,7 @@ workflows:
 
       - cdn_invalidation:
           name: cdn_invalidation_ui_uat
-          env-name: next-uat
+          env-name: next-uat-ui
           resource-group: ${AZURE_RESOURCE_GROUP}
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
