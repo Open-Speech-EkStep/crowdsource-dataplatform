@@ -94,11 +94,14 @@
     width: auto;
   }
 
-  &:hover,
-  &:active {
+  &:hover {
     @include media-breakpoint-up(md) {
       background-color: var(--btn-grey-color);
     }
+  }
+
+  &:active {
+    background-color: var(--btn-grey-color);
   }
 
   &:disabled {
