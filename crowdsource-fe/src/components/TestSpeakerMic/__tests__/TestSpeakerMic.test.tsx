@@ -1,3 +1,5 @@
+import router from 'next/router';
+
 import { render, verifyAxeTest, userEvent, screen, waitFor } from 'utils/testUtils';
 
 import TestSpeakerMic from '../TestSpeakerMic';
@@ -10,12 +12,14 @@ describe('TestSpeakerMic', () => {
   verifyAxeTest(setup(false, true));
 
   it('should render the component and matches it against stored snapshot', () => {
+    router.asPath = '/bolo-india/contribute';
     const { asFragment } = setup(true, true);
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should test the test speaker modal open and close behaviour', async () => {
+    router.asPath = '/suno-india/contribute';
     setup(true, true);
     userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker test testYourSpeaker' }));
 
@@ -31,6 +35,7 @@ describe('TestSpeakerMic', () => {
   });
 
   it('should test the test speaker audio', async () => {
+    router.asPath = '/suno-india/contribute';
     setup(false, true);
     userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker test testYourSpeaker' }));
 
@@ -57,8 +62,13 @@ describe('TestSpeakerMic', () => {
   });
 
   it('should test the mic', async () => {
+    router.asPath = '/bolo-india/contribute';
     setup(true, true);
-    userEvent.click(screen.getByRole('button', { name: 'testYourSpeaker test testYourSpeaker' }));
+    userEvent.click(
+      screen.getByRole('button', {
+        name: 'testYourMicrophoneAndSpeakers | testYourSpeaker test testYourMicrophoneAndSpeakers',
+      })
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId('testMicButton')).toBeInTheDocument();

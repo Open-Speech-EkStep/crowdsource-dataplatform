@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useTranslation, Trans } from 'next-i18next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import IconTextButton from 'components/IconTextButton';
+import routePaths from 'constants/routePaths';
 
 import apiPaths from '../../constants/apiPaths';
 
@@ -36,6 +38,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const media: any = useRef();
   const mediaAudio: any = useRef();
   const micAudio: any = useRef();
+
+  const router = useRouter();
 
   let microphone: any = null;
   let javascriptNode: any = null;
@@ -182,7 +186,13 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
       navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function (stream) {
-          // startRecordingTimer();
+          setShowTestMicText(false);
+          setRecordingCount(4);
+          setTestMicSpeakerInterval(
+            setTimeout(() => {
+              setShowPlayingbackAudio(true);
+            }, 5000)
+          );
           const AudioContext = window.AudioContext;
           audioContext = new AudioContext();
           sampleRate = audioContext.sampleRate;
@@ -277,25 +287,29 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     recordingLength = 0;
     media.current = getMediaRecorder();
     media.current.start();
-    setShowTestMicText(false);
-    setRecordingCount(4);
-    setTestMicSpeakerInterval(
-      setTimeout(() => {
-        setShowPlayingbackAudio(true);
-      }, 5000)
-    );
   };
 
   return (
     <div className="position-relative">
       <IconTextButton
-        icon="speaker.svg"
         textMobile={t('test')}
-        textDesktop={t('testYourSpeaker')}
+        textDesktop={
+          router.asPath === routePaths.boloIndiaContribute
+            ? t('testYourMicrophoneAndSpeakers')
+            : t('testYourSpeaker')
+        }
         onClick={() => setShowMicSpeaker(!showMicSpeaker)}
         altText="testYourSpeaker"
         active={showMicSpeaker}
-      />
+      >
+        {router.asPath === routePaths.boloIndiaContribute && (
+          <>
+            <Image src="/images/mic.svg" width="24" height="24" alt="testYourMicrophoneAndSpeakers" />
+            <span className="mx-1"> | </span>
+          </>
+        )}
+        <Image src="/images/speaker.svg" width="24" height="24" alt="testYourSpeaker" />
+      </IconTextButton>
       {showMicSpeaker && (
         <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>
           <Button

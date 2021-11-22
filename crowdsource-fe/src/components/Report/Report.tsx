@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 import ErrorPopup from 'components/ErrorPopup';
 import IconTextButton from 'components/IconTextButton';
@@ -53,12 +54,9 @@ const Report = ({ onSuccess, action, initiative }: ReportProps) => {
 
   return (
     <Fragment>
-      <IconTextButton
-        icon="report.svg"
-        textDesktop={t('report')}
-        onClick={showModal}
-        altText="reportIconAlt"
-      />
+      <IconTextButton textDesktop={t('report')} onClick={showModal} altText="reportIconAlt">
+        <Image src="/images/report.svg" width="24" height="24" alt="reportIconAlt" />
+      </IconTextButton>
       {modalShow && (
         <ReportModal
           reportSubheadingText={reportSubheadingText}

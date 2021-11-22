@@ -4,7 +4,11 @@ import IconTextButton from '../IconTextButton';
 
 describe('IconTextButton', () => {
   const setup = () =>
-    render(<IconTextButton icon="some-icon.svg" textDesktop="some-text" onClick={() => {}} altText="text" />);
+    render(
+      <IconTextButton textDesktop="some-text" onClick={() => {}} altText="text">
+        <div>Child Component</div>
+      </IconTextButton>
+    );
 
   verifyAxeTest(setup());
 
