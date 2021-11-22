@@ -96,7 +96,9 @@
 
   &:hover,
   &:active {
-    background-color: var(--btn-grey-color);
+    @include media-breakpoint-up(md) {
+      background-color: var(--btn-grey-color);
+    }
   }
 
   &:disabled {
