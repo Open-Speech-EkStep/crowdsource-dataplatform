@@ -397,10 +397,10 @@
   "backgroundNoise": "Background Noise Detected",
   "lowBackgroundNoise": "Low/No Background Noise",
   "quickTips": "Quick Tips",
-  "tipOne": "Please test your Microphone",
-  "tipTwo": "Please test your Speakers",
-  "tipThree": "Ensure there is no background noise",
-  "tipFour": "Read once before recording it",
-  "tipFive": "Get started by clicking on Record button",
+  "tipOne": "Please test your <b>Microphone</b>",
+  "tipTwo": "Please test your <b>Speakers</b>",
+  "tipThree": "Ensure there is <b>no background noise</b>",
+  "tipFour": "Read once <b>before recording it</b>",
+  "tipFive": "Get started by clicking on <b>Record</b> button",
   "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission"
 }

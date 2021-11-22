@@ -11,6 +11,7 @@ import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
 import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
+import LikhoValidateTextArea from 'components/LikhoValidateTextArea';
 import NoDataFound from 'components/NoDataFound';
 import TextEditArea from 'components/TextEditArea';
 import apiPaths from 'constants/apiPaths';
@@ -61,6 +62,7 @@ const LikhoValidate = () => {
     contribution: '',
     dataset_row_id: '0',
     contribution_id: '0',
+    auto_validate: false,
   });
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
@@ -120,7 +122,7 @@ const LikhoValidate = () => {
     }
   }, [currentDataIndex, result]);
 
-  const onChangeTextInput = (text: string) => {
+  const updateFormInput = (text: string) => {
     setFormDataStore({
       ...formDataStore,
       userInput: text,
@@ -274,15 +276,15 @@ const LikhoValidate = () => {
                   </div>
                   <div className="flex-fill">
                     <TextEditArea
-                      id="editText"
+                      id="translatedText"
                       isTextareaDisabled={false}
                       language={translatedLanguage ?? ''}
                       initiative={INITIATIVES_MEDIA_MAPPING.likho}
-                      setTextValue={onChangeTextInput}
+                      setTextValue={() => {}}
                       textValue={showUIData?.contribution}
                       roundedRight
                       label={t(`${translatedLanguage?.toLowerCase()}`)}
-                      onError={setHasError}
+                      onError={() => {}}
                       showTip
                       readOnlyActive
                       readOnly
@@ -291,17 +293,17 @@ const LikhoValidate = () => {
                 </div>
                 {showEditTextArea && (
                   <div className="mt-4 mt-md-8">
-                    <TextEditArea
-                      id="addText"
-                      isTextareaDisabled={false}
-                      language={translatedLanguage ?? ''}
+                    <LikhoValidateTextArea
                       initiative={INITIATIVES_MEDIA_MAPPING.likho}
-                      setTextValue={onChangeTextInput}
-                      textValue={showUIData?.contribution}
-                      label={`${t('yourEdit')}${
+                      fromLanguage={contributionLanguage}
+                      toLanguage={translatedLanguage ?? ''}
+                      text={showUIData?.contribution}
+                      textAreaLabel={`${t('yourEdit')}${
                         translatedLanguage && ` (${t(translatedLanguage.toLowerCase())})`
                       }`}
-                      onError={setHasError}
+                      setHasError={setHasError}
+                      updateText={updateFormInput}
+                      validate={showUIData?.auto_validate}
                     />
                   </div>
                 )}

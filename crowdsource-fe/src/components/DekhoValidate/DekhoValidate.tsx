@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -10,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
+import EditTextBlock from 'components/EditTextBlock';
 import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
 import ImageView from 'components/ImageView';
@@ -50,7 +50,7 @@ const DekhoValidate = () => {
   const [showCorrectButton, setShowCorrectButton] = useState(true);
   const [showSubmitButton, setShowSubmitButton] = useState(false);
   const [showCancelButton, setShowCancelButton] = useState(false);
-  const [showEditTextArea, setShowEditTextArea] = useState(false);
+  const [showEditTextBlock, setShowEditTextBlock] = useState(false);
   const [closeKeyboard, setCloseKeyboard] = useState(false);
   const [contributionData, setContributionData] = useState([]);
   const [currentDataIndex, setCurrentDataIndex] = useState<number>(0);
@@ -61,6 +61,7 @@ const DekhoValidate = () => {
     contribution: '',
     dataset_row_id: '0',
     contribution_id: '0',
+    auto_validate: false,
   });
   const [formData, setFormData] = useState<ActionStoreInterface>({
     userInput: '',
@@ -118,7 +119,7 @@ const DekhoValidate = () => {
     }
   }, [currentDataIndex, result]);
 
-  const onChangeTextInput = (text: string) => {
+  const updateFormInput = (text: string) => {
     setFormData({
       ...formData,
       userInput: text,
@@ -172,7 +173,7 @@ const DekhoValidate = () => {
     setTimeout(() => {
       setDataCurrentIndex(currentDataIndex);
       setShowThankyouMessage(false);
-      setShowEditTextArea(false);
+      setShowEditTextBlock(false);
     }, 1500);
   };
 
@@ -181,7 +182,7 @@ const DekhoValidate = () => {
     setShowSubmitButton(false);
     setShowNeedsChangeButton(true);
     setShowCorrectButton(true);
-    setShowEditTextArea(false);
+    setShowEditTextBlock(false);
     setFormData({
       ...formData,
       userInput: '',
@@ -207,7 +208,7 @@ const DekhoValidate = () => {
   };
 
   const onNeedsChange = () => {
-    setShowEditTextArea(true);
+    setShowEditTextBlock(true);
     setShowNeedsChangeButton(false);
     setShowCorrectButton(false);
     setShowCancelButton(true);
@@ -256,8 +257,24 @@ const DekhoValidate = () => {
                 <div className="mt-2 mt-md-4">
                   <ImageView imageUrl={showUIData?.sentence} />
                 </div>
-                <div className={classNames('mt-4 mt-md-8', { ['d-md-flex']: showEditTextArea })}>
-                  <div className="flex-fill">
+                {showEditTextBlock ? (
+                  <div className="d-md-flex mt-4 mt-md-8">
+                    <EditTextBlock
+                      initiative={INITIATIVES_MEDIA_MAPPING.dekho}
+                      fromLanguage={contributionLanguage}
+                      toLanguage={contributionLanguage}
+                      text={showUIData?.contribution}
+                      leftTextAreaLabel={t('capturedText')}
+                      rightTextAreaLabel={`${t('yourEdit')}${
+                        contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
+                      }`}
+                      setHasError={setHasError}
+                      updateText={updateFormInput}
+                      validate={showUIData?.auto_validate}
+                    />
+                  </div>
+                ) : (
+                  <div className="mt-4 mt-md-8">
                     <TextEditArea
                       id="originalText"
                       isTextareaDisabled={false}
@@ -265,32 +282,14 @@ const DekhoValidate = () => {
                       initiative={INITIATIVES_MEDIA_MAPPING.dekho}
                       setTextValue={() => {}}
                       textValue={showUIData?.contribution}
-                      roundedLeft={showEditTextArea}
+                      roundedLeft={showEditTextBlock}
                       readOnly
-                      readonlyAllBorders={!showEditTextArea}
+                      readonlyAllBorders={!showEditTextBlock}
                       label={t('capturedText')}
                       onError={() => {}}
                     />
                   </div>
-                  <div className="flex-fill">
-                    {showEditTextArea && (
-                      <TextEditArea
-                        id="editText"
-                        isTextareaDisabled={false}
-                        language={contributionLanguage ?? ''}
-                        initiative={INITIATIVES_MEDIA_MAPPING.dekho}
-                        setTextValue={onChangeTextInput}
-                        textValue={showUIData?.contribution}
-                        label={`${t('yourEdit')}${
-                          contributionLanguage && ` (${t(contributionLanguage.toLowerCase())})`
-                        }`}
-                        roundedRight
-                        onError={setHasError}
-                        showTip
-                      />
-                    )}
-                  </div>
-                </div>
+                )}
                 {showThankyouMessage ? (
                   <div className="d-flex align-items-center justify-content-center mt-9 display-1">
                     <span className="me-2 d-flex">

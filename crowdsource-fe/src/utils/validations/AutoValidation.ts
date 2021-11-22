@@ -1,11 +1,11 @@
-// import { BleuScore } from "./BleuScoreValidator";
+import { BleuScore } from './BleuScoreValidator';
 import { Levenstein } from './LevensteinValidator';
 import { TruthyValidator } from './TruthyValidator';
 import { Wer } from './WERValidator';
 
 const AutoValidation = {
   asr: new Wer().validate,
-  parallel: new TruthyValidator().validate,
+  parallel: new BleuScore().validate,
   ocr: new Levenstein().validate,
   text: new TruthyValidator().validate,
 };
