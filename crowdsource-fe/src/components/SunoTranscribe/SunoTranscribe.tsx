@@ -151,6 +151,10 @@ const SunoTranscribe = () => {
   };
 
   const resetState = () => {
+    setShowUIdata({
+      media_data: '',
+      dataset_row_id: '0',
+    });
     setIsDisabled(true);
     onCancelContribution();
     setShowPauseButton(false);
