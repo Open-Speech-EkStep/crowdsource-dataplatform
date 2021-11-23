@@ -4,15 +4,19 @@
     "cdnUrl": "https://test-data-crowdsource.azureedge.net",
     "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-test",
     "whitelistingEmail": false,
-    "showDataSource": true,
+    "showDataSource": false,
     "feedbackTopComponent": false,
     "contextRoot": "",
-    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te","kas","ki","kok"],
     "autoValidation": false,
     "enabledPages": {
       "error": false,
-      "home": false,
-      "sunoIndiaHome": false,
+      "home": true,
+      "sunoIndiaHome": true,
+      "sunoIndiaDashboard": true,
+      "boloIndiaHome": true,
+      "boloIndiaDashboard": true,
+      "dekhoIndiaHome": true,
       "styleGuide": false
     }
   }

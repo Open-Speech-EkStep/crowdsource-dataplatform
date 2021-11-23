@@ -1,18 +1,22 @@
 {
   "fe": {
     "apiUrl": "https://bhashadaan-api.bhashini.gov.in",
-    "cdnUrl": "https://prod-data-crowdsource.azureedge.net",
-    "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-prod",
+    "cdnUrl": "https://bhashadaan-data.azureedge.net",
+    "staticFileUrl": "https://bhashadaan.blob.core.windows.net/static-content-vakyansh-prod",
     "whitelistingEmail": false,
     "showDataSource": false,
     "feedbackTopComponent": false,
     "contextRoot": "/bhashadaan",
-    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te","kas", "si", "kok"],
     "autoValidation": false,
     "enabledPages": {
       "error": false,
-      "home": false,
-      "sunoIndiaHome": false,
+      "home": true,
+      "sunoIndiaHome": true,
+      "sunoIndiaDashboard": true,
+      "boloIndiaHome": true,
+      "boloIndiaDashboard": true,
+      "dekhoIndiaHome": true,
       "styleGuide": false
     }
   }
