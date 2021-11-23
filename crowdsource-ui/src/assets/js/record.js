@@ -245,9 +245,12 @@ const initialize = () => {
         }, 21 * 1000);
       })
       .catch(() => {
-        notyf.error(
-          'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
-        );
+        const notyfMsg = $('.notyf').children().length;
+        if(!notyfMsg){
+          notyf.error(
+            'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
+          );
+        }
         $nextBtn.prop('disabled', true);
       });
   });
