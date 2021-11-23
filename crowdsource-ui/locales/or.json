@@ -302,7 +302,7 @@
   "Participate to keep <from-language>-<to-language> in top 3": "<from-language>-<to-language>କୁ ଶୀର୍ଷ 3 ସ୍ଥାନରେ ରଖିବା ପାଇଁ ଅଂଶଗ୍ରହଣ କରନ୍ତୁ",
   "<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> vs ଶୀର୍ଷ ଯୋଗଦାନ କରିଥିବା ଭାଷା ଯୁଗ୍ମ",
   "<contribution-done>/<contribution-goal> Image(s)": "<contribution-done>/<contribution-goal> ପ୍ରତିଛବି",
-  "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "ଆପଣ ନିଜ ଭାଷା ପାଇଁ <span id=\"user-contribution-count\"></span>ଟି <span>ରେକର୍ଡିଂର<span> ଯୋଗଦାନ କଲେ !",
+  "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "ଆପଣ ନିଜ ଭାଷା ପାଇଁ <span id=\"user-contribution-count\"></span>ଟି <span>ରେକର୍ଡିଂର</span> ଯୋଗଦାନ କଲେ !",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved": "<span id=\"metric-language\"></span>ରେ କୁହ ଇଣ୍ଡିଆ ପାଇଁ <span id=\"totalAverage\"></span>ର ଲକ୍ଷ୍ୟ ହାସଲ",
   "You validated <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language!": "ଆପଣ ନିଜ ଭାଷାରେ  <span id=\"user-contribution-count\"></span>ଟି <span>ବାକ୍ୟର</span> ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରିଛନ୍ତି !",
   "You contributed <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language!": "ଆପଣ ନିଜ ଭାଷା ପାଇଁ <span id=\"user-contribution-count\"></span>ଟି <span>ବାକ୍ୟର</span> ଯୋଗଦାନ କଲେ !",
@@ -422,5 +422,6 @@
   "Thank you for your enthusiasm to validate the transcriptions.": "ଟ୍ରାନ୍ସ୍କ୍ରିପ୍ସନ୍ଗୁଡ଼ିକର ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରିବା ପାଇଁ  ଉତ୍ସାହ ଦେଖେଇଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ।",
   "Thank you for your enthusiasm to translate the sentences.": "ବାକ୍ୟଗୁଡ଼ିକର ଅନୁବାଦ କରିବାକୁ ଦେଖେଇଥିବା ଉତ୍ସାହ ପାଇଁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ ।",
   "Thank you for your enthusiasm to validate the translations.": "ଅନୁବାଦଗୁଡ଼ିକର ପ୍ରାମାଣିକତା ସାବ୍ୟସ୍ତ କରିବା ପାଇଁ  ଉତ୍ସାହ ଦେଖେଇଥିବାରୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ।",
-  "Unspecified location": "Unspecified location"
+  "Unspecified location": "ଅନିର୍ଦ୍ଦିଷ୍ଟ ସ୍ଥାନ",
+  "We feel the text you entered doesn't match the original text, are you sure about your edit?": "ଆପଣ ଲେଖିଥିବା ଟେକ୍ସଟ ପ୍ରକୃତ ଟେକ୍ସଟ ସହିତ ମେଳ ନ ଖାଇଲା ଭଳିଆଦିଶୁଛି, ଆପଣ ନିଜ ଏଡିଟ ସହିତ ସନ୍ତୁଷ୍ଟ ଅଛନ୍ତି କି ?"
 }

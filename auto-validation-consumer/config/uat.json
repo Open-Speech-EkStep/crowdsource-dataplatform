@@ -1,4 +1,4 @@
 { 
     "envName": "uat",
-    "autoValidation": "disabled"
+    "autoValidation": "enabled"
 }

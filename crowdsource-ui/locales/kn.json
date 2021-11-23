@@ -298,13 +298,13 @@
   "Participate to keep <language> in top 3": "<language> ಭಾಷೆಯನ್ನು ಪ್ರಮುಖವಾದ 3 ಸ್ಥಾನದಲ್ಲಿ ಇರಿಸಲು ಭಾಗವಹಿಸಿ",
   "<language> vs Top contributed languages": "<language> vs ಪ್ರಮುಖವಾಗಿ ಕೊಡುಗೆ ನೀಡಲ್ಪಟ್ಟ ಭಾಷೆಗಳು",
   "<contribution-done>/<contribution-goal> Sentence(s)": "<contribution-done> / <contribution-goal> ವಾಕ್ಯಗಳು",
-  "Participate to see <from-language>-<to-language> in top 3": "ಮೊಟ್ಟ ಮೊದಲ 3 ಸ್ಥಾನಗಳಲ್ಲಿ <from-language> - <to-language> ಅನ್ನು ನೋಡಲು ಭಾಗವಹಿಸಿ",
-  "Participate to keep <from-language>-<to-language> in top 3": "<from-language> - <to-language> ಅನ್ನು ಮೊಟ್ಟ ಮೊದಲ 3 ಸ್ಥಾನಗಳಲ್ಲಿ ಇರಿಸಲು ಭಾಗವಹಿಸಿ",
-  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language> - <to-language> vs ಪ್ರಮುಖವಾಗಿ ಕೊಡುಗೆ ನೀಡಲ್ಪಟ್ಟ ಭಾಷೆಗಳು",
+  "Participate to see <from-language>-<to-language> in top 3": "ಮೊಟ್ಟ ಮೊದಲ 3 ಸ್ಥಾನಗಳಲ್ಲಿ <from-language>-<to-language> ಅನ್ನು ನೋಡಲು ಭಾಗವಹಿಸಿ",
+  "Participate to keep <from-language>-<to-language> in top 3": "<from-language>-<to-language> ಅನ್ನು ಮೊಟ್ಟ ಮೊದಲ 3 ಸ್ಥಾನಗಳಲ್ಲಿ ಇರಿಸಲು ಭಾಗವಹಿಸಿ",
+  "<from-language>-<to-language> vs Top contributed language pairs": "<from-language>-<to-language> vs ಪ್ರಮುಖವಾಗಿ ಕೊಡುಗೆ ನೀಡಲ್ಪಟ್ಟ ಭಾಷೆಗಳು",
   "<contribution-done>/<contribution-goal> Image(s)": "<contribution-done> / <contribution-goal> ಚಿತ್ರಗಳು",
   "You contributed <span id=\"user-contribution-count\"></span> <span>recording(s)</span> for your language!": "ನೀವು ನಿಮ್ಮ ಭಾಷೆಗಾಗಿ <span id=\"user-contribution-count\"></span> <span> ರೆಕಾರ್ಡಿಂಗ್‌ಗಳನ್ನು </span> ಕೊಡುಗೆಯಾಗಿ ನೀಡಿದ್ದೀರಿ!",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Bolo India Target Achieved": "<span id=\"metric-language\"></span> ಭಾಷೆಯ ಮಾತನಾಡು ಇಂಡಿಯಾದ ಗುರಿಯ <span id=\"totalAverage\"></span> ರಷ್ಟು ಸಾಧಿಸಲ್ಪಟ್ಟಿದೆ",
-  "You validated <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language!": "ನಿಮ್ಮ ಭಾಷೆಗಾಗಿ ನೀವು <span id=\"user-contribution-count\"></span> <span> ವಾಕ್ಯಗಳನ್ನು </>  ಮೌಲ್ಯೀಕರಿಸಿದ್ದೀರಿ!",
+  "You validated <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language!": "ನಿಮ್ಮ ಭಾಷೆಗಾಗಿ ನೀವು <span id=\"user-contribution-count\"></span> <span> ವಾಕ್ಯಗಳನ್ನು </span>  ಮೌಲ್ಯೀಕರಿಸಿದ್ದೀರಿ!",
   "You contributed <span id=\"user-contribution-count\"></span> <span>sentence(s)</span> for your language!": "ನೀವು ನಿಮ್ಮ ಭಾಷೆಗೆ <span id=\"user-contribution-count\"></span> <span> ವಾಕ್ಯಗಳನ್ನು </span> ಕೊಡುಗೆಯಾಗಿ ನೀಡಿದ್ದೀರಿ!",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Suno India Target Achieved": "<span id=\"metric-language\"></span> ಭಾಷೆಯ ಕೇಳು ಇಂಡಿಯಾದ ಗುರಿಯ <span id=\"totalAverage\"></span> ಅಷ್ಟು ಸಾಧಿಸಲ್ಪಟ್ಟಿದೆ",
   "<span id=\"totalAverage\"></span> of <span id=\"metric-language\"></span> Likho India Target Achieved": "<span id=\"metric-language\"></span> ಭಾಷೆಯ ಬರೆ ಇಂಡಿಯಾದ ಗುರಿಯ <span id=\"totalAverage\"></span> ಅಷ್ಟು ಸಾಧಿಸಲ್ಪಟ್ಟಿದೆ",
@@ -422,5 +422,6 @@
   "Thank you for your enthusiasm to validate the transcriptions.": "ಪ್ರತಿಲೇಖನಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವಲ್ಲಿ ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
   "Thank you for your enthusiasm to translate the sentences.": "ವಾಕ್ಯಗಳನ್ನು ಭಾಷಾಂತರಿಸಲು ನೀವು ತೋರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
   "Thank you for your enthusiasm to validate the translations.": "ಅನುವಾದಗಳನ್ನು ಮೌಲ್ಯೀಕರಿಸುವಲ್ಲಿ ನೀವು ತೊರಿದ ಉತ್ಸಾಹಕ್ಕೆ ಧನ್ಯವಾದಗಳು.",
-  "Unspecified location": "Unspecified location"
+  "Unspecified location": "ಅನಿರ್ದಿಷ್ಟ ವೆಬ್ ಅಡ್ರೆಸ್",
+  "We feel the text you entered doesn't match the original text, are you sure about your edit?": "ನೀವು ನಮೂದಿಸಿದ ಪಠ್ಯವು ಮೂಲ ಪಠ್ಯಕ್ಕೆ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ ಎಂದು ನಾವು ಭಾವಿಸುತ್ತೇವೆ, ನಿಮ್ಮ ಸಂಪಾದನೆಯ ಬಗ್ಗೆ ನೀವು ಖಚಿತರಾಗಿದ್ದೀರಿಯೇ?"
 }

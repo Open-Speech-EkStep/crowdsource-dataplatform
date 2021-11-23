@@ -8,7 +8,8 @@ import { scoreSegment } from './ibleu'
 export class BleuScore implements Validator {
     validate(language: string, ref: string, hyp: string): boolean {
         let bleuScore = scoreSegment(hyp, ref)
-        console.log(bleuScore)
+        console.log('score', bleuScore)
+        console.log('value', LANGUAGE_CONFIG_PARALLEL[language])
         return bleuScore >= (LANGUAGE_CONFIG_PARALLEL[language] || -1)
     }
 }

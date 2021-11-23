@@ -209,10 +209,10 @@ function lngtype(text) {
     return { type: 'symbol' };
   }
 
-  const contributionLanguage =
-    currentModule === INITIATIVES.parallel.value
-      ? localStorage.getItem(PARALLEL_TO_LANGUAGE)
-      : localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const fromLanguage = localStorage.getItem(CONTRIBUTION_LANGUAGE);
+  const toLanguage = localStorage.getItem(PARALLEL_TO_LANGUAGE);
+
+  const contributionLanguage = currentModule === INITIATIVES.parallel.value ? toLanguage : fromLanguage;
 
   Object.entries(langdic).forEach(([key, value]) => {
     // loop to read all the dictionary items if not true
@@ -239,7 +239,9 @@ function lngtype(text) {
     data.sentences[currentIndexOfData].auto_validate
   ) {
     if (langdic[contributionLanguage].test(newText)) {
-      if (!AutoValidation[initiativeType](contributionLanguage, refText, text)) {
+      const autoValidationLanguage =
+        currentModule === INITIATIVES.parallel.value ? `${fromLanguage}-${toLanguage}` : fromLanguage;
+      if (!AutoValidation[initiativeType](autoValidationLanguage, refText, text)) {
         return { type: 'auto-validation' };
       }
     }

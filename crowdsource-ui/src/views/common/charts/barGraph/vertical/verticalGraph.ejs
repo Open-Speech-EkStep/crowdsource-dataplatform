@@ -1,16 +1,20 @@
 <link rel="preload" as="style" onload='this.onload=null,this.rel="stylesheet"' type="text/css" href="/css/common/verticalBarGraph.css">
 <div class="row mx-0 mb-3">
-    <div class="col-lg-3 col-12 p-0">
+    <div class="col-lg-5 col-12 p-0">
         <div class="text-primary"><%= text %></div>
     </div>
-    <div class="col-lg-9 col-12 pr-0 mt-2">
+    <div class="col-lg-7 col-12 pr-0 mt-2">
         <div class="row float-lg-right float-md-right pr-lg-3 pr-md-3">
-            <div class="language-legend mt-lg-1 mt-md-1"></div> <div>
-                <%= __('Your selected language') %>
-            </div>
-            <div class="top-langauge-legend mt-lg-1 mt-md-1 ml-lg-5"></div> <div>
-                <%= __('Top languages') %>
-            </div>
+            <span class="d-flex text-sm-left mr-2">
+                <div class="language-legend mt-lg-1 mt-md-1"></div> <div>
+                    <%= __('Your selected language') %>
+                </div>
+            </span>
+            <span class="d-flex text-sm-left">
+                <div class="top-langauge-legend mt-lg-1 mt-md-1 ml-lg-5 ml-0 mt-1"></div> <div>
+                    <%= __('Top languages') %>
+                </div>
+            </span>
         </div>
     </div>
 </div>

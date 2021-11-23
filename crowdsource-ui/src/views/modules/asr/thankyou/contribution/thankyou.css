@@ -51,6 +51,7 @@ h4,
   line-height: 17px;
   color: #666666;
   margin-right: 3px;
+  align-self: center;
 }
 
 .x-axis-label {

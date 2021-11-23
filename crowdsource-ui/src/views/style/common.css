@@ -387,3 +387,7 @@ body {
 .modal-backdrop.show {
   z-index: 1043;
 }
+
+.btn-custom-outline-primary,.btn-custom-primary{
+  width:max-content;
+}

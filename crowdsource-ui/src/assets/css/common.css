@@ -872,3 +872,7 @@ ul#my-badge {
 #my-badge {
   border-bottom: 1px solid #0f2749;
 }
+
+.btn-custom-outline-primary,.btn-custom-primary{
+  width:max-content;
+}

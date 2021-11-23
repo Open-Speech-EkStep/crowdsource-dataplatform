@@ -7,7 +7,7 @@ class Wer {
     validate(language, ref, hyp) {
         const wordCount = ref.split(" ").length;
         let wer = (0, word_error_rate_1.calculateEditDistance)(ref, hyp) / wordCount;
-        return wer < (constants_1.LANGUAGE_CONFIG_ASR[language] || 2);
+        return wer <= (constants_1.LANGUAGE_CONFIG_ASR[language] || 2);
     }
 }
 exports.Wer = Wer;

@@ -1,4 +1,4 @@
 { 
     "envName": "test",
-    "autoValidation": "disabled"
+    "autoValidation": "enabled"
 }

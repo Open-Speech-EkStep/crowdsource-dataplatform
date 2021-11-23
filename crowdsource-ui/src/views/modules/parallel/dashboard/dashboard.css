@@ -251,8 +251,8 @@ body.modal-open .supreme-container {
   border: 1px solid #c4c4c4;;
   position: absolute;
   z-index: 1;
-  bottom: 60%;
-  left: 50%;
+  bottom: 1%;
+  left: 14%;
   margin-left: -75px;
   transition: opacity 0.3s;
   border-radius: 4px;
@@ -260,6 +260,7 @@ body.modal-open .supreme-container {
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(8px);
+  width: max-content;
 }
 
 .state-popover>.bottomTip {
@@ -281,6 +282,10 @@ body.modal-open .supreme-container {
   line-height: 18px;
   color: #4562b9;
   margin-bottom: 5px;
+}
+
+.language-dropdown-row{
+  flex-wrap: nowrap;
 }
 
 @media screen and (min-width: 280px) {
@@ -309,7 +314,6 @@ body.modal-open .supreme-container {
   }
 
   .state-popover  {
-    width: max-content;
     height: 150px;
     padding: 10px;
     background-color: #e9e9e9;
@@ -360,10 +364,6 @@ body.modal-open .supreme-container {
   .container {
     padding-left: 40px;
     padding-right: 40px;
-  }
-
-  .chart {
-    margin-right: 2.5rem;
   }
 
   .no-data-found {
@@ -484,13 +484,25 @@ body.modal-open .supreme-container {
   }
 
   .state-popover  {
-    width: max-content;
     height: 150px;
     padding: 12px;
     top:290px;
+    left:20%;
     background-color: #e9e9e9;
   }
   .state-popover>.bottomTip {
     left: 15%;
   }
+}
+
+@media (max-width: 359px) {
+  .language-dropdown-row{
+    flex-wrap:wrap !important;
+  }
+
+  .language-dropdown-row> div:nth-child(3) {
+    padding-left: 15px !important;
+    margin-top: 10px;
+  }
+
 }

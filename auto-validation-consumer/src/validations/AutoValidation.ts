@@ -5,7 +5,7 @@ import { TruthyValidator } from "./TruthyValidator"
 
 export default {
     'asr': new Wer().validate,
-    'parallel': new TruthyValidator().validate,
+    'parallel': new BleuScore().validate,
     'ocr': new Levenstein().validate,
     'text': new TruthyValidator().validate
 }

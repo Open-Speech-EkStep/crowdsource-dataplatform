@@ -245,18 +245,13 @@ const initialize = () => {
         }, 21 * 1000);
       })
       .catch(() => {
-        notyf.error(
-          'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
-        );
-        $stopRecordBtn.addClass('d-none');
-        $nextBtn.addClass('d-none');
-        $reRecordBtn.addClass('d-none');
-        $recordingSign.addClass('d-none');
-        $recordingRow.addClass('d-none');
-        $audioPlayer.addClass('d-none');
-        $player.trigger('pause');
-        $visualizer.addClass('d-none');
-        $audioSmallError.addClass('d-none');
+        const notyfMsg = $('.notyf').children().length;
+        if(!notyfMsg){
+          notyf.error(
+            'Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission'
+          );
+        }
+        $nextBtn.prop('disabled', true);
       });
   });
 
