@@ -364,9 +364,11 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   data-testid="testMicButton"
                   variant="normal"
                   onClick={onAudioTest}
-                  className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
+                  className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
-                  <Image src="/images/mic.svg" width="24" height="24" alt="Mic Icon" />
+                  <div className="flex-shrink-0 d-flex">
+                    <Image src="/images/mic.svg" width="24" height="24" alt="Mic Icon" />
+                  </div>
                   <span className="d-flex ms-2">{t('testMic')}</span>
                 </Button>
               )}
@@ -374,9 +376,11 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 <Button
                   variant="normal"
                   data-testid="recordingButton"
-                  className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
+                  className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
-                  <Image src="/images/mic.svg" width="24" height="24" alt="Recording Icon" />
+                  <div className="flex-shrink-0 d-flex">
+                    <Image src="/images/mic.svg" width="24" height="24" alt="Recording Icon" />
+                  </div>
                   <span className="d-flex ms-2">
                     <Trans
                       i18nKey="recordingCountValidationMsg"
@@ -391,9 +395,12 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
               {!showTestMicText && showPlayingbackAudio && (
                 <Button
                   variant="normal"
-                  className={`${styles.testBtn} d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
+                  className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
-                  <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  <div className="flex-shrink-0 d-flex">
+                    <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                  </div>
+
                   <span className="d-flex ms-2">{t('playingBackAudio')}</span>
                 </Button>
               )}
