@@ -402,5 +402,6 @@
   "tipThree": "ନିଶ୍ଚିତ କରନ୍ତୁ <b>ପୃଷ୍ଠଭୂମି ରେ କୌଣସି କୋଳାହଳ  ନାହିଁ</b>",
   "tipFour": "ଏହାକୁ ରେକର୍ଡିଂ କରିବା ପୂର୍ବରୁ ଥରେ ପଢ଼ି ନିଅନ୍ତୁ",
   "tipFive": "ରେକର୍ଡ ବଟନ୍ ଉପରେ କ୍ଲିକ୍ କରି ଆରମ୍ଭ କରନ୍ତୁ",
-  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission"
+  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
+  "UnspecifiedLocation": ""
 }

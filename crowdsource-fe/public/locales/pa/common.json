@@ -402,5 +402,6 @@
   "tipThree": "ਯਕੀਨੀ ਬਣਾਓ ਕਿ<b>ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਕੋਈ ਸ਼ੋਰ ਨਾ ਹੋਵੇ</b>",
   "tipFour": "<b>ਰਿਕਾਰਡ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ</b> ਇੱਕ ਵਾਰ ਪੜ੍ਹੋ",
   "tipFive": "<b>ਰਿਕਾਰਡ</b> ਬਟਨ 'ਤੇ ਕਲਿੱਕ ਕਰਕੇ ਸ਼ੁਰੂ ਕਰੋ",
-  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission"
+  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
+  "UnspecifiedLocation": ""
 }

@@ -402,5 +402,6 @@
   "tipThree": "ખાતરી કરો કે <b>કોઈ બેકગ્રાઉન્ડ નોઇઝ ના હોઈ</b>.",
   "tipFour": "<b>રેકોર્ડિંગ</b> શરૂ કરતા પહેલાં એકવાર વાંચી લો",
   "tipFive": "<b>રેકોર્ડ</b> બટન પર ક્લિક કરીને શરૂ કરો",
-  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission"
+  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
+  "UnspecifiedLocation": ""
 }

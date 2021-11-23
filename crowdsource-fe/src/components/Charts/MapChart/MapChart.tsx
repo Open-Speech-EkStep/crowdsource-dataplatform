@@ -1,7 +1,12 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as maps from '@amcharts/amcharts4/maps';
+import { useTranslation } from 'next-i18next';
+
+import type { UnSpecifiedDataByState } from 'types/CumulativeDataByLanguageAndState';
+
+import styles from './MapChart.module.scss';
 
 interface ChartProps {
   sourceUrl: string;
@@ -12,10 +17,35 @@ interface ChartProps {
   tooltipTemplate?: string;
   xAxisLabel?: string;
   yAxisLabel?: string;
+  anonymousStateData: UnSpecifiedDataByState;
 }
 
-const MapChart = ({ sourceUrl, data, colors, tooltipTemplate, quarterUnit }: ChartProps) => {
+const getStateBg = function (value: number, quarterUnit: number): string {
+  if (value >= quarterUnit * 3) {
+    return 'stateBgDarker';
+  } else if (value >= quarterUnit * 2) {
+    return 'stateBgDark';
+  } else if (value >= quarterUnit) {
+    return 'stateBgLight';
+  } else if (value > 0) {
+    return 'stateBgLighter';
+  } else {
+    return 'stateBgDefault';
+  }
+};
+
+const MapChart = ({
+  sourceUrl,
+  data,
+  colors,
+  tooltipTemplate,
+  quarterUnit,
+  anonymousStateData,
+}: ChartProps) => {
   const chart = useRef({});
+  const { t } = useTranslation();
+
+  const [isUnspecifiedPopUp, setUnspecifiedPopUp] = useState(false);
 
   useEffect(() => {
     let polygonSeries: any;
@@ -88,7 +118,46 @@ const MapChart = ({ sourceUrl, data, colors, tooltipTemplate, quarterUnit }: Cha
     };
   }, [colors, data, quarterUnit, sourceUrl, tooltipTemplate]);
 
-  return <div id="indiaMapChart" className="h-100" />;
+  const stateBg: string = getStateBg(anonymousStateData.value, quarterUnit);
+
+  return (
+    <>
+      <div id="indiaMapChart" className="h-100" />
+      <div
+        className={`${styles.statePopover} ${styles[stateBg]} ${
+          isUnspecifiedPopUp ? styles.show : styles.hide
+        }`}
+        id="state-popover"
+        data-testid="statePopover"
+      >
+        <div>
+          <h6>{t('UnspecifiedLocation')}</h6>
+          <div>
+            {anonymousStateData.speakers} {t('people')}
+          </div>
+          <div>
+            {anonymousStateData.contributionText}: {anonymousStateData.contribution}
+          </div>
+          <div>
+            {anonymousStateData.validationText}: {anonymousStateData.validation}
+          </div>
+        </div>
+        <span className={styles.bottomTip}></span>
+      </div>
+      <div className="text-left mb-1">
+        <span
+          id="unspecifiedLocation"
+          className={styles.unspecifiedLocation}
+          role="button"
+          tabIndex={0}
+          onMouseEnter={() => setUnspecifiedPopUp(true)}
+          onMouseLeave={() => setUnspecifiedPopUp(false)}
+        >
+          *{t('UnspecifiedLocation')}
+        </span>
+      </div>
+    </>
+  );
 };
 
 export default MapChart;

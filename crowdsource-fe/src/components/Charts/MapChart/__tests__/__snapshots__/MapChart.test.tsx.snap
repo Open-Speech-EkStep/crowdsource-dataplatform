@@ -384,5 +384,40 @@ exports[`MapChart should render the component and matches it against stored snap
       </svg>
     </div>
   </div>
+  <div
+    class="statePopover stateBgDarker hide"
+    data-testid="statePopover"
+    id="state-popover"
+  >
+    <div>
+      <h6>
+        UnspecifiedLocation
+      </h6>
+      <div>
+        0 people
+      </div>
+      <div>
+        contribution:  2
+      </div>
+      <div>
+        validation:  3
+      </div>
+    </div>
+    <span
+      class="bottomTip"
+    />
+  </div>
+  <div
+    class="text-left mb-1"
+  >
+    <span
+      class="unspecifiedLocation"
+      id="unspecifiedLocation"
+      role="button"
+      tabindex="0"
+    >
+      *UnspecifiedLocation
+    </span>
+  </div>
 </DocumentFragment>
 `;

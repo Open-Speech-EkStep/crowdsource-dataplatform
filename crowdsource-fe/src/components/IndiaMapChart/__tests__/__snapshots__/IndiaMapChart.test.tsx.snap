@@ -11,7 +11,7 @@ exports[`IndiaMapChart should render the component and matches it against stored
       mapChartTitle
     </p>
     <div
-      class="chart"
+      class="chart position-relative"
     >
       MapChart
     </div>

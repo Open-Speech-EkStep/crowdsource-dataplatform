@@ -402,5 +402,6 @@
   "tipThree": "<b>బ్యాక్‌గ్రౌండ్ శబ్దం ఏమీ లేదని</b> నిర్ధారించుకోండి",
   "tipFour": "<b>రికార్డ్ చేయడానికి ముందు</b> ఒకసారి చదవండి",
   "tipFive": "<b>రికార్డ్</b> బటన్ పై క్లిక్ చేయడం ద్వారా ప్రారంభించండి",
-  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission"
+  "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
+  "UnspecifiedLocation": ""
 }

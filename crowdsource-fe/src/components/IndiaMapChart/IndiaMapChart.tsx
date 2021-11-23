@@ -6,7 +6,10 @@ import MapLegend from 'components/MapLegend';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
-import type { CumulativeDataByLanguageAndState } from 'types/CumulativeDataByLanguageAndState';
+import type {
+  CumulativeDataByLanguageAndState,
+  UnSpecifiedDataByState,
+} from 'types/CumulativeDataByLanguageAndState';
 import type { InitiativeType } from 'types/InitiativeType';
 import { convertTimeFormat, getHoursText, getHoursValue, getMinutesText, getMinutesValue } from 'utils/utils';
 
@@ -96,6 +99,31 @@ const statesInformation = [
 const sourceUrl = 'https://crowdsource1.blob.core.windows.net/vakyansh-json-data/india2020Low.json';
 const colors = ['#4061BF', '#6B85CE', '#92A8E8', '#CDD8F6', '#E9E9E9'];
 
+const generateAnonymousState = function (data: any) {
+  const allUnspecifiedState = data
+    ? data.filter((st: any) => !statesInformation.some(s => s.state === st.state))
+    : [];
+  const anonymousStateData = allUnspecifiedState.reduce(
+    (ctx: any, st: any) => {
+      ctx.total_contributions = ctx.total_contributions + st.total_contributions;
+      ctx.total_validations = ctx.total_validations + st.total_validations;
+      ctx.total_contribution_count = ctx.total_contribution_count + st.total_contribution_count;
+      ctx.total_validation_count = ctx.total_validation_count + st.total_validation_count;
+      ctx.total_speakers = ctx.total_speakers + st.total_speakers;
+      return ctx;
+    },
+    {
+      total_speakers: 0,
+      total_contributions: 0,
+      total_validations: 0.0,
+      total_contribution_count: 0,
+      total_validation_count: 0,
+    }
+  );
+
+  return anonymousStateData;
+};
+
 const getTotalParticipation = (data: CumulativeDataByLanguageAndState | undefined, type: InitiativeType) => {
   if (type === INITIATIVES_MEDIA_MAPPING.likho || type === INITIATIVES_MEDIA_MAPPING.dekho) {
     return (Number(data?.total_validation_count) || 0) + (Number(data?.total_contribution_count) || 0);
@@ -134,6 +162,21 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
       value: contributionData + validationData,
     });
   });
+
+  const anonymousStateData = generateAnonymousState(mapData) as CumulativeDataByLanguageAndState;
+  const contribution = config.contribution as keyof CumulativeDataByLanguageAndState;
+  const contributionData = data ? (anonymousStateData[contribution] as number) : 0;
+  const validation = config.validation as keyof CumulativeDataByLanguageAndState;
+  const validationData = data ? (anonymousStateData[validation] as number) : 0;
+  const formattedAnonymousStateData: UnSpecifiedDataByState = {
+    state: t('Unspecified Location'),
+    contribution: config.format ? convertTimeFormat(contributionData) : `${contributionData}`,
+    validation: config.format ? convertTimeFormat(validationData) : `${validationData}`,
+    speakers: anonymousStateData?.total_speakers || 0,
+    contributionText: t(config.contributionText),
+    validationText: t(config.validationText),
+    value: contributionData + validationData,
+  };
 
   const tooltipTemplate = `
     <div>
@@ -183,7 +226,7 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
   return (
     <div className="bg-light rounded-8 p-5 p-md-8 h-100">
       <p className="mb-5 display-2">{t('mapChartTitle')}</p>
-      <div className={styles.chart}>
+      <div className={`${styles.chart} position-relative`}>
         {!data || isValidating ? (
           <div className="d-flex justify-content-center align-items-center h-100 w-100">
             <Spinner data-testid="ChartSpinner" animation="border" variant="primary" />
@@ -195,6 +238,7 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
             data={statesData}
             tooltipTemplate={tooltipTemplate}
             quarterUnit={quarterVal}
+            anonymousStateData={formattedAnonymousStateData}
           />
         )}
       </div>

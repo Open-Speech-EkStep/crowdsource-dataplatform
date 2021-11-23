@@ -405,5 +405,6 @@
   "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
   "prohibitedContent": "Prohibited Content",
   "politicalStatement": "Political Statement",
-  "misinformation": "Misinformation"
+  "misinformation": "Misinformation",
+  "UnspecifiedLocation": "Unspecified Location"
 }

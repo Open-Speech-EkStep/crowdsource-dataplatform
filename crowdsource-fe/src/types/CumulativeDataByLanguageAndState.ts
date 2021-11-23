@@ -10,3 +10,13 @@ export interface CumulativeDataByLanguageAndState {
   total_validation_count: number;
   type: InitiativeType;
 }
+
+export interface UnSpecifiedDataByState {
+  state: string;
+  contribution: number | string;
+  validation: number | string;
+  speakers: number;
+  contributionText: string;
+  validationText: string;
+  value: number;
+}
