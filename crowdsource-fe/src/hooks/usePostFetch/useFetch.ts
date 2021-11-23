@@ -28,6 +28,10 @@ const useFetch = <T>({ url, init, processData }: RequestProps<T>) => {
       try {
         // Fetch data from REST API
         const response = await fetch(url, init);
+        /* istanbul ignore next */
+        if (!response.ok) {
+          throw response;
+        }
         // Extract json
         const rawData: any = await response.json();
         const processedData = processJson(rawData);

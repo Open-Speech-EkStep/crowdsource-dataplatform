@@ -79,7 +79,7 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
           /* istanbul ignore next */
           if (error) {
             setHasError(true);
-            if (error.status && error.status === ErrorStatusCode.TOO_MANY_REQUEST) {
+            if (error.status && error.status === ErrorStatusCode.SERVICE_UNAVAILABLE) {
               setErrorMsg('multipleRequestApiError');
             } else {
               setErrorMsg('apiFailureError');

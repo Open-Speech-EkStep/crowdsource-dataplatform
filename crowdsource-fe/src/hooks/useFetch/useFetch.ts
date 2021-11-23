@@ -3,7 +3,14 @@ import useSWR from 'swr';
 
 type ValueKey = string | any[] | null;
 
-const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then(res => res.json());
+const fetcher = (...args: Parameters<typeof fetch>) =>
+  fetch(...args).then(res => {
+    /* istanbul ignore next */
+    if (!res.ok) {
+      throw res;
+    }
+    return res.json();
+  });
 
 const useFetch = <Data = any, Error = any>(key: ValueKey | (() => ValueKey), options?: SWRConfiguration) => {
   return useSWR<Data, Error>(key, fetcher, {
@@ -18,7 +25,13 @@ const paramFetcher = (key: string) =>
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-  }).then(res => res.json());
+  }).then(res => {
+    /* istanbul ignore next */
+    if (!res.ok) {
+      throw res;
+    }
+    return res.json();
+  });
 
 export const useFetchWithInit = <Data = any, Error = any>(
   key: ValueKey | (() => ValueKey),

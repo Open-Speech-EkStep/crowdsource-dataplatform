@@ -17,7 +17,10 @@ const useSubmit = <Data = any, Error = any>(key: string, withHeaders: boolean = 
           body,
           headers: withHeaders ? { 'Content-Type': 'application/json' } : undefined,
         });
-
+        /* istanbul ignore next */
+        if (!res.ok) {
+          throw res;
+        }
         setIsLoading(false);
         setData(await res.json());
         setError(undefined);

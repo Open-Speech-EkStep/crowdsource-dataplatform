@@ -232,7 +232,7 @@ export const visualize = (visualizer: any, analyser: any) => {
 };
 
 export const getErrorMsg = (error: any) => {
-  if (error && error.status === ErrorStatusCode.TOO_MANY_REQUEST) {
+  if (error && error.status === ErrorStatusCode.SERVICE_UNAVAILABLE) {
     return 'multipleRequestApiError';
   } else {
     return 'apiFailureError';

@@ -173,7 +173,7 @@ describe('Utils', () => {
     };
 
     const multipleRequestError = {
-      status: 429,
+      status: 503,
     };
 
     const errorMsg = getErrorMsg(error);
