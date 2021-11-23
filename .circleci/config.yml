@@ -164,7 +164,7 @@ jobs:
       - run:
           name: Deploy container
           command: |
-            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO_UI}:<< parameters.env-name >>
+            ENV_IMAGE_NAME=<< parameters.azure_login_server_name >>/${AZURE_REPO_UI}:<< parameters.env-name >>
 
             sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
 
@@ -402,22 +402,24 @@ workflows:
           pre-steps:
             - *fast-checkout
           name: push_prod_image_next_ui
-          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-          registry-name: ${AZURE_REGISTRY}
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          registry-name: ${AZURE_REGISTRY_PROD}
           path: ./
           extra-build-args: --build-arg NODE_CONFIG_ENV=prod
           repo: ${AZURE_REPO_UI}
-          tag: prod
+          tag: prod-ui
           checkout: false
           requires:
             - create-workspace
 
-      # - aks_deployment_ui:
-      #     name: prod_ui_deployment_aks
-      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
-      #     env-name: prod
-      #     requires:
-      #       - push_prod_image_next_ui
+      - aks_deployment_ui:
+          name: prod_ui_deployment_aks
+          cluster-name: ${AZURE_PROD_CLUSTER_NAME}
+          env-name: prod-ui
+          azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          requires:
+            - push_prod_image_next_ui
 
       # - cdn_invalidation:
       #     name: cdn_invalidation_ui_prod
