@@ -102,10 +102,10 @@
             </div>
             <div class="row justify-content-center mb-lg-7 mb-md-7 mb-sm-1 text-btn-control" id="validation-button-row">
                 <div class="flex-lg-row flex-md-row d-flex d-flex flex-row flex-wrap flex-lg-nowrap flex-md-nowrap justify-content-around mt-2">
-                    <button class="w-100 btn mb-2 btn-custom-outline-primary rounded-pill first mt-3 mt-lg-2 mt-md-2" disabled="disabled" id="dislike_button">
+                    <button class="w-100 btn mb-2 btn-custom-outline-primary rounded-pill first mt-3 mt-lg-2 mt-md-2 order-2 order-md-2 order-lg-1" disabled="disabled" id="dislike_button">
                        <img src="/img/cross.svg" class="pr-2" style="margin-top:-3px"> <%= __('Incorrect') %>
                    </button>
-                    <div class="align-items-center justify-content-center align-items-center mb-2 disable-control" id="audio-player-btn">
+                    <div class="align-items-center justify-content-center align-items-center mb-2 disable-control order-1 order-md-2 order-lg-2" id="audio-player-btn">
                         <div class="audioplayer d-flex justify-content-center align-items-center">
                             <img src="/img/play.svg" alt="play" id="play" class="cursor-pointer" height="60" width="60">
                             <img src="/img/pause.svg" alt="pause" id="pause" class="d-none cursor-pointer" height="60" width="60">
@@ -125,7 +125,7 @@
                             <%= __('Resume') %>
                         </h5>
                     </div>
-                    <button class="btn mb-2 w-100 btn-custom-outline-primary rounded-pill second mt-3 mt-lg-2 mt-md-2" disabled="disabled" id="like_button">
+                    <button class="btn mb-2 w-100 btn-custom-outline-primary rounded-pill second mt-3 mt-lg-2 mt-md-2 order-3" disabled="disabled" id="like_button">
                         <img src="/img/right.svg" class="pr-2" style="margin-top:-3px"> <%= __('Correct') %>
                      </button>
                 </div>
