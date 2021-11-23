@@ -1,10 +1,11 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import Button from 'components/Button';
+import ImageBasePath from 'components/ImageBasePath';
 
 import styles from './ButtonControls.module.scss';
 
@@ -92,7 +93,7 @@ const ButtonControls = ({
             className={`${styles.needsChangeBtn} mx-md-6 order-2 order-md-1 my-2 my-md-0`}
           >
             <span className={classNames(`d-flex me-2`, { [styles.correctDisabled]: correctDisable })}>
-              <Image src="/images/cross.svg" width="20" height="20" alt="InCorrect Icon" />
+              <ImageBasePath src="/images/cross.svg" width="20" height="20" alt="InCorrect Icon" />
             </span>
             {t('incorrect')}
           </Button>
