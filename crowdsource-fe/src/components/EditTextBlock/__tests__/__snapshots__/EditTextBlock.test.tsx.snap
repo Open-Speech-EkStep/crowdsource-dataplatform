@@ -3,7 +3,7 @@
 exports[`EditTextBlock should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="flex-fill"
+    class="textarea"
   >
     <div
       class="position-relative p-4 addText roundedLeft readOnly"
@@ -32,7 +32,7 @@ exports[`EditTextBlock should render the component and matches it against stored
     </div>
   </div>
   <div
-    class="flex-fill"
+    class="textarea"
   >
     <div
       class="position-relative p-4 addText roundedRight"

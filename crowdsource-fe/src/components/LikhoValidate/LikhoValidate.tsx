@@ -260,7 +260,7 @@ const LikhoValidate = () => {
                   <span className="display-3">{t(`${INITIATIVES_MAPPING.likho}ValidationHeading`)}</span>
                 </div>
                 <div className="d-md-flex mt-2 mt-md-4">
-                  <div className="flex-fill">
+                  <div className={styles.textarea}>
                     <TextEditArea
                       id="originalText"
                       isTextareaDisabled={false}
@@ -274,7 +274,7 @@ const LikhoValidate = () => {
                       onError={() => {}}
                     />
                   </div>
-                  <div className="flex-fill">
+                  <div className={styles.textarea}>
                     <TextEditArea
                       id="translatedText"
                       isTextareaDisabled={false}

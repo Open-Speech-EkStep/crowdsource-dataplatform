@@ -7,6 +7,8 @@ import nodeConfig from 'constants/nodeConfig';
 import type { InitiativeType } from 'types/InitiativeType';
 import AutoValidation from 'utils/validations';
 
+import styles from './EditTextBlock.module.scss';
+
 interface EditTextBlockProps {
   initiative: InitiativeType;
   fromLanguage: string | null;
@@ -56,7 +58,7 @@ const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
 
   return (
     <Fragment>
-      <div className="flex-fill">
+      <div className={styles.textarea}>
         <TextEditArea
           id="originalText"
           isTextareaDisabled={false}
@@ -70,7 +72,7 @@ const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
           onError={() => {}}
         />
       </div>
-      <div className="flex-fill">
+      <div className={styles.textarea}>
         <TextEditArea
           id="editText"
           isTextareaDisabled={false}
