@@ -397,10 +397,10 @@ exports[`MapChart should render the component and matches it against stored snap
         0 people
       </div>
       <div>
-        contribution:  2
+        contribution: 2
       </div>
       <div>
-        validation:  3
+        validation: 3
       </div>
     </div>
     <span
