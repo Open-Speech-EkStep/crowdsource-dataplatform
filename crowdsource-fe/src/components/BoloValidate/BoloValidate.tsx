@@ -107,6 +107,12 @@ const BoloValidate = () => {
     };
   });
 
+  useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
   const onAudioEnd = () => {
     setShowPlayButton(false);
     setShowPauseButton(false);

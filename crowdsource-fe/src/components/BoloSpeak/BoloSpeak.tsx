@@ -147,6 +147,12 @@ const BoloSpeak = () => {
     }
   }, [currentDataIndex, result]);
 
+  useEffect(() => {
+    if (speakerDetails) {
+      setCurrentDataIndex(0);
+    }
+  }, [speakerDetails]);
+
   const setDataCurrentIndex = (index: number) => {
     if (index === contributionData.length - 1) {
       router.push(`/${currentLocale}${routePaths.boloIndiaContributeThankYou}`, undefined, {
