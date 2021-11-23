@@ -403,5 +403,8 @@
   "tipFour": "<b>రికార్డ్ చేయడానికి ముందు</b> ఒకసారి చదవండి",
   "tipFive": "<b>రికార్డ్</b> బటన్ పై క్లిక్ చేయడం ద్వారా ప్రారంభించండి",
   "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
-  "UnspecifiedLocation": ""
+  "prohibitedContent": "నిషేధించబడిన విషయాలు",
+  "politicalStatement": "రాజకీయ ప్రకటన",
+  "misinformation": "తప్పుడు సమాచారం",
+  "unspecifiedLocation": "Unspecified Location"
 }

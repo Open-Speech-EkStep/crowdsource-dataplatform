@@ -68,7 +68,7 @@ exports[`DekhoContribute should render the component and matches it against stor
   >
     <header>
       <div
-        class="d-flex justify-content-between align-items-center px-3 px-md-6"
+        class="d-lg-flex justify-content-lg-between align-items-lg-center px-3 px-md-3 px-lg-6"
       >
         <div
           class="root d-flex align-items-center"
@@ -127,7 +127,7 @@ exports[`DekhoContribute should render the component and matches it against stor
           </span>
         </div>
         <div
-          class="d-flex"
+          class="d-flex justify-content-end mt-1 mt-md-3 mt-lg-0"
         >
           <div>
             <button

@@ -403,5 +403,8 @@
   "tipFour": "<b>ৰেকৰ্ডিং কৰাৰ আগতে </b>এবাৰ পঢ়ি লওক",
   "tipFive": "ৰেকৰডিং বুটামত ক্লিক কৰি আৰম্ভ কৰক",
   "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
-  "UnspecifiedLocation": ""
+  "prohibitedContent": "ত্যাগ কৰা সমল",
+  "politicalStatement": "ৰাজনৈতিক বাক্য",
+  "misinformation": "ভূল তথ্য",
+  "unspecifiedLocation": "Unspecified Location"
 }

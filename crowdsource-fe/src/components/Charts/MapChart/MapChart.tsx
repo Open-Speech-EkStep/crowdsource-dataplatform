@@ -131,7 +131,7 @@ const MapChart = ({
         data-testid="statePopover"
       >
         <div>
-          <h6>{t('UnspecifiedLocation')}</h6>
+          <h6>{t('unspecifiedLocation')}</h6>
           <div>
             {anonymousStateData.speakers} {t('people')}
           </div>
@@ -153,7 +153,7 @@ const MapChart = ({
           onMouseEnter={() => setUnspecifiedPopUp(true)}
           onMouseLeave={() => setUnspecifiedPopUp(false)}
         >
-          *{t('UnspecifiedLocation')}
+          *{t('unspecifiedLocation')}
         </span>
       </div>
     </>

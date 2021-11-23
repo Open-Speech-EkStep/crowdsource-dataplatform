@@ -23,9 +23,9 @@ const FunctionalHeader = ({
 }: FunctionalHeaderProps) => {
   return (
     <header>
-      <div className="d-flex justify-content-between align-items-center px-3 px-md-6">
+      <div className="d-lg-flex justify-content-lg-between align-items-lg-center px-3 px-md-3 px-lg-6">
         <Breadcrumbs initiative={initiative} path={action} />
-        <div className="d-flex">
+        <div className="d-flex justify-content-end mt-1 mt-md-3 mt-lg-0">
           <div>
             <Report onSuccess={onSuccess} initiative={initiative} action={type} />
           </div>

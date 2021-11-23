@@ -403,5 +403,8 @@
   "tipFour": "<b>रेकॉर्डिंगपूर्वी</b> एकदा वाचा",
   "tipFive": "<b>रेकॉर्ड</b> बटणवर क्लिक करून सुरू करा",
   "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
-  "UnspecifiedLocation": ""
+  "prohibitedContent": "प्रतिबंधित मजकूर",
+  "politicalStatement": "राजनैतिक विधान",
+  "misinformation": "चुकीची माहिती",
+  "unspecifiedLocation": "Unspecified Location"
 }

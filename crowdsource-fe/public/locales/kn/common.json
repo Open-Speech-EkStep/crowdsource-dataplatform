@@ -403,5 +403,8 @@
   "tipFour": "<b> ರೆಕಾರ್ಡ್ ಮಾಡುವ ಮೊದಲು</b> ಒಮ್ಮೆ ಓದಿ",
   "tipFive": "<b> ರೆಕಾರ್ಡ್ </b> ಬಟನ್ ಅನ್ನು ಒತ್ತುವ ಮೂಲಕ ಪ್ರಾರಂಭಿಸಿ",
   "warningAudioPermissionMsg": "Sorry !!! We could not get access to your audio input device. Make sure you have given microphone access permission",
-  "UnspecifiedLocation": ""
+  "prohibitedContent": "ನಿಷೇಧಿತ ವಿಷಯ",
+  "politicalStatement": "ರಾಜಕೀಯ ಪ್ರಕಟಣೆ",
+  "misinformation": "ತಪ್ಪು ಮಾಹಿತಿ",
+  "unspecifiedLocation": "Unspecified Location"
 }

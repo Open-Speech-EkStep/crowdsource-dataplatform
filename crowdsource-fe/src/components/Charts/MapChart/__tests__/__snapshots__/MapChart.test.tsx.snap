@@ -391,7 +391,7 @@ exports[`MapChart should render the component and matches it against stored snap
   >
     <div>
       <h6>
-        UnspecifiedLocation
+        unspecifiedLocation
       </h6>
       <div>
         0 people
@@ -416,7 +416,7 @@ exports[`MapChart should render the component and matches it against stored snap
       role="button"
       tabindex="0"
     >
-      *UnspecifiedLocation
+      *unspecifiedLocation
     </span>
   </div>
 </DocumentFragment>

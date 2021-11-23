@@ -38,6 +38,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   const media: any = useRef();
   const mediaAudio: any = useRef();
   const micAudio: any = useRef();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const navBarRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
 
@@ -46,6 +48,21 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   let audioData: any = [];
   let recordingLength = 0;
   let sampleRate = 44100;
+
+  useEffect(() => {
+    function handleDocumentClick(event: Event) {
+      if (!navBarRef?.current?.contains(event.target as Node)) {
+        setIsExpanded(false);
+        setShowMicSpeaker(false);
+      }
+    }
+
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, [isExpanded]);
 
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
@@ -191,6 +208,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           setTestMicSpeakerInterval(
             setTimeout(() => {
               setShowPlayingbackAudio(true);
+              cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
             }, 5000)
           );
           const AudioContext = window.AudioContext;
@@ -290,7 +308,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   };
 
   return (
-    <div className="position-relative">
+    <div className="position-relative" ref={navBarRef}>
       <IconTextButton
         textMobile={t('test')}
         textDesktop={
@@ -298,7 +316,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
             ? t('testYourMicrophoneAndSpeakers')
             : t('testYourSpeaker')
         }
-        onClick={() => setShowMicSpeaker(!showMicSpeaker)}
+        onClick={() => {
+          setShowMicSpeaker(!showMicSpeaker);
+          setIsExpanded(!isExpanded);
+        }}
         altText="testYourSpeaker"
         active={showMicSpeaker}
       >
@@ -310,7 +331,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         )}
         <Image src="/images/speaker.svg" width="24" height="24" alt="testYourSpeaker" />
       </IconTextButton>
-      {showMicSpeaker && (
+      {showMicSpeaker && isExpanded && (
         <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>
           <Button
             onClick={() => {
@@ -391,7 +412,17 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 >
                   {showPlayingbackAudio && (
                     <span>
-                      {noiseMessage && showPlayingbackAudio ? t('backgroundNoise') : t('lowBackgroundNoise')}
+                      {noiseMessage && showPlayingbackAudio ? (
+                        <div className="d-flex align-items-center">
+                          <Image src="/images/warning.svg" width="16" height="16" alt="warning" />
+                          <span className="ms-1">{t('backgroundNoise')}</span>
+                        </div>
+                      ) : (
+                        <div className="d-flex align-items-center">
+                          <Image src="/images/success.svg" width="16" height="16" alt="success" />
+                          <span className="ms-1">{t('lowBackgroundNoise')}</span>
+                        </div>
+                      )}
                     </span>
                   )}
                   <span>{!showTestMicText && !showPlayingbackAudio && t('speakClearly')}</span>
