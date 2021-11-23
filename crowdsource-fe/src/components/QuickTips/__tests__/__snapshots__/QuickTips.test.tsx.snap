@@ -136,11 +136,7 @@ exports[`QuickTips should render the component and matches it against stored sna
             <noscript />
           </div>
         </div>
-        <span
-          class="mt-2"
-        >
-          tipTwo
-        </span>
+        tipTwo
       </div>
       <span
         class="sep flex-fill mt-9"
@@ -174,11 +170,7 @@ exports[`QuickTips should render the component and matches it against stored sna
             <noscript />
           </div>
         </div>
-        <span
-          class="mt-2"
-        >
-          tipThree
-        </span>
+        tipThree
       </div>
       <span
         class="sep flex-fill mt-9"
@@ -212,11 +204,7 @@ exports[`QuickTips should render the component and matches it against stored sna
             <noscript />
           </div>
         </div>
-        <span
-          class="mt-2"
-        >
-          tipFour
-        </span>
+        tipFour
       </div>
       <span
         class="sep flex-fill mt-9"
@@ -250,11 +238,7 @@ exports[`QuickTips should render the component and matches it against stored sna
             <noscript />
           </div>
         </div>
-        <span
-          class="mt-2"
-        >
-          tipFive
-        </span>
+        tipFive
       </div>
     </div>
   </div>
