@@ -3,9 +3,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import Link from 'components/Link';
+import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
 
 import styles from './Logo.module.scss';
+
 
 const Logo = () => {
   const { t } = useTranslation();
@@ -15,7 +17,7 @@ const Logo = () => {
     <div data-testid="Logo" className="d-flex">
       <a href={routePaths.root} className="d-flex align-items-center d-md-none">
         <Image
-          src={`/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
+          src={`${nodeConfig.contextRoot}/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
           alt={t('bhashiniLogo')}
           width="48"
           height="48"
