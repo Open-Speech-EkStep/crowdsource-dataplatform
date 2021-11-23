@@ -92,7 +92,7 @@ const ButtonControls = ({
             className={`${styles.needsChangeBtn} mx-md-6 order-2 order-md-1 my-2 my-md-0`}
           >
             <span className={classNames(`d-flex me-2`, { [styles.correctDisabled]: correctDisable })}>
-              <Image src="/images/correct.svg" width="24" height="24" alt="InCorrect Icon" />
+              <Image src="/images/cross.svg" width="20" height="20" alt="InCorrect Icon" />
             </span>
             {t('incorrect')}
           </Button>
