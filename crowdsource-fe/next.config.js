@@ -19,7 +19,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['dev-data-crowdsource.azureedge.net'],
-    path: `${nextConfig.basePath}/_next/image`,
+    path: `${config.get('fe.contextRoot')}/_next/image`,
   },
   i18n,
   // Force .page prefix on page files (ex. index.page.tsx) so generated files can be included in /pages directory without Next.js throwing build errors

@@ -274,14 +274,14 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
-      - check_fe:
-          name: check_fe
-          env_name: default
+      # - check_fe:
+      #     name: check_fe
+      #     env_name: default
 
       - create-workspace:
           name: create-workspace
-          requires:
-            - check_fe
+          # requires:
+          #   - check_fe
           filters:
             branches:
               only: [master, nextjs-basic-setup]
