@@ -28,12 +28,12 @@
 }
 
 .audioPermissionDeniedHeader {
-  :global(.btn-close) {
-    position: static;
-  }
   @include media-breakpoint-up(md) {
     :global(.btn-close) {
       position: absolute;
     }
+  }
+  :global(.btn-close) {
+    position: static;
   }
 }
