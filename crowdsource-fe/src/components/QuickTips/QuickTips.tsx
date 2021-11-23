@@ -58,28 +58,36 @@ const QuickTips = ({ showQuickTips }: QuickTipsProps) => {
           <div className={`${styles.icon} d-flex justify-content-center align-items-center rounded-50`}>
             <Image src="/images/speaker_voice.svg" width="24" height="24" alt="Speaker Icon" />
           </div>
-          <Trans i18nKey="tipTwo" defaults="tipTwo" components={{ b: <b /> }} />
+          <span className="mt-2">
+            <Trans i18nKey="tipTwo" defaults="tipTwo" components={{ b: <b /> }} />
+          </span>
         </div>
         <span className={`${styles.sep} flex-fill mt-9`} />
         <div className={`${styles.tip} d-flex flex-shrink-0 flex-column align-items-center text-center my-3`}>
           <div className={`${styles.icon} d-flex justify-content-center align-items-center rounded-50`}>
             <Image src="/images/equalizer.svg" width="24" height="24" alt="Equalizer Icon" />
           </div>
-          <Trans i18nKey="tipThree" defaults="tipThree" components={{ b: <b /> }} />
+          <span className="mt-2">
+            <Trans i18nKey="tipThree" defaults="tipThree" components={{ b: <b /> }} />
+          </span>
         </div>
         <span className={`${styles.sep} flex-fill mt-9`} />
         <div className={`${styles.tip} d-flex flex-shrink-0 flex-column align-items-center text-center my-3`}>
           <div className={`${styles.icon} d-flex justify-content-center align-items-center rounded-50`}>
             <Image src="/images/record_voice_over.svg" width="24" height="24" alt="Record Voice Icon" />
           </div>
-          <Trans i18nKey="tipFour" defaults="tipFour" components={{ b: <b /> }} />
+          <span className="mt-2">
+            <Trans i18nKey="tipFour" defaults="tipFour" components={{ b: <b /> }} />
+          </span>
         </div>
         <span className={`${styles.sep} flex-fill mt-9`} />
         <div className={`${styles.tip} d-flex flex-shrink-0 flex-column align-items-center text-center my-3`}>
           <div className={`${styles.icon} d-flex justify-content-center align-items-center rounded-50`}>
             <Image src="/images/play_circle_filled.svg" width="24" height="24" alt="Play Icon" />
           </div>
-          <Trans i18nKey="tipFive" defaults="tipFive" components={{ b: <b /> }} />
+          <span className="mt-2">
+            <Trans i18nKey="tipFive" defaults="tipFive" components={{ b: <b /> }} />
+          </span>
         </div>
       </div>
     </div>
