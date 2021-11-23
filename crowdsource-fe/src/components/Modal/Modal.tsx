@@ -17,6 +17,7 @@ interface ModalProps {
   onHide?: () => void;
   backdrop?: string;
   closeButton?: boolean;
+  className?: string;
 }
 
 const Modal = ({

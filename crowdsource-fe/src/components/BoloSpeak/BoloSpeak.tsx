@@ -479,6 +479,7 @@ const BoloSpeak = () => {
       )}
       {audioPermissionDenied && (
         <Modal
+          className={`${styles.audioPermissionDeniedHeader}`}
           footer={<> </>}
           onHide={() => setShowAudioPermissionModal(false)}
           show={showAudioPermissionModal}

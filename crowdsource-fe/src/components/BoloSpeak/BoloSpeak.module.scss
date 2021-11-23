@@ -26,3 +26,9 @@
 .erroMsg {
   bottom: 0;
 }
+
+.audioPermissionDeniedHeader {
+  :global(.btn-close) {
+    position: static;
+  }
+}
