@@ -42,10 +42,13 @@ def clean_locale_keys(languages, input_base_path, output_base_path):
                 del data[key]
                 removed_keys.append(key)
 
+        data = {}
         for key, value in en_data.items():
             if key not in data_copy.keys():
                 data[key] = value
                 print(f'{language_code} is missing in {key}'.format(language_code=language_code, key=key))
+            else:
+                data[key] = data_copy[key]
 
         os.makedirs('{output_base_path}/{language_code}'.format(output_base_path=output_base_path,
                                                                             language_code=language_code), exist_ok=True)

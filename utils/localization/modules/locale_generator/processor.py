@@ -107,7 +107,7 @@ class LocaleProcessor:
         del meta_excel_df[self.language_name]
         excel_df = self.clean_translation_excel(excel_df, self.language_name)
         meta_excel_df = self.clean_meta_df(meta_excel_df)
-        merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
+        merged_excel_df = pd.merge(meta_excel_df, excel_df, on=self.english_column_name,
                                    how='inner')
 
         # self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
