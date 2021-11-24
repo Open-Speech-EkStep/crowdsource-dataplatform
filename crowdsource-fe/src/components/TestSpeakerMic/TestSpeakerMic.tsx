@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Button from 'components/Button';
 import IconTextButton from 'components/IconTextButton';
 import ImageBasePath from 'components/ImageBasePath';
+import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
 
 import apiPaths from '../../constants/apiPaths';
@@ -461,7 +462,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   id="test-speaker"
                   data-testid="speakerAudio"
                   ref={audioEl}
-                  src="/audio/sample_audio_file.mp3"
+                  src={`${nodeConfig.contextRoot}/audio/sample_audio_file.mp3`}
                 ></audio>
               </div>
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">

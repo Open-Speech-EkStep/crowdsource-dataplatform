@@ -1,12 +1,12 @@
 .root {
-  background: url('/images/home_page_bg_mobile.svg') no-repeat top center;
+  background: url('/bhashadaan/images/home_page_bg_mobile.svg') no-repeat top center;
 
   @include media-breakpoint-up(md) {
-    background: url('/images/home_page_bg.svg') no-repeat top center;
+    background: url('/bhashadaan/images/home_page_bg.svg') no-repeat top center;
   }
 
   &::before {
-    background: url('/images/left_triangle_mobile.svg') no-repeat;
+    background: url('/bhashadaan/images/left_triangle_mobile.svg') no-repeat;
     content: '';
     height: 164px;
     left: 0;
@@ -19,14 +19,14 @@
     }
 
     @include media-breakpoint-up(md) {
-      background: url('/images/left_triangle.svg') no-repeat;
+      background: url('/bhashadaan/images/left_triangle.svg') no-repeat;
       height: 224px;
       width: 4.375rem;
     }
   }
 
   &::after {
-    background: url('/images/right_triangle_mobile.svg') no-repeat;
+    background: url('/bhashadaan/images/right_triangle_mobile.svg') no-repeat;
     content: '';
     height: 91px;
     position: absolute;
@@ -39,7 +39,7 @@
     }
 
     @include media-breakpoint-up(md) {
-      background: url('/images/right_triangle.svg') no-repeat;
+      background: url('/bhashadaan/images/right_triangle.svg') no-repeat;
       height: 146px;
       top: 8.75rem;
       width: 69px;

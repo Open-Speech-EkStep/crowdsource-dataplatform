@@ -32,18 +32,18 @@
 }
 
 .cardTopBg {
-  background: url('/images/card_orange_bg_mobile.svg') no-repeat top center;
+  background: url('/bhashadaan/images/card_orange_bg_mobile.svg') no-repeat top center;
 
   @include media-breakpoint-up(md) {
-    background: url('/images/card_orange_bg.svg') no-repeat top center;
+    background: url('/bhashadaan/images/card_orange_bg.svg') no-repeat top center;
   }
 }
 
 .cardBottomBg {
-  background: url('/images/card_green_bg_mobile.svg') no-repeat bottom center;
+  background: url('/bhashadaan/images/card_green_bg_mobile.svg') no-repeat bottom center;
 
   @include media-breakpoint-up(md) {
-    background: url('/images/card_green_bg.svg') no-repeat bottom center;
+    background: url('/bhashadaan/images/card_green_bg.svg') no-repeat bottom center;
   }
 }
 

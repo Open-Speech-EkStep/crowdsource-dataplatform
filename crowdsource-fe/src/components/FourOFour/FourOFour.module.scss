@@ -8,10 +8,10 @@
 }
 
 .wrapper {
-  background: url('/images/home_page_bg_mobile.svg') no-repeat top center;
+  background: url('/bhashadaan/images/home_page_bg_mobile.svg') no-repeat top center;
 
   @include media-breakpoint-up(md) {
-    background: url('/images/home_page_bg.svg') no-repeat top center;
+    background: url('/bhashadaan/images/home_page_bg.svg') no-repeat top center;
   }
 }
 

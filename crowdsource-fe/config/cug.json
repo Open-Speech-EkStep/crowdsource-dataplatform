@@ -6,7 +6,7 @@
     "whitelistingEmail": true,
     "showDataSource": false,
     "feedbackTopComponent": false,
-    "contextRoot": "",
+    "contextRoot": "/bhashadaan",
     "enabled_languages": [
       "as",
       "bn",
