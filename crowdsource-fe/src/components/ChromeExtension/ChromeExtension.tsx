@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import Button from 'components/Button';
 import ImageBasePath from 'components/ImageBasePath';
 import Modal from 'components/Modal';
+import nodeConfig from 'constants/nodeConfig';
 import { getBrowserInfo } from 'utils/utils';
 
 import styles from './ChromeExtension.module.scss';
@@ -55,7 +56,10 @@ const ChromeExtension = () => {
       </div>
       <Modal show={show} onHide={onHideModal}>
         <video width="100%" height="360px" controls>
-          <source src="/audio/phonetic_keyboard_instruction_video.mp4" type="video/mp4"></source>
+          <source
+            src={`${nodeConfig.contextRoot}/audio/phonetic_keyboard_instruction_video.mp4`}
+            type="video/mp4"
+          ></source>
           <track
             src="/audio/phonetic_keyboard_instruction_video.mp4"
             kind="captions"
