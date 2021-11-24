@@ -22,6 +22,7 @@ const FeedbackSuccessModal = (props: FeedbackSuccessModalProps) => {
       dialogClassName={styles.root}
       contentClassName={`${styles.content} d-flex flex-column overflow-auto rounded-12`}
       centered
+      backdrop="static"
     >
       <Modal.Header closeButton className={`${styles.modalHeader} border-bottom-0`} />
       <Modal.Body className="pt-0 pb-8 pb-md-9">

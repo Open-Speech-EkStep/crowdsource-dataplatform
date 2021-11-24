@@ -14,7 +14,7 @@ const ReeportSuccessModal = (props: ReeportSuccessModalProps) => {
   const { t } = useTranslation();
 
   return (
-    <Modal data-testid="ReeportSuccessModal" {...props} centered>
+    <Modal data-testid="ReeportSuccessModal" {...props} centered backdrop="static">
       <Modal.Header closeButton className="border-bottom-0" />
       <Modal.Body className="pt-0 pb-8 pb-md-9">
         <div className="text-center pb-4">
