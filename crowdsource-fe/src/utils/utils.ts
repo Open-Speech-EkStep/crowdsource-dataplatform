@@ -12,6 +12,7 @@ import {
 import type { InitiativeType } from 'types/InitiativeType';
 
 import apiPaths from '../constants/apiPaths';
+import nodeConfig from 'constants/nodeConfig';
 
 var platform = require('platform');
 
@@ -172,7 +173,7 @@ export const downloadBadge = (
 ) => {
   const pdf = new jsPDF();
   const img = new Image();
-  img.src = `/images/${locale}/badges/${locale}_${initiative}_${badgeType}_${source}.png`;
+  img.src = `${nodeConfig.contextRoot}/images/${locale}/badges/${locale}_${initiative}_${badgeType}_${source}.png`;
   img.crossOrigin = 'Anonymous';
   img.onload = function () {
     pdf.addImage(img, 50, 10, 105, 130);
