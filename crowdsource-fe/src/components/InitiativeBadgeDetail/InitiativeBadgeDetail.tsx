@@ -21,9 +21,15 @@ interface InitiativeBadgeDetailProps {
   action: string;
   initiative: Initiative;
   language: string;
+  onSelectSourceType: (value: string) => void;
 }
 
-const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadgeDetailProps) => {
+const InitiativeBadgeDetail = ({
+  initiative,
+  action,
+  language,
+  onSelectSourceType,
+}: InitiativeBadgeDetailProps) => {
   const medals = ['bronze', 'silver', 'gold', 'platinum'];
   const languageCode = LOCALE_LANGUAGES[language];
   const { t } = useTranslation();
@@ -84,7 +90,10 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
               name="action"
               className="me-9"
               checked={participatedAction == 'contribute'}
-              onChange={() => setParticipatedAction('contribute')}
+              onChange={() => {
+                setParticipatedAction('contribute');
+                onSelectSourceType('contribute');
+              }}
             />
             <Form.Check
               inline
@@ -95,7 +104,10 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
               value="Validation"
               name="action"
               checked={participatedAction == 'validate'}
-              onChange={() => setParticipatedAction('validate')}
+              onChange={() => {
+                setParticipatedAction('validate');
+                onSelectSourceType('validate');
+              }}
             />
           </Form.Group>
         </Col>

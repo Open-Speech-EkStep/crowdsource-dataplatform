@@ -5,7 +5,12 @@ import InitiativeBadgeDetail from '../InitiativeBadgeDetail';
 describe('InitiativeBadgeDetail', () => {
   const setup = async (initiative: 'suno' | 'likho' | 'bolo' | 'dekho', language: string, action: string) => {
     const renderResult = render(
-      <InitiativeBadgeDetail initiative={initiative} language={language} action={action} />
+      <InitiativeBadgeDetail
+        initiative={initiative}
+        language={language}
+        action={action}
+        onSelectSourceType={() => {}}
+      />
     );
 
     return renderResult;

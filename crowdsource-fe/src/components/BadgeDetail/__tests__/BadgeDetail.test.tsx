@@ -42,4 +42,12 @@ describe('BadgeDetail', () => {
     userEvent.click(screen.getByRole('tab', { name: 'bolo india' }));
     expect(screen.getByRole('tab', { name: 'bolo india' })).toHaveClass('active');
   });
+
+  it('should activate validate badges when validate radio button is selected', async () => {
+    await setup();
+    expect(screen.getByTestId('action2')).not.toBeChecked();
+    userEvent.click(screen.getByTestId('action2'));
+    expect(screen.getByTestId('action2')).toBeChecked();
+    expect(screen.getByTestId('action1')).not.toBeChecked();
+  });
 });

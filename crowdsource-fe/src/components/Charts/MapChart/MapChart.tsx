@@ -20,6 +20,7 @@ interface ChartProps {
   anonymousStateData: UnSpecifiedDataByState;
 }
 
+/* istanbul ignore next */
 const getStateBg = function (value: number, quarterUnit: number): string {
   if (value >= quarterUnit * 3) {
     return 'stateBgDarker';
