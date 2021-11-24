@@ -107,7 +107,7 @@ const TextEditArea = ({
   };
 
   useEffect(() => {
-    handleError(input || '');
+    if (!readOnly) handleError(input || '');
   }, [input]);
 
   const onChange = (input: any) => {
