@@ -41,11 +41,11 @@ const Report = ({ onSuccess, action, initiative }: ReportProps) => {
   const showReportSuccess = () => {
     hideModal();
     setReportSuccess(true);
-    onSuccess();
   };
 
   const hideReportSuccess = () => {
     setReportSuccess(false);
+    onSuccess();
   };
 
   const reportSubheadingText = t(
