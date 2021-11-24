@@ -7,8 +7,9 @@ import Form from 'react-bootstrap/Form';
 
 import Button from 'components/Button';
 import Modal from 'components/Modal';
-import { DEFAULT_LOCALE, DISPLAY_LANGUAGES, RAW_LANGUAGES } from 'constants/localesConstants';
+import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import { MOTHER_TONGUE_LANGUAGES } from 'constants/motherTongueLanguages';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 import styles from './ChangeUserModal.module.scss';
@@ -29,7 +30,7 @@ interface ChangeUserModalProps {
 }
 
 const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: ChangeUserModalProps) => {
-  const { locales, locale: currentLocale = DEFAULT_LOCALE } = useRouter();
+  const { locale: currentLocale = DEFAULT_LOCALE } = useRouter();
   const { t } = useTranslation();
   const [, setSpeakerDetails] = useLocalStorage(localStorageConstants.speakerDetails);
   const router = useRouter();
@@ -134,9 +135,9 @@ const ChangeUserModal = ({ onHide, doRedirection, redirectionUrl, ...rest }: Cha
               onChange={handleChange as any}
             >
               <option value="">{t('selectMotherTongue')}</option>
-              {locales?.map(locale => (
-                <option key={locale} value={RAW_LANGUAGES[locale]}>
-                  {t(DISPLAY_LANGUAGES[locale])}
+              {MOTHER_TONGUE_LANGUAGES.map((object: { value: string; text: string }) => (
+                <option key={object.value} value={object.value}>
+                  {object.text}
                 </option>
               ))}
             </Form.Select>
