@@ -9,10 +9,10 @@ import {
   OTHER_LANGUAGE_UNICODE,
   SPECIAL_CHARACTERS,
 } from 'constants/Keyboard';
+import nodeConfig from 'constants/nodeConfig';
 import type { InitiativeType } from 'types/InitiativeType';
 
 import apiPaths from '../constants/apiPaths';
-import nodeConfig from 'constants/nodeConfig';
 
 var platform = require('platform');
 
