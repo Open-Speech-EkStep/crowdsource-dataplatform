@@ -155,7 +155,6 @@ const BoloValidate = () => {
   };
 
   const onPlayAudio = () => {
-    audio?.load();
     waveVisualizer?.current?.classList.remove('d-none');
     setStartAudioPlayer(true);
     setShowReplayButton(false);
