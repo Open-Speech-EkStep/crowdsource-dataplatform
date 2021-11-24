@@ -321,6 +321,11 @@ workflows:
           requires:
             - dev_ui_deployment_aks
 
+      - approve_to_deploy:
+          name: approve_test_deploy
+          requires:
+            - dev_ui_deployment_aks
+
       # - eks_fargate_deployment:
       #     name: dev_ui_deployment_eks
       #     cluster-name: ${CLUSTER_NAME}
@@ -341,6 +346,7 @@ workflows:
           checkout: false
           requires:
             - dev_ui_deployment_aks
+            - approve_test_deploy
 
       - aks_deployment_ui:
           name: test_ui_deployment_aks
@@ -359,6 +365,11 @@ workflows:
           requires:
             - test_ui_deployment_aks
 
+      - approve_to_deploy:
+          name: approve_uat_deploy
+          requires:
+            - test_ui_deployment_aks
+
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
@@ -372,6 +383,7 @@ workflows:
           checkout: false
           requires:
             - dev_ui_deployment_aks
+            - approve_uat_deploy
 
       - aks_deployment_ui:
           name: uat_ui_deployment_aks
@@ -390,6 +402,11 @@ workflows:
           requires:
             - uat_ui_deployment_aks
 
+      - approve_to_deploy:
+          name: approve_prod_deploy
+          requires:
+            - uat_ui_deployment_aks
+
       - azure-acr/build-and-push-image:
           pre-steps:
             - *fast-checkout
@@ -403,6 +420,7 @@ workflows:
           checkout: false
           requires:
             - create-workspace
+            - approve_prod_deploy
 
       - aks_deployment_ui:
           name: prod_ui_deployment_aks
@@ -413,10 +431,10 @@ workflows:
           requires:
             - push_prod_image_next_ui
 
-      # - cdn_invalidation:
-      #     name: cdn_invalidation_ui_prod
-      #     env-name: next-prod
-      #     resource-group: ${AZURE_RESOURCE_GROUP}
-      #     profile-name: ${AZURE_PROFILE_NAME}
-      #     requires:
-      #       - prod_ui_deployment_aks
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_prod
+          env-name: prod-ui
+          resource-group: ${AZURE_RESOURCE_GROUP_PROD}
+          profile-name: ${AZURE_PROFILE_NAME_PROD}
+          requires:
+            - prod_ui_deployment_aks
