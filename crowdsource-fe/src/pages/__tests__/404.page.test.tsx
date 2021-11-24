@@ -10,6 +10,6 @@ describe('404Page', () => {
   it('should render the 404 page', () => {
     setup();
 
-    expect(screen.getByText('404 Error')).toBeInTheDocument();
+    expect(screen.getByText('pageNotFoundHeading')).toBeInTheDocument();
   });
 });

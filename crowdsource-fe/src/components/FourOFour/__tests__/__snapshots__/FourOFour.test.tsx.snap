@@ -118,22 +118,17 @@ exports[`FourOFour should render the component and matches it against stored sna
           <noscript />
         </div>
         <h2>
-          404 Error
+          pageNotFoundHeading
         </h2>
         <p
           class="mt-2 display-3"
         >
-          404Text
+          pageNotFoundText
         </p>
         <p
           class="mt-8 display-5"
         >
-          visitOur 
-          <a
-            href="/home"
-          >
-            Homepage
-          </a>
+          visitHome
         </p>
       </div>
     </div>

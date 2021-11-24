@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomepageLink should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/home"
+    target="_blank"
+  >
+    homepage
+  </a>
+</DocumentFragment>
+`;
