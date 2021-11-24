@@ -39,7 +39,10 @@ const LanguageChangeNotification = ({
       {...rest}
     >
       <div className="px-5 px-md-9">
-        {t('languageChangeNotification', { fromLanguage: t(oldValue), toLanguage: t(newValue) })}
+        {t('languageChangeNotification', {
+          fromLanguage: t(oldValue.toLowerCase()),
+          toLanguage: t(newValue.toLowerCase()),
+        })}
       </div>
     </Modal>
   );
