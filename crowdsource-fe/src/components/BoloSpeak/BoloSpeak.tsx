@@ -166,6 +166,7 @@ const BoloSpeak = () => {
 
   const resetState = () => {
     setRecordedAudio('');
+    setShowWarningMsg(false);
     setDuration(0);
     clearTimeout(clearTimeoutKey);
     clearTimeout(timerTimeoutKey);
