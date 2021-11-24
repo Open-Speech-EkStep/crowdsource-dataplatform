@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 
 import Button from 'components/Button';
+import ImageBasePath from 'components/ImageBasePath';
 import Modal from 'components/Modal';
 import { getBrowserInfo } from 'utils/utils';
 
@@ -68,7 +68,7 @@ const ChromeExtension = () => {
         variant="normal"
         className={`${styles.close} d-flex position-absolute cursor`}
       >
-        <Image src="/images/close.svg" width="20" height="20" alt="Close Chrome Extension" />
+        <ImageBasePath src="/images/close.svg" width="20" height="20" alt="Close Chrome Extension" />
       </Button>
     </div>
   );

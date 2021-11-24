@@ -2,10 +2,10 @@ import React, { Fragment, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 
 import ErrorPopup from 'components/ErrorPopup';
 import IconTextButton from 'components/IconTextButton';
+import ImageBasePath from 'components/ImageBasePath';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import type { Initiative } from 'types/Initiatives';
 import type { SourceType } from 'types/SourceType';
@@ -55,7 +55,7 @@ const Report = ({ onSuccess, action, initiative }: ReportProps) => {
   return (
     <Fragment>
       <IconTextButton textDesktop={t('report')} onClick={showModal} altText="reportIconAlt">
-        <Image src="/images/report.svg" width="24" height="24" alt="reportIconAlt" />
+        <ImageBasePath src="/images/report.svg" width="24" height="24" alt="reportIconAlt" />
       </IconTextButton>
       {modalShow && (
         <ReportModal

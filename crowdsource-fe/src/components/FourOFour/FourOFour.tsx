@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import Container from 'react-bootstrap/Container';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import Logo from 'components/Logo';
 import routePaths from 'constants/routePaths';
@@ -25,7 +25,7 @@ const FourOFour = () => {
       <div className={`${styles.wrapper} d-flex flex-fill bg-secondary`}>
         <Container fluid="lg" className="flex-fill">
           <div className={`${styles.content} text-center`}>
-            <Image src={`/images/error_page_icon.svg`} alt="404 Icon" width="48" height="48" />
+            <ImageBasePath src={`/images/error_page_icon.svg`} alt="404 Icon" width="48" height="48" />
             <h2>404 Error</h2>
             <p className="mt-2 display-3">{t('404Text')}</p>
             <p className="mt-8 display-5">

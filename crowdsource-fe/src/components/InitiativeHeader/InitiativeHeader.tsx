@@ -1,9 +1,11 @@
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import ImageBasePath from 'components/ImageBasePath';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import type { Initiative } from 'types/Initiatives';
 
@@ -22,7 +24,7 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
       <Row>
         <Col xs="12" md="4" className="d-flex justify-content-center">
           <div className={styles.initiativeHeaderImg}>
-            <Image
+            <ImageBasePath
               src={`/images/${currentLocale}/logos/${currentLocale}-${initiative}IndiaLogo.svg`}
               alt={t(`${initiative}Logo`)}
               width="126"

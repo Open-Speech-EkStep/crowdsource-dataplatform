@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useTranslation, Trans } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import IconTextButton from 'components/IconTextButton';
+import ImageBasePath from 'components/ImageBasePath';
 import routePaths from 'constants/routePaths';
 
 import apiPaths from '../../constants/apiPaths';
@@ -325,11 +325,11 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
       >
         {router.asPath === routePaths.boloIndiaContribute && (
           <>
-            <Image src="/images/mic.svg" width="24" height="24" alt="testYourMicrophoneAndSpeakers" />
+            <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="testYourMicrophoneAndSpeakers" />
             <span className="mx-1"> | </span>
           </>
         )}
-        <Image src="/images/speaker.svg" width="24" height="24" alt="testYourSpeaker" />
+        <ImageBasePath src="/images/speaker.svg" width="24" height="24" alt="testYourSpeaker" />
       </IconTextButton>
       {showMicSpeaker && isExpanded && (
         <div className={`${styles.test} rounded-12 position-absolute bg-light p-5`}>
@@ -350,10 +350,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
             variant="normal"
             className={`${styles.close} d-flex position-absolute`}
           >
-            <Image src="/images/close.svg" width="20" height="20" alt="Close" />
+            <ImageBasePath src="/images/close.svg" width="20" height="20" alt="Close" />
           </Button>
           <div className={`${styles.heading} d-flex align-items-center mb-3 mt-3 mt-md-0`}>
-            <Image src="/images/speaker.svg" width="24" height="24" alt="Speaker Icon" />
+            <ImageBasePath src="/images/speaker.svg" width="24" height="24" alt="Speaker Icon" />
             {showMic && <p className="ms-2">{t('testYourMicrophoneAndSpeakers')}</p>}
             {showSpeaker && !showMic && <p className="ms-2">{t('testYourSpeaker')}</p>}
           </div>
@@ -367,7 +367,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
                   <div className="flex-shrink-0 d-flex">
-                    <Image src="/images/mic.svg" width="24" height="24" alt="Mic Icon" />
+                    <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="Mic Icon" />
                   </div>
                   <span className="d-flex ms-2">{t('testMic')}</span>
                 </Button>
@@ -379,7 +379,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
                   <div className="flex-shrink-0 d-flex">
-                    <Image src="/images/mic.svg" width="24" height="24" alt="Recording Icon" />
+                    <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="Recording Icon" />
                   </div>
                   <span className="d-flex ms-2">
                     <Trans
@@ -398,7 +398,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
                   <div className="flex-shrink-0 d-flex">
-                    <Image src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                    <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
                   </div>
 
                   <span className="d-flex ms-2">{t('playingBackAudio')}</span>
@@ -421,12 +421,12 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                     <span>
                       {noiseMessage && showPlayingbackAudio ? (
                         <div className="d-flex align-items-center">
-                          <Image src="/images/warning.svg" width="16" height="16" alt="warning" />
+                          <ImageBasePath src="/images/warning.svg" width="16" height="16" alt="warning" />
                           <span className="ms-1">{t('backgroundNoise')}</span>
                         </div>
                       ) : (
                         <div className="d-flex align-items-center">
-                          <Image src="/images/success.svg" width="16" height="16" alt="success" />
+                          <ImageBasePath src="/images/success.svg" width="16" height="16" alt="success" />
                           <span className="ms-1">{t('lowBackgroundNoise')}</span>
                         </div>
                       )}
@@ -448,7 +448,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 } d-flex align-items-center justify-content-center border border-1 rounded-16 border-primary`}
               >
                 {speakerText !== 'playing' && (
-                  <Image src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
+                  <ImageBasePath src="/images/speaker.svg" width="24" height="24" alt="Microphone Icon" />
                 )}
 
                 <span id="speakerText" className="d-flex ms-2">

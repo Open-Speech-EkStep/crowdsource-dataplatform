@@ -8,6 +8,7 @@ interface ImageBasePathProps {
   height: string;
   alt: string;
   className?: string;
+  priority?: boolean;
 }
 
 const ImageBasePath = ({ src, alt, ...rest }: ImageBasePathProps) => {

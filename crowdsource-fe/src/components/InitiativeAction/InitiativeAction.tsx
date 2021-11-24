@@ -1,6 +1,8 @@
-import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import React from 'react';
 
+import { useTranslation } from 'next-i18next';
+
+import ImageBasePath from 'components/ImageBasePath';
 import type { InitiativeType } from 'types/InitiativeType';
 
 import styles from './InitiativeAction.module.scss';
@@ -24,7 +26,13 @@ const InitiativeAction = ({
   return (
     <div className={`${styles.action} d-flex flex-column align-items-center text-center display-3`}>
       <div className={`${styles.actionIcon} ${styles[`actionIcon${shadow}`]} d-flex rounded-circle`}>
-        <Image src={`/images/${actionIcon}`} alt={t('initiativeAction')} width="160" height="160" priority />
+        <ImageBasePath
+          src={`/images/${actionIcon}`}
+          alt={t('initiativeAction')}
+          width="160"
+          height="160"
+          priority
+        />
       </div>
       <div className="mt-4">{t(subText)}</div>
     </div>

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 
 import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 
 import Button from 'components/Button';
+import ImageBasePath from 'components/ImageBasePath';
 import nodeConfig from 'constants/nodeConfig';
 
 import styles from './ImageView.module.scss';
@@ -35,7 +35,7 @@ const ImageView: FunctionComponent<ImageViewProps> = ({ imageUrl }) => {
             setViewExpand(false);
           }}
         >
-          <Image width="20" height="20" src="/images/close.svg" alt="Collapse" />
+          <ImageBasePath width="20" height="20" src="/images/close.svg" alt="Collapse" />
         </Button>
       )}
       <div

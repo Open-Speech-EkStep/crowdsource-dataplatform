@@ -1,9 +1,11 @@
 // import { useTranslation } from 'next-i18next';
+import React from 'react';
+
 import { Trans, useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
@@ -78,10 +80,10 @@ const ContributeMore = ({
               variant="normal"
               key={index}
               title={`Download ${item.grade} Badge`}
+              onClick={() => download(item.grade.toLowerCase(), item.generated_badge_id)}
               className={`${styles.medal} d-flex mx-2 flex-shrink-0`}
             >
-              <Image
-                onClick={() => download(item.grade.toLowerCase(), item.generated_badge_id)}
+              <ImageBasePath
                 src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.grade.toLowerCase()}_${source}.svg`}
                 width="48"
                 height="60"
@@ -125,7 +127,7 @@ const ContributeMore = ({
                     index === badges.length ? styles.upcomingBadge : styles.otherBadges
                   }  d-flex mx-2 flex-shrink-0`}
                 >
-                  <Image
+                  <ImageBasePath
                     src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${item.type.toLowerCase()}_${source}.svg`}
                     width="48"
                     height="60"

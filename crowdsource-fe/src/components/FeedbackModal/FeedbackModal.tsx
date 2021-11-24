@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Form from 'react-bootstrap/Form';
 
 import Button from 'components/Button';
+import ImageBasePath from 'components/ImageBasePath';
 import Modal from 'components/Modal';
 import apiPaths from 'constants/apiPaths';
 import { DEFAULT_LOCALE, RAW_LANGUAGES } from 'constants/localesConstants';
@@ -113,7 +113,7 @@ const FeedbackModal = ({ onSuccess: showThankyou, onError, ...props }: FeedbackM
                         : styles[`opinion${opinion}`]
                     } rounded-circle`}
                   >
-                    <Image
+                    <ImageBasePath
                       src={`/images/opinion${opinion}${
                         Number(formData.opinion_rating) === opinion ? '-active' : ''
                       }.svg`}

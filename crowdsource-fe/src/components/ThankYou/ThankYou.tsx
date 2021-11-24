@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
 import { Trans, useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import CompareLanguages from 'components/CompareLanguages';
 import ContributeMore from 'components/ContributeMore';
 import ContributionDetails from 'components/ContributionDetails';
+import ImageBasePath from 'components/ImageBasePath';
 import TwoColumn from 'components/TwoColumn';
 import TyTargetProgress from 'components/TyTargetProgress';
 import apiPaths from 'constants/apiPaths';
@@ -46,7 +46,7 @@ const YourBadge = (props: any) => {
     <div className="text-center">
       <h5 className="fw-light mb-3">{t('yourBadge')}</h5>
       <div className={`${styles.badgeBg} p-3`}>
-        <Image
+        <ImageBasePath
           src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${
             props.initiative
           }_${props.badgeType.toLowerCase()}_${props.source}.svg`}

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Trans, useTranslation } from 'next-i18next';
-import Image from 'next/image';
 
 import Button from 'components/Button';
 import ContributionDetails from 'components/ContributionDetails';
+import ImageBasePath from 'components/ImageBasePath';
 import TwoColumn from 'components/TwoColumn';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
@@ -29,7 +29,7 @@ const BadgeImage = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
 
   return (
     <div className={`${styles.medal} mx-auto`}>
-      <Image
+      <ImageBasePath
         src={`/images/${currentContributionAlias}/badges/${currentContributionAlias}_${initiative}_${badgeType}_${source}.svg`}
         width="140"
         height="180"
@@ -55,7 +55,7 @@ const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: Downl
         >
           {t('download')}
           <span className="d-flex ms-2">
-            <Image src="/images/download_icon.svg" width="12" height="15" alt="download-image" />
+            <ImageBasePath src="/images/download_icon.svg" width="12" height="15" alt="download-image" />
           </span>
         </a>
       </Button>

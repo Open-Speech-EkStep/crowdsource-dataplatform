@@ -3,9 +3,9 @@ import { Fragment, useState } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import localStorageConstants from 'constants/localStorageConstants';
 import routePaths from 'constants/routePaths';
@@ -38,7 +38,7 @@ const UserOptions = () => {
           variant="light"
           className={classnames(styles.toggle, 'd-flex h-100 justify-content-center align-items-center px-3')}
         >
-          <Image src="/images/usericon.svg" width="24" height="24" alt={t('languageIconAlt')} />
+          <ImageBasePath src="/images/usericon.svg" width="24" height="24" alt={t('languageIconAlt')} />
           {speakerDetails.userName && (
             <span className="d-none d-xl-block mx-1">{speakerDetails.userName}</span>
           )}

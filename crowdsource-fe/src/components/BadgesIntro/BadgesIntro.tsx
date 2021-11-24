@@ -1,9 +1,11 @@
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import { INITIATIVES_MEDIA } from 'constants/initiativeConstants';
 import { RAW_LANGUAGES } from 'constants/localesConstants';
@@ -33,7 +35,7 @@ const BadgesIntro = () => {
           {badges.map(badge => {
             return (
               <div key={badge} className={`${styles.badge} mx-3`}>
-                <Image
+                <ImageBasePath
                   src={`/images/${currentLocale}/badges/${currentLocale}_bolo_${badge}_contribute.svg`}
                   width="140"
                   height="180"

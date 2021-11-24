@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 
 import Button from 'components/Button';
 import ImageBasePath from 'components/ImageBasePath';
@@ -125,7 +124,7 @@ const ButtonControls = ({
             className={`${styles.needsChangeBtn} mx-md-6 order-2 order-md-1 my-2 my-md-0`}
           >
             <span className={classNames(`d-flex me-2`, { [styles.needsChangeDisabled]: needsChangeDisable })}>
-              <Image src="/images/edit.svg" width="24" height="24" alt="Edit Icon" />
+              <ImageBasePath src="/images/edit.svg" width="24" height="24" alt="Edit Icon" />
             </span>
             {t('needsChange')}
           </Button>
@@ -136,7 +135,7 @@ const ButtonControls = ({
             onClick={onPlay}
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
-            <Image src="/images/play.svg" width="60" height="60" alt="Play Icon" />
+            <ImageBasePath src="/images/play.svg" width="60" height="60" alt="Play Icon" />
             <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
               {t('play')}
             </span>
@@ -148,7 +147,7 @@ const ButtonControls = ({
             onClick={onPause}
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
-            <Image src="/images/pause.svg" width="60" height="60" alt="Pause Icon" />
+            <ImageBasePath src="/images/pause.svg" width="60" height="60" alt="Pause Icon" />
             <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
               {t('pause')}
             </span>
@@ -160,7 +159,7 @@ const ButtonControls = ({
             onClick={onReplay}
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
-            <Image src="/images/replay.svg" width="60" height="60" alt="Replay Icon" />
+            <ImageBasePath src="/images/replay.svg" width="60" height="60" alt="Replay Icon" />
             <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
               {t('replay')}
             </span>
@@ -174,7 +173,7 @@ const ButtonControls = ({
             className={`${styles.correctBtn} mx-md-6 order-3 order-md-3 my-2 my-md-0`}
           >
             <span className={classNames(`d-flex me-2`, { [styles.correctDisabled]: correctDisable })}>
-              <Image src="/images/correct.svg" width="24" height="24" alt="Correct Icon" />
+              <ImageBasePath src="/images/correct.svg" width="24" height="24" alt="Correct Icon" />
             </span>
             {t('correct')}
           </Button>

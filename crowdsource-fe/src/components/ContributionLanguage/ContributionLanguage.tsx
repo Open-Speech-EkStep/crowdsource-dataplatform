@@ -2,13 +2,13 @@ import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useCookies } from 'react-cookie';
 
+import ImageBasePath from 'components/ImageBasePath';
 import { INITIATIVES_MEDIA, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import {
   DEFAULT_LOCALE,
@@ -95,7 +95,7 @@ const ContributionLanguage = ({ initiative }: ContributionLanguageProps) => {
               </Form.Select>
               {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (
                 <span className="d-flex mx-3 mx-md-4 flex-shrink-0">
-                  <Image src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
+                  <ImageBasePath src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
                 </span>
               )}
               {INITIATIVES_MEDIA_MAPPING[initiative] === INITIATIVES_MEDIA.parallel && (

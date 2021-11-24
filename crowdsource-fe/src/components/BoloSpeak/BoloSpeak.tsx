@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import getBlobDuration from 'get-blob-duration';
 import { Trans, useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -11,6 +10,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import ButtonControls from 'components/ButtonControls';
 import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
+import ImageBasePath from 'components/ImageBasePath';
 import Modal from 'components/Modal';
 import NoDataFound from 'components/NoDataFound';
 import apiPaths from 'constants/apiPaths';
@@ -413,7 +413,7 @@ const BoloSpeak = () => {
                       <div
                         className={`${styles.mic} d-flex justify-content-center align-items-center rounded-50 bg-danger`}
                       >
-                        <Image src="/images/mic_white.svg" width="40" height="40" alt="Mic Icon" />
+                        <ImageBasePath src="/images/mic_white.svg" width="40" height="40" alt="Mic Icon" />
                       </div>
                       <canvas id="visualizer" className={`${styles.visualizer} ms-5 flex-fill`} />
                     </div>

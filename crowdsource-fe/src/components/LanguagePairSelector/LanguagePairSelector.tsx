@@ -2,13 +2,13 @@ import type { ChangeEvent } from 'react';
 import { useState, useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 import DataLastUpdated from 'components/DataLastUpdated';
+import ImageBasePath from 'components/ImageBasePath';
 import { DISPLAY_LANGUAGES, LOCALE_LANGUAGES, RAW_LANGUAGES } from 'constants/localesConstants';
 
 import styles from './LanguagePairSelector.module.scss';
@@ -87,7 +87,7 @@ const LanguagePairSelector = ({
                 ))}
               </Form.Select>
               <span className="d-flex mb-md-0 mb-3 mx-1 mx-md-4 flex-shrink-0">
-                <Image src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
+                <ImageBasePath src="/images/arrow_right.svg" width="24" height="24" alt="Right Arrow" />
               </span>
               <Form.Select
                 disabled={!toSelectEnabled}

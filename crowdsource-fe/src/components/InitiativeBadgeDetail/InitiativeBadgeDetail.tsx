@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useTranslation, Trans } from 'next-i18next';
-import Image from 'next/image';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Medal from 'components/Medal';
 import TriColorGradientBg from 'components/TriColorGradientBg';
 import apiPaths from 'constants/apiPaths';
@@ -109,7 +109,7 @@ const InitiativeBadgeDetail = ({ initiative, action, language }: InitiativeBadge
               className="d-flex align-items-center justify-content-center"
             >
               <div className={styles.medalImg}>
-                <Image
+                <ImageBasePath
                   src={`/images/${languageCode}/badges/${languageCode}_${initiative}_${selectedMedal}_${participatedAction.toLowerCase()}.svg`}
                   width="250"
                   height="320"

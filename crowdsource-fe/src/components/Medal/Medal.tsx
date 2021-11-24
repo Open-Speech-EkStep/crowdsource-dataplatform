@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 
+import ImageBasePath from 'components/ImageBasePath';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import { capitalizeFirstLetter } from 'utils/utils';
 
@@ -58,7 +58,7 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
         tabIndex={0}
       >
         <div className={`${styles.medalImg} d-flex`}>
-          <Image
+          <ImageBasePath
             src={`/images/${languageCode}/badges/${languageCode}_${initiative}_${medal.toLowerCase()}_${action}.svg`}
             width="56"
             height="72"
@@ -76,7 +76,7 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
             className={`${styles.zoom} position-absolute d-flex align-items-center justify-content-center bg-light`}
           >
             <div className={styles.zoomImg}>
-              <Image
+              <ImageBasePath
                 src={`/images/${languageCode}/badges/${languageCode}_${initiative}_${medal.toLowerCase()}_${action}.svg`}
                 width="172"
                 height="220"

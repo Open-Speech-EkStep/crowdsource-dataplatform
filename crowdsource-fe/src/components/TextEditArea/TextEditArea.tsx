@@ -2,12 +2,12 @@ import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import Form from 'react-bootstrap/Form';
 import Draggable from 'react-draggable';
 import Keyboard from 'react-simple-keyboard';
 
 import Button from 'components/Button';
+import ImageBasePath from 'components/ImageBasePath';
 import { KeyboardLanguageLayout } from 'constants/Keyboard';
 import type { InitiativeType } from 'types/InitiativeType';
 import { findInputError } from 'utils/utils';
@@ -178,7 +178,7 @@ const TextEditArea = ({
                 onClick={() => setShowKeyboard(true)}
                 className="d-flex"
               >
-                <Image src="/images/keyboard_icon.svg" width="24" height="24" alt="keyboardBtn" />
+                <ImageBasePath src="/images/keyboard_icon.svg" width="24" height="24" alt="keyboardBtn" />
               </Button>
             </div>
           )}

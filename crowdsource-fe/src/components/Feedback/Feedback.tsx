@@ -1,12 +1,12 @@
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 
 import Button from 'components/Button';
 import ErrorPopup from 'components/ErrorPopup';
 import FeedbackSuccessModal from 'components/FeedbackSuccessModal';
+import ImageBasePath from 'components/ImageBasePath';
 import { getErrorMsg } from 'utils/utils';
 
 import styles from './Feedback.module.scss';
@@ -46,7 +46,7 @@ const Feedback = () => {
         onClick={showModal}
         className={`${styles.root} ms-auto shadow-grey d-inline-flex justify-content-center align-items-center bg-light border border-1 border-primary-40 rounded-circle`}
       >
-        <Image src="/images/feedback_icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
+        <ImageBasePath src="/images/feedback_icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
       </Button>
       {modalShow && (
         <FeedbackModal

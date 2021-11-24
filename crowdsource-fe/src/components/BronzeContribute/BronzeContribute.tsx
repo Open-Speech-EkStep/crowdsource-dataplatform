@@ -1,9 +1,11 @@
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import TriColorBorder from 'components/TriColorBorder';
 import { INITIATIVES } from 'constants/initiativeConstants';
@@ -19,7 +21,7 @@ const BronzeContribute = () => {
       <div className="p-3 py-md-5 px-md-10">
         <Row>
           <Col xs="12" md="2">
-            <Image
+            <ImageBasePath
               src={`/images/${currentLocale}/badges/${currentLocale}_bolo_bronze_contribute.svg`}
               width="125"
               height="160"

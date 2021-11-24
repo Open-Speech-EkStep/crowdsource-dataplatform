@@ -1,9 +1,11 @@
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useCookies } from 'react-cookie';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import {
   DEFAULT_LOCALE,
@@ -51,7 +53,7 @@ const LanguageSwitcher = () => {
         variant="light"
         className={`${styles.toggle} d-flex h-100 justify-content-center align-items-center px-3`}
       >
-        <Image src="/images/locale_logo.svg" width="24" height="24" alt={t('languageIconAlt')} />
+        <ImageBasePath src="/images/locale_logo.svg" width="24" height="24" alt={t('languageIconAlt')} />
         <span className="d-none d-xl-block mx-1">{DISPLAY_LANGUAGES[currentLocale]}</span>
       </Dropdown.Toggle>
 

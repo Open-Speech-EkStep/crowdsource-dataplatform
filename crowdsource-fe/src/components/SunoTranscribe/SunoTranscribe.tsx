@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -12,6 +11,7 @@ import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
 import ErrorPopup from 'components/ErrorPopup';
 import FunctionalHeader from 'components/FunctionalHeader';
+import ImageBasePath from 'components/ImageBasePath';
 import NoDataFound from 'components/NoDataFound';
 import TextEditArea from 'components/TextEditArea';
 import apiPaths from 'constants/apiPaths';
@@ -261,7 +261,7 @@ const SunoTranscribe = () => {
                 {showThankyouMessage ? (
                   <div className="d-flex align-items-center justify-content-center mt-9 display-1">
                     <span className="me-2 d-flex">
-                      <Image src="/images/check_mark.svg" width="40" height="40" alt="check" />
+                      <ImageBasePath src="/images/check_mark.svg" width="40" height="40" alt="check" />
                     </span>
                     {t('thankyouForContributing')}
                   </div>

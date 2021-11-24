@@ -1,7 +1,9 @@
+import React from 'react';
+
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import routePaths from 'constants/routePaths';
 
@@ -24,7 +26,7 @@ const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
         <a className={styles.link}>
           <div className="d-flex align-items-center cursor-pointer">
             <div className={`${styles.icon} d-flex`}>
-              <Image
+              <ImageBasePath
                 src={`/images/${currentLocale}/logos/${currentLocale}-${initiative}IndiaLogo.svg`}
                 alt={t(`${initiative}Logo`)}
                 width="47"
