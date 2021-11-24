@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 
 import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
-import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
 
 import styles from './Logo.module.scss';
@@ -18,7 +17,7 @@ const Logo = () => {
     <div data-testid="Logo" className="d-flex">
       <a href={routePaths.root} className="d-flex align-items-center d-md-none">
         <ImageBasePath
-          src={`${nodeConfig.contextRoot}/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
+          src={`/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
           alt={t('bhashiniLogo')}
           width="48"
           height="48"
