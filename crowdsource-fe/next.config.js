@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/order
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
-})
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const config = require('config');
 const ConfigWebpackPlugin = require('config-webpack');
@@ -31,14 +31,12 @@ const nextConfig = {
 
     config.plugins.push(new ConfigWebpackPlugin('CROWDSOURCE_FE_NODE_CONFIG'));
 
-    config.externals.push(
-      function ({ context, request }, callback) {
-        if (/xlsx|canvg|pdfmake/.test(request)) {
-          return callback(null, "commonjs " + request);
-        }
-        callback();
+    config.externals.push(function ({ context, request }, callback) {
+      if (/xlsx|canvg|pdfmake/.test(request)) {
+        return callback(null, 'commonjs ' + request);
       }
-    )
+      callback();
+    });
 
     return config;
   },
@@ -72,32 +70,38 @@ const nextConfig = {
   async headers() {
     return [
       {
-        key: 'X-Frame-Options',
-        value: 'DENY'
+        source: '/(.*)',
+        locale: false,
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+        ],
       },
       {
-        source: '/:all*',
+        source: '/(.*)',
         locale: false,
         headers: [
           {
             key: 'Cache-Control',
             value: 'no-store, must-revalidate',
-          }
+          },
         ],
       },
       {
-        source: '/:all*(svg|jpg|png)',
+        source: '/(.*)(svg|jpg|png)',
         locale: false,
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=9999999999, must-revalidate',
-          }
+          },
         ],
       },
-    ]
+    ];
   },
   // assetPrefix: process.env.NODE_CONFIG_ENV ? `${config.get('fe.staticFileUrl')}/assets` : '',
 };
 
-module.exports = withBundleAnalyzer(withTM(nextConfig))
+module.exports = withBundleAnalyzer(withTM(nextConfig));

@@ -1,4 +1,4 @@
-import { render, screen, userEvent, waitFor } from 'utils/testUtils';
+import { render, waitFor } from 'utils/testUtils';
 
 import MapChart from '../MapChart';
 
@@ -51,8 +51,5 @@ describe('MapChart', () => {
     ];
     const { container } = setup(data);
     await waitFor(() => expect(container.querySelector('.hide')).toBeInTheDocument());
-
-    userEvent.hover(screen.getByTestId('statePopover'));
-    // await waitFor(() => expect(container.querySelector('.show')).toBeInTheDocument());
   });
 });

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+import nodeConfig from 'constants/nodeConfig';
 
 interface LayoutProps {
   children: ReactNode;
@@ -28,7 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={t('metaOGSiteName')} />
         <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
-        <link rel="icon" type="image/png" href="/img/favicon.png" />
+        <link rel="icon" type="image/png" href={`${nodeConfig.contextRoot}/images/favicon.png`} />
       </Head>
       {router.pathname !== '/404' && <Header />}
       <main className="d-flex flex-column flex-grow-1">{children}</main>
