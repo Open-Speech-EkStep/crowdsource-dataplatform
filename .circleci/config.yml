@@ -323,6 +323,7 @@ workflows:
 
       - approve_to_deploy:
           name: approve_test_deploy
+          type: approval
           requires:
             - dev_ui_deployment_aks
 
@@ -367,6 +368,7 @@ workflows:
 
       - approve_to_deploy:
           name: approve_uat_deploy
+          type: approval
           requires:
             - test_ui_deployment_aks
 
@@ -404,6 +406,7 @@ workflows:
 
       - approve_to_deploy:
           name: approve_prod_deploy
+          type: approval
           requires:
             - uat_ui_deployment_aks
 
