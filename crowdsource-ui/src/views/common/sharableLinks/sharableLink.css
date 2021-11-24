@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-self: center;
+  flex-wrap: wrap;
 }
 
 /* mobile */
@@ -28,7 +29,6 @@
 
 @media (min-width: 768px) {
   .social-share-block {
-    flex-wrap: wrap;
     max-width: 230px;
   }
 }

@@ -378,6 +378,11 @@ h4,
   .thankyou-content-wrapper {
     margin-top: 65px;
   }
+
+  .download-row .social-share-block{
+    flex-wrap: no !important;
+    max-width: max-content;
+  }
 }
 
 .disable {
