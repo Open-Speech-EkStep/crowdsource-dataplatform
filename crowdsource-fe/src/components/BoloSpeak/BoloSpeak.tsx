@@ -166,6 +166,7 @@ const BoloSpeak = () => {
 
   const resetState = () => {
     setRecordedAudio('');
+    setRemainingSec(AUDIO.WARNING_COUNT_START);
     setShowWarningMsg(false);
     setDuration(0);
     clearTimeout(clearTimeoutKey);
@@ -184,6 +185,7 @@ const BoloSpeak = () => {
         setRemainingSec(value);
         value--;
         if (value < 0) {
+          setRemainingSec(AUDIO.WARNING_COUNT_START);
           clearInterval(interval);
         }
       }, 1000);
