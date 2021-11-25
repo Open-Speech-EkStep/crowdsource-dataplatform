@@ -917,6 +917,66 @@ Union values('medium', 'text', '{
     "language": "Hindi"
 }'::jsonb, null, FALSE);
 
+insert into dataset_row 
+    ( difficulty_level, type, media, state, is_profane, master_dataset_id ) 
+values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 1",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 2",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 3",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 4",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 5",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 6",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 7",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 8",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 9",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 10",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5'));
+
+insert into contributions 
+    ( dataset_row_id, contributed_by, media, is_system , date, action)
+	select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "Odia"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='text' and media ->> 'language'='Odia' and state='contributed';
 
 -- Badges Data
 

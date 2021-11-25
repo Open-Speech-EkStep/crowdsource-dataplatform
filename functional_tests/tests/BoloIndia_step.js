@@ -40,7 +40,7 @@ beforeSuite(async () => {
         waitForNavigation: false,
         navigationTimeout: 120000,
         observe: true,
-        observeTime: 2500,
+        observeTime: 1600,
         retryTimeout: 5000
     });
     await overridePermissions(testUrl, ['audioCapture']);

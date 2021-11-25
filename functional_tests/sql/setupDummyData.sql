@@ -50,6 +50,27 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
 			
 insert into dataset_row 
     ( difficulty_level, type, media, state, is_profane, master_dataset_id ) 
+values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 1",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, 'contributed', false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+Union values('medium', 'text', '{
+    "data": "ଏକଥା ସାରା ଗାଁ ଜାଣେ କମଳା 2",
+    "type": "text",
+    "language": "Odia"
+}'::jsonb, null, false, (select master_dataset_id from master_dataset where location='testMDSLocation5'))
+
+insert into contributions 
+    ( dataset_row_id, contributed_by, media, is_system , date, action)
+	select dataset_row_id, (select contributor_id from contributors where user_name='##system##'), '{
+            "data": "automationTestData/asr/0_7_1481file-idQNBJvgvyfuU.wav",
+            "type": "audio",
+            "language": "Odia"
+            }'::jsonb, true, now(), 'completed' from dataset_row where type='text' and media ->> 'language'='Odia' and state='contributed';
+
+insert into dataset_row 
+    ( difficulty_level, type, media, state, is_profane, master_dataset_id ) 
 select 'medium', 'ocr', '{
             "data": "automationTestData/ocr/image1.png",
             "type": "image",
@@ -100,6 +121,12 @@ select 'medium', 'parallel', '{
             "data": "ଆଶାକରେ ତୁମେ ଭଲ ଅଛ",
             "type": "text",
             "language": "Odia"
+            }'::jsonb, 'contributed', false
+union all
+select 'medium', 'parallel', '{
+            "data": "Sample text",
+            "type": "text",
+            "language": "English"
             }'::jsonb, 'contributed', false;
 			
 insert into contributions 
@@ -109,3 +136,9 @@ select dataset_row_id, (select contributor_id from contributors where user_name=
             "type": "text",
             "language": "English"
             }'::jsonb, true, now(), 'completed' from dataset_row where type='parallel' and media ->> 'language'='Odia' and state='contributed'
+union all
+select dataset_row_id, (select contributor_id from contributors where user_name!='##system##' limit 1), '{
+            "data": "পরীক্ষামূলক",
+            "type": "text",
+            "language": "Bengali"
+            }'::jsonb, false, now(), 'completed' from dataset_row where type='parallel' and media ->> 'language'='English' and state='contributed'

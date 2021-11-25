@@ -93,7 +93,7 @@ step("Click <name> Link", async function (name) {
 	await click(link(name));
 });
 
-step("Should select <lang> from localisation dropdown <id>", async function (lang, id) {
+step("Select <lang> from localisation dropdown <id>", async function (lang, id) {
 	await taiko.waitFor(2000)
 	await click(taiko.link({ id: id }));
 	await click(text(lang));
