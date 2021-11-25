@@ -8,10 +8,7 @@ const {
   DEFAULT_CON_LANGUAGE,
   AGGREGATED_DATA_BY_TOP_LANGUAGE,
   AGGREGATED_DATA_BY_LANGUAGE,
-  BADGES_NAME,
-  BADGES_STRING,
-  INITIATIVES,
-  BADGES_API_TEXT,
+  BADGES_NAME,BADGES_STRING,INITIATIVES,BADGES_API_TEXT
 } = require('./constants');
 const { drawTopLanguageChart } = require('./verticalGraph');
 const { changeLocale, showLanguagePopup } = require('./locale');
@@ -24,7 +21,7 @@ const {
   getJson,
   translate,
   toPascalCase,
-  getInitiativeType,
+  getInitiativeType
 } = require('./utils');
 const { onChangeUser, onOpenUserDropDown, showUserProfile } = require('./header');
 const {
@@ -207,7 +204,7 @@ const showFunctionalCards = (type, fromLanguage, toLanguage) => {
             }
             const filteredData =
               jsonData.filter(data => data.type == type && data.language == language)[0] || {};
-
+            
             hasTarget = filteredData.hastarget || false;
             isAllContributed = filteredData.isallcontributed || false;
             if (hasTarget && !isAllContributed) {
@@ -296,6 +293,7 @@ const getTop3Languages = function (functionalFlow = '', currentModule = '', cont
   return sortingLanguages;
 };
 
+
 const setBadge = function (data, localeStrings, functionalFlow) {
   localStorage.setItem('badgeId', data.badgeId);
   localStorage.setItem('badges', JSON.stringify(data.badges));
@@ -344,22 +342,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
   }
 
   const source = functionalFlow === 'validator' ? 'validate' : 'contribute';
-  $('#badge_1_badge_link_img').attr(
-    'src',
-    getLanguageBadge(contributionLanguage, 'badge_1', source, initiativeType)
-  );
-  $('#badge_2_badge_link_img').attr(
-    'src',
-    getLanguageBadge(contributionLanguage, 'badge_2', source, initiativeType)
-  );
-  $('#badge_3_badge_link_img').attr(
-    'src',
-    getLanguageBadge(contributionLanguage, 'badge_3', source, initiativeType)
-  );
-  $('#badge_4_badge_link_img').attr(
-    'src',
-    getLanguageBadge(contributionLanguage, 'badge_4', source, initiativeType)
-  );
+  $('#badge_1_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_1', source, initiativeType));
+  $('#badge_2_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_2', source, initiativeType));
+  $('#badge_3_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_3', source, initiativeType));
+  $('#badge_4_badge_link_img').attr('src', getLanguageBadge(contributionLanguage, 'badge_4', source, initiativeType));
 
   if (data.isNewBadge) {
     $('.new-badge-msg').removeClass('d-none');
@@ -380,10 +366,10 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     nextBadgeLink.removeClass('disable');
 
     $('.participation-msg-section').addClass('d-flex align-items-center');
-    if (!isMobileDevice()) {
-      $('.downloadable_badges').css('margin-left', '10px');
-      if (data.currentBadgeType.toLowerCase() == 'platinum') {
-        $('.badges_information').css('margin-left', '0px');
+    if(!isMobileDevice()){
+      $('.downloadable_badges').css('margin-left','10px')
+      if(data.currentBadgeType.toLowerCase() == 'platinum'){
+        $('.badges_information').css('margin-left','0px')
       }
     }
 
@@ -399,22 +385,12 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     if (functionalFlow === 'validator') {
       $('#reward-img').attr(
         'src',
-        getLanguageBadge(
-          contributionLanguage,
-          BADGES_STRING[data.currentBadgeType.toLowerCase()],
-          'validate',
-          initiativeType
-        )
+        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'validate', initiativeType)
       );
     } else {
       $('#reward-img').attr(
         'src',
-        getLanguageBadge(
-          contributionLanguage,
-          BADGES_STRING[data.currentBadgeType.toLowerCase()],
-          'contribute',
-          initiativeType
-        )
+        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'contribute', initiativeType)
       );
     }
   } else if (data.contributionCount === 0) {
@@ -424,7 +400,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('#contribution_text').removeClass('d-none');
   } else {
     if (data.badges && data.badges.length) {
-      !isMobileDevice() && $('.downloadable_badges').css('margin-left', '10px');
+      !isMobileDevice() && $('.downloadable_badges').css('margin-left','10px')
       $('#showAfterBadge').removeClass('d-none');
       $('.participation-msg-section').removeClass('pt-lg-3').removeClass('pt-md-3').addClass('pt-0');
       const participateMsgWeb = $('.web-view');
@@ -447,12 +423,7 @@ const setBadge = function (data, localeStrings, functionalFlow) {
       const badgeType = data.currentBadgeType;
       $('#thankyou-last-badge').attr(
         'src',
-        getLanguageBadge(
-          contributionLanguage,
-          BADGES_STRING[data.currentBadgeType.toLowerCase()],
-          'contribute',
-          initiativeType
-        )
+        getLanguageBadge(contributionLanguage, BADGES_STRING[data.currentBadgeType.toLowerCase()], 'contribute', initiativeType)
       );
       const badgeTypeTranslation = toPascalCase(translate(BADGES_NAME[badgeType.toLowerCase()]));
       $('#last-bagde-earned').html(badgeTypeTranslation);
@@ -528,9 +499,9 @@ const setBadge = function (data, localeStrings, functionalFlow) {
     $('.downloadable_badges').append($badge_3_Badge);
     $('.downloadable_badges').append($badge_4_Badge);
     $badge_4_BadgeLink.removeClass('mr-3');
-    if (!isMobileDevice()) {
-      $('.downloadable_badges').css('margin-left', '10px');
-      $('.badges_information').css('margin-left', '0px');
+    if(!isMobileDevice()){
+      $('.downloadable_badges').css('margin-left','10px')
+      $('.badges_information').css('margin-left','0px')
     }
     $('#sentence_away_msg').addClass('d-none');
     if (isLanguageOnTop) {

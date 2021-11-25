@@ -5,7 +5,7 @@ const {
   CONTRIBUTION_LANGUAGE,
   DEFAULT_CON_LANGUAGE,
   ErrorStatusCode,
-  INITIATIVES,
+  INITIATIVES
 } = require('./constants');
 const fetch = require('./fetch');
 const platform = require('./platform');
@@ -346,30 +346,22 @@ const toPascalCase = function (text) {
   });
 };
 
-const getInitiativeType = function (initiative) {
-  return initiative === INITIATIVES.parallel.value
-    ? INITIATIVES.parallel.type
-    : initiative === INITIATIVES.asr.value
-    ? INITIATIVES.asr.type
-    : initiative === INITIATIVES.ocr.value
-    ? INITIATIVES.ocr.type
-    : INITIATIVES.text.type;
-};
+const getInitiativeType = function(initiative){
+  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
+}
 
-const getDefaultLanguageStat = function (initiative, fromLanguage, toLanguage = '') {
-  const contributionLanguage = toLanguage ? `${fromLanguage}-${toLanguage}` : fromLanguage;
-  return [
-    {
-      language: contributionLanguage,
-      total_speakers: 0,
-      total_contributions: 0.0,
-      total_validations: 0.0,
-      total_contribution_count: 0,
-      total_validation_count: 0,
-      type: initiative,
-    },
-  ];
-};
+const getDefaultLanguageStat = function(initiative, fromLanguage, toLanguage = ''){
+  const contributionLanguage = toLanguage ? `${fromLanguage}-${toLanguage}` : fromLanguage
+  return [{ 
+    "language": contributionLanguage,
+    "total_speakers": 0,
+    "total_contributions": 0.0,
+    "total_validations": 0.0,
+    "total_contribution_count": 0,
+    "total_validation_count": 0,
+    "type": initiative
+  }]
+}
 
 module.exports = {
   safeJsonParse,
@@ -397,5 +389,5 @@ module.exports = {
   translate,
   toPascalCase,
   getInitiativeType,
-  getDefaultLanguageStat,
+  getDefaultLanguageStat
 };

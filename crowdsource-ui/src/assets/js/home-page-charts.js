@@ -47,7 +47,7 @@ const statesInformation = [
   { id: 'IN-MH', state: 'Maharashtra', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
   { id: 'IN-MN', state: 'Manipur', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
   { id: 'IN-CH', state: 'Chandigarh', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
-  { id: 'IN-PY', state: 'Puducherry', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
+  { id: 'IN-PY', state: 'Union Territory of Puducherry', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
   { id: 'IN-PB', state: 'Punjab', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
   { id: 'IN-RJ', state: 'Rajasthan', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
   { id: 'IN-SK', state: 'Sikkim', contributed_time: '0s', validated_time: '0s', total_speakers: 0 },
@@ -79,7 +79,7 @@ const statesInformation = [
 
 var polygonSeries = undefined;
 const drawMap = function (response) {
-  let statesData = [...statesInformation];
+  let statesData = statesInformation.slice().map(info => Object.assign({},info));
   const $legendDiv = $('#legendDiv');
   const maxContribution = Math.max.apply(
     Math,
@@ -198,9 +198,7 @@ function getLanguageSpecificData(data, lang) {
   const stateData = [];
   data.forEach(item => {
     if (
-      item.language.toLowerCase() === lang.toLowerCase() &&
-      item.state !== '' &&
-      item.state.toLowerCase() !== 'anonymous'
+      item.language.toLowerCase() === lang.toLowerCase()
     ) {
       stateData.push(item);
     }
@@ -268,7 +266,8 @@ function showBySpeakersChart() {
 }
 
 const generateAnonymousState = function(result, initiative){
-  const allUnspecifiedState = result.filter(st => !(statesInformation.some(s=> s.state === st.state)));
+  const statesData = statesInformation.slice().map(info => Object.assign({},info));
+  const allUnspecifiedState = result.filter(st => !(statesData.some(s=> s.state === st.state)));
 
   const anonymousStateData = allUnspecifiedState.reduce((ctx, st) => {
     ctx.total_contributions = ctx.total_contributions+st.total_contributions;

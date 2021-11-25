@@ -24,12 +24,12 @@ const {
     SPEAKER_DETAILS_KEY,
     INITIATIVES,CURRENT_MODULE
 } = require('./constants');
-const { json_url } = require('./env-api');
+const { context_root } = require('./env-api');
 const { updateHrsForCards } = require('../../../build/js/common/card');
 
 const getStatsSummary = function () {
-    $.getJSON(`${json_url}/aggregated-json/cumulativeCount.json`, (jsonData) => {
-        $.getJSON(`${json_url}/aggregated-json/participationStats.json`, (jsonData2) => {
+    $.getJSON(`${context_root}/aggregated-json/cumulativeCount.json`, (jsonData) => {
+        $.getJSON(`${context_root}/aggregated-json/participationStats.json`, (jsonData2) => {
             const bData2 = jsonData2.find(d => d.type == 'text') || {};
             const bData = jsonData.find(d => d.type == 'text') || {};
             bData.total_speakers = bData2.count || 0;
@@ -38,7 +38,7 @@ const getStatsSummary = function () {
     }).fail((e) => {
         safeJqueryErrorHandling(e);
     });
-    $.getJSON(`${json_url}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
+    $.getJSON(`${context_root}/aggregated-json/topLanguagesByHoursContributed.json`, (jsonData) => {
         const top_languages_by_hours = jsonData.filter(d => d.type == "text");
         localStorage.setItem(AGGREGATED_DATA_BY_LANGUAGE, JSON.stringify(top_languages_by_hours));
         const languages = getContributedAndTopLanguage(top_languages_by_hours, INITIATIVES.text.value);
@@ -56,14 +56,14 @@ const getStatsSummary = function () {
     }).fail((e) => {
         safeJqueryErrorHandling(e);
     });
-    $.getJSON(`${json_url}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
+    $.getJSON(`${context_root}/aggregated-json/topLanguagesBySpeakerContributions.json`, (jsonData) => {
         const top_languages_by_speakers = jsonData.filter(d => d.type == "text");
         const speakers = getContributedAndTopLanguage(top_languages_by_speakers, "speakers");
         localStorage.setItem(TOP_LANGUAGES_BY_SPEAKERS, JSON.stringify(speakers));
     }).fail((e) => {
         safeJqueryErrorHandling(e);
     });
-    $.getJSON(`${json_url}/aggregated-json/cumulativeDataByLanguage.json`, (jsonData) => {
+    $.getJSON(`${context_root}/aggregated-json/cumulativeDataByLanguage.json`, (jsonData) => {
         const cumulativeData = jsonData.filter(d => d.type == "text") || [];
 
         localStorage.setItem(CUMULATIVE_DATA, JSON.stringify(cumulativeData));

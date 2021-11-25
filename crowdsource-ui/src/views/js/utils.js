@@ -1,4 +1,4 @@
-const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES, INITIATIVES } = require('./constants');
+const { HOUR_IN_SECONDS, SIXTY, ALL_LANGUAGES,INITIATIVES } = require('./constants');
 const fetch = require('./fetch');
 const platform = require('./platform');
 const { context_root } = require('./env-api');
@@ -130,7 +130,7 @@ function fetchLocationInfo() {
       }
       if (ipAddress.length !== 0 && ipAddress !== null) {
         return fetch(`/location-info?ip=${ipAddress}`);
-      } else {
+  } else {
         return new Promise((resolve, reject) => {
           reject('Ip Address not available');
         });
@@ -254,7 +254,7 @@ const formatTimeForLegends = function (hours, minutes = 0, seconds = 0, isLabelR
   const minStr = localsStrings['minutes'] || 'minutes';
   const secStr = localsStrings['seconds'] || 'seconds';
   if (hours && minutes) {
-    const totalHours = Math.floor((hours + minutes / 60) * 100) / 100; //get decimal point upto 2 values
+    const totalHours = Math.floor((hours + minutes / 60) * 100) / 100;  //get decimal point upto 2 values
     return isLabelRequired ? `${totalHours} ${hrStr}` : `${totalHours}`;
   }
   if (hours == 0 && minutes == 0) {
@@ -336,30 +336,22 @@ const getLanguageBadge = (contibutedLanguage, badgeType, source, initiativeType)
   return `/img/${langaugePrefix}_${initiativeType}_${badgeType}_${source}.svg`;
 };
 
-const getInitiativeType = function (initiative) {
-  return initiative === INITIATIVES.parallel.value
-    ? INITIATIVES.parallel.type
-    : initiative === INITIATIVES.asr.value
-    ? INITIATIVES.asr.type
-    : initiative === INITIATIVES.ocr.value
-    ? INITIATIVES.ocr.type
-    : INITIATIVES.text.type;
-};
+const getInitiativeType = function(initiative){
+  return initiative === INITIATIVES.parallel.value ? INITIATIVES.parallel.type : initiative === INITIATIVES.asr.value ? INITIATIVES.asr.type : initiative === INITIATIVES.ocr.value ? INITIATIVES.ocr.type : INITIATIVES.text.type
+}
 
-const getDefaultLanguageStat = function (initiative, fromLanguage, toLanguage = '') {
-  const contributionLanguage = toLanguage ? `${fromLanguage}-${toLanguage}` : fromLanguage;
-  return [
-    {
-      language: contributionLanguage,
-      total_speakers: 0,
-      total_contributions: 0.0,
-      total_validations: 0.0,
-      total_contribution_count: 0,
-      total_validation_count: 0,
-      type: initiative,
-    },
-  ];
-};
+const getDefaultLanguageStat = function(initiative, fromLanguage, toLanguage = ''){
+  const contributionLanguage = toLanguage ? `${fromLanguage}-${toLanguage}` : fromLanguage
+  return [{ 
+    "language": contributionLanguage,
+    "total_speakers": 0,
+    "total_contributions": 0.0,
+    "total_validations": 0.0,
+    "total_contribution_count": 0,
+    "total_validation_count": 0,
+    "type": initiative
+  }]
+}
 
 module.exports = {
   setPageContentHeight,
@@ -388,5 +380,5 @@ module.exports = {
   toPascalCase,
   getInitiativeType,
   safeJson,
-  getDefaultLanguageStat,
+  getDefaultLanguageStat
 };
