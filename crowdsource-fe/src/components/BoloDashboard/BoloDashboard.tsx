@@ -81,7 +81,9 @@ const BoloDashboard = () => {
         )}
         <Fragment>
           <div className="mt-8">
-            {(!language && <ContributionStats initiative={INITIATIVES_MAPPING.bolo} />) ||
+            {(!language && (
+              <ContributionStats showComponent={true} initiative={INITIATIVES_MAPPING.bolo} />
+            )) ||
               (language && (
                 <ContributionStatsByLanguage
                   initiative={INITIATIVES_MAPPING.bolo}

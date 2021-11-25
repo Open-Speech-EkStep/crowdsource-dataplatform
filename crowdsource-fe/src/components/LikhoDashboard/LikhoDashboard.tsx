@@ -95,7 +95,7 @@ const LikhoDashboard = () => {
         <Fragment>
           <div className="mt-8">
             {(!(fromLanguage && toLanguage) && (
-              <ContributionStats initiative={INITIATIVES_MAPPING.likho} />
+              <ContributionStats showComponent={true} initiative={INITIATIVES_MAPPING.likho} />
             )) ||
               (fromLanguage && toLanguage && (
                 <ContributionStatsByLanguage

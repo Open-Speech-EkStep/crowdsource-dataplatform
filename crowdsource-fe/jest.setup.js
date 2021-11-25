@@ -98,7 +98,7 @@ global.window.HTMLMediaElement.prototype.play = function playMock() {
 // Pause the playback
 global.window.HTMLMediaElement.prototype.pause = function pauseMock() {
   this._mock.paused = true;
-  this.dispatchEvent(new Event('pause'));
+  // this.dispatchEvent(new Event('pause'));
 };
 
 beforeEach(() => {

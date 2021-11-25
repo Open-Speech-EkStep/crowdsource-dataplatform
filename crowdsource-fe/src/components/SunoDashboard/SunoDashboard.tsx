@@ -79,7 +79,9 @@ const SunoDashboard = () => {
         )}
         <Fragment>
           <div className="mt-8">
-            {(!language && <ContributionStats initiative={INITIATIVES_MAPPING.suno} />) ||
+            {(!language && (
+              <ContributionStats showComponent={true} initiative={INITIATIVES_MAPPING.suno} />
+            )) ||
               (language && (
                 <ContributionStatsByLanguage
                   initiative={INITIATIVES_MAPPING.suno}

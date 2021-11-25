@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Spinner from 'react-bootstrap/Spinner';
 
-import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
 import ErrorPopup from 'components/ErrorPopup';
@@ -22,6 +21,7 @@ import {
 } from 'constants/initiativeConstants';
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
+import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
 import { useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -43,7 +43,6 @@ const SunoTranscribe = () => {
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
   const [isDisabled, setIsDisabled] = useState(true);
-  const [playAudio, setPlayAudio] = useState(false);
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
@@ -61,6 +60,8 @@ const SunoTranscribe = () => {
     media_data: '',
     dataset_row_id: '0',
   });
+  const audioEl: any = useRef<HTMLAudioElement>();
+  const audio = audioEl.current;
 
   const { submit, error: submitError } = useSubmit(apiPaths.store);
 
@@ -113,17 +114,33 @@ const SunoTranscribe = () => {
     }
   }, [speakerDetails]);
 
+  useEffect(() => {
+    audio?.addEventListener('ended', onEnded);
+    return () => {
+      audio?.removeEventListener('ended', onEnded);
+    };
+  });
+
+  useEffect(() => {
+    audio?.addEventListener('play', onPlayAudio);
+    audio?.addEventListener('pause', onPauseAudio);
+    return () => {
+      audio?.removeEventListener('pause', onPauseAudio);
+      audio?.removeEventListener('play', onPlayAudio);
+    };
+  });
+
   const onPlayAudio = () => {
+    audio?.play();
     setShowReplayButton(false);
     setIsDisabled(false);
-    setPlayAudio(true);
     setShowPauseButton(true);
     setShowPlayButton(false);
   };
 
   const onPauseAudio = () => {
     setShowPauseButton(false);
-    setPlayAudio(false);
+    audio?.pause();
     setShowPlayButton(true);
   };
 
@@ -192,7 +209,7 @@ const SunoTranscribe = () => {
   };
 
   const onSkipContribution = () => {
-    setPlayAudio(false);
+    audio?.pause();
     setDataCurrentIndex(currentDataIndex);
     setCloseKeyboard(!closeKeyboard);
     resetState();
@@ -210,8 +227,8 @@ const SunoTranscribe = () => {
     );
   };
 
-  const onAudioEnd = () => {
-    setPlayAudio(false);
+  const onEnded = () => {
+    audio?.pause();
     setShowPlayButton(false);
     setShowPauseButton(false);
     setShowReplayButton(true);
@@ -235,14 +252,22 @@ const SunoTranscribe = () => {
             />
             <Container fluid="lg" className="mt-5">
               <div data-testid="SunoTranscribe" className={`${styles.root}`}>
-                <AudioController
-                  audioUrl={showUIData?.media_data}
-                  playAudio={playAudio}
-                  onEnded={onAudioEnd}
-                  onPlay={onPlayAudio}
-                  onPause={onPauseAudio}
-                  type="Contribution"
-                />
+                <div className="d-flex flex-column align-items-center text-center">
+                  <span className="display-3">{t(`sunoContributionHeading`)}</span>
+                  <div className="mt-2 mt-md-3">
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio
+                      data-testid="audioElement"
+                      ref={audioEl}
+                      controls
+                      className="d-flex shadow-grey rounded-24"
+                      tabIndex={-1}
+                      src={`${nodeConfig.cdnUrl}/${showUIData?.media_data}`}
+                      controlsList="nodownload"
+                      crossOrigin="anonymous"
+                    ></audio>
+                  </div>
+                </div>
                 <div className="mt-4 mt-md-8">
                   <TextEditArea
                     id="addText"

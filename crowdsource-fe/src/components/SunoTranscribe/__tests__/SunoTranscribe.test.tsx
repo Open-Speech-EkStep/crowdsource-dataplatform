@@ -254,10 +254,11 @@ describe('SunoTranscribe', () => {
 
     userEvent.click(screen.getByRole('img', { name: 'Play Icon' }));
 
-    const audio: any = screen.getByTestId('audioElement');
+    await waitFor(() => {
+      screen.getByTestId('audioElement').dispatchEvent(new window.Event('ended'));
+    });
 
     await waitFor(() => {
-      audio.dispatchEvent(new window.Event('ended'));
       expect(screen.getByRole('img', { name: 'Replay Icon' })).toBeInTheDocument();
     });
 

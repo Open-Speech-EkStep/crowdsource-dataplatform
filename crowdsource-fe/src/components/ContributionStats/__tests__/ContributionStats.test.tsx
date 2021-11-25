@@ -1,11 +1,11 @@
 import { SWRConfig } from 'swr';
 
-import { render, verifyAxeTest, screen, waitForElementToBeRemoved } from 'utils/testUtils';
+import { render, verifyAxeTest, screen, waitFor, waitForElementToBeRemoved } from 'utils/testUtils';
 
 import ContributionStats from '../ContributionStats';
 
 describe('ContributionStats', () => {
-  const setup = async (value?: any) => {
+  const setup = async (value?: any, showComponent?: boolean) => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
       JSON.stringify([
         {
@@ -61,10 +61,25 @@ describe('ContributionStats', () => {
 
     const renderResult = render(
       <SWRConfig value={{ provider: () => new Map() }}>
-        <ContributionStats initiative={value} header="Header" subHeader="Sub Header" />
+        <ContributionStats
+          initiative={value}
+          header="Header"
+          subHeader="Sub Header"
+          showComponent={showComponent}
+        />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/participationStats.json');
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeCount.json');
+    });
+    if (showComponent) {
+      console.log(showComponent);
+      await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
+    }
+
     return renderResult;
   };
 
@@ -73,13 +88,13 @@ describe('ContributionStats', () => {
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup('suno');
+    const { asFragment } = await setup('suno', false);
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should render the result for initiative home page', async () => {
-    await setup('suno');
+    await setup('suno', false);
     expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
     expect(screen.getByText('durationTranscribed')).toBeInTheDocument();
     expect(screen.getByText('durationValidated')).toBeInTheDocument();
@@ -89,7 +104,7 @@ describe('ContributionStats', () => {
   });
 
   it('should render the result for likho initiative home page', async () => {
-    await setup('bolo');
+    await setup('bolo', false);
     expect(screen.getByText('peopleParticipated')).toBeInTheDocument();
     expect(screen.getByText('durationRecorded')).toBeInTheDocument();
     expect(screen.getByText('durationValidated')).toBeInTheDocument();

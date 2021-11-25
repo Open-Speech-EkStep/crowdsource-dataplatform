@@ -11,9 +11,15 @@ interface ContributionStatsProps {
   initiative: 'suno' | 'bolo' | 'likho' | 'dekho';
   header?: string;
   subHeader?: string;
+  showComponent?: boolean;
 }
 
-const ContributionStats = (props: ContributionStatsProps) => {
+const ContributionStats = ({
+  initiative,
+  header,
+  subHeader,
+  showComponent = false,
+}: ContributionStatsProps) => {
   const { t } = useTranslation();
   const { data: participationStats } = useFetch<Array<{ count: string; type: string }>>(
     apiPaths.participationStats
@@ -27,18 +33,22 @@ const ContributionStats = (props: ContributionStatsProps) => {
   }> = [];
 
   const initiativeData: any =
-    (cumulativeData &&
-      cumulativeData.find(item => item.type === INITIATIVES_MEDIA_MAPPING[props.initiative])) ||
+    (cumulativeData && cumulativeData.find(item => item.type === INITIATIVES_MEDIA_MAPPING[initiative])) ||
     {};
-  initiativeData.peopleParticipated = participationStats?.find(
-    item => item.type === INITIATIVES_MEDIA_MAPPING[props.initiative]
+  const participationCount = participationStats?.find(
+    item => item.type === INITIATIVES_MEDIA_MAPPING[initiative]
   )?.count;
-  INITIATIVE_CUMULATIVE_VALUE[props.initiative].forEach((ele, index) => {
+  if (participationCount) {
+    initiativeData.peopleParticipated = participationCount;
+  }
+  INITIATIVE_CUMULATIVE_VALUE[initiative].forEach((ele, index) => {
     let statValue;
-    if (isSunoOrBoloInitiative(INITIATIVES_MEDIA_MAPPING[props.initiative]) && ele.isFormat === 'true') {
-      statValue = convertTimeFormat(initiativeData[Object.values(ele)[0]!]);
+    if (isSunoOrBoloInitiative(INITIATIVES_MEDIA_MAPPING[initiative]) && ele.isFormat === 'true') {
+      statValue = convertTimeFormat(
+        initiativeData[Object.values(ele)[0]!] ? initiativeData[Object.values(ele)[0]!] : '0'
+      );
     } else {
-      statValue = initiativeData[Object.values(ele)[0]!];
+      statValue = initiativeData[Object.values(ele)[0]!] ? initiativeData[Object.values(ele)[0]!] : '0';
     }
 
     statsContents.push({
@@ -48,12 +58,12 @@ const ContributionStats = (props: ContributionStatsProps) => {
     });
   });
 
-  return (
+  const componentStatsUI = () => (
     <div data-testid="ContributionStats">
-      {(props.header || props.subHeader) && (
+      {(header || subHeader) && (
         <header className="d-flex flex-column">
-          {props.header && <h3 className="w-100 mb-4">{props.header}</h3>}
-          {props.subHeader && <span className={`font-family-rowdies display-3 mb-0`}>{props.subHeader}</span>}
+          {header && <h3 className="w-100 mb-4">{header}</h3>}
+          {subHeader && <span className={`font-family-rowdies display-3 mb-0`}>{subHeader}</span>}
         </header>
       )}
       <div className="mt-4 mt-md-5">
@@ -61,6 +71,12 @@ const ContributionStats = (props: ContributionStatsProps) => {
       </div>
     </div>
   );
+
+  return showComponent
+    ? componentStatsUI()
+    : initiativeData && Object.keys(initiativeData).length
+    ? componentStatsUI()
+    : null;
 };
 
 export default ContributionStats;

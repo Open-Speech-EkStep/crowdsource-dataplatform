@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Spinner from 'react-bootstrap/Spinner';
 
-import AudioController from 'components/AudioController';
 import ButtonControls from 'components/ButtonControls';
 import ChromeExtension from 'components/ChromeExtension';
 import EditTextBlock from 'components/EditTextBlock';
@@ -23,6 +22,7 @@ import {
 } from 'constants/initiativeConstants';
 import { TEXT_INPUT_LENGTH } from 'constants/Keyboard';
 import localStorageConstants from 'constants/localStorageConstants';
+import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
 import { useFetchWithInit, useSubmit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -44,7 +44,6 @@ const SunoValidate = () => {
 
   const [speakerDetails] = useLocalStorage<SpeakerDetails>(localStorageConstants.speakerDetails);
 
-  const [playAudio, setPlayAudio] = useState(false);
   const [showPauseButton, setShowPauseButton] = useState(false);
   const [showReplayButton, setShowReplayButton] = useState(false);
   const [showThankyouMessage, setShowThankyouMessage] = useState(false);
@@ -95,6 +94,9 @@ const SunoValidate = () => {
     speakerDetails: '',
   });
 
+  const audioEl: any = useRef<HTMLAudioElement>();
+  const audio = audioEl.current;
+
   const { data: result, mutate } = useFetchWithInit<ResultType>(
     `${apiPaths.contributionsAsr}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
     {
@@ -127,9 +129,25 @@ const SunoValidate = () => {
     }
   }, [speakerDetails]);
 
+  useEffect(() => {
+    audio?.addEventListener('ended', onEnded);
+    return () => {
+      audio?.removeEventListener('ended', onEnded);
+    };
+  });
+
+  useEffect(() => {
+    audio?.addEventListener('play', onPlayAudio);
+    audio?.addEventListener('pause', onPauseAudio);
+    return () => {
+      audio?.removeEventListener('pause', onPauseAudio);
+      audio?.removeEventListener('play', onPlayAudio);
+    };
+  });
+
   const onPlayAudio = () => {
     setShowReplayButton(false);
-    setPlayAudio(true);
+    audio?.play();
     setShowPauseButton(true);
     setShowPlayButton(false);
     setNeedsChangeDisable(false);
@@ -137,7 +155,7 @@ const SunoValidate = () => {
 
   const onPauseAudio = () => {
     setShowPauseButton(false);
-    setPlayAudio(false);
+    audio?.pause();
     setShowPlayButton(true);
   };
 
@@ -221,6 +239,7 @@ const SunoValidate = () => {
   };
 
   const onSkipContribution = () => {
+    audio?.pause();
     setDataCurrentIndex(currentDataIndex);
     resetState();
     submitSkip(
@@ -237,8 +256,8 @@ const SunoValidate = () => {
     );
   };
 
-  const onAudioEnd = () => {
-    setPlayAudio(false);
+  const onEnded = () => {
+    audio?.pause();
     setShowPlayButton(false);
     setShowPauseButton(false);
     setShowReplayButton(true);
@@ -288,14 +307,22 @@ const SunoValidate = () => {
             />
             <Container fluid="lg" className="mt-5">
               <div data-testid="SunoValidate" className={`${styles.root}`}>
-                <AudioController
-                  audioUrl={showUIData?.sentence}
-                  playAudio={playAudio}
-                  onEnded={onAudioEnd}
-                  onPlay={onPlayAudio}
-                  onPause={onPauseAudio}
-                  type="Validation"
-                />
+                <div className="d-flex flex-column align-items-center text-center">
+                  <span className="display-3">{t(`sunoValidationHeading`)}</span>
+                  <div className="mt-2 mt-md-3">
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                    <audio
+                      data-testid="audioElement"
+                      ref={audioEl}
+                      controls
+                      className="d-flex shadow-grey rounded-24"
+                      tabIndex={-1}
+                      src={`${nodeConfig.cdnUrl}/${showUIData?.sentence}`}
+                      controlsList="nodownload"
+                      crossOrigin="anonymous"
+                    ></audio>
+                  </div>
+                </div>
                 {showEditTextArea ? (
                   <div className="d-md-flex mt-9 mt-md-12">
                     <EditTextBlock

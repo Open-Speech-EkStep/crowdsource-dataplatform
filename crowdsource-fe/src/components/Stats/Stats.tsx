@@ -27,7 +27,7 @@ const Stats = ({ contents }: StatsProps) => {
           return (
             <Col xs={MAX_COL_LENGTH} md={mdNum} className={styles.stat} key={content.id}>
               <div className="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center">
-                {stat ? (
+                {stat || stat === '0' ? (
                   <span className={`${styles.count} text-warning display-1 d-flex text-center`}>{stat}</span>
                 ) : (
                   <Spinner data-testid="Loader" animation="border" variant="light" />

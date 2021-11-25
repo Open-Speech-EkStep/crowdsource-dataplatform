@@ -79,7 +79,9 @@ const DekhoDashboard = () => {
         )}
         <Fragment>
           <div className="mt-8">
-            {(!language && <ContributionStats initiative={INITIATIVES_MAPPING.dekho} />) ||
+            {(!language && (
+              <ContributionStats showComponent={true} initiative={INITIATIVES_MAPPING.dekho} />
+            )) ||
               (language && (
                 <ContributionStatsByLanguage
                   initiative={INITIATIVES_MAPPING.dekho}
