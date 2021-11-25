@@ -10,6 +10,7 @@ const profanityApi = require('./profanityChecker');
 const helmet = require('helmet');
 const express = require('express');
 const app = express();
+app.set('x-powered-by', false);
 const morganBody = require('morgan-body');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -55,7 +56,6 @@ app.use(bodyParser.json());
 
 
 app.enable('trust proxy');
-app.disable('x-powered-by');
 
 const randomString = () => {
   return (Math.random() + 1).toString(36).substring(2, 10);
