@@ -10,7 +10,7 @@ const profanityApi = require('./profanityChecker');
 const helmet = require('helmet');
 const express = require('express');
 const app = express();
-app.set('x-powered-by', false);
+app.disable('x-powered-by');
 const morganBody = require('morgan-body');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
