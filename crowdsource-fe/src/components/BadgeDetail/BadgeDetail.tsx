@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -12,9 +12,13 @@ import {
   INITIATIVES_MEDIA_MAPPING,
   INITIATIVES_REVERSE_MEDIA_MAPPING,
 } from 'constants/initiativeConstants';
+import { MEDALS } from 'constants/medalConstants';
+import { sourceConstants } from 'constants/pageRouteConstants';
 import routePaths from 'constants/routePaths';
 import type { Initiative } from 'types/Initiatives';
 import type { InitiativeType } from 'types/InitiativeType';
+import type { MedalsType } from 'types/MedalsType';
+import type { SourceType } from 'types/SourceType';
 
 import styles from './BadgeDetail.module.scss';
 
@@ -22,21 +26,23 @@ const BadgeDetail = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const { locale: currentLocale } = useRouter();
-  const { language, initiative, source } = router.query;
+  const { language, initiative, source, badge } = router.query;
 
-  const [defaultLanguage, setLanguage] = useState(language || 'English');
+  const [defaultLanguage, setLanguage] = useState((language as string) || 'English');
   const [defaultInitiative, setDefaultInitiative] = useState<Initiative>(
     INITIATIVES_REVERSE_MEDIA_MAPPING[initiative as InitiativeType] || INITIATIVES_MAPPING.suno
   );
-  const defaultAction = source || 'contribute';
+  const defaultAction: SourceType = (source as SourceType) || sourceConstants.contribute;
+  const defaultBadge = (badge as MedalsType) || MEDALS[0];
 
   const setRoutingParam = (
-    initiative: any,
-    language: string | string[],
-    source: string | string[] | undefined
+    initiative: InitiativeType,
+    language: string,
+    source: SourceType,
+    badge: MedalsType
   ) => {
     router.push(
-      `/${currentLocale}${routePaths.badges}?initiative=${initiative}&language=${language}&source=${source}`,
+      `/${currentLocale}${routePaths.badges}?initiative=${initiative}&language=${language}&source=${source}&badge=${badge}`,
       undefined,
       {
         locale: currentLocale,
@@ -51,8 +57,22 @@ const BadgeDetail = () => {
       inline: 'center',
     });
     setDefaultInitiative(tab as Initiative);
-    setRoutingParam(INITIATIVES_MEDIA_MAPPING[tab as Initiative], defaultLanguage, source);
+    setRoutingParam(
+      INITIATIVES_MEDIA_MAPPING[tab as Initiative],
+      defaultLanguage,
+      defaultAction,
+      defaultBadge
+    );
   }
+
+  useEffect(() => {
+    setRoutingParam(
+      INITIATIVES_MEDIA_MAPPING[defaultInitiative],
+      defaultLanguage,
+      defaultAction,
+      defaultBadge
+    );
+  }, []);
 
   return (
     <div data-testid="BadgeDetail">
@@ -61,7 +81,12 @@ const BadgeDetail = () => {
         <LanguageDropDown
           selectedLanguage={defaultLanguage as string}
           updateSelectedLanguage={selectedLanguage => {
-            setRoutingParam(initiative, selectedLanguage, source);
+            setRoutingParam(
+              INITIATIVES_MEDIA_MAPPING[defaultInitiative],
+              selectedLanguage,
+              defaultAction,
+              defaultBadge
+            );
             setLanguage(selectedLanguage);
           }}
         />
@@ -86,8 +111,24 @@ const BadgeDetail = () => {
           <InitiativeBadgeDetail
             initiative={defaultInitiative}
             language={defaultLanguage as string}
-            action={defaultAction as string}
-            onSelectSourceType={(type: string) => setRoutingParam(initiative, defaultLanguage, type)}
+            action={defaultAction as SourceType}
+            badge={defaultBadge as MedalsType}
+            onSelectSourceType={(type: SourceType) =>
+              setRoutingParam(
+                INITIATIVES_MEDIA_MAPPING[defaultInitiative],
+                defaultLanguage,
+                type,
+                defaultBadge
+              )
+            }
+            onSelectBadgeType={(badge: MedalsType) =>
+              setRoutingParam(
+                INITIATIVES_MEDIA_MAPPING[defaultInitiative],
+                defaultLanguage,
+                defaultAction,
+                badge
+              )
+            }
           />
         </div>
       </div>

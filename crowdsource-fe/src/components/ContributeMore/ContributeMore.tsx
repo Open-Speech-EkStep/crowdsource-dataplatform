@@ -10,6 +10,7 @@ import Link from 'components/Link';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import localStorageConstants from 'constants/localStorageConstants';
+import { MEDALS } from 'constants/medalConstants';
 import { pageSourceConstants } from 'constants/pageRouteConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -139,7 +140,7 @@ const ContributeMore = ({
           </div>
         )}
         <Link
-          href={`${routePaths.badges}?initiative=${INITIATIVES_MEDIA_MAPPING[initiative]}&language=${contributionLanguage}&source=${source}`}
+          href={`${routePaths.badges}?initiative=${INITIATIVES_MEDIA_MAPPING[initiative]}&language=${contributionLanguage}&source=${source}&badge=${MEDALS[0]}`}
         >
           <a className={`${styles.text} mt-4 mt-md-0 display-5 ms-md-3 flex-shrink-0`}>
             <b>{t('knowMore')}</b>

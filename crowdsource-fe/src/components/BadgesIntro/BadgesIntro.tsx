@@ -9,6 +9,7 @@ import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import { INITIATIVES_MEDIA } from 'constants/initiativeConstants';
 import { RAW_LANGUAGES } from 'constants/localesConstants';
+import { MEDALS } from 'constants/medalConstants';
 import routePaths from 'constants/routePaths';
 
 import styles from './BadgesIntro.module.scss';
@@ -23,7 +24,7 @@ const BadgesIntro = () => {
       <Col xs="12" lg="5">
         <h1 className="text-center text-md-start">{t('badgesIntroHeading')}</h1>
         <Link
-          href={`${routePaths.badges}?initiative=${INITIATIVES_MEDIA.asr}&language=${RAW_LANGUAGES.en}&source=contribute`}
+          href={`${routePaths.badges}?initiative=${INITIATIVES_MEDIA.asr}&language=${RAW_LANGUAGES.en}&source=contribute&badge=${MEDALS[0]}`}
         >
           <a className="display-3 d-none d-lg-block mt-6">
             <b>{t('knowMore')}</b>
@@ -49,7 +50,7 @@ const BadgesIntro = () => {
       <Col xs="12">
         <div className="d-flex justify-content-center justify-content-md-start mt-6 d-lg-none">
           <Link
-            href={`${routePaths.badges}?initiative=${INITIATIVES_MEDIA.asr}&language=${RAW_LANGUAGES.en}&source=contribute`}
+            href={`${routePaths.badges}?initiative=${INITIATIVES_MEDIA.asr}&language=${RAW_LANGUAGES.en}&source=contribute&badge=${MEDALS[0]}`}
           >
             <a className="display-3">
               <b>{t('knowMore')}</b>

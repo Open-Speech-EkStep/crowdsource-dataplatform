@@ -11,31 +11,39 @@ import TriColorGradientBg from 'components/TriColorGradientBg';
 import apiPaths from 'constants/apiPaths';
 import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
+import { MEDALS, MEDALS_MAPPING } from 'constants/medalConstants';
+import { sourceConstants } from 'constants/pageRouteConstants';
 import { useFetchWithInit } from 'hooks/useFetch';
 import type { Initiative } from 'types/Initiatives';
+import type { MedalsType } from 'types/MedalsType';
+import type { SourceType } from 'types/SourceType';
 import { capitalizeFirstLetter } from 'utils/utils';
 
 import styles from './InitiativeBadgeDetail.module.scss';
 
 interface InitiativeBadgeDetailProps {
-  action: string;
+  action: SourceType;
   initiative: Initiative;
   language: string;
-  onSelectSourceType: (value: string) => void;
+  badge: MedalsType;
+  onSelectSourceType: (value: SourceType) => void;
+  onSelectBadgeType: (value: MedalsType) => void;
 }
 
 const InitiativeBadgeDetail = ({
   initiative,
   action,
   language,
+  badge,
   onSelectSourceType,
+  onSelectBadgeType,
 }: InitiativeBadgeDetailProps) => {
-  const medals = ['bronze', 'silver', 'gold', 'platinum'];
   const languageCode = LOCALE_LANGUAGES[language];
   const { t } = useTranslation();
 
-  const [participatedAction, setParticipatedAction] = useState<string>(action);
-  const [selectedMedal, setSelectedMedal] = useState<string>(medals[0]);
+  const [participatedAction, setParticipatedAction] = useState<SourceType>(action);
+
+  const [selectedMedal, setSelectedMedal] = useState<MedalsType>(MEDALS_MAPPING[badge] as MedalsType);
   const { data, mutate: rewardMutate } = useFetchWithInit<Array<{ contributions: number; badge: string }>>(
     `${apiPaths.rewardInfo}?type=${INITIATIVES_MEDIA_MAPPING[initiative]}&source=${participatedAction}&language=${language}`,
     {
@@ -51,7 +59,7 @@ const InitiativeBadgeDetail = ({
     rewardMutate();
   }, [participatedAction, initiative, language, rewardMutate]);
 
-  const contributionCount = data && data[medals.indexOf(selectedMedal)].contributions;
+  const contributionCount = data && data[MEDALS.indexOf(selectedMedal)].contributions;
 
   return (
     <div data-testid="InitiativeBadgeDetail">
@@ -60,7 +68,7 @@ const InitiativeBadgeDetail = ({
           {t('selectBadgeLevelPrompt')}
         </Col>
         <Col md="9" className="d-flex justify-content-between justify-content-lg-start mt-5 mt-md-0">
-          {medals.map(medal => (
+          {MEDALS.map(medal => (
             <div key={medal} className={styles.medal}>
               <Medal
                 initiative={initiative}
@@ -68,7 +76,10 @@ const InitiativeBadgeDetail = ({
                 medal={medal}
                 action={participatedAction}
                 language={language}
-                handleClick={() => setSelectedMedal(medal)}
+                handleClick={() => {
+                  onSelectBadgeType(medal as MedalsType);
+                  setSelectedMedal(medal as MedalsType);
+                }}
               />
             </div>
           ))}
@@ -89,10 +100,10 @@ const InitiativeBadgeDetail = ({
               value="Contribution"
               name="action"
               className="me-9"
-              checked={participatedAction == 'contribute'}
+              checked={participatedAction == (sourceConstants.contribute as SourceType)}
               onChange={() => {
-                setParticipatedAction('contribute');
-                onSelectSourceType('contribute');
+                setParticipatedAction(sourceConstants.contribute);
+                onSelectSourceType(sourceConstants.contribute);
               }}
             />
             <Form.Check
@@ -103,10 +114,10 @@ const InitiativeBadgeDetail = ({
               label={t('validation')}
               value="Validation"
               name="action"
-              checked={participatedAction == 'validate'}
+              checked={participatedAction == (sourceConstants.validate as SourceType)}
               onChange={() => {
-                setParticipatedAction('validate');
-                onSelectSourceType('validate');
+                setParticipatedAction(sourceConstants.validate);
+                onSelectSourceType(sourceConstants.validate);
               }}
             />
           </Form.Group>

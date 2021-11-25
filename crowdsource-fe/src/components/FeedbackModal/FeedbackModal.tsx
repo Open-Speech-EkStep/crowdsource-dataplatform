@@ -61,8 +61,8 @@ const FeedbackModal = ({ onSuccess: showThankyou, onError, ...props }: FeedbackM
         ...formData,
         email: speakerDetails?.userName || 'Anonymous',
         language: contributionLanguage,
-        module: pageInitiativeRouteConstants[route.asPath] || '',
-        target_page: pageRouteConstants[route.asPath] || '',
+        module: pageInitiativeRouteConstants[route.pathname] || '',
+        target_page: pageRouteConstants[route.pathname] || '',
       })
     );
   };
