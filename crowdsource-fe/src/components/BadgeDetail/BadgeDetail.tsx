@@ -7,9 +7,14 @@ import Tabs from 'react-bootstrap/Tabs';
 
 import InitiativeBadgeDetail from 'components/InitiativeBadgeDetail';
 import LanguageDropDown from 'components/LanguageDropDown';
-import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
+import {
+  INITIATIVES_MAPPING,
+  INITIATIVES_MEDIA_MAPPING,
+  INITIATIVES_REVERSE_MEDIA_MAPPING,
+} from 'constants/initiativeConstants';
 import routePaths from 'constants/routePaths';
 import type { Initiative } from 'types/Initiatives';
+import type { InitiativeType } from 'types/InitiativeType';
 
 import styles from './BadgeDetail.module.scss';
 
@@ -21,12 +26,12 @@ const BadgeDetail = () => {
 
   const [defaultLanguage, setLanguage] = useState(language || 'English');
   const [defaultInitiative, setDefaultInitiative] = useState<Initiative>(
-    INITIATIVES_MAPPING[initiative as Initiative] || INITIATIVES_MAPPING.suno
+    INITIATIVES_REVERSE_MEDIA_MAPPING[initiative as InitiativeType] || INITIATIVES_MAPPING.suno
   );
   const defaultAction = source || 'contribute';
 
   const setRoutingParam = (
-    initiative: Initiative,
+    initiative: any,
     language: string | string[],
     source: string | string[] | undefined
   ) => {
@@ -39,14 +44,14 @@ const BadgeDetail = () => {
     );
   };
 
-  function handleTabClick(tab: any, event: any) {
+  function handleTabClick(tab: string | null, event: any) {
     event.target.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
       inline: 'center',
     });
-    setDefaultInitiative(tab);
-    setRoutingParam(tab, defaultLanguage, source);
+    setDefaultInitiative(tab as Initiative);
+    setRoutingParam(INITIATIVES_MEDIA_MAPPING[tab as Initiative], defaultLanguage, source);
   }
 
   return (
@@ -56,7 +61,7 @@ const BadgeDetail = () => {
         <LanguageDropDown
           selectedLanguage={defaultLanguage as string}
           updateSelectedLanguage={selectedLanguage => {
-            setRoutingParam(defaultInitiative, selectedLanguage, source);
+            setRoutingParam(initiative, selectedLanguage, source);
             setLanguage(selectedLanguage);
           }}
         />
@@ -82,7 +87,7 @@ const BadgeDetail = () => {
             initiative={defaultInitiative}
             language={defaultLanguage as string}
             action={defaultAction as string}
-            onSelectSourceType={(type: string) => setRoutingParam(defaultInitiative, defaultLanguage, type)}
+            onSelectSourceType={(type: string) => setRoutingParam(initiative, defaultLanguage, type)}
           />
         </div>
       </div>
