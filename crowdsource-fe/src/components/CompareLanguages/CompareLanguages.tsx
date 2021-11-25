@@ -27,8 +27,8 @@ const mapChartData = (
   initiativeMedia: InitiativeType,
   value: string
 ) => {
-  if (langauge && data && data.length) {
-    const contributedLanguageHours = data.find(
+  if (langauge && data) {
+    const contributedLanguageHours = data?.find(
       (item: CumulativeDataByLanguage) => item.language === langauge && item.type === initiativeMedia
     );
     const topLanguageArray = [];
@@ -40,8 +40,9 @@ const mapChartData = (
         [value]: 0.0,
       });
     }
-    const topLanguage = data.sort((a: any, b: any) => (Number(a[key]) > Number(b[key]) ? -1 : 1));
-    const isSelectedLanguageTop = topLanguage[0].language === topLanguageArray[0].language;
+    const topLanguage = data?.sort((a: any, b: any) => (Number(a[key]) > Number(b[key]) ? -1 : 1));
+    const isSelectedLanguageTop =
+      topLanguage && topLanguage.length && topLanguage[0].language === topLanguageArray[0].language;
     let remainingLanguage = data.filter((item: CumulativeDataByLanguage) => item?.language !== langauge);
     remainingLanguage = remainingLanguage.sort((a: any, b: any) =>
       Number(a[key]) > Number(b[key]) ? -1 : 1
