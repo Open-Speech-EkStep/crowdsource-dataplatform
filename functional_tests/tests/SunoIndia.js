@@ -210,7 +210,7 @@ step("User plays the audio , <needchange> should be enabled & <arg1> should be d
     assert.ok(! await taiko.button({ id: needchange }).isDisabled());
     assert.ok(await taiko.button({ id: arg1 }).isDisabled());
     // Once the audio is complete , then correct button should be enabled
-    await taiko.image({ id: "replay" }).exists();
+    await taiko.waitFor(5000)
     assert.ok(! await taiko.button({ id: arg1 }).isDisabled());
 });
 
