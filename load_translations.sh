@@ -4,7 +4,7 @@ export json_input_folder='./crowdsource-fe/public/locales'
 export delta_output_folder='./delta_out'
 export views_folder_path='./crowdsource-fe/src'
 export meta_output_folder='./meta_files'
-export excel_sheet_path='./utils/localization/resources/backup/Bhasha_Daan_All_Content_November_22.xlsx'
+export excel_sheet_path='./utils/localization/resources/backup/Bhasha_Daan_All_Content_November_24.xlsx'
 export translation_output_path='./crowdsource-fe/public/locales'
 
 export meta_file_location=$meta_output_folder/nextjs_meta.xlsx
