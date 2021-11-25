@@ -55,6 +55,7 @@ app.use(bodyParser.json());
 
 
 app.enable('trust proxy');
+app.disable('x-powered-by');
 
 const randomString = () => {
   return (Math.random() + 1).toString(36).substring(2, 10);
