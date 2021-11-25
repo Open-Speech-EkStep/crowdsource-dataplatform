@@ -81,7 +81,7 @@ const TargetProgress = (props: TargetProgressProps) => {
     return totalGoal;
   };
 
-  if (cumulativeCountData && cumulativeCountData.length && initiativeGoalData && initiativeGoalData.length) {
+  if (cumulativeCountData && initiativeGoalData && initiativeGoalData.length) {
     const initiativeCumulativeData = cumulativeCountData.find(item => item.type === props.initiativeType);
     if (props.initiative === INITIATIVES_MAPPING.suno || props.initiative === INITIATIVES_MAPPING.bolo) {
       initiativeUnit = t('hours1');

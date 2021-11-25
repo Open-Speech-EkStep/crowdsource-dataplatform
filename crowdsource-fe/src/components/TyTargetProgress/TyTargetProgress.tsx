@@ -92,7 +92,7 @@ const TyTargetProgress = (props: TyTargetProgressProps) => {
     return totalGoal;
   };
 
-  if (cumulativeCountData && cumulativeCountData.length && initiativeGoalData && initiativeGoalData.length) {
+  if (cumulativeCountData && initiativeGoalData && initiativeGoalData.length) {
     const initiativeCumulativeData = cumulativeCountData.find(
       item => item.type === props.initiativeType && item.language === props.language
     );
