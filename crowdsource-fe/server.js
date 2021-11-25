@@ -21,6 +21,8 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 nextApp.prepare().then(() => {
+  app.disable('x-powered-by');
+
   app.all('*', (req, res) => {
     return togglePages(req, res, () => handle(req, res));
   });

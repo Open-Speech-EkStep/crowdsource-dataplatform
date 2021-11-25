@@ -12,6 +12,8 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 nextApp.prepare().then(() => {
+  app.disable('x-powered-by');
+
   app.use(express.static('target', { redirect: false }));
 
   app.all('*', (req, res) => {
