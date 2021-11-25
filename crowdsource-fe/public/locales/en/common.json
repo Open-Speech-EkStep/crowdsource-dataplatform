@@ -58,7 +58,7 @@
   "changeUserModalSubHeading": "All the fields are optional but you can enrich your dataset contribution by providing the demographic details.",
   "name": "Name",
   "enterUsername": "Enter username",
-  "userNameError": "Please don't use email or mobile number as user name",
+  "userNameError": "Please don't use only numerics or email as username",
   "userNameHint": "Only 12 characters allowed. (Hint: name.surname, name_surname etc.)",
   "motherTongue": "Mother Tongue",
   "selectMotherTongue": "Select Mother Tongue",
