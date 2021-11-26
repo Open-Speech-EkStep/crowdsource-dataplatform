@@ -1,7 +1,6 @@
 version: 2.1
 
 parameters:
-  # This parameter is used to trigger the main workflow
   build_ui:
     type: boolean
     default: false
