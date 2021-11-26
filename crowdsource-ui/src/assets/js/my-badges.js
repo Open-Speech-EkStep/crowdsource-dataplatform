@@ -15,7 +15,7 @@ const NO_BADGE_EARNED_TEXT = 'No badge earned for <initiative>';
 
 const getWidgetWithBadge = (imgPath, badgeType, initiativeType, type, localeString, language) => {
   return `
-  <div class="badge-widget cursor-pointer text-center bg-white" tabindex="0" role="button" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true" data-content="<div class='text-center p-4'><img src=${imgPath} alt='' class='badge-img-fluid'></div>" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
+  <div class="badge-widget cursor-pointer text-center bg-white" tabindex="0" role="button" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="auto" data-html="true" data-content="<div class='text-center p-4'><img src=${imgPath} alt='' class='badge-img-fluid'></div>" id="${badgeType}_${type}_${initiativeType}_${language}_badge">
   <img src=${imgPath} class="my-badge-image" height="74" width="60" >
   <h6 class="mt-2 font-family-Rowdies text-capitalize">${localeString[config[badgeType]]}</h6>
 </div>`
