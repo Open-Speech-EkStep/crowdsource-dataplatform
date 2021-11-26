@@ -371,8 +371,8 @@ jobs:
       - run: aws cloudfront create-invalidation --distribution-id ${NEXT_DEV_ID} --paths '/*'
 
 workflows:
-  when: << pipeline.parameters.build_ui >>
   build_ui_deploy:
+    when: << pipeline.parameters.build_ui >>
     jobs:
       # - node/test:
       #     version: "14.17.5"
