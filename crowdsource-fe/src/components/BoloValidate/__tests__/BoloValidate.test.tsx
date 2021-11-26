@@ -202,7 +202,7 @@ describe('BoloValidate', () => {
           userName: 'abc',
           language: 'Hindi',
           sentenceId: 1248712,
-          state_region: 'National Capital Territory of Delhi',
+          state: 'National Capital Territory of Delhi',
           country: 'India',
           type: 'text',
         }),

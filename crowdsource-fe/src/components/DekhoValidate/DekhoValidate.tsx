@@ -243,7 +243,7 @@ const DekhoValidate = () => {
           userName: speakerDetails?.userName,
           fromLanguage: contributionLanguage,
           sentenceId: showUIData.dataset_row_id,
-          state_region: locationInfo?.regionName,
+          state: locationInfo?.regionName,
           country: locationInfo?.country,
           type: INITIATIVES_MEDIA_MAPPING.dekho,
         })
@@ -256,7 +256,7 @@ const DekhoValidate = () => {
           userName: speakerDetails?.userName,
           fromLanguage: contributionLanguage,
           sentenceId: showUIData.dataset_row_id,
-          state_region: locationInfo?.regionName,
+          state: locationInfo?.regionName,
           country: locationInfo?.country,
           type: INITIATIVES_MEDIA_MAPPING.dekho,
         })
