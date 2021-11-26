@@ -113,11 +113,46 @@ describe('SunoTranscribe', () => {
     });
   });
 
-  it('should show the error popup when api throw the error and close modal on clicking button', async () => {
+  it('should show the error popup for 1st sentence when api throw the error and close modal on clicking button', async () => {
     const url = '/media/asr';
     const errorResponse = new Error('Some error');
     fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
     render(<SunoTranscribe />);
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/media/asr', {
+        body: JSON.stringify({
+          language: 'Hindi',
+          userName: 'abc',
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
+  it('should show the error popup for 2nd sentence when api throw the error and modal should close on clicking button', async () => {
+    const url = '/skip';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
     await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/media/asr', {
         body: JSON.stringify({

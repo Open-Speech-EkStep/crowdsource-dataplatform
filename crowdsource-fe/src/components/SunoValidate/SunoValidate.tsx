@@ -72,15 +72,15 @@ const SunoValidate = () => {
   });
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
 
   const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
   const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
-  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, data: acceptData, error: acceptError } = useSubmit(acceptApiUrl);
 
   const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
     device: getDeviceInfo(),
@@ -115,6 +115,27 @@ const SunoValidate = () => {
       mutate();
     }
   }, [contributionLanguage, mutate, speakerDetails]);
+
+  useEffect(() => {
+    if ((storeData || skipData || acceptData) && !(skipError || submitError || acceptError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.sunoIndiaValidateThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+    acceptData,
+    acceptError,
+  ]);
 
   useEffect(() => {
     if (result && result.data) {
@@ -172,17 +193,29 @@ const SunoValidate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}${routePaths.sunoIndiaValidateThankYou}`, undefined, {
-        locale: currentLocale,
-      });
-    } else {
+    if (index !== contributionData.length) {
       setCurrentDataIndex(index + 1);
       setShowUIdata(contributionData[index + 1]);
     }
   };
 
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
+      router.push(`/${currentLocale}${routePaths.sunoIndiaValidateThankYou}`, undefined, {
+        locale: currentLocale,
+      });
+    }
+  };
+
   const resetState = () => {
+    setShowUIdata({
+      sentence: '',
+      contribution: '',
+      dataset_row_id: '0',
+      contribution_id: '0',
+      auto_validate: false,
+    });
     onCancelContribution();
     setShowPauseButton(false);
     setShowPlayButton(true);
@@ -191,22 +224,37 @@ const SunoValidate = () => {
     setCorrectDisable(true);
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     resetState();
     setShowEditTextArea(true);
-    submit(
-      JSON.stringify({
-        ...formDataStore,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(
+        JSON.stringify({
+          ...formDataStore,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    } else {
+      submit(
+        JSON.stringify({
+          ...formDataStore,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    }
     reject(
       JSON.stringify({
         device: getDeviceInfo(),
@@ -219,8 +267,8 @@ const SunoValidate = () => {
         type: INITIATIVES_MEDIA.asr,
       })
     );
+    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
-      setDataCurrentIndex(currentDataIndex);
       setShowThankyouMessage(false);
       setShowEditTextArea(false);
     }, 1500);
@@ -238,11 +286,10 @@ const SunoValidate = () => {
     });
   };
 
-  const onSkipContribution = () => {
+  const onSkipContribution = async () => {
     audio?.pause();
-    setDataCurrentIndex(currentDataIndex);
     resetState();
-    submitSkip(
+    await submitSkip(
       JSON.stringify({
         device: getDeviceInfo(),
         browser: getBrowserInfo(),
@@ -254,6 +301,7 @@ const SunoValidate = () => {
         type: INITIATIVES_MEDIA_MAPPING.suno,
       })
     );
+    setDataCurrentIndex(currentDataIndex);
   };
 
   const onEnded = () => {
@@ -272,10 +320,9 @@ const SunoValidate = () => {
     setShowSubmitButton(true);
   };
 
-  const onCorrect = () => {
-    setDataCurrentIndex(currentDataIndex);
+  const onCorrect = async () => {
     resetState();
-    accept(
+    await accept(
       JSON.stringify({
         device: getDeviceInfo(),
         browser: getBrowserInfo(),
@@ -287,6 +334,7 @@ const SunoValidate = () => {
         type: INITIATIVES_MEDIA_MAPPING.suno,
       })
     );
+    setDataCurrentIndex(currentDataIndex);
   };
 
   if (!result) {
@@ -393,7 +441,10 @@ const SunoValidate = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -414,7 +465,7 @@ const SunoValidate = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(skipError || rejectError || acceptError || submitError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
     </Fragment>

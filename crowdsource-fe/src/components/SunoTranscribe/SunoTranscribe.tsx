@@ -63,9 +63,9 @@ const SunoTranscribe = () => {
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
 
-  const { submit: submitSkip, error: skipError } = useSubmit(apiPaths.skip);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(apiPaths.skip);
 
   const [formData, setFormData] = useState<ActionStoreInterface>({
     userInput: '',
@@ -100,6 +100,26 @@ const SunoTranscribe = () => {
       setShowErrorModal(true);
     }
   }, [error, skipError, submitError]);
+
+  useEffect(() => {
+    console.log(storeData, skipData, skipError, submitError);
+    if ((storeData || skipData) && !(skipError || submitError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.sunoIndiaContributeThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+  ]);
 
   useEffect(() => {
     if (result && result.data) {
@@ -157,13 +177,18 @@ const SunoTranscribe = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
+    if (index !== contributionData.length) {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
       router.push(`/${currentLocale}${routePaths.sunoIndiaContributeThankYou}`, undefined, {
         locale: currentLocale,
       });
-    } else {
-      setCurrentDataIndex(index + 1);
-      setShowUIdata(contributionData[index + 1]);
     }
   };
 
@@ -179,23 +204,38 @@ const SunoTranscribe = () => {
     setShowReplayButton(false);
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     setCloseKeyboard(!closeKeyboard);
-    setDataCurrentIndex(currentDataIndex);
     resetState();
-    submit(
-      JSON.stringify({
-        ...formData,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(
+        JSON.stringify({
+          ...formData,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    } else {
+      submit(
+        JSON.stringify({
+          ...formData,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
     }, 1500);
@@ -208,23 +248,38 @@ const SunoTranscribe = () => {
     });
   };
 
-  const onSkipContribution = () => {
+  const onSkipContribution = async () => {
     audio?.pause();
-    setDataCurrentIndex(currentDataIndex);
     setCloseKeyboard(!closeKeyboard);
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state_region: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.suno,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.suno,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.suno,
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   const onEnded = () => {
@@ -322,7 +377,10 @@ const SunoTranscribe = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -343,7 +401,7 @@ const SunoTranscribe = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(error || skipError || submitError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
     </Fragment>
