@@ -1,4 +1,14 @@
 version: 2.1
+
+parameters:
+  # This parameter is used to trigger the main workflow
+  build_ui:
+    type: boolean
+    default: false
+  build_api:
+    type: boolean
+    default: false
+
 orbs:
   node: circleci/node@4.4.0
   azure-aks: circleci/azure-aks@0.3.0
@@ -368,6 +378,7 @@ workflows:
       #     version: "14.17.5"
 
       - check_fe:
+          when: << pipeline.parameters.build_ui >>
           name: check_fe
           env_name: default
 
