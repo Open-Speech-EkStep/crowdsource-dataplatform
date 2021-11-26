@@ -82,7 +82,7 @@ body.modal-open .supreme-container {
 }
 
 .chart-row .state-chart {
-  height: 42rem;
+  height: 40rem;
 }
 
 .chart-container {
@@ -339,9 +339,11 @@ body.modal-open .supreme-container {
   .chart-title {
     padding-right: 0;
   }
+}
 
-  .chart-row .state-chart {
-    height: 40rem;
+@media (min-width: 768px) and (max-width: 1199px) {
+  .chart-row .chart {
+    height: 42rem;
   }
 }
 
@@ -505,4 +507,14 @@ body.modal-open .supreme-container {
     margin-top: 10px;
   }
 
+}
+
+@media screen and (max-width: 419px){
+  .chart-row .state-chart {
+    height: 37rem;
+  }
+}
+
+.h-95{
+  height:95% !important;
 }

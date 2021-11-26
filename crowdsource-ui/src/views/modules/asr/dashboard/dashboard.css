@@ -80,7 +80,7 @@ body.modal-open .supreme-container {
 }
 
 .chart-row .state-chart {
-  height: 42rem;
+  height: 40rem;
 }
 
 .chart-container {
@@ -338,12 +338,14 @@ body.modal-open .supreme-container {
     padding-right: 0;
   }
 
-  .chart-row .state-chart {
-    height: 40rem;
-  }
-
   .container {
     padding-top: 50px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .chart-row .chart {
+    height: 42rem;
   }
 }
 
@@ -494,4 +496,14 @@ body.modal-open .supreme-container {
   #indiaMapChart {
     height: 380px;
   }
+}
+
+@media screen and (max-width: 419px){
+  .chart-row .state-chart {
+    height: 37rem;
+  }
+}
+
+.h-95{
+  height:95% !important;
 }
