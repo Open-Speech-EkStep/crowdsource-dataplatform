@@ -53,7 +53,7 @@ step("when user navigates to <tab> tab user should see badges", async function(t
 
 
         await click(taiko.$('#badge_2_contribution_ocr_Assamese_badge'));
-        assert.ok( await taiko.$('#badge-popover').isVisible())
+        assert.ok( await taiko.$('.popover').isVisible())
 
     }
     else if(tab== "parallel-tab")

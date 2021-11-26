@@ -434,17 +434,10 @@ body {
 }
 
 @media (min-width: 768px) {
-  .badge-popover  {
-    width: 320px;
-    height: 262px;
-    padding-top: 20px;
-  }
   .padding-top-65 {
     padding-top: 65px !important;
   }
-  .badge-popover:after  {
-    left: 26%;
-  }
+  
   .badge-img-fluid {
     height: 230px;
   }
@@ -572,15 +565,6 @@ body {
   }
   .padding-top-65 {
     padding-top: 56px !important;
-  }
-
-  .badge-popover  {
-    width: 180px;
-    height: 150px;
-    padding-top: 12px;
-  }
-  .badge-popover:after {
-    left: 15%;
   }
   .badge-img-fluid {
     height: 130px;
@@ -786,31 +770,6 @@ body {
 .badge-section {
   height: 500px;
   overflow: auto;
-}
-
-.badge-popover {
-  visibility: hidden;
-  background-color: #ffffff;
-  color: #ffffff;
-  text-align: center;
-  border: 1px solid #c4c4c4;;
-  position: absolute;
-  z-index: 1;
-  bottom: 60%;
-  left: 50%;
-  margin-left: -75px;
-  transition: opacity 0.3s;
-  border-radius: 20px;
-}
-
-.badge-popover:after {
-  content: '';
-  position: absolute;
-  top: -19px;
-  margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent #ffffff transparent;
 }
 
 .cursor-pointer {

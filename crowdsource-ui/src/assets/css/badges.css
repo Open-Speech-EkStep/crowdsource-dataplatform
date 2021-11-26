@@ -33,6 +33,10 @@ html {
   }
 }
 
+.popover {
+  border-radius: 20px;
+}
+
 #initiative .light-bg.active{
   border-bottom: 4px solid #0f2749 !important;
 }
@@ -313,10 +317,6 @@ ul#initiative {
     margin-top: 5rem;
   }
 
-  .popover {
-    width: 180px;
-  }
-
   .badges-detail-heading {
     font-size: 18px !important;
     line-height: 22px !important;
@@ -392,12 +392,6 @@ ul#initiative {
     padding-top: 6px;
     padding-bottom: 0;
     margin: 0;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .popover {
-    width: 200px;
   }
 }
 
