@@ -102,7 +102,6 @@ const SunoTranscribe = () => {
   }, [error, skipError, submitError]);
 
   useEffect(() => {
-    console.log(storeData, skipData, skipError, submitError);
     if ((storeData || skipData) && !(skipError || submitError)) {
       if (currentDataIndex === contributionData.length) {
         router.push(`/${currentLocale}${routePaths.sunoIndiaContributeThankYou}`, undefined, {

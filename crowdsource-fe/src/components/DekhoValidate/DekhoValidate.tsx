@@ -82,10 +82,10 @@ const DekhoValidate = () => {
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
   const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
-  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, data: acceptData, error: acceptError } = useSubmit(acceptApiUrl);
 
   const { data: result, mutate } = useFetchWithInit<ResultType>(
     `${apiPaths.contributionsOCR}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
@@ -99,6 +99,28 @@ const DekhoValidate = () => {
       setShowErrorModal(true);
     }
   }, [skipError, acceptError, rejectError, submitError]);
+
+  /* istanbul ignore next */
+  useEffect(() => {
+    if ((storeData || skipData || acceptData) && !(skipError || submitError || acceptError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.dekhoIndiaValidateThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+    acceptData,
+    acceptError,
+  ]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -127,13 +149,18 @@ const DekhoValidate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
+    if (index !== contributionData.length) {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
       router.push(`/${currentLocale}${routePaths.dekhoIndiaValidateThankYou}`, undefined, {
         locale: currentLocale,
       });
-    } else {
-      setCurrentDataIndex(index + 1);
-      setShowUIdata(contributionData[index + 1]);
     }
   };
 
@@ -141,23 +168,39 @@ const DekhoValidate = () => {
     onCancelContribution();
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     resetState();
     setCloseKeyboard(!closeKeyboard);
+
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(
+        JSON.stringify({
+          ...formData,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    } else {
+      submit(
+        JSON.stringify({
+          ...formData,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    }
     setDataCurrentIndex(currentDataIndex);
-    submit(
-      JSON.stringify({
-        ...formData,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
-      })
-    );
     reject(
       JSON.stringify({
         device: getDeviceInfo(),
@@ -189,22 +232,37 @@ const DekhoValidate = () => {
     });
   };
 
-  const onSkipContribution = () => {
-    setDataCurrentIndex(currentDataIndex);
+  const onSkipContribution = async () => {
     setCloseKeyboard(!closeKeyboard);
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state_region: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.dekho,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.dekho,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.dekho,
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   const onNeedsChange = () => {
@@ -215,21 +273,36 @@ const DekhoValidate = () => {
     setShowSubmitButton(true);
   };
 
-  const onCorrect = () => {
-    setDataCurrentIndex(currentDataIndex);
+  const onCorrect = async () => {
     resetState();
-    accept(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.dekho,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await accept(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.dekho,
+        })
+      );
+    } else {
+      accept(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.dekho,
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   if (!result) {
@@ -331,7 +404,10 @@ const DekhoValidate = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -352,7 +428,7 @@ const DekhoValidate = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(skipError || rejectError || acceptError || submitError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
     </Fragment>

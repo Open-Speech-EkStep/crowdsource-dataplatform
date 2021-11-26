@@ -62,9 +62,9 @@ const DekhoContribute = () => {
     dataset_row_id: '0',
   });
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
 
-  const { submit: submitSkip, error: skipError } = useSubmit(apiPaths.skip);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(apiPaths.skip);
 
   const [formData, setFormData] = useState<ActionStoreInterface>({
     userInput: '',
@@ -100,6 +100,26 @@ const DekhoContribute = () => {
     }
   }, [error, skipError, submitError]);
 
+  /* istanbul ignore next */
+  useEffect(() => {
+    if ((storeData || skipData) && !(skipError || submitError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.dekhoIndiaContributeThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+  ]);
+
   useEffect(() => {
     if (result && result.data) {
       setContributionData(result.data);
@@ -121,13 +141,18 @@ const DekhoContribute = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
+    if (index !== contributionData.length) {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
       router.push(`/${currentLocale}${routePaths.dekhoIndiaContributeThankYou}`, undefined, {
         locale: currentLocale,
       });
-    } else {
-      setCurrentDataIndex(index + 1);
-      setShowUIdata(contributionData[index + 1]);
     }
   };
 
@@ -135,23 +160,38 @@ const DekhoContribute = () => {
     onCancelContribution();
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     setCloseKeyboard(!closeKeyboard);
-    setDataCurrentIndex(currentDataIndex);
     resetState();
-    submit(
-      JSON.stringify({
-        ...formData,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(
+        JSON.stringify({
+          ...formData,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    } else {
+      submit(
+        JSON.stringify({
+          ...formData,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
     }, 1500);
@@ -164,22 +204,37 @@ const DekhoContribute = () => {
     });
   };
 
-  const onSkipContribution = () => {
-    setDataCurrentIndex(currentDataIndex);
+  const onSkipContribution = async () => {
     setCloseKeyboard(!closeKeyboard);
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state_region: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.dekho,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.dekho,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.dekho,
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   if (!result && !error) {
@@ -251,7 +306,10 @@ const DekhoContribute = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -272,7 +330,7 @@ const DekhoContribute = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(error || submitError || skipError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
     </Fragment>

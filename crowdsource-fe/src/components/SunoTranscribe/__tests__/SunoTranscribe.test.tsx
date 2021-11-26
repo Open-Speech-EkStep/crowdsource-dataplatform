@@ -330,19 +330,106 @@ describe('SunoTranscribe', () => {
     await waitFor(() => expect(screen.queryByRole('img', { name: 'check' })).not.toBeInTheDocument());
   });
 
-  it('should go to thank you page after 5 skip sentences', async () => {
+  it('should throw the error for last sentence', async () => {
+    const url = '/skip';
+    const errorResponse = new Error('Some error');
     await setup(resultData);
+
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          language: 'Hindi',
+          sentenceId: 1248671,
+          state_region: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'asr',
+        }),
+      });
+    });
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+  });
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+  it('should go to thank you page after 5 skip sentences', async () => {
+    const url = '/skip';
+    const successResponse = { message: 'Skipped successfully.', statusCode: 200 };
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockResponseOnce(JSON.stringify(successResponse));
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          language: 'Hindi',
+          sentenceId: 1248671,
+          state_region: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'asr',
+        }),
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
   });
 });

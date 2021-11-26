@@ -60,9 +60,9 @@ const LikhoTranslate = () => {
     dataset_row_id: '0',
   });
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
 
-  const { submit: submitSkip, error: skipError } = useSubmit(apiPaths.skip);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(apiPaths.skip);
 
   const [formData, setFormData] = useState<ActionStoreInterface>({
     userInput: '',
@@ -100,6 +100,26 @@ const LikhoTranslate = () => {
     }
   }, [error, skipError, submitError]);
 
+  /* istanbul ignore next */
+  useEffect(() => {
+    if ((storeData || skipData) && !(skipError || submitError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.likhoIndiaContributeThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+  ]);
+
   useEffect(() => {
     if (result && result.data) {
       setContributionData(result.data);
@@ -121,13 +141,18 @@ const LikhoTranslate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
+    if (index !== contributionData.length) {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
       router.push(`/${currentLocale}${routePaths.likhoIndiaContributeThankYou}`, undefined, {
         locale: currentLocale,
       });
-    } else {
-      setCurrentDataIndex(index + 1);
-      setShowUIdata(contributionData[index + 1]);
     }
   };
 
@@ -135,24 +160,40 @@ const LikhoTranslate = () => {
     onCancelContribution();
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     setCloseKeyboard(!closeKeyboard);
-    setDataCurrentIndex(currentDataIndex);
     resetState();
-    submit(
-      JSON.stringify({
-        ...formData,
-        language: translatedLanguage,
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(
+        JSON.stringify({
+          ...formData,
+          language: translatedLanguage,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    } else {
+      submit(
+        JSON.stringify({
+          ...formData,
+          language: translatedLanguage,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
     }, 1500);
@@ -165,23 +206,39 @@ const LikhoTranslate = () => {
     });
   };
 
-  const onSkipContribution = () => {
-    setDataCurrentIndex(currentDataIndex);
+  const onSkipContribution = async () => {
     setCloseKeyboard(!closeKeyboard);
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        language: translatedLanguage,
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state_region: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.likho,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: translatedLanguage,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.likho,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: translatedLanguage,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.likho,
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   if (!result && !error) {
@@ -271,7 +328,10 @@ const LikhoTranslate = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -289,11 +349,7 @@ const LikhoTranslate = () => {
         </div>
       )}
       {(error || skipError || submitError) && (
-        <ErrorPopup
-          show={showErrorModal}
-          errorMsg={getErrorMsg(error)}
-          onHide={() => setShowErrorModal(false)}
-        />
+        <ErrorPopup show={showErrorModal} errorMsg={getErrorMsg(error)} onHide={() => hideErrorModal()} />
       )}
     </Fragment>
   );

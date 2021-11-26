@@ -66,7 +66,7 @@ const LikhoValidate = () => {
   });
   const [locationInfo] = useLocalStorage<LocationInfo>(localStorageConstants.locationInfo);
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
 
   const [showErrorModal, setShowErrorModal] = useState(false);
 
@@ -75,8 +75,8 @@ const LikhoValidate = () => {
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
   const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
-  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, data: acceptData, error: acceptError } = useSubmit(acceptApiUrl);
 
   const [formDataStore, setFormDataStore] = useState<ActionStoreInterface>({
     device: getDeviceInfo(),
@@ -102,6 +102,28 @@ const LikhoValidate = () => {
       setShowErrorModal(true);
     }
   }, [skipError, acceptError, rejectError, submitError]);
+
+  /* istanbul ignore next */
+  useEffect(() => {
+    if ((storeData || skipData || acceptData) && !(skipError || submitError || acceptError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.likhoIndiaValidateThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+    acceptData,
+    acceptError,
+  ]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -130,13 +152,18 @@ const LikhoValidate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
+    if (index !== contributionData.length) {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
       router.push(`/${currentLocale}${routePaths.likhoIndiaValidateThankYou}`, undefined, {
         locale: currentLocale,
       });
-    } else {
-      setCurrentDataIndex(index + 1);
-      setShowUIdata(contributionData[index + 1]);
     }
   };
 
@@ -144,23 +171,39 @@ const LikhoValidate = () => {
     onCancelContribution();
   };
 
-  const onSubmitContribution = () => {
+  const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     resetState();
     setShowEditTextArea(true);
-    submit(
-      JSON.stringify({
-        ...formDataStore,
-        fromLanguage: contributionLanguage,
-        language: translatedLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        speakerDetails: JSON.stringify({
-          userName: speakerDetails?.userName,
-        }),
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(
+        JSON.stringify({
+          ...formDataStore,
+          fromLanguage: contributionLanguage,
+          language: translatedLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    } else {
+      submit(
+        JSON.stringify({
+          ...formDataStore,
+          fromLanguage: contributionLanguage,
+          language: translatedLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          speakerDetails: JSON.stringify({
+            userName: speakerDetails?.userName,
+          }),
+        })
+      );
+    }
     reject(
       JSON.stringify({
         device: getDeviceInfo(),
@@ -174,8 +217,8 @@ const LikhoValidate = () => {
         type: INITIATIVES_MEDIA.parallel,
       })
     );
+    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
-      setDataCurrentIndex(currentDataIndex);
       setShowThankyouMessage(false);
       setShowEditTextArea(false);
     }, 1500);
@@ -193,22 +236,38 @@ const LikhoValidate = () => {
     });
   };
 
-  const onSkipContribution = () => {
+  const onSkipContribution = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        fromLanguage: contributionLanguage,
-        language: translatedLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.likho,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          language: translatedLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.likho,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          language: translatedLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.likho,
+        })
+      );
+    }
   };
 
   const onNeedsChange = () => {
@@ -219,22 +278,38 @@ const LikhoValidate = () => {
     setShowSubmitButton(true);
   };
 
-  const onCorrect = () => {
+  const onCorrect = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
-    accept(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        fromLanguage: contributionLanguage,
-        language: translatedLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.likho,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await accept(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          language: translatedLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.likho,
+        })
+      );
+    } else {
+      accept(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          language: translatedLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.likho,
+        })
+      );
+    }
   };
 
   if (!result) {
@@ -348,7 +423,10 @@ const LikhoValidate = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -369,7 +447,7 @@ const LikhoValidate = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(skipError || rejectError || acceptError || submitError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
     </Fragment>

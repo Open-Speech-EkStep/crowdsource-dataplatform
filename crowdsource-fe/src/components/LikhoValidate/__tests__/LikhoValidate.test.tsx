@@ -237,6 +237,47 @@ describe('LikhoValidate', () => {
     });
   });
 
+  it('should show the error popup for 2nd sentence when api throw the error and modal should close on clicking button', async () => {
+    const url = '/validate/1719084/skip';
+    const errorResponse = new Error('Some error');
+    await setup();
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          fromLanguage: 'Hindi',
+          language: 'English',
+          sentenceId: 1323119,
+          state: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'parallel',
+        }),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should call /store and /validate endpoint when a correction is done', async () => {
     await setup();
 
@@ -332,22 +373,30 @@ describe('LikhoValidate', () => {
   });
 
   it('should go to thank you page after 5 skip sentences', async () => {
+    const url = '/validate/1719084/skip';
+    const errorResponse = new Error('Some error');
     await setup();
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
     await waitFor(() => {
-      expect(fetchMock).toBeCalledWith('/validate/1719084/skip', {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
         body: JSON.stringify({
           device: 'android 11',
           browser: 'Chrome 13',
@@ -364,6 +413,13 @@ describe('LikhoValidate', () => {
         method: 'POST',
         mode: 'cors',
       });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
     });
   });
 });

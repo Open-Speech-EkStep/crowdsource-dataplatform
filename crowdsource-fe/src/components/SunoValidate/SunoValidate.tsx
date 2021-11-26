@@ -116,6 +116,7 @@ const SunoValidate = () => {
     }
   }, [contributionLanguage, mutate, speakerDetails]);
 
+  /* istanbul ignore next */
   useEffect(() => {
     if ((storeData || skipData || acceptData) && !(skipError || submitError || acceptError)) {
       if (currentDataIndex === contributionData.length) {
@@ -289,18 +290,33 @@ const SunoValidate = () => {
   const onSkipContribution = async () => {
     audio?.pause();
     resetState();
-    await submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.suno,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.suno,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.suno,
+        })
+      );
+    }
     setDataCurrentIndex(currentDataIndex);
   };
 

@@ -211,6 +211,41 @@ describe('DekhoValidate', () => {
     });
   });
 
+  it('should show the error popup for 2nd sentence when api throw the error and modal should close on clicking button', async () => {
+    const url = '/validate/1717503/skip';
+    const errorResponse = new Error('Some error');
+    await setup();
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(skipUrl, {
+        body:
+          expect.stringContaining('"userName":"abc"') &&
+          expect.stringContaining('"fromLanguage":"Hindi"') &&
+          expect.stringContaining('"sentenceId":"1248712"') &&
+          expect.stringContaining('"type":"ocr"'),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should call /store and /validate endpoint when a correction is done', async () => {
     await setup();
 
@@ -288,18 +323,47 @@ describe('DekhoValidate', () => {
   });
 
   it('should go to thank you page after 5 skip sentences', async () => {
+    const url = '/validate/1717503/skip';
+    const errorResponse = new Error('Some error');
     await setup();
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(skipUrl, {
+        body:
+          expect.stringContaining('"userName":"abc"') &&
+          expect.stringContaining('"fromLanguage":"Hindi"') &&
+          expect.stringContaining('"sentenceId":"1248712"') &&
+          expect.stringContaining('"type":"ocr"'),
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
   });
 });

@@ -123,6 +123,43 @@ describe('DekhoContribute', () => {
     });
   });
 
+  it('should show the error popup for 2nd sentence when api throw the error and modal should close on clicking button', async () => {
+    const url = '/skip';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:
+          expect.stringContaining('"userName":"abc"') &&
+          expect.stringContaining('"language":"Hindi"') &&
+          expect.stringContaining('"sentenceId":"1248671"') &&
+          expect.stringContaining('"type":"ocr"'),
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should test the textarea text with valid language', async () => {
     await setup(resultData);
 
