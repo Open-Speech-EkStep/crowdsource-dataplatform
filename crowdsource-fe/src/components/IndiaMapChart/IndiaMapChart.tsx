@@ -1,17 +1,19 @@
-import { useTranslation } from 'next-i18next';
+import React from 'react';
+
+import {useTranslation} from 'next-i18next';
 import Spinner from 'react-bootstrap/Spinner';
 
-import { MapChart } from 'components/Charts';
+import {MapChart} from 'components/Charts';
 import MapLegend from 'components/MapLegend';
 import apiPaths from 'constants/apiPaths';
-import { INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+import {INITIATIVES_MEDIA_MAPPING} from 'constants/initiativeConstants';
 import useFetch from 'hooks/useFetch';
 import type {
   CumulativeDataByLanguageAndState,
   UnSpecifiedDataByState,
 } from 'types/CumulativeDataByLanguageAndState';
-import type { InitiativeType } from 'types/InitiativeType';
-import { convertTimeFormat, getHoursText, getHoursValue, getMinutesText, getMinutesValue } from 'utils/utils';
+import type {InitiativeType} from 'types/InitiativeType';
+import {convertTimeFormat, getHoursText, getHoursValue, getMinutesText, getMinutesValue} from 'utils/utils';
 
 import styles from './IndiaMapChart.module.scss';
 
@@ -131,7 +133,7 @@ const getTotalParticipation = (data: CumulativeDataByLanguageAndState | undefine
   return (Number(data?.total_validations) || 0) + (Number(data?.total_contributions) || 0);
 };
 
-const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: string }) => {
+const IndiaMapChart = React.memo(({ type, language }: { type: InitiativeType; language?: string }) => {
   const { t } = useTranslation();
   const jsonUrl = language ? apiPaths.cumulativeDataByLanguageAndState : apiPaths.cumulativeDataByState;
 
@@ -245,6 +247,8 @@ const IndiaMapChart = ({ type, language }: { type: InitiativeType; language?: st
       <MapLegend data={legendData} />
     </div>
   );
-};
+});
+
+IndiaMapChart.displayName = 'IndiaMapChart';
 
 export default IndiaMapChart;
