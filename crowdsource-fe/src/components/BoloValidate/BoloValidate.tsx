@@ -378,6 +378,7 @@ const BoloValidate = () => {
                     {currentDataIndex + 1 > contributionData.length
                       ? contributionData.length
                       : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
