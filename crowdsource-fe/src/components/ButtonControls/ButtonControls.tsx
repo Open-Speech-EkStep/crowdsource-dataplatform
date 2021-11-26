@@ -37,6 +37,7 @@ interface ButtonControlProps {
   reRecordButton?: boolean;
   incorrectButton?: boolean;
   incorrectDisable?: boolean;
+  skipDisable?: boolean;
 }
 
 const ButtonControls = ({
@@ -68,6 +69,7 @@ const ButtonControls = ({
   reRecordButton = false,
   incorrectButton = false,
   incorrectDisable = true,
+  skipDisable = false,
 }: ButtonControlProps) => {
   const { t } = useTranslation();
 
@@ -189,7 +191,7 @@ const ButtonControls = ({
         )}
       </div>
       <div className="d-flex justify-content-center mt-4 mt-md-13">
-        <Button onClick={onSkip} variant="tertiary">
+        <Button disabled={skipDisable} onClick={onSkip} variant="tertiary">
           {t('skip')}
         </Button>
       </div>

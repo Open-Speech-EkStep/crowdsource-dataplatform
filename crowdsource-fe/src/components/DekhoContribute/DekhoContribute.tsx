@@ -293,6 +293,7 @@ const DekhoContribute = () => {
                       onCancel={onCancelContribution}
                       onSkip={onSkipContribution}
                       playButton={false}
+                      skipDisable={currentDataIndex === 5}
                     />
                   </div>
                 )}

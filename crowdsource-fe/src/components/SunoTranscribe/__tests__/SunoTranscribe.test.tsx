@@ -424,12 +424,6 @@ describe('SunoTranscribe', () => {
       });
     });
 
-    await waitFor(() => {
-      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      userEvent.click(screen.getByRole('button', { name: 'close' }));
-    });
+    expect(screen.getByRole('button', { name: 'skip' })).toBeDisabled();
   });
 });

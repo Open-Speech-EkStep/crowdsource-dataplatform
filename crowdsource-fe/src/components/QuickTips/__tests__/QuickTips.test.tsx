@@ -1,4 +1,4 @@
-import { render, verifyAxeTest } from 'utils/testUtils';
+import { render, userEvent, verifyAxeTest, screen } from 'utils/testUtils';
 
 import QuickTips from '../QuickTips';
 
@@ -11,5 +11,13 @@ describe('QuickTips', () => {
     const { asFragment } = setup();
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should close the quick tips when user click on cross button', () => {
+    setup();
+
+    userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+    expect(screen.queryByTestId('QuickTips')).not.toBeInTheDocument();
   });
 });

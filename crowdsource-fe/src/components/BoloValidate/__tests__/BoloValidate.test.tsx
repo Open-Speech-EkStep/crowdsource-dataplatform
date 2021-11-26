@@ -292,6 +292,46 @@ describe('BoloValidate', () => {
     });
   });
 
+  it('should show the error popup for 2nd sentence when api throw the error and modal should close on clicking button', async () => {
+    const url = '/validate/1717503/skip';
+    const errorResponse = new Error('Some error');
+    await setup(contributionsData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          language: 'Hindi',
+          sentenceId: 1248712,
+          state_region: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'text',
+        }),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('apiFailureError')).not.toBeInTheDocument();
+    });
+  });
+
   it('should test the incorrect functionality', async () => {
     const url = '/validate/1717503/reject';
     const successResponse = { message: 'Validate successfully.', statusCode: 200 };
@@ -331,18 +371,52 @@ describe('BoloValidate', () => {
   });
 
   it('should go to thank you page after 5 skip sentences', async () => {
+    const url = '/validate/1717503/skip';
+    const errorResponse = new Error('Some error');
     await setup(contributionsData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          language: 'Hindi',
+          sentenceId: 1248712,
+          state_region: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'text',
+        }),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
   });
 });

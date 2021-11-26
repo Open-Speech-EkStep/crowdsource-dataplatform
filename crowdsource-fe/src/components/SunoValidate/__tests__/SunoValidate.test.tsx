@@ -492,7 +492,7 @@ describe('SunoValidate', () => {
     expect(screen.getByRole('button', { name: 'Edit Icon needsChange' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Correct Icon correct' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Play Icon play' })).toBeEnabled();
-    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'skip' })).toBeDisabled();
     expect(screen.getByText('5/5')).toBeInTheDocument();
   });
 
@@ -538,7 +538,7 @@ describe('SunoValidate', () => {
     expect(screen.getByRole('button', { name: 'Edit Icon needsChange' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Correct Icon correct' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Play Icon play' })).toBeEnabled();
-    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'skip' })).toBeDisabled();
     expect(screen.getByText('5/5')).toBeInTheDocument();
   });
 });

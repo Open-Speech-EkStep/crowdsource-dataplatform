@@ -399,6 +399,7 @@ const LikhoValidate = () => {
                       correctBtn={showCorrectButton}
                       correctDisable={false}
                       cancelDisable={false}
+                      skipDisable={currentDataIndex === 5}
                       submitDisable={
                         !formDataStore.userInput ||
                         formDataStore.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||

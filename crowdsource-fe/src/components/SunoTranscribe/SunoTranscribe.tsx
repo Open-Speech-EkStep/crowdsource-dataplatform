@@ -354,6 +354,7 @@ const SunoTranscribe = () => {
                       pauseButton={showPauseButton}
                       replayButton={showReplayButton}
                       cancelDisable={!formData.userInput}
+                      skipDisable={currentDataIndex === 5}
                       submitDisable={
                         !showReplayButton ||
                         !formData.userInput ||

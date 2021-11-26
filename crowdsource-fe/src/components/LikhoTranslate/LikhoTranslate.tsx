@@ -307,6 +307,7 @@ const LikhoTranslate = () => {
                   <div className="mt-9 mt-md-12">
                     <ButtonControls
                       cancelDisable={!formData.userInput}
+                      skipDisable={currentDataIndex === 5}
                       submitDisable={
                         !formData.userInput ||
                         formData.userInput.length < TEXT_INPUT_LENGTH.LENGTH ||

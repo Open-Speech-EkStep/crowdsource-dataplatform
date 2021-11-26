@@ -429,6 +429,7 @@ const SunoValidate = () => {
                       submitButton={showSubmitButton}
                       cancelButton={showCancelButton}
                       needsChangeButton={showNeedsChangeButton}
+                      skipDisable={currentDataIndex === 5}
                       correctBtn={showCorrectButton}
                       cancelDisable={false}
                       submitDisable={

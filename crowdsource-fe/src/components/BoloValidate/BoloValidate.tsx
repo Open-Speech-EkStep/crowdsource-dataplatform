@@ -71,8 +71,8 @@ const BoloValidate = () => {
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
   const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
-  const { submit: submitSkip, error: skipError } = useSubmit(skipApiUrl);
-  const { submit: accept, error: acceptError } = useSubmit(acceptApiUrl);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(skipApiUrl);
+  const { submit: accept, data: acceptData, error: acceptError } = useSubmit(acceptApiUrl);
 
   const { data: result, mutate } = useFetchWithInit<ResultType>(
     `${apiPaths.contributionsText}?from=${contributionLanguage}&to=&username=${speakerDetails?.userName}`,
@@ -86,6 +86,26 @@ const BoloValidate = () => {
       setShowErrorModal(true);
     }
   }, [skipError, acceptError, rejectError]);
+
+  /* istanbul ignore next */
+  useEffect(() => {
+    if ((skipData || acceptData) && !(skipError || acceptError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.boloIndiaValidateThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    router,
+    currentLocale,
+    acceptData,
+    acceptError,
+  ]);
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
@@ -122,13 +142,18 @@ const BoloValidate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
-      router.push(`/${currentLocale}${routePaths.boloIndiaValidateThankYou}`, undefined, {
-        locale: currentLocale,
-      });
-    } else {
+    if (index !== contributionData.length) {
       setCurrentDataIndex(index + 1);
       setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
+      router.push(`/${currentLocale}${routePaths.dekhoIndiaValidateThankYou}`, undefined, {
+        locale: currentLocale,
+      });
     }
   };
 
@@ -175,55 +200,100 @@ const BoloValidate = () => {
     onPlayAudio();
   };
 
-  const onIncorrect = () => {
+  const onIncorrect = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
-    reject(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        country: locationInfo?.country,
-        state: locationInfo?.regionName,
-        userName: speakerDetails?.userName,
-        type: INITIATIVES_MEDIA.text,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await reject(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          userName: speakerDetails?.userName,
+          type: INITIATIVES_MEDIA.text,
+        })
+      );
+    } else {
+      reject(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          country: locationInfo?.country,
+          state: locationInfo?.regionName,
+          userName: speakerDetails?.userName,
+          type: INITIATIVES_MEDIA.text,
+        })
+      );
+    }
   };
 
-  const onSkipContribution = () => {
+  const onSkipContribution = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.bolo,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.bolo,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.bolo,
+        })
+      );
+    }
   };
 
-  const onCorrect = () => {
+  const onCorrect = async () => {
     setDataCurrentIndex(currentDataIndex);
     resetState();
-    accept(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        fromLanguage: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.bolo,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await accept(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.bolo,
+        })
+      );
+    } else {
+      accept(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          fromLanguage: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.bolo,
+        })
+      );
+    }
   };
 
   if (!result) {
@@ -292,6 +362,7 @@ const BoloValidate = () => {
                     incorrectDisable={incorrectDisable}
                     onCorrect={onCorrect}
                     onIncorrect={onIncorrect}
+                    skipDisable={currentDataIndex === 5}
                   />
                 </div>
 
@@ -304,7 +375,9 @@ const BoloValidate = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
                   </span>
                 </div>
               </div>
@@ -325,7 +398,7 @@ const BoloValidate = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(skipError || rejectError || acceptError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
     </Fragment>

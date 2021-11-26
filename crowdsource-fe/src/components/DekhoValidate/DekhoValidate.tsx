@@ -391,6 +391,7 @@ const DekhoValidate = () => {
                       onSkip={onSkipContribution}
                       onNeedsChange={onNeedsChange}
                       onCorrect={onCorrect}
+                      skipDisable={currentDataIndex === 5}
                     />
                   </div>
                 )}

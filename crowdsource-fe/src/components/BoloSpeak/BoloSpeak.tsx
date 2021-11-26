@@ -90,10 +90,10 @@ const BoloSpeak = () => {
   let input: any;
   let chunks: any = [];
 
-  const { submit, error: submitError } = useSubmit(apiPaths.store, false);
+  const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store, false);
   const audioEl: any = useRef<HTMLAudioElement>();
   const audio = audioEl.current;
-  const { submit: submitSkip, error: skipError } = useSubmit(apiPaths.skip);
+  const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(apiPaths.skip);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   const [formData, setFormData] = useState<ActionStoreBoloInterface>({
@@ -131,6 +131,26 @@ const BoloSpeak = () => {
     }
   }, [skipError, submitError, error]);
 
+  /* istanbul ignore next */
+  useEffect(() => {
+    if ((storeData || skipData) && !(skipError || submitError)) {
+      if (currentDataIndex === contributionData.length) {
+        router.push(`/${currentLocale}${routePaths.boloIndiaContributeThankYou}`, undefined, {
+          locale: currentLocale,
+        });
+      }
+    }
+  }, [
+    storeData,
+    skipData,
+    currentDataIndex,
+    contributionData.length,
+    skipError,
+    submitError,
+    router,
+    currentLocale,
+  ]);
+
   useEffect(() => {
     if (result && result.data) {
       if (lastSpeakerDetail?.userName !== speakerDetails?.userName) {
@@ -153,14 +173,21 @@ const BoloSpeak = () => {
     }
   }, [speakerDetails]);
 
+  /* istanbul ignore next */
   const setDataCurrentIndex = (index: number) => {
-    if (index === contributionData.length - 1) {
+    if (index !== contributionData.length) {
+      setCurrentDataIndex(index + 1);
+      setShowUIdata(contributionData[index + 1]);
+    }
+  };
+
+  /* istanbul ignore next */
+  const hideErrorModal = () => {
+    setShowErrorModal(false);
+    if (currentDataIndex === contributionData.length) {
       router.push(`/${currentLocale}${routePaths.boloIndiaContributeThankYou}`, undefined, {
         locale: currentLocale,
       });
-    } else {
-      setCurrentDataIndex(index + 1);
-      setShowUIdata(contributionData[index + 1]);
     }
   };
 
@@ -323,7 +350,6 @@ const BoloSpeak = () => {
 
   /* istanbul ignore next */
   const onSubmitContribution = async () => {
-    setDataCurrentIndex(currentDataIndex);
     resetState();
     const fd = new FormData();
     fd.append('language', `${contributionLanguage}`);
@@ -344,25 +370,45 @@ const BoloSpeak = () => {
     fd.append('device', getDeviceInfo());
     fd.append('browser', getBrowserInfo());
     fd.append('type', INITIATIVES_MEDIA_MAPPING.bolo);
+    if (currentDataIndex === contributionData.length - 1) {
+      await submit(fd);
+    } else {
+      submit(fd);
+    }
 
-    submit(fd);
+    setDataCurrentIndex(currentDataIndex);
   };
 
-  const onSkipContribution = () => {
-    setDataCurrentIndex(currentDataIndex);
+  const onSkipContribution = async () => {
     resetState();
-    submitSkip(
-      JSON.stringify({
-        device: getDeviceInfo(),
-        browser: getBrowserInfo(),
-        userName: speakerDetails?.userName,
-        language: contributionLanguage,
-        sentenceId: showUIData.dataset_row_id,
-        state_region: locationInfo?.regionName,
-        country: locationInfo?.country,
-        type: INITIATIVES_MEDIA_MAPPING.bolo,
-      })
-    );
+    if (currentDataIndex === contributionData.length - 1) {
+      await submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.bolo,
+        })
+      );
+    } else {
+      submitSkip(
+        JSON.stringify({
+          device: getDeviceInfo(),
+          browser: getBrowserInfo(),
+          userName: speakerDetails?.userName,
+          language: contributionLanguage,
+          sentenceId: showUIData.dataset_row_id,
+          state_region: locationInfo?.regionName,
+          country: locationInfo?.country,
+          type: INITIATIVES_MEDIA_MAPPING.bolo,
+        })
+      );
+    }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   if (!result && !error) {
@@ -449,7 +495,7 @@ const BoloSpeak = () => {
                     onStart={onStartRecording}
                     onStop={onStopRecording}
                     onRerecord={onRerecord}
-                    // submitButton={!audioPermissionDenied}
+                    skipDisable={currentDataIndex === 5}
                   />
                 </div>
 
@@ -462,7 +508,10 @@ const BoloSpeak = () => {
                     />
                   </div>
                   <span className="ms-5">
-                    {currentDataIndex + 1}/{contributionData.length}
+                    {currentDataIndex + 1 > contributionData.length
+                      ? contributionData.length
+                      : currentDataIndex + 1}
+                    /{contributionData.length}
                   </span>
                 </div>
               </div>
@@ -483,7 +532,7 @@ const BoloSpeak = () => {
         <ErrorPopup
           show={showErrorModal}
           errorMsg={getErrorMsg(skipError || error || submitError)}
-          onHide={() => setShowErrorModal(false)}
+          onHide={() => hideErrorModal()}
         />
       )}
       {audioPermissionDenied && (
