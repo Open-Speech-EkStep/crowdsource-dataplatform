@@ -395,6 +395,7 @@ const drawTimelineChart = timelineData => {
     hourAxis.min = 0;
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = '3,3';
+    hourAxis.tooltip.disabled = true;
     hourAxis.renderer.labels.template.fill = '#000';
     hourAxis.title.text = translate('Contribution (in hours)');
     hourAxis.renderer.labels.template.fontSize = 12;
