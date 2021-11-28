@@ -362,7 +362,7 @@ const BoloValidate = () => {
                     incorrectDisable={incorrectDisable}
                     onCorrect={onCorrect}
                     onIncorrect={onIncorrect}
-                    skipDisable={currentDataIndex === 5}
+                    skipDisable={currentDataIndex === contributionData.length}
                   />
                 </div>
 

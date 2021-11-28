@@ -495,7 +495,7 @@ const BoloSpeak = () => {
                     onStart={onStartRecording}
                     onStop={onStopRecording}
                     onRerecord={onRerecord}
-                    skipDisable={currentDataIndex === 5}
+                    skipDisable={currentDataIndex === contributionData.length}
                   />
                 </div>
 
