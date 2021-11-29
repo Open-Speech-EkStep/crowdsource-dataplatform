@@ -27,12 +27,17 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
     categoryAxis.renderer.grid.template.strokeWidth = 0;
     // categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.labels.template.fontSize = 14;
-    categoryAxis.renderer.labels.template.html = `<span class=${labelClass}>{category}</span>`;
+    // categoryAxis.renderer.labels.template.html = `<span class=${labelClass}>{category}</span>`;
     categoryAxis.renderer.grid.template.location = 0;
     const label = categoryAxis.renderer.labels.template;
-    // label.wrap = true;
-    label.truncate = true;
     label.maxWidth = 120;
+
+    // label.wrap = true;
+    if (isMobileDevice()) {
+      label.maxWidth = 80;
+    }
+    label.truncate = true;
+    label.tooltipText = '{category}';
 
     /* istanbul ignore next */
     categoryAxis.events.on('sizechanged', function (ev) {
