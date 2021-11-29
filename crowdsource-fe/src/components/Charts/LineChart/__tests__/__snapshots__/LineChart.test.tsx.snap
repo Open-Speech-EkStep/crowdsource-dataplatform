@@ -676,7 +676,7 @@ exports[`Hero should render the component and matches it against stored snapshot
                   visibility="hidden"
                 >
                   <g
-                    fill="rgba(252,194,50,0.2)"
+                    fill="#fcc232"
                     fill-opacity="0.9"
                     filter="url(\\"#filter-id-130\\")"
                     stroke="#ffffff"
@@ -703,7 +703,7 @@ exports[`Hero should render the component and matches it against stored snapshot
                   visibility="hidden"
                 >
                   <g
-                    fill="rgba(131,230,97,0.2)"
+                    fill="#83e661"
                     fill-opacity="0.9"
                     filter="url(\\"#filter-id-146\\")"
                     stroke="#ffffff"

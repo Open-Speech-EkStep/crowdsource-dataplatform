@@ -35,7 +35,7 @@ exports[`Footer should render the component and matches it against stored snapsh
           data-testid="SocialShare"
         >
           <span
-            class="fw-bold"
+            class="fw-bold socialShareText"
           >
             footerSocialShareText
           </span>
