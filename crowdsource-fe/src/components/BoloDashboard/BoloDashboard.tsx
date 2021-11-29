@@ -108,7 +108,7 @@ const BoloDashboard = () => {
             <Col lg="6">
               <IndiaMapChart type={INITIATIVES_MEDIA_MAPPING.bolo} language={language} />
             </Col>
-            <Col lg="6">
+            <Col lg="6" className="mt-8 mt-lg-0">
               <AgeChart language={language} />
             </Col>
           </Row>
