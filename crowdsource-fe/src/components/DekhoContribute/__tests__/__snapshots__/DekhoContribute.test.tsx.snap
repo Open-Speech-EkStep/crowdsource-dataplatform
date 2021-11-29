@@ -197,7 +197,7 @@ exports[`DekhoContribute should render the component and matches it against stor
               <img
                 alt="OCR Data"
                 class="img-fluid"
-                src="/inbound/ocr/Hindi/test.png"
+                src="/inbound%2Focr%2FHindi%2Ftest.png"
               />
             </div>
             <div
