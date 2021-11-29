@@ -80,7 +80,7 @@ const MedalGallery = () => {
                     initiativeBadge={groupByInitiative[INITIATIVES_MEDIA_MAPPING[initiative]]}
                   />
                 ) : (
-                  <p className="w-100 display-2 font-family-roboto text-decoration-underline text-primary-80 text-center mt-5">
+                  <p className="w-100 display-3 font-family-roboto text-primary-60 text-center mt-5">
                     {t('noBadgeText', { initiativeName: `${t(initiative)} ${t('india')}` })}
                   </p>
                 )}
