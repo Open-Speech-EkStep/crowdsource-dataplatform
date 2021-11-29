@@ -76,7 +76,6 @@ describe('ContributionStats', () => {
       expect(fetchMock).toBeCalledWith('/aggregated-json/cumulativeCount.json');
     });
     if (showComponent) {
-      console.log(showComponent);
       await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
     }
 

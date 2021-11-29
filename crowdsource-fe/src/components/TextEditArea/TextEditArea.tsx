@@ -94,27 +94,28 @@ const TextEditArea = ({
     onError(state);
   };
 
+  useEffect(() => {
+    if (!readOnly && validationError && !showError) {
+      setErrorMessage(t(validationError.errorTextKey));
+      setShowError(true);
+    }
+  }, [readOnly, t, validationError, input, showError]);
+
   const handleError = (input: string) => {
     const error = findInputError(input, initiative, language);
     if (error) {
       setErrorMessage(t(error.errorTextKey));
       toggleError(true);
-    } else if (validationError) {
-      setErrorMessage(t(validationError.errorTextKey));
-      setShowError(true);
-      onError(false);
-    } else toggleError(false);
+    } else {
+      toggleError(false);
+      setTextValue(input);
+    }
   };
-
-  useEffect(() => {
-    if (!readOnly) handleError(input || '');
-  }, [input]);
 
   const onChange = (input: any) => {
     setIsUsingPhysicalKeyboard(false);
-    setTextValue(input);
-    setInput(input);
     handleError(input);
+    setInput(input);
   };
 
   const onKeyPress = (button: any) => {
@@ -129,7 +130,6 @@ const TextEditArea = ({
     setIsUsingPhysicalKeyboard(true);
     const input = event.target.value;
     handleError(input);
-    setTextValue(input);
     setInput(input);
     keyboard && keyboard.current && keyboard.current.setInput(input);
     if (!input) {
@@ -184,7 +184,7 @@ const TextEditArea = ({
           )}
         </div>
       </div>
-      {showError ? <TextErrorMessage message={errorMessage} /> : null}
+      {showError && <TextErrorMessage message={errorMessage} isWarning={!!validationError} />}
       {showKeyboard ? (
         <Draggable bounds="main" nodeRef={nodeRef}>
           <div

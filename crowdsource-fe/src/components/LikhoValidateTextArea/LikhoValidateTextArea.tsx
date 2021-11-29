@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import TextEditArea from 'components/TextEditArea';
 import { TEXT_INPUT_ERROR_CONFIG } from 'constants/Keyboard';
@@ -29,28 +29,30 @@ const ValidateTextArea: FunctionComponent<ValidateTextAreaProps> = ({
   validate,
 }) => {
   const [validationError, setValidationError] = useState<typeof TEXT_INPUT_ERROR_CONFIG.validation>();
-  const [inputText, setInputText] = useState<string>();
+  const [inputText, setInputText] = useState<string>(text);
+  const [error, setError] = useState<Boolean>(false);
 
   const autoValidationEnabled = nodeConfig.autoValidation && validate;
 
   const onChangeText = (inputText: string) => {
     if (
       inputText &&
-      autoValidationEnabled &&
+      // autoValidationEnabled &&
       !AutoValidation[initiative](`${fromLanguage || ''}-${toLanguage || ''}`, text, inputText)
     ) {
       setValidationError(TEXT_INPUT_ERROR_CONFIG.validation);
     } else setValidationError(undefined);
-
     setInputText(inputText);
     updateText(inputText);
   };
 
-  const setError = (value: boolean) => {
-    if (text === inputText) {
+  useEffect(() => {
+    if (!error && text !== inputText) setHasError(false);
+    else {
       setHasError(true);
-    } else setHasError(value);
-  };
+      setValidationError(undefined);
+    }
+  }, [error, inputText, setHasError, text]);
 
   return (
     <TextEditArea

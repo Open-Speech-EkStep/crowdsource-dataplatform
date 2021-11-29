@@ -58,11 +58,5 @@ exports[`LikhoValidateTextArea should render the component and matches it agains
       </div>
     </div>
   </div>
-  <span
-    class="d-block text-danger fst-italic mt-2 display-5"
-    data-testid="ErrorText"
-  >
-    typeInChosenLanguage
-  </span>
 </DocumentFragment>
 `;

@@ -1,10 +1,14 @@
 interface TextErrorMessageProps {
   message: string;
+  isWarning?: Boolean;
 }
 
-const TextErrorMessage = ({ message }: TextErrorMessageProps) => {
+const TextErrorMessage = ({ message, isWarning = false }: TextErrorMessageProps) => {
   return (
-    <span data-testid="ErrorText" className="d-block text-danger fst-italic mt-2 display-5">
+    <span
+      data-testid="ErrorText"
+      className={`d-block ${isWarning ? 'text-strong-warning' : 'text-danger'} fst-italic mt-2 display-5`}
+    >
       {message}
     </span>
   );

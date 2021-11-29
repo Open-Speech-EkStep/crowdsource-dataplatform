@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react';
-import { useState, Fragment } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 
 import TextEditArea from 'components/TextEditArea';
 import { TEXT_INPUT_ERROR_CONFIG } from 'constants/Keyboard';
@@ -33,7 +33,8 @@ const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
   validate,
 }) => {
   const [validationError, setValidationError] = useState<typeof TEXT_INPUT_ERROR_CONFIG.validation>();
-  const [inputText, setInputText] = useState<string>();
+  const [inputText, setInputText] = useState<string>(text);
+  const [error, setError] = useState<Boolean>(false);
 
   const autoValidationEnabled = nodeConfig.autoValidation && validate;
 
@@ -45,16 +46,17 @@ const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
     ) {
       setValidationError(TEXT_INPUT_ERROR_CONFIG.validation);
     } else setValidationError(undefined);
-
     setInputText(inputText);
     updateText(inputText);
   };
 
-  const setError = (value: boolean) => {
-    if (text === inputText) {
+  useEffect(() => {
+    if (!error && text !== inputText) setHasError(false);
+    else {
       setHasError(true);
-    } else setHasError(value);
-  };
+      setValidationError(undefined);
+    }
+  }, [error, inputText, setHasError, text]);
 
   return (
     <Fragment>

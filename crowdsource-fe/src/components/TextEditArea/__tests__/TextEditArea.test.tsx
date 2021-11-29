@@ -3,7 +3,8 @@ import { render, verifyAxeTest, userEvent, screen, waitFor } from 'utils/testUti
 import TextEditArea from '../TextEditArea';
 
 describe('TextEditArea English', () => {
-  const setup = (contributionLanguage: string) =>
+  const mockOnError = jest.fn();
+  const setup = (contributionLanguage: string, error?: { errorTextKey: string }) =>
     render(
       <TextEditArea
         id="textarea"
@@ -12,8 +13,9 @@ describe('TextEditArea English', () => {
         setTextValue={value => value}
         isTextareaDisabled={false}
         label={`addText (${contributionLanguage})`}
-        onError={() => {}}
+        onError={mockOnError}
         closeKeyboard={true}
+        validationError={error}
       />
     );
 
@@ -110,6 +112,29 @@ describe('TextEditArea English', () => {
     await waitFor(() => {
       expect(screen.queryByText('X')).not.toBeInTheDocument();
     });
+  });
+
+  it('should not show any error message if input is empty', async () => {
+    setup('English');
+
+    expect(screen.queryByText('validationWarningText')).not.toBeInTheDocument();
+  });
+
+  it('should show validation warning message if present', async () => {
+    setup('English', { errorTextKey: 'validationWarningText' });
+
+    expect(screen.getByText('validationWarningText')).toBeInTheDocument();
+  });
+
+  it('should show ui errors on priority even if validation warning is present', async () => {
+    setup('English', { errorTextKey: 'validationWarningText' });
+
+    userEvent.clear(screen.getByRole('textbox', { name: 'addText (English)' }));
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (English)' }), 'abc');
+    expect(screen.getByText('validationWarningText')).toBeInTheDocument();
+    // Add a special chartacter in input
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (English)' }), '@');
+    expect(screen.getByText('specialCharacters')).toBeInTheDocument();
   });
 });
 
