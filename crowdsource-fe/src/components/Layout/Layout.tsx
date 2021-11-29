@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div data-testid="Layout" className="d-flex flex-column flex-fill">
       <Head>
-        <title>hello bhashadaan sir</title>
+        <title>{t('metaTitle')}</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU" />
