@@ -316,7 +316,7 @@ const SunoTranscribe = () => {
                       controls
                       className="d-flex shadow-grey rounded-24"
                       tabIndex={-1}
-                      src={`${nodeConfig.cdnUrl}/${showUIData?.media_data}`}
+                      src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.media_data)}`}
                       controlsList="nodownload"
                       crossOrigin="anonymous"
                     ></audio>

@@ -381,7 +381,7 @@ const SunoValidate = () => {
                       controls
                       className="d-flex shadow-grey rounded-24"
                       tabIndex={-1}
-                      src={`${nodeConfig.cdnUrl}/${showUIData?.sentence}`}
+                      src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.sentence)}`}
                       controlsList="nodownload"
                       crossOrigin="anonymous"
                     ></audio>
