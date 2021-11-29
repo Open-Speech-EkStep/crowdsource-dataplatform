@@ -32,7 +32,7 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
     const label = categoryAxis.renderer.labels.template;
     label.maxWidth = 120;
 
-    // label.wrap = true;
+    /* istanbul ignore next */
     if (isMobileDevice()) {
       label.maxWidth = 80;
     }
