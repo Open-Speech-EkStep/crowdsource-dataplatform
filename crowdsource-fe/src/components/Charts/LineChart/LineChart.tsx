@@ -3,6 +3,8 @@ import { useRef, useEffect } from 'react';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
 
+import { isMobileDevice } from 'utils/utils';
+
 interface ChartProps {
   data: Array<
     | {
@@ -80,8 +82,12 @@ const LineChart = (props: ChartProps) => {
     lineSeries1.tooltipHTML = props.line1Tooltip;
     lineSeries1.tooltip.getFillFromObject = false;
     lineSeries1.tooltip.autoTextColor = false;
-    lineSeries1.tooltip.background.fill = am4core.color('rgba(252,194,50,0.2)');
+    lineSeries1.tooltip.background.fill = am4core.color('rgba(252,194,50,1)');
     lineSeries1.tooltip.label.fill = am4core.color('#000000');
+    if (isMobileDevice()) {
+      lineSeries1.tooltip.label.maxWidth = 150;
+      lineSeries1.tooltip.label.wrap = true;
+    }
     lineSeries1.sequencedInterpolation = true;
     lineSeries1.stroke = am4core.color('#FCC232');
     lineSeries1.name = props.line1Text || '';
@@ -95,8 +101,12 @@ const LineChart = (props: ChartProps) => {
     lineSeries2.tooltipHTML = props.line2Tooltip;
     lineSeries2.tooltip.getFillFromObject = false;
     lineSeries2.tooltip.autoTextColor = false;
-    lineSeries2.tooltip.background.fill = am4core.color('rgba(131,230,97,0.2)');
+    lineSeries2.tooltip.background.fill = am4core.color('rgba(131,230,97,1)');
     lineSeries2.tooltip.label.fill = am4core.color('#000000');
+    if (isMobileDevice()) {
+      lineSeries2.tooltip.label.maxWidth = 150;
+      lineSeries2.tooltip.label.wrap = true;
+    }
     lineSeries2.strokeWidth = 3;
     lineSeries2.stroke = am4core.color('#83E661');
     lineSeries2.name = props.line2Text || '';

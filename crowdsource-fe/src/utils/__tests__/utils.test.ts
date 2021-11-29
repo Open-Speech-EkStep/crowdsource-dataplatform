@@ -11,6 +11,7 @@ import {
   groupBy,
   isBoloInitiative,
   getErrorMsg,
+  isMobileDevice,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -185,5 +186,9 @@ describe('Utils', () => {
     expect(errorMsg).toEqual(expectedOutput);
 
     expect(multipleRequestErrorMsg).toEqual(expectedMultipleRequestOutput);
+  });
+
+  it('should give false for desktop view', () => {
+    expect(isMobileDevice()).toEqual(false);
   });
 });

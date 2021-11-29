@@ -4,6 +4,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
 
 import type { ChartDetails } from 'types/Chart';
+import { isMobileDevice } from 'utils/utils';
 
 interface ChartProps {
   id: string;
@@ -77,6 +78,11 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
     if (data.bgColor) {
       series.tooltip.getFillFromObject = false;
       series.tooltip.background.fill = am4core.color(data.bgColor);
+    }
+
+    if (isMobileDevice()) {
+      series.tooltip.label.maxWidth = 160;
+      series.tooltip.label.wrap = true;
     }
 
     /* istanbul ignore next */
