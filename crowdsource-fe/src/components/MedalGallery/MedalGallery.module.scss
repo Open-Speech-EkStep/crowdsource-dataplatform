@@ -39,12 +39,12 @@
 }
 
 .text {
+  bottom: 50px;
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.875rem;
   line-height: 1.375rem;
   max-width: 36rem;
   position: absolute;
-  bottom: 50px;
 
   @include media-breakpoint-up(md) {
     font-size: 1.125rem;
