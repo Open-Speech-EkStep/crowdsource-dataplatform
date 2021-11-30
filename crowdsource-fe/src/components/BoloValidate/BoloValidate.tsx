@@ -70,7 +70,7 @@ const BoloValidate = () => {
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
   const acceptApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/accept`;
 
-  const { submit: reject, error: rejectError } = useSubmit(rejectApiUrl);
+  const { submit: reject, data: rejectData, error: rejectError } = useSubmit(rejectApiUrl);
   const { submit: submitSkip, data: skipData, error: skipError } = useSubmit(skipApiUrl);
   const { submit: accept, data: acceptData, error: acceptError } = useSubmit(acceptApiUrl);
 
@@ -89,7 +89,7 @@ const BoloValidate = () => {
 
   /* istanbul ignore next */
   useEffect(() => {
-    if ((skipData || acceptData) && !(skipError || acceptError)) {
+    if ((skipData || acceptData || rejectData) && !(skipError || acceptError || rejectError)) {
       if (currentDataIndex === contributionData.length) {
         router.push(`/${currentLocale}${routePaths.boloIndiaValidateThankYou}`, undefined, {
           locale: currentLocale,
@@ -98,6 +98,8 @@ const BoloValidate = () => {
     }
   }, [
     skipData,
+    rejectData,
+    rejectError,
     currentDataIndex,
     contributionData.length,
     skipError,
@@ -201,7 +203,6 @@ const BoloValidate = () => {
   };
 
   const onIncorrect = async () => {
-    setDataCurrentIndex(currentDataIndex);
     resetState();
     if (currentDataIndex === contributionData.length - 1) {
       await reject(
@@ -230,10 +231,10 @@ const BoloValidate = () => {
         })
       );
     }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   const onSkipContribution = async () => {
-    setDataCurrentIndex(currentDataIndex);
     resetState();
     if (currentDataIndex === contributionData.length - 1) {
       await submitSkip(
@@ -262,10 +263,10 @@ const BoloValidate = () => {
         })
       );
     }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   const onCorrect = async () => {
-    setDataCurrentIndex(currentDataIndex);
     resetState();
     if (currentDataIndex === contributionData.length - 1) {
       await accept(
@@ -294,6 +295,7 @@ const BoloValidate = () => {
         })
       );
     }
+    setDataCurrentIndex(currentDataIndex);
   };
 
   if (!result) {
