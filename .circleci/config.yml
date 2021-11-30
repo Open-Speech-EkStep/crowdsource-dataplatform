@@ -6,7 +6,7 @@ parameters:
     default: true
   build_api:
     type: boolean
-    default: false
+    default: true
 
 orbs:
   node: circleci/node@4.4.0
