@@ -144,6 +144,8 @@ const BoloValidate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
+    console.log(index);
+    console.log(contributionData.length - 1);
     if (index !== contributionData.length) {
       setCurrentDataIndex(index + 1);
       setShowUIdata(contributionData[index + 1]);
@@ -172,6 +174,12 @@ const BoloValidate = () => {
   };
 
   const resetState = () => {
+    setShowUIdata({
+      sentence: '',
+      contribution: '',
+      dataset_row_id: '0',
+      contribution_id: '0',
+    });
     waveVisualizer?.current?.classList.add('d-none');
     setShowPauseButton(false);
     setStartAudioPlayer(false);
@@ -236,6 +244,7 @@ const BoloValidate = () => {
 
   const onSkipContribution = async () => {
     resetState();
+    audio?.pause();
     if (currentDataIndex === contributionData.length - 1) {
       await submitSkip(
         JSON.stringify({
@@ -330,7 +339,10 @@ const BoloValidate = () => {
                         controls
                         className="d-flex shadow-grey rounded-24"
                         tabIndex={-1}
-                        src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.contribution)}`}
+                        src={
+                          showUIData?.contribution &&
+                          `${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.contribution)}`
+                        }
                         controlsList="nodownload"
                         crossOrigin="anonymous"
                       ></audio>
