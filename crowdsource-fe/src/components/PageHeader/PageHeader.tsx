@@ -30,7 +30,7 @@ const PageHeader = ({ initiative }: PageHeaderProps) => {
               height="76"
             />
           </div>
-          <div className="d-flex flex-column justify-content-center ms-4 ms-md-6">
+          <div className="d-flex flex-column justify-content-center ms-4 ms-md-6 w-100">
             <h1 className={`${styles.pageHeading} mb-0`}>
               {t(initiative)} {t('india')}
             </h1>
@@ -39,7 +39,9 @@ const PageHeader = ({ initiative }: PageHeaderProps) => {
             </p>
           </div>
         </div>
-        <p className="mt-4 d-md-none mb-0">{t(`${INITIATIVES_MEDIA_MAPPING[initiative]}SloganText`)}</p>
+        <p className={`${styles.pageHeaderTextMobile} mt-4 d-md-none mb-0`}>
+          {t(`${INITIATIVES_MEDIA_MAPPING[initiative]}SloganText`)}
+        </p>
       </div>
       <TriColorBorder />
     </div>

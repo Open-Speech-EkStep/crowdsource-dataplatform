@@ -39,7 +39,7 @@ exports[`PageHeadeer should render the component and matches it against stored s
           </div>
         </div>
         <div
-          class="d-flex flex-column justify-content-center ms-4 ms-md-6"
+          class="d-flex flex-column justify-content-center ms-4 ms-md-6 w-100"
         >
           <h1
             class="pageHeading mb-0"
@@ -54,7 +54,7 @@ exports[`PageHeadeer should render the component and matches it against stored s
         </div>
       </div>
       <p
-        class="mt-4 d-md-none mb-0"
+        class="pageHeaderTextMobile mt-4 d-md-none mb-0"
       >
         asrSloganText
       </p>
