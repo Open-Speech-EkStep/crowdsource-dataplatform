@@ -29,6 +29,19 @@ class MyDocument extends Document<MyDocumentProps> {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
           />
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C`} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3B78XVT75C', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
         </Head>
         <body className="d-flex flex-column">
           <Main />

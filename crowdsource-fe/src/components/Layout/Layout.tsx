@@ -29,19 +29,6 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={t('metaOGSiteName')} />
         <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-3B78XVT75C`} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-3B78XVT75C', {
-              page_path: window.location.pathname,
-            });
-          `,
-          }}
-        />
         <link rel="icon" type="image/png" href={`${nodeConfig.contextRoot}/images/favicon.png`} />
       </Head>
       {router.pathname !== '/404' && <Header />}
