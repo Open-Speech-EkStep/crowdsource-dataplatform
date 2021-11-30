@@ -144,8 +144,6 @@ const BoloValidate = () => {
   };
 
   const setDataCurrentIndex = (index: number) => {
-    console.log(index);
-    console.log(contributionData.length - 1);
     if (index !== contributionData.length) {
       setCurrentDataIndex(index + 1);
       setShowUIdata(contributionData[index + 1]);
