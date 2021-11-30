@@ -317,9 +317,7 @@ const SunoValidate = () => {
         })
       );
     }
-    setTimeout(() => {
-      setDataCurrentIndex(currentDataIndex);
-    }, 100);
+    setDataCurrentIndex(currentDataIndex);
   };
 
   const onEnded = () => {
