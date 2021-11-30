@@ -55,7 +55,7 @@ const YourBadge = (props: any) => {
           alt={`${props.badgeType} badge`}
         />
       </div>
-      <span className="d-flex justify-content-center mt-3 display-5 font-family-rowdies fw-light">
+      <span className="justify-content-center mt-3 display-5 font-family-rowdies fw-light">
         <Trans
           i18nKey={`${pageSourceConstants4[route.asPath]}Acheived`}
           defaults={`${pageSourceConstants4[route.asPath]}Acheived`}
