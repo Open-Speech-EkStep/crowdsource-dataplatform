@@ -27,8 +27,7 @@ const InitiativesCarousel = () => {
     arrows: false,
     dots: false,
     infinite: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
+    autoplay: false,
     speed: 500,
   };
 
