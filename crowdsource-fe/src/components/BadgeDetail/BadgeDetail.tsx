@@ -46,6 +46,7 @@ const BadgeDetail = () => {
       undefined,
       {
         locale: currentLocale,
+        scroll: false,
       }
     );
   };
@@ -53,7 +54,7 @@ const BadgeDetail = () => {
   function handleTabClick(tab: string | null, event: any) {
     event.target.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
+      block: 'nearest',
       inline: 'center',
     });
     setDefaultInitiative(tab as Initiative);
