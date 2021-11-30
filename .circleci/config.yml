@@ -6,7 +6,7 @@ parameters:
     default: true
   build_api:
     type: boolean
-    default: false
+    default: true
 
 orbs:
   node: circleci/node@4.4.0
@@ -1002,9 +1002,9 @@ workflows:
             - dev_deployment_aks
             - build_dev_ui
             # - functional_tests_dev
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
 
       - db_migrate_azure:
           name: migrate_test_azure
@@ -1090,9 +1090,9 @@ workflows:
             - test_deployment_aks
             - build_test_ui
             #- functional_tests_test
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
 
       - db_migrate_azure:
           name: migrate_uat_azure
@@ -1161,9 +1161,9 @@ workflows:
           type: approval
           requires:
             - uat_deployment_aks
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
 
 
       - db_migrate_azure:
