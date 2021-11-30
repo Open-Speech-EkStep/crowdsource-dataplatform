@@ -11,6 +11,7 @@ const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 const validation_count = config.validation_count ? Number(config.validation_count) : 5;
 const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
 const batchSize = config.cache_batch_size || 5000;
+const batchLength = 20;
 
 const getRandom = (datasetList, requireElements) => {
 	let len = datasetList.length;
@@ -28,14 +29,14 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 	if (!data || data.length == 0) {
 		return response;
 	}
-	let randomItems = getRandom(data, desiredCount);
+	let randomItems = getRandom(data, batchLength);
 	const randomItemsDataSetRowIds = randomItems.map(i => i.dataset_row_id);
 	data = data.filter(d => !randomItemsDataSetRowIds.includes(d.dataset_row_id));
 	const itemLength = randomItems.length;
 	let i = 0;
 	let skipCount = 0;
 	let includedIds = [];
-	while (response.length + skipCount < itemLength) {
+	while (response.length + skipCount < itemLength && response.length < desiredCount) {
 		if (randomItems[i].skipped_by && randomItems[i].skipped_by.includes(`${userId}-${userName}`)) {
 			skipCount++;
 			let obj = getRandom(data, 1)[0];
@@ -89,12 +90,12 @@ const generateValidationResponse = (data, desiredCount, userId, userName) => {
 		return response;
 	}
 	console.log('EMPTYERROR: after if check')
-	let randomItems = data.slice(0, desiredCount);
+	let randomItems = data.slice(0, batchLength);
 	const itemLength = randomItems.length;
 	console.log('EMPTYERROR: random items selected ' + itemLength)
 	let i = 0;
 	let skipCount = 0;
-	while (response.length < itemLength && skipCount < (data.length - response.length)) {
+	while (response.length < itemLength && skipCount < (data.length - response.length) && response.length < desiredCount) {
 		if (isRowSkippedByOrContributedByUser(randomItems[i], userId, userName)) {
 			console.log('EMPTYERROR: inside if')
 			if (itemLength + skipCount < data.length) {
