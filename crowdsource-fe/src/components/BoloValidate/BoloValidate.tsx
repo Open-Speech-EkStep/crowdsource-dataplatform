@@ -270,7 +270,9 @@ const BoloValidate = () => {
         })
       );
     }
-    setDataCurrentIndex(currentDataIndex);
+    setTimeout(() => {
+      setDataCurrentIndex(currentDataIndex);
+    }, 100);
   };
 
   const onCorrect = async () => {
