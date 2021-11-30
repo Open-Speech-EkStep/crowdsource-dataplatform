@@ -374,17 +374,19 @@ const SunoValidate = () => {
                 <div className="d-flex flex-column align-items-center text-center">
                   <span className="display-3">{t(`sunoValidationHeading`)}</span>
                   <div className="mt-2 mt-md-3">
-                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                    <audio
-                      data-testid="audioElement"
-                      ref={audioEl}
-                      controls
-                      className="d-flex shadow-grey rounded-24"
-                      tabIndex={-1}
-                      src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.sentence)}`}
-                      controlsList="nodownload"
-                      crossOrigin="anonymous"
-                    ></audio>
+                    {showUIData?.sentence && (
+                      // eslint-disable-next-line jsx-a11y/media-has-caption
+                      <audio
+                        data-testid="audioElement"
+                        ref={audioEl}
+                        controls
+                        className="d-flex shadow-grey rounded-24"
+                        tabIndex={-1}
+                        src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.sentence)}`}
+                        controlsList="nodownload"
+                        crossOrigin="anonymous"
+                      ></audio>
+                    )}
                   </div>
                 </div>
                 {showEditTextArea ? (

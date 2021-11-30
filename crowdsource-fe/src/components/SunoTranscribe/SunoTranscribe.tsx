@@ -309,17 +309,19 @@ const SunoTranscribe = () => {
                 <div className="d-flex flex-column align-items-center text-center">
                   <span className="display-3">{t(`sunoContributionHeading`)}</span>
                   <div className="mt-2 mt-md-3">
-                    {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                    <audio
-                      data-testid="audioElement"
-                      ref={audioEl}
-                      controls
-                      className="d-flex shadow-grey rounded-24"
-                      tabIndex={-1}
-                      src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.media_data)}`}
-                      controlsList="nodownload"
-                      crossOrigin="anonymous"
-                    ></audio>
+                    {showUIData?.media_data && (
+                      // eslint-disable-next-line jsx-a11y/media-has-caption
+                      <audio
+                        data-testid="audioElement"
+                        ref={audioEl}
+                        controls
+                        className="d-flex shadow-grey rounded-24"
+                        tabIndex={-1}
+                        src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.media_data)}`}
+                        controlsList="nodownload"
+                        crossOrigin="anonymous"
+                      ></audio>
+                    )}
                   </div>
                 </div>
                 <div className="mt-4 mt-md-8">

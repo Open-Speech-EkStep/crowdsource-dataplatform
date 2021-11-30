@@ -321,17 +321,19 @@ const BoloValidate = () => {
                 <div className={`${styles.audioWrapper} d-flex flex-column justify-content-center`}>
                   <div className="d-none d-flex flex-column align-items-center text-center">
                     <div className="mt-2 mt-md-3">
-                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                      <audio
-                        ref={audioEl}
-                        data-testid="boloValidateAudioElement"
-                        controls
-                        className="d-flex shadow-grey rounded-24"
-                        tabIndex={-1}
-                        src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.contribution)}`}
-                        controlsList="nodownload"
-                        crossOrigin="anonymous"
-                      ></audio>
+                      {showUIData?.contribution && (
+                        // eslint-disable-next-line jsx-a11y/media-has-caption
+                        <audio
+                          ref={audioEl}
+                          data-testid="boloValidateAudioElement"
+                          controls
+                          className="d-flex shadow-grey rounded-24"
+                          tabIndex={-1}
+                          src={`${nodeConfig.cdnUrl}/${encodeURIComponent(showUIData?.contribution)}`}
+                          controlsList="nodownload"
+                          crossOrigin="anonymous"
+                        ></audio>
+                      )}
                     </div>
                   </div>
                   <div ref={waveVisualizer} className={`d-flex d-none align-items-center`}>

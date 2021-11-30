@@ -328,7 +328,7 @@ const DekhoValidate = () => {
                   <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ValidationHeading`)}</span>
                 </div>
                 <div className="mt-2 mt-md-4">
-                  <ImageView imageUrl={encodeURIComponent(showUIData?.sentence)} />
+                  {showUIData?.sentence && <ImageView imageUrl={encodeURIComponent(showUIData?.sentence)} />}
                 </div>
                 {showEditTextBlock ? (
                   <div className="d-md-flex mt-4 mt-md-8">

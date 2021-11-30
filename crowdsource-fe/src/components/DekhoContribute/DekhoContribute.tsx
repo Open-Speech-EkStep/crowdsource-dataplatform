@@ -260,7 +260,9 @@ const DekhoContribute = () => {
                   <span className="display-3">{t(`${INITIATIVES_MAPPING.dekho}ContributionHeading`)}</span>
                 </div>
                 <div className="mt-2 mt-md-4">
-                  <ImageView imageUrl={encodeURIComponent(showUIData?.media_data)} />
+                  {showUIData?.media_data && (
+                    <ImageView imageUrl={encodeURIComponent(showUIData?.media_data)} />
+                  )}
                 </div>
                 <div className="mt-4 mt-md-8">
                   <TextEditArea
