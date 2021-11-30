@@ -55,6 +55,16 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
       if (!navBarRef?.current?.contains(event.target as Node)) {
         setIsExpanded(false);
         setShowMicSpeaker(false);
+        clearTimeout(testMicSpeakerInterval);
+        setSpeakerText('testSpeakers');
+        setShowTestMicText(true);
+        setShowPlayingbackAudio(false);
+        context.current = null;
+        mediaElementSrc.current = null;
+        analyser.current = null;
+        media.current = null;
+        mediaAudio.current = null;
+        micAudio.current = null;
       }
     }
 
@@ -63,7 +73,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
-  }, [isExpanded]);
+  }, [isExpanded, testMicSpeakerInterval]);
 
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
