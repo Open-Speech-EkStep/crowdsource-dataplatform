@@ -27,6 +27,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
 
   const [testMicSpeakerInterval, setTestMicSpeakerInterval] = useState<any>();
 
+  const [audioCountIntreval, setAudioCountInterval] = useState<any>();
+
   const [speakerText, setSpeakerText] = useState('testSpeakers');
   const [showPlayingbackAudio, setShowPlayingbackAudio] = useState(false);
   const [noiseMessage, setNoiseMessage] = useState(false);
@@ -65,6 +67,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         media.current = null;
         mediaAudio.current = null;
         micAudio.current = null;
+        clearInterval(audioCountIntreval);
+        setRemainingSec(5);
       }
     }
 
@@ -73,7 +77,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
-  }, [isExpanded, testMicSpeakerInterval]);
+  }, [audioCountIntreval, isExpanded, testMicSpeakerInterval]);
 
   const playSpeaker = () => {
     const speakerAudio: any = document.getElementById('test-speaker');
@@ -297,12 +301,13 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
   /* istanbul ignore next */
   const setRecordingCount = (value: number) => {
     if (value) {
-      const interval = setInterval(() => {
+      let audioCountInterval = setInterval(() => {
+        setAudioCountInterval(audioCountInterval);
         setRemainingSec(value);
         value--;
         if (value < 0) {
           setRemainingSec(5);
-          clearInterval(interval);
+          clearInterval(audioCountInterval);
           mediaAudio.current = media.current?.stop();
           mediaAudio.current?.play();
         }
@@ -357,6 +362,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
               media.current = null;
               mediaAudio.current = null;
               micAudio.current = null;
+              clearInterval(audioCountIntreval);
+              setRemainingSec(5);
             }}
             variant="normal"
             className={`${styles.close} d-flex position-absolute`}
