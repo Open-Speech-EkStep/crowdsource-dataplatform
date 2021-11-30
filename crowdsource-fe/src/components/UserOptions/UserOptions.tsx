@@ -38,7 +38,7 @@ const UserOptions = () => {
           variant="light"
           className={classnames(styles.toggle, 'd-flex h-100 justify-content-center align-items-center px-3')}
         >
-          <ImageBasePath src="/images/usericon.svg" width="24" height="24" alt={t('languageIconAlt')} />
+          <ImageBasePath src="/images/usericon.svg" width="24" height="24" alt="Language Icon" />
           {speakerDetails.userName && (
             <span className="d-none d-xl-block mx-1">{speakerDetails.userName}</span>
           )}

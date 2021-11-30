@@ -24,7 +24,7 @@ exports[`Logo should render the component and matches it against stored snapshot
           />
         </div>
         <img
-          alt="bhashiniLogo"
+          alt="Bhashini Logo"
           data-nimg="intrinsic"
           decoding="async"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -51,7 +51,7 @@ exports[`Logo should render the component and matches it against stored snapshot
           />
         </div>
         <img
-          alt="bhashiniLogo"
+          alt="Bhashini Logo"
           data-nimg="intrinsic"
           decoding="async"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -76,7 +76,7 @@ exports[`Logo should render the component and matches it against stored snapshot
       <span
         class="betaText display-9 position-absolute"
       >
-        beta
+        Beta
       </span>
     </a>
   </div>

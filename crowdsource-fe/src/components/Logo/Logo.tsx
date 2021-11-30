@@ -18,7 +18,7 @@ const Logo = () => {
       <a href={routePaths.root} className="d-flex align-items-center d-md-none">
         <ImageBasePath
           src={`/images/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
-          alt={t('bhashiniLogo')}
+          alt="Bhashini Logo"
           width="48"
           height="48"
         />
@@ -26,7 +26,7 @@ const Logo = () => {
       <a href={routePaths.root} className="d-none align-items-center d-md-flex ms-0 ms-lg-3">
         <ImageBasePath
           src={`/images/${currentLocale}/logos/${currentLocale}-logo.svg`}
-          alt={t('bhashiniLogo')}
+          alt="Bhashini Logo"
           width="192"
           height="70"
         />
@@ -36,7 +36,7 @@ const Logo = () => {
         <a className={`${styles.label} d-flex align-items-center text-primary px-xl-2 position-relative`}>
           {t('bhasha')}
           <span className={styles.labelSecondHalf}>{t('daan')}</span>
-          <span className={`${styles.betaText} display-9 position-absolute`}>{t('beta')}</span>
+          <span className={`${styles.betaText} display-9 position-absolute`}>Beta</span>
         </a>
       </Link>
     </div>

@@ -29,7 +29,7 @@ exports[`UserOptions should render the component when speaker details are presen
           />
         </div>
         <img
-          alt="languageIconAlt"
+          alt="Language Icon"
           data-nimg="intrinsic"
           decoding="async"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -74,7 +74,7 @@ exports[`UserOptions should render the component when speaker details are presen
           />
         </div>
         <img
-          alt="languageIconAlt"
+          alt="Language Icon"
           data-nimg="intrinsic"
           decoding="async"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

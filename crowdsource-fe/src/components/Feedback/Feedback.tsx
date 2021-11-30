@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 
-import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 
 import Button from 'components/Button';
@@ -14,7 +13,6 @@ import styles from './Feedback.module.scss';
 const FeedbackModal = dynamic(() => import('components/FeedbackModal'), { ssr: false });
 
 const Feedback = () => {
-  const { t } = useTranslation();
   const [modalShow, setModalShow] = useState(false);
   const [feedbackSuccess, setFeedbackSuccess] = useState(false);
 
@@ -46,7 +44,7 @@ const Feedback = () => {
         onClick={showModal}
         className={`${styles.root} ms-auto shadow-grey d-inline-flex justify-content-center align-items-center bg-light border border-1 border-primary-40 rounded-circle`}
       >
-        <ImageBasePath src="/images/feedback_icon.svg" width="32" height="32" alt={t('feedbackIconAlt')} />
+        <ImageBasePath src="/images/feedback_icon.svg" width="32" height="32" alt={'Feedback Icon'} />
       </Button>
       {modalShow && (
         <FeedbackModal

@@ -27,7 +27,7 @@ exports[`LanguageSwitcher should render the component and matches it against sto
           />
         </div>
         <img
-          alt="languageIconAlt"
+          alt="Language Icon"
           data-nimg="intrinsic"
           decoding="async"
           src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

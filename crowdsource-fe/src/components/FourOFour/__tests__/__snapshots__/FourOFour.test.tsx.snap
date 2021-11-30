@@ -29,7 +29,7 @@ exports[`FourOFour should render the component and matches it against stored sna
             />
           </div>
           <img
-            alt="bhashiniLogo"
+            alt="Bhashini Logo"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -56,7 +56,7 @@ exports[`FourOFour should render the component and matches it against stored sna
             />
           </div>
           <img
-            alt="bhashiniLogo"
+            alt="Bhashini Logo"
             data-nimg="intrinsic"
             decoding="async"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -81,7 +81,7 @@ exports[`FourOFour should render the component and matches it against stored sna
         <span
           class="betaText display-9 position-absolute"
         >
-          beta
+          Beta
         </span>
       </a>
     </div>

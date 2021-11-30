@@ -31,7 +31,7 @@ exports[`Float should render the component and matches it against stored snapsho
               />
             </div>
             <img
-              alt="feedbackIconAlt"
+              alt="Feedback Icon"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

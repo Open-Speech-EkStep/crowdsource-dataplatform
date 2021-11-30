@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div data-testid="Layout" className="d-flex flex-column flex-fill">
       <Head>
-        <title>{t('metaTitle')}</title>
+        <title>{`${t('metaOGTitle')} (Beta)`}</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU" />
@@ -27,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:title" content={t('metaOGTitle')} />
         <meta property="og:description" content={t('metaOGDescription')} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={t('metaOGSiteName')} />
+        <meta property="og:site_name" content={`${t('bhasha')} ${t('daan')}`} />
         <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
         <link rel="icon" type="image/png" href={`${nodeConfig.contextRoot}/images/favicon.png`} />
       </Head>

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useCookies } from 'react-cookie';
@@ -24,7 +23,6 @@ import styles from './LanguageSwitcher.module.scss';
 
 const LanguageSwitcher = () => {
   const { asPath: currentRoutePath, locale: currentLocale = DEFAULT_LOCALE, locales } = useRouter();
-  const { t } = useTranslation();
   const [cookie, setCookie] = useCookies([localeCookieName]);
 
   let localeValues: any | undefined;
@@ -53,7 +51,7 @@ const LanguageSwitcher = () => {
         variant="light"
         className={`${styles.toggle} d-flex h-100 justify-content-center align-items-center px-3`}
       >
-        <ImageBasePath src="/images/locale_logo.svg" width="24" height="24" alt={t('languageIconAlt')} />
+        <ImageBasePath src="/images/locale_logo.svg" width="24" height="24" alt="Language Icon" />
         <span className="d-none d-xl-block mx-1">{DISPLAY_LANGUAGES[currentLocale]}</span>
       </Dropdown.Toggle>
 

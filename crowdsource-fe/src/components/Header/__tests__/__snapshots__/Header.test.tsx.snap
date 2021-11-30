@@ -95,7 +95,7 @@ exports[`Header should render the component and matches it against stored snapsh
               />
             </div>
             <img
-              alt="bhashiniLogo"
+              alt="Bhashini Logo"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -122,7 +122,7 @@ exports[`Header should render the component and matches it against stored snapsh
               />
             </div>
             <img
-              alt="bhashiniLogo"
+              alt="Bhashini Logo"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -147,7 +147,7 @@ exports[`Header should render the component and matches it against stored snapsh
           <span
             class="betaText display-9 position-absolute"
           >
-            beta
+            Beta
           </span>
         </a>
       </div>
@@ -183,7 +183,7 @@ exports[`Header should render the component and matches it against stored snapsh
               />
             </div>
             <img
-              alt="languageIconAlt"
+              alt="Language Icon"
               data-nimg="intrinsic"
               decoding="async"
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"

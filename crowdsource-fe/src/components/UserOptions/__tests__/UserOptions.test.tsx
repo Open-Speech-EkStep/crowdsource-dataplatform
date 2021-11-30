@@ -69,7 +69,7 @@ describe('UserOptions', () => {
   it('should show ChangeUserModal when change user option is clicked', async () => {
     setupWithSpeakerDetails();
 
-    userEvent.click(screen.getByRole('button', { name: 'languageIconAlt abcd' }));
+    userEvent.click(screen.getByRole('button', { name: 'Language Icon abcd' }));
 
     await waitFor(() => expect(screen.getByRole('button', { name: 'changeUser' })).toBeInTheDocument());
 
@@ -87,7 +87,7 @@ describe('UserOptions', () => {
   it('should navigate to my badges page on "my badges" link click', async () => {
     setupWithSpeakerDetails();
 
-    userEvent.click(screen.getByRole('button', { name: 'languageIconAlt abcd' }));
+    userEvent.click(screen.getByRole('button', { name: 'Language Icon abcd' }));
 
     await waitFor(() => expect(screen.getByRole('button', { name: 'changeUser' })).toBeInTheDocument());
 

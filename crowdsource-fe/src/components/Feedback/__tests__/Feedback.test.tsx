@@ -5,7 +5,7 @@ import Feedback from '../Feedback';
 describe('Feedback', () => {
   const setup = async () => {
     const result = render(<Feedback />);
-    await screen.findByRole('button', { name: 'feedbackIconAlt' });
+    await screen.findByRole('button', { name: 'Feedback Icon' });
     return result;
   };
 
@@ -16,7 +16,7 @@ describe('Feedback', () => {
   it('should open feedback if button clicked', async () => {
     await setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
+    userEvent.click(screen.getByRole('button', { name: 'Feedback Icon' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('Feedback', () => {
 
     await setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
+    userEvent.click(screen.getByRole('button', { name: 'Feedback Icon' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -59,7 +59,7 @@ describe('Feedback', () => {
 
     await setup();
 
-    userEvent.click(screen.getByRole('button', { name: 'feedbackIconAlt' }));
+    userEvent.click(screen.getByRole('button', { name: 'Feedback Icon' }));
 
     await waitFor(() => {
       expect(screen.getByRole('dialog')).toBeInTheDocument();
