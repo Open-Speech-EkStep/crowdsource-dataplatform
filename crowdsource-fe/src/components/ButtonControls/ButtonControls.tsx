@@ -162,7 +162,9 @@ const ButtonControls = ({
             className="position-relative d-flex flex-column align-items-center fw-bold mx-md-6 order-1 order-md-2 my-2 my-md-0"
           >
             <ImageBasePath src="/images/replay.svg" width="60" height="60" alt="Replay Icon" />
-            <span className={`${styles.mainControl} display-3 position-absolute d-none d-md-block`}>
+            <span
+              className={`${styles.mainControl} ${styles.replayBtnText} display-3 position-absolute d-none d-md-block`}
+            >
               {t('replay')}
             </span>
           </Button>
