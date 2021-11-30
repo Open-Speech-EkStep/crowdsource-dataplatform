@@ -143,6 +143,7 @@ const TextEditArea = ({
         data-testid="TextEditArea"
         className={classNames('position-relative p-4', styles.addText, {
           [styles.addTextDisabled]: isTextareaDisabled,
+          [styles.addTextError]: showError,
           [styles.roundedLeft]: roundedLeft,
           [styles.roundedRight]: roundedRight,
           ['rounded-8']: !roundedLeft && !roundedRight,
