@@ -33,7 +33,7 @@ exports[`InitiativeAction should render the component and matches it against sto
       </div>
     </div>
     <div
-      class="mt-4"
+      class="mt-4 text-break"
     >
       asrContributionSubtext
     </div>

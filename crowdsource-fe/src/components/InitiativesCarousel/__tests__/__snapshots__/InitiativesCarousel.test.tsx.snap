@@ -232,7 +232,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     ocrContributionSubtext
                                   </div>
@@ -272,7 +272,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     ocrValidationSubtext
                                   </div>
@@ -395,7 +395,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     asrContributionSubtext
                                   </div>
@@ -435,7 +435,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     asrValidationSubtext
                                   </div>
@@ -558,7 +558,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     textContributionSubtext
                                   </div>
@@ -598,7 +598,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     textValidationSubtext
                                   </div>
@@ -721,7 +721,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     parallelContributionSubtext
                                   </div>
@@ -761,7 +761,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     parallelValidationSubtext
                                   </div>
@@ -884,7 +884,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     ocrContributionSubtext
                                   </div>
@@ -924,7 +924,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     ocrValidationSubtext
                                   </div>
@@ -1047,7 +1047,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     asrContributionSubtext
                                   </div>
@@ -1087,7 +1087,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     asrValidationSubtext
                                   </div>
@@ -1210,7 +1210,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     textContributionSubtext
                                   </div>
@@ -1250,7 +1250,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     textValidationSubtext
                                   </div>
@@ -1373,7 +1373,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     parallelContributionSubtext
                                   </div>
@@ -1413,7 +1413,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     parallelValidationSubtext
                                   </div>
@@ -1536,7 +1536,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     ocrContributionSubtext
                                   </div>
@@ -1576,7 +1576,7 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                     </div>
                                   </div>
                                   <div
-                                    class="mt-4"
+                                    class="mt-4 text-break"
                                   >
                                     ocrValidationSubtext
                                   </div>

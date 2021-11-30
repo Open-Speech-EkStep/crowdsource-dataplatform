@@ -34,7 +34,7 @@ const InitiativeAction = ({
           priority
         />
       </div>
-      <div className="mt-4">{t(subText)}</div>
+      <div className="mt-4 text-break">{t(subText)}</div>
     </div>
   );
 };
