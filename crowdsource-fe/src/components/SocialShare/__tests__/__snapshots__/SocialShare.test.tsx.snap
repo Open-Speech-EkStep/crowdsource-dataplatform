@@ -16,7 +16,7 @@ exports[`SocialShare should render the component and matches it against stored s
     >
       <a
         class="socialShareLink mx-2 d-inline-block ms-0"
-        href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home.html"
+        href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -45,7 +45,7 @@ exports[`SocialShare should render the component and matches it against stored s
       </a>
       <a
         class="socialShareLink mx-2 d-inline-block"
-        href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home.html"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home"
         rel="noopener noreferrer"
         target="_blank"
       >
