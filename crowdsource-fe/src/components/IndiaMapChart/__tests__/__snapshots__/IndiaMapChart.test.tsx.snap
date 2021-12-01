@@ -3,10 +3,10 @@
 exports[`IndiaMapChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="bg-light rounded-8 p-5 p-md-8 h-100"
+    class="bg-light rounded-8 py-5 py-md-8 h-100"
   >
     <p
-      class="mb-5 display-2"
+      class="mb-5 display-2 px-5 px-md-8"
     >
       mapChartTitle
     </p>
@@ -16,7 +16,7 @@ exports[`IndiaMapChart should render the component and matches it against stored
       MapChart
     </div>
     <div
-      class="d-flex mt-8"
+      class="d-flex mt-8 px-5 px-md-8"
     >
       <div
         class="flex-fill"

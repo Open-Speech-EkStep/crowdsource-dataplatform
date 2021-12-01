@@ -123,7 +123,7 @@ const MapChart = ({
 
   return (
     <>
-      <div id="indiaMapChart" className="h-100" />
+      <div id="indiaMapChart" className="h-100 px-md-8" />
       <div
         className={`${styles.statePopover} ${styles[stateBg]} ${
           isUnspecifiedPopUp ? styles.show : styles.hide
@@ -145,7 +145,7 @@ const MapChart = ({
         </div>
         <span className={styles.bottomTip}></span>
       </div>
-      <div className="text-left mb-1">
+      <div className="text-left mb-1 px-5 px-md-8">
         <span
           id="unspecifiedLocation"
           className={styles.unspecifiedLocation}

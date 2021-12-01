@@ -3,7 +3,7 @@
 exports[`MapChart should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="h-100"
+    class="h-100 px-md-8"
     id="indiaMapChart"
   >
     <div
@@ -408,7 +408,7 @@ exports[`MapChart should render the component and matches it against stored snap
     />
   </div>
   <div
-    class="text-left mb-1"
+    class="text-left mb-1 px-5 px-md-8"
   >
     <span
       class="unspecifiedLocation"

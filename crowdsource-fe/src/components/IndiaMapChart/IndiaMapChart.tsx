@@ -226,8 +226,8 @@ const IndiaMapChart = React.memo(({ type, language }: { type: InitiativeType; la
   });
 
   return (
-    <div className="bg-light rounded-8 p-5 p-md-8 h-100">
-      <p className="mb-5 display-2">{t('mapChartTitle')}</p>
+    <div className="bg-light rounded-8 py-5 py-md-8 h-100">
+      <p className="mb-5 display-2 px-5 px-md-8">{t('mapChartTitle')}</p>
       <div className={`${styles.chart} position-relative`}>
         {!data || isValidating ? (
           <div className="d-flex justify-content-center align-items-center h-100 w-100">
