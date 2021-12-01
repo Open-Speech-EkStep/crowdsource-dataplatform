@@ -364,10 +364,10 @@
   "badgeDetailText": "{{language}} ਵਿੱਚ <span>{{count}}</span> <span>{{sourceType}}</span> {{action}} ਅਤੇ {{initiativeName}} {{badge}} ਭਾਸ਼ਾ ਸਮਰਥਕ ਬੈਜ ਪ੍ਰਾਪਤ ਕਰੋ",
   "thousandCharLimitText": "ਸਿਰਫ 1000 ਅੱਖਰਾਂ ਦੀ ਇਜਾਜ਼ਤ",
   "expandViewText": "ਵੱਡਾ ਕਰਕੇ ਦੇਖਣ ਲਈ ਕਲਿਕ ਕਰੋ",
-  "visitHome": "Visit our <homepageLink />",
-  "homepage": "homepage",
-  "pageNotFoundHeading": "404 Error",
-  "pageNotFoundText": "Seems this page doesn't exist",
+  "visitHome": "ਸਾਡੇ <homepageLink /> ਜਾਓ",
+  "homepage": "ਹੋਮਪੇਜ 'ਤੇ",
+  "pageNotFoundHeading": "404 ਐਰਰ",
+  "pageNotFoundText": "ਲੱਗਦਾ ਹੈ ਕਿ ਇਹ ਪੇਜ ਮੌਜੂਦ ਨਹੀਂ ਹੈ",
   "testYourMicrophoneAndSpeakers": "ਆਪਣੇ ਮਾਈਕ੍ਰੋਫੋਨ ਅਤੇ ਸਪੀਕਰ ਦੀ ਜਾਂਚ ਕਰੋ",
   "startRecording": "ਰਿਕਾਰਡ ਕਰਨਾ ਸ਼ੁਰੂ ਕਰੋ",
   "stopRecording": "ਰਿਕਾਰਡ ਕਰਨਾ ਬੰਦ ਕਰੋ",
@@ -383,7 +383,7 @@
   "apiFailureError": "ਇੱਕ ਅਣ-ਕਿਆਸੀ ਗਲਤੀ ਹੋਈ ਹੈ।",
   "multipleRequestApiError": "ਅਸੀਂ ਇਸ ਸਮੇਂ ਕਈ ਰਿਕੁਐਸਟਾਂ ਨੂੰ ਪ੍ਰੋਸੈੱਸ ਕਰ ਰਹੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਕੁਝ ਦੇਰ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
   "close": "ਬੰਦ ਕਰੋੋ",
-  "validationWarningText": "",
+  "validationWarningText": "ਸਾਨੂੰ ਲਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਦੁਆਰਾ ਐਂਟਰ ਕੀਤੀ ਗਈ ਟੈਕਸਟ ਮੂਲ ਟੈਕਸਟ ਨਾਲ ਮੇਲ ਨਹੀਂ ਖਾ ਰਹੀ, ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਸੰਪਾਦਨ ਬਾਰੇ ਯਕੀਨੀ ਹੋ?",
   "testMic": "ਮਾਈਕ ਦੀ ਜਾਂਚ ਕਰੋ",
   "playingBackAudio": "ਆਡੀਓ ਫਿਰ ਤੋਂ ਪਲੇਅ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ",
   "speakClearly": "ਕਿਰਪਾ ਕਰਕੇ ਸਪੱਸ਼ਟ ਬੋਲੋ",
@@ -400,5 +400,5 @@
   "prohibitedContent": "ਪਾਬੰਦੀਸ਼ੁਦਾ ਕੰਟੈਂਟ",
   "politicalStatement": "ਰਾਜਨੀਤਕ ਬਿਆਨ",
   "misinformation": "ਗਲਤ ਜਾਣਕਾਰੀ",
-  "unspecifiedLocation": "Unspecified location"
+  "unspecifiedLocation": "ਅਣ-ਨਿਰਧਾਰਤ ਸਥਾਨ"
 }

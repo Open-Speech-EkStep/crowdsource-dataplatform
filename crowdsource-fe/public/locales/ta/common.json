@@ -364,10 +364,10 @@
   "badgeDetailText": "{{language}} இல் {{action}} <span>{{count}}</span> <span>{{sourceType}}</span> மற்றும் {{initiativeName}} {{badge}} பாஷா சமர்த்தக் பேட்ஜைப் பெறுங்கள்",
   "thousandCharLimitText": "1000 எழுத்துக்கள் மட்டுமே அனுமதிக்கப்படுகின்றன",
   "expandViewText": "விரிவாக்கப்பட்ட தோற்றத்தை திறக்க அழுத்தவும்",
-  "visitHome": "Visit our <homepageLink />",
-  "homepage": "homepage",
-  "pageNotFoundHeading": "404 Error",
-  "pageNotFoundText": "Seems this page doesn't exist",
+  "visitHome": "எங்கள் <homepageLink /> பார்வையிடவும்",
+  "homepage": "முகப்புப் பக்கத்தைப்",
+  "pageNotFoundHeading": "404 பிழை",
+  "pageNotFoundText": "இந்தப் பக்கம் இல்லை என்று தெரிகிறது",
   "testYourMicrophoneAndSpeakers": "உங்கள் ஒலிவாங்கி மற்றும் ஒலிபெருக்கிகளை சோதிக்கவும்",
   "startRecording": "பதிவு செய்",
   "stopRecording": "பதிவு செய்வதை நிறுத்து",
@@ -383,7 +383,7 @@
   "apiFailureError": "எதிர்பாராத பிழை ஏற்பட்டது.",
   "multipleRequestApiError": "இந்த தருணத்தில் பல கோரிக்கைகளை நாங்கள் செயலாக்குகிறோம். சிறிது நேரம் கழித்து மீண்டும் முயற்சிக்கவும்.",
   "close": "மூடு",
-  "validationWarningText": "",
+  "validationWarningText": "நீங்கள் உள்ளிட்ட உரை அசல் உரையுடன் பொருந்தவில்லை என்பதை நாங்கள் உணர்கிறோம், உங்கள் திருத்தம் குறித்து உறுதியாக உள்ளீர்களா",
   "testMic": "மைக்கை சோதிக்கவும்",
   "playingBackAudio": "ஆடியோவை மீண்டும் இயக்குகிறது",
   "speakClearly": "தயவுசெய்து தெளிவாக பேசவும்",
@@ -400,5 +400,5 @@
   "prohibitedContent": "தடைசெய்யப்பட்ட உள்ளடக்கம்",
   "politicalStatement": "அரசியல் அறிக்கை",
   "misinformation": "தவறான தகவல்",
-  "unspecifiedLocation": "Unspecified location"
+  "unspecifiedLocation": "குறிப்பிடப்படாத இடம்"
 }
