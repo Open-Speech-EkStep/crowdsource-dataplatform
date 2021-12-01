@@ -332,7 +332,7 @@ const BoloValidate = () => {
                   {showUIData?.sentence}
                 </div>
                 <div className={`${styles.audioWrapper} d-flex flex-column justify-content-center`}>
-                  <div className="d-flex flex-column align-items-center text-center">
+                  <div className="d-none d-flex flex-column align-items-center text-center">
                     <div className="mt-2 mt-md-3">
                       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                       <audio
