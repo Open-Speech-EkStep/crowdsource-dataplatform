@@ -18,7 +18,7 @@ module.exports = {
     assert: {
       assertions: {
         // TODO: Reduced minScore since images need to be optimised. Increase after further optimisations"
-        'categories:performance': ['error', { minScore: 0.9 }],
+        'categories:performance': ['error', { minScore: 0.85 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
         // TODO: Reduced minScore to suppress "Audit usage of navigator.userAgent, navigator.appVersion, and navigator.platform"
         // issue in console"
