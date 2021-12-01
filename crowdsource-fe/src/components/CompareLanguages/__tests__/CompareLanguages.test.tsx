@@ -81,7 +81,7 @@ describe('CompareLanguages', () => {
       <CompareLanguages
         initiative={initiative}
         dataBindigValue="total_contributions"
-        graphLabel="asrBarGraphTitle"
+        graphLabel="asrContributionGraphYLabel3"
         isTopLanguage={() => {}}
         graphHeading="Participate to keep Bengali in top 3"
         showHeader={true}

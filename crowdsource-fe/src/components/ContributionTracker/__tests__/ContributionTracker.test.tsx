@@ -93,9 +93,7 @@ describe('ContributionTracker', () => {
       ])
     );
 
-    const renderResult = render(
-      <ContributionTracker initiative={initiative} graphTitle="asrBarGraphTitle" />
-    );
+    const renderResult = render(<ContributionTracker initiative={initiative} />);
     await waitFor(() => {
       expect(localStorage.getItem).toBeCalled();
     });
