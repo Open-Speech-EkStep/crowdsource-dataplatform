@@ -208,8 +208,16 @@ const IndiaMapChart = React.memo(({ type, language }: { type: InitiativeType; la
     } else return `${value} ${t(config.legend)}`;
   };
 
-  const isGreaterThanLegendDefaultRange = maxContribution > config.legendDefaultRange;
-  const quarterVal = isGreaterThanLegendDefaultRange ? maxContribution / 4 : config.legendDefaultRange / 4;
+  const getQuarterValue = () => {
+    const isGreaterThanLegendDefaultRange = maxContribution > config.legendDefaultRange;
+    const maximumValue = isGreaterThanLegendDefaultRange ? maxContribution : config.legendDefaultRange;
+    const quarterVal = maximumValue / 4;
+    if (config.format) {
+      return quarterVal;
+    } else return Math.round(quarterVal);
+  };
+
+  const quarterVal = getQuarterValue();
 
   let legendData = [];
   legendData.push({
