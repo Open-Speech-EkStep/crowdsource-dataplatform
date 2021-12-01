@@ -1,15 +1,14 @@
 import { render, verifyAxeTest } from 'utils/testUtils';
 
-import SocialShareIcons from '../SocialShareIcons';
+import ShareOn from '../ShareOn';
 
-describe('SocialShareIcons', () => {
-  const setup = () => render(<SocialShareIcons socialShareText={'share text'} />);
+describe('BadgeEarned', () => {
+  const setup = () => render(<ShareOn initiativeName="Suno India" language="Hindi" rank={2} />);
 
   verifyAxeTest(setup());
 
   it('should render the component and matches it against stored snapshot', () => {
     const { asFragment } = setup();
-
     expect(asFragment()).toMatchSnapshot();
   });
 });

@@ -26,10 +26,11 @@ import {
 import routePaths from 'constants/routePaths';
 import { useFetchWithInit } from 'hooks/useFetch';
 import useLocalStorage from 'hooks/useLocalStorage';
+import type { CumulativeDataByLanguage } from 'types/CumulativeDataByLanguage';
 import type { Initiative } from 'types/Initiatives';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import type { ThankYouReward } from 'types/ThankYou';
-import { capitalizeFirstLetter } from 'utils/utils';
+import { capitalizeFirstLetter, getLanguageRank } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
 
@@ -96,15 +97,35 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
     }
   );
 
+  const { data: cumulativeDataByLanguage, mutate: hrsMutate } = useFetchWithInit<
+    Array<CumulativeDataByLanguage>
+  >(apiPaths.cumulativeDataByLanguage, { revalidateOnMount: false });
+
   const translatedContributionLanguage = `${t(`${contributionLanguage?.toLowerCase()}`)}${
     initiative === INITIATIVES_MAPPING.likho ? `-${t(`${translatedLanguage?.toLowerCase()}`)}` : ''
   }`;
+
+  const contributedLanguage =
+    initiative === INITIATIVES_MAPPING.likho
+      ? `${contributionLanguage}-${translatedLanguage}`
+      : contributionLanguage;
 
   useEffect(() => {
     if (contributionLanguage && speakerDetails) {
       rewardMutate();
     }
   }, [contributionLanguage, rewardMutate, speakerDetails]);
+
+  useEffect(() => {
+    hrsMutate();
+  }, [hrsMutate]);
+
+  const rank = getLanguageRank(
+    cumulativeDataByLanguage || [],
+    INITIATIVES_MEDIA_MAPPING[initiative],
+    CONTRIBUTION_MAPPING[route.asPath],
+    contributedLanguage || 'English'
+  );
 
   return (
     <Fragment>
@@ -146,6 +167,7 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
               language={translatedContributionLanguage}
               source={pageSourceConstants[route.asPath]}
               winningBadge={rewardData?.badges[rewardData?.badges.length - 1]}
+              rank={rank}
             />
             <div className="mt-8 mt-md-9">
               <TwoColumn
@@ -212,7 +234,13 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   }
                 />
               }
-              bottom={<ShareOn />}
+              bottom={
+                <ShareOn
+                  rank={rank}
+                  language={t(translatedContributionLanguage)}
+                  initiativeName={`${t(initiative)} ${t('india')}`}
+                />
+              }
             />
           </section>
         )}
@@ -247,7 +275,13 @@ const ThankYou = ({ initiative }: ThankYouProps) => {
                   }
                 />
               }
-              bottom={<ShareOn />}
+              bottom={
+                <ShareOn
+                  rank={rank}
+                  language={t(translatedContributionLanguage)}
+                  initiativeName={`${t(initiative)} ${t('india')}`}
+                />
+              }
             />
           </section>
         )}

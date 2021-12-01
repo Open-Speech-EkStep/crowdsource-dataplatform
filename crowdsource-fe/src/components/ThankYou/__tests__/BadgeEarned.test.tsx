@@ -12,6 +12,7 @@ describe('BadgeEarned', () => {
         language="Hindi"
         source="contribute"
         winningBadge={[]}
+        rank={2}
       />
     );
 

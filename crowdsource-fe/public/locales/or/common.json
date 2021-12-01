@@ -86,6 +86,7 @@
   "privacyPolicy": "ଗୋପନୀୟତା ନୀତି",
   "footerSocialShareText": "ନିଜର ବନ୍ଧୁଗଣ ଓ ପରିବାରବର୍ଗଙ୍କ ସହିତ ସେୟାର କରନ୍ତୁ",
   "socialSharingTextWithoutRank": "ମୁଁ https://bhashini.gov.in/bhashadaan ରେ ଭାରତ ପାଇଁ ଏକ ଓପନ ଲାଙ୍ଗୁଏଜ ରିପୋଜିଟରୀ ତିଆରି କରିବା ଦିଗରେ ଯୋଗଦାନ କରିଛି। ଆସନ୍ତୁ, ଭାଷା ଦାନରେ ଯୋଗଦାନ କରି ଏକ ନୂତନ ପରିବର୍ତ୍ତନରେ ସାମିଲ ହେବା ଓ ଆମ ଭାଷାଗୁଡ଼ିକୁ ସମୃଦ୍ଧ କରିବା।",
+  "socialSharingTextWithRank": "ମୁଁ https://bhashini.gov.in/bhashadaan ରେ ଭାରତ ପାଇଁ ଏକ ଓପନ ଲାଙ୍ଗୁଏଜ ରିପୋଜିଟରୀ ତିଆରି କରିବା ଦିଗରେ ଯୋଗଦାନ କରିଛି। {{language}} {{initiativeName}}ରେ {{rank}} ସ୍ଥାନରେ ଅଛି। ଆସନ୍ତୁ, ଭାଷା ଦାନରେ ଯୋଗଦାନ କରି ଏକ ନୂତନ ପରିବର୍ତ୍ତନରେ ସାମିଲ ହେବା ଓ ଆମ ଭାଷାଗୁଡ଼ିକୁ ସମୃଦ୍ଧ କରିବା।",
   "submitSuccess": "ସଫଳତାର ସହିତ ଦାଖଲ",
   "feedbackThankYou": "ଆପଣଙ୍କ ଫିଡବ୍ୟାକ ପାଇଁ ଧନ୍ୟବାଦ!",
   "textContributionStatsHeader": "କୁହ ଇଣ୍ଡିଆକୁ ଯୋଗଦାନ",

@@ -11,7 +11,7 @@ const SocialShare = () => {
     <div data-testid="SocialShare" className="d-flex flex-column flex-lg-row align-items-center">
       <span className={`fw-bold ${styles.socialShareText}`}>{t('footerSocialShareText')}</span>
       <div className="d-flex py-3 ms-lg-6 py-lg-0">
-        <SocialShareIcons />
+        <SocialShareIcons socialShareText={t('socialSharingTextWithoutRank')} />
       </div>
     </div>
   );

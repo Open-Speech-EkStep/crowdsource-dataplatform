@@ -10,6 +10,7 @@ import {
   SPECIAL_CHARACTERS,
 } from 'constants/Keyboard';
 import nodeConfig from 'constants/nodeConfig';
+import type { CumulativeDataByLanguage } from 'types/CumulativeDataByLanguage';
 import type { InitiativeType } from 'types/InitiativeType';
 
 import apiPaths from '../constants/apiPaths';
@@ -248,4 +249,24 @@ export const isMobileDevice = () => {
     // false for not mobile device
     return false;
   }
+};
+
+export const getLanguageRank = (
+  cumulativeDataByLanguage: Array<CumulativeDataByLanguage>,
+  initiative: string,
+  contributionType: string,
+  contributionLanguage: string
+) => {
+  const langaugeDataByInitiative =
+    cumulativeDataByLanguage?.filter(dataByLanguage => dataByLanguage.type === initiative) || [];
+
+  const sortingLanguages = langaugeDataByInitiative.sort((a: any, b: any) =>
+    Number(a[contributionType]) > Number(b[contributionType]) ? -1 : 1
+  );
+
+  const rank = sortingLanguages.findIndex(x => {
+    return x.language.toLowerCase() == contributionLanguage.toLowerCase();
+  });
+
+  return rank + 1;
 };

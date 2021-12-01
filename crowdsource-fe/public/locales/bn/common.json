@@ -86,6 +86,7 @@
   "privacyPolicy": "গোপনীয়তা নীতি",
   "footerSocialShareText": "আপনার পরিবার এবং বন্ধুদেরকে এটিতে অংশী হতে নিমন্ত্রণ করুন",
   "socialSharingTextWithoutRank": "ভারতের ওপেন ল্যাঙ্গুয়েজ রিপোজিটরি তৈরিতে আমি https://bhashini.gov.in/bhasadaan - তে  অবদান রেখেছি। আসুন ভাষাদান এ যোগদান করে একটি ভিন্নতা তৈরি করি এবং আমাদের ভাষাকে শক্তিশালী করি।",
+  "socialSharingTextWithRank": "ভারতের জন্য ওপেন ল্যাঙ্গুয়েজ রিপোজিটরি তৈরিতে আমি https://bhashini.gov.in/bhasadaan - এ   {{initiativeName}}  এ {{language}} {{rank}}  স্থানে। আসুন ভাষাদান এ যোগদান করে একটি পার্থক্য তৈরি করি এবং আমাদের ভাষাকে শক্তিশালী করি।",
   "submitSuccess": "সফলভাবে সাবমিট হয়েছে",
   "feedbackThankYou": "আপনার মতামতের জন্য ধন্যবাদ!",
   "textContributionStatsHeader": "বলো ইন্ডিয়াতে যোগদান",

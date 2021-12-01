@@ -86,6 +86,7 @@
   "privacyPolicy": "ગોપનીયતા નીતિ",
   "footerSocialShareText": "આપના મિત્રો અને પરિવારજનો સાથે શૅર કરો",
   "socialSharingTextWithoutRank": "મેં https://bhashini.gov.in/bhasadaan પર ભારત માટે ઓપન લેંગ્વેજ રિપોઝીટરી બનાવવા માટે યોગદાન આપ્યું છે. ચાલો ભાષા દાનમાં યોગદાન આપીને આપણી ભાષાઓને સશક્ત બનાવીએ.",
+  "socialSharingTextWithRank": "મેં ભારત માટે https://bhashini.gov.in/bhasadaan પર ઓપન લેંગ્વેજ રિપોઝીટરી બનાવવા માટે ફાળો આપ્યો છે, {{initiativeName}} માટે  {{language}}  {{rank}} પર ક્રમાંકિત છે. ચાલો ભાષા દાનમાં યોગદાન આપીને આપણી ભાષાઓને સશક્ત બનાવીએ.",
   "submitSuccess": "સફળતાપૂર્વક સબમિટ થઈ ગયું",
   "feedbackThankYou": "આપના પ્રતિભાવ બદલ આભાર!",
   "textContributionStatsHeader": "બોલો ઇન્ડિયામાં આપવામાં આવેલ યોગદાન",

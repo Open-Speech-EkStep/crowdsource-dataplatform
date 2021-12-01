@@ -154,7 +154,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               </a>
               <a
                 class="socialShareLink mx-2 d-inline-block"
-                href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home"
+                href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home&title=metaOGTitle&summary=socialSharingTextWithRank"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -183,7 +183,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               </a>
               <a
                 class="socialShareLink mx-2 d-inline-block"
-                href="https://twitter.com/intent/tweet?text=socialSharingTextWithoutRank"
+                href="https://twitter.com/intent/tweet?text=socialSharingTextWithRank"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -212,7 +212,7 @@ exports[`BadgeEarned should render the component and matches it against stored s
               </a>
               <a
                 class="socialShareLink mx-2 d-inline-block me-0"
-                href="https://api.whatsapp.com/send?text=socialSharingTextWithoutRank"
+                href="https://api.whatsapp.com/send?text=socialSharingTextWithRank"
                 rel="noopener noreferrer"
                 target="_blank"
               >

@@ -86,6 +86,7 @@
   "privacyPolicy": "निजता नीति",
   "footerSocialShareText": "अपने दोस्तों और परिवार के सदस्यों के साथ शेयर करें",
   "socialSharingTextWithoutRank": "मैंने https://bhashini.gov.in/bhasadaan पर भारत के लिए ओपन लैंग्वेज रिपोजिटरी बनाने में योगदान दिया है। आइए भाषा दान में योगदान देकर बदलाव लाएं और अपनी अपनी भाषाओं को सशक्त बनाएं।",
+  "socialSharingTextWithRank": "मैंने https://bhashini.gov.in/bhasadaan पर भारत के लिए ओपन लैंग्वेज रिपोजिटरी बनाने में योगदान दिया है, {{initiativeName}} में {{language}}  {{rank}}  रैंक पर । आइए भाषा दान में योगदान देकर बदलाव लाएं और अपनी अपनी भाषाओं को सशक्त बनाएं।",
   "submitSuccess": "सफलतापूर्वक सबमिट किया",
   "feedbackThankYou": "फीडबैक देने के लिए धन्यवाद!",
   "textContributionStatsHeader": "बोलो इंडिया में किए गए योगदान",

@@ -21,6 +21,8 @@ interface DownloadBadgeProps {
   badgeType: string;
   source: string;
   winningBadge?: any;
+  language?: string;
+  rank?: Number;
 }
 
 const BadgeImage = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
@@ -39,7 +41,14 @@ const BadgeImage = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
   );
 };
 
-const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: DownloadBadgeProps) => {
+const DownloadAndShare = ({
+  initiative,
+  badgeType,
+  source,
+  winningBadge,
+  language,
+  rank = 0,
+}: DownloadBadgeProps) => {
   const { t } = useTranslation();
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
@@ -61,7 +70,11 @@ const DownloadAndShare = ({ initiative, badgeType, source, winningBadge }: Downl
       </Button>
 
       <div className="mt-4 mt-md-0 ms-md-4">
-        <ShareOn />
+        <ShareOn
+          rank={rank}
+          language={`${language ? t(language) : contributionLanguage}`}
+          initiativeName={`${t(initiative)} ${t('india')}`}
+        />
       </div>
     </div>
   );
@@ -74,6 +87,7 @@ interface BadgeEarnedProps {
   language: string;
   source: string;
   winningBadge: any;
+  rank: Number;
 }
 
 const BadgeEarned = ({
@@ -83,6 +97,7 @@ const BadgeEarned = ({
   language,
   source,
   winningBadge,
+  rank,
 }: BadgeEarnedProps) => {
   const { t } = useTranslation();
 
@@ -136,6 +151,8 @@ const BadgeEarned = ({
           badgeType={badgeType}
           source={source}
           winningBadge={winningBadge}
+          language={language}
+          rank={rank}
         />
       }
     />

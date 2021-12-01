@@ -86,6 +86,7 @@
   "privacyPolicy": "গোপনীয়তা নীতি",
   "footerSocialShareText": "আপোনাৰ বন্ধুবৰ্গ আৰু পৰিয়ালৰ লগত ভগাই লওঁক",
   "socialSharingTextWithoutRank": "মই ভাৰতৰ বাবে মুক্ত ভাষা ভঁৰাল সাজিবলৈ https://bhashini.gov.in/bhashadaan ত অৰিহণা আগবঢ়াইছো৷ ভাষা দানত অৰিহণা আগবঢ়াই এটা পাৰ্থক্যৰ সৃষ্টি আৰু আমাৰ ভাষাসমূহক শক্তিশালী কৰি তোলো আহক৷",
+  "socialSharingTextWithRank": "মই ভাৰতৰ বাবে মুক্ত ভাষা ভঁৰাল সাজিবলৈ https://bhashini.gov.in/bhashadaan ত অৰিহণা আগবঢ়াইছো৷ {{initiativeName}}ত  {{language}} য়ে{{rank}} স্থান লাভ কৰিছে৷ ভাষা দানত অৰিহণা আগবঢ়াই এটা পাৰ্থক্যৰ সৃষ্টি আৰু আমাৰ ভাষা সমূহক শক্তিশালী কৰি তোলো আহক৷",
   "submitSuccess": "সফলতাৰে দাখিল কৰা হৈছে",
   "feedbackThankYou": "আপোনাৰ মতামতৰ বাবে আপোনাক ধন্যবাদ!",
   "textContributionStatsHeader": "কোৱা ইণ্ডিয়ালৈ আগবঢ়োৱা অৱদানসমূহ",

@@ -12,8 +12,19 @@ import {
   isBoloInitiative,
   getErrorMsg,
   isMobileDevice,
+  getLanguageRank,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
+
+interface CumulativeDataByLanguage {
+  total_contribution_count: number;
+  total_contributions: number;
+  total_validation_count: number;
+  total_validations: number;
+  type: 'asr' | 'ocr' | 'parallel' | 'text';
+  total_speakers: number;
+  language: string;
+}
 
 describe('Utils', () => {
   it('should test the convert into hrs format method', () => {
@@ -190,5 +201,120 @@ describe('Utils', () => {
 
   it('should give false for desktop view', () => {
     expect(isMobileDevice()).toEqual(false);
+  });
+
+  it('should give 1st rank when langauge is on top', () => {
+    const cumulativeDataByLanguage: Array<CumulativeDataByLanguage> = [
+      {
+        total_contribution_count: 5,
+        total_contributions: 5.8,
+        total_validation_count: 9.4,
+        total_validations: 9.6,
+        type: 'asr',
+        total_speakers: 8,
+        language: 'English',
+      },
+      {
+        total_contribution_count: 7,
+        total_contributions: 7.8,
+        total_validation_count: 8,
+        total_validations: 8.9,
+        type: 'asr',
+        total_speakers: 9,
+        language: 'Hindi',
+      },
+      {
+        total_contribution_count: 7,
+        total_contributions: 7.8,
+        total_validation_count: 8,
+        total_validations: 8.9,
+        type: 'ocr',
+        total_speakers: 10,
+        language: 'English',
+      },
+    ];
+
+    const rank = getLanguageRank(cumulativeDataByLanguage, 'asr', 'total_validation_count', 'English');
+    expect(rank).toEqual(1);
+  });
+
+  it('should give 0 rank when data is not present is on top', () => {
+    const rank = getLanguageRank([], 'asr', 'total_validation_count', 'English');
+    expect(rank).toEqual(0);
+  });
+
+  it('should give 0 rank when initiativeType is not present in data', () => {
+    const cumulativeDataByLanguage: Array<CumulativeDataByLanguage> = [
+      {
+        total_contribution_count: 5,
+        total_contributions: 5.8,
+        total_validation_count: 9.4,
+        total_validations: 9.6,
+        type: 'asr',
+        total_speakers: 8,
+        language: 'English',
+      },
+      {
+        total_contribution_count: 7,
+        total_contributions: 7.8,
+        total_validation_count: 8,
+        total_validations: 8.9,
+        type: 'asr',
+        total_speakers: 9,
+        language: 'Hindi',
+      },
+    ];
+    const rank = getLanguageRank(cumulativeDataByLanguage, 'ocr', 'total_validation_count', 'English');
+    expect(rank).toEqual(0);
+  });
+
+  it('should give 0 rank when language is not present in list', () => {
+    const cumulativeDataByLanguage: Array<CumulativeDataByLanguage> = [
+      {
+        total_contribution_count: 5,
+        total_contributions: 5.8,
+        total_validation_count: 9.4,
+        total_validations: 9.6,
+        type: 'asr',
+        total_speakers: 8,
+        language: 'English',
+      },
+      {
+        total_contribution_count: 7,
+        total_contributions: 7.8,
+        total_validation_count: 8,
+        total_validations: 8.9,
+        type: 'asr',
+        total_speakers: 9,
+        language: 'Hindi',
+      },
+    ];
+    const rank = getLanguageRank(cumulativeDataByLanguage, 'asr', 'total_validation_count', 'Odia');
+    expect(rank).toEqual(0);
+  });
+
+  it('should give last rank when language is in bottom', () => {
+    const cumulativeDataByLanguage: Array<CumulativeDataByLanguage> = [
+      {
+        total_contribution_count: 5,
+        total_contributions: 5.8,
+        total_validation_count: 9.4,
+        total_validations: 9.6,
+        type: 'asr',
+        total_speakers: 8,
+        language: 'English',
+      },
+      {
+        total_contribution_count: 7,
+        total_contributions: 7.8,
+        total_validation_count: 8,
+        total_validations: 8.9,
+        type: 'asr',
+        total_speakers: 9,
+        language: 'Hindi',
+      },
+    ];
+    const rank = getLanguageRank(cumulativeDataByLanguage, 'asr', 'total_validation_count', 'Hindi');
+    expect(rank).toEqual(2);
   });
 });

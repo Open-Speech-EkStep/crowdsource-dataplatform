@@ -86,6 +86,7 @@
   "privacyPolicy": "गोपनियता नीति",
   "footerSocialShareText": "आपल्या मित्र व कुटुंबाशी शेयर करा",
   "socialSharingTextWithoutRank": "मी https://bhashini.gov.in/bhashadaan वर भारतासाठी मुक्त भाषा भांडार तयार करण्यासाठी योगदान दिले आहे. भाषा दानामध्ये योगदान देऊन आणि आपल्या भाषांना सक्षम बनवून एक बदल घडवून आणूया.",
+  "socialSharingTextWithRank": "मी https://bhashini.gov.in/bhashadaan वर भारतासाठी मुक्त भाषा भांडार तयार करण्यासाठी योगदान दिले आहे. {{initiativeName}} मध्ये {{language}} {{rank}} रॅंक वर. भाषा दानामध्ये योगदान देऊन आणि आपल्या भाषांना सक्षम बनवून एक बदल घडवून आणूया.",
   "submitSuccess": "यशस्वीरित्या सबमिट केले",
   "feedbackThankYou": "आपल्या अभिप्रायाबद्दल धन्यवाद!",
   "textContributionStatsHeader": "बोल इंडियामध्ये दिलेले योगदान",

@@ -86,6 +86,7 @@
   "privacyPolicy": "ਪ੍ਰਾਈਵੇਸੀ ਨੀਤੀ",
   "footerSocialShareText": "ਆਪਣੇ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰਕ ਮੈਂਬਰਾਂ ਦੇ ਨਾਲ ਸ਼ੇਅਰ ਕਰੋ",
   "socialSharingTextWithoutRank": "ਮੈਂ https://bhashini.gov.in/bhasadaan 'ਤੇ ਭਾਰਤ ਦੇ ਲਈ ਓਪਨ ਲੈਂਗੁਏਜ ਰਿਪੋਜ਼ਿਟਰੀ ਬਣਾਉਣ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਇਆ ਹੈ। ਆਓ ਭਾਸ਼ਾ ਦਾਨ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਇੱਕ ਬਦਲਾਅ ਲਿਆਈਏ ਅਤੇ ਆਪਣੀਆਂ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਈਏ।",
+  "socialSharingTextWithRank": "ਮੈਂ https://bhashini.gov.in/bhasadaan 'ਤੇ ਭਾਰਤ ਦੇ ਲਈ ਓਪਨ ਲੈਂਗੁਏਜ ਰਿਪੋਜ਼ਿਟਰੀ ਬਣਾਉਣ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਇਆ ਹੈ। {{initiativeName}} ਵਿੱਚ {{language}} {{rank}} ਰੈਂਕ 'ਤੇ। ਆਓ ਭਾਸ਼ਾ ਦਾਨ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਕੇ ਇੱਕ ਬਦਲਾਅ ਲਿਆਈਏ ਅਤੇ ਆਪਣੀਆਂ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਈਏ।",
   "submitSuccess": "ਸਫਲਤਾ-ਪੂਰਵਕ ਸਬਮਿਟ ਕੀਤਾ ਗਿਆ",
   "feedbackThankYou": "ਫੀਡਬੈਕ ਦੇ ਲਈ ਤੁਹਾਡਾ ਸ਼ੁਕਰੀਆ!",
   "textContributionStatsHeader": "ਬੋਲੋ ਇੰਡੀਆ ਵਿੱਚ ਪਾਇਆ ਗਿਆ ਯੋਗਦਾਨ",

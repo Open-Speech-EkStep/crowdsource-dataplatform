@@ -86,6 +86,7 @@
   "privacyPolicy": "Privacy Policy",
   "footerSocialShareText": "Share it with your friends and family",
   "socialSharingTextWithoutRank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan. Let's make a difference by contributing to Bhasha Daan and empower our languages.",
+  "socialSharingTextWithRank": "I've contributed towards building open language repository for India on https://bhashini.gov.in/bhashadaan. {{language}} ranks {{rank}} on {{initiativeName}}. Let's make a difference by contributing to Bhasha Daan and empower our languages.",
   "submitSuccess": "Submitted successfully",
   "feedbackThankYou": "Thank you for your feedback!",
   "textContributionStatsHeader": "Contributions made to Bolo India",

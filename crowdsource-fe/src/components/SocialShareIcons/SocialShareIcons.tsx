@@ -7,7 +7,11 @@ import ImageBasePath from 'components/ImageBasePath';
 
 import styles from './SocialShareIcons.module.scss';
 
-const SocialShareIcons = () => {
+interface SocialShareIconsProps {
+  socialShareText: string;
+}
+
+const SocialShareIcons = ({ socialShareText }: SocialShareIconsProps) => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
@@ -22,7 +26,9 @@ const SocialShareIcons = () => {
         <ImageBasePath src="/images/fb-icon.svg" width="24" height="24" alt="Share on Facebook" />
       </a>
       <a
-        href={`https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/${currentLocale}/home`}
+        href={`https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/${currentLocale}/home&title=${t(
+          'metaOGTitle'
+        )}&summary=${socialShareText}`}
         target="_blank"
         rel="noopener noreferrer"
         className={`${styles.socialShareLink} mx-2 d-inline-block`}
@@ -30,7 +36,7 @@ const SocialShareIcons = () => {
         <ImageBasePath src="/images/linkedin-icon.svg" width="24" height="24" alt="Share on LinkedIn" />
       </a>
       <a
-        href={`https://twitter.com/intent/tweet?text=${t('socialSharingTextWithoutRank')}`}
+        href={`https://twitter.com/intent/tweet?text=${socialShareText}`}
         target="_blank"
         rel="noopener noreferrer"
         className={`${styles.socialShareLink} mx-2 d-inline-block`}
@@ -38,7 +44,7 @@ const SocialShareIcons = () => {
         <ImageBasePath src="/images/twitter-icon.svg" width="24" height="24" alt="Share on Twitter" />
       </a>
       <a
-        href={`https://api.whatsapp.com/send?text=${t('socialSharingTextWithoutRank')}`}
+        href={`https://api.whatsapp.com/send?text=${socialShareText}`}
         target="_blank"
         rel="noopener noreferrer"
         className={`${styles.socialShareLink} mx-2 d-inline-block me-0`}

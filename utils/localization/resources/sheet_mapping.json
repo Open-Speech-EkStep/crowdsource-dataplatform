@@ -234,6 +234,13 @@
       "<badge-color>": "{{nextBadgeType}}"
     }
   },
+  "socialSharingTextWithRank":{
+    "replacements": {
+      "<x>": "{{language}}",
+      "<y>": "{{rank}}",
+      "<initiative name>": "{{initiativeName}}"
+    }
+  },
   "badgeDetailText": {
     "replacements": {
       "<participation-type>": "{{action}}",
