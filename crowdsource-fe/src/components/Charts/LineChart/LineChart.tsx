@@ -57,7 +57,12 @@ const LineChart = (props: ChartProps) => {
     /* istanbul ignore next */
     dateAxis.events.on('sizechanged', function (ev) {
       var axis = ev.target;
-      var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+      var cellWidth;
+      if (isMobileDevice()) {
+        cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
+      } else {
+        cellWidth = axis.pixelWidth;
+      }
       if (cellWidth < axis.renderer.labels.template.maxWidth) {
         axis.renderer.labels.template.rotation = -45;
         axis.renderer.labels.template.horizontalCenter = 'right';
@@ -68,8 +73,6 @@ const LineChart = (props: ChartProps) => {
         axis.renderer.labels.template.verticalCenter = 'top';
       }
     });
-    // x.paddingRight = 50;
-    // x.paddingLeft = 50;
     dateAxis.renderer.minLabelPosition = 0.05;
     dateAxis.renderer.maxLabelPosition = 0.95;
     dateAxis.renderer.labels.template.location = 0.5;
