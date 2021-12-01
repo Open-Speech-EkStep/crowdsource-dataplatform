@@ -43,19 +43,33 @@ const LineChart = (props: ChartProps) => {
     dateAxis.title.text = props.xAxisLabel || '';
     dateAxis.renderer.labels.template.fontSize = 12;
     dateAxis.title.fontSize = 12;
-    // dateAxis.dateFormats.setKey("month", "MMMM");
-    // dateAxis.periodChangeDateFormats.setKey("month", "MMM");
-    // dateAxis.periodChangeDateFormats.setKey("day", "MMMM");
+
+    const label = dateAxis.renderer.labels.template;
+    label.maxWidth = 120;
+
+    /* istanbul ignore next */
+    if (isMobileDevice()) {
+      label.maxWidth = 80;
+    }
+    label.truncate = true;
+    label.tooltipText = '{category}';
 
     /* istanbul ignore next */
     dateAxis.events.on('sizechanged', function (ev) {
       var axis = ev.target;
       var cellWidth = axis.pixelWidth / (axis.endIndex - axis.startIndex);
-      axis.renderer.labels.template.maxWidth = cellWidth;
+      if (cellWidth < axis.renderer.labels.template.maxWidth) {
+        axis.renderer.labels.template.rotation = -45;
+        axis.renderer.labels.template.horizontalCenter = 'right';
+        axis.renderer.labels.template.verticalCenter = 'middle';
+      } else {
+        axis.renderer.labels.template.rotation = 0;
+        axis.renderer.labels.template.horizontalCenter = 'middle';
+        axis.renderer.labels.template.verticalCenter = 'top';
+      }
     });
-
-    x.paddingRight = 50;
-    x.paddingLeft = 50;
+    // x.paddingRight = 50;
+    // x.paddingLeft = 50;
     dateAxis.renderer.minLabelPosition = 0.05;
     dateAxis.renderer.maxLabelPosition = 0.95;
     dateAxis.renderer.labels.template.location = 0.5;
