@@ -29,7 +29,6 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={`${t('bhasha')} ${t('daan')}`} />
         <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
-        <meta name="image" property="og:image" content={`${nodeConfig.contextRoot}/images/favicon.png`} />
         <link rel="icon" type="image/png" href={`${nodeConfig.contextRoot}/images/favicon.png`} />
       </Head>
       {router.pathname !== '/404' && <Header />}
