@@ -210,6 +210,9 @@ const SunoValidate = () => {
   };
 
   const resetState = () => {
+    if (audio) {
+      audio.currentTime = 0;
+    }
     setShowUIdata({
       sentence: '',
       contribution: '',

@@ -192,6 +192,9 @@ const SunoTranscribe = () => {
   };
 
   const resetState = () => {
+    if (audio) {
+      audio.currentTime = 0;
+    }
     setShowUIdata({
       media_data: '',
       dataset_row_id: '0',

@@ -172,6 +172,9 @@ const BoloValidate = () => {
   };
 
   const resetState = () => {
+    if (audio) {
+      audio.currentTime = 0;
+    }
     setShowUIdata({
       sentence: '',
       contribution: '',
@@ -241,8 +244,9 @@ const BoloValidate = () => {
   };
 
   const onSkipContribution = async () => {
-    resetState();
     audio?.pause();
+    resetState();
+
     if (currentDataIndex === contributionData.length - 1) {
       await submitSkip(
         JSON.stringify({
@@ -328,7 +332,7 @@ const BoloValidate = () => {
                   {showUIData?.sentence}
                 </div>
                 <div className={`${styles.audioWrapper} d-flex flex-column justify-content-center`}>
-                  <div className="d-none d-flex flex-column align-items-center text-center">
+                  <div className="d-flex flex-column align-items-center text-center">
                     <div className="mt-2 mt-md-3">
                       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                       <audio
