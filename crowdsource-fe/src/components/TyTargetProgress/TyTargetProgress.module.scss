@@ -11,7 +11,7 @@
 }
 
 .count {
-  color: var(--text-orange);
+  color: var(--strong-warning-color);
   font-size: 1.75rem;
 
   @include media-breakpoint-up(md) {

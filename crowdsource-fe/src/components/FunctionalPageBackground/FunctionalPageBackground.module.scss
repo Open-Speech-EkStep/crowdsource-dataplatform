@@ -1,9 +1,9 @@
 .root {
-  background: var(--bg-light-color) url('/bhashadaan/images/home_page_bg_mobile.svg') no-repeat top center;
+  background: var(--secondary-color) url('/bhashadaan/images/home_page_bg_mobile.svg') no-repeat top center;
   position: relative;
 
   @include media-breakpoint-up(md) {
-    background: var(--bg-light-color) url('/bhashadaan/images/home_page_bg.svg') no-repeat top center;
+    background: var(--secondary-color) url('/bhashadaan/images/home_page_bg.svg') no-repeat top center;
   }
 
   &::before {

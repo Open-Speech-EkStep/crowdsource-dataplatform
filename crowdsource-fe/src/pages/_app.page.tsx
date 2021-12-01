@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import 'styles/custom.scss';
-import 'styles/theme.scss';
 import 'styles/globals.scss';
 import 'styles/slickCarousel.scss';
 
