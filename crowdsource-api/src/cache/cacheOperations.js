@@ -241,7 +241,7 @@ const getDataForValidation = async (type, language, toLanguage, userId, userName
 			await setValidationDataForCaching(db, type, language, toLanguage)
 			console.log('EMPTYERROR: after set validation data')
 			cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
-			console.log('EMPTYERROR: now cache has ' + cacheResponse.length)
+			console.log('EMPTYERROR: now cache has ' + cacheResponse?.length)
 		}
 
 		const cacheData = JSON.parse(cacheResponse);
