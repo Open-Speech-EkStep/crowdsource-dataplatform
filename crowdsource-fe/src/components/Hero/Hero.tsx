@@ -8,7 +8,6 @@ const Hero = () => {
       <h1>
         {t('bhasha')} <span className="text-warning">{t('daan')}</span>
       </h1>
-      <span>Vakyansh</span>
       <p className="display-1 mt-7">{t('heroSecondaryHeading')}</p>
       <p className="display-3 mt-5">{t('heroText')}</p>
     </section>
