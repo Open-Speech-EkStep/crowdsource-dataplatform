@@ -30,6 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={`${t('bhasha')} ${t('daan')}`} />
         <meta property="og:url" content={`https://bhashini.gov.in/bhashadaan${locale}/home`} />
+        <meta name="twitter:image:src" content="https://bhashini.gov.in/bhashadaan/images/favicon.png" />
         <meta
           name="image"
           property="og:image"
