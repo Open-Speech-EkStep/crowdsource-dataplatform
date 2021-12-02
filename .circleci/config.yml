@@ -3,10 +3,10 @@ version: 2.1
 parameters:
   build_ui:
     type: boolean
-    default: false
+    default: true
   build_api:
     type: boolean
-    default: true
+    default: false
 
 orbs:
   node: circleci/node@4.4.0
