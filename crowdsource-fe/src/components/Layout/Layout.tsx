@@ -26,15 +26,15 @@ const Layout = ({ children }: LayoutProps) => {
         <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU" />
         <meta name="description" content={t('metaDescription')} />
         <meta property="og:title" content={t('metaOGTitle')} />
-        <meta property="og:description" content={t('metaOGDescription')} key="meta-description-key" />
+        <meta property="og:description" content={'speech recognition platform'} key="meta-description-key" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={`${t('bhasha')} ${t('daan')}`} />
-        <meta property="og:url" content={`https://bhashini.gov.in/bhashadaan${locale}/home`} />
-        <meta name="twitter:image:src" content="https://bhashini.gov.in/bhashadaan/images/favicon.png" />
+        <meta property="og:url" content={`https://dev-ui.vakyansh.in/bhashadaan${locale}/home`} />
+        <meta name="twitter:image:src" content="https://dev-ui.vakyansh.in/bhashadaan/images/favicon.png" />
         <meta
           name="image"
           property="og:image"
-          content="https://bhashini.gov.in/bhashadaan/images/favicon.png"
+          content="https://dev-ui.vakyansh.in/bhashadaan/images/favicon.png"
         />
         <link rel="icon" type="image/png" href={`${nodeConfig.contextRoot}/images/favicon.png`} />
       </Head>
