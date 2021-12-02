@@ -14,6 +14,9 @@ exports[`Hero should render the component and matches it against stored snapshot
         daan
       </span>
     </h1>
+    <span>
+      Vakyansh
+    </span>
     <p
       class="display-1 mt-7"
     >
