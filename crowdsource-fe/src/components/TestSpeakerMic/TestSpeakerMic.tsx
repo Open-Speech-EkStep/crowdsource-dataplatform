@@ -31,6 +31,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
 
   const [speakerText, setSpeakerText] = useState('testSpeakers');
   const [showPlayingbackAudio, setShowPlayingbackAudio] = useState(false);
+  const [showPlayBtn, setShowPlayBtn] = useState(false);
   const [noiseMessage, setNoiseMessage] = useState(false);
 
   const audioEl: any = useRef<HTMLAudioElement>();
@@ -69,6 +70,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         micAudio.current = null;
         clearInterval(audioCountIntreval);
         setRemainingSec(5);
+        setShowPlayBtn(false);
       }
     }
 
@@ -222,7 +224,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           setRecordingCount(4);
           setTestMicSpeakerInterval(
             setTimeout(() => {
+              setShowPlayBtn(true);
               setShowPlayingbackAudio(true);
+              if (microphone !== null) microphone.disconnect();
+              if (javascriptNode !== null) javascriptNode.disconnect();
               cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
             }, 5000)
           );
@@ -258,20 +263,18 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     };
 
     const stop = () => {
-      if (microphone !== null) microphone.disconnect();
-      if (javascriptNode !== null) javascriptNode.disconnect();
       const finalBuffer = flattenArray(audioData, recordingLength);
       const audioBlob = generateWavBlob(finalBuffer, sampleRate);
       if (audioBlob !== null) {
         ambienceNoiseCheck(audioBlob);
-
         const audioUrl = URL.createObjectURL(audioBlob);
         micAudio.current = new Audio(audioUrl);
         micAudio.current.onloadedmetadata = function () {
           const audioDuration = Math.ceil(micAudio.current?.duration * 1000);
           setTimeout(() => {
             setShowTestMicText(true);
-            setShowPlayingbackAudio(false);
+            setShowPlayBtn(false);
+            setShowPlayingbackAudio(true);
             if (audioContext) {
               audioContext.close();
               audioContext = undefined;
@@ -282,10 +285,14 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         const play = () => {
           micAudio.current?.play();
         };
+        const clearContext = () => {
+          cnvs_cntxt.clearRect(0, 0, cnvs.width, cnvs.height);
+        };
         return {
           audioBlob,
           audioUrl,
           play,
+          clearContext,
         };
       } else {
         console.log('No blob present');
@@ -308,8 +315,6 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         if (value < 0) {
           setRemainingSec(5);
           clearInterval(audioCountInterval);
-          mediaAudio.current = media.current?.stop();
-          // mediaAudio.current?.play();
         }
       }, 1000);
     }
@@ -317,15 +322,21 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
 
   /* istanbul ignore next */
   const onAudioTest = () => {
+    setShowPlayingbackAudio(false);
+    setShowPlayBtn(false);
     audioData = [];
     recordingLength = 0;
     media.current = getMediaRecorder();
     media.current.start();
   };
 
-  function playRecordedAudio() {
+  const playRecordedAudio = () => {
+    setShowPlayBtn(false);
+    setShowPlayingbackAudio(true);
+    mediaAudio.current = media.current?.stop();
+    mediaAudio.current?.clearContext();
     mediaAudio.current?.play();
-  }
+  };
 
   return (
     <div className="position-relative" ref={navBarRef}>
@@ -368,6 +379,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
               micAudio.current = null;
               clearInterval(audioCountIntreval);
               setRemainingSec(5);
+              setShowPlayBtn(false);
             }}
             variant="normal"
             className={`${styles.close} d-flex position-absolute`}
@@ -394,7 +406,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   <span className="d-flex ms-2">{t('testMic')}</span>
                 </Button>
               )}
-              {!showTestMicText && !showPlayingbackAudio && (
+              {!showTestMicText && !showPlayingbackAudio && !showPlayBtn && (
                 <Button
                   variant="normal"
                   data-testid="recordingButton"
@@ -414,19 +426,21 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   </span>
                 </Button>
               )}
-              <Button onClick={playRecordedAudio} variant="normal">
-                Playback
-              </Button>
               {!showTestMicText && showPlayingbackAudio && (
                 <Button
                   variant="normal"
+                  onClick={showPlayBtn ? playRecordedAudio : () => {}}
                   className={`${styles.testBtn} px-3 d-flex align-items-center justify-content-center border rounded-16 border-1 border-primary`}
                 >
                   <div className="flex-shrink-0 d-flex">
-                    <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                    {showPlayBtn ? (
+                      <ImageBasePath src="/images/play.svg" width="24" height="24" alt="Play Icon" />
+                    ) : (
+                      <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
+                    )}
                   </div>
 
-                  <span className="d-flex ms-2">{t('playingBackAudio')}</span>
+                  <span className="d-flex ms-2">{showPlayBtn ? t('play') : t('playingBackAudio')}</span>
                 </Button>
               )}
               <div className="position-relative flex-grow-1 ms-md-3 mt-2 mt-md-0">
@@ -442,7 +456,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 <div
                   className={`${styles.text} d-flex align-items-center mt-1 mt-md-0 justify-content-center justify-content-md-start`}
                 >
-                  {showPlayingbackAudio && (
+                  {showPlayingbackAudio && !showPlayBtn && !showTestMicText && (
                     <span>
                       {noiseMessage && showPlayingbackAudio ? (
                         <div className="d-flex align-items-center">
