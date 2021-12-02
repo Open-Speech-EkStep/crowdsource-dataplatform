@@ -35,7 +35,6 @@ RUN adduser -S nextjs -u 1001
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/next-i18next.config.js ./
-COPY --from=builder /app/serverUtils.js ./
 COPY --from=builder /app/server.docker.js ./
 COPY --from=builder /app/config ./config
 # COPY --from=builder /app/target ./target
