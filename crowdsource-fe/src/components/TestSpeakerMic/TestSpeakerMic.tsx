@@ -309,7 +309,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           setRemainingSec(5);
           clearInterval(audioCountInterval);
           mediaAudio.current = media.current?.stop();
-          mediaAudio.current?.play();
+          // mediaAudio.current?.play();
         }
       }, 1000);
     }
@@ -322,6 +322,10 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     media.current = getMediaRecorder();
     media.current.start();
   };
+
+  function playRecordedAudio() {
+    mediaAudio.current?.play();
+  }
 
   return (
     <div className="position-relative" ref={navBarRef}>
@@ -410,6 +414,9 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   </span>
                 </Button>
               )}
+              <Button onClick={playRecordedAudio} variant="normal">
+                Playback
+              </Button>
               {!showTestMicText && showPlayingbackAudio && (
                 <Button
                   variant="normal"
