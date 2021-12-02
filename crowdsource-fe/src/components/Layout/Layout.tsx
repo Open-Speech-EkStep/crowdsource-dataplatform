@@ -15,6 +15,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { t } = useTranslation();
   const router = useRouter();
+  const { locale } = useRouter();
 
   return (
     <div data-testid="Layout" className="d-flex flex-column flex-fill">
@@ -28,8 +29,12 @@ const Layout = ({ children }: LayoutProps) => {
         <meta property="og:description" content={t('metaOGDescription')} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={`${t('bhasha')} ${t('daan')}`} />
-        <meta property="og:url" content="https://bhashini.gov.in/bhashadaan" />
-        <meta name="image" property="og:image" content={`${nodeConfig.contextRoot}/images/favicon.png`} />
+        <meta property="og:url" content={`https://bhashini.gov.in/bhashadaan${locale}/home`} />
+        <meta
+          name="image"
+          property="og:image"
+          content="https://bhashini.gov.in/bhashadaan/images/favicon.png"
+        />
         <link rel="icon" type="image/png" href={`${nodeConfig.contextRoot}/images/favicon.png`} />
       </Head>
       {router.pathname !== '/404' && <Header />}
