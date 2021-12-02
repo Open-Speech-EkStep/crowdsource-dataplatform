@@ -63,7 +63,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               </span>
               <a
                 class="socialShareLink mx-2 d-inline-block ms-0"
-                href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home"
+                href="https://www.facebook.com/sharer/sharer.php?u=dev-ui.vakyansh.in/bhashadaan/en/home"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -93,7 +93,7 @@ exports[`ThankYou should render the component and matches it against stored snap
               </a>
               <a
                 class="socialShareLink mx-2 d-inline-block"
-                href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home&title=metaOGTitle&summary=socialSharingTextWithRank"
+                href="https://www.linkedin.com/shareArticle?mini=true&url=https://dev-ui.vakyansh.in/bhashadaan/en/home&title=metaOGTitle&summary=socialSharingTextWithRank"
                 rel="noopener noreferrer"
                 target="_blank"
               >

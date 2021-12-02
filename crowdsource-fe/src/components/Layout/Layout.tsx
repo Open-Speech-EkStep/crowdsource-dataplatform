@@ -26,7 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
         <meta name="google-site-verification" content="WzZdl_-Ka4oElzowGxq3Y8knBPs31AOHFnEqSUtjGFU" />
         <meta name="description" content={t('metaDescription')} />
         <meta property="og:title" content={t('metaOGTitle')} />
-        <meta property="og:description" content={t('metaOGDescription')} />
+        <meta property="og:description" content={t('metaOGDescription')} key="meta-description-key" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={`${t('bhasha')} ${t('daan')}`} />
         <meta property="og:url" content={`https://bhashini.gov.in/bhashadaan${locale}/home`} />

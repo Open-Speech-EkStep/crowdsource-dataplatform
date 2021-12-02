@@ -18,7 +18,7 @@ const SocialShareIcons = ({ socialShareText }: SocialShareIconsProps) => {
   return (
     <Fragment>
       <a
-        href={`https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/${currentLocale}/home`}
+        href={`https://www.facebook.com/sharer/sharer.php?u=dev-ui.vakyansh.in/bhashadaan/${currentLocale}/home`}
         target="_blank"
         rel="noopener noreferrer"
         className={`${styles.socialShareLink} mx-2 d-inline-block ms-0`}
@@ -26,7 +26,7 @@ const SocialShareIcons = ({ socialShareText }: SocialShareIconsProps) => {
         <ImageBasePath src="/images/fb-icon.svg" width="24" height="24" alt="Share on Facebook" />
       </a>
       <a
-        href={`https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/${currentLocale}/home&title=${t(
+        href={`https://www.linkedin.com/shareArticle?mini=true&url=https://dev-ui.vakyansh.in/bhashadaan/${currentLocale}/home&title=${t(
           'metaOGTitle'
         )}&summary=${socialShareText}`}
         target="_blank"

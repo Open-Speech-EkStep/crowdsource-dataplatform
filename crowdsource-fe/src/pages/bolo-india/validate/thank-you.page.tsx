@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import type { NextPage, GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 import Container from 'react-bootstrap/Container';
 
 import Breadcrumbs from 'components/Breadcrumbs';
@@ -13,6 +14,9 @@ import { DEFAULT_LOCALE } from 'constants/localesConstants';
 const ThankYouPage: NextPage = () => {
   return (
     <Fragment>
+      <Head>
+        <meta property="og:description" content={'contribute to Bhasha Daan'} key="meta-description-key" />
+      </Head>
       <FunctionalPageBackground>
         <div className="pt-4 px-2 px-lg-0 pb-8">
           <header className="d-flex justify-content-between align-items-center px-3 px-md-6">

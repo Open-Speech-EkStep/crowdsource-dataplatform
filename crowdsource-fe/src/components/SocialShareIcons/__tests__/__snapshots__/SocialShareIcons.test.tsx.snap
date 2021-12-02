@@ -4,7 +4,7 @@ exports[`SocialShareIcons should render the component and matches it against sto
 <DocumentFragment>
   <a
     class="socialShareLink mx-2 d-inline-block ms-0"
-    href="https://www.facebook.com/sharer/sharer.php?u=bhashini.gov.in/bhashadaan/en/home"
+    href="https://www.facebook.com/sharer/sharer.php?u=dev-ui.vakyansh.in/bhashadaan/en/home"
     rel="noopener noreferrer"
     target="_blank"
   >
@@ -33,7 +33,7 @@ exports[`SocialShareIcons should render the component and matches it against sto
   </a>
   <a
     class="socialShareLink mx-2 d-inline-block"
-    href="https://www.linkedin.com/shareArticle?mini=true&url=https://bhashini.gov.in/bhashadaan/en/home&title=metaOGTitle&summary=share text"
+    href="https://www.linkedin.com/shareArticle?mini=true&url=https://dev-ui.vakyansh.in/bhashadaan/en/home&title=metaOGTitle&summary=share text"
     rel="noopener noreferrer"
     target="_blank"
   >
