@@ -11,5 +11,7 @@ describe('404Page', () => {
     setup();
 
     expect(screen.getByText('pageNotFoundHeading')).toBeInTheDocument();
+    expect(screen.getByText('pageNotFoundText')).toBeInTheDocument();
+    expect(screen.getByText('visitHome')).toBeInTheDocument();
   });
 });

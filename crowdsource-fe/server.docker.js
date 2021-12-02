@@ -2,8 +2,6 @@ const chalk = require('chalk');
 const express = require('express');
 const next = require('next');
 
-const { togglePages } = require('./serverUtils');
-
 const app = express();
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -16,9 +14,7 @@ nextApp.prepare().then(() => {
 
   app.use(express.static('target', { redirect: false }));
 
-  app.all('*', (req, res) => {
-    return togglePages(req, res, () => handle(req, res));
-  });
+  app.all('*', (req, res) => handle(req, res));
 
   app.listen(port, err => {
     if (err) {

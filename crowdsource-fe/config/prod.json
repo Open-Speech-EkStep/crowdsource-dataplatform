@@ -24,16 +24,6 @@
       "si",
       "kok"
     ],
-    "autoValidation": true,
-    "enabledPages": {
-      "error": false,
-      "home": true,
-      "sunoIndiaHome": true,
-      "sunoIndiaDashboard": true,
-      "boloIndiaHome": true,
-      "boloIndiaDashboard": true,
-      "dekhoIndiaHome": true,
-      "styleGuide": false
-    }
+    "autoValidation": true
   }
 }

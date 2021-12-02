@@ -31,12 +31,6 @@
       "sa",
       "mai"
     ],
-    "autoValidation": false,
-    "enabledPages": {
-      "error": false,
-      "home": false,
-      "sunoIndiaHome": false,
-      "styleGuide": false
-    }
+    "autoValidation": false
   }
 }
