@@ -382,6 +382,7 @@ h4,
   .download-row .social-share-block{
     flex-wrap: no !important;
     max-width: max-content;
+    position: absolute !important;
   }
 }
 

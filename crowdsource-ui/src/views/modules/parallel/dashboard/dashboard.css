@@ -82,7 +82,7 @@ body.modal-open .supreme-container {
 }
 
 .chart-row .state-chart {
-  height: 42rem;
+  height: 40rem;
 }
 
 .chart-container {
@@ -284,10 +284,6 @@ body.modal-open .supreme-container {
   margin-bottom: 5px;
 }
 
-.language-dropdown-row{
-  flex-wrap: nowrap;
-}
-
 @media screen and (min-width: 280px) {
   .no-data-found {
     left: 11%;
@@ -343,9 +339,11 @@ body.modal-open .supreme-container {
   .chart-title {
     padding-right: 0;
   }
+}
 
-  .chart-row .state-chart {
-    height: 40rem;
+@media (min-width: 768px) and (max-width: 1199px) {
+  .chart-row .chart {
+    height: 42rem;
   }
 }
 
@@ -495,14 +493,28 @@ body.modal-open .supreme-container {
   }
 }
 
-@media (max-width: 359px) {
-  .language-dropdown-row{
-    flex-wrap:wrap !important;
-  }
 
+
+@media (min-width: 360px) {
+  .language-dropdown {
+    width:100%
+  }
+}
+
+@media (max-width: 359px) {
   .language-dropdown-row> div:nth-child(3) {
-    padding-left: 15px !important;
+    margin-left: 15px !important;
     margin-top: 10px;
   }
 
+}
+
+@media screen and (max-width: 419px){
+  .chart-row .state-chart {
+    height: 37rem;
+  }
+}
+
+.h-95{
+  height:95% !important;
 }

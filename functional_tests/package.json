@@ -11,7 +11,7 @@
     "fs": "^0.0.1-security",
     "jest": "27.0.4",
     "npm-force-resolutions": "0.0.10",
-    "taiko": "latest"
+    "taiko": "^1.2.7"
   },
   "devDependencies": {
     "glob-parent": "^5.1.2",

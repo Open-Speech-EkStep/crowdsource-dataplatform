@@ -124,6 +124,7 @@ const drawTimelineChart = (timelineData, series1Name, series2Name) => {
     hourAxis.min = 0;
     hourAxis.renderer.minGridDistance = 50;
     hourAxis.renderer.grid.template.strokeDasharray = '3,3';
+    hourAxis.tooltip.disabled = true;
     hourAxis.renderer.labels.template.fill = '#000';
     hourAxis.title.text =
       currentModule == INITIATIVES.ocr.value
