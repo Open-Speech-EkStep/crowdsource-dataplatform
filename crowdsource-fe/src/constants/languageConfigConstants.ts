@@ -23,7 +23,7 @@ export const LANGUAGE_CONFIG_ASR = {
 export const LANGUAGE_CONFIG_OCR = {
   Telugu: 0.6,
   Tamil: 0.6,
-  Malyalam: 0.6,
+  Malayalam: 0.6,
   Kannada: 0.7,
   Hindi: 0.9,
   Bengali: 0.7,
