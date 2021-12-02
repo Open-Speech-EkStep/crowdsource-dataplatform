@@ -434,7 +434,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                 >
                   <div className="flex-shrink-0 d-flex">
                     {showPlayBtn ? (
-                      <ImageBasePath src="/images/play.svg" width="24" height="24" alt="Play Icon" />
+                      <ImageBasePath src="/images/play_icon.svg" width="24" height="24" alt="Play Icon" />
                     ) : (
                       <ImageBasePath src="/images/mic.svg" width="24" height="24" alt="Microphone Icon" />
                     )}
