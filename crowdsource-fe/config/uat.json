@@ -1,0 +1,29 @@
+{
+  "fe": {
+    "apiUrl": "https://uat-api.vakyansh.in",
+    "cdnUrl": "https://uat-data-crowdsource.azureedge.net",
+    "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-uat",
+    "whitelistingEmail": false,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "contextRoot": "/bhashadaan",
+    "enabled_languages": [
+      "as",
+      "bn",
+      "en",
+      "gu",
+      "hi",
+      "kn",
+      "ml",
+      "mr",
+      "or",
+      "pa",
+      "ta",
+      "te",
+      "kas",
+      "ki",
+      "kok"
+    ],
+    "autoValidation": true
+  }
+}

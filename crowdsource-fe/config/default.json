@@ -1,0 +1,13 @@
+{
+  "fe": {
+    "apiUrl": "http://localhost:8080",
+    "cdnUrl": "https://dev-data-crowdsource.azureedge.net",
+    "staticFileUrl": "http://localhost:8080",
+    "whitelistingEmail": false,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "contextRoot": "/bhashadaan",
+    "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
+    "autoValidation": true
+  }
+}

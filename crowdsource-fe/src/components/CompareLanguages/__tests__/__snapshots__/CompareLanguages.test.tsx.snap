@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompareLanguages should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="chartContainer"
+    data-testid="CompareLanguages"
+  >
+    <h5
+      class="fw-light mb-3 text-center"
+    >
+      Participate to keep Bengali in top 3
+    </h5>
+    <div
+      class="chart"
+    >
+      BarChart
+    </div>
+    <span
+      class="display-6 d-block text-center text-primary-60"
+    >
+      sunocontributionVsTopLanguage
+    </span>
+  </div>
+</DocumentFragment>
+`;

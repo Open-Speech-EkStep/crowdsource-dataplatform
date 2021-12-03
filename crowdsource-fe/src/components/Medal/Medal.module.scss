@@ -1,0 +1,71 @@
+.root {
+  background-color: var(--light-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(15, 39, 73, 0.1);
+  min-height: 6rem;
+  outline: none;
+
+  @include media-breakpoint-up(md) {
+    min-height: 7rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 5rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    min-height: 8rem;
+    width: 6.125rem;
+  }
+
+  &.active {
+    background-color: var(--light-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(15, 39, 73, 0.35);
+  }
+}
+
+.medalImg {
+  width: 2.5rem;
+
+  @include media-breakpoint-up(xl) {
+    width: 3.5rem;
+  }
+}
+
+.zoom {
+  border-radius: 20px;
+  bottom: -14.25rem;
+  box-shadow: 0 0 32px rgba(0, 123, 255, 0.4);
+  height: 13.25rem;
+  left: 0;
+  width: 13.75rem;
+  z-index: 1;
+
+  @include media-breakpoint-up(lg) {
+    bottom: -18.5rem;
+    height: 17.5rem;
+    left: -1.25rem;
+    width: 20rem;
+  }
+}
+
+.zoomImg {
+  width: 7.5rem;
+
+  @include media-breakpoint-up(lg) {
+    width: 10.75rem;
+  }
+}
+
+.tip {
+  border-radius: 4px;
+  bottom: -1.6rem;
+  height: 1rem;
+  left: 0;
+  margin: auto;
+  right: 0;
+  transform: rotate(-45deg);
+  width: 1rem;
+  z-index: 2;
+}

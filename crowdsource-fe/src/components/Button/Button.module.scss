@@ -1,0 +1,119 @@
+.primary {
+  align-items: center;
+  border-radius: var(--border-radius-24);
+  box-shadow: 0 8px 24px rgba(15, 39, 73, 0.2);
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.5rem;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.125rem;
+    min-height: 3rem;
+    min-width: 12.5rem;
+    width: auto;
+  }
+
+  &:active {
+    background-color: var(--info-color);
+    border: 0;
+    box-shadow: 0 8px 28px rgba(15, 39, 73, 0.4);
+  }
+
+  &:hover {
+    background-color: var(--info-color);
+    border: 0;
+    box-shadow: 0 8px 20px rgba(15, 39, 73, 0.2);
+  }
+
+  &:disabled {
+    background-color: var(--btn-primary-disabled-bg-color);
+    border: 0;
+    color: var(--btn-primary-disabled-text-color);
+    opacity: 1;
+  }
+}
+
+.secondary {
+  align-items: center;
+  border-radius: var(--border-radius-24);
+  box-shadow: 0 8px 24px rgba(15, 39, 73, 0.2);
+  color: var(--primary-color);
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.5rem;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.125rem;
+    min-height: 3rem;
+    min-width: 12.5rem;
+    width: auto;
+  }
+
+  &:active {
+    box-shadow: 0 8px 28px rgba(15, 39, 73, 0.4);
+    color: var(--info-color);
+  }
+
+  &:hover {
+    @include media-breakpoint-up(md) {
+      box-shadow: 0 8px 20px rgba(15, 39, 73, 0.2);
+      color: var(--info-color);
+    }
+  }
+
+  &:disabled {
+    background-color: var(--btn-secondary-disabled-bg-color);
+    border: 0;
+    color: var(--primary-40-color);
+    opacity: 1;
+  }
+}
+
+.tertiary {
+  align-items: center;
+  border-radius: var(--border-radius-24);
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.5rem;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.125rem;
+    min-height: 3rem;
+    min-width: 12.5rem;
+    width: auto;
+  }
+
+  &:hover {
+    @include media-breakpoint-up(md) {
+      background-color: var(--btn-grey-color);
+    }
+  }
+
+  &:active {
+    background-color: var(--btn-grey-color);
+  }
+
+  &:disabled {
+    color: var(--btn-tertiary-disabled-text-color);
+  }
+}
+
+.normal {
+  color: var(--primary-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}

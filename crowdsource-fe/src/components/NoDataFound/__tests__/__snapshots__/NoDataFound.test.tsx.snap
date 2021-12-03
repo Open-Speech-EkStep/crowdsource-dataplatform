@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoDataFound should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root d-flex flex-column align-items-center justify-content-center text-center mx-auto p-5"
+  >
+    <h4
+      class="mb-5"
+    >
+      some-title
+    </h4>
+    <p
+      class="display-3"
+    >
+      some-text
+    </p>
+    <a
+      class="mt-8 info primary btn btn-primary"
+      data-testid="Button"
+      href="/some-url"
+      role="button"
+      tabindex="0"
+    >
+      some-label
+    </a>
+  </div>
+</DocumentFragment>
+`;

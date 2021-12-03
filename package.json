@@ -4,6 +4,7 @@
   "description": "This will hold the crowdsourcing platform to be used to store voice data from various speakers",
   "main": "server.js",
   "scripts": {
+    "dev": "cd crowdsource-fe && npm run dev",
     "start": "cd crowdsource-api && npm start",
     "watch": "run-s gulp watch:nodemon",
     "watch:nodemon": "cd crowdsource-api && npm run watch",
@@ -20,10 +21,11 @@
     "functional_test": "cd functional_tests && npm run test",
     "db-migrate": "cd crowdsource-api && npx db-migrate up --config migrations/config/migration_config.json -e dev",
     "prepare": "husky install",
-    "install": "run-p install:api install:ui install:ft",
+    "install": "run-p install:api install:ui install:ft install:fe",
     "install:api": "cd crowdsource-api && npm i",
     "install:ui": "cd crowdsource-ui && npm i",
     "install:ft": "cd functional_tests && npm i",
+    "install:fe": "cd crowdsource-fe && npm i",
     "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
@@ -45,6 +47,9 @@
     ],
     "crowdsource-ui/**/*.js": [
       "npm run eslint"
+    ],
+    "crowdsource-fe/**/*.{js,jsx,ts,tsx,json,html,scss,css,md}": [
+      "prettier --config ./.prettierrc --write"
     ]
   },
   "devDependencies": {

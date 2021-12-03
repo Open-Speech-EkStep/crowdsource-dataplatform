@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressChart should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="bg-light rounded-8 p-5 p-md-8 h-100"
+  >
+    <div
+      class="d-md-flex justify-content-md-between mb-5 align-items-center"
+    >
+      <p
+        class="display-2"
+      >
+        lineChartTitle
+      </p>
+      <div
+        class="d-flex justify-content-end mt-4 mt-md-0"
+      >
+        <div
+          class="root d-flex align-items-center rounded-20 text-primary-40"
+          data-testid="Switch"
+        >
+          <button
+            class="option flex-fill px-2 rounded-12 activeOption text-light bg-primary info normal btn btn-link"
+            data-testid="Button"
+            type="button"
+          >
+            monthly
+          </button>
+          <button
+            class="option flex-fill px-2 rounded-12 info normal btn btn-link"
+            data-testid="Button"
+            type="button"
+          >
+            quarterly
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="chart"
+    >
+      LineChart
+    </div>
+  </div>
+</DocumentFragment>
+`;

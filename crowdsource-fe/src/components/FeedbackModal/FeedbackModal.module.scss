@@ -1,0 +1,119 @@
+.root {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  @include media-breakpoint-up(sm) {
+    max-width: 34rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    max-width: 37.5rem;
+  }
+
+  :global(.modal-header) {
+    border-bottom: 0;
+    padding: 0 1.25rem;
+
+    @include media-breakpoint-up(md) {
+      padding: 0 2.5rem;
+    }
+  }
+
+  :global(.modal-body) {
+    overflow: auto;
+    padding: 0;
+  }
+
+  :global(.modal-footer) {
+    border: 0;
+    padding: 0;
+  }
+
+  :global(.btn-close) {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+}
+
+.form {
+  padding: 0 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 2.5rem;
+  }
+}
+
+.root {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+
+.opinions {
+  display: flex;
+}
+
+.opinion {
+  cursor: pointer;
+  height: 2.75rem;
+  width: 2.75rem;
+}
+
+.opinionLabel,
+.opinionInput {
+  height: 0;
+  width: 0;
+}
+
+.opinion1 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(227, 6, 6, 0.4);
+  }
+}
+
+.opinion1-active {
+  box-shadow: 0 4px 12px rgba(227, 6, 6, 0.5);
+}
+
+.opinion2 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(255, 122, 0, 0.4);
+  }
+}
+
+.opinion2-active {
+  box-shadow: 0 4px 8px rgba(255, 122, 0, 0.5);
+}
+
+.opinion3 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+  }
+}
+
+.opinion3-active {
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+}
+
+.opinion4 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(24, 175, 0, 0.4);
+  }
+}
+
+.opinion4-active {
+  box-shadow: 0 4px 8px rgba(24, 175, 0, 0.5);
+}
+
+.opinion5 {
+  &:hover {
+    box-shadow: 0 4px 8px rgba(42, 137, 8, 0.4);
+  }
+}
+
+.opinion5-active {
+  box-shadow: 0 4px 8px rgba(42, 137, 8, 0.5);
+}
+
+.radio label {
+  line-height: 1.375rem;
+}

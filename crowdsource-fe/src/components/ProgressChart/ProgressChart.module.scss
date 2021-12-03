@@ -1,0 +1,7 @@
+.chart {
+  height: 20rem;
+
+  @include media-breakpoint-up(md) {
+    height: 35rem;
+  }
+}

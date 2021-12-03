@@ -1,4 +1,4 @@
 { 
     "envName": "prod",
-    "autoValidation": "disabled"
+    "autoValidation": "enabled"
 }

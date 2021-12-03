@@ -1,0 +1,382 @@
+{
+  "contributorAcheived": {
+    "replacements": {
+      "<badge-color>": "<span>{{badgeType}}</span>"
+    }
+  },
+  "validatorAcheived": {
+    "replacements": {
+      "<badge-color>": "<span>{{badgeType}}</span>"
+    }
+  },
+  "noBadgeText": {
+    "replacements": {
+      "<initiative>": "{{initiativeName}}"
+    }
+  },
+  "noDataMessage": {
+    "replacements": {
+      "<u>": "{{language}}"
+    }
+  },
+  "sunocontributionVsTopLanguage": {
+    "replacements": {
+      "<language>": "{{language}}"
+    }
+  },
+  "bolocontributionVsTopLanguage": {
+    "replacements": {
+      "<language>": "{{language}}"
+    }
+  },
+  "dekhocontributionVsTopLanguage": {
+    "replacements": {
+      "<language>": "{{language}}"
+    }
+  },
+  "likhocontributionVsTopLanguage": {
+    "replacements": {
+      "<from-language>-<to-language>": "{{language}}"
+    }
+  },
+  "seeParticipationText": {
+    "replacements": {
+      "<language>": "{{language}}"
+    }
+  },
+  "keepParticipationText": {
+    "replacements": {
+      "<language>": "{{language}}"
+    }
+  },
+  "asrContributedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "textContributedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "ocrContributedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "parallelContributedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "asrValidatedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "textValidatedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "ocrValidatedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "parallelValidatedMessage": {
+    "replacements": {
+      "<contribution-count>": "<span>{{count}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "textContributeEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "asrContributeEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    },
+    "update_text": "Transcribed <contribution-count> <s>sentences</s> in <language>"
+  },
+  "ocrContributeEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "parallelContributeEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "textValidateEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "asrValidateEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "ocrValidateEarnedBadgeSubheader": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "parallelValidateEarnedBadgeSubheader": {
+    "replacements": {
+      "<validation-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<language>": "{{language}}"
+    }
+  },
+  "textContributeRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "asrContributeRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "ocrContributeRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "parallelContributeRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "textValidateRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "asrValidateRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "ocrValidateRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "parallelValidateRemainingText": {
+    "replacements": {
+      "<contribution-count>": "<strong>{{count}}</strong>",
+      "<s>": "<strong>",
+      "</s>": "</strong>",
+      "<badge-color>": "{{nextBadgeType}}"
+    }
+  },
+  "socialSharingTextWithRank":{
+    "replacements": {
+      "<x>": "{{language}}",
+      "<y>": "{{rank}}",
+      "<initiative name>": "{{initiativeName}}"
+    }
+  },
+  "badgeDetailText": {
+    "replacements": {
+      "<participation-type>": "{{action}}",
+      "<milestone>": "<span>{{count}}</span>",
+      "<text-type>": "<span>{{sourceType}}</span>",
+      "<language>": "{{language}}",
+      "<initiative>": "{{initiativeName}}",
+      "<badge-color>": "{{badge}}"
+    }
+  },
+  "languageChangeNotification": {
+    "replacements": {
+      "<old language>": "{{fromLanguage}}",
+      "<new language>": "{{toLanguage}}"
+    }
+  },
+  "remainingAudioTextDurationWarning": {
+    "replacements": {
+      "<u>": "{{remainingSec}}"
+    }
+  },
+  "textProgressStatus": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>"
+    }
+  },
+  "asrProgressStatus": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>"
+    }
+  },
+  "ocrProgressStatus": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>"
+    }
+  },
+  "parallelProgressStatus": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>"
+    }
+  },
+  "textProgressStatusWithLanguage": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>",
+      "<language>": "{{language}}"
+    }
+  },
+  "asrProgressStatusWithLanguage": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>",
+      "<language>": "{{language}}"
+    }
+  },
+  "ocrProgressStatusWithLanguage": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>",
+      "<language>": "{{language}}"
+    }
+  },
+  "parallelProgressStatusWithLanguage": {
+    "replacements": {
+      "<average>%": "<span>{{average}}%</span>",
+      "<from-language>-<to-language>": "{{language}}"
+    }
+  },
+  "textBadgeEarnedText": {
+    "replacements": {
+      "<badge-color>": "<span>{{badge}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "asrBadgeEarnedText": {
+    "replacements": {
+      "<badge-color>": "<span>{{badge}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "ocrBadgeEarnedText": {
+    "replacements": {
+      "<badge-color>": "<span>{{badge}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "parallelBadgeEarnedText": {
+    "replacements": {
+      "<badge-color>": "<span>{{badge}}</span>",
+      "<s>": "<span>",
+      "</s>": "</span>"
+    }
+  },
+  "recordingCountValidationMsg": {
+    "replacements": {
+      "<count>": "{{remainingSec}}"
+    }
+  },
+  "noUsername": {
+    "update_text": "(No Username)",
+    "replacements": {
+      "(": "",
+      ")": ""
+    }
+  },
+  "viewAllDetail": {
+    "update_text": "VIEW ALL DETAILS"
+  },
+  "yourBadge": {
+    "update_text": "Your badges"
+  },
+  "durationTranscribed": {
+    "update_text": "Duration Transcribed"
+  },
+  "durationValidated": {
+    "update_text": "Duration Validated"
+  },
+  "durationRecorded": {
+    "update_text": "Duration Recorded"
+  },
+  "languagePairs": {
+    "update_text": "Language Pairs"
+  },
+  "testYourMicrophoneAndSpeakers": {
+    "update_text": "Test your Microphone and Speakers"
+  },
+  "selectDropDownLanguagePrompt": {
+    "update_text": "Your language"
+  },
+  "kidAgeGroup": {
+    "update_text": "Upto 10 (Kid)"
+  },
+  "peopleParticipated": {
+    "update_text": "People Participated"
+  },
+  "testMic": {
+    "update_text": "Test mic"
+  }
+}

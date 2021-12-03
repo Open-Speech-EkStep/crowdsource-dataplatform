@@ -1,0 +1,73 @@
+import type { AriaAttributes } from 'react';
+import { useCallback } from 'react';
+
+import classnames from 'classnames';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import Nav from 'react-bootstrap/Nav';
+
+import Link from 'components/Link';
+import routePaths from 'constants/routePaths';
+
+import styles from './NavigationList.module.scss';
+
+const useNavLink = () => {
+  const { asPath: currentRoutePath } = useRouter();
+  const getNavLinkProps = useCallback(
+    routePath => {
+      if (currentRoutePath === routePath || currentRoutePath.includes(routePath)) {
+        return {
+          className: classnames(
+            `${styles.link} ${styles.activeLink} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`
+          ),
+          'aria-current':
+            currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
+        };
+      } else {
+        return {
+          className: classnames(
+            `${styles.link} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`
+          ),
+          'aria-current':
+            currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
+        };
+      }
+    },
+    [currentRoutePath]
+  );
+  return {
+    getNavLinkProps,
+  };
+};
+
+const NavigationList = () => {
+  const { getNavLinkProps } = useNavLink();
+  const { t } = useTranslation();
+
+  return (
+    <Nav data-testid="NavigationList" className={styles.root}>
+      <Link href={routePaths.sunoIndiaHome} passHref>
+        <Nav.Link {...getNavLinkProps(routePaths.sunoIndiaHome)}>
+          {t('suno')} {t('india')}
+        </Nav.Link>
+      </Link>
+      <Link href={routePaths.boloIndiaHome} passHref>
+        <Nav.Link {...getNavLinkProps(routePaths.boloIndiaHome)}>
+          {t('bolo')} {t('india')}
+        </Nav.Link>
+      </Link>
+      <Link href={routePaths.likhoIndiaHome} passHref>
+        <Nav.Link {...getNavLinkProps(routePaths.likhoIndiaHome)}>
+          {t('likho')} {t('india')}
+        </Nav.Link>
+      </Link>
+      <Link href={routePaths.dekhoIndiaHome} passHref>
+        <Nav.Link {...getNavLinkProps(routePaths.dekhoIndiaHome)}>
+          {t('dekho')} {t('india')}
+        </Nav.Link>
+      </Link>
+    </Nav>
+  );
+};
+
+export default NavigationList;

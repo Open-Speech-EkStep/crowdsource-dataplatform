@@ -1,0 +1,14 @@
+.root {
+  @include media-breakpoint-up(lg) {
+    height: 4rem;
+  }
+}
+
+.link {
+  color: var(--primary-color);
+  font-weight: bold;
+
+  &:hover {
+    color: var(--link-color);
+  }
+}

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndiaMapChart should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="bg-light rounded-8 py-5 py-md-8 h-100"
+  >
+    <p
+      class="mb-5 display-2 px-5 px-md-8"
+    >
+      mapChartTitle
+    </p>
+    <div
+      class="chart position-relative"
+    >
+      MapChart
+    </div>
+    <div
+      class="d-flex mt-8 px-5 px-md-8"
+    >
+      <div
+        class="flex-fill"
+      >
+        <span
+          class="d-flex legend legendsBG0"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          0 - 15 minutes2
+        </span>
+      </div>
+      <div
+        class="flex-fill"
+      >
+        <span
+          class="d-flex legend legendsBG1"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          15 - 30 minutes2
+        </span>
+      </div>
+      <div
+        class="flex-fill"
+      >
+        <span
+          class="d-flex legend legendsBG2"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          30 - 45 minutes2
+        </span>
+      </div>
+      <div
+        class="flex-fill"
+      >
+        <span
+          class="d-flex legend legendsBG3"
+        />
+        <span
+          class="d-flex justify-content-center text-center mt-1 display-7"
+        >
+          &gt;45 minutes2
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

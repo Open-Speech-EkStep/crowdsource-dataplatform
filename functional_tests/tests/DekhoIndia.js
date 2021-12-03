@@ -19,8 +19,8 @@ step("Validate Dekho India content", async function () {
 	assert.ok(await text('Validate').exists());
 	assert.ok(await text('Label').exists());
 	assert.ok(await text('Contribution Tracker').isVisible());
-    assert.ok(await text('Overall Summary').isVisible());
-    assert.ok(await text('Contributions made to Dekho India').isVisible());
+	assert.ok(await text('Overall Summary').isVisible());
+	assert.ok(await text('Contributions made to Dekho India').isVisible());
 });
 
 step("User should see the top Language graph and other stats for Dekho India", async function () {
@@ -60,10 +60,10 @@ step("Close button should close the pop up and user should see <flow> India Home
 });
 
 step("User clears the edit field should disable the buttons again", async function () {
-	await clear(taiko.textBox({ id: 'edit' }));
+	await clear(taiko.textBox({ id: 'addText' }));
 	await taiko.waitFor(500)
-	assert.ok(await button({ id: 'submit-edit-button' }).isDisabled())
-	assert.ok(await button({ id: 'cancel-edit-button' }).isDisabled())
+	assert.ok(await button('Submit').isDisabled())
+	assert.ok(await button('Cancel').isDisabled())
 });
 
 
@@ -156,28 +156,28 @@ step("User should see add extension and watch video link", async function () {
 	assert.ok(await link({ id: "extension_video_button" }).exists());
 });
 
-step("Validate the updated progress bar value with <contributedValue> for <initiative>", async function (contributedValue,  initiative) {
-   await taiko.waitFor(2000);
-   const updatedContributionMade = await taiko.$("#contribution-made").text();
-   const updatedContributedValue = updatedContributionMade.split('/');
-   const updatedValue = Number(updatedContributedValue[0]);
-   const aggregatedValue = Number(initialProgressValue) + Number(contributedValue);
+step("Validate the updated progress bar value with <contributedValue> for <initiative>", async function (contributedValue, initiative) {
+	await taiko.waitFor(2000);
+	const updatedContributionMade = await taiko.$("#contribution-made").text();
+	const updatedContributedValue = updatedContributionMade.split('/');
+	const updatedValue = Number(updatedContributedValue[0]);
+	const aggregatedValue = Number(initialProgressValue) + Number(contributedValue);
 	if (initiative == "Dekho India") {
 		assert.ok(updatedValue == aggregatedValue);
 	} else if (initialProgressValue != updatedValue) {
 		assert.ok(true);
 	}
-   assert.ok(await text(`${initiative} Target Achieved`).isVisible());
+	assert.ok(await text(`${initiative} Target Achieved`).isVisible());
 });
 
 step("User should store the progress bar for <initiative>", async function (initiative) {
 	await taiko.waitFor(2000);
 	await taiko.$("#progress_bar").exists();
-	const contributionMade = await taiko.$("#contribution-made").text();
+	const contributionMade = await taiko.$('//*[@data-testid="TargetProgress"]').text();
 	const contributedValue = contributionMade.split('/');
 	initialProgressValue = contributedValue[0];
 	assert.ok(await text(`${initiative} Target Achieved`).isVisible());
- });
+});
 
 step("Clicking watch video link should open video", async function () {
 	assert.ok(await link('Watch the video').exists())
@@ -216,7 +216,7 @@ step("Check Data Source button should not be visible", async () => {
 	assert.ok(! await taiko.button({ id: 'show_source_button' }).isVisible());
 });
 
-step("User should be able to see bronze Badge after winning with <contributionLeft> <label> contribution left", async function(contributionLeft, label) {
+step("User should be able to see bronze Badge after winning with <contributionLeft> <label> contribution left", async function (contributionLeft, label) {
 	assert.ok(await text("You are a Bronze Validator").isVisible());
 	assert.ok(await text("Your Badge").isVisible());
 	assert.ok(await text("Share on").isVisible());
@@ -224,7 +224,7 @@ step("User should be able to see bronze Badge after winning with <contributionLe
 	assert.ok(await image({ id: "thankyou-last-badge" }).isVisible());
 });
 
-step("User clicks on <arg0> , he should see thank you page with heading <contributed> <label> contributed", async function(arg0, contributed, label) {
+step("User clicks on <arg0> , he should see thank you page with heading <contributed> <label> contributed", async function (arg0, contributed, label) {
 	await click(taiko.button({ id: arg0 }))
 	await taiko.waitFor(2000)
 	assert.ok(await text(`You validated ${contributed} ${label} for your language!`).isVisible());

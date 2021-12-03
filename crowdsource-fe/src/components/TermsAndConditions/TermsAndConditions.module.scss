@@ -1,0 +1,12 @@
+.header {
+  height: 4.5rem;
+}
+
+.link {
+  font-weight: 700;
+  height: 2.75rem;
+
+  @include media-breakpoint-up(md) {
+    height: 3rem;
+  }
+}

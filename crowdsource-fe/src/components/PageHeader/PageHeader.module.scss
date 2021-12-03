@@ -1,0 +1,41 @@
+.root {
+  font-family: Roboto, sans-serif;
+}
+
+.bg {
+  background: url('/bhashadaan/images/alphabets_bg_mobile.svg') no-repeat bottom 0.25rem right;
+
+  @include media-breakpoint-up(md) {
+    background: url('/bhashadaan/images/alphabets_bg.svg') no-repeat bottom 1rem right;
+  }
+}
+
+.pageHeaderImg {
+  width: 2.75rem;
+
+  @include media-breakpoint-up(md) {
+    width: 5.25rem;
+  }
+}
+
+.pageHeading {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+  }
+}
+
+.pageHeaderText {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  width: 80%;
+}
+
+.pageHeaderTextMobile {
+  line-height: 1.5rem;
+  width: 80%;
+}

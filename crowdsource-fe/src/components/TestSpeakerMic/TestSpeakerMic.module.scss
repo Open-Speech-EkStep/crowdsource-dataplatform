@@ -1,0 +1,56 @@
+.test {
+  box-shadow: 0 4px 12px rgba(15, 39, 73, 0.2);
+  right: 0;
+  top: 2.5rem;
+  width: 20rem;
+  z-index: 2;
+
+  @include media-breakpoint-up(md) {
+    width: 37.5rem;
+  }
+}
+
+.heading {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.testBtn {
+  font-size: 0.875rem;
+  min-height: 2rem;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    width: 15rem;
+  }
+
+  &.active {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+  }
+}
+
+.bar {
+  height: 1.25rem;
+  width: 100%;
+}
+
+.text {
+  font-size: 0.75rem;
+
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    right: 0;
+    top: 1.5rem;
+  }
+}
+
+.progress {
+  height: 0.75rem;
+}
+
+.close {
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
+}

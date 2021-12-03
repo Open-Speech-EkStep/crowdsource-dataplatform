@@ -1,0 +1,15 @@
+.root {
+  box-shadow: 0 2px 12px #9fc8ff;
+  padding: 1px;
+}
+
+.option {
+  color: var(--text-primary-40);
+  font-size: 0.75rem;
+  height: 1.375rem;
+  min-width: 6.25rem;
+
+  &:hover {
+    color: var(--text-primary-40);
+  }
+}

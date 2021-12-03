@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TriColorBackground should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="root"
+  >
+    <div
+      class="topBg"
+    >
+      <div
+        class="bottomBg"
+      >
+        Hello world
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

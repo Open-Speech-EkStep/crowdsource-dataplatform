@@ -1,0 +1,23 @@
+.action {
+  max-width: 14rem;
+}
+
+.actionIcon {
+  width: 5rem;
+
+  @include media-breakpoint-up(md) {
+    width: 8.125rem;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  &Green {
+    box-shadow: var(--box-shadow-green-sm);
+  }
+
+  &Blue {
+    box-shadow: var(--box-shadow-blue-sm);
+  }
+}

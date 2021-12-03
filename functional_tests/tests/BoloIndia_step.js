@@ -23,8 +23,8 @@ const {
 } = require('taiko');
 const path = require('path');
 
-const headless = process.env.headless_chrome.toLowerCase() === 'true';
-const testUrl = process.env.test_url || 'https://dev-nplt.vakyansh.in';
+const headless = process.env.headless_chrome.toLowerCase() === 'false';
+const testUrl = process.env.test_url || 'https://dev-next.vakyansh.in';
 
 beforeSuite(async () => {
     //setConfig( { waitForNavigation: false, navigationTimeout: 120000});
@@ -222,7 +222,7 @@ step("when user clicks on the Contribute More button, user should not see the In
 step("Navigate to <arg0> button and click <arg0> button", async function (arg0) {
     if (arg0 == "Contribute") {
         await taiko.waitFor(2000)
-        const startRecordingButton = taiko.image({ id: "start_recording" });
+        const startRecordingButton = taiko.image('Contribute Icon');
         assert.ok(await startRecordingButton.exists());
         // await hover(startRecordingButton);
         await taiko.waitFor(1500)
@@ -232,7 +232,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
 
     else if (arg0 == "Validate") {
         await taiko.waitFor(2000)
-        const startValidatingButton = taiko.image({ id: "start_validating" });
+        const startValidatingButton = taiko.image('Validate Icon');
         assert.ok(await startValidatingButton.exists());
         // await taiko.waitFor(500);
         // await hover(startValidatingButton);
@@ -241,7 +241,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
     }
     else if (arg0 == "Transcribe") {
         await taiko.waitFor(2000)
-        const startRecordingButton = taiko.image({ id: "start_recording" });
+        const startRecordingButton = taiko.image('Contribute Icon');
         assert.ok(await startRecordingButton.exists());
         // await hover(startRecordingButton);
         await taiko.waitFor(1500)
@@ -249,7 +249,7 @@ step("Navigate to <arg0> button and click <arg0> button", async function (arg0) 
     }
     else if (arg0 == "Correct") {
         await taiko.waitFor(2000)
-        const startValidatingButton = taiko.image({ id: "start_validating" });
+        const startValidatingButton = taiko.image('Validate Icon');
         assert.ok(await startValidatingButton.exists());
         // await taiko.waitFor(500);
         // await hover(startValidatingButton);
@@ -338,9 +338,9 @@ step("User plays the audio , <arg0>,<arg1> should be disabled", async function (
 
 step("<arg0> should be enabled , <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
     await taiko.waitFor(2000)
-    assert.ok(! await taiko.button({ id: arg0 }).isDisabled());
-    assert.ok(await taiko.button({ id: arg1 }).isDisabled());
-    assert.ok(await taiko.button({ id: arg2 }).isDisabled());
+    assert.ok(! await taiko.button('arg0').isDisabled());
+    assert.ok(await taiko.button('arg1').isDisabled());
+    assert.ok(await taiko.button('arg2').isDisabled());
 });
 
 step("User clicks on <arg0> , he should see next sentence and <arg1> <arg2> buttons should be disabled", async function (arg0, arg1, arg2) {
@@ -390,7 +390,7 @@ step("User should be able to change to preffered Language to English again", asy
 step("Select Contribution Language as <language>", async function (language) {
     await taiko.waitFor(1200)
 
-    const selectLanguageDropDown = taiko.dropDown({ id: "from-language" })
+    const selectLanguageDropDown = taiko.dropDown({ "data-testid": "SelectContributionLanguage" })
     assert.ok(await selectLanguageDropDown.exists());
     await selectLanguageDropDown.select(language);
 
@@ -419,8 +419,8 @@ step("When user clicks on the Test Microphone Speaker button, user should see <a
 });
 
 step("When user clicks on the cross button , pop up should close and user should see the Test Mic and speaker button", async function () {
-    await click(taiko.button({ id: "test-mic-close" }))
-    assert.ok(await button({ id: 'test-mic-speakers-button' }).exists())
+    await click(taiko.image('Close'))
+    assert.ok(await button({ "data-testid": 'testYourSpeaker_button' }).exists())
 });
 
 step("When user clicks on the Feedback icon, user should see the feedback popup", async function () {

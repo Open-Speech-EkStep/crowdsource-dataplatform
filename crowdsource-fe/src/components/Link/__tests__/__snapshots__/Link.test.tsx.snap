@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/en/some/path"
+  >
+    Some link
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Link should render the component and matches it against stored snapshot when passed locale is different than default locale 1`] = `
+<DocumentFragment>
+  <a
+    href="/some/path"
+  >
+    Some link
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Link should render the component and matches it against stored snapshot when passed locale is same as default locale 1`] = `
+<DocumentFragment>
+  <a
+    href="/en/some/path"
+  >
+    Some link
+  </a>
+</DocumentFragment>
+`;

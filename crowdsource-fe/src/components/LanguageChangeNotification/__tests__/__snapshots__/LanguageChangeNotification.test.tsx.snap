@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageChangeNotification should render the component and matches it against stored snapshot 1`] = `
+<div
+  class="modal-dialog root modal-lg modal-dialog-centered modal-dialog-scrollable"
+  data-testid="Modal"
+>
+  <div
+    class="modal-content content"
+  >
+    <div
+      class="modal-header"
+    >
+      
+    </div>
+    <div
+      class="modal-body"
+    >
+      <div
+        class="px-5 px-md-9"
+      >
+        languageChangeNotification
+      </div>
+    </div>
+    <div
+      class="modal-footer"
+    >
+      <footer
+        class="d-flex justify-content-center w-100 m-0 pt-md-4 pt-2"
+      >
+        <a
+          class="info primary btn btn-primary"
+          data-testid="Button"
+          href="/suno-india"
+          role="button"
+          tabindex="0"
+        >
+          proceed
+        </a>
+      </footer>
+    </div>
+  </div>
+</div>
+`;

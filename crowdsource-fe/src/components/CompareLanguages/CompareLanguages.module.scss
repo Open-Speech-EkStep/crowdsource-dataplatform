@@ -1,0 +1,16 @@
+.heading {
+  border-bottom: 1px dashed var(--primary-40-color);
+
+  @include media-breakpoint-up(md) {
+    border-bottom: 0;
+    border-right: 1px dashed var(--primary-40-color);
+  }
+}
+
+.chart {
+  height: 12rem;
+}
+
+.chartContainer {
+  height: 100%;
+}

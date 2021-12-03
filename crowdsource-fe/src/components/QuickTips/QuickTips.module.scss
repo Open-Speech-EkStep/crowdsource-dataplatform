@@ -1,0 +1,48 @@
+.root {
+  background-color: #343a40;
+}
+
+.label {
+  background-color: rgb(149 149 149 / 20%);
+
+  @include media-breakpoint-up(xl) {
+    width: 7.5rem;
+  }
+}
+
+.labelIcon {
+  transform: rotate(180deg);
+}
+
+.tip {
+  width: 7.5rem;
+
+  @include media-breakpoint-up(sm) {
+    width: 10rem;
+  }
+}
+
+.icon {
+  background-color: rgba(196, 196, 196, 0.2);
+  border: 3px solid rgba(196, 196, 196, 0.2);
+  height: 56px;
+  width: 56px;
+}
+
+.sep {
+  border-top: 1px dashed #676b6e;
+  height: 0;
+  max-width: 2rem;
+  min-width: 1rem;
+
+  @include media-breakpoint-up(lg) {
+    max-width: none;
+  }
+}
+
+.close {
+  cursor: pointer;
+  right: -10px;
+  top: -10px;
+  z-index: 1;
+}

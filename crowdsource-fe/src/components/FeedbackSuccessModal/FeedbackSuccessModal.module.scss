@@ -1,0 +1,20 @@
+.modalHeader {
+  height: 2rem;
+
+  @include media-breakpoint-up(md) {
+    height: 2.5rem;
+  }
+}
+
+.root {
+  max-width: 25rem;
+
+  :global(.btn-close) {
+    margin: 0.5rem -0.4rem -0.5rem auto;
+  }
+}
+
+.content {
+  box-shadow: 0 0 2rem rgba(15, 39, 73, 0.1);
+  max-height: 40rem;
+}

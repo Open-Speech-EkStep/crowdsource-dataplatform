@@ -1,0 +1,37 @@
+.root {
+  z-index: 1;
+}
+
+.progress {
+  height: 0.625rem;
+}
+
+.audioLine {
+  background-color: var(--link-color);
+  border-radius: 2px;
+  height: 5px;
+}
+
+.mic {
+  box-shadow: 0 0 15px 2px #bdc3c7;
+  height: 4rem;
+  width: 4rem;
+}
+
+.audioWrapper,
+.visualizer {
+  height: 7.5rem;
+}
+
+.erroMsg {
+  bottom: 0;
+}
+
+.audioPermissionDeniedHeader {
+  :global(.btn-close) {
+    position: static;
+    @include media-breakpoint-up(md) {
+      position: absolute;
+    }
+  }
+}

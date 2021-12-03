@@ -1,0 +1,39 @@
+.root {
+  z-index: 1;
+}
+
+.bottomShadow {
+  box-shadow: 0 8px 0 #43c0d7;
+}
+
+.labelCarousel {
+  :global(.slick-slide) {
+    text-align: center;
+  }
+}
+
+/* stylelint-disable */
+.initiativesCarousel {
+  :global(.slick-current) {
+    .slideLabel {
+      opacity: 1;
+
+      &::after {
+        background-color: var(--primary-color);
+        border-radius: var(--border-radius-12);
+        bottom: 0;
+        content: '';
+        height: 0.25rem;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.slideLabel {
+  cursor: pointer;
+  font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  opacity: 0.6;
+}

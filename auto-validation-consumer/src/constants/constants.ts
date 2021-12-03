@@ -25,7 +25,7 @@ export const LANGUAGE_CONFIG_ASR: KeyValue = {
 export const LANGUAGE_CONFIG_OCR: KeyValue = {
     'Telugu': 0.60,
     'Tamil': 0.60,
-    'Malyalam': 0.60,
+    'Malayalam': 0.60,
     'Kannada': 0.70,
     'Hindi': 0.90,
     'Bengali': 0.70,

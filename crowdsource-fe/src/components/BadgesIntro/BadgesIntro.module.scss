@@ -1,0 +1,15 @@
+.badge {
+  width: 4.5rem;
+
+  @include media-breakpoint-up(sm) {
+    width: 8rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 8.75rem;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageView should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="position-relative"
+    data-testid="ImageView"
+  >
+    <div
+      class="bg bg-light p-3 rounded-8 border border-1 border-primary-20 position-relative overflow-auto"
+    >
+      <img
+        alt="OCR Data"
+        class="img-fluid"
+        src="/images/photos.png"
+      />
+    </div>
+    <div
+      class="expandText d-flex justify-content-end"
+    >
+      <button
+        class="display-6 ms-auto mt-1 text-primary-60 info normal btn btn-link"
+        data-testid="ExpandView"
+        type="button"
+      >
+        expandViewText
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

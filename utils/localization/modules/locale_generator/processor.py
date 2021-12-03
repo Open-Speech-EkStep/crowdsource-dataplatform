@@ -2,7 +2,7 @@ import pandas as pd
 
 from helper.reader.excel_file_reader import ExcelReader
 from modules.locale_generator.data import LocaleOutData
-from helper.utils.utils import read_replacer_file
+from helper.utils.utils import read_sheet_map_file
 
 
 class LocaleProcessor:
@@ -12,7 +12,7 @@ class LocaleProcessor:
         self.english_column_name = english_column_name
         self.allowed_values = ['x', 'y', 'z', 'u', 'v', 'w']
         self.a_tag_replacement = 'a-tag-replacement'
-        self.additional_replacer_list = read_replacer_file()
+        self.additional_replacer_list = read_sheet_map_file()
 
     def add_translation_if_present(self, df_row):
         if self.language_name in list(df_row.index):
@@ -22,21 +22,16 @@ class LocaleProcessor:
 
     def replace_tags_in_df(self, df):
         for i, df_row in df.iterrows():
-            for replacer in self.additional_replacer_list:
-                if len(replacer['excel_key']) == 0:
-                    continue
-                if replacer['excel_key'] == df_row['Key']:
-                    df_row['Key'] = replacer['json_key']
-                    replacements_ = replacer['replacements']
-                    for replacer_key in replacements_.keys():
+            if df_row['Key'] in self.additional_replacer_list.keys():
+                if 'replacements' in self.additional_replacer_list[df_row['Key']].keys():
+                    for from_text, to in self.additional_replacer_list[df_row['Key']]['replacements'].items():
                         if pd.notnull(df_row[self.language_name]) and len(str(df_row[self.language_name]).strip()) != 0:
                             tmp = df_row[self.language_name]
-                            df_row[self.language_name] = df_row[self.language_name].replace(replacer_key,
-                                                                                            replacements_[replacer_key])
+                            df_row[self.language_name] = df_row[self.language_name].replace(from_text, to)
+                            df.loc[i, self.language_name] = df_row[self.language_name]
                             if tmp == df_row[self.language_name]:
-                                print("In", replacer['excel_key'], "=> ", replacer_key, 'is not changed')
-                                print("Out", df_row[self.language_name], "=> ", replacer_key, 'is not changed')
-                    break
+                                print("In", df_row['Key'], "=> ", from_text, 'is not changed')
+                                print("Out", df_row[self.language_name], "=> ", from_text, 'is not changed')
         return df
 
     def restructure_extracted_tags(self, df_row):
@@ -112,12 +107,12 @@ class LocaleProcessor:
         del meta_excel_df[self.language_name]
         excel_df = self.clean_translation_excel(excel_df, self.language_name)
         meta_excel_df = self.clean_meta_df(meta_excel_df)
-        merged_excel_df = pd.merge(excel_df, meta_excel_df, on=self.english_column_name,
+        merged_excel_df = pd.merge(meta_excel_df, excel_df, on=self.english_column_name,
                                    how='inner')
 
         # self.compare_and_update_extracted_tags(tmp_df, merged_excel_df)
 
-        merged_excel_df = merged_excel_df.apply(self.restructure_extracted_tags, axis=1)
+        # merged_excel_df = merged_excel_df.apply(self.restructure_extracted_tags, axis=1)
         merged_excel_df = self.clean_merged_excel(merged_excel_df, self.language_name)
         return merged_excel_df
 

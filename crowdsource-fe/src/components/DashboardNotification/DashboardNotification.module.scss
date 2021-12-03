@@ -1,0 +1,13 @@
+.root {
+  min-height: 5rem;
+
+  @include media-breakpoint-up(lg) {
+    margin: 0 auto;
+    width: 800px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    margin: 0 auto;
+    width: 1024px;
+  }
+}

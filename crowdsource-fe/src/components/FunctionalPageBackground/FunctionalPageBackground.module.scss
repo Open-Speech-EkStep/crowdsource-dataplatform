@@ -1,0 +1,49 @@
+.root {
+  background: var(--secondary-color) url('/bhashadaan/images/home_page_bg_mobile.svg') no-repeat top center;
+  position: relative;
+
+  @include media-breakpoint-up(md) {
+    background: var(--secondary-color) url('/bhashadaan/images/home_page_bg.svg') no-repeat top center;
+  }
+
+  &::before {
+    background: url('/bhashadaan/images/left_triangle_mobile.svg') no-repeat;
+    content: '';
+    height: 164px;
+    left: 0;
+    margin: auto;
+    opacity: 0.5;
+    position: absolute;
+    top: 5rem;
+    width: 46px;
+
+    @include media-breakpoint-up(lg) {
+      background: url('/bhashadaan/images/left_triangle.svg') no-repeat;
+      height: 224px;
+      top: 260px;
+      width: 70px;
+    }
+  }
+
+  &::after {
+    background: url('/bhashadaan/images/right_triangle_mobile.svg') no-repeat;
+    content: '';
+    height: 91px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 16rem;
+    width: 41px;
+
+    @include media-breakpoint-up(lg) {
+      background: url('/bhashadaan/images/right_triangle.svg') no-repeat;
+      height: 146px;
+      top: 260px;
+      width: 69px;
+    }
+  }
+}
+
+.wrapper {
+  z-index: 1;
+}

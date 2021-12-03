@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationList should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root nav"
+    data-testid="NavigationList"
+  >
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/suno-india"
+      href="/suno-india"
+    >
+      suno india
+    </a>
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/bolo-india"
+      href="/bolo-india"
+    >
+      bolo india
+    </a>
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/likho-india"
+      href="/likho-india"
+    >
+      likho india
+    </a>
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/dekho-india"
+      href="/dekho-india"
+    >
+      dekho india
+    </a>
+  </div>
+</DocumentFragment>
+`;

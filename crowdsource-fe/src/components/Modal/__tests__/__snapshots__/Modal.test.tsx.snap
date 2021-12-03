@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should render the component and matches it against stored snapshot 1`] = `
+<div
+  class="modal-dialog root modal-lg modal-dialog-centered modal-dialog-scrollable"
+  data-testid="Modal"
+>
+  <div
+    class="modal-content content"
+  >
+    <div
+      class="modal-header"
+    >
+      <header
+        class="header text-center flex-grow-1 pb-2 pb-md-3"
+      >
+        <h3>
+          title
+        </h3>
+        <p
+          class="display-5 mt-2 mt-md-3"
+        >
+          subTitle
+        </p>
+      </header>
+      <button
+        aria-label="Close"
+        class="btn-close"
+        type="button"
+      />
+    </div>
+    <div
+      class="modal-body"
+    >
+      <div>
+        Hello world
+      </div>
+    </div>
+    <div
+      class="modal-footer"
+    >
+      <footer
+        class="d-flex justify-content-center w-100 m-0 pt-md-4 pt-2"
+      >
+        <button
+          type="submit"
+        >
+          Done
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Modal should render the component and matches it against stored snapshot with default prop values 1`] = `
+<div
+  class="modal-dialog root modal-lg modal-dialog-centered modal-dialog-scrollable"
+  data-testid="Modal"
+>
+  <div
+    class="modal-content content"
+  >
+    <div
+      class="modal-header"
+    >
+      
+      <button
+        aria-label="Close"
+        class="btn-close"
+        type="button"
+      />
+    </div>
+    <div
+      class="modal-body"
+    >
+      <div>
+        Hello world
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,109 @@
+.root {
+  border: 1px solid rgba(67, 192, 215, 1);
+  box-shadow: rgb(67 192 215) 0 8px 0, var(--box-shadow);
+  position: relative;
+
+  &:hover {
+    box-shadow: rgb(67 192 215) 0 8px 0, var(--box-shadow-green);
+  }
+}
+
+.cardGradient {
+  background: linear-gradient(
+    180.52deg,
+    #ff9a1c -33.42%,
+    #ffba3f -19.59%,
+    #ffde66 -5.75%,
+    #ffea9c 5.15%,
+    #fff 19.03%,
+    #fff 81.54%,
+    #eaf6e0 87.7%,
+    #99e090 99.7%,
+    #00ba06 118.97%
+  );
+}
+
+.card {
+  height: 16rem;
+
+  @include media-breakpoint-up(md) {
+    height: 25rem;
+  }
+}
+
+.cardTopBg {
+  background: url('/bhashadaan/images/card_orange_bg_mobile.svg') no-repeat top center;
+
+  @include media-breakpoint-up(md) {
+    background: url('/bhashadaan/images/card_orange_bg.svg') no-repeat top center;
+  }
+}
+
+.cardBottomBg {
+  background: url('/bhashadaan/images/card_green_bg_mobile.svg') no-repeat bottom center;
+
+  @include media-breakpoint-up(md) {
+    background: url('/bhashadaan/images/card_green_bg.svg') no-repeat bottom center;
+  }
+}
+
+.type {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  word-break: break-word;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2rem;
+    line-height: 3.25rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+  }
+}
+
+.text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+.icon {
+  width: 5rem;
+
+  @include media-breakpoint-up(xl) {
+    width: 7.5rem;
+  }
+}
+
+.iconShadowGreen {
+  box-shadow: var(--box-shadow-green-sm);
+}
+
+.iconShadowBlue {
+  box-shadow: var(--box-shadow-blue-sm);
+}
+
+.infoMsg {
+  left: 12px;
+  right: 12px;
+  top: 12px;
+}
+
+.disabledCursor {
+  cursor: no-drop;
+}
+
+.disableClick {
+  pointer-events: none;
+}
+
+.disableCard {
+  opacity: 0.3;
+}

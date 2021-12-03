@@ -91,7 +91,8 @@ def main():
     os.makedirs(output_base_path, exist_ok=True)
     all_languages_report = {}
     for language_code, language_out_data in language_output_map.items():
-        output_json_path = '{base_path}/{language}.json'.format(base_path=output_base_path, language=language_code)
+        output_json_path = '{base_path}/{language}/common.json'.format(base_path=output_base_path, language=language_code)
+        os.makedirs('{base_path}/{language}'.format(base_path=output_base_path, language=language_code), exist_ok=True)
         write_df_to_json(language_out_data.get_final_df(), output_json_path)
 
         locale_report_generator = LocaleReportGenerator(languages[language_code], language_out_data.get_excel_df(),
@@ -101,7 +102,8 @@ def main():
         all_languages_report[languages[language_code]] = report
 
     write_report(all_languages_report, 'locale_generation')
-    os.system("cp {} {}".format(os.path.join(input_json_path, 'en.json'), output_base_path))
+    os.makedirs('{base_path}/en'.format(base_path=output_base_path), exist_ok=True)
+    os.system("cp {} {}".format(os.path.join(input_json_path, 'en', 'common.json'), '{base_path}/en/common.json'.format(base_path=output_base_path)))
 
     if os.path.isdir(tmp_cleaned_json_path):
         os.system("rm -rf " + tmp_cleaned_json_path)

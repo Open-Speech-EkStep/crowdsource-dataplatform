@@ -23,7 +23,7 @@ class ExcelInput(ABC):
         pass
 
     def read_json_file(self, language_code):
-        json_path = '{input_json_path}/{locale}.json'.format(input_json_path=self.input_json_path, locale=language_code)
+        json_path = '{input_json_path}/{locale}/common.json'.format(input_json_path=self.input_json_path, locale=language_code)
         return self.json_reader.read_as_df(json_path)
 
 

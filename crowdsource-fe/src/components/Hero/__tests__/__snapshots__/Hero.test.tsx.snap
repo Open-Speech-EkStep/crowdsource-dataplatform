@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="d-flex align-items-center flex-column text-center"
+    data-testid="Hero"
+  >
+    <h1>
+      bhasha 
+      <span
+        class="text-warning"
+      >
+        daan
+      </span>
+    </h1>
+    <p
+      class="display-1 mt-7"
+    >
+      heroSecondaryHeading
+    </p>
+    <p
+      class="display-3 mt-5"
+    >
+      heroText
+    </p>
+  </section>
+</DocumentFragment>
+`;

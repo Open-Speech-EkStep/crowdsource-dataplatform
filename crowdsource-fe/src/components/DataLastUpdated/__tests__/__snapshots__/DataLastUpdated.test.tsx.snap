@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataLastUpdated should render snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="display-6"
+  >
+    dataLastUpdated: 11-10-2021, 1:30:05 pm
+  </div>
+</DocumentFragment>
+`;

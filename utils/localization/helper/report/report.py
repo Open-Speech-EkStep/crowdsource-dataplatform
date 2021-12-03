@@ -23,7 +23,7 @@ class LocaleReportGenerator:
         for _, row in df.iterrows():
             key = row['Key']
             value = row['value']
-            if key == value:
+            if key == value or value == "":
                 translation_needed_content[key] = value
         return translation_needed_content
 
