@@ -1,0 +1,159 @@
+@objects
+    header                                 css    header[data-testid=Header]
+    chromextension                         css    div[data-testid=ChromeExtension]
+    extensionText                          xpath  //div[@data-testid='ChromeExtension']//span
+    installnow                             xpath  //div[@data-testid='ChromeExtension']//a[1]
+    watchvideoButton                       xpath  //div[@data-testid='ChromeExtension']//button[1]
+    dekhoIndiabreadCrumbs                  xpath  //div[@data-testid='Breadcrumbs']
+    reportButton                           xpath  //*[@data-testid="reportIconAlt_button"]
+    labelheading                           xpath  //*[@data-testid='DekhoContribute']//span
+    image                                  xpath  //*[@data-testid="ImageView"]
+    editbox                                css    div[data-testid=TextEditArea]
+    cancel                                 xpath  //button[contains(text(),'Cancel')]
+    submit                                 xpath  //button[contains(text(),'Submit')]
+    skip                                   xpath  //button[contains(text(),'Skip')]
+    tracker                                xpath  //*/div[2]/div/div/div[5]
+    footer                                 css    footer[data-testid=Footer]
+
+
+= Dekho Contribute Page =
+    
+    chromextension:
+        @on Desktop
+            below header
+            above dekhoIndiabreadCrumbs 16px           
+    
+
+    extensionText:
+        @on Desktop
+            inside chromextension
+            text is "Get Chrome extension to type in any language you choose"
+            css font-size is "16px"          
+
+    installnow:
+        @on Desktop
+            inside chromextension
+            text is "Install Now"  
+            css font-size is "16px"         
+
+
+    watchvideoButton:
+        @on Desktop
+            inside chromextension
+            right-of installnow 41px  
+            width 163px         
+            
+
+    dekhoIndiabreadCrumbs:
+        @on Desktop
+            below header
+            height 42px
+            width 244px
+        
+        @on Mobile
+            below header
+            height 42px
+            width 460px
+
+    reportButton:
+        @on Desktop
+            below header
+            height 32px
+            width 98px
+        
+        @on Mobile
+            below header
+            height 32px
+            width 48px
+
+    labelheading:
+        @on Desktop
+            below extensionText
+            text is "Type the text from the image"
+            css font-size is "20px"
+        @on Mobile
+            below header
+            text is "Type the text from the image"
+            css font-size is "16px"
+
+    image:
+        @on Desktop
+            below labelheading 19px
+            above editbox 32px
+            height 140px
+            width 1296px
+
+        @on Mobile
+            below labelheading 11px
+            above editbox 16px
+            height 140px
+            width 460px
+
+
+    editbox:
+        @on Desktop
+            below image 32px
+            height 167px
+            width 1296px
+
+        @on Mobile
+            below image 16px
+            height 166px
+            width 460px
+
+    
+    cancel:
+        @on Desktop
+            below editbox 60px
+            height 48px
+            width 200px
+            left-of submit 48px
+            above skip 72px
+            
+
+        @on Mobile
+            below editbox 48px
+            above submit 16px
+            height 44px
+            width 460px    
+        
+            
+    submit:
+        @on Desktop
+            above skip 72px
+            below editbox 60px
+            right-of cancel 48px
+            height 48px
+            width 200px
+
+        @on Mobile
+            above skip 24px
+            below cancel 16px
+            height 44px
+            width 460px
+
+    skip:
+        @on Desktop
+            below cancel 72px
+            below submit 72px
+            above tracker 80px
+            height 48px
+            width 200px
+
+        @on Mobile
+            below submit 24px
+            above tracker 48px
+            height 44px
+            width 460px
+
+    tracker:
+        @on Desktop
+            below skip 80px
+            above footer 32px
+            width 1296px
+
+
+        @on Mobile
+            below skip 48px
+            above footer 32px
+            width 460px

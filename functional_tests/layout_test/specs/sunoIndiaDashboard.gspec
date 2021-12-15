@@ -1,0 +1,211 @@
+@objects
+
+    header                      xpath   //header[@data-testid="Header"]
+    Breadcrumbs                 xpath   //div[@data-testid="Breadcrumbs"]
+    sunoLogo                    xpath   //img[contains(@alt,'sunoLogo')]
+    sunoIndiaText               xpath   //span[text()='Suno India']
+    sunoIndiaDashboardText      xpath   //span[text()='Dashboard']
+    selectLanguageText          xpath   //label[text()='Select a language']
+    selectLanguageDropdown      xpath   //select[@id='language']
+    dateText                    xpath   //div[text()='Data Last Updated']
+    contributionStats           xpath   //div[@data-testid='ContributionStats']
+    stateGraphComponent         xpath   //div[@data-testid='StateWiseDistribution']
+    indiaMapChart               id          indiaMapChart
+    mapHeading                  xpath   //p[text()='State Wise distribution']
+    lineChartComponent          xpath   //div[@data-testid='ProgressChart']
+    lineChart                   id          LineChart
+    progressChartLabel          xpath   //p[text()='Progress Chart']
+    monthly                     xpath   //button[text()='Monthly']
+    quarterly                   xpath   //button[text()='Quarterly']
+    footer                      xpath   //Footer[@data-testid="Footer"]
+    
+
+= Skeleton =
+
+  
+    sunoLogo:
+        @on Desktop
+            inside Breadcrumbs
+            left-of sunoIndiaText 13px
+            left-of sunoIndiaDashboardText
+            height 42px
+            width 47px
+        
+        @on Mobile
+            inside Breadcrumbs
+            left-of sunoIndiaDashboardText
+            height 42px
+            width 47px
+    
+    sunoIndiaText:
+        @on Desktop
+            inside Breadcrumbs
+            right-of sunoLogo 13px
+            left-of sunoIndiaDashboardText
+            text is "Suno India"
+            css font-size is "20px"
+
+    sunoIndiaDashboardText:
+        @on Desktop
+            right-of sunoLogo
+            right-of sunoIndiaText
+            text is "Dashboard"
+            css font-size is "16px"
+        @on Mobile
+            right-of sunoLogo
+            text is "Dashboard"
+            css font-size is "14px"
+
+    
+    selectLanguageText:
+        @on Desktop
+            below header 78px
+            above selectLanguageDropdown 16px
+            text is "Select a language:"
+            css font-size is "16px"
+        @on Mobile
+            below header 78px
+            above selectLanguageDropdown 8px
+            text is "Select a language:"
+            css font-size is "16px"
+
+    selectLanguageDropdown:
+        @on Desktop
+            below selectLanguageText 16px
+            left-of dateText 20px
+            height 38px
+            width 225px
+
+        @on Mobile
+            below selectLanguageText 8px
+            above dateText 12px
+            height 38px
+            width 225px
+    
+    dateText:
+        @on Desktop
+            below selectLanguageText 24px
+            above contributionStats 41px
+            text starts "Data Last Updated:"
+            css font-size is "14px"
+
+        @on Mobile
+            below selectLanguageDropdown 12px
+            above contributionStats 32px
+            text starts "Data Last Updated:"
+            css font-size is "12px"
+        
+    contributionStats:
+        @on Desktop
+            below selectLanguageText 86px
+            above indiaMapChart 136px
+            height >150px
+            width 1296px
+
+        @on Mobile
+            below dateText 32px
+            above indiaMapChart 115px
+            height > 455px
+            width 460px
+    
+    
+    
+    stateGraphComponent:
+        @on Desktop
+            left-of lineChartComponent 0px
+            height 680px
+            width 660px
+            above footer 32px
+
+        @on Mobile
+            height 480px
+            width 484px
+
+    
+    mapHeading:
+        @on Desktop
+            inside stateGraphComponent
+            text is "State Wise distribution"
+            css font-size is "24px"
+
+        @on Mobile
+            inside stateGraphComponent
+            text is "State Wise distribution"
+            css font-size is "18px"
+    
+    
+    indiaMapChart:
+        @on Desktop
+            inside  stateGraphComponent
+            above footer 144px
+            height 480px
+            width 636px
+
+        @on Mobile
+            inside stateGraphComponent
+            height 320px
+            width 460px
+    
+
+         
+    lineChartComponent:
+        @on Desktop
+            height 680px
+            width 660px
+            above footer 32px
+
+        @on Mobile
+            height 447px
+            width 484px
+            above footer 32px
+    
+    
+    progressChartLabel:
+        @on Desktop
+            inside lineChartComponent
+            text is "Progress Chart"
+            css font-size is "24px"
+
+        @on Mobile
+            inside lineChartComponent
+            text is "Progress Chart"
+            css font-size is "18px"
+    
+    
+    lineChart:
+        @on Desktop
+            inside lineChartComponent
+            height 560px
+            width 572px
+
+        @on Mobile
+            inside lineChartComponent
+            height 320px
+            width 420px
+
+
+    monthly:
+        @on Desktop
+            inside lineChartComponent
+            right-of progressChartLabel 211px
+            text is "Monthly"
+            css font-size is "12px"
+
+        @on Mobile
+            inside lineChartComponent
+            below progressChartLabel 17px
+            text is "Monthly"
+            css font-size is "12px"
+    
+    quarterly:
+        @on Desktop
+            inside lineChartComponent
+            right-of monthly
+            text is "Quarterly"
+            css font-size is "12px"
+
+        @on Mobile
+            inside lineChartComponent
+            right-of monthly
+            text is "Quarterly"
+            css font-size is "12px"

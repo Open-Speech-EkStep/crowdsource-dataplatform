@@ -1,0 +1,214 @@
+@objects
+
+    header                      xpath   //header[@data-testid="Header"]
+    Breadcrumbs                 xpath   //div[@data-testid="Breadcrumbs"]
+    selectLanguageText          xpath   //label[text()='Select a language pair']
+    dateText                    xpath   //div[text()='Data Last Updated']
+    contributionStats           xpath   //div[@data-testid='ContributionStats']
+    stateGraphComponent         xpath   //div[@data-testid='StateWiseDistribution']
+    indiaMapChart                id         indiaMapChart
+    mapHeading                  xpath   //p[text()='State Wise distribution']
+    lineChartComponent          xpath   //div[@data-testid='ProgressChart']
+    lineChart                   id          LineChart
+    progressChartLabel          xpath   //p[text()='Progress Chart']
+    monthly                     xpath   //button[text()='Monthly']
+    quarterly                   xpath   //button[text()='Quarterly']
+    footer                      xpath   //Footer[@data-testid="Footer"]
+    likhoLogo                   xpath   //img[contains(@alt,'likhoLogo')]
+    likhoIndiaText              xpath   //span[text()='Likho India']
+    likhoIndiaDashboardText     xpath   //span[text()='Dashboard']
+    fromLanguageDropdown        xpath   //select[1][@id='language']
+    toLanguageDropdown          xpath   //select[2][@id='language']
+    
+
+
+
+= Skeleton =
+
+  
+    likhoLogo:
+        @on Desktop
+            inside Breadcrumbs
+            left-of likhoIndiaText 13px
+            left-of likhoIndiaDashboardText
+            height 42px
+            width 47px
+        
+        @on Mobile
+            inside Breadcrumbs
+            left-of likhoIndiaDashboardText
+            height 42px
+            width 47px
+    
+    likhoIndiaText:
+        @on Desktop
+            inside Breadcrumbs
+            right-of likhoLogo 13px
+            left-of likhoIndiaDashboardText
+            text is "Likho India"
+            css font-size is "20px"
+
+    likhoIndiaDashboardText:
+        @on Desktop
+            right-of likhoLogo
+            right-of likhoIndiaText
+            text is "Dashboard"
+            css font-size is "16px"
+        @on Mobile
+            right-of likhoLogo
+            text is "Dashboard"
+            css font-size is "14px"
+
+    
+    selectLanguageText:
+        @on Desktop
+            below header 78px
+            above fromLanguageDropdown 16px
+            text is "Select a language pair:"
+            css font-size is "16px"
+        @on Mobile
+            below header 78px
+            above fromLanguageDropdown 8px
+            text is "Select a language pair:"
+            css font-size is "16px"
+
+    fromLanguageDropdown:
+        @on Desktop
+            below selectLanguageText 16px
+            left-of dateText 323px
+            height 38px
+            width 225px
+
+        @on Mobile
+            below selectLanguageText 8px
+            above dateText 12px
+            height 38px
+            width 214px
+    
+    dateText:
+        @on Desktop
+            below selectLanguageText 24px
+            above contributionStats 41px
+            text starts "Data Last Updated:"
+            css font-size is "14px"
+
+        @on Mobile
+            below fromLanguageDropdown 12px
+            above contributionStats 32px
+            text starts "Data Last Updated:"
+            css font-size is "12px"
+        
+    contributionStats:
+        @on Desktop
+            below selectLanguageText 86px
+            above indiaMapChart 136px
+            height >130px
+            width 1296px
+
+        @on Mobile
+            below dateText 32px
+            above indiaMapChart 115px
+            height 459px
+            width 460px
+    
+    
+    
+    stateGraphComponent:
+        @on Desktop
+            left-of lineChartComponent 0px
+            height 680px
+            width 660px
+            above footer 32px
+
+        @on Mobile
+            height > 480px
+            width 484px
+
+    
+    mapHeading:
+        @on Desktop
+            inside stateGraphComponent
+            text is "State Wise distribution"
+            css font-size is "24px"
+
+        @on Mobile
+            inside stateGraphComponent
+            text is "State Wise distribution"
+            css font-size is "18px"
+    
+    
+    indiaMapChart:
+        @on Desktop
+            inside  stateGraphComponent
+            above footer 144px
+            height 480px
+            width 636px
+
+        @on Mobile
+            inside stateGraphComponent
+            height 320px
+            width 460px
+    
+
+         
+    lineChartComponent:
+        @on Desktop
+            height 680px
+            width 660px
+            above footer 32px
+
+        @on Mobile
+            height 447px
+            width 484px
+            above footer 32px
+    
+    
+    progressChartLabel:
+        @on Desktop
+            inside lineChartComponent
+            text is "Progress Chart"
+            css font-size is "24px"
+
+        @on Mobile
+            inside lineChartComponent
+            text is "Progress Chart"
+            css font-size is "18px"
+    
+    
+    lineChart:
+        @on Desktop
+            inside lineChartComponent
+            height 560px
+            width 572px
+
+        @on Mobile
+            inside lineChartComponent
+            height 320px
+            width 420px
+
+
+    monthly:
+        @on Desktop
+            inside lineChartComponent
+            right-of progressChartLabel 211px
+            text is "Monthly"
+            css font-size is "12px"
+
+        @on Mobile
+            inside lineChartComponent
+            below progressChartLabel 17px
+            text is "Monthly"
+            css font-size is "12px"
+    
+    quarterly:
+        @on Desktop
+            inside lineChartComponent
+            right-of monthly
+            text is "Quarterly"
+            css font-size is "12px"
+
+        @on Mobile
+            inside lineChartComponent
+            right-of monthly
+            text is "Quarterly"
+            css font-size is "12px"

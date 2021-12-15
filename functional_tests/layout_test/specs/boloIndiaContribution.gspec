@@ -1,0 +1,125 @@
+@objects
+    header                                 css    header[data-testid=Header]
+    boloIndiabreadCrumbs                   xpath  //div[@data-testid='Breadcrumbs']
+    reportButton                           xpath  //*[@data-testid="reportIconAlt_button"]
+    testSpeakerbutton                      xpath  //*[@data-testid="testYourSpeaker_button"]
+    textData                               xpath  //div[@data-testid="BoloSpeak"]/div[1]
+    BoloSpeakAudioLine                     xpath  //div[@data-testid="BoloSpeak"]/div[2]/span[1]
+    recordingButton                        xpath  //button[contains(text(),'Start Recording')]
+    submitButton                           xpath  //button[contains(text(),'Submit')]
+    skip                                   xpath  //button[contains(text(),'Skip')]
+    tracker                                xpath  //*/div/div/div/div/div[4]
+    footer                                 css    footer[data-testid=Footer]
+
+
+= Bolo Contribute Page =
+
+    boloIndiabreadCrumbs:
+        @on Desktop
+            below header
+            height 42px
+            width 231px
+        
+        @on Mobile
+            below header
+            height 42px
+            width 460px
+
+    reportButton:
+        @on Desktop
+            below header
+            height 32px
+            width 98px
+        
+        @on Mobile
+            below header
+            height 32px
+            width 48px
+
+    testSpeakerbutton:
+        @on Desktop
+            right-of reportButton 16px
+            height 32px
+            width 315px
+
+        @on Mobile
+            right-of reportButton 8px
+            height 32px
+            width 119px
+
+    textData:
+        @on Desktop
+            below boloIndiabreadCrumbs 60px
+            below testSpeakerbutton 65px
+            above BoloSpeakAudioLine 105px
+
+        @on Mobile
+            below boloIndiabreadCrumbs 76px
+            below testSpeakerbutton 40px
+            above BoloSpeakAudioLine 97px
+
+    BoloSpeakAudioLine:
+        @on Desktop
+            below textData 105px
+            above recordingButton 138px
+            above submitButton 138px
+            height 5px
+            width 1296px
+        
+        @on Mobile
+            below textData 97px
+            above recordingButton 126px
+            height 5px
+            width 460px
+    
+    recordingButton:
+        @on Desktop
+            below BoloSpeakAudioLine 138px
+            left-of submitButton 48px
+            height 48px
+            width 200px
+            
+
+        @on Mobile
+            below BoloSpeakAudioLine 126px
+            above submitButton 16px
+            height 44px
+            width 460px           
+            
+
+    submitButton:
+        @on Desktop
+            below BoloSpeakAudioLine 138px
+            right-of recordingButton 48px
+            height 48px
+            width 200px
+
+        @on Mobile
+            below recordingButton 16px
+            above skip 24px
+            height 44px
+            width 460px
+
+    skip:
+        @on Desktop
+            above tracker 80px
+            height 48px
+            width 200px
+
+        @on Mobile
+            below submitButton 24px
+            above tracker 48px
+            height 44px
+            width 460px
+
+    tracker:
+        @on Desktop
+            below skip
+            width 1296px
+            above footer 32px
+
+
+        @on Mobile
+            below skip
+            width 460px
+            above footer 32px

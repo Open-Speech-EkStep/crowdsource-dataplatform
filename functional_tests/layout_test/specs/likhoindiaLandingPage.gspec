@@ -1,0 +1,270 @@
+@objects
+    header                                  css    header[data-testid=Header]
+    likhoIndiaLogo                          xpath  //*[@data-testid="PageHeader"]//img
+    likhoIndiaHeadingText                   xpath  //*[@data-testid="PageHeader"]//h1
+    likhoIndiaText                          xpath  //*[@data-testid="PageHeader"]//p
+    likhoIndiaTextM                         xpath  //*[@data-testid="PageHeader"]//p[contains(@class,'mt-4 d-md-none mb-0')]
+    dropdownLabel                           xpath  //*[@data-testid='ContributionLanguage']//label
+    fromDropDown                            xpath  //*[@data-testid="SelectContributionLanguage"]
+    ToDropDown                              xpath  //*[@data-testid="SelectTranslatedLanguage"]
+    contributecard                          css    div[data-testid=ActionCardcontribute]
+    contributelogo                          xpath  //*[@data-testid='ActionCardcontribute']//img[contains(@alt,'Contribute Icon')]
+    contributeheading                       xpath  //*[@data-testid='ActionCardcontribute']//h1
+    contributetext                          xpath  //*[@data-testid='ActionCardcontribute']//p
+    validatecard                            css     div[data-testid='ActionCardvalidate']
+    validatelogo                            xpath  //*[@data-testid='ActionCardvalidate']//div/img[contains(@alt,'Contribute Icon')]
+    validatetext                            xpath  //*[@data-testid='ActionCardvalidate']//p
+    validateheading                         xpath  //*[@data-testid='ActionCardvalidate']//h1
+    targetsection                           css    div[data-testid=TargetProgress]
+    contributionmadetext                    xpath  //*[@data-testid="ContributionStats"]//h3
+    overallsummarytext                      xpath  //*[@data-testid="ContributionStats"]//span
+    summarysection                          xpath  //*[@data-testid='ContributionStats']//div[contains(@class,'Stats_root')]
+    contributiontracker                     xpath  //*[@id="__next"]/div/main/section[2]/div/section[3]/div/h3
+    durationradobtn                         xpath  //*[@id="feedbackFormYesCheckbox"]
+    sentencesradiobtn                       xpath  //*[@id="feedbackFormNoCheckbox"]
+    top3contribution                        xpath  //*[@data-testid="ContributionTracker"]//label   
+    contributiontrackercomponent            xpath  //*[@data-testid='ContributionTracker']//div[contains(@class,'bg-secondary')]
+    viewalldetails                          css    a[data-testid=ViewAllDetailButton]
+    footer                                  css    footer[data-testid=Footer]                         
+
+
+= Skeleton =
+
+    likhoIndiaLogo:
+        @on Desktop
+            below header 54px
+            left-of likhoIndiaHeadingText
+            left-of likhoIndiaText
+            height 76px
+        @on Mobile
+            below header 20px
+            left-of likhoIndiaHeadingText
+            height 40px
+
+    likhoIndiaHeadingText:
+        @on Desktop
+            above likhoIndiaText
+            text is "Likho India"
+            css font-size is "40px"
+        @on Mobile
+            above likhoIndiaTextM
+            text is "Likho India"
+            css font-size is "28px"
+    likhoIndiaText:
+        @on Desktop
+            below likhoIndiaHeadingText 
+            text is "Enrich your language by translating text"
+            css font-size is "20px"
+
+    likhoIndiaTextM:
+        @on Mobile
+            below likhoIndiaHeadingText 
+            text is "Enrich your language by translating text"
+            css font-size is "16px"
+
+    dropdownLabel:
+        @on Desktop
+            below likhoIndiaText
+            text is "Select the language for contribution:"
+            css font-size is "16px"
+
+        @on Mobile
+            below likhoIndiaTextM
+            text is "Select the language for contribution:"
+            css font-size is "16px"
+
+    fromDropDown:
+        @on Desktop
+            right-of dropdownLabel
+            above contributecard
+            height 38px
+            width 225px
+
+        @on Mobile
+            below dropdownLabel
+            above contributecard
+            height 38px
+            width 199px
+
+    ToDropDown:
+        @on Desktop
+            right-of dropdownLabel
+            right-of fromDropDown
+            above contributecard
+            above validatecard
+            height 38px
+            width 225px
+
+        @on Mobile
+            below dropdownLabel
+            right-of fromDropDown
+            above contributecard
+            above validatecard
+            height 38px
+            width 198px
+
+    contributecard:
+        @on Desktop
+            left-of validatecard 24px
+            below dropdownLabel
+            below fromDropDown
+            below ToDropDown
+
+        @on Mobile
+            below fromDropDown
+            below ToDropDown
+            above validatecard 40px
+
+    contributelogo:
+        @on Desktop
+            inside contributecard
+            height 120px
+            width 120px
+
+        @on Mobile
+            inside contributecard
+            height 80px
+            width 80px
+
+    contributeheading:
+        @on Desktop
+            inside contributecard
+            text is "Translate"
+            css font-size is "40px"
+
+        @on Mobile
+            inside contributecard
+            text is "Translate"
+            css font-size is "28px"
+
+    contributetext:
+        @on Desktop
+            inside contributecard
+            below contributeheading
+            text is "Translate and type the text"
+            css font-size is "16px"
+
+        @on Mobile
+            inside contributecard
+            below contributeheading
+            text is "Translate and type the text"
+            css font-size is "14px"
+    
+    validatecard:
+        @on Desktop
+            below fromDropDown
+            right-of contributecard 24px
+
+        @on Mobile
+            below contributecard 40px
+
+    validatelogo:
+        @on Desktop
+            inside validatecard
+            height 120px
+            width 120px
+
+        @on Mobile
+            inside validatecard
+            height 80px
+            width 80px
+    
+    validateheading:
+        @on Desktop
+            inside validatecard
+            text is "Validate"
+            css font-size is "40px"
+
+        @on Mobile
+            inside validatecard
+            text is "Validate"
+            css font-size is "28px"
+
+    validatetext:
+        @on Desktop
+            inside validatecard
+            below validateheading
+            text is "Validate what others have contributed"
+            css font-size is "16px"
+
+        @on Mobile
+            inside validatecard
+            below validateheading
+            text is "Validate what others have contributed"
+            css font-size is "14px"
+
+    contributionmadetext:
+        @on Desktop
+            text is "Contributions made to Likho India"
+            css font-size is "28px"
+            above overallsummarytext 16px
+
+        @on Mobile
+            text is "Contributions made to Likho India"
+            css font-size is "20px"
+            above overallsummarytext 16px
+
+    overallsummarytext:
+        @on Desktop
+            above summarysection 20px
+            text is "Overall Summary"
+            css font-size is "20px"
+
+        @on Mobile
+            above summarysection 16px
+            text is "Overall Summary"
+            css font-size is "16px"
+
+    summarysection:
+        @on Desktop
+            below overallsummarytext
+            height 132px
+            width 1296px
+
+        @on Mobile
+            below overallsummarytext
+            height 459px
+            width 445px
+
+    contributiontracker:
+        @on Desktop
+            below summarysection 60px
+            text is "Contribution Tracker"
+            css font-size is "28px"
+
+        @on Mobile
+            below summarysection 40px
+            text is "Contribution Tracker"
+            css font-size is "20px"
+    top3contribution:
+        @on Desktop
+            text is "Your language and top 3 contributed languages"
+            css font-size is "20px"
+
+        @on Mobile
+            text is "Your language and top 3 contributed languages"
+            css font-size is "16px"
+
+    contributiontrackercomponent:
+        @on Desktop
+            below top3contribution
+            height 432px
+            width 1296px
+
+        @on Mobile
+            below top3contribution
+            height 431px
+            width 445px
+
+    viewalldetails:
+        @on Desktop
+            below contributiontrackercomponent
+            above footer 52px
+            height 48px
+            width 200px
+
+        @on Mobile
+            below contributiontrackercomponent
+            above footer 40px
+            height 44px
+            width 445px

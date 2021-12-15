@@ -1,0 +1,271 @@
+@objects
+    header                                  css    header[data-testid=Header]
+    boloIndiaLogo                           xpath  //*[@data-testid="PageHeader"]//img
+    boloIndiaHeadingText                    xpath  //*[@data-testid="PageHeader"]//h1
+    boloIndiaText                           xpath  //*[@data-testid="PageHeader"]//p
+    boloIndiaTextM                          xpath  //*[@data-testid="PageHeader"]//p[contains(@class,'mt-4 d-md-none mb-0')]
+    dropdownLabel                           xpath  //*[@data-testid='ContributionLanguage']//label
+    dropdown                                xpath  //*[@id="contribution"]
+    contributecard                          css    div[data-testid=ActionCardcontribute]
+    contributelogo                          xpath  //*[@data-testid='ActionCardcontribute']//img[contains(@alt,'Contribute Icon')]
+    contributeheading                       xpath  //*[@data-testid='ActionCardcontribute']//h1
+    contributetext                          xpath  //*[@data-testid='ActionCardcontribute']//p
+    validatecard                            css     div[data-testid='ActionCardvalidate']
+    validatelogo                            xpath  //*[@data-testid='ActionCardvalidate']//div/img[contains(@alt,'Contribute Icon')]
+    validatetext                            xpath  //*[@data-testid='ActionCardvalidate']//p
+    validateheading                         xpath  //*[@data-testid='ActionCardvalidate']//h1
+    targetsection                           css    div[data-testid=TargetProgress]
+    contributionmadetext                    xpath  //*[@data-testid="ContributionStats"]//h3
+    overallsummarytext                      xpath  //*[@data-testid="ContributionStats"]//span
+    summarysection                          xpath  //*[@data-testid='ContributionStats']//div[contains(@class,'Stats_root')]
+    contributiontracker                     xpath  //*[@data-testid="ContributionTracker"]//h3
+    top3contribution                        xpath  //*[@data-testid="ContributionTracker"]//label
+    durationradobtn                         xpath  //*[@id="feedbackFormYesCheckbox"]
+    sentencesradiobtn                       xpath  //*[@id="feedbackFormNoCheckbox"]
+    contributiontrackercomponent            xpath  //*[@data-testid='ContributionTracker']//div[contains(@class,'bg-secondary')]
+    viewalldetails                          css    a[data-testid=ViewAllDetailButton]
+    footer                                  css    footer[data-testid=Footer]
+
+
+
+= Skeleton =
+    
+
+    boloIndiaLogo:
+        @on Desktop
+            below header 54px
+            left-of boloIndiaText
+            left-of boloIndiaHeadingText
+
+        @on Mobile
+            below header 20px
+            left-of boloIndiaTextM -44px
+            left-of boloIndiaHeadingText
+    
+    boloIndiaHeadingText:
+        @on Desktop
+            above boloIndiaText
+            text is "Bolo India"
+            css font-size is "40px"
+
+        @on Mobile
+            above boloIndiaTextM
+            text is "Bolo India"
+            css font-size is "28px"
+
+    boloIndiaText:
+        @on Desktop
+            below boloIndiaHeadingText 
+            text is "Enrich your language by donating your voice"
+            css font-size is "20px"
+
+    boloIndiaTextM:
+        @on Mobile
+            below boloIndiaHeadingText 
+            text is "Enrich your language by donating your voice"
+            css font-size is "16px"
+
+    dropdownLabel:
+        @on Desktop
+            below boloIndiaText
+            text is "Select the language for contribution:"
+            css font-size is "16px"
+
+        @on Mobile
+            below boloIndiaTextM
+            text is "Select the language for contribution:"
+            css font-size is "16px"
+
+
+    dropdown:
+        @on Desktop
+            right-of dropdownLabel
+            above contributecard
+            height 38px
+            width 225px
+
+        @on Mobile
+            below dropdownLabel
+            above contributecard
+            height 38px
+            width 225px
+    
+    contributecard:
+        @on Desktop
+            left-of validatecard 24px
+            below dropdown
+        
+        @on Mobile
+            above validatecard 40px
+            below dropdown
+
+    contributelogo:
+        @on Desktop
+            inside contributecard
+            height 120px
+            width 120px
+
+        @on Mobile
+            inside contributecard
+            height 80px
+            width 80px
+
+    contributeheading:
+        @on Desktop
+            inside contributecard
+            text is "Speak"
+            css font-size is "40px"
+
+        @on Mobile
+            inside contributecard
+            text is "Speak"
+            css font-size is "28px"
+    
+    contributetext:
+        @on Desktop
+            inside contributecard
+            below contributeheading
+            text is "Contribute your voice"
+            css font-size is "16px"
+
+        @on Mobile
+            inside contributecard
+            below contributeheading
+            text is "Contribute your voice"
+            css font-size is "14px"
+
+    validatecard :
+        @on Desktop
+            right-of contributecard
+
+        @on Mobile
+            below contributecard
+
+    validatelogo:
+        @on Desktop
+            inside validatecard
+            height 120px
+            width 120px
+
+        @on Mobile
+            inside validatecard
+            height 80px
+            width 80px
+
+    validateheading:
+        @on Desktop
+            inside validatecard
+            text is "Validate"
+            css font-size is "40px"
+
+        @on Mobile
+            inside validatecard
+            text is "Validate"
+            css font-size is "28px"
+
+    validatetext:
+        @on Desktop
+            inside validatecard
+            below validateheading
+            text is "Validate what others have contributed"
+            css font-size is "16px"
+
+        @on Mobile
+            inside validatecard
+            below validateheading
+            text is "Validate what others have contributed"
+            css font-size is "14px"
+        
+
+    contributionmadetext:
+        @on Desktop
+            text is "Contributions made to Bolo India"
+            css font-size is "28px"
+            above overallsummarytext 16px
+
+        @on Mobile
+            text is "Contributions made to Bolo India"
+            css font-size is "20px"
+            above overallsummarytext 16px
+
+    overallsummarytext:
+        @on Desktop
+            above summarysection 20px
+            text is "Overall Summary"
+            css font-size is "20px"
+
+        @on Mobile
+            above summarysection 16px
+            text is "Overall Summary"
+            css font-size is "16px"
+
+    summarysection:
+        @on Desktop
+            below overallsummarytext
+            height 132px
+            width 1296px
+
+        @on Mobile
+            below overallsummarytext
+            height 459px
+            width 445px
+
+    contributiontracker:
+        @on Desktop
+            below summarysection 60px
+            text is "Contribution Tracker"
+            css font-size is "28px"
+
+        @on Mobile
+            below summarysection 40px
+            text is "Contribution Tracker"
+            css font-size is "20px"
+
+    top3contribution:
+        @on Desktop
+            left-of durationradobtn 40px
+            text is "Your language and top 3 contributed languages"
+            css font-size is "20px"
+
+        @on Mobile
+            above durationradobtn 28px
+            text is "Your language and top 3 contributed languages"
+            css font-size is "16px"
+
+    durationradobtn:
+        @on Desktop
+            left-of sentencesradiobtn
+
+        @on Mobile
+            left-of sentencesradiobtn
+
+    sentencesradiobtn:
+        @on Desktop
+            right-of durationradobtn 185px
+
+        @on Mobile
+            right-of durationradobtn 185px
+
+    contributiontrackercomponent:
+        @on Desktop
+            below top3contribution
+            height 432px
+            width 1296px
+
+        @on Mobile
+            below top3contribution
+            height 431px
+            width 445px
+
+    viewalldetails:
+        @on Desktop
+            below contributiontrackercomponent
+            above footer 52px
+            height 48px
+            width 200px
+
+        @on Mobile
+            below contributiontrackercomponent
+            above footer 40px
+            height 44px
+            width 445px

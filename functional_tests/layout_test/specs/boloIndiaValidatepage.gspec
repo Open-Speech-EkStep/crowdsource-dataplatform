@@ -1,0 +1,120 @@
+@objects
+    header                                 css    header[data-testid=Header]
+    boloIndiabreadCrumbs                   xpath  //div[@data-testid='Breadcrumbs']
+    reportButton                           xpath  //*[@data-testid="reportIconAlt_button"]
+    testSpeakerbutton                      xpath  //*[@data-testid="testYourSpeaker_button"]
+    audiocontroller                        xpath  //*[@data-testid="BoloValidate"]/div[2]/span
+    incorrect                              xpath  //button[contains(text(),'Incorrect')]
+    play                                   xpath  //img[contains(@alt,'Play Icon')]
+    correct                                xpath  //button[contains(text(),'Correct')]
+    skip                                   xpath  //button[contains(text(),'Skip')]
+    tracker                                xpath  //*/div/div/div/div/div[4]
+    footer                                 css    footer[data-testid=Footer]
+
+
+= Validate Page =
+    
+                           
+    boloIndiabreadCrumbs:
+        @on Desktop
+            below header
+            height 42px
+            width 245px
+        
+        @on Mobile
+            below header
+            height 42px
+            width 460px
+
+    reportButton:
+        @on Desktop
+            below header
+            height 32px
+            width 98px
+        
+        @on Mobile
+            below header
+            height 32px
+            width 48px
+
+    testSpeakerbutton:
+        @on Desktop
+            right-of reportButton
+            height 32px
+            width 167px
+
+        @on Mobile
+            right-of reportButton
+            height 32px
+            width 83px
+
+
+    audiocontroller:
+        @on Desktop
+            below header
+            height 5px
+            width 1296px
+        
+        @on Mobile
+            below header
+            height 5px
+            width 460px
+    
+    incorrect:
+        @on Desktop
+            height 48px
+            width 240px
+            
+
+        @on Mobile
+            above correct 16px
+            height 44px
+            width 460px           
+            
+
+    play:
+        @on Desktop
+            right-of incorrect
+            left-of correct
+            above skip
+            height 60px
+            width 60px
+
+        @on Mobile
+            above skip
+            height 60px
+            width 60px
+
+
+    correct:
+        @on Desktop
+            right-of play
+            height 48px
+            width 240px
+
+        @on Mobile
+            above skip 24px
+            below play
+            height 44px
+            width 460px
+
+    skip:
+        @on Desktop
+            below play
+            height 48px
+            width 200px
+
+        @on Mobile
+            below play
+            height 44px
+            width 460px
+
+    tracker:
+        @on Desktop
+            below skip
+            width 1296px
+
+
+        @on Mobile
+            below skip
+            width 460px

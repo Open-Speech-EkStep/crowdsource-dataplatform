@@ -1,0 +1,289 @@
+@objects
+    header                      xpath   //header[@data-testid="Header"]
+    Breadcrumbs                 xpath   //div[@data-testid='Breadcrumbs']
+    boloLogo                    xpath   //img[contains(@alt,'boloLogo')]
+    boloIndiaText               xpath   //span[text()='Bolo India']
+    boloIndiaDashboardText      xpath   //span[text()='Dashboard']
+    selectLanguageText          xpath   //label[text()='Select a language']
+    selectLanguageDropdown      xpath   //select[@id='language']
+    dateText                    xpath   //div[text()='Data Last Updated']
+    contributionStats           xpath   //div[@data-testid='ContributionStats']
+    stateGraphComponent         xpath   //div[@data-testid='StateWiseDistribution']
+    indiaMapChart               id         indiaMapChart
+    mapChartLabel               xpath   //p[text()='State Wise distribution']
+    lineChartComponent          xpath   //div[@data-testid='ProgressChart']
+    lineChart                   id          LineChart
+    lineChartLabel              xpath   //p[text()='Progress Chart']
+    monthly                     xpath   //button[text()='Monthly']
+    quarterly                   xpath   //button[text()='Quarterly']
+    genderChartComponent        xpath   //div[@data-testid='GenderChart']
+    genderChart                 id      bar_chart
+    genderChartLabel            xpath   //p[text()='Gender Distribution']
+    ageChartComponent           xpath   //div[@data-testid='AgeChart']
+    ageChart                    id      pie_chart
+    ageChartLabel               xpath   //p[text()='Age Group Distribution']
+    footer                      xpath   //Footer[@data-testid="Footer"]
+
+
+= Bolo India Dashboard =
+
+    boloLogo:
+        @on Desktop
+            inside Breadcrumbs
+            left-of boloIndiaText 13px
+            left-of boloIndiaDashboardText
+            height 42px
+            width 47px
+        
+        @on Mobile
+            inside Breadcrumbs
+            left-of boloIndiaDashboardText
+            height 42px
+            width 47px
+
+    boloIndiaText:
+        @on Desktop
+            inside Breadcrumbs
+            right-of boloLogo 13px
+            left-of boloIndiaDashboardText
+            text is "Bolo India"
+            css font-size is "20px"
+
+    boloIndiaDashboardText:
+        @on Desktop
+            right-of boloLogo
+            right-of boloIndiaText
+            text is "Dashboard"
+            css font-size is "16px"
+        @on Mobile
+            right-of boloLogo
+            text is "Dashboard"
+            css font-size is "14px"
+    
+    selectLanguageText:
+        @on Desktop
+            below header 78px
+            above selectLanguageDropdown 16px
+            text is "Select a language:"
+            css font-size is "16px"
+        @on Mobile
+            below header 78px
+            above selectLanguageDropdown 8px
+            text is "Select a language:"
+            css font-size is "16px"
+
+    selectLanguageDropdown:
+        @on Desktop
+            below selectLanguageText 16px
+            left-of dateText 20px
+            height 38px
+            width 225px
+
+        @on Mobile
+            below selectLanguageText 8px
+            above dateText 12px
+            height 38px
+            width 225px
+
+    dateText:
+        @on Desktop
+            below selectLanguageText 24px
+            above contributionStats 41px
+            text starts "Data Last Updated:"
+            css font-size is "14px"
+
+        @on Mobile
+            below selectLanguageDropdown 12px
+            above contributionStats 32px
+            text starts "Data Last Updated:"
+            css font-size is "12px"
+        
+    contributionStats:
+        @on Desktop
+            below selectLanguageDropdown 32px
+            above genderChartComponent 48px
+            above lineChartComponent 48px
+            height 132px
+            width 1296px
+
+        @on Mobile
+            below dateText 32px
+            above lineChartComponent 48px
+            height > 455px
+            width 460px
+
+
+    lineChartComponent:
+        @on Desktop
+            left-of genderChartComponent 0px
+            above stateGraphComponent 48px
+            height 680px
+            width 660px
+
+        @on Mobile
+            above genderChartComponent 32px
+            height 447px
+            width 484px
+    
+    lineChartLabel:
+        @on Desktop
+            inside lineChartComponent
+            text is "Progress Chart"
+            css font-size is "24px"
+
+        @on Mobile
+            inside lineChartComponent
+            text is "Progress Chart"
+            css font-size is "18px"
+    
+    lineChart:
+        @on Desktop
+            inside lineChartComponent
+            height 560px
+            width 572px
+            below lineChartLabel 20px
+
+        @on Mobile
+            inside lineChartComponent
+            height 320px
+            width 420px
+            below lineChartLabel  60px
+
+    monthly:
+        @on Desktop
+            inside lineChartComponent
+            right-of lineChartLabel 211px
+            text is "Monthly"
+            css font-size is "12px"
+
+        @on Mobile
+            inside lineChartComponent
+            below lineChartLabel 17px
+            text is "Monthly"
+            css font-size is "12px"
+    
+    quarterly:
+        @on Desktop
+            inside lineChartComponent
+            right-of monthly
+            text is "Quarterly"
+            css font-size is "12px"
+
+        @on Mobile
+            inside lineChartComponent
+            right-of monthly
+            text is "Quarterly"
+            css font-size is "12px"
+
+    genderChartComponent:
+        @on Desktop
+            right-of lineChartComponent 0px
+            above ageChartComponent 48px
+            height 680px
+            width 660px
+
+        @on Mobile
+            above stateGraphComponent 48px
+            height 407px
+            width 484px
+    
+    genderChartLabel:
+        @on Desktop
+            inside genderChartComponent
+            text is "Gender Distribution"
+            css font-size is "24px"
+
+        @on Mobile
+            inside genderChartComponent
+            text is "Gender Distribution"
+            css font-size is "18px"
+    
+    genderChart:
+        @on Desktop
+            inside genderChartComponent
+            height 560px
+            width 572px
+            below genderChartLabel 20px
+
+        @on Mobile
+            inside genderChartComponent
+            height 320px
+            width 420px
+            below genderChartLabel 20px
+
+
+    stateGraphComponent:
+        @on Desktop
+            left-of ageChartComponent 0px
+            height 674px
+            width 660px
+            above footer 32px
+
+        @on Mobile
+            above ageChartComponent 31px
+            height 480px
+            width 484px
+
+    
+    mapChartLabel:
+        @on Desktop
+            inside stateGraphComponent
+            text is "State Wise distribution"
+            css font-size is "24px"
+
+        @on Mobile
+            inside stateGraphComponent
+            text is "State Wise distribution"
+            css font-size is "18px"
+    
+    indiaMapChart:
+        @on Desktop
+            inside  stateGraphComponent
+            below mapChartLabel 20px
+            height 480px
+            width 636px
+            above footer 138px
+            
+
+        @on Mobile
+            inside stateGraphComponent
+            below mapChartLabel 20px
+            height 320px
+            width 460px
+    
+
+    ageChartComponent:
+        @on Desktop
+            right-of stateGraphComponent 0px
+            height 674px
+            width 660px
+            above footer 32px
+
+        @on Mobile
+            height 407px
+            width 484px
+            above footer 32px
+    
+    ageChartLabel:
+        @on Desktop
+            inside ageChartComponent
+            text is "Age Group Distribution"
+            css font-size is "24px"
+
+        @on Mobile
+            inside ageChartComponent
+            text is "Age Group Distribution"
+            css font-size is "18px"
+    
+    ageChart:
+        @on Desktop
+            inside ageChartComponent
+            below ageChartLabel 20px
+            height 480px
+            width 572px
+            above footer 138px
+
+        @on Mobile
+            inside ageChartComponent
+            below ageChartLabel 20px
+            above footer 52px

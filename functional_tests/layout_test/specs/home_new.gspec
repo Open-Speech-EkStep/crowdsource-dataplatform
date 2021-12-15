@@ -1,29 +1,129 @@
 @objects
     header      css   header[data-testid=Header]
-    section     css   section[data-testid=Hero]
-    caraousel   css   div[data-testid=InitiativesCarousel]
-    contributionstats   css div[data-testid=ContributionStats]
-    badesgroup  css    div[data-testid=BadgesIntro]
-    bronzebadge css    div[data-testid="BronzeContribute"]
+    titletextsection     css   section[data-testid=Hero]
+    caraousel      css   div[data-testid=InitiativesCarousel]
+    contributionstats   xpath  //*/div[2]/div/section[1]/div/div
+    badesgroup     css    div[data-testid=BadgesIntro]
+    bronzebadge    css    div[data-testid="BronzeContribute"]
+    feedbackicon   css   button[data-testid=Button]
+    knowmorebutton css a[href="/en/badges.html"]
+    footer css footer[data-testid=Footer]
+    termscondition  xpath //*[@id="__next"]/div/footer/div/div[1]/a[1]
+    privacypolicy  xpath //*[@id="__next"]/div/footer/div/div[1]/a[2]
+    sharetext  xpath  //*[@id="__next"]/div/footer/div/div[2]/div/span
+    shareicons  xpath  //*[@id="__next"]/div/footer/div/div[2]/div/div
+
+
 = Skeleton =
+
+    caraousel:
+            @on Desktop
+                inside screen 64px left, 65px right
+                centered horizontally inside screen 1px 
+
     contributionstats:
-        above badesgroup
-        below caraousel
+            @on Mobile
+                above badesgroup
+                below caraousel
+
+            @on Desktop
+                above badesgroup
+                below caraousel 
+                inside screen 64px left, 65px right
+
 
     badesgroup:
-        above bronzebadge
-        inside screen 32px left right
+            @on Desktop
+                above bronzebadge
+                inside screen 52px left, 53px right
+
+            @on Mobile
+                above bronzebadge
+                inside screen 8px left right
 
     header:
-        above section
-        height 72px
-        inside screen 0px top left right
+            @on Desktop
+                above titletextsection
+                height 72px
+                inside screen 0px top left right
 
-    section, caraousel, contributionstats, bronzebadge:
-        inside screen 44px left right
+            @on Mobile
+                above titletextsection
+                height 56px
+                inside screen 0px top left right
 
-    section:
-        above caraousel
 
-    header, badesgroup, section, caraousel, contributionstats, bronzebadge:
-        centered horizontally inside screen 1px    
+    titletextsection:
+            @on Desktop
+                above caraousel
+                inside screen 64px left, 65px right
+
+            @on Mobile
+                above caraousel
+
+    feedbackicon:
+            @on Desktop
+                inside screen 24px right
+                inside screen 1077px bottom
+
+            @on Mobile
+                inside screen 16px right
+                inside screen 1973px bottom
+
+  
+    knowmorebutton:
+            @on Desktop
+                left-of badesgroup -538px
+                css font-size is "20px" 
+                text is "Know More"
+
+
+    bronzebadge:
+            @on Desktop
+                inside screen 64px left, 65px right
+                centered horizontally inside screen 1px
+
+  
+    header, badesgroup, titletextsection, caraousel, contributionstats, bronzebadge:
+            @on Desktop
+                centered horizontally inside screen 1px    
+
+            @on Mobile
+                centered horizontally inside screen 1px 
+
+    footer:
+            @on Desktop
+                below bronzebadge
+                height 64px
+                inside screen 0px left right
+
+            @on Mobile
+                below bronzebadge
+                height 175px
+                inside screen 0px left right
+    
+    termscondition:
+            @on Desktop
+                inside footer
+                text is "Terms & Conditions"
+                css font-size is "16px"
+                
+
+    privacypolicy:
+            @on Desktop
+                inside footer
+                text is "Privacy Policy"
+                css font-size is "16px"
+                right-of termscondition 60px
+
+    sharetext:
+            @on Desktop
+                inside footer
+                text is "Share it with your friends and family"
+                css font-size is "16px"
+                right-of privacypolicy 60px
+
+    shareicons:
+            @on Desktop
+                inside footer
+                right-of sharetext 25px

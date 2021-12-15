@@ -1,0 +1,164 @@
+@objects
+    userDetailModal       css   div[data-testid=ChangeUserModal]
+    userDetailheading     xpath  //*[@data-testid="ChangeUserModal"]//h3
+    userDetailtext        xpath   //*[@data-testid="ChangeUserModal"]//p
+    username              xpath  //*[@data-testid="ChangeUserForm"]//label[contains(@for,'userName')]
+    usernameEditbox       id      userName
+    mothertongue          xpath   //*[@data-testid="ChangeUserForm"]//label[contains(@for,'motherTongue')]
+    mothertongueDropdown  id     motherTongue
+    ageGroupText          xpath    //*[@data-testid="ChangeUserForm"]//label[contains(@for,'age')]
+    agrGroupDropdown      id      age
+    genderText            xpath    //*[@data-testid="ChangeUserForm"]//label[contains(@for,'gender')]
+    genderMale            id      male
+    genderFeMale          id      female
+    genderOthers          id      others
+    tcText                xpath   //*[@data-testid="ChangeUserForm"]//p
+    done                  css     button[data-testid=Button]
+
+
+= userDetailform =
+
+    userDetailheading:
+        @on Desktop
+            text is "User Details"   
+            css font-size is "28px"
+            inside userDetailModal
+
+        @on Mobile
+            text is "User Details"   
+            css font-size is "20px"
+            inside userDetailModal    
+        
+    userDetailtext:
+        @on Desktop
+            text is "All the fields are optional but you can enrich your dataset contribution by providing the demographic details."   
+            css font-size is "16px"
+            below userDetailheading
+
+        @on Mobile
+            text is "All the fields are optional but you can enrich your dataset contribution by providing the demographic details."   
+            css font-size is "14px"
+            below userDetailheading    
+     
+    username:
+        @on Desktop
+            below userDetailtext
+            text is "Name  
+            css font-size is "14px"
+
+        @on Mobile
+            below userDetailtext  
+            text is "Name" 
+            css font-size is "14px"
+
+    usernameEditbox:
+        @on Desktop
+            below username
+            width 518px
+
+        @on Mobile
+            below username
+            width 442px
+
+    mothertongue:
+        @on Desktop
+            below usernameEditbox
+            text is "Mother Tongue" 
+            css font-size is "14px"
+
+        @on Mobile
+            below usernameEditbox     
+            text is "Mother Tongue" 
+            css font-size is "14px"
+
+    mothertongueDropdown:
+        @on Desktop
+            below mothertongue  
+            width 518px
+        @on Mobile
+            below mothertongue  
+            width 442px
+    
+    ageGroupText:
+        @on Desktop
+            below mothertongueDropdown
+            text is "Age Group" 
+            css font-size is "14px"
+
+        @on Mobile
+            below mothertongueDropdown
+            text is "Age Group" 
+            css font-size is "14px"
+
+    
+    agrGroupDropdown:
+        @on Desktop
+            below ageGroupText
+            width 518px
+     
+        @on Mobile
+            below ageGroupText
+            width 442px
+
+    genderText:
+        @on Desktop
+            below agrGroupDropdown
+            text is "Gender" 
+            css font-size is "14px"
+
+
+        @on Mobile
+            below agrGroupDropdown
+            text is "Gender" 
+            css font-size is "14px"
+
+    genderMale:
+        @on Desktop
+            below genderText 8px
+            left-of genderFeMale 72px
+
+        @on Mobile
+            below genderText 8px
+            left-of genderFeMale 72px
+
+
+    genderFeMale:
+        @on Desktop
+            above tcText 16px
+            left-of genderOthers 88px
+            right-of genderMale 72px
+
+        @on Mobile
+            above tcText 
+            left-of genderOthers 88px
+            right-of genderMale 72px
+
+
+    genderOthers:
+        @on Desktop
+            above tcText 16px
+            right-of genderFeMale 88px
+        @on Mobile
+            above tcText 16px
+            right-of genderFeMale 88px
+
+    tcText:
+        @on Desktop
+            text is "By proceeding ahead you agree to the Terms and Conditions"   
+            css font-size is "14px"
+            above done
+
+        @on Mobile
+            text is "By proceeding ahead you agree to the Terms and Conditions"   
+            css font-size is "14px"
+            above done -31px   
+
+
+    done:
+        @on Desktop
+            height 60px 
+            width  60px
+
+        @on Mobile
+            height 60px 
+            width  60px
