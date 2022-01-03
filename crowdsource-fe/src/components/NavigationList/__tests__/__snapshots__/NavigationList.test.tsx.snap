@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationList should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root nav"
+    data-testid="NavigationList"
+  >
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/tts-initiative"
+      href="/tts-initiative"
+    >
+      tts initiativeTextSuffix
+    </a>
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/asr-initiative"
+      href="/asr-initiative"
+    >
+      asr initiativeTextSuffix
+    </a>
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/translation-initiative"
+      href="/translation-initiative"
+    >
+      translation initiativeTextSuffix
+    </a>
+    <a
+      class="link font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0 nav-link"
+      data-rr-ui-event-key="/ocr-initiative"
+      href="/ocr-initiative"
+    >
+      ocr initiativeTextSuffix
+    </a>
+  </div>
+</DocumentFragment>
+`;

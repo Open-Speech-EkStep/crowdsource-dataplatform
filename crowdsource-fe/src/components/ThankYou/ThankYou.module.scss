@@ -1,0 +1,54 @@
+.root {
+  max-width: 50rem;
+  position: relative;
+  z-index: 1;
+}
+
+.medal {
+  width: 5.875rem;
+
+  @include media-breakpoint-up(md) {
+    width: 8.75rem;
+  }
+}
+
+.download {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(15, 39, 73, 0.2);
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  height: 2.25rem;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.socialShare {
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(15, 39, 73, 0.2);
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  height: 2.25rem;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.badgeBg {
+  background-color: var(--badge-bg-color);
+  border-radius: 20px;
+}
+
+.count {
+  color: var(--link-color);
+}
+
+.bar {
+  @include media-breakpoint-up(md) {
+    bottom: 1.5rem;
+    position: sticky;
+    z-index: 1;
+  }
+}

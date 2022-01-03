@@ -1,0 +1,38 @@
+@import '../../styles/mixins';
+
+.root {
+  background-color: var(--secondary-color);
+  font-family: Roboto, sans-serif;
+
+  &::before {
+    @include image-path('page_top_left_bg_mobile.svg', 'no-repeat');
+    content: '';
+    height: 40px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 29px;
+
+    @include media-breakpoint-up(xl) {
+      @include image-path('page_top_left_bg.svg', 'no-repeat');
+      height: 144px;
+      width: 65px;
+    }
+  }
+
+  &::after {
+    @include image-path('page_bottom_right_bg_mobile.svg', 'no-repeat');
+    bottom: 0;
+    content: '';
+    height: 49px;
+    position: absolute;
+    right: 0;
+    width: 48px;
+
+    @include media-breakpoint-up(xl) {
+      @include image-path('page_bottom_right_bg.svg', 'no-repeat');
+      height: 74px;
+      width: 74px;
+    }
+  }
+}

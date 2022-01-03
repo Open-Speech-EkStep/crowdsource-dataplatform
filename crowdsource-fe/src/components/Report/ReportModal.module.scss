@@ -1,0 +1,26 @@
+.form {
+  padding: 0 1.25rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 2.5rem;
+  }
+}
+
+.reasonText {
+  border-width: 2px;
+  box-shadow: inset 0 0 8px rgba(15, 39, 73, 0.5);
+
+  font-size: 0.875rem;
+  height: 7.5rem;
+  resize: none;
+
+  &:focus {
+    box-shadow: inset 0 0 8px rgba(15, 39, 73, 0.5);
+  }
+
+  &:disabled {
+    background-color: var(--primary-4-color);
+    border: 0;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,75 @@
+.root {
+  :global(.dropdown-menu) {
+    left: auto !important;
+    right: 0 !important;
+    top: 3.5rem !important;
+    transform: none !important;
+
+    @include media-breakpoint-up(md) {
+      top: 4.5rem !important;
+    }
+  }
+}
+
+.root:global(.show) {
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    &::before {
+      background-color: var(--primary-color);
+      bottom: 0;
+      content: '';
+      height: 0.125rem;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  .toggle {
+    background-color: var(--light-color);
+    border-radius: 0;
+    opacity: 1;
+
+    @include media-breakpoint-up(lg) {
+      background-color: rgba(159, 200, 255, 0.39);
+    }
+  }
+}
+
+.toggle {
+  opacity: 0.8;
+
+  @include media-breakpoint-up(md) {
+    width: 4.5rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: auto;
+  }
+
+  &:hover {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    opacity: 1;
+  }
+}
+
+.toggle,
+.toggle:focus {
+  background-color: var(--light-color);
+  border: 0;
+  border-radius: 0;
+}
+
+.item {
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+  }
+
+  &:visited,
+  &:hover,
+  &:active {
+    background-color: rgba(159, 200, 255, 0.39);
+    color: var(--primary-color);
+  }
+}

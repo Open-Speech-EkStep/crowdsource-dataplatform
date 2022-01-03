@@ -1,0 +1,22 @@
+{
+  "name": "api_tests",
+  "version": "1.0.0",
+  "description": "",
+  "config": {
+    "env": "test"
+  },
+  "scripts": {
+    "test": "ENV=$npm_config_env mocha test/*.test.js -p --reporter mochawesome --reporter-options reportFilename=ApiTestReport,overwrite=false,charts=true"
+  },
+  "author": "Amulya Ahuja",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "27.0.4",
+    "mocha": "^9.1.1",
+    "mochawesome": "^6.2.2",
+    "supertest": "^6.1.6"
+  },
+  "dependencies": {
+    "chai": "^4.3.4"
+  }
+}

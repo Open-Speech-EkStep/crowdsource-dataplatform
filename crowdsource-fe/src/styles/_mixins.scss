@@ -1,0 +1,9 @@
+$image-context-root: '';
+
+@mixin image-path($image-name, $bgProperties...) {
+  background: url('#{$image-context-root}/images/#{$image-name}') #{$bgProperties};
+}
+
+@mixin radio-button-bg($image-name) {
+  background-image: url('#{$image-context-root}/images/#{$image-name}') !important;
+}

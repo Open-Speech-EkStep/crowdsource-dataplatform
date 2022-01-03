@@ -1,0 +1,4 @@
+{ 
+    "envName": "prod",
+    "autoValidation": "enabled"
+}

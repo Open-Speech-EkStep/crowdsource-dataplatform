@@ -1,0 +1,25 @@
+.heading {
+  max-width: 37.5rem;
+}
+
+.medal {
+  flex: 1;
+  margin-right: 0.5rem;
+
+  @include media-breakpoint-up(lg) {
+    flex: none;
+    margin-right: 3rem;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.medalImg {
+  width: 7.5rem;
+
+  @include media-breakpoint-up(md) {
+    width: 15.625rem;
+  }
+}

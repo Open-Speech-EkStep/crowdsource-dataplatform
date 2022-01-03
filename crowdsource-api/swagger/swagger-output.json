@@ -1,0 +1,976 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Crowdsource API",
+    "description": "Swagger API Documentation for Crowdsource",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/verify-user": {
+      "post": {
+        "tags": [
+          "uat"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "body",
+            "type": "string",
+            "description": "media type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/media/{type}": {
+      "post": {
+        "tags": [
+          "Contribution"
+        ],
+        "description": "Endpoint to get media for contribution",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "media type",
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "User info",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "toLanguage": {
+                  "type": "string",
+                  "example": "English"
+                },
+                "age": {
+                  "type": "string",
+                  "example": "upto 10"
+                }
+              }
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dataset_row_id": {
+                        "type": "string",
+                        "example": "123"
+                      },
+                      "media_data": {
+                        "type": "string",
+                        "example": "qwe"
+                      },
+                      "source_info": {
+                        "type": "string",
+                        "example": "abc"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/contributions/{type}": {
+      "get": {
+        "tags": [
+          "Validation"
+        ],
+        "description": "Endpoint to get contributed data for validation. parameter \"to\" is only required if type=parallel.",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "media type",
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "type": "string",
+            "description": "From language",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hindi"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "type": "string",
+            "description": "To language",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "English"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "contribution_id": {
+                        "type": "string",
+                        "example": "123"
+                      },
+                      "dataset_row_id": {
+                        "type": "number",
+                        "example": 321
+                      },
+                      "sentence": {
+                        "type": "string",
+                        "example": "Text 1"
+                      },
+                      "contribution": {
+                        "type": "string",
+                        "example": "contribution/1"
+                      },
+                      "source_info": {
+                        "type": "string",
+                        "example": "info"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/validate/{contributionId}/{action}": {
+      "post": {
+        "tags": [
+          "Validation"
+        ],
+        "description": "Endpoint to store validation for a contributed data.",
+        "parameters": [
+          {
+            "name": "contributionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Validation action taken (accept/reject/skip)",
+            "schema": {
+              "type": "string",
+              "example": "accept"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "Validation details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentenceId": {
+                  "type": "number",
+                  "example": 1123
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Punjab"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "device": {
+                  "type": "string",
+                  "example": "device"
+                },
+                "browser": {
+                  "type": "string",
+                  "example": "browser_name"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "asr"
+                },
+                "fromLanguage": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "English"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/report": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to store report entry.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentenceId": {
+                  "type": "number",
+                  "example": 123
+                },
+                "reportText": {
+                  "type": "string",
+                  "example": "Report message"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "source": {
+                  "type": "string",
+                  "example": "contribution"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/skip": {
+      "post": {
+        "tags": [
+          "Contribution"
+        ],
+        "description": "Endpoint to mark contribution as skipped",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "sentenceId": {
+                  "type": "number",
+                  "example": 123
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "fromLanguage": {
+                  "type": "string",
+                  "example": "English"
+                },
+                "state_region": {
+                  "type": "string",
+                  "example": "Punjab"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "device": {
+                  "type": "string",
+                  "example": "deviceName"
+                },
+                "browser": {
+                  "type": "string",
+                  "example": "browserName"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "parallel"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/store": {
+      "post": {
+        "tags": [
+          "Contribution"
+        ],
+        "description": "Endpoint to store contribution data",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentenceId": {
+                  "type": "number",
+                  "example": 123
+                },
+                "audioDuration": {
+                  "type": "number",
+                  "example": 3
+                },
+                "userInput": {
+                  "type": "string",
+                  "example": "text contribution sentence"
+                },
+                "speakerDetails": {
+                  "type": "object",
+                  "properties": {
+                    "userName": {
+                      "type": "string",
+                      "example": "name"
+                    },
+                    "motherTongue": {
+                      "type": "string",
+                      "example": "Hindi"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "Male"
+                    },
+                    "age": {
+                      "type": "string",
+                      "example": "upto 10"
+                    }
+                  }
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Punjab"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "device": {
+                  "type": "string",
+                  "example": "deviceName"
+                },
+                "browser": {
+                  "type": "string",
+                  "example": "browserName"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "parallel"
+                },
+                "fromLanguage": {
+                  "type": "string",
+                  "example": "English"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/audio/snr": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/location-info": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to get location info",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/feedback": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "description": "Endpoint to store user feedbacks",
+        "parameters": [
+          {
+            "name": "obj",
+            "type": "object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "feedback": {
+                  "type": "string",
+                  "example": "user feedback text"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Complaint"
+                },
+                "language": {
+                  "type": "string",
+                  "example": "Hindi"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@mail.com"
+                },
+                "module": {
+                  "type": "string",
+                  "example": "ASR Initiative"
+                },
+                "target_page": {
+                  "type": "string",
+                  "example": "Home page"
+                },
+                "opinion_rating": {
+                  "type": "string",
+                  "example": "5"
+                },
+                "recommended": {
+                  "type": "string",
+                  "example": "Yes"
+                },
+                "revisit": {
+                  "type": "string",
+                  "example": "Yes"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/rewards": {
+      "get": {
+        "tags": [
+          "Thank you"
+        ],
+        "description": "Endpoint for reward details of user",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "description": "Type of initiative (asr/text/ocr/parallel)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Source (contribute/validate)",
+            "schema": {
+              "type": "string",
+              "example": "contribute"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hindi"
+            }
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "name"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "badgeId": {
+                  "type": "string",
+                  "example": "1324"
+                },
+                "currentBadgeType": {
+                  "type": "string",
+                  "example": "silver"
+                },
+                "nextBadgeType": {
+                  "type": "string",
+                  "example": "gold"
+                },
+                "sequence": {
+                  "type": "string",
+                  "example": "3rd"
+                },
+                "currentMilestone": {
+                  "type": "string",
+                  "example": "25"
+                },
+                "nextMilestone": {
+                  "type": "string",
+                  "example": "100"
+                },
+                "contributionCount": {
+                  "type": "string",
+                  "example": "30"
+                },
+                "isNewBadge": {
+                  "type": "string",
+                  "example": "true"
+                },
+                "badges": {
+                  "type": "string",
+                  "example": "[{ 'grade': 'bronze, 'generated_badge_id': '3321' }]"
+                },
+                "currentAmount": {
+                  "type": "string",
+                  "example": "0.62"
+                },
+                "languageGoal": {
+                  "type": "string",
+                  "example": "100"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/rewards-info": {
+      "get": {
+        "tags": [
+          "Thank you"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string",
+            "description": "Type of initiative (asr/text/ocr/parallel)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "asr"
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Source (contribute/validate)",
+            "schema": {
+              "type": "string",
+              "example": "contribute"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hindi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "contributions": {
+                    "type": "string",
+                    "example": "100"
+                  },
+                  "badge": {
+                    "type": "string",
+                    "example": "silver"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/user-rewards/{username?}": {
+      "get": {
+        "tags": [
+          "Badges"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "username?",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "schema": {
+              "type": "string",
+              "example": "name"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "cookies",
+            "type": "string",
+            "description": "user id cookie",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "generated_at": {
+                    "type": "string",
+                    "example": "10:00"
+                  },
+                  "generated_badge_id": {
+                    "type": "string",
+                    "example": "113"
+                  },
+                  "language": {
+                    "type": "string",
+                    "example": "Hindi"
+                  },
+                  "milestone": {
+                    "type": "string",
+                    "example": "100"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "asr"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "contribute"
+                  },
+                  "grade": {
+                    "type": "string",
+                    "example": "bronze"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

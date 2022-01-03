@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Translation Actions should render the translation Initiative homepage 1`] = `
+<DocumentFragment>
+  <section
+    class="py-9 py-md-11 px-2 px-lg-0"
+    data-testid="TranslationInitiativeDetails"
+  >
+    <div
+      class="container-lg"
+    >
+      <section>
+        Feedback
+      </section>
+      <section
+        class="mt-9 mt-md-12"
+      >
+        ContributionStats
+      </section>
+      <section
+        class="mt-9 mt-md-12"
+      >
+        ContributionTracker
+      </section>
+    </div>
+  </section>
+</DocumentFragment>
+`;

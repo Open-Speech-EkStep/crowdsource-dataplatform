@@ -1,0 +1,8 @@
+threshold: medium
+fileignoreconfig:
+  - filename: package-lock.json
+    checksum:
+    ignore_detectors: [filename, filesize, filecontent]
+
+  - filename: src/components/Layout/Layout.tsx
+    checksum: 9c0eb7df56f3fd97fcb18cbefcdcc72aee1b2c17f2e1e79f6afb5d3f6e89e5ef

@@ -1,0 +1,11 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-controller
+   
+data:
+  http-snippet : |
+    limit_req_zone prod zone=rd_ingress-hello_rps:10m rate=2000r/s ;
+  location-snippet: |
+      limit_req zone=rd_ingress-hello_rps burst=1000 nodelay;

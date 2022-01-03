@@ -1,0 +1,47 @@
+.root {
+  background-color: var(--primary-color);
+}
+
+.label {
+  background-color: rgba(196, 196, 196, 0.1);
+  padding: 0 10px;
+  width: max-content;
+
+  @include media-breakpoint-up(xl) {
+    text-align: center;
+    width: 7.5rem;
+  }
+}
+
+.tip {
+  width: 7.5rem;
+
+  @include media-breakpoint-up(sm) {
+    width: 10rem;
+  }
+}
+
+.icon {
+  background-color: rgba(196, 196, 196, 0.1);
+  border: 1px solid #bbb;
+  height: 56px;
+  width: 56px;
+}
+
+.sep {
+  border-top: 1px dashed #676b6e;
+  height: 0;
+  max-width: 2rem;
+  min-width: 1rem;
+
+  @include media-breakpoint-up(lg) {
+    max-width: none;
+  }
+}
+
+.close {
+  cursor: pointer;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+}

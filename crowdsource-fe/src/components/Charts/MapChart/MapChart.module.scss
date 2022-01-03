@@ -1,0 +1,80 @@
+.unspecifiedLocation {
+  color: #4562b9;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 18px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.statePopover {
+  backdrop-filter: blur(8px);
+  background: #e9e9e9;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  bottom: 1%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #000;
+  left: 10%;
+  margin-left: -35px;
+  padding: 10px;
+  position: absolute;
+  transition: opacity 0.3s;
+  width: max-content;
+  z-index: 1;
+}
+
+.show {
+  visibility: visible;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.statePopover > .bottomTip {
+  border-color: #e9e9e9 transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  bottom: -19px;
+  content: '';
+  position: absolute;
+}
+
+.stateBgLighter {
+  background-color: #cdd8f6;
+}
+
+.stateBgLighter > .bottomTip {
+  border-color: #cdd8f6 transparent transparent;
+}
+
+.stateBgLight {
+  background-color: #92a8e8;
+}
+
+.stateBgLight > .bottomTip {
+  border-color: #92a8e8 transparent transparent;
+}
+
+.stateBgDark {
+  background-color: #6b85ce;
+}
+
+.stateBgDark > .bottomTip {
+  border-color: #6b85ce transparent transparent;
+}
+
+.stateBgDarker {
+  background-color: #4061bf;
+}
+
+.stateBgDarker > .bottomTip {
+  border-color: #4061bf transparent transparent;
+}
+
+.stateBgDefault {
+  background-color: #e9e9e9;
+}

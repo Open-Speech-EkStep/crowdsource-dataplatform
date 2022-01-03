@@ -1,0 +1,39 @@
+{
+  "fe": {
+    "apiUrl": "https://cug-nplt-api.vakyansh.in",
+    "cdnUrl": "https://d280keiphyegef.cloudfront.net",
+    "staticFileUrl": "https://crowdsource1.blob.core.windows.net/static-content-vakyansh-cug",
+    "whitelistingEmail": true,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "contextRoot": "",
+    "enabled_languages": [
+      "as",
+      "bn",
+      "en",
+      "gu",
+      "hi",
+      "kn",
+      "ml",
+      "mr",
+      "or",
+      "pa",
+      "ta",
+      "te",
+      "kas",
+      "sd",
+      "kok",
+      "bo",
+      "mni",
+      "doi",
+      "ne",
+      "sat",
+      "sa",
+      "mai"
+    ],
+    "enabled_locales": ["en"],
+    "autoValidation": false,
+    "appUrl": "https://uat-ui.vakyansh.in",
+    "brand": "vakyansh"
+  }
+}

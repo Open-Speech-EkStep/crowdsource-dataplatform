@@ -1,0 +1,10 @@
+{
+  "brand": {
+    "initiativeBaseRoute": {
+      "tts": "/tts-initiative",
+      "asr": "/asr-initiative",
+      "translation": "/translation-initiative",
+      "ocr": "/ocr-initiative"
+    }
+  }
+}

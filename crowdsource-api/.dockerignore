@@ -1,0 +1,8 @@
+./nodemodule
+./.env
+./.*
+.dockerignore
+.env
+./*_tests
+k8s-deployments
+migrations

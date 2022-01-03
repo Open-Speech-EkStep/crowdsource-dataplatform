@@ -1,0 +1,177 @@
+@objects
+    header                                 css    header[data-testid=Header]
+    chromextension                         css    div[data-testid=ChromeExtension]
+    extensionText                          xpath  //div[@data-testid='ChromeExtension']//span
+    installnow                             xpath  //div[@data-testid='ChromeExtension']//a[1]
+    watchvideoButton                       xpath  //div[@data-testid='ChromeExtension']//button[1]
+    ttsInitiativeBreadCrumbs                   xpath  //div[@data-testid='Breadcrumbs']
+    reportButton                           xpath  //*[@data-testid="reportIconAlt_button"]
+    testSpeakerbutton                      xpath  //*[@data-testid="testYourSpeaker_button"]
+    labelheading                           xpath  //*[@data-testid='TtsTranscribe']//span
+    audiocontroller                        xpath  //*[@data-testid="audioElement"]
+    editbox                                css    div[data-testid=TextEditArea]
+    cancel                                 xpath  //button[contains(text(),'Cancel')]
+    play                                   xpath  //img[contains(@alt,'Play Icon')]
+    submit                                 xpath  //button[contains(text(),'Submit')]
+    skip                                   xpath  //button[contains(text(),'Skip')]
+    tracker                                xpath  //*/div/div/div/div/div[4]
+    footer                                 css    footer[data-testid=Footer]
+
+
+= Contribute Page =
+    
+    chromextension:
+        @on Desktop
+            below header
+            above ttsInitiativeBreadCrumbs 16px           
+    
+
+    extensionText:
+        @on Desktop
+            inside chromextension
+            text is "Get Chrome extension to type in any language you choose"
+            css font-size is "16px"          
+
+    installnow:
+        @on Desktop
+            inside chromextension
+            text is "Install Now"  
+            css font-size is "16px"         
+
+
+    watchvideoButton:
+        @on Desktop
+            inside chromextension
+            right-of installnow 41px  
+            width 163px         
+            
+
+    ttsInitiativeBreadCrumbs:
+        @on Desktop
+            below header
+            height 42px
+            width 266 to 297px
+        
+        @on Mobile
+            below header
+            height 42px
+            width 460px
+
+    reportButton:
+        @on Desktop
+            below header
+            height 32px
+            width 98px
+        
+        @on Mobile
+            below header
+            height 32px
+            width 48px
+
+    testSpeakerbutton:
+        @on Desktop
+            right-of reportButton
+            height 32px
+            width ~167px
+
+        @on Mobile
+            right-of reportButton
+            height 32px
+            width ~83px
+
+    labelheading:
+        @on Desktop
+            below extensionText
+            text is "Type the text as you hear the audio"
+            css font-size is "20px"
+
+
+        @on Mobile
+            below header
+            text is "Type the text as you hear the audio"
+            css font-size is "16px"
+
+    
+    audiocontroller:
+        @on Desktop
+            below labelheading
+            height 54px
+            width 300px
+        
+        @on Mobile
+            below labelheading
+            height 54px
+            width 300px
+
+    editbox:
+        @on Desktop
+            below audiocontroller
+            height 167px
+            width 1296px
+
+        @on Mobile
+            below audiocontroller
+            height 166px
+            width 460px
+
+    
+    cancel:
+        @on Desktop
+            below editbox
+            height 48px
+            width 200px
+            
+
+        @on Mobile
+            above submit 16px
+            height 44px
+            width 460px           
+            
+
+    play:
+        @on Desktop
+            right-of cancel
+            left-of submit
+            above skip
+            height 60px
+            width 60px
+
+        @on Mobile
+            below editbox
+            above skip
+            height 60px
+            width 60px
+
+
+    submit:
+        @on Desktop
+            right-of play
+            height 48px
+            width 200px
+
+        @on Mobile
+            above skip 24px
+            below play
+            height 44px
+            width 460px
+
+    skip:
+        @on Desktop
+            below play
+            height 48px
+            width 200px
+
+        @on Mobile
+            below play
+            height 44px
+            width 460px
+
+    tracker:
+        @on Desktop
+            below skip
+            width 1296px
+
+
+        @on Mobile
+            below skip
+            width 460px

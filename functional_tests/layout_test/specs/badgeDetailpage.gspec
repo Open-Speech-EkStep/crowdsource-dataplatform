@@ -1,0 +1,342 @@
+@objects
+
+    header                              xpath   //header[@data-testid="Header"]
+    home                                xpath   //span[text()="Home"]
+    heading                             xpath   //h2[text()="How can you win Brand Contributor Badges"]
+    languageTextAndDropDownComponent    xpath   //div[@data-testid="LanguageDropDown"]
+    yourLanguageText                    xpath   //label[@for="languageDropDown"]
+    yourLanguageDropdown                xpath   //select[@data-testid="SelectDropDownLanguage"]
+    badgeDetailTabs                     xpath   //ul[@role="tablist"]
+    ttsTab                             xpath   //button[@id="uncontrolled-tab-example-tab-tts"]
+    asrTab                             xpath   //button[@id="uncontrolled-tab-example-tab-asr"]
+    translationTab                            xpath   //button[@id="uncontrolled-tab-example-tab-translation"]
+    ocrTab                            xpath   //button[@id="uncontrolled-tab-example-tab-ocr"]
+
+    badgeLevelRow                       xpath   //div[@data-testid="badgeLevelRow"]
+    selectBadgeLevelText                xpath   //div[text()="Select Badge level"]
+    bronzeCard                          xpath   //div[@data-testid="en-tts-bronze-contribute-medal"]
+    silverCard                          xpath   //div[@data-testid="en-tts-silver-contribute-medal"]
+    goldCard                            xpath   //div[@data-testid="en-tts-gold-contribute-medal"]
+    platinumCard                        xpath   //div[@data-testid="en-tts-platinum-contribute-medal"]
+
+    participationRow                    xpath   //div[@data-testid="participationRow"]
+    participationText                   xpath   //div[text()="Participation"]
+    contributionRadioButton             xpath   //input[@data-testid="action1"]
+    contributionText                    xpath   //label[text()="Contribution"]
+    validationRadioButton               xpath   //input[@data-testid="action2"]
+    validationText                      xpath   //label[text()="Validation"]
+
+    badgeDescriptionComponent           xpath   //div[@data-testid="badgeDescriptionRow"]
+
+    instructionRow1                     xpath   //p[text()="Please keep contributing actively to stand a chance to get recognised."]
+    instructionRow2                     xpath   //p[text()="Levels and badges may take upto 48 hours to update."]
+    footer                              xpath   //Footer[@data-testid="Footer"]
+    
+= Badge Detail Page =
+
+    header:
+        @on Desktop
+            above home 16px
+            height 72px
+            width 1440px
+        @on Mobile
+            above home
+            height 56px
+            width 500px
+
+    home:
+        @on Desktop
+            text is "Home"
+            css font-size is "18px"
+        
+        @on Mobile
+            text is "Home"
+            css font-size is "14px"
+    heading:
+        @on Desktop
+            below header 63px
+            above languageTextAndDropDownComponent 32px
+            text is "How can you win Brand Contributor Badges"
+            css font-size is "32px"
+        
+        @on Mobile
+            below header
+            above languageTextAndDropDownComponent 20px
+            text is "How can you win Brand Contributor Badges"
+            css font-size is "24px"
+        
+    languageTextAndDropDownComponent:
+        @on Desktop
+            above badgeDetailTabs 40px
+            height 38px
+            width 1320px
+        
+        @on Mobile
+            above badgeDetailTabs 28px
+            height 66px
+            width 484px
+        
+    yourLanguageText:
+        @on Desktop
+            inside languageTextAndDropDownComponent
+            left-of yourLanguageDropdown 8px
+            text is "Your Language:"
+            css font-size is "16px"
+
+        @on Mobile
+            inside languageTextAndDropDownComponent
+            above yourLanguageDropdown 4px
+            text is "Your Language:"
+            css font-size is "16px"
+
+    yourLanguageDropdown:
+        @on Desktop
+            inside languageTextAndDropDownComponent
+            right-of yourLanguageText 8px
+            height 38px
+            width 225px
+
+        @on Mobile
+            inside languageTextAndDropDownComponent
+            below yourLanguageText 4px
+            height 38px
+            width 225px
+    
+    badgeDetailTabs:
+        @on Desktop
+            above badgeLevelRow 20px
+            height 64px
+            width 1296px
+        
+        @on Mobile
+            above badgeLevelRow 20px
+            height 64px
+            width 460px
+
+    ttsTab:
+        @on Desktop
+            inside badgeDetailTabs
+            text is "TTS Initiative"
+            css font-size is "20px"
+
+        @on Mobile
+            inside badgeDetailTabs
+            text is "TTS Initiative"
+            css font-size is "16px"
+    asrTab:
+        @on Desktop
+            inside badgeDetailTabs
+            left-of translationTab
+            text is "ASR Initiative"
+            css font-size is "20px"
+
+        @on Mobile
+            inside badgeDetailTabs
+            left-of translationTab
+            text is "ASR Initiative"
+            css font-size is "16px"
+
+    translationTab:
+        @on Desktop
+            inside badgeDetailTabs
+            left-of ocrTab
+            text is "Translation Initiative"
+            css font-size is "20px"
+
+        @on Mobile
+            left-of ocrTab
+            right-of asrTab
+            text is "Translation Initiative"
+            css font-size is "16px"
+    
+    badgeLevelRow:
+        @on Desktop
+            above participationRow
+            height 168px
+            width 1320px
+        
+        @on Mobile
+            above participationRow
+            height 180px
+            width 484px
+    
+    selectBadgeLevelText:
+        @on Desktop
+            inside badgeLevelRow
+            above participationText 40px
+            left-of bronzeCard 12px
+            text is "Select Badge level"
+            css font-size is "20px"
+
+        @on Mobile
+            inside badgeLevelRow
+            above participationText 156px
+            above bronzeCard 20px
+            text is "Select Badge level"
+            css font-size is "16px"
+    
+    bronzeCard:
+        @on Desktop
+            inside badgeLevelRow
+            above contributionText 40px
+            left-of silverCard 48px
+            height 128px
+            width 98px
+
+        @on Mobile
+            inside badgeLevelRow
+            above participationText 40px
+            left-of silverCard 8px
+            height 96px
+            width 109px
+    
+    silverCard:
+        @on Desktop
+            inside badgeLevelRow
+            above contributionText 40px
+            left-of goldCard 48px
+            height 128px
+            width 98px
+
+        @on Mobile
+            inside badgeLevelRow
+            above participationText 40px
+            left-of goldCard 8px
+            height 96px
+            width 109px
+
+        
+    goldCard:
+        @on Desktop
+            inside badgeLevelRow
+            above contributionText 40px
+            left-of platinumCard 48px
+            height 128px
+            width 98px
+
+        @on Mobile
+            inside badgeLevelRow
+            above participationText 40px
+            left-of platinumCard 8px
+            height 96px
+            width 109px
+
+    platinumCard:
+        @on Desktop
+            inside badgeLevelRow
+            above contributionText 40px
+            height 128px
+            width 98px
+
+        @on Mobile
+            inside badgeLevelRow
+            above participationText 40px
+            height 96px
+            width 109px
+
+    participationRow:
+        @on Desktop
+            above badgeDescriptionComponent 20px
+            height 72px
+            width 1320px
+        
+        @on Mobile
+            above badgeDescriptionComponent 20px
+            height 110px
+            width 484px
+        
+    participationText:
+        @on Desktop
+            inside participationRow
+            left-of contributionRadioButton 12px
+            text is "Participation"
+            css font-size is "20px"
+
+        @on Mobile
+            inside participationRow
+            above contributionRadioButton 24px
+            text is "Participation"
+            css font-size is "16px"
+    
+
+    contributionRadioButton:
+        @on Desktop
+            inside participationRow
+            left-of contributionText 10px
+            height 16px
+            width 16px
+
+        @on Mobile
+            inside participationRow
+            left-of contributionText 10px
+            height 16px
+            width 16px
+
+    contributionText:
+        @on Desktop
+            inside participationRow
+            left-of validationRadioButton 40px
+            text is "Contribution"
+            css font-size is "20px"
+        @on Mobile
+            inside participationRow
+            left-of validationRadioButton ~39px
+            text is "Contribution"
+            css font-size is "16px"
+
+    validationRadioButton:
+        @on Desktop
+            inside participationRow
+            left-of validationText 10px
+            height 16px
+            width 16px
+
+        @on Mobile
+            inside participationRow
+            left-of validationText 10px
+            height 16px
+            width 16px
+
+    validationText:
+        @on Desktop
+            inside participationRow
+            text is "Validation"
+            css font-size is "20px"
+
+        @on Mobile
+            inside participationRow
+            text is "Validation"
+            css font-size is "16px"
+
+    badgeDescriptionComponent:
+        @on Desktop
+            above instructionRow1 40px
+            height 370px
+            width 1296px
+        
+        @on Mobile
+            above instructionRow1 39px
+            height 332px
+            width 460px
+
+    instructionRow1:
+        @on Desktop
+            above instructionRow2
+            text is "Please keep contributing actively to stand a chance to get recognised."
+            css font-size is "18px"
+        
+        @on Mobile
+            above instructionRow2
+            text is "Please keep contributing actively to stand a chance to get recognised."
+            css font-size is "14px"
+
+    instructionRow2:
+        @on Desktop
+            above footer 32px
+            text is "Levels and badges may take upto 48 hours to update."
+            css font-size is "18px"
+        
+        @on Mobile
+            above footer 32px
+            text is "Levels and badges may take upto 48 hours to update."
+            css font-size is "14px"

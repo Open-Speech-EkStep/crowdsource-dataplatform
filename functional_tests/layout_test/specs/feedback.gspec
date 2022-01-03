@@ -1,0 +1,160 @@
+@objects
+    feedbackmodal      css   div[data-testid=Modal]
+    feedbackheading    css   div.modal-header > header > h3
+    feedbackheading2   css   div.modal-header > header > p
+    opinionsection     xpath //*[@id="feedbackForm"]/div[1]
+    categorydropdown   id    category
+    feedbacktext       xpath  //textarea[@id="feedback"]
+    recommendtext      xpath //div[2]/div/form/div[4]/label
+    recommendyes       id    feedbackFormYesCheckbox
+    recommendyno       id    feedbackFormNoCheckbox
+    recommendmaybe     id    feedbackFormNoCheckbox
+    revisittext        xpath //div[2]/div/form/div[5]/label
+    revisityes         xpath    //input[@id="revisit1"]
+    revisitno          xpath    //input[@id="revisit2"]
+    revisitmaybe       xpath    //input[@id="revisit3"]
+    submit             xpath //div/div[3]/footer
+
+
+= feedbackform =
+
+    feedbackheading:
+        @on Desktop
+            text is "Your Feedback"   
+            css font-size is "28px"
+            above feedbackheading2
+            inside feedbackmodal
+
+        @on Mobile
+            text is "Your Feedback"   
+            css font-size is "20px"
+            above feedbackheading2
+            inside feedbackmodal
+
+    feedbackheading2:
+        @on Desktop
+            text is "We would like to get your feedback to improve this platform"   
+            css font-size is "16px"
+            below feedbackheading
+
+        @on Mobile
+            text is "We would like to get your feedback to improve this platform"   
+            css font-size is "14px"
+            below feedbackheading    
+        
+    opinionsection:
+        @on Desktop
+            above categorydropdown 34px
+            width 518px
+
+        @on Mobile
+            above categorydropdown 34px
+            width 442px
+     
+    categorydropdown:
+        @on Desktop
+            above feedbacktext  
+            width 518px
+        @on Mobile
+            above feedbacktext  
+            width 442px
+
+    feedbacktext:
+        @on Desktop
+            above recommendtext
+            width 518px
+        @on Mobile
+            above recommendtext
+            width 442px
+
+    recommendtext:
+        @on Desktop
+            below feedbacktext
+            css font-size is "14px"
+
+        @on Mobile
+            below feedbacktext
+            css font-size is "14px"
+
+
+    recommendyes:
+        @on Desktop
+            above revisittext  
+            left-of recommendyno 64px
+        @on Mobile
+            above revisittext  
+            left-of recommendyno 64px
+    
+    recommendyno:
+     @on Desktop
+        above revisittext
+        left-of recommendmaybe -16px
+        right-of recommendyes 64px
+     @on Mobile
+        above revisittext
+        left-of recommendmaybe -16px
+        right-of recommendyes 64px
+    
+    recommendmaybe:
+     @on Desktop
+        above revisittext
+        right-of recommendyno -16px
+     
+     @on Mobile
+        above revisittext
+        right-of recommendyno -16px
+
+    revisittext:
+     @on Desktop
+        above submit
+        css font-size is "14px" 
+        inside feedbackmodal 41px left
+
+     @on Mobile
+        css font-size is "14px" 
+
+    revisityes:
+     @on Desktop
+        above submit 24px
+        left-of revisitno 64px
+
+     @on Mobile
+        left-of revisitno 64px
+
+
+
+    revisitno:
+     @on Desktop
+        above submit 24px
+        left-of revisitmaybe 60px
+        right-of revisityes 64px
+
+     @on Mobile
+         left-of revisitmaybe 60px
+         right-of revisityes 64px
+
+
+
+    revisitmaybe:
+     @on Desktop
+         above submit 24px
+         right-of revisitno 60px
+     @on Mobile
+         right-of revisitno 60px
+
+    
+    submit:
+     @on Desktop
+         height 64px 
+         width  558px
+
+     @on Mobile
+         height 52px 
+         width  442px
+
+    categorydropdown, recommendtext, feedbacktext:
+     @on Desktop
+         inside feedbackmodal 41px left
+
+     @on Mobile
+         inside feedbackmodal 21px left

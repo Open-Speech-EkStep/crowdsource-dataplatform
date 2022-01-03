@@ -1,0 +1,14 @@
+Dockerfile
+.dockerignore
+node_modules/
+npm-debug.log
+README.md/
+.next/
+crowdsource-api/
+utils/
+data-pipelines
+db-refresher/
+functional_tests/
+infra/
+k8-deployments-aws/
+k8-deployments/

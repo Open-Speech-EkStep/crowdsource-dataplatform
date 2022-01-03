@@ -1,0 +1,550 @@
+@import 'mixins';
+
+/* Customizations goes here */
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  // 0
+  1: $spacer * 0.25,
+  // 4px
+  2: $spacer * 0.5,
+  // 8px
+  3: $spacer * 0.75,
+  // 12px
+  4: $spacer,
+  // 16px
+  5: $spacer * 1.25,
+  // 20px
+  6: $spacer * 1.5,
+  // 24px
+  7: $spacer * 1.75,
+  // 28px
+  8: $spacer * 2,
+  // 32px
+  9: $spacer * 2.5,
+  // 40px
+  10: $spacer * 3,
+  // 48px
+  11: $spacer * 3.25,
+  // 52px
+  12: $spacer * 3.75,
+  // 60px
+  13: $spacer * 4.5,
+  // 72px
+  14: $spacer * 5,
+  // 80px
+);
+
+// Colors
+$link-color: #007bff;
+
+$theme-colors: (
+  'primary': #0f2749,
+  'secondary': #eff5ff,
+  'success': #71e947,
+  'info': #2961ad,
+  'warning': #ffcc35,
+  'danger': #d32f2f,
+  'light': #fff,
+  'dark': #000,
+);
+$custom-colors: (
+  'primary-80': rgba(15, 39, 73, 0.8),
+  'primary-60': rgba(15, 39, 73, 0.6),
+  'primary-40': rgba(15, 39, 73, 0.4),
+  'primary-20': rgba(15, 39, 73, 0.2),
+  'primary-10': rgba(15, 39, 73, 0.1),
+  'primary-4': rgba(15, 39, 73, 0.04),
+  'strong-warning': #ef8537,
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+:root {
+  --primary-color: #{map-get($theme-colors, 'primary')};
+  --secondary-color: #{map-get($theme-colors, 'secondary')};
+  --success-color: #{map-get($theme-colors, 'success')};
+  --info-color: #{map-get($theme-colors, 'info')};
+  --warning-color: #{map-get($theme-colors, 'warning')};
+  --danger-color: #{map-get($theme-colors, 'danger')};
+  --light-color: #{map-get($theme-colors, 'light')};
+  --dark-color: #{map-get($theme-colors, 'dark')};
+  --link-color: #{$link-color};
+  --primary-10-color: #{map-get($custom-colors, 'primary-10')};
+  --primary-20-color: #{map-get($custom-colors, 'primary-20')};
+  --primary-40-color: #{map-get($custom-colors, 'primary-40')};
+  --primary-60-color: #{map-get($custom-colors, 'primary-60')};
+  --primary-80-color: #{map-get($custom-colors, 'primary-80')};
+  --primary-4-color: #{map-get($custom-colors, 'primary-4')};
+  --strong-warning-color: #{map-get($custom-colors, 'strong-warning')};
+  --text-area-grey-color: #f5f6f8;
+  --btn-grey-color: #e7e9ed;
+  --btn-primary-disabled-bg-color: #9fa9b6;
+  --btn-primary-disabled-text-color: #cfd4da;
+  --btn-secondary-disabled-bg-color: #f9fbff;
+  --btn-tertiary-disabled-text-color: #6f7d92;
+  --icon-text-btn-focus-color: #e4e6eb;
+  --badge-bg-color: #fdf5dd;
+  --box-shadow: 0 0 32px rgba(15, 39, 73, 0.1);
+  --box-shadow-green: 0 0 32px #43c0d7;
+  --box-shadow-green-sm: 0 0 12px 8px rgba(67, 192, 215, 0.3);
+  --box-shadow-blue: 0 2px 12px #9fc8ff;
+  --box-shadow-blue-sm: 0 0 12px 8px rgba(102, 176, 255, 0.3);
+  --box-shadow-blue-md: 0 4px 16px 4px rgba(0, 123, 255, 0.2);
+  --box-shadow-blue-lg: 0 0 32px rgba(0, 123, 255, 0.4);
+  --box-shadow-grey: 0 4px 12px rgba(15, 39, 73, 0.2);
+  --border-radius: 0.25rem;
+  --border-radius-8: 0.5rem;
+  --border-radius-12: 0.75rem;
+  --border-radius-16: 1rem;
+  --border-radius-20: 1.25rem;
+  --border-radius-24: 1.5rem;
+  --border-radius-50: 50%;
+}
+
+// Typography
+$font-family-base: Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+$h1-font-size: $font-size-base * 1.75; // 28px
+$h2-font-size: $font-size-base * 1.5; // 24px
+$h3-font-size: $font-size-base * 1.25; // 20px;
+$h4-font-size: $font-size-base * 1.125; // 18px
+$h5-font-size: $font-size-base * 1; // 16px
+$h6-font-size: $font-size-base * 0.875; // 14px
+
+$headings-margin-bottom: 0;
+$headings-font-family: Rowdies;
+$headings-font-style: normal;
+$headings-font-weight: 400;
+$headings-line-height: $line-height-base;
+$headings-color: map-get($theme-colors, 'primary');
+
+h1 {
+  font-size: $h1-font-size !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base * 2.5 !important; // 40px
+  }
+}
+
+h2 {
+  font-size: $h2-font-size !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base * 2 !important; // 32px
+  }
+}
+
+h3 {
+  font-size: $h3-font-size !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base * 1.75 !important; // 28px
+  }
+}
+
+h4 {
+  font-size: $h4-font-size !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base * 1.5 !important; // 24px
+  }
+}
+
+h5 {
+  font-size: $h5-font-size !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base * 1.25 !important; // 20px
+  }
+}
+
+h6 {
+  font-size: $h6-font-size !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base * 1.125 !important; // 18px
+  }
+}
+
+$display-font-sizes: (
+  1: 1.25rem,
+  // 20px
+  2: 1.125rem,
+  // 18px
+  3: 1rem,
+  // 16px
+  4: 0.875rem,
+  // 14px
+  5: 0.875rem,
+  // 14px
+  6: 0.75rem,
+  // 12px
+  7: 0.6875rem,
+  // 11px
+  8: 0.625rem,
+  // 10px
+  9: 0.625rem,
+  // 10px
+);
+$display-font-weight: 400;
+$display-line-height: $line-height-base;
+
+$paragraph-margin-bottom: 0;
+
+p {
+  color: map-get($theme-colors, 'primary') !important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.display-1 {
+  font-size: 1.25rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.75rem !important; // 28px
+  }
+}
+
+.display-2 {
+  font-size: 1.125rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.5rem !important; // 24px
+  }
+}
+
+.display-3 {
+  font-size: 1rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem !important; // 20px
+  }
+}
+
+.display-4 {
+  font-size: 0.875rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.125rem !important; // 18px
+  }
+}
+
+.display-5 {
+  font-size: 0.875rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1rem !important; // 16px
+  }
+}
+
+.display-6 {
+  font-size: 0.75rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 0.875rem !important; // 14px
+  }
+}
+
+.display-7 {
+  font-size: 0.6875rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 0.75rem !important; // 12px
+  }
+}
+
+.display-8 {
+  font-size: 0.625rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 0.6875rem !important; // 11px
+  }
+}
+
+.display-9 {
+  font-size: 0.625rem !important;
+
+  @include media-breakpoint-up(md) {
+    font-size: 0.625rem !important; // 11px
+  }
+}
+
+b,
+strong {
+  font-weight: 700 !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+$box-shadow: var(--box-shadow);
+$box-shadow-green: var(--box-shadow-green);
+$box-shadow-green-sm: var(--box-shadow-green-sm);
+$box-shadow-blue: var(--box-shadow-blue);
+$box-shadow-blue-sm: var(--box-shadow-blue-sm);
+$box-shadow-blue-md: var(--box-shadow-blue-md);
+$box-shadow-blue-lg: var(--box-shadow-blue-lg);
+$box-shadow-grey: var(--box-shadow-grey);
+
+$border-radius: var(--border-radius);
+$border-radius-8: var(--border-radius-8);
+$border-radius-12: var(--border-radius-12);
+$border-radius-16: var(--border-radius-16);
+$border-radius-20: var(--border-radius-20);
+$border-radius-24: var(--border-radius-24);
+$border-radius-50: var(--border-radius-50);
+
+// Merge utilities
+$utilities: map-merge(
+  $utilities,
+  (
+    'rounded':
+      map-merge(
+        map-get($utilities, 'rounded'),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, 'rounded'), 'values'),
+              (
+                8: $border-radius-8,
+                12: $border-radius-12,
+                16: $border-radius-16,
+                20: $border-radius-20,
+                24: $border-radius-24,
+                50: $border-radius-50,
+              )
+            ),
+        )
+      ),
+    'shadow':
+      map-merge(
+        map-get($utilities, 'shadow'),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, 'shadow'), 'values'),
+              (
+                green: $box-shadow-green,
+                green-sm: $box-shadow-green-sm,
+                blue: $box-shadow-blue,
+                blue-sm: $box-shadow-blue-sm,
+                blue-md: $box-shadow-blue-md,
+                blue-lg: $box-shadow-blue-lg,
+                grey: $box-shadow-grey,
+              )
+            ),
+        )
+      ),
+    'color': (
+      property: color,
+      class: text,
+      values: $theme-colors,
+    ),
+    'background-color': (
+      property: background-color,
+      class: bg,
+      values:
+        map-merge(
+          $theme-colors,
+          (
+            'body': $body-bg,
+            'white': $white,
+            'transparent': transparent,
+          )
+        ),
+    ),
+    'margin': (
+      responsive: true,
+      property: margin,
+      class: m,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    'margin-x': (
+      responsive: true,
+      property: margin-right margin-left,
+      class: mx,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    'margin-y': (
+      responsive: true,
+      property: margin-top margin-bottom,
+      class: my,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    'margin-top': (
+      responsive: true,
+      property: margin-top,
+      class: mt,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    'margin-end': (
+      responsive: true,
+      property: margin-right,
+      class: me,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    'margin-bottom': (
+      responsive: true,
+      property: margin-bottom,
+      class: mb,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    'margin-start': (
+      responsive: true,
+      property: margin-left,
+      class: ms,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    // Padding utilities
+    'padding':
+      (
+        responsive: true,
+        property: padding,
+        class: p,
+        values: $spacers,
+      ),
+    'padding-x': (
+      responsive: true,
+      property: padding-right padding-left,
+      class: px,
+      values: $spacers,
+    ),
+    'padding-y': (
+      responsive: true,
+      property: padding-top padding-bottom,
+      class: py,
+      values: $spacers,
+    ),
+    'padding-top': (
+      responsive: true,
+      property: padding-top,
+      class: pt,
+      values: $spacers,
+    ),
+    'padding-end': (
+      responsive: true,
+      property: padding-right,
+      class: pe,
+      values: $spacers,
+    ),
+    'padding-bottom': (
+      responsive: true,
+      property: padding-bottom,
+      class: pb,
+      values: $spacers,
+    ),
+    'padding-start': (
+      responsive: true,
+      property: padding-left,
+      class: ps,
+      values: $spacers,
+    ),
+    'border-color': (
+      property: border-color,
+      class: border,
+      values:
+        map-merge(
+          $theme-colors,
+          (
+            'white': $white,
+          )
+        ),
+    ),
+  )
+);
+
+/****************************/
+// Components override
+/****************************/
+
+$btn-focus-width: 0;
+$input-border-color: var(--primary-color);
+$form-select-border-color: var(--primary-color);
+$input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
+$form-select-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
+$form-check-input-width: 1rem;
+$form-check-input-height: 1rem;
+$form-check-input-checked-bg-color: var(--light-color);
+$form-check-input-border: 2px solid var(--primary-color);
+$form-check-input-checked-border-color: var(--primary-color);
+$form-check-input-focus-box-shadow: 0 0 0 0.2rem rgb(20 39 69 / 50%);
+$navbar-light-color: var(--primary-color);
+$navbar-light-hover-color: var(--primary-color);
+$progress-bg: var(--light-color);
+$btn-padding-x: 0;
+$btn-padding-y: 0;
+$progress-border-radius: 10px;
+$form-check-input-focus-box-shadow: none;
+$nav-tabs-border-width: 0;
+$nav-link-color: var(--primary-80-color);
+$nav-tabs-link-active-color: var(--primary-color);
+$nav-link-hover-color: var(--primary-color);
+$nav-link-padding-y: 0;
+$nav-link-padding-x: 0;
+$input-focus-box-shadow: none;
+$input-focus-border-color: var(--primary-color);
+$form-select-focus-box-shadow: none;
+$form-select-focus-border-color: var(--primary-color);
+$btn-close-focus-shadow: none;
+$btn-focus-box-shadow: none;
+$input-color: var(--primary-color);
+$btn-border-width: 0;
+$input-disabled-bg: transparent;
+$btn-line-height: 1;
+
+:root {
+  /* Z-Indexes */
+  --header-z-index: 100;
+}
+
+.form-check-input:checked[type='radio'] {
+  @include radio-button-bg('radio_checked.svg');
+}
+
+@import '~bootstrap/scss/bootstrap';

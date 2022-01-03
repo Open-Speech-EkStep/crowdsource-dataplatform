@@ -1,0 +1,162 @@
+@objects
+    header                                 css    header[data-testid=Header]
+    chromextension                         css    div[data-testid=ChromeExtension]
+    extensionText                          xpath  //div[@data-testid='ChromeExtension']//span
+    installnow                             xpath  //div[@data-testid='ChromeExtension']//a[1]
+    watchvideoButton                       xpath  //div[@data-testid='ChromeExtension']//button[1]
+    ttsInitiativeBreadCrumbs                   xpath  //div[@data-testid='Breadcrumbs']
+    reportButton                           xpath  //*[@data-testid="reportIconAlt_button"]
+    testSpeakerbutton                      xpath  //*[@data-testid="testYourSpeaker_button"]
+    labelheading                           xpath  //*[@data-testid='TtsValidate']//span
+    audiocontroller                        xpath  //*[@data-testid="audioElement"]
+    needsChange                            xpath  //button[contains(text(),'Needs Change')]
+    play                                   xpath  //img[contains(@alt,'Play Icon')]
+    correct                                xpath  //button[contains(text(),'Correct')]
+    skip                                   xpath  //button[contains(text(),'Skip')]
+    tracker                                xpath  //*/div/div/div/div/div[4]
+    footer                                 css    footer[data-testid=Footer]
+
+
+= Validate Page =
+    
+    chromextension:
+        @on Desktop
+            below header
+            above ttsInitiativeBreadCrumbs 16px           
+    
+
+    extensionText:
+        @on Desktop
+            inside chromextension
+            text is "Get Chrome extension to type in any language you choose"
+            css font-size is "16px"          
+
+    installnow:
+        @on Desktop
+            inside chromextension
+            text is "Install Now"  
+            css font-size is "16px"         
+
+
+    watchvideoButton:
+        @on Desktop
+            inside chromextension
+            right-of installnow 41px  
+            width 163px         
+            
+
+    ttsInitiativeBreadCrumbs:
+        @on Desktop
+            below header
+            height 42px
+            width 249 to 282px
+        
+        @on Mobile
+            below header
+            height 42px
+            width ~460px
+
+    reportButton:
+        @on Desktop
+            below header
+            height 32px
+            width 98px
+        
+        @on Mobile
+            below header
+            height 32px
+            width 48px
+
+    testSpeakerbutton:
+        @on Desktop
+            right-of reportButton
+            height 32px
+            width ~167px
+
+        @on Mobile
+            right-of reportButton
+            height 32px
+            width ~83px
+
+    labelheading:
+        @on Desktop
+            below extensionText
+            text is "Does the audio match the text?"
+            css font-size is "20px"
+
+
+        @on Mobile
+            below header
+            text is  "Does the audio match the text?"
+            css font-size is "16px"
+
+    
+    audiocontroller:
+        @on Desktop
+            below labelheading
+            height 54px
+            width 300px
+        
+        @on Mobile
+            below labelheading
+            height 54px
+            width 300px
+    
+    needsChange:
+        @on Desktop
+            height 48px
+            width 240px
+            
+
+        @on Mobile
+            above correct 16px
+            height 44px
+            width 460px           
+            
+
+    play:
+        @on Desktop
+            right-of needsChange
+            left-of correct
+            above skip
+            height 60px
+            width 60px
+
+        @on Mobile
+            above skip
+            height 60px
+            width 60px
+
+
+    correct:
+        @on Desktop
+            right-of play
+            height 48px
+            width 240px
+
+        @on Mobile
+            above skip 24px
+            below play
+            height 44px
+            width 460px
+
+    skip:
+        @on Desktop
+            below play
+            height 48px
+            width 200px
+
+        @on Mobile
+            below play
+            height 44px
+            width 460px
+
+    tracker:
+        @on Desktop
+            below skip
+            width 1296px
+
+
+        @on Mobile
+            below skip
+            width 460px

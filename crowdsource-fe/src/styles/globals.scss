@@ -1,0 +1,64 @@
+#__next {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+body {
+  min-height: 100%;
+}
+
+.font-family-rowdies {
+  font-family: Rowdies, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.font-family-roboto {
+  font-family: Roboto, sans-serif !important;
+}
+
+.form-check {
+  align-items: center;
+  display: inline-flex;
+  padding: 0;
+
+  .form-check-input {
+    margin: 0;
+  }
+
+  label {
+    margin-left: 10px;
+  }
+}
+
+.amXAxisLabel {
+  font-size: 0.75rem;
+  @include media-breakpoint-up(md) {
+    font-size: 1rem;
+  }
+}
+
+.amThankyouXAxisLabel {
+  font-size: 0.75rem;
+  @include media-breakpoint-up(md) {
+    font-size: 0.875rem;
+  }
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--primary-color) !important;
+  opacity: 0.63 !important; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.loader {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

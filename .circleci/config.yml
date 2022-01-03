@@ -1,163 +1,826 @@
 version: 2.1
-orbs:
-  node: circleci/node@4.1.0
-commands:
-    create_yaml:
-        parameters:
-            file:
-                type: string
-        steps:
-            - run:
-                name: Create app yaml file
-                command: |
-                    cd ~/project
-                    chmod +rwx << parameters.file >>
-                    ./<< parameters.file >> > app.yaml
-    delete_files:
-        steps:
-            - run: 
-                name: Remove files
-                command: |
-                  rm ${HOME}/gcp-key.json
-                  rm app.yaml
-jobs:
-    run_functional_tests:
-        executor:
-            name: node/default
-        steps:
-            - checkout
-            - node/install-packages
-            - run: 
-                name: Gauge tests
-                command: |
-                  sudo apt-get update
-                  sudo apt-get install -y git-all gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libgbm-dev libappindicator1 libnss3 lsb-release xdg-utils wget
-                  sudo rm -rf /var/lib/apt/lists/*
-                  npm run functional_test -- --env test
-    deploy:
-        parameters:
-            env_name:
-                type: string
-            sh_file:
-                type: string
-        docker:
-            - image: google/cloud-sdk
-        steps:
-            - checkout
-            - run:
-                name: Authorize gcloud
-                command: |
-                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
-                  gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
-                  gcloud --quiet config set project ${GCP_PROJECT}
-            - create_yaml:
-                file: <<parameters.sh_file>>
-            - deploy: 
-                name: Deploy app to GAE
-                command: |
-                  if [[ << parameters.env_name >> == "dev" ]]; then
-                    gcloud app deploy app.yaml -v devversion --no-promote
-                  elif [[ << parameters.env_name >> == "test" ]]; then
-                    gcloud app deploy app.yaml -v somerandom --no-promote
-                  else
-                    gcloud app deploy app.yaml
-                    gcloud app deploy dispatch.yaml
-                  fi
-            - delete_files
-    approve_to_deploy:
-        docker: 
-            - image: circleci/node:13.4
-        steps:
-            - run: echo "Hold for approval"
 
-    db_migrate:
-        parameters:
-            db_name:
-              type: string
-        executor:
-            name: node/default
-        steps:
-            - checkout
-            - run :
-                name: Run DB Proxy
-                command: |
-                  sudo apt-get update
-                  sudo apt-get install wget
-                  wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-265.0.0-linux-x86_64.tar.gz
-                  tar -zxf google-cloud-sdk-*
-                  cd google-cloud-sdk
-                  pwd
-                  ./install.sh --quiet
-                  echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
-                  ./bin/gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
-                  ./bin/gcloud --quiet config set project ${GCP_PROJECT}
-                  export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
-                  echo $GOOGLE_APPLICATION_CREDENTIALS
-                  wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-                  chmod +x cloud_sql_proxy
-                  nohup ./cloud_sql_proxy -dir=./cloudsql -instances=ekstepspeechrecognition:us-central1:crowdsourcedb=tcp:5432 &
-                  sleep 25s
-                  cat nohup.out
-            - node/install-packages
-            - run:
-                name: Run DB Migrate
-                command: |
-                    export DATABASE_URL=postgresql://${DEV_DB_USER}:${DEV_DB_PASS}@127.0.0.1/<< parameters.db_name >>
-                    echo << parameters.db_name >>
-                    npx db-migrate up
+parameters:
+  build_ui:
+    type: boolean
+    default: true
+  build_api:
+    type: boolean
+    default: true
+
+orbs:
+  node: circleci/node@4.4.0
+  azure-aks: circleci/azure-aks@0.3.0
+  azure-acr: circleci/azure-acr@0.2.0
+  kubernetes: circleci/kubernetes@0.11.2
+  azure-cli: circleci/azure-cli@1.2.0
+
+definition:
+  fast-checkout: &fast-checkout
+    attach_workspace:
+      at: .
+
+jobs:
+  create-workspace:
+    executor: node/default
+    steps:
+      - checkout
+      - run: rm -rf .git
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  setup_functional_tests:
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env_name:
+        type: string
+      db_name:
+        type: string
+    executor: azure-aks/default
+    steps:
+      - *fast-checkout
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: ${AZURE_RESOURCE_GROUP}
+      - run:
+          name: Setup for Functional tests
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y python3 python3-pip
+            sudo apt-get install -y postgresql-client
+            ENV_IMAGE_NAME=${AZURE_LOGIN_SERVER_NAME}/${AZURE_REPO}:<< parameters.env_name >>
+            ENV_IMAGE_NAME_DB_REFRESHER=${AZURE_LOGIN_SERVER_NAME}/${DB_REFRESHER_REPO}:<< parameters.env_name >>
+            AZURE_DB_USER=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_USER)
+            AZURE_DB_PASS=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_PASS)
+            psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/setupDummyData.sql
+            kubectl -n << parameters.env_name >> patch cronjob refresh-data  -p '{"spec":{"schedule": "* * * * *"}}'
+            sleep 40
+            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env_name >> apply  -f -
+
+  setup_run_galen_tests:
+    executor: node/default
+    steps:
+      - *fast-checkout
+      - run:
+          name: Setup for Galen tests
+          command: |
+            sudo apt-get update
+            sudo apt install -y unzip xvfb libxi6 libgconf-2-4
+            sudo apt install default-jdk
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo apt install ./google-chrome-stable_current_amd64.deb
+            google-chrome --version
+            sudo npm install -g galenframework-cli --unsafe-perm=true --allow-root
+            wget  https://chromedriver.storage.googleapis.com/96.0.4664.45/chromedriver_linux64.zip
+            unzip chromedriver_linux64.zip
+            sudo cp chromedriver /usr/local/lib/node_modules/galenframework-cli/node_modules/chromedriver/lib/chromedriver/
+            cd functional_tests/layout_test/
+            galen test ./suites/ --htmlreport reports -Dwebdriver.chrome.driver=/home/circleci/project/chromedriver
+
+      - store_artifacts:
+          path: functional_tests/layout_test/reports
+          destination: reports
+
+  run_functional_tests:
+    parameters:
+      env_name:
+        type: string
+      db_name:
+        type: string
+    executor:
+      name: node/default
+    steps:
+      - *fast-checkout
+      - run:
+          name: Gauge tests
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y python3 python3-pip
+            sudo apt-get install -y postgresql-client git-all gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libgbm-dev libappindicator1 libnss3 lsb-release xdg-utils wget
+            AZURE_DB_USER=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_USER)
+            AZURE_DB_PASS=$(python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(sys.argv[1]))" $AZURE_DB_PASS)
+            psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/dataSeed.sql
+            sudo rm -rf /var/lib/apt/lists/*
+            npm run install:ft
+            npm run functional_test -- -- --env <<parameters.env_name>>
+            psql "postgresql://${AZURE_DB_USER}:${AZURE_DB_PASS}@${AZURE_DB_HOST}/<< parameters.db_name >>" -f functional_tests/sql/deleteSeedData.sql
+      - run:
+          name: Chat Notification Fail
+          when: on_fail
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"Oops. Build ${CIRCLE_BUILD_NUM} failed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
+      - store_artifacts:
+          path: functional_tests/reports
+          destination: reports
+
+  approve_to_deploy:
+    docker:
+      - image: circleci/node:13.4
+    steps:
+      - run: echo "Hold for approval"
+
+  db_migrate_azure:
+    parameters:
+      db_name:
+        type: string
+      db_host:
+        type: string
+      db_user:
+        type: string
+    executor:
+      name: node/default
+    steps:
+      - *fast-checkout
+      - run:
+          name: Run DB Migrate
+          command: |
+            echo << parameters.db_name >>
+            export DATABASE_URL=postgresql://<< parameters.db_user >>:${AZURE_DB_PASS}@<< parameters.db_host >>/<< parameters.db_name >>
+            echo << parameters.db_name >>
+            echo $DATABASE_URL
+            npm run install:api
+            cd crowdsource-api && npx db-migrate up
+
+  cdn_invalidation:
+    executor: azure-cli/default
+    parameters:
+      env-name:
+        description: |
+          Name of the cdn profile
+        type: string
+      resource-group:
+        description: |
+          Azure resource group
+        type: string
+      profile-name:
+        description: |
+          Azure profile name
+        type: string
+
+    steps:
+      - azure-cli/install
+      - azure-cli/login-with-user:
+          alternate-tenant: false
+      - run:
+          name: cdn_invalidation
+          command: |
+            az cdn endpoint purge -g << parameters.resource-group >> -n << parameters.env-name >> --profile-name << parameters.profile-name >> --content-paths '/*'
+
+  aks_deployment_ui:
+    executor: azure-aks/default
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env-name:
+        description: |
+          Name of the env
+        type: string
+      azure_resource_group:
+        description: |
+          Name of the resource group
+        type: string
+      azure_login_server_name:
+        description: |
+          Name of the acr
+        type: string
+
+    steps:
+      - *fast-checkout
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: << parameters.azure_resource_group >>
+      - run:
+          name: Deploy container
+          command: |
+            ENV_IMAGE_NAME=<< parameters.azure_login_server_name >>/${AZURE_REPO_UI}:<< parameters.env-name >>
+
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
+
+  aks_deployment:
+    executor: azure-aks/default
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env-name:
+        description: |
+          Name of the env
+        type: string
+      azure_resource_group:
+        description: |
+          Name of the resource group
+        type: string
+      azure_login_server_name:
+        description: |
+          Name of the acr
+        type: string
+      azure_repo_api:
+        description: |
+          Name of the image repo
+        type: string
+
+    steps:
+      - *fast-checkout
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: << parameters.azure_resource_group >>
+      - run:
+          command: |
+            ENV_IMAGE_NAME=<< parameters.azure_login_server_name >>/<< parameters.azure_repo_api >>:<< parameters.env-name >>
+            ENV_IMAGE_NAME_DB_REFRESHER=<< parameters.azure_login_server_name >>/${DB_REFRESHER_REPO}:<< parameters.env-name >>
+            ENV_IMAGE_NAME_AUTO_VALIDATION=<< parameters.azure_login_server_name >>/auto-validation:<< parameters.env-name >>
+            kubectl -n << parameters.env-name >> apply  -f ${HOME}/project/crowdsource-api/k8s-deployments/autoscaler_<< parameters.env-name >>.yaml
+
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-api/k8s-deployments/azure/deployment_<< parameters.env-name >>.yaml | kubectl -n << parameters.env-name >> apply  -f -
+
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME_AUTO_VALIDATION|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/auto-validation-consumer/k8s-deployments/azure/deployment.yaml | kubectl -n << parameters.env-name >> apply  -f -
+
+            sed -e "s|IMAGE_NAME_DB_REFRESHER|$ENV_IMAGE_NAME_DB_REFRESHER|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/db-refresher/k8s-deployments/dbrefresher.yaml | kubectl -n << parameters.env-name >> apply  -f -
+          name: Deploy container
+
+  failed-notification:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Chat Notification Fail
+          when: on_fail
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"Oops. Build ${CIRCLE_BUILD_NUM} failed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170406/icon_failed__1325447.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
+
+  success-notification:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Chat Notification Success
+          when: on_success
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":{\"title\":\"Build ${CIRCLE_BUILD_NUM} passed.\",\"subtitle\":\"${CIRCLE_PROJECT_REPONAME}\",\"imageUrl\":\"https://png.pngtree.com/svg/20170510/success_404253.png\",\"imageStyle\":\"IMAGE\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"topLabel\":\"${CIRCLE_TAG}\",\"content\":\"${CIRCLE_SHA1}\"}}]},{\"widgets\":[{\"buttons\":[{\"textButton\":{\"text\":\"DETAILS\",\"onClick\":{\"openLink\":{\"url\":\"${CIRCLE_BUILD_URL}\"}}}}]}]}]}]}"
+            $CHAT_WEBHOOK_URL
+
+  check_fe:
+    executor:
+      name: node/default
+    parameters:
+      env_name:
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Update apt-get
+          command: sudo apt-get update
+      - run:
+          name: Install Headless Chrome & unix dependencies
+          command: >
+            sudo apt-get install -yq \
+
+            gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2
+            libcups2 libdbus-1-3 \
+
+            libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0
+            libglib2.0-0 libgtk-3-0 libnspr4 \
+
+            libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1
+            libxcb1 libxcomposite1 libxcursor1 libgbm-dev \
+
+            libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1
+            libxtst6 ca-certificates \
+
+            fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget unzip
+      - run:
+          name: Build code with check
+          command: |
+            cd crowdsource-api
+            npm i
+            cd ..
+            cd crowdsource-fe
+            npm i
+            unzip ./public/do-not-unzip-aggregated-json.zip -d ./public
+            CI=true NEXT_TELEMETRY_DISABLED=1 NODE_CONFIG_ENV=<< parameters.env_name >> npm run build
+      - run:
+          name: Lighthouse
+          command: |
+            cd crowdsource-fe
+            PORT=8080 NODE_CONFIG_ENV=<< parameters.env_name >> npm run test:lh-ci
+      - store_artifacts:
+          path: crowdsource-fe/.lighthouseci
+          destination: .lighthouseci
+      - store_artifacts:
+          path: crowdsource-fe/coverage
+          destination: coverage
+      - store_test_results:
+          path: crowdsource-fe/test-results
+
+  eks_fargate_deployment:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      env-name:
+        description: |
+          Name of the env
+        type: string
+
+    steps:
+      - *fast-checkout
+      - aws-cli/setup:
+          profile-name: circle-ci
+      - kubernetes/install
+      - run:
+          command: |
+            aws eks --region ap-south-1 update-kubeconfig --name << parameters.cluster-name >>
+            ENV_IMAGE_NAME=${AWS_ECR_ACCOUNT_URL}/${AZURE_REPO_UI}:<< parameters.env-name >>
+            sed -e "s|IMAGE_NAME|$ENV_IMAGE_NAME|g;s/CIRCLE_SHA1/$CIRCLE_SHA1/g" ${HOME}/project/crowdsource-fe/k8s-deployments/deployment_dev.yaml | kubectl -n << parameters.env-name >> apply  -f -
+          name: Deploy container
+      - run: aws cloudfront create-invalidation --distribution-id ${NEXT_DEV_ID} --paths '/*'
 
 workflows:
-    build_test_deploy:
-        jobs:
-          - node/test:
-                version: "13.4"
-          - db_migrate:
-               name: migrate_dev
-               db_name: ${DEV_DB_NAME}
-               requires:
-                 - node/test
-          - deploy:
-               name: deploy_dev
-               env_name: dev
-               sh_file: app_yaml_dev.sh
-               requires:
-                 - migrate_dev
-          - approve_to_deploy:
-                name: approve_test
-                type: approval
-                requires:
-                   - deploy_dev
-          - db_migrate:
-               name: migrate_test
-               db_name: ${TEST_DB_NAME}
-               requires:
-                 - approve_test
-          - deploy:
-               name: deploy_test
-               env_name: test
-               sh_file: app_yaml_test.sh
-               requires:
-                 - migrate_test
-          - run_functional_tests:
-                 requires:
-                   - deploy_test
-          - approve_to_deploy:
-                name: approve_prod
-                type: approval
-                requires:
-                   - deploy_test
-          - db_migrate:
-              name: migrate_prod
-              db_name: ${DB_NAME}
-              requires:
-                - approve_prod
-          - deploy:
-                name: deploy_prod
-                env_name: prod
-                sh_file: app_yaml_prod.sh
-                requires:
-                  - migrate_prod
-                filters:
-                  branches:
-                    only:
-                      - release
+  build_ui_deploy:
+    when: << pipeline.parameters.build_ui >>
+    jobs:
+      - check_fe:
+          name: check_fe
+          env_name: default
+
+      - create-workspace:
+          name: create-workspace
+          requires:
+            - check_fe
+            # - node/test
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_dev_image_next_ui
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./crowdsource-fe/
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+      #     repo: ${AZURE_REPO_UI}
+      #     tag: dev
+      #     checkout: false
+      #     requires:
+      #       - create-workspace
+
+      # - aks_deployment_ui:
+      #     name: dev_ui_deployment_aks
+      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
+      #     env-name: dev
+      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
+      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+      #     requires:
+      #       - push_dev_image_next_ui
+
+      # - cdn_invalidation:
+      #     name: cdn_invalidation_ui_dev
+      #     env-name: next-dev-ui
+      #     resource-group: ${AZURE_RESOURCE_GROUP}
+      #     profile-name: ${AZURE_PROFILE_NAME}
+      #     requires:
+      #       - dev_ui_deployment_aks
+
+      - approve_to_deploy:
+          name: approve_test_deploy
+          type: approval
+          requires:
+            - create-workspace
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_test_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./crowdsource-fe/
+          extra-build-args: --build-arg NODE_CONFIG_ENV=test
+          repo: ${AZURE_REPO_UI}
+          tag: test
+          checkout: false
+          requires:
+            # - dev_ui_deployment_aks
+            - approve_test_deploy
+
+      - aks_deployment_ui:
+          name: test_ui_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+          env-name: test
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          requires:
+            - push_test_image_next_ui
+
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_test
+          env-name: next-test-ui
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - test_ui_deployment_aks
+
+      # - approve_to_deploy:
+      #     name: approve_uat_deploy
+      #     type: approval
+      #     requires:
+      #       - test_ui_deployment_aks
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_uat_image_next_ui
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./crowdsource-fe/
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=uat
+      #     repo: ${AZURE_REPO_UI}
+      #     tag: uat
+      #     checkout: false
+      #     requires:
+      #       - dev_ui_deployment_aks
+      #       - approve_uat_deploy
+
+      # - aks_deployment_ui:
+      #     name: uat_ui_deployment_aks
+      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
+      #     env-name: uat
+      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
+      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+      #     requires:
+      #       - push_uat_image_next_ui
+
+      # - cdn_invalidation:
+      #     name: cdn_invalidation_ui_uat
+      #     env-name: next-uat-ui
+      #     resource-group: ${AZURE_RESOURCE_GROUP}
+      #     profile-name: ${AZURE_PROFILE_NAME}
+      #     requires:
+      #       - uat_ui_deployment_aks
+
+      - setup_run_galen_tests:
+          name: setup_run_galen_uat
+          requires:
+            - cdn_invalidation_ui_test
+
+      # - approve_to_deploy:
+      #     name: approve_prod_deploy
+      #     type: approval
+      #     requires:
+      #       - uat_ui_deployment_aks
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_prod_image_next_ui
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+      #     registry-name: ${AZURE_REGISTRY_PROD}
+      #     path: ./crowdsource-fe/
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+      #     repo: ${AZURE_REPO_UI}
+      #     tag: prod-ui
+      #     checkout: false
+      #     requires:
+      #       - create-workspace
+      #       - approve_prod_deploy
+
+      # - aks_deployment_ui:
+      #     name: prod_ui_deployment_aks
+      #     cluster-name: ${AZURE_PROD_CLUSTER_NAME}
+      #     env-name: prod-ui
+      #     azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
+      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+      #     requires:
+      #       - push_prod_image_next_ui
+
+      # - cdn_invalidation:
+      #     name: cdn_invalidation_ui_prod
+      #     env-name: prod-ui
+      #     resource-group: ${AZURE_RESOURCE_GROUP_PROD}
+      #     profile-name: ${AZURE_PROFILE_NAME_PROD}
+      #     requires:
+      #       - prod_ui_deployment_aks
+
+  build_api_deploy:
+    when: << pipeline.parameters.build_api >>
+    jobs:
+      - node/test:
+          version: '14.17.5'
+      - create-workspace:
+          name: create-workspace
+          requires:
+            - node/test
+          filters:
+            branches:
+              only: [master, nextjs_open_source]
+
+      # - db_migrate_azure:
+      #     name: migrate_dev_azure
+      #     db_name: ${AZURE_DEV_DB_NAME}
+      #     db_host: ${AZURE_DB_HOST}
+      #     db_user: ${AZURE_DB_USER}
+      #     requires:
+      #       - create-workspace
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_dev_image
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./crowdsource-api
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+      #     repo: ${AZURE_REPO}
+      #     tag: dev
+      #     checkout: false
+      #     requires:
+      #       - migrate_dev_azure
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_consumer_image_dev
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./auto-validation-consumer
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+      #     repo: auto-validation
+      #     tag: dev
+      #     checkout: false
+      #     requires:
+      #       - migrate_dev_azure
+
+      # - azure-acr/build-and-push-image:
+      #     name: push_db_refresher_image
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     dockerfile: Dockerfile-dbRefresh
+      #     path: ./db-refresher
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+      #     repo: ${DB_REFRESHER_REPO}
+      #     tag: "dev,test,prod,uat"
+      #     requires:
+      #       - migrate_dev_azure
+
+      # - aks_deployment:
+      #     name: dev_deployment_aks
+      #     cluster-name: ${AZURE_CLUSTER_NAME}
+      #     env-name: dev
+      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
+      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+      #     azure_repo_api: ${AZURE_REPO}
+      #     requires:
+      #       - push_dev_image
+      #       - push_db_refresher_image
+
+      # - setup_functional_tests:
+      #     name: setup_ft_dev
+      #     cluster-name: ${AZURE_CLUSTER_NAME}
+      #     env_name: dev
+      #     db_name: ${AZURE_DEV_DB_NAME}
+      #     requires:
+      #       - dev_deployment_aks
+      #       - migrate_dev_azure
+
+      # - run_functional_tests:
+      #     name: functional_tests_dev
+      #     env_name: dev
+      #     db_name: ${AZURE_DEV_DB_NAME}
+      #     requires:
+      #       - setup_ft_dev
+
+      # - failed-notification:
+      #     name: dev-failed-notification
+      #     requires:
+      #       - functional_tests_dev
+
+      # - success-notification:
+      #     name: dev-success-notification
+      #     requires:
+      #       - functional_tests_dev
+
+      # - approve_to_deploy:
+      #     name: approve_test_deployment_aks
+      #     type: approval
+      #     requires:
+      #       - dev_deployment_aks
+      #       - migrate_dev_azure
+            # - functional_tests_dev
+          # filters:
+          #   branches:
+          #     only: master
+
+      - db_migrate_azure:
+          name: migrate_test_azure
+          db_name: ${AZURE_TEST_DB_NAME}
+          db_host: ${AZURE_DB_HOST}
+          db_user: ${AZURE_DB_USER}
+          requires:
+            - create-workspace
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_test_image
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_CONFIG_ENV=test
+          repo: ${AZURE_REPO}
+          tag: test
+          checkout: false
+          requires:
+            - migrate_test_azure
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_consumer_image_test
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./auto-validation-consumer
+          extra-build-args: --build-arg NODE_CONFIG_ENV=test
+          repo: auto-validation
+          tag: test
+          checkout: false
+          requires:
+            - migrate_test_azure
+
+      - aks_deployment:
+          name: test_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME}
+          env-name: test
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          azure_repo_api: ${AZURE_REPO}
+          requires:
+            - push_test_image
+
+      - setup_functional_tests:
+          name: setup_ft_test
+          cluster-name: ${AZURE_CLUSTER_NAME}
+          env_name: test
+          db_name: ${AZURE_TEST_DB_NAME}
+          requires:
+            - test_deployment_aks
+            - migrate_test_azure
+
+      - run_functional_tests:
+          name: functional_tests_test
+          env_name: test
+          db_name: ${AZURE_TEST_DB_NAME}
+          requires:
+            - setup_ft_test
+
+      # - approve_to_deploy:
+      #     name: approve_uat_deployment_aks
+      #     type: approval
+      #     requires:
+      #       - test_deployment_aks
+      #       - migrate_test_azure
+            #- functional_tests_test
+          # filters:
+          #   branches:
+          #     only: master
+
+      # - db_migrate_azure:
+      #     name: migrate_uat_azure
+      #     db_name: ${AZURE_UAT_DB_NAME}
+      #     db_host: ${AZURE_DB_HOST}
+      #     db_user: ${AZURE_DB_USER}
+      #     requires:
+      #       - approve_uat_deployment_aks
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_uat_image
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./crowdsource-api
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=uat
+      #     repo: ${AZURE_REPO}
+      #     tag: uat
+      #     checkout: false
+      #     requires:
+      #       - migrate_uat_azure
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_consumer_image_uat
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+      #     registry-name: ${AZURE_REGISTRY}
+      #     path: ./auto-validation-consumer
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=uat
+      #     repo: auto-validation
+      #     tag: uat
+      #     checkout: false
+      #     requires:
+      #       - migrate_uat_azure
+
+      # - aks_deployment:
+      #     name: uat_deployment_aks
+      #     cluster-name: ${AZURE_CLUSTER_NAME}
+      #     env-name: uat
+      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
+      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+      #     azure_repo_api: ${AZURE_REPO}
+      #     requires:
+      #       - push_uat_image
+
+
+      # - approve_to_deploy:
+      #     name: approve_prod_deployment_aks
+      #     type: approval
+      #     requires:
+      #       - uat_deployment_aks
+      #     # filters:
+      #     #   branches:
+      #     #     only: master
+
+
+      # - db_migrate_azure:
+      #     name: migrate_prod_azure
+      #     db_name: ${AZURE_PROD_DB_NAME}
+      #     db_host: ${AZURE_PROD_DB_HOST}
+      #     db_user: ${AZURE_PROD_DB_USER}
+      #     requires:
+      #       - approve_prod_deployment_aks
+
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_db_refresher_image_prod
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+      #     registry-name: ${AZURE_REGISTRY_PROD}
+      #     dockerfile: Dockerfile-dbRefresh
+      #     path: ./db-refresher
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+      #     repo: ${DB_REFRESHER_REPO}
+      #     tag: "prod"
+      #     checkout: false
+      #     requires:
+      #       - migrate_prod_azure
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_consumer_image_prod
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+      #     registry-name: ${AZURE_REGISTRY_PROD}
+      #     path: ./auto-validation-consumer
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+      #     repo: auto-validation
+      #     tag: prod
+      #     checkout: false
+      #     requires:
+      #       - migrate_prod_azure
+
+      # - azure-acr/build-and-push-image:
+      #     pre-steps:
+      #       - *fast-checkout
+      #     name: push_prod_image
+      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+      #     registry-name: ${AZURE_REGISTRY_PROD}
+      #     path: ./crowdsource-api
+      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+      #     repo: ${AZURE_REPO}
+      #     tag: prod
+      #     checkout: false
+      #     requires:
+      #       - migrate_prod_azure
+
+
+      # - aks_deployment:
+      #     name: prod_deployment_eks
+      #     cluster-name: ${AZURE_PROD_CLUSTER_NAME}
+      #     env-name: prod
+      #     azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
+      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+      #     azure_repo_api: ${AZURE_REPO}
+      #     requires:
+      #       - push_prod_image

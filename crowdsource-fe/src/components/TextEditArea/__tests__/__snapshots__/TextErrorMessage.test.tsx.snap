@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextErrorMessage should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <span
+    class="d-block text-danger fst-italic mt-2 display-5"
+    data-testid="ErrorText"
+  >
+    error message
+  </span>
+</DocumentFragment>
+`;

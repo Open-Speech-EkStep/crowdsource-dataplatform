@@ -1,0 +1,14 @@
+.root {
+  height: 3.5rem;
+  top: 0;
+  z-index: var(--header-z-index);
+
+  @include media-breakpoint-up(md) {
+    height: 4.5rem;
+  }
+}
+
+.sep {
+  height: 2.5rem;
+  opacity: 0.1;
+}

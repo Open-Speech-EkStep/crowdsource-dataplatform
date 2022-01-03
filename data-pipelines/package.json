@@ -1,0 +1,19 @@
+{
+  "name": "data-ingestion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Rajat Singhal",
+  "license": "ISC",
+  "dependencies": {
+    "csvtojson": "2.0.10",
+    "pg": "^8.3.2",
+    "xlsx": "0.17.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}

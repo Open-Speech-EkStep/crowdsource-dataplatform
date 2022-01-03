@@ -1,0 +1,136 @@
+@objects
+    header                                 css    header[data-testid=Header]
+    chromextension                         css    div[data-testid=ChromeExtension]
+    extensionText                          xpath  //div[@data-testid='ChromeExtension']//span
+    installnow                             xpath  //div[@data-testid='ChromeExtension']//a[1]
+    watchvideoButton                       xpath  //div[@data-testid='ChromeExtension']//button[1]
+    translationInitiativeBreadCrumbs                   xpath  //div[@data-testid='Breadcrumbs']
+    reportButton                           xpath  //*[@data-testid="reportIconAlt_button"]
+    labelheading                           xpath  //*[@data-testid='TranslationValidate']//span
+    textbox                                 xpath  //*[@data-testid="TranslationValidate"]/div[2]
+    needsChange                            xpath   //button[contains(text(),'Needs Change')]
+    correct                                xpath  //button[contains(text(),'Correct')]
+    skip                                   xpath  //button[contains(text(),'Skip')]
+    tracker                                xpath  //*/div/div/div/div/div[4]
+    footer                                 css    footer[data-testid=Footer]
+
+
+= Validate Page =
+    
+    chromextension:
+        @on Desktop
+            below header
+            above translationInitiativeBreadCrumbs 16px           
+    
+
+    extensionText:
+        @on Desktop
+            inside chromextension
+            text is "Get Chrome extension to type in any language you choose"
+            css font-size is "16px"          
+
+    installnow:
+        @on Desktop
+            inside chromextension
+            text is "Install Now"  
+            css font-size is "16px"         
+
+
+    watchvideoButton:
+        @on Desktop
+            inside chromextension
+            right-of installnow 41px  
+            width 163px         
+            
+
+    translationInitiativeBreadCrumbs:
+        @on Desktop
+            below header
+            height 42px
+            width 255 to 352px
+        
+        @on Mobile
+            below header
+            height 42px
+            width 460px
+
+    reportButton:
+        @on Desktop
+            below header
+            height 32px
+            width 98px
+        
+        @on Mobile
+            below header
+            height 32px
+            width 48px
+
+    labelheading:
+        @on Desktop
+            below header
+            text is "Is the translation correct?"
+            css font-size is "20px"
+
+
+        @on Mobile
+            below header
+            text is  "Is the translation correct?"
+            css font-size is "16px"
+
+    
+    textbox:
+        @on Desktop
+            below labelheading
+            height 167px
+            width 1296px
+        
+        @on Mobile
+            below labelheading
+            height 330px
+            width 460px
+    
+    needsChange:
+        @on Desktop
+            height 48px
+            width 240px
+            
+
+        @on Mobile
+            above correct 16px
+            height 44px
+            width 460px           
+            
+
+
+    correct:
+        @on Desktop
+            right-of needsChange
+            height 48px
+            width 240px
+
+        @on Mobile
+            above skip 24px
+            below needsChange
+            height 44px
+            width 460px
+
+    skip:
+        @on Desktop
+            below textbox
+            height 48px
+            width 200px
+
+        @on Mobile
+            below correct
+            height 44px
+            width 460px
+
+    tracker:
+        @on Desktop
+            below skip
+            width 1296px
+
+
+        @on Mobile
+            below skip
+            width 460px

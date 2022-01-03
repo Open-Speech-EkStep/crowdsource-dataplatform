@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashboardNotification should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="root d-flex mt-3 mt-xl-0 flex-column flex-md-row justify-content-md-between align-items-center text-center text-md-start p-5 rounded-12 bg-primary"
+  >
+    <span
+      class="text-light display-4"
+    >
+      some-text
+    </span>
+    <button
+      class="ms-md-5 mt-5 mt-md-0 light secondary btn btn-light"
+      data-testid="Button"
+      type="button"
+    >
+      Contribute Now
+    </button>
+  </div>
+</DocumentFragment>
+`;

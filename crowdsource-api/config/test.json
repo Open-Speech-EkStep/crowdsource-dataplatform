@@ -1,0 +1,9 @@
+{ 
+    "whitelistingEmail":"disabled",
+    "envName": "test",
+    "caching": "disabled",
+    "autoValidation": "enabled",
+    "validation_count": "3",
+    "cache_timeout": "600",
+    "cache_batch_size": "1000"
+}

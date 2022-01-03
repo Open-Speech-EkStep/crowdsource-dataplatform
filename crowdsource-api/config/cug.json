@@ -1,0 +1,9 @@
+{
+  "whitelistingEmail":"enabled",
+  "envName": "cug",
+  "caching": "disabled",
+  "autoValidation": "disabled",
+  "validation_count": "5",
+  "cache_timeout": "1800",
+  "cache_batch_size": "1000"
+}

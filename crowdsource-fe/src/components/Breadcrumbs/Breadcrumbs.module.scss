@@ -1,0 +1,27 @@
+.root {
+  > span {
+    @include media-breakpoint-up(md) {
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+
+.initiative {
+  font-size: 0.875rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+  }
+}
+
+.icon {
+  width: 3rem;
+}
+
+.link {
+  color: var(--primary-color);
+  &:hover {
+    color: var(--primary-color);
+  }
+}

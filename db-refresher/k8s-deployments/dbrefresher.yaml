@@ -1,0 +1,95 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: refresh-data
+  labels:
+    app: CIRCLE_SHA1
+
+spec:
+  schedule: "0 */2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: db-refresher
+              image: IMAGE_NAME_DB_REFRESHER
+              imagePullPolicy: Always
+              env:
+                - name: DB_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: DB_HOST
+                - name: DB_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: DB_NAME
+                - name: DB_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: DB_USER
+                - name: DB_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: DB_PASS
+                - name: BUCKET_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: STATIC_BUCKET_NAME
+                - name: ENCRYPTION_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: ENCRYPTION_KEY
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AWS_ACCESS_KEY_ID
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AWS_SECRET_ACCESS_KEY
+                - name: region
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: region
+                - name: AZURE_TENANT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_TENANT_ID
+                - name: AZURE_APP_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_APP_ID
+                - name: AZURE_ACC_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_ACC_URL
+                - name: AZURE_CONTAINER
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZURE_CONTAINER
+                - name: AZCOPY_SPA_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: AZCOPY_SPA_CLIENT_SECRET
+                - name: ENVIRONMENT
+                  valueFrom:
+                    secretKeyRef:
+                      name: vakyansh-secret
+                      key: ENVIRONMENT
+          restartPolicy: Never
+      backoffLimit: 2

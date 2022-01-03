@@ -1,0 +1,23 @@
+const { Client } = require('pg');
+
+const conn = (connectionString) => {
+    const client = new Client({
+        connectionString: connectionString
+    });
+    client.connect().then(ok => { console.log("ok connection done") });
+    return client
+}
+
+const insertMaster = async (params, location, client) => {
+    console.log('params', params)
+    const paramsStr = JSON.stringify(params)
+        .split("'").join("''")
+
+    const insert_master = `insert into master_dataset (params,location, dataset_type, ingested_by) values ('${paramsStr}','${location}', 'parallel', 'srajat@thoughtworks.com') RETURNING master_dataset_id`
+
+    const result = await client.query(`${insert_master}`)
+    const datasetId = result.rows[0].master_dataset_id;
+    console.log('master_dataset_id=', datasetId)
+    return datasetId
+}
+module.exports = { conn, insertMaster }

@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContributionTracker should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="ContributionTracker"
+  >
+    <h3>
+      contributionTrackerHeader
+    </h3>
+    <div
+      class="mt-4 d-flex flex-column flex-md-row align-items-md-center"
+    >
+      <label
+        class="display-3 mb-0 mb-md-0 font-family-rowdies form-label"
+        for="recommended"
+      >
+        contributionTrackerSubHeader1
+      </label>
+      <div
+        class="d-md-flex ms-md-9 mt-4 mt-md-0"
+      >
+        <div
+          class="radio me-8 mb-0 form-check form-check-inline"
+        >
+          <input
+            checked=""
+            class="form-check-input"
+            id="feedbackFormYesCheckbox"
+            name="recommended"
+            type="radio"
+            value="byDuration"
+          />
+          <label
+            class="form-check-label"
+            for="feedbackFormYesCheckbox"
+            title=""
+          >
+            byHours
+          </label>
+        </div>
+        <div
+          class="radio me-8 mb-0 mt-2 mt-md-0 form-check form-check-inline"
+        >
+          <input
+            class="form-check-input"
+            id="feedbackFormNoCheckbox"
+            name="recommended"
+            type="radio"
+            value="bySpeaker"
+          />
+          <label
+            class="form-check-label"
+            for="feedbackFormNoCheckbox"
+            title=""
+          >
+            bySentences
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="bg-secondary p-5 mt-4 mt-md-5 rounded-8"
+    >
+      <div
+        class="d-flex justify-content-end display-5 mb-2"
+      >
+        <div
+          class="d-flex align-items-center mt-3 mt-md-0 display-6"
+        >
+          <span
+            class="chartLabel chartLabelOrange"
+          >
+            yourSelectedLanguage
+          </span>
+          <span
+            class="chartLabel chartLabelYellow ms-4"
+          >
+            topLanguages
+          </span>
+        </div>
+      </div>
+      <div
+        class="chartContainer"
+      >
+        BarChart
+      </div>
+    </div>
+    <div
+      class="mt-9 mt-md-12"
+    >
+      <div
+        class="d-flex justify-content-center"
+      >
+        <a
+          class="info primary btn btn-primary"
+          data-testid="ViewAllDetailButton"
+          href="/tts-initiative/dashboard"
+          role="button"
+          tabindex="0"
+        >
+          viewAllDetail
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

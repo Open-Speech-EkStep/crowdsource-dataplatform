@@ -1,0 +1,25 @@
+.root {
+  box-shadow: #ffbf00 0 8px 0;
+}
+
+.stat {
+  border-top: 1px solid #d8d8d8;
+  word-break: break-word;
+
+  @include media-breakpoint-up(md) {
+    border-left: 1px solid #d8d8d8;
+    border-top: 0;
+  }
+
+  &:first-child {
+    border-top: 0;
+
+    @include media-breakpoint-up(md) {
+      border-left: 0;
+    }
+  }
+}
+
+.count {
+  font-family: 'Rowdies', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

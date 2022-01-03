@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewAllDetailButton should render the view all detail button 1`] = `
+<DocumentFragment>
+  <div
+    class="d-flex justify-content-center"
+  >
+    <a
+      class="info primary btn btn-primary"
+      data-testid="ViewAllDetailButton"
+      href="/tts-initiative/dashboard"
+      role="button"
+      tabindex="0"
+    >
+      viewAllDetail
+    </a>
+  </div>
+</DocumentFragment>
+`;

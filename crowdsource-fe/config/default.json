@@ -1,0 +1,16 @@
+{
+  "fe": {
+    "apiUrl": "http://localhost:8080",
+    "cdnUrl": "https://dev-data-crowdsource.azureedge.net",
+    "staticFileUrl": "http://localhost:8080",
+    "whitelistingEmail": false,
+    "showDataSource": false,
+    "feedbackTopComponent": false,
+    "contextRoot": "",
+    "enabled_languages": ["as", "bn", "en", "hi", "kn", "ml"],
+    "enabled_locales": ["en"],
+    "autoValidation": true,
+    "appUrl": "https://dev-ui.vakyansh.in",
+    "brand": "vakyansh"
+  }
+}

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContributionStatsByLanguage should render the component and matches it against stored snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="mt-4 mt-md-5"
+    >
+      <div
+        class="root rounded-20 bg-info px-7 px-md-0 py-md-7"
+      >
+        <div
+          class="m-md-0 row"
+          data-testid="StatsRow"
+        >
+          <div
+            class="stat col-md-4 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
+            >
+              <span
+                class="count text-warning display-1 d-flex text-center"
+              >
+                6
+              </span>
+              <span
+                class="text-light mt-1 display-3 text-center"
+              >
+                peopleParticipated
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-4 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
+            >
+              <span
+                class="count text-warning display-1 d-flex text-center"
+              >
+                1 minutes1
+              </span>
+              <span
+                class="text-light mt-1 display-3 text-center"
+              >
+                durationTranscribed
+              </span>
+            </div>
+          </div>
+          <div
+            class="stat col-md-4 col-12"
+          >
+            <div
+              class="d-flex flex-column align-items-center py-7 py-md-0 h-100 justify-content-md-center"
+            >
+              <span
+                class="count text-warning display-1 d-flex text-center"
+              >
+                3 minutes1
+              </span>
+              <span
+                class="text-light mt-1 display-3 text-center"
+              >
+                durationValidated
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,10 @@
+.root {
+  background-image: var(--background--image-mobile);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: var(--background-size);
+
+  @include media-breakpoint-up(md) {
+    background-image: var(--background--image);
+  }
+}

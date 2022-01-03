@@ -1,0 +1,5 @@
+export const AUDIO = {
+  MAX_DURATION: 21,
+  WARNING_COUNT_START: 5,
+  MIN_DURATION: 2,
+};
