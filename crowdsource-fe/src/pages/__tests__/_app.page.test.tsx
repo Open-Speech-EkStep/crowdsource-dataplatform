@@ -1,3 +1,4 @@
+import jestFetchMock from 'jest-fetch-mock';
 import type { Router } from 'next/router';
 import router from 'next/router';
 
@@ -7,8 +8,17 @@ import { act, render, screen, verifyAxeTest } from 'utils/testUtils';
 import App from '../_app.page';
 
 describe('App', () => {
+  jestFetchMock.enableMocks();
+
   const setup = () => {
     router.pathname = '/tts-initiative/dashboard';
+    const mockIpAddress = '111.111.11.111';
+
+    fetchMock
+      .doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace')
+      .mockResponseOnce(`ip=${mockIpAddress}`);
+
+    fetchMock.doMockIf(`/location-info?ip=${mockIpAddress}`).mockResponse(JSON.stringify({}));
 
     const Component = () => <div>Hello World</div>;
 

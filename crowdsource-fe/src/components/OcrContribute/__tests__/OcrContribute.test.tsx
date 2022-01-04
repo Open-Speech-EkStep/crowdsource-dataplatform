@@ -1,4 +1,5 @@
 import { when } from 'jest-when';
+import router from 'next/router';
 
 import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 
@@ -261,7 +262,13 @@ describe('OcrContribute', () => {
   });
 
   it('should go to thank you page after 5 skip sentences', async () => {
+    const url = '/skip';
+    const successResponse = { message: 'Skipped successfully.', statusCode: 200 };
+
     await setup(resultData);
+    fetchMock.doMockIf(url).mockResponse(JSON.stringify(successResponse));
+
+    router.push = jest.fn();
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 
@@ -274,5 +281,11 @@ describe('OcrContribute', () => {
     userEvent.click(screen.getByRole('button', { name: 'skip' }));
 
     userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    await waitFor(() => {
+      expect(router.push).toHaveBeenCalledWith(expect.stringContaining('/thank-you'), undefined, {
+        locale: 'en',
+      });
+    });
   });
 });

@@ -38,6 +38,6 @@ describe('#usePostFetch', () => {
 
     const { result } = setup(url);
 
-    expect(result.error).toBe(undefined);
+    await waitFor(() => expect(result.current.error).toBe(errorResponse));
   });
 });

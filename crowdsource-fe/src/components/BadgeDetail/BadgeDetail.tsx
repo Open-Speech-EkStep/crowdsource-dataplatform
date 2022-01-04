@@ -73,7 +73,7 @@ const BadgeDetail = () => {
         block: 'nearest',
         inline: 'center',
       });
-    }, 500);
+    }, 800);
     onSetInitiativeRouting(INITIATIVES_MEDIA_MAPPING[defaultInitiative]);
   }, []);
 
