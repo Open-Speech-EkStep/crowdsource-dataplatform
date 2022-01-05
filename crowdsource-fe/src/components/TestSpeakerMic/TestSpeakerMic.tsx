@@ -71,6 +71,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
         media.current = null;
         mediaAudio.current?.pause();
         const audio = mediaAudio.current;
+        /* istanbul ignore next */
         if (audio) {
           audio.currentTime = 0;
         }
@@ -343,6 +344,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     media.current.start();
   };
 
+  /* istanbul ignore next */
   const playRecordedAudio = () => {
     setShowPlayBtn(false);
     setShowPlayingbackAudio(true);
@@ -375,6 +377,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
           media.current = null;
           mediaAudio.current?.pause();
           const audio = mediaAudio.current;
+          /* istanbul ignore next */
           if (audio) {
             audio.currentTime = 0;
           }
@@ -411,6 +414,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
               media.current = null;
               mediaAudio.current?.pause();
               const audio = mediaAudio.current;
+              /* istanbul ignore next */
               if (audio) {
                 audio.currentTime = 0;
               }
@@ -464,7 +468,9 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   </span>
                 </Button>
               )}
+
               {!showTestMicText && showPlayingbackAudio && (
+                /* istanbul ignore next */
                 <Button
                   variant="normal"
                   onClick={showPlayBtn ? playRecordedAudio : () => {}}
@@ -495,6 +501,7 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
                   className={`${styles.text} d-flex align-items-center mt-1 mt-md-0 justify-content-center justify-content-md-start`}
                 >
                   {showPlayingbackAudio && !showPlayBtn && !showTestMicText && (
+                    /* istanbul ignore next */
                     <span>
                       {noiseMessage && showPlayingbackAudio ? (
                         <div className="d-flex align-items-center">

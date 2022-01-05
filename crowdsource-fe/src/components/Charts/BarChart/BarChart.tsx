@@ -85,6 +85,7 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
       series.tooltip.background.fill = am4core.color(data.bgColor);
     }
 
+    /* istanbul ignore next */
     if (isMobileDevice()) {
       series.tooltip.label.maxWidth = 160;
       series.tooltip.label.wrap = true;

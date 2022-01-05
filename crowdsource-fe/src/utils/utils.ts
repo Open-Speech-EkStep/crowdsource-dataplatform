@@ -245,8 +245,9 @@ export const getLanguageRank = (
   contributionType: string,
   contributionLanguage: string
 ) => {
-  const langaugeDataByInitiative =
-    cumulativeDataByLanguage?.filter(dataByLanguage => dataByLanguage.type === initiative) || [];
+  const langaugeDataByInitiative = cumulativeDataByLanguage?.filter(
+    dataByLanguage => dataByLanguage.type === initiative
+  );
 
   const sortingLanguages = langaugeDataByInitiative.sort((a: any, b: any) =>
     Number(a[contributionType]) > Number(b[contributionType]) ? -1 : 1

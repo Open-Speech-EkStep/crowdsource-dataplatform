@@ -1,6 +1,6 @@
 import { when } from 'jest-when';
 
-import { render, screen, userEvent } from 'utils/testUtils';
+import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 
 import BadgeDetail from '../BadgeDetail';
 
@@ -41,6 +41,27 @@ describe('BadgeDetail', () => {
     expect(scrollIntoViewMock).toBeCalled();
     userEvent.click(screen.getByRole('tab', { name: 'asr initiativeTextSuffix' }));
     expect(screen.getByRole('tab', { name: 'asr initiativeTextSuffix' })).toHaveClass('active');
+  });
+
+  it('should render badge detail for selected initiative when comes from thank you page', async () => {
+    let scrollIntoViewMock = jest.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
+    setup();
+
+    await waitFor(() => expect(scrollIntoViewMock).toBeCalled());
+
+    expect(screen.getByRole('tab', { name: 'asr initiativeTextSuffix' })).toHaveClass('active');
+  });
+
+  it('should activate silver badges when silver medal is selected', async () => {
+    await setup();
+    expect(screen.getByText('Silver')).toBeInTheDocument();
+    expect(screen.getByText('Silver').parentElement).not.toHaveClass('active');
+    userEvent.click(screen.getByText('Silver'));
+    await waitFor(() => {
+      expect(screen.getByText('Silver').parentElement).toHaveClass('active');
+    });
   });
 
   it('should activate validate badges when validate radio button is selected', async () => {

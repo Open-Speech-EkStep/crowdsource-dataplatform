@@ -69,4 +69,16 @@ describe('EditTextBlock', () => {
       expect(screen.queryByText('validationWarningText')).toBeInTheDocument();
     });
   });
+
+  it('should test auto validate if language is not defined', async () => {
+    setup(null, 'test', true);
+
+    expect(screen.queryByText('validationWarningText')).not.toBeInTheDocument();
+    userEvent.clear(screen.getByRole('textbox', { name: 'label 2' }));
+    userEvent.type(screen.getByRole('textbox', { name: 'label 2' }), 'wrong text');
+
+    await waitFor(() => {
+      expect(screen.queryByText('typeInChosenLanguage')).toBeInTheDocument();
+    });
+  });
 });

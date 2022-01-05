@@ -308,4 +308,91 @@ describe('TranslationTranslate', () => {
       });
     });
   });
+
+  it('should go to thank you page after 5 skip sentences but last sentence throw an error', async () => {
+    const url = '/skip';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          userName: 'abc',
+          language: 'English',
+          fromLanguage: 'Hindi',
+          sentenceId: 1138910,
+          state_region: 'National Capital Territory of Delhi',
+          country: 'India',
+          type: 'parallel',
+        }),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+  });
+
+  it('should go to thank you page after 4 skip sentences and last sentence throw an error when user submit', async () => {
+    const url = '/store';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
+
+    userEvent.type(screen.getByRole('textbox', { name: 'english' }), 'abcd');
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'submit' }));
+    });
+
+    await waitFor(() => {
+      expect(router.push).toHaveBeenCalledWith(expect.stringContaining('/thank-you'), undefined, {
+        locale: 'en',
+      });
+    });
+  });
 });

@@ -9,6 +9,7 @@ interface PortalProps {
 
 let portalRoot: HTMLElement | null;
 
+/* istanbul ignore next */
 if (typeof window !== 'undefined') {
   portalRoot = document.getElementById('portal');
 
@@ -22,6 +23,7 @@ if (typeof window !== 'undefined') {
 const Portal = ({ children }: PortalProps) => {
   let el: Element | undefined;
 
+  /* istanbul ignore next */
   if (typeof window !== 'undefined') {
     el = document.createElement('div');
   }

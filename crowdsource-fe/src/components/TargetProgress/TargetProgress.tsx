@@ -75,7 +75,7 @@ const TargetProgress = (props: TargetProgressProps) => {
   let initiativeUnit;
 
   const getInitiativeGoal = (data: any) => {
-    const goalDataList = data.filter((d: any) => d.type === props.initiativeType) || [];
+    const goalDataList = data.filter((d: any) => d.type === props.initiativeType);
     const goalData = reduceList(goalDataList);
     const totalGoal = getSourceCount(props.source, goalData.contribution_goal, goalData.validation_goal) || 1;
     return totalGoal;

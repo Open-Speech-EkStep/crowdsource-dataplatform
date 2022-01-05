@@ -13,6 +13,8 @@ import {
   getErrorMsg,
   isMobileDevice,
   getLanguageRank,
+  getHoursValue,
+  getHoursText,
 } from '../utils';
 import '__fixtures__/mockComponentsWithSideEffects';
 
@@ -198,6 +200,33 @@ describe('Utils', () => {
     expect(isMobileDevice()).toEqual(false);
   });
 
+  it('should test the getHoursValue method', () => {
+    const roundedValue = getHoursValue(25);
+    expect(roundedValue).toEqual(25);
+  });
+
+  it('should test the getHoursText method', () => {
+    const roundedValue = getHoursText(25);
+    expect(roundedValue).toEqual('25 hours2');
+  });
+
+  // it('should test the fetchLocationInfo method', async () => {
+  //   const mockIpAddress = '111.111.11.111';
+
+  //   fetchMock
+  //     .doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace')
+  //     .mockResponseOnce(`ip=${mockIpAddress}`);
+
+  //   fetchMock.doMockIf(`/location-info?ip=${mockIpAddress}`).mockResponse(
+  //     JSON.stringify({
+  //       state: 'Uttar Pradesh',
+  //       reegion: 'India',
+  //     })
+  //   );
+
+  //   expect(fetchLocationInfo()).toHaveBeenCalled();
+  // });
+
   it('should give 1st rank when langauge is on top', () => {
     const cumulativeDataByLanguage: Array<CumulativeDataByLanguage> = [
       {
@@ -277,7 +306,7 @@ describe('Utils', () => {
       {
         total_contribution_count: 7,
         total_contributions: 7.8,
-        total_validation_count: 8,
+        total_validation_count: 10,
         total_validations: 8.9,
         type: 'asr',
         total_speakers: 9,

@@ -1,4 +1,4 @@
-import { render, screen, userEvent, verifyAxeTest, waitFor } from 'utils/testUtils';
+import { fireEvent, render, screen, userEvent, verifyAxeTest, waitFor } from 'utils/testUtils';
 
 import Navigation from '../Navigation';
 
@@ -43,6 +43,20 @@ describe('Navigation', () => {
     await waitFor(() => expect(container.querySelector('.navbar-collapse')).toHaveClass('show'));
 
     userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
+
+    await waitFor(() => expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show'));
+  });
+
+  it('should collapse when page is scrolling', async () => {
+    const { container } = setup();
+
+    expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show');
+
+    userEvent.click(screen.getByRole('button', { name: /Toggle navigation/ }));
+
+    await waitFor(() => expect(container.querySelector('.navbar-collapse')).toHaveClass('show'));
+
+    fireEvent.scroll(document, { target: { scrollY: 100 } });
 
     await waitFor(() => expect(container.querySelector('.navbar-collapse')).not.toHaveClass('show'));
   });

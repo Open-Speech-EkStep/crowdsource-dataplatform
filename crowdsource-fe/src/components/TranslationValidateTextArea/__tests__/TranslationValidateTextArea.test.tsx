@@ -41,6 +41,16 @@ describe('TranslationValidateTextArea', () => {
     });
   });
 
+  it('should test the textarea text without language', async () => {
+    setup(null, null, 'test');
+
+    userEvent.type(screen.getByRole('textbox', { name: 'label 1' }), 'abc');
+
+    await waitFor(() => {
+      expect(screen.queryByText('Please type in your chosen language')).not.toBeInTheDocument();
+    });
+  });
+
   it('should call error callback when input text updated but is equal to original', async () => {
     setup('Hindi', 'English', 'test');
 

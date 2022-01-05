@@ -67,4 +67,15 @@ describe('LanguageSwitcher', () => {
 
     expect(localStorage.setItem).toHaveBeenCalledWith('contributionLanguage', 'English');
   });
+
+  it('should change the locale to English but contribution language should not select', async () => {
+    router.asPath = '/tts-initiative';
+    setup();
+
+    userEvent.click(screen.getByText('English'));
+
+    await waitFor(() => expect(screen.getByRole('link', { name: 'English' })).toBeInTheDocument());
+
+    expect(localStorage.setItem).not.toHaveBeenCalledWith('contributionLanguage', 'English');
+  });
 });

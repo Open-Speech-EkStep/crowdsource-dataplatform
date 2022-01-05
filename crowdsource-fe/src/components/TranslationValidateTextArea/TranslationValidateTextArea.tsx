@@ -38,7 +38,7 @@ const ValidateTextArea: FunctionComponent<ValidateTextAreaProps> = ({
     if (
       inputText &&
       autoValidationEnabled &&
-      !AutoValidation[initiative](`${fromLanguage || ''}-${toLanguage || ''}`, text, inputText)
+      !AutoValidation[initiative](`${fromLanguage}-${toLanguage}`, text, inputText)
     ) {
       setValidationError(TEXT_INPUT_ERROR_CONFIG.validation);
     } else setValidationError(undefined);

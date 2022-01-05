@@ -20,16 +20,14 @@ const useNavLink = () => {
           className: classnames(
             `${styles.link} ${styles.activeLink} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`
           ),
-          'aria-current':
-            currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
+          'aria-current': 'page' as AriaAttributes['aria-current'],
         };
       } else {
         return {
           className: classnames(
             `${styles.link} font-family-rowdies d-flex align-items-center display-5 p-4 px-xl-5 py-xl-0`
           ),
-          'aria-current':
-            currentRoutePath === routePath ? 'page' : (undefined as AriaAttributes['aria-current']),
+          'aria-current': undefined as AriaAttributes['aria-current'],
         };
       }
     },

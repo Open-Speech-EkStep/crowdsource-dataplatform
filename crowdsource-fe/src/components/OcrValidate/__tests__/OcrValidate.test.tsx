@@ -114,6 +114,20 @@ describe('OcrValidate', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Edit Icon needsChange' })).toBeEnabled());
   });
 
+  it('should expand the  image', async () => {
+    await setup();
+
+    expect(screen.getByTestId('ExpandView')).toBeInTheDocument();
+    expect(screen.getByAltText('OCR Data')).toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId('ExpandView'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('CollapseView')).toBeInTheDocument();
+      expect(screen.getByAltText('OCR Data Expanded')).toBeInTheDocument();
+    });
+  });
+
   it('should not enable submit for short edit', async () => {
     await setup();
 
@@ -358,6 +372,60 @@ describe('OcrValidate', () => {
         mode: 'cors',
       });
     });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+  });
+
+  it('should go to thank you page after 4 skip sentences and last sentence throw an error when user submit', async () => {
+    const errorResponse = new Error('Some error');
+    await setup();
+    fetchMock.doMockOnceIf(storeUrl).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+
+    userEvent.click(screen.getByRole('button', { name: 'Edit Icon needsChange' }));
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
+    userEvent.clear(screen.getByRole('textbox', { name: 'yourEdit (hindi)' }));
+    userEvent.type(screen.getByRole('textbox', { name: 'yourEdit (hindi)' }), 'बपपप');
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'submit' })).toBeEnabled();
+    });
+    userEvent.click(screen.getByRole('button', { name: 'submit' }));
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(storeUrl, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:
+          expect.stringContaining('"speakerDetails":{"userName":"abc"}') &&
+          expect.stringContaining('"language":"Hindi"') &&
+          expect.stringContaining('"sentenceId":"1248712"') &&
+          expect.stringContaining('"type":"ocr"'),
+      });
+    });
+    await waitFor(() => expect(screen.getByRole('img', { name: 'check' })).toBeInTheDocument());
+
     await waitFor(() => {
       expect(screen.getByText('apiFailureError')).toBeInTheDocument();
     });

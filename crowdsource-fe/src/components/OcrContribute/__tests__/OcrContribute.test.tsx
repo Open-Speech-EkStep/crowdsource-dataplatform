@@ -171,6 +171,20 @@ describe('OcrContribute', () => {
     });
   });
 
+  it('should expand the  image', async () => {
+    await setup(resultData);
+
+    expect(screen.getByTestId('ExpandView')).toBeInTheDocument();
+    expect(screen.getByAltText('OCR Data')).toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId('ExpandView'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('CollapseView')).toBeInTheDocument();
+      expect(screen.getByAltText('OCR Data Expanded')).toBeInTheDocument();
+    });
+  });
+
   it('should test the cancel button functionality', async () => {
     await setup(resultData);
 
@@ -281,6 +295,116 @@ describe('OcrContribute', () => {
     userEvent.click(screen.getByRole('button', { name: 'skip' }));
 
     userEvent.click(screen.getByRole('button', { name: 'skip' }));
+
+    await waitFor(() => {
+      expect(router.push).toHaveBeenCalledWith(expect.stringContaining('/thank-you'), undefined, {
+        locale: 'en',
+      });
+    });
+  });
+
+  it('should go to thank you page after 5 skip sentences but last sentence throw an error', async () => {
+    const url = '/skip';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:
+          expect.stringContaining('"userName":"abc"') &&
+          expect.stringContaining('"language":"Hindi"') &&
+          expect.stringContaining('"sentenceId":"1248671"') &&
+          expect.stringContaining('"type":"ocr"'),
+      });
+    });
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+  });
+
+  it('should go to thank you page after 4 skip sentences and last sentence throw an error when user submit', async () => {
+    const url = '/store';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
+
+    userEvent.type(screen.getByRole('textbox', { name: 'addText (hindi)' }), 'बपपप');
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'submit' })).toBeEnabled();
+    });
+
+    userEvent.click(screen.getByRole('button', { name: 'submit' }));
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:
+          expect.stringContaining('"userInput":"बपपप"') &&
+          expect.stringContaining('"language":"Hindi"') &&
+          expect.stringContaining('"sentenceId":"1248671"') &&
+          expect.stringContaining('"speakerDetails":{"userName":"abc"}') &&
+          expect.stringContaining('"type":"ocr"'),
+      });
+    });
+
+    await waitFor(() => expect(screen.queryByRole('img', { name: 'check' })).toBeInTheDocument());
+
+    await waitFor(() => expect(screen.queryByRole('img', { name: 'check' })).not.toBeInTheDocument());
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
 
     await waitFor(() => {
       expect(router.push).toHaveBeenCalledWith(expect.stringContaining('/thank-you'), undefined, {
