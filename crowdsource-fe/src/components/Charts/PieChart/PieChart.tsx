@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 
-import * as am4charts from '@amcharts/amcharts4/charts';
-import * as am4core from '@amcharts/amcharts4/core';
+import { PieChart3D, PieSeries3D, Legend } from '@amcharts/amcharts4/charts';
+import { create, color, percent } from '@amcharts/amcharts4/core';
 
 interface ChartProps {
   id: string;
@@ -18,17 +18,17 @@ const PieChart = (props: ChartProps | any) => {
   const chart = useRef({});
 
   useEffect(() => {
-    var x = am4core.create(props.id, am4charts.PieChart3D);
+    var x = create(props.id, PieChart3D);
     x.hiddenState.properties.opacity = 0;
 
     x.data = props.data.data;
 
-    x.innerRadius = am4core.percent(40);
+    x.innerRadius = percent(40);
     x.depth = 20;
 
-    x.legend = new am4charts.Legend();
+    x.legend = new Legend();
 
-    var series = x.series.push(new am4charts.PieSeries3D());
+    var series = x.series.push(new PieSeries3D());
     series.dataFields.value = 'value';
     series.labels.template.disabled = true;
     series.ticks.template.disabled = true;
@@ -39,7 +39,7 @@ const PieChart = (props: ChartProps | any) => {
 
     /* istanbul ignore next */
     series.slices.template.adapter.add('fill', (value, target: any) => {
-      return am4core.color(props.data.colors[target.dataItem.index]);
+      return color(props.data.colors[target.dataItem.index]);
     });
 
     chart.current = x;

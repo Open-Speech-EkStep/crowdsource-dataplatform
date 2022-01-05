@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 
-import * as am4core from '@amcharts/amcharts4/core';
-import * as maps from '@amcharts/amcharts4/maps';
+import { create, color } from '@amcharts/amcharts4/core';
+import { MapChart as map, projections, MapPolygonSeries } from '@amcharts/amcharts4/maps';
 import { useTranslation } from 'next-i18next';
 
 import type { UnSpecifiedDataByState } from 'types/CumulativeDataByLanguageAndState';
@@ -50,7 +50,7 @@ const MapChart = ({
 
   useEffect(() => {
     let polygonSeries: any;
-    var x = am4core.create('indiaMapChart', maps.MapChart);
+    var x = create('indiaMapChart', map);
     const index = x.series.indexOf(polygonSeries);
     /* istanbul ignore next */
     if (index > -1) {
@@ -59,8 +59,8 @@ const MapChart = ({
 
     let toolTipContent = tooltipTemplate;
     x.geodataSource.url = sourceUrl;
-    x.projection = new maps.projections.Miller();
-    polygonSeries = new maps.MapPolygonSeries();
+    x.projection = new projections.Miller();
+    polygonSeries = new MapPolygonSeries();
     x.seriesContainer.draggable = false;
     x.seriesContainer.resizable = false;
     x.chartContainer.wheelable = false;
@@ -71,8 +71,8 @@ const MapChart = ({
     polygonTemplate.tooltipHTML = toolTipContent;
     polygonTemplate.nonScalingStroke = true;
     polygonTemplate.strokeWidth = 0.5;
-    polygonTemplate.stroke = am4core.color('#929292');
-    polygonTemplate.fill = am4core.color('#fff');
+    polygonTemplate.stroke = color('#929292');
+    polygonTemplate.fill = color('#fff');
 
     // Create hover state and set alternative fill color
     var hs = polygonTemplate.states.create('hover');
@@ -81,27 +81,27 @@ const MapChart = ({
     polygonSeries.mapPolygons.template.adapter.add('fill', function (fill: any, target: any) {
       if (target.dataItem) {
         if (target.dataItem.value >= quarterUnit * 3) {
-          return am4core.color(colors ? colors[0] : '#4061BF');
+          return color(colors ? colors[0] : '#4061BF');
         } else if (target.dataItem.value >= quarterUnit * 2) {
-          return am4core.color(colors ? colors[1] : '#6B85CE');
+          return color(colors ? colors[1] : '#6B85CE');
         } else if (target.dataItem.value >= quarterUnit) {
-          return am4core.color(colors ? colors[2] : '#92A8E8');
+          return color(colors ? colors[2] : '#92A8E8');
         } else if (target.dataItem.value > 0) {
-          return am4core.color(colors ? colors[3] : '#CDD8F6');
+          return color(colors ? colors[3] : '#CDD8F6');
         } else {
-          return am4core.color(colors ? colors[4] : '#E9E9E9');
+          return color(colors ? colors[4] : '#E9E9E9');
         }
       } else {
         if (target.dataItem.value >= 500) {
-          return am4core.color('#4061BF');
+          return color('#4061BF');
         } else if (target.dataItem.value >= 200) {
-          return am4core.color('#6B85CE');
+          return color('#6B85CE');
         } else if (target.dataItem.value >= 100) {
-          return am4core.color('#92A8E8');
+          return color('#92A8E8');
         } else if (target.dataItem.value > 0) {
-          return am4core.color(colors ? colors[3] : '#CDD8F6');
+          return color(colors ? colors[3] : '#CDD8F6');
         } else {
-          return am4core.color(colors ? colors[4] : '#E9E9E9');
+          return color(colors ? colors[4] : '#E9E9E9');
         }
       }
     });
@@ -109,7 +109,7 @@ const MapChart = ({
     x.series.push(polygonSeries);
     /* istanbul ignore next */
     x.events.on('sizechanged', () => {
-      x.projection = new maps.projections.Miller();
+      x.projection = new projections.Miller();
     });
 
     chart.current = x;

@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 
-import * as am4charts from '@amcharts/amcharts4/charts';
-import * as am4core from '@amcharts/amcharts4/core';
+import { XYChart, CategoryAxis, ValueAxis, ColumnSeries } from '@amcharts/amcharts4/charts';
+import { create, percent, color } from '@amcharts/amcharts4/core';
 
 import type { ChartDetails } from 'types/Chart';
 import { isMobileDevice } from 'utils/utils';
@@ -16,12 +16,12 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
   const chart = useRef({});
 
   useLayoutEffect(() => {
-    const x = am4core.create(id, am4charts.XYChart);
+    const x = create(id, XYChart);
 
     x.paddingRight = 20;
     x.data = data.data;
     // Create axes
-    const categoryAxis = x.xAxes.push(new am4charts.CategoryAxis());
+    const categoryAxis = x.xAxes.push(new CategoryAxis());
     categoryAxis.dataFields.category = 'category';
     categoryAxis.renderer.minGridDistance = 20;
     categoryAxis.renderer.grid.template.strokeWidth = 0;
@@ -54,7 +54,7 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
       }
     });
 
-    const valueAxis: any = x.yAxes.push(new am4charts.ValueAxis());
+    const valueAxis: any = x.yAxes.push(new ValueAxis());
     valueAxis.min = 0;
     valueAxis.renderer.labels.template.fill = '#142745';
     valueAxis.renderer.grid.template.strokeDasharray = '3,3';
@@ -68,21 +68,21 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
     valueAxis.title.opacity = 0.6;
     valueAxis.renderer.grid.template.strokeWidth = data.strokeWidth || 0;
 
-    const series: any = x.series.push(new am4charts.ColumnSeries());
+    const series: any = x.series.push(new ColumnSeries());
     series.dataFields.valueY = 'value';
 
     series.dataFields.categoryX = 'category';
     const columnTemplate = series.columns.template;
     columnTemplate.tooltipHTML = `<div>{tooltipText}</div>`;
-    columnTemplate.tooltipX = am4core.percent(50);
-    columnTemplate.tooltipY = am4core.percent(0);
+    columnTemplate.tooltipX = percent(50);
+    columnTemplate.tooltipY = percent(0);
 
     series.tooltip.autoTextColor = false;
-    series.tooltip.label.fill = am4core.color('#fff');
+    series.tooltip.label.fill = color('#fff');
     /* istanbul ignore next */
     if (data.bgColor) {
       series.tooltip.getFillFromObject = false;
-      series.tooltip.background.fill = am4core.color(data.bgColor);
+      series.tooltip.background.fill = color(data.bgColor);
     }
 
     /* istanbul ignore next */
@@ -93,11 +93,11 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
 
     /* istanbul ignore next */
     columnTemplate.adapter.add('fill', (value: any, target: any) => {
-      return am4core.color(data.colors?.[data.colors.length - 1 - target.dataItem.index]);
+      return color(data.colors?.[data.colors.length - 1 - target.dataItem.index]);
     });
     /* istanbul ignore next */
     columnTemplate.adapter.add('stroke', (value: any, target: any) => {
-      return am4core.color(data.colors?.[data.colors.length - 1 - target.dataItem.index]);
+      return color(data.colors?.[data.colors.length - 1 - target.dataItem.index]);
     });
     chart.current = x;
 

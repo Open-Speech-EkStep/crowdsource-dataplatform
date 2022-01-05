@@ -1,4 +1,3 @@
-import { jsPDF } from 'jspdf';
 import { i18n } from 'next-i18next';
 
 import { ErrorStatusCode } from 'constants/errorStatusCode';
@@ -153,13 +152,14 @@ export const getBrowserInfo = () => {
   return platform.name + ' ' + platform.version;
 };
 
-export const downloadBadge = (
+export const downloadBadge = async (
   locale: string | undefined,
   initiative: Initiative,
   source: string,
   badgeType: string,
   badgeId: string
 ) => {
+  const jsPDF = (await import('jspdf')).jsPDF;
   const pdf = new jsPDF();
   const img = new Image();
   img.src = `${nodeConfig.contextRoot}/images/${nodeConfig.brand}/${locale}/badges/${locale}_${INITIATIVES_MAPPING[initiative]}_${badgeType}_${source}.png`;
