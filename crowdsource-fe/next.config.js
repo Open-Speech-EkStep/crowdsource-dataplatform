@@ -17,10 +17,6 @@ const { i18n } = require('./next-i18next.config');
 const nextConfig = {
   basePath: config.get('fe.contextRoot'),
   reactStrictMode: true,
-  images: {
-    domains: ['dev-data-crowdsource.azureedge.net'],
-    path: `${config.get('fe.contextRoot')}/_next/image`,
-  },
   poweredByHeader: false,
   i18n,
   // Force .page prefix on page files (ex. index.page.tsx) so generated files can be included in /pages directory without Next.js throwing build errors
@@ -68,7 +64,7 @@ const nextConfig = {
   // generateBuildId: async () => {
   //   return 'v1.0.0';
   // },
-  
+
   async headers() {
     return [
       {
