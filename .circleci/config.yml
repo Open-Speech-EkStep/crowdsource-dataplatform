@@ -6,7 +6,7 @@ parameters:
     default: true
   build_api:
     type: boolean
-    default: true
+    default: false
 
 orbs:
   node: circleci/node@4.4.0
@@ -371,6 +371,9 @@ workflows:
           name: create-workspace
           requires:
             - check_fe
+          filters:
+            branches:
+              only: master
 
       - azure-acr/build-and-push-image:
           pre-steps:
