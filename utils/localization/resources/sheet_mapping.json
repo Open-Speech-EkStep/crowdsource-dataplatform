@@ -312,7 +312,7 @@
       "<from-language>-<to-language>": "{{language}}"
     }
   },
-  "ttsBadgeEarnedText": {
+  "asrBadgeEarnedText": {
     "replacements": {
       "<badge-color>": "<span>{{badge}}</span>",
       "<s>": "<span>",

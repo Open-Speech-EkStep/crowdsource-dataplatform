@@ -11,9 +11,15 @@ This utility allows users to generate excel file(with all keys / delta keys) fro
 
 2. Run the following command to install python libraries:  `pip install -r requirements.txt`
 
-3. `resources/languages.json` has list of all languages to be considered. If you want to add a new languages, add it in this json file.
+3. `resources/languages.json` has list of all languages to be considered. If you want to add a new language, add it in this json file in given format - `{"<language-code>":"<language-name>"}`.
+
     ```
-    eg: {"<language-code>":"<language-name>"}
+    Eg:
+    {
+    "hi": "Hindi",
+    "gu": "Gujarati",
+    "as": "Assamese",
+    }
     ```
 
 #### All Keys excel file generation:
@@ -134,3 +140,16 @@ In `./out/` folder all locale files are generated after the above command is ran
                                    -a
    ```
 4. This will provide locale json files in output folder mentioned in the command.
+
+#### Mapping Sheet contents with code:
+If the excel sheet needs to have content on a specific format slightly different from the text content present in code, one can specify in [this](resources/sheet_mapping.json) file what needs to be replaced.
+
+```
+Eg:
+  <key-name>: {
+    "replacements": {
+      <text-to-be-present-in-excel-sheet>: <corresponding-text-present-in-code>
+    }
+  },
+```
+This file is used to map contents between the sheet and code.
