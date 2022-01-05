@@ -2,9 +2,8 @@ import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import Form from 'react-bootstrap/Form';
-import Draggable from 'react-draggable';
-import Keyboard from 'react-simple-keyboard';
 
 import Button from 'components/Button';
 import ImageBasePath from 'components/ImageBasePath';
@@ -14,8 +13,9 @@ import { findInputError } from 'utils/utils';
 
 import styles from './TextEditArea.module.scss';
 import TextErrorMessage from './TextErrorMessage';
-
 import 'react-simple-keyboard/build/css/index.css';
+
+const VirtualKeyboard = dynamic(() => import('./VirtualKeyboard'), { ssr: false });
 
 interface TextEditAreaProps {
   id: string;
@@ -61,7 +61,6 @@ const TextEditArea = ({
   const [layoutName, setLayoutName] = useState<string>('default');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const nodeRef = useRef(null);
   const chromeExtension = useRef<any>(null);
   let keyboard: any = useRef();
 
@@ -184,37 +183,17 @@ const TextEditArea = ({
         </div>
       </div>
       {showError && <TextErrorMessage message={errorMessage} isWarning={!!validationError} />}
-      {showKeyboard ? (
-        <Draggable bounds="main" nodeRef={nodeRef}>
-          <div
-            ref={nodeRef}
-            data-testid="virtual-keyboard"
-            className={`${styles.keyboard} d-none d-md-block`}
-          >
-            <div className="pb-2">
-              <span>{t(language.toLowerCase())}</span>
-              <span
-                data-testid="close-keyboard"
-                className={styles.crossIcon}
-                onClick={() => {
-                  setShowKeyboard(false);
-                }}
-                aria-hidden="true"
-              >
-                X
-              </span>
-            </div>
-
-            <Keyboard
-              keyboardRef={keyBoardRef}
-              onChange={onChange}
-              onKeyPress={onKeyPress}
-              layoutName={layoutName}
-              layout={layout}
-            />
-          </div>
-        </Draggable>
-      ) : null}
+      {showKeyboard && (
+        <VirtualKeyboard
+          language={language}
+          setShowKeyboard={setShowKeyboard}
+          onChange={onChange}
+          onKeyPress={onKeyPress}
+          layoutName={layoutName}
+          layout={layout}
+          keyBoardRef={keyBoardRef}
+        />
+      )}
     </Fragment>
   );
 };
