@@ -371,44 +371,43 @@ workflows:
           name: create-workspace
           requires:
             - check_fe
-            # - node/test
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_dev_image_next_ui
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     path: ./crowdsource-fe/
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-      #     repo: ${AZURE_REPO_UI}
-      #     tag: dev
-      #     checkout: false
-      #     requires:
-      #       - create-workspace
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_dev_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./crowdsource-fe/
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: ${AZURE_REPO_UI}
+          tag: dev
+          checkout: false
+          requires:
+            - create-workspace
 
-      # - aks_deployment_ui:
-      #     name: dev_ui_deployment_aks
-      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
-      #     env-name: dev
-      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
-      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
-      #     requires:
-      #       - push_dev_image_next_ui
+      - aks_deployment_ui:
+          name: dev_ui_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+          env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          requires:
+            - push_dev_image_next_ui
 
-      # - cdn_invalidation:
-      #     name: cdn_invalidation_ui_dev
-      #     env-name: next-dev-ui
-      #     resource-group: ${AZURE_RESOURCE_GROUP}
-      #     profile-name: ${AZURE_PROFILE_NAME}
-      #     requires:
-      #       - dev_ui_deployment_aks
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_dev
+          env-name: next-dev-ui
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - dev_ui_deployment_aks
 
       - approve_to_deploy:
           name: approve_test_deploy
           type: approval
           requires:
-            - create-workspace
+            - dev_ui_deployment_aks
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -422,7 +421,7 @@ workflows:
           tag: test
           checkout: false
           requires:
-            # - dev_ui_deployment_aks
+            - dev_ui_deployment_aks
             - approve_test_deploy
 
       - aks_deployment_ui:
@@ -442,86 +441,86 @@ workflows:
           requires:
             - test_ui_deployment_aks
 
-      # - approve_to_deploy:
-      #     name: approve_uat_deploy
-      #     type: approval
-      #     requires:
-      #       - test_ui_deployment_aks
+      - approve_to_deploy:
+          name: approve_uat_deploy
+          type: approval
+          requires:
+            - test_ui_deployment_aks
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_uat_image_next_ui
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     path: ./crowdsource-fe/
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=uat
-      #     repo: ${AZURE_REPO_UI}
-      #     tag: uat
-      #     checkout: false
-      #     requires:
-      #       - dev_ui_deployment_aks
-      #       - approve_uat_deploy
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_uat_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./crowdsource-fe/
+          extra-build-args: --build-arg NODE_CONFIG_ENV=uat
+          repo: ${AZURE_REPO_UI}
+          tag: uat
+          checkout: false
+          requires:
+            - dev_ui_deployment_aks
+            - approve_uat_deploy
 
-      # - aks_deployment_ui:
-      #     name: uat_ui_deployment_aks
-      #     cluster-name: ${AZURE_CLUSTER_NAME_UI}
-      #     env-name: uat
-      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
-      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
-      #     requires:
-      #       - push_uat_image_next_ui
+      - aks_deployment_ui:
+          name: uat_ui_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME_UI}
+          env-name: uat
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          requires:
+            - push_uat_image_next_ui
 
-      # - cdn_invalidation:
-      #     name: cdn_invalidation_ui_uat
-      #     env-name: next-uat-ui
-      #     resource-group: ${AZURE_RESOURCE_GROUP}
-      #     profile-name: ${AZURE_PROFILE_NAME}
-      #     requires:
-      #       - uat_ui_deployment_aks
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_uat
+          env-name: next-uat-ui
+          resource-group: ${AZURE_RESOURCE_GROUP}
+          profile-name: ${AZURE_PROFILE_NAME}
+          requires:
+            - uat_ui_deployment_aks
 
       - setup_run_galen_tests:
           name: setup_run_galen_uat
           requires:
-            - cdn_invalidation_ui_test
+            - cdn_invalidation_ui_uat
 
-      # - approve_to_deploy:
-      #     name: approve_prod_deploy
-      #     type: approval
-      #     requires:
-      #       - uat_ui_deployment_aks
+      - approve_to_deploy:
+          name: approve_prod_deploy
+          type: approval
+          requires:
+            - uat_ui_deployment_aks
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_prod_image_next_ui
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
-      #     registry-name: ${AZURE_REGISTRY_PROD}
-      #     path: ./crowdsource-fe/
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
-      #     repo: ${AZURE_REPO_UI}
-      #     tag: prod-ui
-      #     checkout: false
-      #     requires:
-      #       - create-workspace
-      #       - approve_prod_deploy
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_prod_image_next_ui
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          registry-name: ${AZURE_REGISTRY_PROD}
+          path: ./crowdsource-fe/
+          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+          repo: ${AZURE_REPO_UI}
+          tag: prod-ui
+          checkout: false
+          requires:
+            - create-workspace
+            - approve_prod_deploy
 
-      # - aks_deployment_ui:
-      #     name: prod_ui_deployment_aks
-      #     cluster-name: ${AZURE_PROD_CLUSTER_NAME}
-      #     env-name: prod-ui
-      #     azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
-      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
-      #     requires:
-      #       - push_prod_image_next_ui
+      - aks_deployment_ui:
+          name: prod_ui_deployment_aks
+          cluster-name: ${AZURE_PROD_CLUSTER_NAME}
+          env-name: prod-ui
+          azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          requires:
+            - push_prod_image_next_ui
 
-      # - cdn_invalidation:
-      #     name: cdn_invalidation_ui_prod
-      #     env-name: prod-ui
-      #     resource-group: ${AZURE_RESOURCE_GROUP_PROD}
-      #     profile-name: ${AZURE_PROFILE_NAME_PROD}
-      #     requires:
-      #       - prod_ui_deployment_aks
+      - cdn_invalidation:
+          name: cdn_invalidation_ui_prod
+          env-name: prod-ui
+          resource-group: ${AZURE_RESOURCE_GROUP_PROD}
+          profile-name: ${AZURE_PROFILE_NAME_PROD}
+          requires:
+            - prod_ui_deployment_aks
 
   build_api_deploy:
     when: << pipeline.parameters.build_api >>
@@ -534,99 +533,99 @@ workflows:
             - node/test
           filters:
             branches:
-              only: [master, nextjs_open_source]
+              only: [master]
 
-      # - db_migrate_azure:
-      #     name: migrate_dev_azure
-      #     db_name: ${AZURE_DEV_DB_NAME}
-      #     db_host: ${AZURE_DB_HOST}
-      #     db_user: ${AZURE_DB_USER}
-      #     requires:
-      #       - create-workspace
+      - db_migrate_azure:
+          name: migrate_dev_azure
+          db_name: ${AZURE_DEV_DB_NAME}
+          db_host: ${AZURE_DB_HOST}
+          db_user: ${AZURE_DB_USER}
+          requires:
+            - create-workspace
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_dev_image
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     path: ./crowdsource-api
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-      #     repo: ${AZURE_REPO}
-      #     tag: dev
-      #     checkout: false
-      #     requires:
-      #       - migrate_dev_azure
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_dev_image
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: ${AZURE_REPO}
+          tag: dev
+          checkout: false
+          requires:
+            - migrate_dev_azure
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_consumer_image_dev
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     path: ./auto-validation-consumer
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-      #     repo: auto-validation
-      #     tag: dev
-      #     checkout: false
-      #     requires:
-      #       - migrate_dev_azure
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_consumer_image_dev
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./auto-validation-consumer
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: auto-validation
+          tag: dev
+          checkout: false
+          requires:
+            - migrate_dev_azure
 
-      # - azure-acr/build-and-push-image:
-      #     name: push_db_refresher_image
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     dockerfile: Dockerfile-dbRefresh
-      #     path: ./db-refresher
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=dev
-      #     repo: ${DB_REFRESHER_REPO}
-      #     tag: "dev,test,prod,uat"
-      #     requires:
-      #       - migrate_dev_azure
+      - azure-acr/build-and-push-image:
+          name: push_db_refresher_image
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          dockerfile: Dockerfile-dbRefresh
+          path: ./db-refresher
+          extra-build-args: --build-arg NODE_CONFIG_ENV=dev
+          repo: ${DB_REFRESHER_REPO}
+          tag: "dev,test,prod,uat"
+          requires:
+            - migrate_dev_azure
 
-      # - aks_deployment:
-      #     name: dev_deployment_aks
-      #     cluster-name: ${AZURE_CLUSTER_NAME}
-      #     env-name: dev
-      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
-      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
-      #     azure_repo_api: ${AZURE_REPO}
-      #     requires:
-      #       - push_dev_image
-      #       - push_db_refresher_image
+      - aks_deployment:
+          name: dev_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME}
+          env-name: dev
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          azure_repo_api: ${AZURE_REPO}
+          requires:
+            - push_dev_image
+            - push_db_refresher_image
 
-      # - setup_functional_tests:
-      #     name: setup_ft_dev
-      #     cluster-name: ${AZURE_CLUSTER_NAME}
-      #     env_name: dev
-      #     db_name: ${AZURE_DEV_DB_NAME}
-      #     requires:
-      #       - dev_deployment_aks
-      #       - migrate_dev_azure
+      - setup_functional_tests:
+          name: setup_ft_dev
+          cluster-name: ${AZURE_CLUSTER_NAME}
+          env_name: dev
+          db_name: ${AZURE_DEV_DB_NAME}
+          requires:
+            - dev_deployment_aks
+            - migrate_dev_azure
 
-      # - run_functional_tests:
-      #     name: functional_tests_dev
-      #     env_name: dev
-      #     db_name: ${AZURE_DEV_DB_NAME}
-      #     requires:
-      #       - setup_ft_dev
+      - run_functional_tests:
+          name: functional_tests_dev
+          env_name: dev
+          db_name: ${AZURE_DEV_DB_NAME}
+          requires:
+            - setup_ft_dev
 
-      # - failed-notification:
-      #     name: dev-failed-notification
-      #     requires:
-      #       - functional_tests_dev
+      - failed-notification:
+          name: dev-failed-notification
+          requires:
+            - functional_tests_dev
 
-      # - success-notification:
-      #     name: dev-success-notification
-      #     requires:
-      #       - functional_tests_dev
+      - success-notification:
+          name: dev-success-notification
+          requires:
+            - functional_tests_dev
 
-      # - approve_to_deploy:
-      #     name: approve_test_deployment_aks
-      #     type: approval
-      #     requires:
-      #       - dev_deployment_aks
-      #       - migrate_dev_azure
+      - approve_to_deploy:
+          name: approve_test_deployment_aks
+          type: approval
+          requires:
+            - dev_deployment_aks
+            - migrate_dev_azure
             # - functional_tests_dev
           # filters:
           #   branches:
@@ -638,7 +637,7 @@ workflows:
           db_host: ${AZURE_DB_HOST}
           db_user: ${AZURE_DB_USER}
           requires:
-            - create-workspace
+            - approve_test_deployment_aks
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -694,133 +693,133 @@ workflows:
           requires:
             - setup_ft_test
 
-      # - approve_to_deploy:
-      #     name: approve_uat_deployment_aks
-      #     type: approval
-      #     requires:
-      #       - test_deployment_aks
-      #       - migrate_test_azure
+      - approve_to_deploy:
+          name: approve_uat_deployment_aks
+          type: approval
+          requires:
+            - test_deployment_aks
+            - migrate_test_azure
             #- functional_tests_test
           # filters:
           #   branches:
           #     only: master
 
-      # - db_migrate_azure:
-      #     name: migrate_uat_azure
-      #     db_name: ${AZURE_UAT_DB_NAME}
-      #     db_host: ${AZURE_DB_HOST}
-      #     db_user: ${AZURE_DB_USER}
-      #     requires:
-      #       - approve_uat_deployment_aks
+      - db_migrate_azure:
+          name: migrate_uat_azure
+          db_name: ${AZURE_UAT_DB_NAME}
+          db_host: ${AZURE_DB_HOST}
+          db_user: ${AZURE_DB_USER}
+          requires:
+            - approve_uat_deployment_aks
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_uat_image
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     path: ./crowdsource-api
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=uat
-      #     repo: ${AZURE_REPO}
-      #     tag: uat
-      #     checkout: false
-      #     requires:
-      #       - migrate_uat_azure
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_uat_image
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_CONFIG_ENV=uat
+          repo: ${AZURE_REPO}
+          tag: uat
+          checkout: false
+          requires:
+            - migrate_uat_azure
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_consumer_image_uat
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME}
-      #     registry-name: ${AZURE_REGISTRY}
-      #     path: ./auto-validation-consumer
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=uat
-      #     repo: auto-validation
-      #     tag: uat
-      #     checkout: false
-      #     requires:
-      #       - migrate_uat_azure
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_consumer_image_uat
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME}
+          registry-name: ${AZURE_REGISTRY}
+          path: ./auto-validation-consumer
+          extra-build-args: --build-arg NODE_CONFIG_ENV=uat
+          repo: auto-validation
+          tag: uat
+          checkout: false
+          requires:
+            - migrate_uat_azure
 
-      # - aks_deployment:
-      #     name: uat_deployment_aks
-      #     cluster-name: ${AZURE_CLUSTER_NAME}
-      #     env-name: uat
-      #     azure_resource_group: ${AZURE_RESOURCE_GROUP}
-      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
-      #     azure_repo_api: ${AZURE_REPO}
-      #     requires:
-      #       - push_uat_image
-
-
-      # - approve_to_deploy:
-      #     name: approve_prod_deployment_aks
-      #     type: approval
-      #     requires:
-      #       - uat_deployment_aks
-      #     # filters:
-      #     #   branches:
-      #     #     only: master
+      - aks_deployment:
+          name: uat_deployment_aks
+          cluster-name: ${AZURE_CLUSTER_NAME}
+          env-name: uat
+          azure_resource_group: ${AZURE_RESOURCE_GROUP}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME}
+          azure_repo_api: ${AZURE_REPO}
+          requires:
+            - push_uat_image
 
 
-      # - db_migrate_azure:
-      #     name: migrate_prod_azure
-      #     db_name: ${AZURE_PROD_DB_NAME}
-      #     db_host: ${AZURE_PROD_DB_HOST}
-      #     db_user: ${AZURE_PROD_DB_USER}
-      #     requires:
-      #       - approve_prod_deployment_aks
+      - approve_to_deploy:
+          name: approve_prod_deployment_aks
+          type: approval
+          requires:
+            - uat_deployment_aks
+          # filters:
+          #   branches:
+          #     only: master
 
 
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_db_refresher_image_prod
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
-      #     registry-name: ${AZURE_REGISTRY_PROD}
-      #     dockerfile: Dockerfile-dbRefresh
-      #     path: ./db-refresher
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
-      #     repo: ${DB_REFRESHER_REPO}
-      #     tag: "prod"
-      #     checkout: false
-      #     requires:
-      #       - migrate_prod_azure
-
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_consumer_image_prod
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
-      #     registry-name: ${AZURE_REGISTRY_PROD}
-      #     path: ./auto-validation-consumer
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
-      #     repo: auto-validation
-      #     tag: prod
-      #     checkout: false
-      #     requires:
-      #       - migrate_prod_azure
-
-      # - azure-acr/build-and-push-image:
-      #     pre-steps:
-      #       - *fast-checkout
-      #     name: push_prod_image
-      #     login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
-      #     registry-name: ${AZURE_REGISTRY_PROD}
-      #     path: ./crowdsource-api
-      #     extra-build-args: --build-arg NODE_CONFIG_ENV=prod
-      #     repo: ${AZURE_REPO}
-      #     tag: prod
-      #     checkout: false
-      #     requires:
-      #       - migrate_prod_azure
+      - db_migrate_azure:
+          name: migrate_prod_azure
+          db_name: ${AZURE_PROD_DB_NAME}
+          db_host: ${AZURE_PROD_DB_HOST}
+          db_user: ${AZURE_PROD_DB_USER}
+          requires:
+            - approve_prod_deployment_aks
 
 
-      # - aks_deployment:
-      #     name: prod_deployment_eks
-      #     cluster-name: ${AZURE_PROD_CLUSTER_NAME}
-      #     env-name: prod
-      #     azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
-      #     azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
-      #     azure_repo_api: ${AZURE_REPO}
-      #     requires:
-      #       - push_prod_image
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_db_refresher_image_prod
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          registry-name: ${AZURE_REGISTRY_PROD}
+          dockerfile: Dockerfile-dbRefresh
+          path: ./db-refresher
+          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+          repo: ${DB_REFRESHER_REPO}
+          tag: "prod"
+          checkout: false
+          requires:
+            - migrate_prod_azure
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_consumer_image_prod
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          registry-name: ${AZURE_REGISTRY_PROD}
+          path: ./auto-validation-consumer
+          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+          repo: auto-validation
+          tag: prod
+          checkout: false
+          requires:
+            - migrate_prod_azure
+
+      - azure-acr/build-and-push-image:
+          pre-steps:
+            - *fast-checkout
+          name: push_prod_image
+          login-server-name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          registry-name: ${AZURE_REGISTRY_PROD}
+          path: ./crowdsource-api
+          extra-build-args: --build-arg NODE_CONFIG_ENV=prod
+          repo: ${AZURE_REPO}
+          tag: prod
+          checkout: false
+          requires:
+            - migrate_prod_azure
+
+
+      - aks_deployment:
+          name: prod_deployment_eks
+          cluster-name: ${AZURE_PROD_CLUSTER_NAME}
+          env-name: prod
+          azure_resource_group: ${AZURE_RESOURCE_GROUP_PROD}
+          azure_login_server_name: ${AZURE_LOGIN_SERVER_NAME_PROD}
+          azure_repo_api: ${AZURE_REPO}
+          requires:
+            - push_prod_image
