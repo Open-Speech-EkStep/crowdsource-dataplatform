@@ -360,6 +360,60 @@ describe('TranslationTranslate', () => {
     });
   });
 
+  it('should throw an error when user submit', async () => {
+    const url = '/store';
+    const errorResponse = new Error('Some error');
+    await setup(resultData);
+    fetchMock.doMockOnceIf(url).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
+
+    userEvent.type(screen.getByRole('textbox', { name: 'english' }), 'abcd');
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'submit' }));
+    });
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(url, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userInput: 'abcd',
+          speakerDetails: '{"userName":"abc"}',
+          language: 'English',
+          fromLanguage: 'Hindi',
+          type: 'parallel',
+          sentenceId: 1138910,
+          state: 'National Capital Territory of Delhi',
+          country: 'India',
+          device: 'android 11',
+          browser: 'Chrome 13',
+        }),
+      });
+    });
+
+    await waitFor(() => expect(screen.getByRole('img', { name: 'check' })).toBeInTheDocument());
+
+    await waitFor(() => expect(screen.queryByRole('img', { name: 'check' })).not.toBeInTheDocument());
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+
+    await waitFor(() => {
+      expect(router.push).toHaveBeenCalledWith(expect.stringContaining('/thank-you'), undefined, {
+        locale: 'en',
+      });
+    });
+  });
+
   it('should go to thank you page after 4 skip sentences and last sentence throw an error when user submit', async () => {
     const url = '/store';
     const errorResponse = new Error('Some error');

@@ -422,4 +422,67 @@ describe('TranslationValidate', () => {
       userEvent.click(screen.getByRole('button', { name: 'close' }));
     });
   });
+
+  it('should go to thank you page after 4 skip sentences and last sentence throw an error when user submit', async () => {
+    const errorResponse = new Error('Some error');
+    await setup();
+    fetchMock.doMockOnceIf(storeUrl).mockRejectOnce(errorResponse);
+
+    expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+
+    expect(screen.getByRole('button', { name: 'Edit Icon needsChange' })).toBeEnabled();
+    userEvent.click(screen.getByRole('button', { name: 'Edit Icon needsChange' }));
+    expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
+    userEvent.clear(screen.getByRole('textbox', { name: 'yourEdit (english)' }));
+    userEvent.type(screen.getByRole('textbox', { name: 'yourEdit (english)' }), 'abcd');
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'submit' })).toBeEnabled();
+    });
+    userEvent.click(screen.getByRole('button', { name: 'submit' }));
+
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith(storeUrl, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          device: 'android 11',
+          browser: 'Chrome 13',
+          country: 'India',
+          state: 'National Capital Territory of Delhi',
+          language: 'English',
+          type: 'parallel',
+          sentenceId: 1323119,
+          userInput: 'abcd',
+          speakerDetails: JSON.stringify({
+            userName: 'abc',
+          }),
+          fromLanguage: 'Hindi',
+        }),
+      });
+    });
+    await waitFor(() => expect(screen.getByRole('img', { name: 'check' })).toBeInTheDocument());
+
+    await waitFor(() => {
+      expect(screen.getByText('apiFailureError')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'close' }));
+    });
+  });
 });
