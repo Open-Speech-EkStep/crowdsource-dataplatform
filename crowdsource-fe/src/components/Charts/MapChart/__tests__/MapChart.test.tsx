@@ -1,9 +1,9 @@
-import { render } from 'utils/testUtils';
+import { render, userEvent, waitFor, screen } from 'utils/testUtils';
 
 import MapChart from '../MapChart';
 
 describe('MapChart', () => {
-  const anonumousStateData = {
+  const anonymousStateData = {
     state: 'Unspecified Location',
     contribution: 2,
     validation: 3,
@@ -18,7 +18,7 @@ describe('MapChart', () => {
         sourceUrl="https://test/indiaMap.json"
         data={data}
         quarterUnit={0.25}
-        anonymousStateData={anonumousStateData}
+        anonymousStateData={anonymousStateData}
       />
     );
 
@@ -26,5 +26,19 @@ describe('MapChart', () => {
     const { asFragment } = setup([]);
 
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should open and close unspecifiedLocation tooltip', async () => {
+    setup([]);
+
+    expect(screen.getByTestId('statePopover')).toBeInTheDocument();
+
+    expect(screen.getByTestId('statePopover')).toHaveClass('hide');
+    userEvent.hover(screen.getByRole('button'));
+    await waitFor(async () => {
+      expect(screen.getByTestId('statePopover')).toHaveClass('show');
+      userEvent.unhover(screen.getByRole('button'));
+      await waitFor(() => expect(screen.getByTestId('statePopover')).toHaveClass('hide'));
+    });
   });
 });
