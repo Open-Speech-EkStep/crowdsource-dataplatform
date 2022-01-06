@@ -81,7 +81,7 @@ const ProgressChart = ({ type, language }: { type: InitiativeType; language?: st
 
   let chartData = data?.filter(d => d.type === type) || [];
   if (language) {
-    chartData = chartData.filter(d => d.language === language) || [];
+    chartData = chartData.filter(d => d.language === language);
   }
   for (let i = 0; i < chartData.length; i++) {
     const duration = chartData[i].month || chartData[i].quarter * 3 - 2;

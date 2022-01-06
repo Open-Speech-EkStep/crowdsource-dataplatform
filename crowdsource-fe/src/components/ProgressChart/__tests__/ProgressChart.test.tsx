@@ -159,4 +159,10 @@ describe('ProgressChart', () => {
       expect(fetchMock).toBeCalledWith('/aggregated-json/monthlyTimelineCumulative.json');
     });
   });
+
+  it('should fetch data from monthlyTimelineCumulative when language not specified and time formatting is not needed', async () => {
+    await setup('ocr', undefined);
+
+    expect(fetchMock).toBeCalledWith('/aggregated-json/monthlyTimelineCumulative.json');
+  });
 });
