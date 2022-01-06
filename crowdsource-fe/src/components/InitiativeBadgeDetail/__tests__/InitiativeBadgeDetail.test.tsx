@@ -71,8 +71,10 @@ describe('InitiativeBadgeDetail', () => {
     await setup('tts', 'english', 'contribute', 'bronze');
     expect(screen.getByTestId('action2')).not.toBeChecked();
     userEvent.click(screen.getByTestId('action2'));
-    expect(screen.getByTestId('action2')).toBeChecked();
-    expect(screen.getByTestId('action1')).not.toBeChecked();
+    await waitFor(() => {
+      expect(screen.getByTestId('action1')).not.toBeChecked();
+      expect(screen.getByTestId('action2')).toBeChecked();
+    });
   });
 
   it('should activate silver badges when silver medal is selected', async () => {
@@ -89,7 +91,9 @@ describe('InitiativeBadgeDetail', () => {
     await setup('tts', 'english', 'validate', 'bronze');
     expect(screen.getByTestId('action1')).not.toBeChecked();
     userEvent.click(screen.getByTestId('action1'));
-    expect(screen.getByTestId('action1')).toBeChecked();
-    expect(screen.getByTestId('action2')).not.toBeChecked();
+    await waitFor(() => {
+      expect(screen.getByTestId('action1')).toBeChecked();
+      expect(screen.getByTestId('action2')).not.toBeChecked();
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { waitFor } from 'utils/testUtils';
 
 import {
   convertIntoHrsFormat,
