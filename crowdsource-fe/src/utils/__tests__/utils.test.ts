@@ -234,12 +234,20 @@ describe('Utils', () => {
       })
     );
 
-    fetchLocationInfo();
+    await fetchLocationInfo();
     expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(fetchMock).toBeCalledWith('/location-info?ip=dummyAddress');
     });
+  });
+
+  it('should test the fetchLocationInfo for invalid ipAddressText method', async () => {
+    const mockIpAddress = 'dummyAddress';
+
+    fetchMock.doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace').mockResponseOnce(`${mockIpAddress}`);
+
+    await expect(fetchLocationInfo()).rejects.toEqual('Ip Address not available');
   });
 
   it('should test the fetchLocationInfo for no ipAddress method', async () => {
@@ -249,11 +257,7 @@ describe('Utils', () => {
       .doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace')
       .mockResponseOnce(`ip=${mockIpAddress}`);
 
-    fetchLocationInfo();
-    expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
-    waitFor(() => {
-      expect(Promise.reject).toHaveBeenCalledWith('Ip Address not available');
-    });
+    await expect(fetchLocationInfo()).rejects.toEqual('Ip Address not available');
   });
 
   it('should give 1st rank when langauge is on top', () => {
