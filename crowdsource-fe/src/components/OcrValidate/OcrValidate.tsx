@@ -216,9 +216,9 @@ const OcrValidate = () => {
       })
     );
     setTimeout(() => {
-      setDataCurrentIndex(currentDataIndex);
       setShowThankyouMessage(false);
       setShowEditTextBlock(false);
+      setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
 

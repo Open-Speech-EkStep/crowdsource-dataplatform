@@ -243,13 +243,7 @@ const TtsValidate = () => {
     if (audio) {
       audio.currentTime = 0;
     }
-    setShowUIdata({
-      sentence: '',
-      contribution: '',
-      dataset_row_id: '0',
-      contribution_id: '0',
-      auto_validate: false,
-    });
+
     onCancelContribution();
     setShowPauseButton(false);
     setShowPlayButton(true);
@@ -306,6 +300,13 @@ const TtsValidate = () => {
     setTimeout(() => {
       setShowThankyouMessage(false);
       setShowEditTextArea(false);
+      setShowUIdata({
+        sentence: '',
+        contribution: '',
+        dataset_row_id: '0',
+        contribution_id: '0',
+        auto_validate: false,
+      });
       setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
