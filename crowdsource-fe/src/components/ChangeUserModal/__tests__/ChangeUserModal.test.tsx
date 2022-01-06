@@ -1,8 +1,12 @@
+import router from 'next/router';
+
 import { render, screen, userEvent, verifyAxeTest } from 'utils/testUtils';
 
 import ChangeUserModal from '../ChangeUserModal';
 
 describe('ChangeUserModal', () => {
+  router.locale = undefined;
+
   const setup = (redirectionUrl?: any, doRedirection?: boolean) => {
     const onHide = jest.fn();
 
@@ -173,5 +177,23 @@ describe('ChangeUserModal', () => {
       'speakerDetails',
       '{"userName":"","motherTongue":"","age":"","gender":"female","language":"English","toLanguage":""}'
     );
+  });
+
+  it('should handle for invalid username when done button is enabled', () => {
+    const { onHide } = setup('/tts-initiative', true);
+
+    expect(screen.queryByText('userNameError')).not.toBeInTheDocument();
+    expect(screen.getByText('userNameHint')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'done' })).not.toBeDisabled();
+
+    userEvent.clear(screen.getByRole('textbox', { name: 'name' }));
+    userEvent.type(screen.getByRole('textbox', { name: 'name' }), '9879879878');
+    screen.getByRole('button', { name: 'done' }).removeAttribute('disabled');
+    userEvent.click(screen.getByRole('button', { name: 'done' }));
+
+    expect(screen.getByText('userNameError')).toBeInTheDocument();
+    expect(screen.queryByText('userNameHint')).not.toBeInTheDocument();
+
+    expect(onHide).not.toHaveBeenCalled();
   });
 });
