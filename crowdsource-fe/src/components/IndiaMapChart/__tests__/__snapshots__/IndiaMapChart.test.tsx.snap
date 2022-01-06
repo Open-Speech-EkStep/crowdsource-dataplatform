@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IndiaMapChart should render the component and matches it against stored snapshot 1`] = `
+exports[`IndiaMapChart without language should render the component and matches it against stored snapshot 1`] = `
 <DocumentFragment>
   <div
     class="bg-light rounded-8 py-5 py-md-8 h-100"

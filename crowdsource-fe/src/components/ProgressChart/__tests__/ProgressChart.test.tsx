@@ -139,12 +139,6 @@ describe('ProgressChart', () => {
     expect(fetchMock).toBeCalledWith('/aggregated-json/monthlyTimelineCumulative.json');
   });
 
-  it('should fetch data from monthlyTimeline when language is specified', async () => {
-    await setup('asr', 'Hindi');
-
-    expect(fetchMock).toBeCalledWith('/aggregated-json/monthlyTimeline.json');
-  });
-
   it('should fetch data from quarterlyTimelineCumulative and monthlyTimelineCumulative when selected', async () => {
     await setup('asr', undefined);
     userEvent.click(screen.getByRole('button', { name: 'quarterly' }));
@@ -164,5 +158,69 @@ describe('ProgressChart', () => {
     await setup('ocr', undefined);
 
     expect(fetchMock).toBeCalledWith('/aggregated-json/monthlyTimelineCumulative.json');
+  });
+});
+
+describe('ProgressChart with language', () => {
+  const setup = async (
+    type: 'asr' | 'ocr' | 'text' | 'parallel',
+    language: string | undefined,
+    responseData: any
+  ) => {
+    fetchMock
+      .doMockOnceIf('/aggregated-json/monthlyTimeline.json')
+      .mockResponseOnce(JSON.stringify(responseData));
+
+    const renderResult = render(
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <ProgressChart type={type} language={language} />
+      </SWRConfig>
+    );
+    await waitFor(() => expect(fetchMock).toBeCalled());
+    return renderResult;
+  };
+  it('should fetch data from monthlyTimeline when language is specified', async () => {
+    const data = [
+      {
+        year: 2021,
+        month: 5,
+        language: 'Hindi',
+        cumulative_validations: 0,
+        total_contribution_count: 1,
+        total_validation_count: 0,
+        type: 'asr',
+      },
+      {
+        year: 2021,
+        month: 6,
+        language: 'Hindi',
+        cumulative_contributions: 0.002,
+        cumulative_validations: 0,
+        total_contribution_count: 1,
+        total_validation_count: 0,
+        type: 'asr',
+      },
+      {
+        year: 2021,
+        month: 4,
+        cumulative_contributions: 0.02,
+        cumulative_validations: 0,
+        total_contribution_count: 1,
+        total_validation_count: 0,
+        type: 'ocr',
+      },
+      {
+        year: 2021,
+        month: 7,
+        cumulative_contributions: 0.102,
+        cumulative_validations: 2.02,
+        total_contribution_count: 1,
+        total_validation_count: 2,
+        type: 'ocr',
+      },
+    ];
+    await setup('asr', 'Hindi', data);
+
+    await waitFor(() => expect(fetchMock).toBeCalledWith('/aggregated-json/monthlyTimeline.json'));
   });
 });

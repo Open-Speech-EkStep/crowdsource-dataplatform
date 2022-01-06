@@ -39,18 +39,6 @@ describe('GenderChart', () => {
         },
       ])
     );
-    fetchMock.doMockOnceIf('/aggregated-json/genderGroupAndLanguageContributions.json').mockResponseOnce(
-      JSON.stringify([
-        {
-          gender: 'male',
-          contributions: 10,
-          hours_contributed: 0.45,
-          hours_validated: 0.2,
-          speakers: 3,
-          language: 'Hindi',
-        },
-      ])
-    );
     const renderResult = render(
       <SWRConfig value={{ provider: () => new Map() }}>
         <GenderChart language={language} />
@@ -73,10 +61,75 @@ describe('GenderChart', () => {
 
     expect(fetchMock).toBeCalledWith('/aggregated-json/genderGroupContributions.json');
   });
+});
+
+describe('GenderChart with language', () => {
+  const setup = async (language: string | undefined, responseData: any) => {
+    fetchMock
+      .doMockOnceIf('/aggregated-json/genderGroupAndLanguageContributions.json')
+      .mockResponseOnce(JSON.stringify(responseData));
+    const renderResult = render(
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <GenderChart language={language} />
+      </SWRConfig>
+    );
+    await waitFor(() => {
+      expect(fetchMock).toBeCalled();
+    });
+    return renderResult;
+  };
 
   it('should fetch data from genderGroupAndLanguageContributions when language is specified', async () => {
-    await setup('Hindi');
+    const data = [
+      {
+        gender: 'male',
+        contributions: 10,
+        hours_contributed: 0.45,
+        hours_validated: 0.2,
+        speakers: 3,
+        language: 'Hindi',
+      },
+    ];
+    await setup('Hindi', data);
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/genderGroupAndLanguageContributions.json');
+    });
+  });
 
-    expect(fetchMock).toBeCalledWith('/aggregated-json/genderGroupAndLanguageContributions.json');
+  it('should set the default value to 0 when hours_contributed is not present in api response', async () => {
+    const data = [
+      {
+        gender: 'male',
+        contributions: 10,
+        hours_validated: 0.2,
+        speakers: 3,
+        language: 'Hindi',
+      },
+      {
+        gender: 'female',
+        contributions: 10,
+        hours_validated: 0.2,
+        speakers: 3,
+        language: 'Hindi',
+      },
+      {
+        gender: '',
+        contributions: 10,
+        hours_validated: 0.2,
+        speakers: 3,
+        language: 'Hindi',
+      },
+      {
+        gender: 'transgender',
+        contributions: 10,
+        hours_validated: 0.2,
+        speakers: 3,
+        language: 'Hindi',
+      },
+    ];
+    await setup('Hindi', data);
+    await waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/aggregated-json/genderGroupAndLanguageContributions.json');
+    });
   });
 });

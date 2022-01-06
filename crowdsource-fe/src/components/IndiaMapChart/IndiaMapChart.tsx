@@ -102,9 +102,7 @@ const sourceUrl = 'https://crowdsource1.blob.core.windows.net/vakyansh-json-data
 const colors = ['#4061BF', '#6B85CE', '#92A8E8', '#CDD8F6', '#E9E9E9'];
 
 const generateAnonymousState = function (data: any) {
-  const allUnspecifiedState = data
-    ? data.filter((st: any) => !statesInformation.some(s => s.state === st.state))
-    : [];
+  const allUnspecifiedState = data?.filter((st: any) => !statesInformation.some(s => s.state === st.state));
   const anonymousStateData = allUnspecifiedState.reduce(
     (ctx: any, st: any) => {
       ctx.total_contributions = ctx.total_contributions + st.total_contributions;
@@ -142,7 +140,7 @@ const IndiaMapChart = React.memo(({ type, language }: { type: InitiativeType; la
   let statesData: {}[] = [];
   let mapData = data?.filter(d => d.type === type) || [];
   if (language) {
-    mapData = mapData.filter(d => d.language === language) || [];
+    mapData = mapData?.filter(d => d.language === language);
   }
 
   const config = INITIATIVE_STATE_PARTICIPATION_CONFIG[type];
