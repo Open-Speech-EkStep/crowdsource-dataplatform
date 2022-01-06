@@ -137,6 +137,7 @@ const AsrSpeak = () => {
     const testSpeakerRef = document.getElementById('testSpeaker');
     const userOptionRef = document.getElementById('userOptions');
     const languageSwitcherRef = document.getElementById('languageSwitcher');
+    const tipsButton = document.getElementById('tips');
     const feedbackRef = document.getElementById('feedback');
     function handleDocumentClick(event: Event) {
       if (
@@ -144,7 +145,8 @@ const AsrSpeak = () => {
         testSpeakerRef?.contains(event.target as Node) ||
         userOptionRef?.contains(event.target as Node) ||
         languageSwitcherRef?.contains(event.target as Node) ||
-        feedbackRef?.contains(event.target as Node)
+        feedbackRef?.contains(event.target as Node) ||
+        tipsButton?.contains(event.target as Node)
       ) {
         resetState();
       }
