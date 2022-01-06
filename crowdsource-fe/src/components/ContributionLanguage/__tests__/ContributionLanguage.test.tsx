@@ -9,7 +9,7 @@ import { render, screen, userEvent, waitFor } from 'utils/testUtils';
 import ContributionLanguage from '../ContributionLanguage';
 
 describe('tts Actions', () => {
-  const setup = (locale: string, initiative: Initiative) => {
+  const setup = (locale: string | undefined, initiative: Initiative) => {
     router.locale = locale;
     return render(<ContributionLanguage initiative={initiative} />);
   };
@@ -49,7 +49,7 @@ describe('tts Actions', () => {
   });
 
   it('should select the value from translated dropdown', async () => {
-    setup('en', 'translation');
+    setup(undefined, 'translation');
 
     userEvent.selectOptions(screen.getByTestId('SelectTranslatedLanguage'), 'English');
 
