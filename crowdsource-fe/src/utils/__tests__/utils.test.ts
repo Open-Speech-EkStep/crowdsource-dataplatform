@@ -1,3 +1,5 @@
+import { waitFor } from '@testing-library/react';
+
 import {
   convertIntoHrsFormat,
   roundOffValue,
@@ -19,8 +21,6 @@ import {
 } from '../utils';
 
 import '__fixtures__/mockComponentsWithSideEffects';
-// eslint-disable-next-line import/order
-import { waitFor } from '@testing-library/react';
 
 interface CumulativeDataByLanguage {
   total_contribution_count: number;
