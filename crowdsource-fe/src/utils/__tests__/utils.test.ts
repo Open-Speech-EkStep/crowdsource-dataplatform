@@ -15,8 +15,12 @@ import {
   getLanguageRank,
   getHoursValue,
   getHoursText,
+  fetchLocationInfo,
 } from '../utils';
+
 import '__fixtures__/mockComponentsWithSideEffects';
+// eslint-disable-next-line import/order
+import { waitFor } from '@testing-library/react';
 
 interface CumulativeDataByLanguage {
   total_contribution_count: number;
@@ -197,7 +201,13 @@ describe('Utils', () => {
   });
 
   it('should give false for desktop view', () => {
+    Object.defineProperty(window.navigator, 'userAgent', { value: 'Desktop', configurable: true });
     expect(isMobileDevice()).toEqual(false);
+  });
+
+  it('should give true for Android mobile view', () => {
+    Object.defineProperty(window.navigator, 'userAgent', { value: 'Android', configurable: true });
+    expect(isMobileDevice()).toEqual(true);
   });
 
   it('should test the getHoursValue method', () => {
@@ -210,22 +220,41 @@ describe('Utils', () => {
     expect(roundedValue).toEqual('25 hours2');
   });
 
-  // it('should test the fetchLocationInfo method', async () => {
-  //   const mockIpAddress = '111.111.11.111';
+  it('should test the fetchLocationInfo for given ipAddress method', async () => {
+    const mockIpAddress = 'dummyAddress';
 
-  //   fetchMock
-  //     .doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace')
-  //     .mockResponseOnce(`ip=${mockIpAddress}`);
+    fetchMock
+      .doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace')
+      .mockResponseOnce(`ip=${mockIpAddress}`);
 
-  //   fetchMock.doMockIf(`/location-info?ip=${mockIpAddress}`).mockResponse(
-  //     JSON.stringify({
-  //       state: 'Uttar Pradesh',
-  //       reegion: 'India',
-  //     })
-  //   );
+    fetchMock.doMockOnceIf(`/location-info?ip=${mockIpAddress}`).mockResponseOnce(
+      JSON.stringify({
+        state: 'Uttar Pradesh',
+        region: 'India',
+      })
+    );
 
-  //   expect(fetchLocationInfo()).toHaveBeenCalled();
-  // });
+    fetchLocationInfo();
+    expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
+
+    waitFor(() => {
+      expect(fetchMock).toBeCalledWith('/location-info?ip=dummyAddress');
+    });
+  });
+
+  it('should test the fetchLocationInfo for no ipAddress method', async () => {
+    const mockIpAddress = '';
+
+    fetchMock
+      .doMockOnceIf('https://www.cloudflare.com/cdn-cgi/trace')
+      .mockResponseOnce(`ip=${mockIpAddress}`);
+
+    fetchLocationInfo();
+    expect(fetchMock).toBeCalledWith('https://www.cloudflare.com/cdn-cgi/trace');
+    waitFor(() => {
+      expect(Promise.reject).toHaveBeenCalledWith('Ip Address not available');
+    });
+  });
 
   it('should give 1st rank when langauge is on top', () => {
     const cumulativeDataByLanguage: Array<CumulativeDataByLanguage> = [
