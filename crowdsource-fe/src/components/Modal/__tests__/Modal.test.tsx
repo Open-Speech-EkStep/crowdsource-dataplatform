@@ -36,3 +36,28 @@ describe('Modal', () => {
     expect(screen.getByTestId('Modal')).toMatchSnapshot();
   });
 });
+
+describe('Modal Not in DOM', () => {
+  const setup = (
+    props: {
+      title?: string;
+      subTitle?: string;
+      footer?: ReactNode;
+    } = {
+      title: 'title',
+      subTitle: 'subTitle',
+      footer: <button type="submit">Done</button>,
+    }
+  ) =>
+    render(
+      <Modal {...props}>
+        <div>Hello world</div>
+      </Modal>
+    );
+
+  it('should render the component and matches it against stored snapshot', () => {
+    setup();
+
+    expect(screen.queryByTestId('Modal')).not.toBeInTheDocument();
+  });
+});
