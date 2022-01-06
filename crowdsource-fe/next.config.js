@@ -18,6 +18,9 @@ const nextConfig = {
   basePath: config.get('fe.contextRoot'),
   reactStrictMode: true,
   poweredByHeader: false,
+  images: {
+    minimumCacheTTL: 60,
+  },
   i18n,
   // Force .page prefix on page files (ex. index.page.tsx) so generated files can be included in /pages directory without Next.js throwing build errors
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
