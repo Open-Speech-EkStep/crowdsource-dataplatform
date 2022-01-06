@@ -173,7 +173,7 @@ const TranslationValidate = () => {
 
   const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
-    resetState();
+
     setShowEditTextArea(true);
     if (currentDataIndex === contributionData.length - 1) {
       await submit(
@@ -218,8 +218,8 @@ const TranslationValidate = () => {
       })
     );
     setTimeout(() => {
+      resetState();
       setShowThankyouMessage(false);
-      setShowEditTextArea(false);
       setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
