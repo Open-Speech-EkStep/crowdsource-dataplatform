@@ -303,10 +303,10 @@ const TtsValidate = () => {
         type: INITIATIVES_MEDIA.asr,
       })
     );
-    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
       setShowEditTextArea(false);
+      setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
 

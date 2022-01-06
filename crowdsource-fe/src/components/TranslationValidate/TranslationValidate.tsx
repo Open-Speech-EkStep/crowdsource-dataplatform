@@ -217,10 +217,10 @@ const TranslationValidate = () => {
         type: INITIATIVES_MEDIA.parallel,
       })
     );
-    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
       setShowEditTextArea(false);
+      setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
 
