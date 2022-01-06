@@ -18,9 +18,6 @@ const nextConfig = {
   basePath: config.get('fe.contextRoot'),
   reactStrictMode: true,
   poweredByHeader: false,
-  images: {
-    minimumCacheTTL: 60,
-  },
   i18n,
   // Force .page prefix on page files (ex. index.page.tsx) so generated files can be included in /pages directory without Next.js throwing build errors
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
@@ -80,16 +77,16 @@ const nextConfig = {
           },
         ],
       },
-      // {
-      //   source: '/(.*)(svg|jpg|png)',
-      //   locale: false,
-      //   headers: [
-      //     {
-      //       key: 'Cache-Control',
-      //       value: 'public, max-age=9999999999, must-revalidate',
-      //     },
-      //   ],
-      // },
+      {
+        source: '/(.*)(svg|jpg|png)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, must-revalidate',
+          },
+        ],
+      },
     ];
   },
   // assetPrefix: process.env.NODE_CONFIG_ENV ? `${config.get('fe.staticFileUrl')}/assets` : '',
