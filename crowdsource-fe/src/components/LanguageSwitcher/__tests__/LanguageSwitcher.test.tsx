@@ -19,6 +19,7 @@ describe('LanguageSwitcher', () => {
   });
 
   it('should change the locale to hindi', async () => {
+    router.locale = undefined;
     setup();
 
     expect(document.cookie).toBe('');
@@ -76,6 +77,6 @@ describe('LanguageSwitcher', () => {
 
     await waitFor(() => expect(screen.getByRole('link', { name: 'English' })).toBeInTheDocument());
 
-    expect(localStorage.setItem).not.toHaveBeenCalledWith('contributionLanguage', 'English');
+    expect(localStorage.setItem).not.toHaveBeenCalled();
   });
 });
