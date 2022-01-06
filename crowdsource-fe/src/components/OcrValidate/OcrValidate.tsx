@@ -171,10 +171,9 @@ const OcrValidate = () => {
 
   const onSubmitContribution = async () => {
     setViewExpand(false);
-    setShowThankyouMessage(true);
-    resetState();
-    setCloseKeyboard(!closeKeyboard);
 
+    setShowThankyouMessage(true);
+    setCloseKeyboard(!closeKeyboard);
     if (currentDataIndex === contributionData.length - 1) {
       await submit(
         JSON.stringify({
@@ -202,7 +201,6 @@ const OcrValidate = () => {
         })
       );
     }
-    setDataCurrentIndex(currentDataIndex);
     reject(
       JSON.stringify({
         device: getDeviceInfo(),
@@ -216,8 +214,8 @@ const OcrValidate = () => {
       })
     );
     setTimeout(() => {
+      resetState();
       setShowThankyouMessage(false);
-      setShowEditTextBlock(false);
       setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
