@@ -11,11 +11,14 @@ jest.mock('components/Charts/LineChart', () => () => 'LineChart');
 jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 
 describe('TtsDashboard', () => {
-  global.document.getElementById = jest.fn().mockReturnValue({
-    style: {
-      width: '50%',
-    },
-  });
+  global.document.getElementById = jest.fn().mockImplementation(
+    x =>
+      x === 'float' && {
+        style: {
+          width: '50%',
+        },
+      }
+  );
 
   const setup = async () => {
     fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(

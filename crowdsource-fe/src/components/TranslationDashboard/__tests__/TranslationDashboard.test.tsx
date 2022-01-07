@@ -10,11 +10,14 @@ jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 import TranslationDashboard from '../TranslationDashboard';
 
 describe('TranslationDashboard', () => {
-  global.document.getElementById = jest.fn().mockReturnValue({
-    style: {
-      width: '50%',
-    },
-  });
+  global.document.getElementById = jest.fn().mockImplementation(
+    x =>
+      x === 'float' && {
+        style: {
+          width: '50%',
+        },
+      }
+  );
 
   const fromLanguageElement = () => screen.getByRole('combobox', { name: 'Select From Language' });
   const toLanguageElement = () => screen.getByRole('combobox', { name: 'Select To Language' });

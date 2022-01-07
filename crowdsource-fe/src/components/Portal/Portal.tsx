@@ -7,37 +7,30 @@ interface PortalProps {
   children: ReactNode;
 }
 
-let portalRoot: HTMLElement | null;
-
-/* istanbul ignore next */
-if (typeof window !== 'undefined') {
-  portalRoot = document.getElementById('portal');
-
-  if (!portalRoot) {
-    portalRoot = document.createElement('div');
-    portalRoot.setAttribute('id', 'portal');
-    document.body.appendChild(portalRoot);
-  }
-}
-
 const Portal = ({ children }: PortalProps) => {
+  let portalRoot: HTMLElement | null = null;
   let el: Element | undefined;
-
-  // if (typeof window !== 'undefined') {
-  //   portalRoot = document.getElementById('portal');
-  // }
 
   /* istanbul ignore next */
   if (typeof window !== 'undefined') {
+    portalRoot = document.getElementById('portal');
+
+    if (!portalRoot) {
+      portalRoot = document.createElement('div');
+      portalRoot.setAttribute('id', 'portal');
+      document.body.appendChild(portalRoot);
+    }
+
     el = document.createElement('div');
   }
 
   useEffect(() => {
     portalRoot?.appendChild(el!!);
+
     return () => {
       portalRoot?.removeChild(el!!);
     };
-  }, [el]);
+  }, [el, portalRoot]);
 
   return createPortal(children, el!!);
 };
