@@ -9,28 +9,17 @@ interface PortalProps {
 
 let portalRoot: HTMLElement | null;
 
-/* istanbul ignore next */
-if (typeof window !== 'undefined') {
-  portalRoot = document.getElementById('portal');
-
-  if (!portalRoot) {
-    portalRoot = document.createElement('div');
-    portalRoot.setAttribute('id', 'portal');
-    document.body.appendChild(portalRoot);
-  }
-}
-
 const Portal = ({ children }: PortalProps) => {
   let el: Element | undefined;
 
   /* istanbul ignore next */
   if (typeof window !== 'undefined') {
+    portalRoot = document.getElementById('portal');
     el = document.createElement('div');
   }
 
   useEffect(() => {
     portalRoot?.appendChild(el!!);
-
     return () => {
       portalRoot?.removeChild(el!!);
     };
