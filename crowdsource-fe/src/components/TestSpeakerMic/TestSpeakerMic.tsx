@@ -142,7 +142,8 @@ const TestSpeakerMic = ({ showSpeaker, showMic }: TestSpeakerProps) => {
     };
   });
 
-  const playSpeakerSound = () => {
+  const playSpeakerSound = (e: any) => {
+    e.stopPropagation();
     playSpeaker();
   };
 
