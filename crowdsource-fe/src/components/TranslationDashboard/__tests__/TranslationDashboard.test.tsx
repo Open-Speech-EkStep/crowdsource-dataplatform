@@ -4,9 +4,6 @@ import { SWRConfig } from 'swr';
 
 import { screen, userEvent } from 'utils/testUtils';
 
-jest.mock('components/Charts/MapChart', () => () => 'MapChart');
-jest.mock('components/Charts/LineChart', () => () => 'LineChart');
-jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
 import TranslationDashboard from '../TranslationDashboard';
 
 describe('TranslationDashboard', () => {
@@ -73,7 +70,7 @@ describe('TranslationDashboard', () => {
         <TranslationDashboard />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
+    await screen.findByTestId('Breadcrumbs');
     return renderResult;
   };
 

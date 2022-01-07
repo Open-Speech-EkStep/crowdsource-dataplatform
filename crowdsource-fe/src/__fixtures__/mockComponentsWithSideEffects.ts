@@ -2,7 +2,6 @@ jest.mock('components/ContributionStats', () => () => 'ContributionStats');
 jest.mock('components/ParticipationStats', () => () => 'ParticipationStats');
 jest.mock('components/Feedback', () => () => 'Feedback');
 jest.mock('components/TargetProgress', () => () => 'Feedback');
-jest.mock('components/ContributionTracker', () => () => 'ContributionTracker');
 jest.mock('components/IndiaMapChart', () => () => 'IndiaMapChart');
 jest.mock('components/ProgressChart', () => () => 'ProgressChart');
 jest.mock('components/AgeChart', () => () => 'AgeChart');

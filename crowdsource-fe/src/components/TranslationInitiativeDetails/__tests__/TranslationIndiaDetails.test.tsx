@@ -3,6 +3,8 @@ import '__fixtures__/mockComponentsWithSideEffects';
 
 import { render } from 'utils/testUtils';
 
+jest.mock('next/dynamic', () => () => () => 'ContributionTracker');
+
 import TranslationInitiativeDetails from '../TranslationInitiativeDetails';
 
 describe('Translation Actions', () => {

@@ -6,10 +6,6 @@ import { screen, userEvent } from 'utils/testUtils';
 
 import TtsDashboard from '../TtsDashboard';
 
-jest.mock('components/Charts/MapChart', () => () => 'MapChart');
-jest.mock('components/Charts/LineChart', () => () => 'LineChart');
-jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
-
 describe('TtsDashboard', () => {
   global.document.getElementById = jest.fn().mockImplementation(
     x =>
@@ -71,7 +67,7 @@ describe('TtsDashboard', () => {
         <TtsDashboard />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
+    await screen.findByTestId('Breadcrumbs');
     return renderResult;
   };
   it('should contain language selector', async () => {

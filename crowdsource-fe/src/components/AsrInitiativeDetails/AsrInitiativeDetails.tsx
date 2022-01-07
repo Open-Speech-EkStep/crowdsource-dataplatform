@@ -1,10 +1,12 @@
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import Container from 'react-bootstrap/Container';
 
 import ContributionStats from 'components/ContributionStats';
-import ContributionTracker from 'components/ContributionTracker';
 import TargetProgress from 'components/TargetProgress';
 import { INITIATIVES_MAPPING, INITIATIVES_MEDIA_MAPPING } from 'constants/initiativeConstants';
+
+const ContributionTracker = dynamic(() => import('components/ContributionTracker'));
 
 const AsrInitiativeDetails = () => {
   const { t } = useTranslation();

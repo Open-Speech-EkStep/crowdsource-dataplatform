@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { configure } from '@testing-library/react';
 import { configureAxe, toHaveNoViolations } from 'jest-axe';
 import jestFetchMock from 'jest-fetch-mock';
+import preloadAll from 'jest-next-dynamic';
 
 jest.mock('next/dist/client/router', () => {
   const router = require('next-router-mock');
@@ -101,6 +102,10 @@ global.window.HTMLMediaElement.prototype.pause = function pauseMock() {
   this._mock.paused = true;
   // this.dispatchEvent(new Event('pause'));
 };
+
+beforeAll(async () => {
+  await preloadAll();
+});
 
 beforeEach(() => {
   jestFetchMock.enableMocks();

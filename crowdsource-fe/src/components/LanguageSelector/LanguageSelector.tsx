@@ -2,12 +2,14 @@ import type { ChangeEvent } from 'react';
 import React from 'react';
 
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import Form from 'react-bootstrap/Form';
 
-import DataLastUpdated from 'components/DataLastUpdated';
 import { DISPLAY_LANGUAGES, RAW_LANGUAGES, CONTRIBUTION_LANGUAGE } from 'constants/localesConstants';
 
 import styles from './LanguageSelector.module.scss';
+
+const DataLastUpdated = dynamic(() => import('components/DataLastUpdated'));
 
 const LanguageSelector = ({
   selectedLanguage,

@@ -6,11 +6,6 @@ import { screen, userEvent } from 'utils/testUtils';
 
 import AsrDashboard from '../AsrDashboard';
 
-jest.mock('components/Charts/MapChart', () => () => 'MapChart');
-jest.mock('components/Charts/LineChart', () => () => 'LineChart');
-jest.mock('components/GenderChart', () => () => 'GenderChart');
-jest.mock('components/DataLastUpdated', () => () => 'DataLastUpdated');
-
 describe('AsrDashboard', () => {
   global.document.getElementById = jest.fn().mockImplementation(
     x =>
@@ -72,9 +67,10 @@ describe('AsrDashboard', () => {
         <AsrDashboard />
       </SWRConfig>
     );
-    await waitForElementToBeRemoved(() => screen.queryAllByTestId('Loader'));
+    await screen.findByTestId('Breadcrumbs');
     return renderResult;
   };
+
   it('should contain language selector', async () => {
     await setup();
     expect(screen.getByRole('combobox', { name: 'Select Language' })).toBeInTheDocument();

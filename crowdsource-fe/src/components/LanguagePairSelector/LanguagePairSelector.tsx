@@ -2,11 +2,11 @@ import type { ChangeEvent } from 'react';
 import { useState, useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-import DataLastUpdated from 'components/DataLastUpdated';
 import ImageBasePath from 'components/ImageBasePath';
 import {
   DISPLAY_LANGUAGES,
@@ -16,6 +16,8 @@ import {
 } from 'constants/localesConstants';
 
 import styles from './LanguagePairSelector.module.scss';
+
+const DataLastUpdated = dynamic(() => import('components/DataLastUpdated'));
 
 const LanguagePairSelector = ({
   fromLanguage,

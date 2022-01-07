@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
 import { Trans, useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import Spinner from 'react-bootstrap/Spinner';
 
-import CompareLanguages from 'components/CompareLanguages';
 import ContributeMore from 'components/ContributeMore';
 import ContributionDetails from 'components/ContributionDetails';
 import ImageBasePath from 'components/ImageBasePath';
@@ -37,6 +37,8 @@ import { capitalizeFirstLetter, getLanguageRank } from 'utils/utils';
 import styles from './ThankYou.module.scss';
 
 import { BadgeEarned, ShareOn } from '.';
+
+const CompareLanguages = dynamic(() => import('components/CompareLanguages'));
 
 const YourBadge = (props: any) => {
   const route = useRouter();
