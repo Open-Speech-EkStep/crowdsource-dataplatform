@@ -18,7 +18,7 @@ Tags: page
 
 ## Validate Badge Section
 * Click "Know More" Link
-* "badges" page should be displayed
+* "badge-detail" page should be displayed
 * Clicking "TTS Initiative" should navigate to "TTS Initiative" Page
 * Clicking "ASR Initiative" should navigate to "ASR Initiative" Page
 * Clicking "Translation Initiative" should navigate to "Translation Initiative" Page
