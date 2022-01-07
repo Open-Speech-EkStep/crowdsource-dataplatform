@@ -36,7 +36,7 @@ const routePaths: { [key: string]: string } = {
   translationInitiativeDashboard: `${initiativeBaseRoute.translation}/dashboard`,
   translationInitiativeContributeThankYou: `${initiativeBaseRoute.translation}/contribute/thank-you`,
   translationInitiativeValidateThankYou: `${initiativeBaseRoute.translation}/validate/thank-you`,
-  badges: '/badges',
+  badgeDetail: '/badge-detail',
   myBadges: '/my-badges',
   termsAndConditions: '/terms-and-conditions',
   termsOfUse: '/terms-and-conditions#terms-of-use',

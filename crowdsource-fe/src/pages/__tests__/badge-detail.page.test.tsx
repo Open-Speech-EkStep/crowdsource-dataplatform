@@ -1,6 +1,6 @@
 import { render, screen } from 'utils/testUtils';
 
-import BadgesPage from '../badges.page';
+import BadgesPage from '../badge-detail.page';
 
 describe('BadgePage', () => {
   it('should render the BadgePage', () => {

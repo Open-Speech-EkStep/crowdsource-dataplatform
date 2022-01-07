@@ -42,7 +42,7 @@ const BadgeDetail = () => {
     badge: MedalsType
   ) => {
     router.push(
-      `/${currentLocale}${routePaths.badges}?initiative=${initiative}&language=${language}&source=${source}&badge=${badge}`,
+      `/${currentLocale}${routePaths.badgeDetail}?initiative=${initiative}&language=${language}&source=${source}&badge=${badge}`,
       undefined,
       {
         locale: currentLocale,

@@ -28,7 +28,7 @@ export const pageRouteConstants = {
   [routePaths.translationInitiativeContributeThankYou]: 'Contribution Thank You Page',
   [routePaths.translationInitiativeValidateThankYou]: 'Validation Thank You Page',
   [routePaths.myBadges]: 'My Badges',
-  [routePaths.badges]: 'Badges Info',
+  [routePaths.badgeDetail]: 'Badges Detail',
   [routePaths.termsAndConditions]: 'Terms and Conditions',
   [routePaths.termsOfUse]: 'Terms and Conditions',
   [routePaths.privacyPolicy]: 'Terms and Conditions',
@@ -153,7 +153,7 @@ export const pageInitiativeRouteConstants = {
   [routePaths.translationInitiativeValidateThankYou]: INITIATIVES_MAPPING.translation,
 
   [routePaths.myBadges]: 'Others',
-  [routePaths.badges]: 'Others',
+  [routePaths.badgeDetail]: 'Others',
   [routePaths.termsAndConditions]: 'Others',
   [routePaths.termsOfUse]: 'Others',
   [routePaths.privacyPolicy]: 'Others',

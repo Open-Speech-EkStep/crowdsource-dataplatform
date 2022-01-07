@@ -16,7 +16,7 @@ exports[`BadgesIntro should render the component and matches it against stored s
       </h1>
       <a
         class="display-3 d-none d-lg-block mt-6"
-        href="/badges?initiative=asr&language=English&source=contribute&badge=bronze"
+        href="/badge-detail?initiative=asr&language=English&source=contribute&badge=bronze"
       >
         <b>
           knowMore
@@ -143,7 +143,7 @@ exports[`BadgesIntro should render the component and matches it against stored s
       >
         <a
           class="display-3"
-          href="/badges?initiative=asr&language=English&source=contribute&badge=bronze"
+          href="/badge-detail?initiative=asr&language=English&source=contribute&badge=bronze"
         >
           <b>
             knowMore
