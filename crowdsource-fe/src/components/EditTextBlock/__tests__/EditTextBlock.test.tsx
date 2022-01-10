@@ -16,6 +16,7 @@ describe('EditTextBlock', () => {
         setHasError={callback}
         updateText={(text: string) => text}
         validate={validate}
+        closeKeyboard={true}
       />
     );
 

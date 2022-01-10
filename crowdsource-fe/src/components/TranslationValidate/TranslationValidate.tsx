@@ -69,6 +69,7 @@ const TranslationValidate = () => {
   const { submit, data: storeData, error: submitError } = useSubmit(apiPaths.store);
 
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [closeKeyboard, setCloseKeyboard] = useState(false);
 
   const rejectApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/reject`;
   const skipApiUrl = `${apiPaths.validate}/${showUIData?.contribution_id}/skip`;
@@ -172,6 +173,7 @@ const TranslationValidate = () => {
   };
 
   const onSubmitContribution = async () => {
+    setCloseKeyboard(!closeKeyboard);
     setShowThankyouMessage(true);
 
     setShowEditTextArea(true);
@@ -237,6 +239,7 @@ const TranslationValidate = () => {
   };
 
   const onSkipContribution = async () => {
+    setCloseKeyboard(!closeKeyboard);
     setDataCurrentIndex(currentDataIndex);
     resetState();
     if (currentDataIndex === contributionData.length - 1) {
@@ -381,6 +384,7 @@ const TranslationValidate = () => {
                       setHasError={setHasError}
                       updateText={updateFormInput}
                       validate={showUIData?.auto_validate}
+                      closeKeyboard={closeKeyboard}
                     />
                   </div>
                 )}

@@ -352,6 +352,7 @@ const OcrValidate = () => {
                       setHasError={setHasError}
                       updateText={updateFormInput}
                       validate={showUIData?.auto_validate}
+                      closeKeyboard={closeKeyboard}
                     />
                   </div>
                 ) : (
