@@ -19,7 +19,6 @@ interface EditTextBlockProps {
   setHasError: (value: boolean) => void;
   updateText: Function;
   validate: boolean;
-  closeKeyboard: boolean;
 }
 
 const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
@@ -32,7 +31,6 @@ const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
   setHasError,
   updateText,
   validate,
-  closeKeyboard,
 }) => {
   const [validationError, setValidationError] = useState<typeof TEXT_INPUT_ERROR_CONFIG.validation>();
   const [inputText, setInputText] = useState<string>(text);
@@ -89,7 +87,6 @@ const EditTextBlock: FunctionComponent<EditTextBlockProps> = ({
           onError={setError}
           validationError={validationError}
           showTip
-          closeKeyboard={closeKeyboard}
         />
       </div>
     </Fragment>

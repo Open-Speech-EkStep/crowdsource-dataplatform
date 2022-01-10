@@ -56,7 +56,6 @@ const TtsValidate = () => {
   const [correctDisable, setCorrectDisable] = useState(true);
   const [showEditTextArea, setShowEditTextArea] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [closeKeyboard, setCloseKeyboard] = useState(false);
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [isAudioEnded, setIsAudioEnded] = useState(false);
@@ -257,7 +256,6 @@ const TtsValidate = () => {
   const onSubmitContribution = async () => {
     audio?.pause();
     setShowThankyouMessage(true);
-    setCloseKeyboard(!closeKeyboard);
     resetState();
     setShowEditTextArea(true);
     if (currentDataIndex === contributionData.length - 1) {
@@ -328,7 +326,6 @@ const TtsValidate = () => {
   const onSkipContribution = async () => {
     audio?.pause();
     resetState();
-    setCloseKeyboard(!closeKeyboard);
     if (currentDataIndex === contributionData.length - 1) {
       await submitSkip(
         JSON.stringify({
@@ -445,7 +442,6 @@ const TtsValidate = () => {
                       setHasError={setHasError}
                       updateText={updateFormInput}
                       validate={showUIData?.auto_validate}
-                      closeKeyboard={closeKeyboard}
                     />
                   </div>
                 ) : (

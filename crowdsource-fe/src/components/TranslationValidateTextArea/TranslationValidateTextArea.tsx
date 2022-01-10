@@ -16,7 +16,6 @@ interface ValidateTextAreaProps {
   setHasError: (value: boolean) => void;
   updateText: Function;
   validate: boolean;
-  closeKeyboard: boolean;
 }
 
 const ValidateTextArea: FunctionComponent<ValidateTextAreaProps> = ({
@@ -28,7 +27,6 @@ const ValidateTextArea: FunctionComponent<ValidateTextAreaProps> = ({
   setHasError,
   updateText,
   validate,
-  closeKeyboard,
 }) => {
   const [validationError, setValidationError] = useState<typeof TEXT_INPUT_ERROR_CONFIG.validation>();
   const [inputText, setInputText] = useState<string>(text);
@@ -67,7 +65,6 @@ const ValidateTextArea: FunctionComponent<ValidateTextAreaProps> = ({
       label={textAreaLabel}
       onError={setError}
       validationError={validationError}
-      closeKeyboard={closeKeyboard}
     />
   );
 };
