@@ -2,7 +2,7 @@ import { render, screen } from 'utils/testUtils';
 
 import AsrInitiativeActions from '../AsrInitiativeActions';
 
-describe('Asr Actions', () => {
+describe('AsrInitiativeActions', () => {
   const setup = () => {
     return render(<AsrInitiativeActions />);
   };

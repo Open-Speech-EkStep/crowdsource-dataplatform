@@ -121,7 +121,7 @@ function openAsrCards(driver,device,flow)
   
   forAll(devices, function (device) {
     forAll(browsers, function (browser) {
-      test("Test Asr india Landing Page ", function (device,browser) {
+      test("Test Asr Initiative Landing Page ", function (device,browser) {
         var driver = create_driver(content.get("url"),device,browser);
   
           openAsrInitiative(driver,device);
@@ -132,7 +132,7 @@ function openAsrCards(driver,device,flow)
       });
 
 
-      test("Test Asr India Contribute page", function (device,browser) {
+      test("Test Asr Initiative Contribute page", function (device,browser) {
 
         var driver = create_driver(content.get("url"),device,browser);
         
@@ -143,7 +143,7 @@ function openAsrCards(driver,device,flow)
   
     }); 
 
-      test("Test Asr India Validate page", function (device,browser) {
+      test("Test Asr Initiative Validate page", function (device,browser) {
 
           var driver = create_driver(content.get("url"),device,browser);
         
@@ -154,7 +154,7 @@ function openAsrCards(driver,device,flow)
   
     }); 
 
-      test("Asr India Dashboard Page",function(device,browser){
+      test("Asr Initiative Dashboard Page",function(device,browser){
 
         var driver = create_driver(content.get("url"),device,browser); 
         openDashboard(driver,device);

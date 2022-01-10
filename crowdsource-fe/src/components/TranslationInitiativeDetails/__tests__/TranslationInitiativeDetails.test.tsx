@@ -5,14 +5,14 @@ import { render } from 'utils/testUtils';
 
 jest.mock('next/dynamic', () => () => () => 'ContributionTracker');
 
-import OcrInitiativeDetails from '../OcrInitiativeDetails';
+import TranslationInitiativeDetails from '../TranslationInitiativeDetails';
 
-describe('Ocr Actions', () => {
+describe('TranslationInitiativeDetails', () => {
   const setup = () => {
-    return render(<OcrInitiativeDetails />);
+    return render(<TranslationInitiativeDetails />);
   };
 
-  it('should render the ocr Initiative homepage', () => {
+  it('should render the translation Initiative homepage', () => {
     const { asFragment } = setup();
     expect(asFragment()).toMatchSnapshot();
   });

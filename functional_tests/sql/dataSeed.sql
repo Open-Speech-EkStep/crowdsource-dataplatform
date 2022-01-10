@@ -454,7 +454,7 @@ select 'medium', 'parallel', '{
             }'::jsonb, null, false ;
 
 
--- Boolo India INsertions
+-- Text Data Insertions
 
 insert into dataset_row ( difficulty_level, type, media, state,is_profane ) 
 values('medium', 'text', '{

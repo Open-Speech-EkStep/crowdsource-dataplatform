@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tts Actions should render the tts Initiative homepage 1`] = `
+exports[`OcrInitiativeDetails should render the ocr Initiative homepage 1`] = `
 <DocumentFragment>
   <section
     class="py-9 py-md-11 px-2 px-lg-0"
-    data-testid="TtsInitiativeDetails"
+    data-testid="OcrInitiativeDetails"
   >
     <div
       class="container-lg"

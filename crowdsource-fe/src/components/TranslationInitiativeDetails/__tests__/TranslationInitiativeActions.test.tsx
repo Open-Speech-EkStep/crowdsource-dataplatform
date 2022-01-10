@@ -1,13 +1,13 @@
 import { render, screen } from 'utils/testUtils';
 
-import OcrInitiativeActions from '../OcrInitiativeActions';
+import TranslationInitiativeActions from '../TranslationInitiativeActions';
 
-describe('Ocr Actions', () => {
+describe('TranslationInitiativeActions', () => {
   const setup = () => {
-    return render(<OcrInitiativeActions />);
+    return render(<TranslationInitiativeActions />);
   };
 
-  it('should render the ocr Initiative homepage', () => {
+  it('should render the translation Initiative homepage', () => {
     setup();
 
     expect(screen.getByTestId('ContributionActions')).toBeInTheDocument();

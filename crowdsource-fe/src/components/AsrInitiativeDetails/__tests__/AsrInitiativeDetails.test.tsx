@@ -6,7 +6,7 @@ jest.mock('next/dynamic', () => () => () => 'ContributionTracker');
 
 import AsrInitiativeDetails from '../AsrInitiativeDetails';
 
-describe('Asr Actions', () => {
+describe('AsrInitiativeDetails', () => {
   const setup = async () => {
     const result = render(<AsrInitiativeDetails />);
     return result;

@@ -2,7 +2,7 @@ import { render, screen } from 'utils/testUtils';
 
 import TtsInitiativeActions from '../TtsInitiativeActions';
 
-describe('Tts Actions', () => {
+describe('TtsInitiativeActions', () => {
   const setup = () => {
     return render(<TtsInitiativeActions />);
   };

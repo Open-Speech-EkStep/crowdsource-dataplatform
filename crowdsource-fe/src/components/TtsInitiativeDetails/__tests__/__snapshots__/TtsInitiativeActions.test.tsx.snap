@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tts Actions should render the tts Initiative action snapshot 1`] = `
+exports[`TtsInitiativeActions should render the tts Initiative action snapshot 1`] = `
 <DocumentFragment>
   <section
     class="mt-7 mt-md-9"

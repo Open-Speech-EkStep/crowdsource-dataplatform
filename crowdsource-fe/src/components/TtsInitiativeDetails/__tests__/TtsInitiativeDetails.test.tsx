@@ -7,7 +7,7 @@ jest.mock('next/dynamic', () => () => () => 'ContributionTracker');
 
 import TtsInitiativeDetails from '../TtsInitiativeDetails';
 
-describe('Tts Actions', () => {
+describe('TtsInitiativeDetails', () => {
   const setup = () => {
     return render(<TtsInitiativeDetails />);
   };
