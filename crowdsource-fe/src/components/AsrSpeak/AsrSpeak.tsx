@@ -140,15 +140,17 @@ const AsrSpeak = () => {
     const tipsButton = document.getElementById('tips');
     const feedbackRef = document.getElementById('feedback');
     function handleDocumentClick(event: Event) {
-      if (
-        (showStopRecording && reportRef?.contains(event.target as Node)) ||
-        testSpeakerRef?.contains(event.target as Node) ||
-        userOptionRef?.contains(event.target as Node) ||
-        languageSwitcherRef?.contains(event.target as Node) ||
-        feedbackRef?.contains(event.target as Node) ||
-        tipsButton?.contains(event.target as Node)
-      ) {
-        resetState();
+      if (!showReRecording) {
+        if (
+          (showStopRecording && reportRef?.contains(event.target as Node)) ||
+          testSpeakerRef?.contains(event.target as Node) ||
+          userOptionRef?.contains(event.target as Node) ||
+          languageSwitcherRef?.contains(event.target as Node) ||
+          feedbackRef?.contains(event.target as Node) ||
+          tipsButton?.contains(event.target as Node)
+        ) {
+          resetState();
+        }
       }
     }
     document.addEventListener('click', handleDocumentClick);
