@@ -8,6 +8,7 @@ module.exports = {
     '!src/utils/testUtils.tsx',
     '!src/utils/validations/*.ts',
     '!src/pages/_document.page.tsx',
+    '!src/__fixtures__/mockComponentsWithSideEffects.ts',
   ],
   coverageThreshold: {
     global: {
