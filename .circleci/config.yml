@@ -31,6 +31,17 @@ jobs:
           paths:
             - .
 
+  sonar-scan:
+    machine:
+      image: ubuntu-2004:202101-01
+    working_directory: ~/speech-recognition-model-api/
+    steps:
+      - checkout:
+          path: ~/speech-recognition-model-api
+      - run:
+          name: Sonar Scan
+          command: docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_TOKEN=$SONAR_TOKEN -v $PWD:/usr/src sonarsource/sonar-scanner-cli -D sonar.branch.name=$CIRCLE_BRANCH
+
   setup_functional_tests:
     parameters:
       cluster-name:
@@ -367,6 +378,9 @@ workflows:
           name: check_fe
           env_name: default
 
+      - sonar-scan:
+          name: sonar-scan
+
       - create-workspace:
           name: create-workspace
           requires:
@@ -582,7 +596,7 @@ workflows:
           path: ./db-refresher
           extra-build-args: --build-arg NODE_CONFIG_ENV=dev
           repo: ${DB_REFRESHER_REPO}
-          tag: "dev,test,prod,uat"
+          tag: 'dev,test,prod,uat'
           requires:
             - migrate_dev_azure
 
@@ -753,7 +767,6 @@ workflows:
           requires:
             - push_uat_image
 
-
       - approve_to_deploy:
           name: approve_prod_deployment_aks
           type: approval
@@ -763,7 +776,6 @@ workflows:
           #   branches:
           #     only: master
 
-
       - db_migrate_azure:
           name: migrate_prod_azure
           db_name: ${AZURE_PROD_DB_NAME}
@@ -771,7 +783,6 @@ workflows:
           db_user: ${AZURE_PROD_DB_USER}
           requires:
             - approve_prod_deployment_aks
-
 
       - azure-acr/build-and-push-image:
           pre-steps:
@@ -783,7 +794,7 @@ workflows:
           path: ./db-refresher
           extra-build-args: --build-arg NODE_CONFIG_ENV=prod
           repo: ${DB_REFRESHER_REPO}
-          tag: "prod"
+          tag: 'prod'
           checkout: false
           requires:
             - migrate_prod_azure
@@ -815,7 +826,6 @@ workflows:
           checkout: false
           requires:
             - migrate_prod_azure
-
 
       - aks_deployment:
           name: prod_deployment_eks

@@ -127,3 +127,6 @@ logs
 crowdsource-api/.env
 # ignore the upload files
 crowdsource-api/uploads
+
+# Sonar scan reports
+.scannerwork/
