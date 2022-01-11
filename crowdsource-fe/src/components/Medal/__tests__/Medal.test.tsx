@@ -1,4 +1,4 @@
-import { render, userEvent, waitFor, screen, fireEvent } from 'utils/testUtils';
+import { render, userEvent, waitFor, screen } from 'utils/testUtils';
 
 import Medal from '../Medal';
 
@@ -43,34 +43,6 @@ describe('Medal', () => {
     const { asFragment } = setup(false, false);
 
     expect(asFragment()).toMatchSnapshot();
-  });
-
-  it('should not render when clicked outside', async () => {
-    const { container } = setup(true, false);
-
-    expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
-
-    userEvent.click(screen.getByAltText('Medal'));
-
-    await waitFor(() => expect(container.querySelector('.position-absolute')).toBeInTheDocument());
-
-    userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
-
-    await waitFor(() => expect(container.querySelector('.position-absolute')).not.toBeInTheDocument());
-  });
-
-  it('should render on keydown', async () => {
-    const { container } = setup(true, false);
-
-    expect(container.querySelector('.position-absolute')).not.toBeInTheDocument();
-
-    fireEvent.keyDown(screen.getByAltText('Medal'));
-
-    await waitFor(() => expect(container.querySelector('.position-absolute')).toBeInTheDocument());
-
-    userEvent.click(screen.getByRole('button', { name: /Test Button/ }));
-
-    await waitFor(() => expect(container.querySelector('.position-absolute')).not.toBeInTheDocument());
   });
 
   it('should call callback fn when callback is provided', async () => {

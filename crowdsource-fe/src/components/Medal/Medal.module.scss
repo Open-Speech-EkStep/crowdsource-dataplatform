@@ -35,18 +35,15 @@
 
 .zoom {
   border-radius: 20px;
-  bottom: -14.25rem;
   box-shadow: 0 0 32px rgba(0, 123, 255, 0.4);
   height: 13.25rem;
-  left: 0;
   width: 13.75rem;
   z-index: 1;
 
   @include media-breakpoint-up(lg) {
-    bottom: -18.5rem;
     height: 17.5rem;
-    left: -1.25rem;
     width: 20rem;
+    max-width: 20rem;
   }
 }
 
@@ -56,16 +53,4 @@
   @include media-breakpoint-up(lg) {
     width: 10.75rem;
   }
-}
-
-.tip {
-  border-radius: 4px;
-  bottom: -1.6rem;
-  height: 1rem;
-  left: 0;
-  margin: auto;
-  right: 0;
-  transform: rotate(-45deg);
-  width: 1rem;
-  z-index: 2;
 }
