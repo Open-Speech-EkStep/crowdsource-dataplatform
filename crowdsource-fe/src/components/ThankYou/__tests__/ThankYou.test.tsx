@@ -62,14 +62,10 @@ describe('ThankYou', () => {
       badgeId: '',
       badges: [],
       contributionCount: 0,
-      currentAmount: 0.072,
       currentBadgeType: '',
-      currentMilestone: 5,
       isNewBadge: false,
-      languageGoal: 5,
       nextBadgeType: 'Bronze',
       nextMilestone: 5,
-      sequence: '1st',
     };
     const { asFragment } = await setup('tts', data);
 
@@ -81,14 +77,10 @@ describe('ThankYou', () => {
       badgeId: '',
       badges: [],
       contributionCount: 0,
-      currentAmount: 0.072,
       currentBadgeType: '',
-      currentMilestone: 0,
       isNewBadge: false,
-      languageGoal: 5,
       nextBadgeType: 'Bronze',
       nextMilestone: 5,
-      sequence: '1st',
     };
     await setup('tts', data);
 
@@ -107,14 +99,10 @@ describe('ThankYou', () => {
         },
       ],
       contributionCount: 5,
-      currentAmount: 0.072,
       currentBadgeType: 'Bronze',
-      currentMilestone: 5,
       isNewBadge: true,
-      languageGoal: 5,
       nextBadgeType: 'Bronze',
       nextMilestone: 50,
-      sequence: '1st',
     };
     await setup('tts', data);
 
@@ -135,14 +123,10 @@ describe('ThankYou', () => {
         },
       ],
       contributionCount: 6,
-      currentAmount: 0.072,
       currentBadgeType: 'Bronze',
-      currentMilestone: 5,
       isNewBadge: false,
-      languageGoal: 5,
       nextBadgeType: 'Bronze',
       nextMilestone: 50,
-      sequence: '2nd',
     };
     await setup('tts', data);
 
@@ -167,14 +151,10 @@ describe('ThankYou', () => {
         },
       ],
       contributionCount: 60,
-      currentAmount: 0.072,
       currentBadgeType: 'Silver',
-      currentMilestone: 50,
       isNewBadge: false,
-      languageGoal: 5,
       nextBadgeType: 'Bronze',
       nextMilestone: 100,
-      sequence: '3rd',
     };
     await setup('tts', data);
 
