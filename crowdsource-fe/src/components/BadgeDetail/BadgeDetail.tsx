@@ -75,6 +75,7 @@ const BadgeDetail = () => {
       });
     }, 800);
     onSetInitiativeRouting(INITIATIVES_MEDIA_MAPPING[defaultInitiative]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
