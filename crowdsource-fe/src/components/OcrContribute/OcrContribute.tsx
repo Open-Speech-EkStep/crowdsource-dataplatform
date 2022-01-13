@@ -166,7 +166,7 @@ const OcrContribute = () => {
     setViewExpand(false);
     setShowThankyouMessage(true);
     setCloseKeyboard(!closeKeyboard);
-    resetState();
+
     if (currentDataIndex === contributionData.length - 1) {
       await submit(
         JSON.stringify({
@@ -194,9 +194,10 @@ const OcrContribute = () => {
         })
       );
     }
-    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
+      resetState();
+      setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
 
@@ -275,7 +276,7 @@ const OcrContribute = () => {
                 <div className="mt-4 mt-md-8">
                   <TextEditArea
                     id="addText"
-                    isTextareaDisabled={false}
+                    isTextareaDisabled={showThankyouMessage}
                     language={contributionLanguage ?? ''}
                     initiative={INITIATIVES_MEDIA_MAPPING.ocr}
                     setTextValue={onChangeTextInput}

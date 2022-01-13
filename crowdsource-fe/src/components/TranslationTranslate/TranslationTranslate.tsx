@@ -163,7 +163,6 @@ const TranslationTranslate = () => {
   const onSubmitContribution = async () => {
     setShowThankyouMessage(true);
     setCloseKeyboard(!closeKeyboard);
-    resetState();
     if (currentDataIndex === contributionData.length - 1) {
       await submit(
         JSON.stringify({
@@ -193,9 +192,10 @@ const TranslationTranslate = () => {
         })
       );
     }
-    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
+      resetState();
+      setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
 
@@ -284,7 +284,7 @@ const TranslationTranslate = () => {
                     <div className="flex-fill">
                       <TextEditArea
                         id="editText"
-                        isTextareaDisabled={false}
+                        isTextareaDisabled={showThankyouMessage}
                         language={translatedLanguage ?? ''}
                         initiative={INITIATIVES_MEDIA_MAPPING.translation}
                         setTextValue={onChangeTextInput}

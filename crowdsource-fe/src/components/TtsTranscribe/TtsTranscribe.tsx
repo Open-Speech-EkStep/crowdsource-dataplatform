@@ -270,9 +270,9 @@ const TtsTranscribe = () => {
         })
       );
     }
-    setDataCurrentIndex(currentDataIndex);
     setTimeout(() => {
       setShowThankyouMessage(false);
+      setDataCurrentIndex(currentDataIndex);
     }, 1500);
   };
 
