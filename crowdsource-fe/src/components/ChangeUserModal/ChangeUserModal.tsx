@@ -24,7 +24,7 @@ const testUserName = (value: string) => {
 
 interface ChangeUserModalProps {
   onHide: () => void;
-  show: Boolean;
+  show: boolean;
   doRedirection?: boolean;
   redirectionUrl?: string;
 }

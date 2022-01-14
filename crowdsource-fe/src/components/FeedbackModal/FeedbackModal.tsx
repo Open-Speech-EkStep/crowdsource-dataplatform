@@ -23,7 +23,7 @@ interface FeedbackModalProps {
   onHide: () => void;
   onSuccess: () => void;
   onError: (error: any) => any;
-  show: Boolean;
+  show: boolean;
 }
 
 const FeedbackModal = ({ onSuccess: showThankyou, onError, ...props }: FeedbackModalProps) => {

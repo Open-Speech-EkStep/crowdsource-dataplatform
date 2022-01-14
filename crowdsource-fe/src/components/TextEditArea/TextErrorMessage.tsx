@@ -1,6 +1,6 @@
 interface TextErrorMessageProps {
   message: string;
-  isWarning?: Boolean;
+  isWarning?: boolean;
 }
 
 const TextErrorMessage = ({ message, isWarning = false }: TextErrorMessageProps) => {

@@ -7,6 +7,7 @@ import 'styles/slickCarousel.scss';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import SSRProvider from 'react-bootstrap/SSRProvider';
 import { SWRConfig } from 'swr';
 
 import ErrorPopup from 'components/ErrorPopup';
@@ -71,41 +72,43 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
   };
 
   return (
-    <SWRConfig
-      value={{
-        /* istanbul ignore next */
-        onError: error => {
+    <SSRProvider>
+      <SWRConfig
+        value={{
           /* istanbul ignore next */
-          if (error) {
-            setHasError(true);
-            if (error.status && error.status === ErrorStatusCode.SERVICE_UNAVAILABLE) {
-              setErrorMsg('multipleRequestApiError');
-            } else {
-              setErrorMsg('apiFailureError');
-            }
-          }
-        },
-      }}
-    >
-      <Layout>
-        <Component {...pageProps} />
-        {router.pathname !== '/404' && <Float />}
-        <LanguageChangeNotification
-          show={showModal}
-          onHide={closeModal}
-          oldValue={storageObj.oldValue}
-          newValue={storageObj.newValue}
-        />
-        <ErrorPopup
-          show={hasError}
-          onHide={() => {
+          onError: error => {
             /* istanbul ignore next */
-            setHasError(false);
-          }}
-          errorMsg={errorMsg}
-        />
-      </Layout>
-    </SWRConfig>
+            if (error) {
+              setHasError(true);
+              if (error.status && error.status === ErrorStatusCode.SERVICE_UNAVAILABLE) {
+                setErrorMsg('multipleRequestApiError');
+              } else {
+                setErrorMsg('apiFailureError');
+              }
+            }
+          },
+        }}
+      >
+        <Layout>
+          <Component {...pageProps} />
+          {router.pathname !== '/404' && <Float />}
+          <LanguageChangeNotification
+            show={showModal}
+            onHide={closeModal}
+            oldValue={storageObj.oldValue}
+            newValue={storageObj.newValue}
+          />
+          <ErrorPopup
+            show={hasError}
+            onHide={() => {
+              /* istanbul ignore next */
+              setHasError(false);
+            }}
+            errorMsg={errorMsg}
+          />
+        </Layout>
+      </SWRConfig>
+    </SSRProvider>
   );
 };
 

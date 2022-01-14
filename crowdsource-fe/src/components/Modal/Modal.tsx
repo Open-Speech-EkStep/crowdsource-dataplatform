@@ -13,9 +13,9 @@ interface ModalProps {
   subTitle?: string;
   footer?: ReactNode;
   size?: 'sm' | 'lg' | 'xl';
-  show?: Boolean;
+  show?: boolean;
   onHide?: () => void;
-  backdrop?: string;
+  backdrop?: boolean | 'static' | undefined;
   closeButton?: boolean;
   className?: string;
 }

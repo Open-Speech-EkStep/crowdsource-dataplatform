@@ -6,7 +6,7 @@ import type { Initiative } from 'types/Initiatives';
 
 interface ReeportSuccessModalProps {
   onHide: () => void;
-  show: Boolean;
+  show: boolean;
   initiative: Initiative;
 }
 

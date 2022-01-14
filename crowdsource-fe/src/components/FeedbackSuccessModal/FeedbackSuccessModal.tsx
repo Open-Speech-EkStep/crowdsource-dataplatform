@@ -9,7 +9,7 @@ import styles from './FeedbackSuccessModal.module.scss';
 
 interface FeedbackSuccessModalProps {
   onHide: () => void;
-  show: Boolean;
+  show: boolean;
 }
 
 const FeedbackSuccessModal = (props: FeedbackSuccessModalProps) => {
