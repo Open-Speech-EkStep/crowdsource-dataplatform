@@ -4,6 +4,8 @@ import { SWRConfig } from 'swr';
 
 import { screen, userEvent } from 'utils/testUtils';
 
+jest.mock('components/ContributionStats', () => () => 'ContributionStats');
+
 import TranslationDashboard from '../TranslationDashboard';
 
 describe('TranslationDashboard', () => {
@@ -20,38 +22,6 @@ describe('TranslationDashboard', () => {
   const toLanguageElement = () => screen.getByRole('combobox', { name: 'Select To Language' });
 
   const setup = async () => {
-    fetchMock.doMockOnceIf('/aggregated-json/participationStats.json').mockResponseOnce(
-      JSON.stringify([
-        {
-          count: '9',
-          type: 'asr',
-        },
-        {
-          count: '283',
-          type: 'text',
-        },
-        {
-          count: '53',
-          type: 'ocr',
-        },
-        {
-          count: 10,
-          type: 'parallel',
-        },
-      ])
-    );
-    fetchMock.doMockOnceIf('/aggregated-json/cumulativeCount.json').mockResponseOnce(
-      JSON.stringify([
-        {
-          total_contribution_count: 37,
-          total_contributions: 0.057,
-          total_languages: 2,
-          total_validation_count: 2,
-          total_validations: 0.001,
-          type: 'parallel',
-        },
-      ])
-    );
     fetchMock.doMockIf('/aggregated-json/cumulativeDataByLanguage.json').mockResponse(
       JSON.stringify([
         {
@@ -70,7 +40,7 @@ describe('TranslationDashboard', () => {
         <TranslationDashboard />
       </SWRConfig>
     );
-    await screen.findByTestId('Breadcrumbs');
+    await screen.findByText('ContributionStats');
     return renderResult;
   };
 
