@@ -114,6 +114,6 @@ select type,
 	where dataset_row.type=l.type and dataset_row.media->>'language'=l.fromLanguage
 		and not exists (
 		select 1 from contributions where contributions.dataset_row_id=dataset_row.dataset_row_id 
-			and (dataset_row.type!='parallel' or contributions.media->>'language'=l.toLanguage) and contributions.action='completed'))
+			and contributions.action='completed'))
 group by type,language) as all_contributed on has_target.type=all_contributed.type and has_target.language=all_contributed.language
 group by has_target.type,all_contributed.type, has_target.language,all_contributed.language, has_target.hasTarget, all_contributed.isAllContributed )t
