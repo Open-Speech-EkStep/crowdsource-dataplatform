@@ -53,11 +53,11 @@ SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select st
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  distinct(language), type from contributions_and_demo_stats)t;
 
 \o topLanguagesBySpeakerContributions.json 
-SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, total_speakers, type from (select language, total_speakers, type, row_number() OVER ( PARTITION BY type ORDER BY total_speakers DESC ) rank from language_group_contributions) as language_data where  rank < 6)t;
+SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, total_speakers, type from (select language, total_speakers, type, row_number() OVER ( PARTITION BY type ORDER BY total_speakers DESC ) rank from language_group_contributions) as language_data)t;
 
 \o topLanguagesByHoursContributed.json 
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( select language, coalesce(total_contributions, 0) total_contributions, total_contribution_count, type from (select language,(total_contributions + total_validations) as total_contributions, (total_contribution_count + total_validation_count) as total_contribution_count, row_number() OVER ( PARTITION BY type ORDER BY (total_contributions + total_validations) DESC,
-					   (total_contribution_count + total_validation_count) DESC ) rank, type from language_group_contributions ) as language_data where  rank < 6)t;
+					   (total_contribution_count + total_validation_count) DESC ) rank, type from language_group_contributions ) as language_data)t;
 
 \o lastUpdatedAtQuery.json 
 SELECT coalesce(array_to_json(array_agg(row_to_json (t))),'[]') FROM ( SELECT  max(lastupdated) AT TIME ZONE 'Asia/Kolkata' from audit_load_log)t;
