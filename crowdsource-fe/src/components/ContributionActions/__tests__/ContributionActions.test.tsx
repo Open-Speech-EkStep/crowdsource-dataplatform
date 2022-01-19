@@ -5,14 +5,18 @@ import { render, verifyAxeTest, screen, waitFor } from 'utils/testUtils';
 import ContributionActions from '../ContributionActions';
 
 describe('ContributionActions', () => {
-  const setup = async (initiative: 'tts' | 'asr' | 'translation' | 'ocr', language: string) => {
+  const setup = async (
+    initiative: 'tts' | 'asr' | 'translation' | 'ocr',
+    language: string,
+    translatedLanguage?: string
+  ) => {
     when(localStorage.getItem)
       .calledWith('contributionLanguage')
       .mockImplementation(() => language);
 
     when(localStorage.getItem)
       .calledWith('translatedLanguage')
-      .mockImplementation(() => 'Hindi');
+      .mockImplementation(() => translatedLanguage || 'Hindi');
 
     const speakerDetails = {
       userName: 'abc',
@@ -45,6 +49,10 @@ describe('ContributionActions', () => {
           language: 'English',
           type: 'parallel',
         },
+        {
+          language: 'Odia',
+          type: 'parallel',
+        },
       ])
     );
 
@@ -72,6 +80,24 @@ describe('ContributionActions', () => {
           hastarget: false,
           isallcontributed: true,
           language: 'English-Hindi',
+          type: 'parallel',
+        },
+        {
+          hastarget: true,
+          isallcontributed: true,
+          language: 'English-Tamil',
+          type: 'parallel',
+        },
+        {
+          hastarget: true,
+          isallcontributed: false,
+          language: 'Odia-English',
+          type: 'parallel',
+        },
+        {
+          hastarget: true,
+          isallcontributed: false,
+          language: 'Odia-Hindi',
           type: 'parallel',
         },
       ])
@@ -122,7 +148,7 @@ describe('ContributionActions', () => {
     });
   });
 
-  it('should make set he "{}" value when no value found in enable disable card api', async () => {
+  it('should set empty object when no value found in enable disable card api', async () => {
     await setup('ocr', 'English');
 
     await waitFor(() => {
@@ -134,15 +160,41 @@ describe('ContributionActions', () => {
     });
   });
 
-  it('should test the card enable  disable for translation', async () => {
-    await setup('translation', 'English');
+  describe('test enable disable cards for translation initiative', () => {
+    it('both cards should be disabled for translation on English-Hindi pair', async () => {
+      await setup('translation', 'English', 'Hindi');
 
-    await waitFor(() => {
-      expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');
+      await waitFor(() => {
+        expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');
+      });
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
+      });
     });
 
-    await waitFor(() => {
-      expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
+    it('translate card should be disabled for translation on pairs with fromLanguage=English if all data are paired for English', async () => {
+      await setup('translation', 'English', 'Punjabi');
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).not.toHaveClass('d-none');
+      });
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
+      });
+    });
+
+    it('translate card should be enabled for translation on pairs when unpaired data present for fromLanguage', async () => {
+      await setup('translation', 'Odia', 'Tamil');
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId('ActionCardWarningMessage')[0]).toHaveClass('d-none');
+      });
+
+      await waitFor(() => {
+        expect(screen.getAllByTestId('ActionCardWarningMessage')[1]).not.toHaveClass('d-none');
+      });
     });
   });
 });

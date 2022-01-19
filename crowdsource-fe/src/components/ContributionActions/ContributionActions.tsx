@@ -51,11 +51,14 @@ const ContributionActions = (props: ContributionActionProps) => {
   }, [contributionLanguage, translatedLanguage, languageWithDataMutate, cardStateMutate]);
 
   const callbacks = {
-    asr: (data: LanguageWithData) =>
+    language: (data: LanguageWithData) =>
       data.type === INITIATIVES_MEDIA_MAPPING[props.initiative] && data.language === contributionLanguage,
-    parallel: (data: LanguageWithData) =>
+    languagePair: (data: LanguageWithData) =>
       data.type === INITIATIVES_MEDIA_MAPPING[props.initiative] &&
       data.language === `${contributionLanguage}-${translatedLanguage}`,
+    fromLanguage: (data: LanguageWithData) =>
+      data.type === INITIATIVES_MEDIA_MAPPING[props.initiative] &&
+      data.language.split('-')[0] === contributionLanguage,
   };
 
   const isLanguageAvailable = !!languageWithData?.find(
@@ -69,10 +72,12 @@ const ContributionActions = (props: ContributionActionProps) => {
   if (isLanguageAvailable && cardState) {
     const filteredData: any =
       INITIATIVES_MEDIA_MAPPING[props.initiative] === INITIATIVES_MEDIA.parallel
-        ? cardState?.find(callbacks[INITIATIVES_MEDIA.parallel]) || {}
-        : cardState?.find(callbacks[INITIATIVES_MEDIA.asr]) || {};
-    hasTarget = filteredData.hastarget ?? false;
-    isAllContributed = filteredData.isallcontributed ?? false;
+        ? cardState?.find(callbacks['languagePair']) || {
+            isallcontributed: cardState?.find(callbacks['fromLanguage'])?.isallcontributed,
+          }
+        : cardState?.find(callbacks['language']) || {};
+    hasTarget = filteredData?.hastarget ?? false;
+    isAllContributed = filteredData?.isallcontributed ?? false;
   }
 
   return (
