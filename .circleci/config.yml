@@ -34,7 +34,7 @@ jobs:
   sonar-scan:
     machine:
       image: ubuntu-2004:202101-01
-    # working_directory: ~/crowdsource-dataplatform/
+    working_directory: ~/crowdsource-dataplatform/
     steps:
       - checkout:
           path: ~/crowdsource-dataplatform
