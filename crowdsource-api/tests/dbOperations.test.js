@@ -21,13 +21,6 @@ const {
     getContributionHoursForLanguage,
     getDataRowInfo,
     getOrderedUniqueMediaQuery,
-    getLanguageGoalQuery,
-    getContributionAmount,
-    getValidationAmount,
-    getContributionHoursForText,
-    getValidationHoursForText,
-    getContributionHoursForAsr,
-    getValidationHoursForAsr,
     getUserRewardsQuery
 } = require('./../src/dbQuery');
 
@@ -422,34 +415,12 @@ describe("Running tests for dbOperations", () => {
         const milestoneId = 1
         const bronzeBadge = 1, silverBadge = 2, goldBadge = 3;
         const textType = 'text';
-        const asrType = 'asr';
-        const ocrType = 'ocr';
-        const parallelType = 'parallel';
-        // one or None - get contributor id
-        // any - total contributions
-        // one - total validations
-        // one or None - current milestone data
-        // any - actual badges <= current nearest milestone
-        // any - find my badges
-        // any (n times)- insert rewards that are missed due to not being validated
-        // any - insert rewards for latest nearest milestone
-        // one or None - next Milestone data
 
         beforeEach(() => {
             when(spyDBone).calledWith(addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue]).mockReturnValue({ 'contributor_id': contributor_id });
-            when(spyDBany).calledWith(getTotalUserContribution, [contributor_id, language, textType]).mockReturnValue([{ 'contribution_id': 1234 }]);
-            when(spyDBany).calledWith(getTotalUserValidation, [contributor_id, language, textType]).mockReturnValue([{ 'contribution_id': 1234 }]);
+            when(spyDBone).calledWith(getTotalUserContribution, [contributor_id, language, textType]).mockReturnValue({ 'count': 1 });
+            when(spyDBone).calledWith(getTotalUserValidation, [contributor_id, language, textType]).mockReturnValue({ 'count': 1 });
             when(spyDBone).calledWith(getContributionHoursForLanguage, [language]).mockReturnValue(10);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryContribute, textType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryContribute, asrType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryContribute, parallelType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryContribute, ocrType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryValidate, textType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryValidate, asrType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryValidate, parallelType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getLanguageGoalQuery, [categoryValidate, ocrType, language]).mockReturnValue(100);
-            when(spyDBoneOrNone).calledWith(getContributionHoursForText, [language, textType]).mockReturnValue(5.5);
-            when(spyDBoneOrNone).calledWith(getValidationHoursForText, [language, textType]).mockReturnValue(2.3);
             when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([{ grade: 'bronze', id: 23, milestone: 5 }, { grade: 'silver', id: 24, milestone: 50 }, { grade: 'gold', id: 25, milestone: 100 }])
             when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, textType]).mockReturnValue([]);
             when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryValidate, textType]).mockReturnValue([]);
@@ -472,8 +443,7 @@ describe("Running tests for dbOperations", () => {
             expect(spyDBone).toHaveBeenNthCalledWith(1, addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryContribute])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, getLanguageGoalQuery, [categoryContribute, textType, language])
-            expect(spyDBany).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language, textType])
+            expect(spyDBone).toHaveBeenCalledWith(getTotalUserContribution, [contributor_id, language, textType])
         });
 
         test('should call queries for rewards data if user found for validate', async () => {
@@ -482,8 +452,7 @@ describe("Running tests for dbOperations", () => {
             expect(spyDBone).toHaveBeenNthCalledWith(1, addContributorIfNotExistQuery, [userId, userName, age, gender, motherTongue])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(1, checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryValidate])
             expect(spyDBoneOrNone).toHaveBeenNthCalledWith(2, checkNextMilestoneQuery, [contribution_count, language, categoryValidate, textType])
-            expect(spyDBoneOrNone).toHaveBeenNthCalledWith(3, getLanguageGoalQuery, [categoryValidate, textType, language])
-            expect(spyDBany).toHaveBeenCalledWith(getTotalUserValidation, [contributor_id, language, textType])
+            expect(spyDBone).toHaveBeenCalledWith(getTotalUserValidation, [contributor_id, language, textType])
         });
 
         describe('Test get contributor id', () => {
@@ -500,7 +469,7 @@ describe("Running tests for dbOperations", () => {
 
         describe('Test create badge', () => {
 
-            test('should call insertRewardQuery id rewardsList is empty', async () => {
+            test('should call insertRewardQuery if rewardsList is empty', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
                 when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, textType]).mockReturnValue([]);
 
@@ -511,7 +480,7 @@ describe("Running tests for dbOperations", () => {
                 jest.clearAllMocks()
             });
 
-            test('should not call insertRewardQuery if matched badge', async () => {
+            test('should not call insertRewardQuery if badge already present', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
                 when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, textType]).mockReturnValue([{ "milestone_id": milestoneId }]);
 
@@ -523,38 +492,34 @@ describe("Running tests for dbOperations", () => {
             });
         });
 
-        describe('Test get current milestone data', () => {
+        describe('Test get latest badge data', () => {
 
-            test('get current milestone data if exists', async () => {
+            test('get latest badge data if exists', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
                 when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, textType]).mockReturnValue([]);
                 when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryContribute]).mockReturnValue({ 'milestone_id': 1, 'grade': 'copper', 'milestone': 100 });
 
                 const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType])
-                expect(result.currentMilestone).toBe(100)
                 expect(result.currentBadgeType).toBe('copper')
                 jest.clearAllMocks();
             });
 
-            test('get current milestone as 0 if data not exists', async () => {
+            test('get latest badge data as 0 if data not exists', async () => {
                 when(spyDBany).calledWith(getBadges, [expect.anything(), language]).mockReturnValue([]);
                 when(spyDBany).calledWith(findRewardInfo, [contributor_id, language, categoryContribute, textType]).mockReturnValue([]);
                 when(spyDBoneOrNone).calledWith(checkCurrentMilestoneQuery, [contribution_count, language, textType, categoryContribute]).mockReturnValue(null);
 
                 const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
 
-                expect(spyDBoneOrNone).toHaveBeenCalledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType])
-                expect(result.currentMilestone).toBe(0)
                 expect(result.currentBadgeType).toBe('')
                 jest.clearAllMocks();
             });
         });
 
-        describe('Test get next milestone data', () => {
+        describe('Test get next badge data', () => {
 
-            test('get next milestone data if exists', async () => {
+            test('get next badge data if exists', async () => {
                 when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType]).mockReturnValue({ 'milestone_id': 2, 'grade': 'silver', 'milestone': 200 });
 
                 const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
@@ -565,7 +530,7 @@ describe("Running tests for dbOperations", () => {
                 jest.clearAllMocks();
             });
 
-            test('get next milestone as 0 if data not exists', async () => {
+            test('get next badge as 0 if data not exists', async () => {
                 when(spyDBoneOrNone).calledWith(checkNextMilestoneQuery, [contribution_count, language, categoryContribute, textType]).mockReturnValue({});
 
                 const result = await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
@@ -577,56 +542,6 @@ describe("Running tests for dbOperations", () => {
             });
         });
 
-        describe('test get current amount', () => {
-
-            test('should call getContributionHoursForText for type text contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionHoursForText, [language, textType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryContribute, textType);
-                expect(spyDBoneOrNone).toBeCalledWith(getContributionHoursForText, [language, textType])
-            });
-
-            test('should call getContributionHoursForAsr for type asr contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionHoursForAsr, [language, asrType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryContribute, asrType);
-                expect(spyDBoneOrNone).toBeCalledWith(getContributionHoursForAsr, [language, asrType])
-            });
-
-            test('should call getContributionAmount for type ocr contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionAmount, [language, ocrType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryContribute, ocrType);
-                expect(spyDBoneOrNone).toBeCalledWith(getContributionAmount, [language, ocrType])
-            });
-
-            test('should call getContributionAmount for type parallel contribute', async () => {
-                when(spyDBoneOrNone).calledWith(getContributionAmount, [language, parallelType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryContribute, parallelType);
-                expect(spyDBoneOrNone).toBeCalledWith(getContributionAmount, [language, parallelType])
-            });
-
-            test('should call getValidationAmount for type ocr validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationAmount, [language, ocrType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryValidate, ocrType);
-                expect(spyDBoneOrNone).toBeCalledWith(getValidationAmount, [language, ocrType])
-            });
-
-            test('should call getValidationAmount for type parallel validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationAmount, [language, parallelType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryValidate, parallelType);
-                expect(spyDBoneOrNone).toBeCalledWith(getValidationAmount, [language, parallelType])
-            });
-
-            test('should call getValidationHoursForText for type text validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationHoursForText, [language, textType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryValidate, textType);
-                expect(spyDBoneOrNone).toBeCalledWith(getValidationHoursForText, [language, textType])
-            });
-
-            test('should call getValidationHoursForAsr for type asr validate', async () => {
-                when(spyDBoneOrNone).calledWith(getValidationHoursForAsr, [language, asrType]).mockReturnValue({ amount: 10 })
-                await dbOperations.getRewards(userId, userName, language, categoryValidate, asrType);
-                expect(spyDBoneOrNone).toBeCalledWith(getValidationHoursForAsr, [language, asrType])
-            });
-        })
     });
 
     describe('Test Update Tables after validation', () => {

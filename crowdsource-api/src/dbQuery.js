@@ -211,11 +211,11 @@ const rewardsInfoQuery = `select milestone as contributions, grade as badge from
 inner join reward_catalogue rew on mil.reward_catalogue_id=rew.id
 where mil.type=$1 and category=$2 and LOWER(language)=LOWER($3) order by mil.milestone`;
 
-const getTotalUserContribution = `select con.contribution_id from contributions con 
-inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where dr.type=$3 and LOWER(dr.media->>'language') = LOWER($2) 
+const getTotalUserContribution = `select count(1) from contributions con 
+inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where dr.type=$3 and LOWER(dr.media->>'language') = LOWER($2) 
 and action = 'completed' and con.contributed_by = $1`;
 
-const getTotalUserValidation = `select val.validation_id from validations val 
+const getTotalUserValidation = `select count(1) from validations val 
 inner join contributions con on val.contribution_id=con.contribution_id and val.action!='skip' 
 inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where dr.type=$3 and LOWER(dr.media->>'language')=LOWER($2) 
 and val.validated_by=$1`;
@@ -226,9 +226,7 @@ and LOWER(language) = LOWER($2) and type=$3 and category=$4 order by milestone d
 as reward_milestone where id=reward_milestone.rid`;
 
 const checkNextMilestoneQuery = `select grade, reward_milestone.milestone from reward_catalogue, 
-(select milestone,milestone_id, reward_catalogue_id as rid from reward_milestones where milestone > $1 and milestone >= 
-  (select milestone from reward_milestones, reward_catalogue where 
-  id=reward_catalogue_id and grade is not null order by milestone limit 1) 
+(select milestone, milestone_id, reward_catalogue_id as rid from reward_milestones where milestone > $1 
 and language=$2 and category=$3 and type=$4 order by milestone limit 1) 
 as reward_milestone where id=reward_milestone.rid and grade is not null`;
 
@@ -255,35 +253,6 @@ as reward_milestone where id=reward_milestone.rid`;
 const getContributionHoursForLanguage = `select COALESCE(sum((con.media->>'duration')::decimal/3600), 0) as hours from contributions con 
 inner join dataset_row dr on dr."dataset_row_id"=con."dataset_row_id" where LOWER(dr.media->>'language') = LOWER($1) 
 and action = 'completed' and (con.media->>'duration') is not null`;
-
-const getContributionAmount = `select count(*) as amount from contributions con 
-inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and action='completed' and type=$2 and con.date::date>=date_trunc('month', current_date)::date`;
-
-const getContributionHoursForAsr = `select ROUND((sum(COALESCE((dr.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
-inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and action='completed' and type='asr' and con.date::date>=date_trunc('month', current_date)::date`;
-
-const getContributionHoursForText = `select ROUND((sum(COALESCE((con.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
-inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and action='completed' and type='text' and con.date::date>=date_trunc('month', current_date)::date`;
-
-const getValidationAmount = `select count(*) as amount from contributions con 
-inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
-inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and con.action='completed' and type=$2 and val.date::date>=date_trunc('month', current_date)::date`;
-
-const getValidationHoursForAsr = `select ROUND((sum(COALESCE((dr.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
-inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
-inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and con.action='completed' and type='asr' and val.date::date>=date_trunc('month', current_date)::date`;
-
-const getValidationHoursForText = `select ROUND((sum(COALESCE((con.media->>'duration')::decimal,0))/3600),3) as amount from contributions con 
-inner join validations val on val.contribution_id=con.contribution_id and val.action!='skip'
-inner join dataset_row dr on dr.dataset_row_id=con.dataset_row_id where LOWER(dr.media->>'language')=LOWER($1) 
-and con.action='completed' and type='text' and val.date::date>=date_trunc('month', current_date)::date`;
-
-const getLanguageGoalQuery = `select goal from language_goals where category=$1 and type=$2 and LOWER(language)=LOWER($3)`;
 
 const getContributionLanguagesQuery = `select dr.media->>'language' as from_language,con.media->>'language' as to_language from dataset_row dr inner join 
 contributions con on con.dataset_row_id=dr.dataset_row_id and con.action='completed' where dr.type=$1 group by dr.media->>'language',con.media->>'language',dr.type`;
@@ -334,13 +303,6 @@ module.exports = {
   getBadges,
   addContributorIfNotExistQuery,
   getContributionHoursForLanguage,
-  getContributionAmount,
-  getContributionHoursForAsr,
-  getContributionHoursForText,
-  getValidationAmount,
-  getValidationHoursForAsr,
-  getValidationHoursForText,
-  getLanguageGoalQuery,
   updateContributionDetailsWithUserInput,
   getContributionLanguagesQuery,
   getDataRowInfo,

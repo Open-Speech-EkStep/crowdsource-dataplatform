@@ -11,7 +11,6 @@ const cachingEnabled = config.caching ? config.caching == "enabled" : false;
 const validation_count = config.validation_count ? Number(config.validation_count) : 5;
 const expiry = config.cache_timeout || Number(config.cache_timeout) || 1800;
 const batchSize = config.cache_batch_size || 5000;
-const batchLength = 20;
 
 const getRandom = (datasetList, requireElements) => {
 	let len = datasetList.length;
@@ -29,14 +28,14 @@ const generateResponse = (data, desiredCount, userId, userName) => {
 	if (!data || data.length == 0) {
 		return response;
 	}
-	let randomItems = getRandom(data, batchLength);
+	let randomItems = getRandom(data, desiredCount);
 	const randomItemsDataSetRowIds = randomItems.map(i => i.dataset_row_id);
 	data = data.filter(d => !randomItemsDataSetRowIds.includes(d.dataset_row_id));
 	const itemLength = randomItems.length;
 	let i = 0;
 	let skipCount = 0;
 	let includedIds = [];
-	while (response.length + skipCount < itemLength && response.length < desiredCount) {
+	while (response.length + skipCount < itemLength) {
 		if (randomItems[i].skipped_by && randomItems[i].skipped_by.includes(`${userId}-${userName}`)) {
 			skipCount++;
 			let obj = getRandom(data, 1)[0];
@@ -72,8 +71,12 @@ const userIncludedIn = (property, userInfo) => {
 	return property && property.includes(`${userInfo}`);
 }
 
-const isRowSkippedByOrContributedByUser = (row, userId, userName) => {
-	return userIncludedIn(row.skipped_by, `${userId}-${userName}`) || userIncludedIn(row.contributed_by, `${userId}-${userName}`)
+const isRowSkippedByOrContributedByUser = (row, userId, userName, userContributions) => {
+	let oldContributions = [];
+	if (userContributions) {
+		oldContributions = JSON.parse(userContributions);
+	}
+	return userIncludedIn(row.skipped_by, `${userId}-${userName}`) || userIncludedIn(row.contributed_by, `${userId}-${userName}`) || oldContributions.includes(row.contribution_id)
 }
 
 const deleteProperties = (obj, properties) => {
@@ -83,38 +86,34 @@ const deleteProperties = (obj, properties) => {
 	return obj;
 }
 
-const generateValidationResponse = (data, desiredCount, userId, userName) => {
-	console.log('EMPTYERROR: generating validation response')
+const getUserContributionsFromCache = (userId, userName) => {
+	return cache.getAsync(`user_contributions_${userId}_${userName}`);
+}
+
+const generateValidationResponse = (data, desiredCount, userId, userName, userContributions) => {
 	let response = [];
 	if (!data || data.length == 0) {
 		return response;
 	}
-	console.log('EMPTYERROR: after if check')
-	let randomItems = data.slice(0, batchLength);
+	let randomItems = data.slice(0, desiredCount);
 	const itemLength = randomItems.length;
-	console.log('EMPTYERROR: random items selected ' + itemLength)
 	let i = 0;
 	let skipCount = 0;
-	while (response.length < itemLength && skipCount < (data.length - response.length) && response.length < desiredCount) {
-		if (isRowSkippedByOrContributedByUser(randomItems[i], userId, userName)) {
-			console.log('EMPTYERROR: inside if')
+	while (response.length < itemLength && skipCount < (data.length - response.length)) {
+		if (isRowSkippedByOrContributedByUser(randomItems[i], userId, userName, userContributions)) {
 			if (itemLength + skipCount < data.length) {
 				randomItems[i] = data[itemLength + skipCount]
-				console.log('EMPTYERROR: inside if if')
 			}
 			else {
 				randomItems.splice(i, 1);
-				console.log('EMPTYERROR: inside if else')
 			}
 			skipCount++;
 		}
 		else {
-			console.log('EMPTYERROR: inside else')
 			response.push(deleteProperties(randomItems[i], ["skipped_by", "contributed_by", "validation_count"]));
 			i++;
 		}
 	}
-	console.log('EMPTYERROR: response length ' + response.length)
 	return response;
 }
 
@@ -235,22 +234,31 @@ const getDataForValidation = async (type, language, toLanguage, userId, userName
 		return null;
 	}
 	try {
-		console.log('EMPTYERROR: inside get validation')
 		let cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
 		if (cacheResponse == null) {
-			console.log('EMPTYERROR: no data from cache')
 			await setValidationDataForCaching(db, type, language, toLanguage)
-			console.log('EMPTYERROR: after set validation data')
 			cacheResponse = await cache.getAsync(`contributions_${type}_${language}_${toLanguage}`);
-			console.log('EMPTYERROR: now cache has ' + cacheResponse ? cacheResponse.length : 0);
 		}
 
 		const cacheData = JSON.parse(cacheResponse);
-		console.log('EMPTYERROR: cache item numbers ' + cacheData ? cacheData.length : 0)
-		return generateValidationResponse(cacheData, 5, userId, userName);
+		const userContributions = await getUserContributionsFromCache(userId, userName)
+		return generateValidationResponse(cacheData, 5, userId, userName, userContributions);
 	} catch (err) {
 		console.log("CACHING ERROR: " + err)
 	}
+}
+
+const updateUserCache = async (contribution_id, userId, userName) => {
+	const key = `user_contributions_${userId}_${userName}`
+	let cacheResponse = await cache.getAsync(key);
+	let userContributions = [contribution_id];
+
+	if (cacheResponse != null) {
+		let cacheData = JSON.parse(cacheResponse);
+		userContributions = userContributions.concat(cacheData);
+	}
+
+	await cache.setAsync(key, JSON.stringify(userContributions), expiry);
 }
 
 const updateValidationCountForItem = (cacheData, contribution_id, userId, userName, action) => {
@@ -283,6 +291,7 @@ const updateCacheAfterValidation = async (contribution_id, type, fromLanguage, t
 			cacheData = updateValidationCountForItem(cacheData, contribution_id, userId, userName, action);
 			cacheData = sortAndFilterValidationData(cacheData);
 			await cache.setAsync(key, JSON.stringify(cacheData), expiry);
+			await updateUserCache(contribution_id, userId, userName);
 		}
 
 	} catch (err) {

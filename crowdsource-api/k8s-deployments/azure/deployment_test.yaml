@@ -104,6 +104,11 @@ spec:
                 secretKeyRef:
                   key: TOPIC
                   name: vakyansh-secret
+            - name: IP_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: IP_API_KEY
+                  name: vakyansh-secret
           ports:
             - containerPort: 8080
 

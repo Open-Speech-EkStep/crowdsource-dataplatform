@@ -2,7 +2,7 @@ require('dotenv').config();
 const cors = require('cors');
 const objectStorage = process.argv[2] || 'azure';
 const fetch = require('node-fetch');
-
+const config = require('config');
 const { uploader } = require('./uploader/objUploader');
 const { calculateSNR } = require('./audio_attributes/snr');
 
@@ -455,7 +455,13 @@ router.get('/location-info', (req, res) => {
     res.sendStatus(400);
     return;
   }
-  fetch(`http://ip-api.com/json/${ip}?fields=country,regionName`)
+  
+  let locationApiUrl = `http://ip-api.com/json/${ip}?`
+  if (config.paid_location_api  == "enabled" && process.env.IP_API_KEY){
+    locationApiUrl = `https://pro.ip-api.com/json/${ip}?key=${process.env.IP_API_KEY}&`
+  } 
+  
+  fetch(`${locationApiUrl}fields=country,regionName`)
     .then(jsonRes => jsonRes.json())
     .then(response => {
       res.send(response);
