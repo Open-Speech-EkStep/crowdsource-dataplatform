@@ -39,15 +39,17 @@ jobs:
       - checkout:
           path: ~/crowdsource-dataplatform
       - run:
+          shell: /bin/bash
           name: Run jest coverage for backend
           command: |
             cd crowdsource-api && npm install
             npm run test -- --coverage
       - run:
+          shell: /bin/bash
           name: Run jest coverage for frontend
           command: |
             cd crowdsource-fe && npm install
-            npm run test:coverage
+            npm run test:coverage:ci
       - run:
           name: Sonar Scan
           command: docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_TOKEN=$SONAR_TOKEN -v $PWD:/usr/src sonarsource/sonar-scanner-cli -D sonar.branch.name=$CIRCLE_BRANCH
