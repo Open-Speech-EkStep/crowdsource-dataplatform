@@ -308,9 +308,9 @@ const getRewards = async (userId, userName, language, source, type) => {
     }
   
     const nextBadgeData = await getNextBadgeData(total_count, language, source, type);
-    const currentBadgeType = latestBadgeData?.grade || '';
-    const nextBadgeType = nextBadgeData?.grade || '';
-    const nextMilestone = nextBadgeData?.milestone || 0;
+    const currentBadgeType = latestBadgeData? latestBadgeData.grade || '' : '';
+    const nextBadgeType = nextBadgeData? nextBadgeData.grade || '' : '';
+    const nextMilestone = nextBadgeData? nextBadgeData.milestone || 0 : 0;
   
     return {
       badgeId: generatedBadgeId,
