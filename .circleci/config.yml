@@ -34,15 +34,16 @@ jobs:
   sonar-scan:
     machine:
       image: ubuntu-2004:202101-01
-    working_directory: ~/crowdsource-dataplatform/
+    # working_directory: ~/crowdsource-dataplatform/
     steps:
-      - *fast-checkout
+      - checkout:
+          path: ~/crowdsource-dataplatform
       - run:
           name: Run jest coverage for backend
           command: |
             ls
             pwd
-            cd crowdsource-api && npm install
+            cd crowdsource-dataplatform/crowdsource-api && npm install
             npm run test -- --coverage
       - run:
           name: Run jest coverage for frontend
