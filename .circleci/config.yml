@@ -34,10 +34,18 @@ jobs:
   sonar-scan:
     machine:
       image: ubuntu-2004:202101-01
-    working_directory: ~/speech-recognition-model-api/
     steps:
-      - checkout:
-          path: ~/speech-recognition-model-api
+      - *fast-checkout
+      - run:
+          name: Run jest coverage for backend
+          command: |
+            cd crowdsource-api && npm install
+            npm run test -- --coverage
+      - run:
+          name: Run jest coverage for frontend
+          command: |
+            cd crowdsource-fe && npm install
+            npm run test:coverage
       - run:
           name: Sonar Scan
           command: docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_TOKEN=$SONAR_TOKEN -v $PWD:/usr/src sonarsource/sonar-scanner-cli -D sonar.branch.name=$CIRCLE_BRANCH
