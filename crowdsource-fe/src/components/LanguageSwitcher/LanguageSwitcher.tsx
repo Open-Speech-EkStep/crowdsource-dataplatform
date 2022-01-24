@@ -33,7 +33,9 @@ const LanguageSwitcher = () => {
 
   if (contributionLanguage && currentRoutePath !== routePaths.home) {
     const filteredLanguage = locales?.filter(locale => locale === LOCALE_LANGUAGES[contributionLanguage]);
-    filteredLanguage && filteredLanguage.includes(LOCALES_MAPPING.en) ? '' : filteredLanguage?.unshift('en');
+    if (!(filteredLanguage && filteredLanguage.includes(LOCALES_MAPPING.en))) {
+      filteredLanguage?.unshift('en');
+    }
     localeValues = filteredLanguage;
   } else {
     localeValues = locales?.slice().sort();
@@ -61,7 +63,9 @@ const LanguageSwitcher = () => {
               eventKey={locale}
               className={`${styles.item} text-primary display-5 px-4 py-2`}
               onClick={() => {
-                doSetContributionLanguage ? null : setContributionLanguage(RAW_LANGUAGES[locale]);
+                if (!doSetContributionLanguage) {
+                  setContributionLanguage(RAW_LANGUAGES[locale]);
+                }
                 if (cookie.NEXT_LOCALE !== locale) {
                   setCookie(localeCookieName, locale, { path: '/' });
                 }
