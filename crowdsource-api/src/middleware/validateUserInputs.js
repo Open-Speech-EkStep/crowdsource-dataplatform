@@ -136,7 +136,7 @@ const validateUserInputForFeedback = function (req, res, next) {
 
     const invalidTargetPage = (!target_page || !target_page.trim().length || target_page.trim().length > 50)
 
-    const invalidOpinionRating = (!opinion_rating || !(opinion_rating >= 1) || !(opinion_rating <= 5))
+    const invalidOpinionRating = (!opinion_rating || opinion_rating < 1 || opinion_rating > 5)
     
     if (invalidEmail || invalidFeedback || invalidCategory || invalidLanguage || invalidOpinionRating || invalidModule || invalidTargetPage
         || invalidRecommended || invalidRevisit) {

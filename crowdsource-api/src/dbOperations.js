@@ -265,7 +265,7 @@ const getContributorId = async (userId, userName, age = '', gender = '', motherT
 }
 
 const getUserBadges = async (contributor_id, language, source, type) =>
-  await db.any(findRewardInfo, [contributor_id, language, source, type]);
+  db.any(findRewardInfo, [contributor_id, language, source, type]);
 
 const badgeExists = (badges, milestone_id) => {
   return badges.some(badge => badge.milestone_id === milestone_id);
@@ -277,10 +277,10 @@ const generateNewBadge = async (contributor_id, milestone_id) => {
 };
 
 const getNextBadgeData = async (total_count, language, source, type) =>
-  await db.oneOrNone(checkNextMilestoneQuery, [total_count, language, source, type]);
+  db.oneOrNone(checkNextMilestoneQuery, [total_count, language, source, type]);
 
 const getLatestBadgeData = async (total_count, language, type, source) =>
-  await db.oneOrNone(checkCurrentMilestoneQuery, [total_count, language, type, source]);
+  db.oneOrNone(checkCurrentMilestoneQuery, [total_count, language, type, source]);
 
 const getRewards = async (userId, userName, language, source, type) => {
     const contributor_id = await getContributorId(userId, userName);

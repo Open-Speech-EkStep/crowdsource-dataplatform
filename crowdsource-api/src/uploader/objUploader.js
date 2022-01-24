@@ -3,7 +3,7 @@ const { awsUploader } = require("./awsUploader")
 const { azureUploader } = require("./azureUploader")
 
 const uploader = function (provider) {
-    uploaders = { 'gcp': gcpUploader, 'aws': awsUploader, 'azure': azureUploader }
+    const uploaders = { 'gcp': gcpUploader, 'aws': awsUploader, 'azure': azureUploader }
 
     return uploaders[provider]
 }
