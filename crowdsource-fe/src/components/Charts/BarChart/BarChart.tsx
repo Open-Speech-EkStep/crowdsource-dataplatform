@@ -25,9 +25,7 @@ const BarChart = ({ id, data, labelClass = 'amXAxisLabel' }: ChartProps) => {
     categoryAxis.dataFields.category = 'category';
     categoryAxis.renderer.minGridDistance = 20;
     categoryAxis.renderer.grid.template.strokeWidth = 0;
-    // categoryAxis.renderer.grid.template.disabled = true;
     categoryAxis.renderer.labels.template.fontSize = 14;
-    // categoryAxis.renderer.labels.template.html = `<span class=${labelClass}>{category}</span>`;
     categoryAxis.renderer.grid.template.location = 0;
     const label = categoryAxis.renderer.labels.template;
     label.maxWidth = 120;

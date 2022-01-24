@@ -10,9 +10,7 @@ describe('Stats', () => {
       { id: '2', stat: 'b', label: 'l2' },
     ];
 
-    const renderResult = render(<Stats contents={statsContents} />);
-
-    return renderResult;
+    return render(<Stats contents={statsContents} />);
   };
 
   verifyAxeTest(setup());

@@ -4,9 +4,7 @@ import useSubmit from '../useSubmit';
 
 describe('#useSubmit', () => {
   const setup = (url: string, withHeaders: boolean) => {
-    const renderHookResult = renderHook(() => useSubmit(url, withHeaders));
-
-    return renderHookResult;
+    return renderHook(() => useSubmit(url, withHeaders));
   };
 
   it('should use fetch and gets the success response', async () => {

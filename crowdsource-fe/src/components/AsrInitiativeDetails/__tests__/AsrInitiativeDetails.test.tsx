@@ -8,8 +8,7 @@ import AsrInitiativeDetails from '../AsrInitiativeDetails';
 
 describe('AsrInitiativeDetails', () => {
   const setup = async () => {
-    const result = render(<AsrInitiativeDetails />);
-    return result;
+    return render(<AsrInitiativeDetails />);
   };
 
   it('should render the asr Initiative homepage', async () => {

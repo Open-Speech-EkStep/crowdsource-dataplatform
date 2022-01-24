@@ -4,13 +4,11 @@ import Layout from '../Layout';
 
 describe('Layout', () => {
   const setup = () => {
-    const renderResult = render(
+    return render(
       <Layout>
         <div>Hello World</div>
       </Layout>
     );
-
-    return renderResult;
   };
 
   // verifyAxeTest(setup());

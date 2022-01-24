@@ -55,8 +55,6 @@ describe('ThankYou', () => {
     return renderResult;
   };
 
-  // verifyAxeTest(setup());
-
   it('should render the component and matches it against stored snapshot', async () => {
     const data = {
       badgeId: '',

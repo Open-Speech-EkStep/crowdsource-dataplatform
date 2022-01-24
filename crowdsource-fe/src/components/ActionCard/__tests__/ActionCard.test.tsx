@@ -15,7 +15,7 @@ import ActionCard from '../ActionCard';
 describe('ActionCard', () => {
   const setup = () => {
     router.locale = 'as';
-    const rendereResult = render(
+    return render(
       <ActionCard
         icon="some-icon.svg"
         type="contribute"
@@ -25,7 +25,6 @@ describe('ActionCard', () => {
         altText="Contribute"
       />
     );
-    return rendereResult;
   };
 
   verifyAxeTest(setup());
