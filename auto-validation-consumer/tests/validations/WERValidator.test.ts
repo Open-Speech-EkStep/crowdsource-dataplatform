@@ -10,7 +10,7 @@ describe('Wer', () => {
 
         let result = wer.validate('English', "test", "test")
 
-        expect(result).toBeTruthy()
+        expect(result).toBe(true)
 
     })
 
@@ -19,7 +19,7 @@ describe('Wer', () => {
 
         let result = wer.validate('French', "test", "ball")
 
-        expect(result).toBeTruthy()
+        expect(result).toBe(true)
 
     })
 

@@ -8,7 +8,7 @@ describe('BleuScore', () => {
 
         let result = bleuScore.validate('Hindi-English', "this is a test", "this is a test")
 
-        expect(result).toBeTruthy()
+        expect(result).toBe(true)
 
     })
 

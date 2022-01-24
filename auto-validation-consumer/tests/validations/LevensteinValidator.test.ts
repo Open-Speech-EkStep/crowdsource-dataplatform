@@ -8,7 +8,7 @@ describe('Levenstein', () => {
 
         let result = levenstein.validate('English', "test", "test")
 
-        expect(result).toBeTruthy()
+        expect(result).toBe(true)
 
     })
 
@@ -18,7 +18,7 @@ describe('Levenstein', () => {
 
         let result = levenstein.validate('Marathi', "test", "test1234567890")
 
-        expect(result).toBeTruthy()
+        expect(result).toBe(true)
 
     })
 
