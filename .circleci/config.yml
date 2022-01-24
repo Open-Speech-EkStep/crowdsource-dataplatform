@@ -38,6 +38,15 @@ jobs:
     steps:
       - checkout:
           path: ~/crowdsource-dataplatform
+      - run: |
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      - run: |
+          node -v
+      - run: |
+          nvm install 14.17.5
+          node -v
+          nvm alias default 14.17.5
       - run:
           shell: /bin/bash
           name: Run jest coverage for backend
