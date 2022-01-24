@@ -292,15 +292,21 @@ describe('TranslationTranslate', () => {
 
     expect(screen.getByRole('button', { name: 'skip' })).toBeEnabled();
 
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
-
-    userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
+    await waitFor(() => {
+      userEvent.click(screen.getByRole('button', { name: 'skip' }));
+    });
 
     await waitFor(() => {
       expect(router.push).toHaveBeenCalledWith(expect.stringContaining('/thank-you'), undefined, {
