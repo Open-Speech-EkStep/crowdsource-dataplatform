@@ -104,6 +104,7 @@ describe('AsrSpeak', () => {
       expect(screen.getByRole('button', { name: 'stopRecording' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'submit' })).toBeDisabled();
     });
+    userEvent.click(screen.getByRole('button', { name: 'stopRecording' }));
   });
 
   it('should hide the quick tipe bar when user click on tips button', async () => {
