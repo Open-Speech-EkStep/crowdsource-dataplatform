@@ -57,9 +57,8 @@ describe('InitiativeBadgeDetail', () => {
   };
 
   it('should render the component and matches it against stored snapshot', async () => {
-    const { asFragment } = await setup('tts', 'english', 'contribute', 'bronze');
+    await setup('tts', 'english', 'contribute', 'bronze');
 
-    expect(asFragment()).toMatchSnapshot();
     expect(screen.getByText('Bronze')).toBeInTheDocument();
     expect(screen.getByText('Silver')).toBeInTheDocument();
     expect(screen.getByText('Gold')).toBeInTheDocument();
