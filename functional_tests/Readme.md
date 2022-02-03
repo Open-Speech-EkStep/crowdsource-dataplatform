@@ -9,10 +9,6 @@ To run functional tests, do the following:
 6. To run all specs parallely, `gauge run specs/ --env <env-name> -p`.
 7. To run with headless mode off, in `tests/AsrInitiative.js` file `const headless = process.env.headless_chrome.toLowerCase() === 'true';`, replace true with false.
 
-To run Galen tests, do the following:
-    - Specify url in `layout_test/suites/constant.properties` on which env you want to run the tests.
-
-
 Note: 
     - All environment related properties are in the `functional_tests/env` folder.
     - Supported envs: local, dev, prod, test
