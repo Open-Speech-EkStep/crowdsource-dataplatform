@@ -20,7 +20,10 @@ E.g., `galen test ./suites/ --htmlreport reports --parallel-tests 4`<br>
 4. To run specific test file, execute the following command.<br>
 `galen test <TestFile_name> --htmlreport <ReportDirectory_name>`<br>
 E.g., `galen test ./suites/homepage.test.js --htmlreport reports`<br>
-5. To run with headless mode off, in `layout_test/galen.config` file, `galen.browser.headless=true`, replace true with false.<br>
+5. To execute and check a gspec file use the following command.<br>
+`galen check <File_name> --url <url> --size <dimension> --htmlreport <ReportDirectory_name>`<br>
+E.g., `galen check ./specs/userDetail.gspec --url https://uat-ui.vakyansh.in/ --size 1024x768 --htmlreport reports`<br>
+6. To run with headless mode off, in `layout_test/galen.config` file, `galen.browser.headless=true`, replace true with false.<br>
 
 Note:<br>
 - You can change the environment url in `layout_test/suites/constant.properties` file,<br> `url : https://uat-ui.vakyansh.in`, change `url` value to the env on which you want to run the Galen tests<br>
