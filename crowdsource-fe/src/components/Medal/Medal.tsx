@@ -9,7 +9,7 @@ import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import { LOCALE_LANGUAGES } from 'constants/localesConstants';
 import nodeConfig from 'constants/nodeConfig';
 import type { Initiative } from 'types/Initiatives';
-import { capitalizeFirstLetter } from 'utils/utils';
+import { capitalizeFirstLetter, isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './Medal.module.scss';
 
@@ -26,6 +26,8 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
   const { t } = useTranslation();
   const languageCode = LOCALE_LANGUAGES[language];
   const [hasMedalActive, setMedalActive] = useState(false);
+
+  const languagePrefix = isLanguageImageAvailable(languageCode);
 
   const medalRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +54,7 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
     <Popover className={`${styles.zoom} border-0 d-flex`}>
       <div className={`${styles.zoomImg} d-flex m-auto`}>
         <ImageBasePath
-          src={`/images/${nodeConfig.brand}/${languageCode}/badges/${languageCode}_${
+          src={`/images/${nodeConfig.brand}/${languagePrefix}/badges/${languagePrefix}_${
             INITIATIVES_MAPPING[initiative]
           }_${medal.toLowerCase()}_${action}.svg`}
           width="172"
@@ -65,7 +67,7 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
 
   const medalCard = (
     <div
-      data-testid={`${languageCode}-${initiative}-${medal.toLowerCase()}-${action}-medal`}
+      data-testid={`${languagePrefix}-${initiative}-${medal.toLowerCase()}-${action}-medal`}
       role="button"
       className={`${styles.root} ${
         hasMedalActive || selectedMedal == medal ? styles.active : ''
@@ -77,7 +79,7 @@ const Medal = ({ initiative, medal, action, language, selectedMedal, handleClick
     >
       <div className={`${styles.medalImg} d-flex`}>
         <ImageBasePath
-          src={`/images/${nodeConfig.brand}/${languageCode}/badges/${languageCode}_${
+          src={`/images/${nodeConfig.brand}/${languagePrefix}/badges/${languagePrefix}_${
             INITIATIVES_MAPPING[initiative]
           }_${medal.toLowerCase()}_${action}.svg`}
           width="56"

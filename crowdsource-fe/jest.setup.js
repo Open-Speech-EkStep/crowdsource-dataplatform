@@ -46,6 +46,7 @@ global.CROWDSOURCE_FE_NODE_CONFIG = {
     contextRoot: '',
     enabled_languages: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
     enabled_locales: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te'],
+    hasLanguage_image: ['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'or', 'pa', 'ta', 'te'],
     autoValidation: true,
     appUrl: '',
     brand: 'vakyansh',

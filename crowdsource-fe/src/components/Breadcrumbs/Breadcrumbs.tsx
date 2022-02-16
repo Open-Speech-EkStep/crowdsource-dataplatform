@@ -9,6 +9,7 @@ import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
 import type { Initiative } from 'types/Initiatives';
+import { isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './Breadcrumbs.module.scss';
 
@@ -21,6 +22,8 @@ const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
+  const language = isLanguageImageAvailable(currentLocale);
+
   const initiativeName = `${t(initiative)} ${t('initiativeTextSuffix')}`;
 
   return (
@@ -30,7 +33,7 @@ const Breadcrumbs = ({ initiative, path }: BreadcrumbsPorpsInterface) => {
           <div className="d-flex align-items-center cursor-pointer">
             <div className={`${styles.icon} d-flex`}>
               <ImageBasePath
-                src={`/images/${nodeConfig.brand}/${currentLocale}/logos/${currentLocale}-${INITIATIVES_MAPPING[initiative]}InitiativeLogo.svg`}
+                src={`/images/${nodeConfig.brand}/${language}/logos/${language}-${INITIATIVES_MAPPING[initiative]}InitiativeLogo.svg`}
                 alt={t(`${initiative}Logo`)}
                 width="47"
                 height="42"

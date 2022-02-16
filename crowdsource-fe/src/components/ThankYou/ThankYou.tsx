@@ -32,7 +32,7 @@ import type { CumulativeDataByLanguage } from 'types/CumulativeDataByLanguage';
 import type { Initiative } from 'types/Initiatives';
 import type SpeakerDetails from 'types/SpeakerDetails';
 import type { ThankYouReward } from 'types/ThankYou';
-import { capitalizeFirstLetter, getLanguageRank } from 'utils/utils';
+import { capitalizeFirstLetter, getLanguageRank, isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './ThankYou.module.scss';
 
@@ -47,12 +47,14 @@ const YourBadge = (props: any) => {
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
 
+  const language = isLanguageImageAvailable(currentContributionAlias);
+
   return (
     <div className="text-center">
       <h5 className="fw-light mb-3">{t('yourBadge')}</h5>
       <div className={`${styles.badgeBg} p-3`}>
         <ImageBasePath
-          src={`/images/${nodeConfig.brand}/${currentContributionAlias}/badges/${currentContributionAlias}_${
+          src={`/images/${nodeConfig.brand}/${language}/badges/${language}_${
             INITIATIVES_MAPPING[props.initiative as Initiative]
           }_${props.badgeType.toLowerCase()}_${props.source}.svg`}
           width="94"

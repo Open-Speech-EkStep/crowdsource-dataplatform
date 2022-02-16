@@ -18,7 +18,7 @@ import { useFetchWithInit } from 'hooks/useFetch';
 import type { Initiative } from 'types/Initiatives';
 import type { MedalsType } from 'types/MedalsType';
 import type { SourceType } from 'types/SourceType';
-import { capitalizeFirstLetter } from 'utils/utils';
+import { capitalizeFirstLetter, isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './InitiativeBadgeDetail.module.scss';
 
@@ -41,6 +41,8 @@ const InitiativeBadgeDetail = ({
 }: InitiativeBadgeDetailProps) => {
   const languageCode = LOCALE_LANGUAGES[language];
   const { t } = useTranslation();
+
+  const languagePrefix = isLanguageImageAvailable(languageCode);
 
   const [participatedAction, setParticipatedAction] = useState<SourceType>(action);
 
@@ -134,7 +136,7 @@ const InitiativeBadgeDetail = ({
             >
               <div className={styles.medalImg}>
                 <ImageBasePath
-                  src={`/images/${nodeConfig.brand}/${languageCode}/badges/${languageCode}_${
+                  src={`/images/${nodeConfig.brand}/${languagePrefix}/badges/${languagePrefix}_${
                     INITIATIVES_MAPPING[initiative]
                   }_${selectedMedal}_${participatedAction.toLowerCase()}.svg`}
                   width="250"

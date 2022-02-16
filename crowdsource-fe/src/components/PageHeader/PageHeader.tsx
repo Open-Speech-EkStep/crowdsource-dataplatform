@@ -8,6 +8,7 @@ import TriColorBorder from 'components/TriColorBorder';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import nodeConfig from 'constants/nodeConfig';
 import type { Initiative } from 'types/Initiatives';
+import { isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './PageHeader.module.scss';
 
@@ -19,13 +20,15 @@ const PageHeader = ({ initiative }: PageHeaderProps) => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
+  const language = isLanguageImageAvailable(currentLocale);
+
   return (
     <div data-testid="PageHeader" className={styles.root}>
       <div className={`${styles.bg} pb-2 pb-md-5`}>
         <div className="d-flex">
           <div className={`${styles.pageHeaderImg} d-flex align-items-center`}>
             <ImageBasePath
-              src={`/images/${nodeConfig.brand}/${currentLocale}/logos/${currentLocale}-${INITIATIVES_MAPPING[initiative]}InitiativeLogo.svg`}
+              src={`/images/${nodeConfig.brand}/${language}/logos/${language}-${INITIATIVES_MAPPING[initiative]}InitiativeLogo.svg`}
               alt={t(`${initiative}Logo`)}
               width="84"
               height="76"

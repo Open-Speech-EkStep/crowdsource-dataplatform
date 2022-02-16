@@ -10,6 +10,7 @@ interface CrowdsourceFENodeConfig {
     feedbackTopComponent: boolean;
     contextRoot: string;
     enabled_languages: string[];
+    hasLanguage_image: string[];
     autoValidation: boolean;
     appUrl: string;
     brand: string;

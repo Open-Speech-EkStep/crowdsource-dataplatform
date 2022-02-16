@@ -15,7 +15,7 @@ import { pageSourceConstants } from 'constants/pageRouteConstants';
 import routePaths from 'constants/routePaths';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
-import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
+import { capitalizeFirstLetter, downloadBadge, isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './ContributeMore.module.scss';
 
@@ -66,8 +66,10 @@ const ContributeMore = ({
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
 
+  const language = isLanguageImageAvailable(currentContributionAlias);
+
   const download = (badgeType: string, badgeId: string) => {
-    downloadBadge(currentContributionAlias, initiative, source, badgeType, badgeId);
+    downloadBadge(language, initiative, source, badgeType, badgeId);
   };
 
   return (
@@ -85,9 +87,7 @@ const ContributeMore = ({
               className={`${styles.medal} d-flex mx-2 flex-shrink-0`}
             >
               <ImageBasePath
-                src={`/images/${
-                  nodeConfig.brand
-                }/${currentContributionAlias}/badges/${currentContributionAlias}_${
+                src={`/images/${nodeConfig.brand}/${language}/badges/${language}_${
                   INITIATIVES_MAPPING[initiative]
                 }_${item.grade.toLowerCase()}_${source}.svg`}
                 width="48"
@@ -129,9 +129,7 @@ const ContributeMore = ({
                   }  d-flex mx-2 flex-shrink-0`}
                 >
                   <ImageBasePath
-                    src={`/images/${
-                      nodeConfig.brand
-                    }/${currentContributionAlias}/badges/${currentContributionAlias}_${
+                    src={`/images/${nodeConfig.brand}/${language}/badges/${language}_${
                       INITIATIVES_MAPPING[initiative]
                     }_${item.type.toLowerCase()}_${source}.svg`}
                     width="48"

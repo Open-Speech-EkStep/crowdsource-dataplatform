@@ -11,22 +11,26 @@ import TriColorBorder from 'components/TriColorBorder';
 import { INITIATIVES } from 'constants/initiativeConstants';
 import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
+import { isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './BronzeContribute.module.scss';
 
 const BronzeContribute = () => {
   const { locale: currentLocale } = useRouter();
   const { t } = useTranslation();
+
+  const language = isLanguageImageAvailable(currentLocale);
+
   return (
     <div data-testid="BronzeContribute" className={`${styles.root} bg-secondary text-center text-md-start`}>
       <div className="p-3 py-md-5 px-md-10">
         <Row>
           <Col xs="12" md="2">
             <ImageBasePath
-              src={`/images/${nodeConfig.brand}/${currentLocale}/badges/${currentLocale}_asr_bronze_contribute.svg`}
+              src={`/images/${nodeConfig.brand}/${language}/badges/${language}_asr_bronze_contribute.svg`}
               width="125"
               height="160"
-              alt={`Bronze Badge ${currentLocale}`}
+              alt={`Bronze Badge ${language}`}
             />
           </Col>
           <Col xs="12" md="10">

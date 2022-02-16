@@ -18,6 +18,7 @@ import {
   getHoursValue,
   getHoursText,
   fetchLocationInfo,
+  isLanguageImageAvailable,
 } from '../utils';
 
 import '__fixtures__/mockComponentsWithSideEffects';
@@ -373,5 +374,19 @@ describe('Utils', () => {
     ];
     const rank = getLanguageRank(cumulativeDataByLanguage, 'asr', 'total_validation_count', 'Hindi');
     expect(rank).toEqual(2);
+  });
+
+  it('should return the default language if language not present', () => {
+    const language = isLanguageImageAvailable('mr');
+
+    const expectedOutput = 'en';
+    expect(language).toEqual(expectedOutput);
+  });
+
+  it('should return the same language if language present', () => {
+    const language = isLanguageImageAvailable('en');
+
+    const expectedOutput = 'en';
+    expect(language).toEqual(expectedOutput);
   });
 });

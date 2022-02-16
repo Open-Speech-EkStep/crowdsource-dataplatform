@@ -9,6 +9,7 @@
     "contextRoot": "",
     "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
     "enabled_locales": ["en"],
+    "hasLanguage_image": ["en"],
     "autoValidation": false,
     "appUrl": "https://test-ui.vakyansh.in",
     "brand": "vakyansh"

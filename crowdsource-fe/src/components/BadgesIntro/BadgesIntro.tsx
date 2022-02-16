@@ -12,6 +12,7 @@ import { RAW_LANGUAGES } from 'constants/localesConstants';
 import { MEDALS } from 'constants/medalConstants';
 import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
+import { isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './BadgesIntro.module.scss';
 
@@ -19,6 +20,8 @@ const BadgesIntro = () => {
   const badges = ['bronze', 'silver', 'gold', 'platinum'];
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
+
+  const language = isLanguageImageAvailable(currentLocale);
 
   return (
     <Row data-testid="BadgesIntro">
@@ -38,10 +41,10 @@ const BadgesIntro = () => {
             return (
               <div key={badge} className={`${styles.badge} mx-3`}>
                 <ImageBasePath
-                  src={`/images/${nodeConfig.brand}/${currentLocale}/badges/${currentLocale}_asr_${badge}_contribute.svg`}
+                  src={`/images/${nodeConfig.brand}/${language}/badges/${language}_asr_${badge}_contribute.svg`}
                   width="140"
                   height="180"
-                  alt={`${badge} Badge ${currentLocale}`}
+                  alt={`${badge} Badge ${language}`}
                 />
               </div>
             );

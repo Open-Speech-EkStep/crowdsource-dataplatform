@@ -9,6 +9,7 @@ import ImageBasePath from 'components/ImageBasePath';
 import { INITIATIVES_MAPPING } from 'constants/initiativeConstants';
 import nodeConfig from 'constants/nodeConfig';
 import type { Initiative } from 'types/Initiatives';
+import { isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './InitiativeHeader.module.scss';
 
@@ -20,13 +21,15 @@ const InitiativeHeader = ({ initiative }: PageHeaderProps) => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
+  const locale = isLanguageImageAvailable(currentLocale);
+
   return (
     <div>
       <Row>
         <Col xs="12" md="4" className="d-flex justify-content-center">
           <div className={styles.initiativeHeaderImg}>
             <ImageBasePath
-              src={`/images/${nodeConfig.brand}/${currentLocale}/logos/${currentLocale}-${INITIATIVES_MAPPING[initiative]}InitiativeLogo.svg`}
+              src={`/images/${nodeConfig.brand}/${locale}/logos/${locale}-${INITIATIVES_MAPPING[initiative]}InitiativeLogo.svg`}
               alt={t(`${initiative}Logo`)}
               width="126"
               height="103"

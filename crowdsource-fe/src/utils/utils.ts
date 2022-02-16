@@ -259,3 +259,8 @@ export const getLanguageRank = (
 
   return rank + 1;
 };
+
+export const isLanguageImageAvailable = (language: string | undefined) => {
+  const hasLanguageImages = nodeConfig.hasLanguage_image;
+  return hasLanguageImages.find(item => item === language) || 'en';
+};

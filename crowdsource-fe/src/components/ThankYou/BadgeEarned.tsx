@@ -12,7 +12,7 @@ import localStorageConstants from 'constants/localStorageConstants';
 import nodeConfig from 'constants/nodeConfig';
 import useLocalStorage from 'hooks/useLocalStorage';
 import type { Initiative } from 'types/Initiatives';
-import { capitalizeFirstLetter, downloadBadge } from 'utils/utils';
+import { capitalizeFirstLetter, downloadBadge, isLanguageImageAvailable } from 'utils/utils';
 
 import ShareOn from './ShareOn';
 import styles from './ThankYou.module.scss';
@@ -30,10 +30,12 @@ const BadgeImage = ({ initiative, badgeType, source }: DownloadBadgeProps) => {
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
   const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
 
+  const language = isLanguageImageAvailable(currentContributionAlias);
+
   return (
     <div className={`${styles.medal} mx-auto`}>
       <ImageBasePath
-        src={`/images/${nodeConfig.brand}/${currentContributionAlias}/badges/${currentContributionAlias}_${INITIATIVES_MAPPING[initiative]}_${badgeType}_${source}.svg`}
+        src={`/images/${nodeConfig.brand}/${language}/badges/${language}_${INITIATIVES_MAPPING[initiative]}_${badgeType}_${source}.svg`}
         width="140"
         height="180"
         alt={`Bronze Badge english`}
@@ -53,8 +55,12 @@ const DownloadAndShare = ({
   const { t } = useTranslation();
   const [contributionLanguage] = useLocalStorage<string>(localStorageConstants.contributionLanguage);
 
+  const currentContributionAlias = LOCALE_LANGUAGES[contributionLanguage ?? ''];
+
+  const languagePrefix = isLanguageImageAvailable(currentContributionAlias);
+
   const download = (badgeType: string, badgeId: string) => {
-    downloadBadge(LOCALE_LANGUAGES[contributionLanguage ?? ''], initiative, source, badgeType, badgeId);
+    downloadBadge(languagePrefix, initiative, source, badgeType, badgeId);
   };
 
   return (

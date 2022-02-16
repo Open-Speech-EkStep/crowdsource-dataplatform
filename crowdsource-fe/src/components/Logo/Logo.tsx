@@ -7,6 +7,7 @@ import ImageBasePath from 'components/ImageBasePath';
 import Link from 'components/Link';
 import nodeConfig from 'constants/nodeConfig';
 import routePaths from 'constants/routePaths';
+import { isLanguageImageAvailable } from 'utils/utils';
 
 import styles from './Logo.module.scss';
 
@@ -14,11 +15,13 @@ const Logo = () => {
   const { t } = useTranslation();
   const { locale: currentLocale } = useRouter();
 
+  const locale = isLanguageImageAvailable(currentLocale);
+
   return (
     <div data-testid="Logo" className="d-flex">
       <a href={routePaths.root} className="d-flex align-items-center d-md-none">
         <ImageBasePath
-          src={`/images/${nodeConfig.brand}/${currentLocale}/logos/${currentLocale}-logo-sm.svg`}
+          src={`/images/${nodeConfig.brand}/${locale}/logos/${locale}-logo-sm.svg`}
           alt="Website Logo"
           width="48"
           height="48"
@@ -26,7 +29,7 @@ const Logo = () => {
       </a>
       <a href={routePaths.root} className="d-none align-items-center d-md-flex ms-0 ms-lg-3">
         <ImageBasePath
-          src={`/images/${nodeConfig.brand}/${currentLocale}/logos/${currentLocale}-logo.svg`}
+          src={`/images/${nodeConfig.brand}/${locale}/logos/${locale}-logo.svg`}
           alt="Website Logo"
           width="192"
           height="70"
