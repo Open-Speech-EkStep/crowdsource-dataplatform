@@ -32,7 +32,7 @@
       "mai"
     ],
     "enabled_locales": ["en"],
-    "hasLanguage_image": ["en"],
+    "hasLanguage_image": ["en", "as", "or", "bn"],
     "autoValidation": false,
     "appUrl": "https://uat-ui.vakyansh.in",
     "brand": "vakyansh"
