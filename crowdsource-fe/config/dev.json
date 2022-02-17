@@ -8,7 +8,7 @@
     "feedbackTopComponent": false,
     "contextRoot": "",
     "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
-    "enabled_locales": ["en", "kn"],
+    "enabled_locales": ["en"],
     "hasLanguage_image": ["as", "bn", "en", "gu", "hi", "ml", "kn", "mr", "or", "pa", "ta", "te"],
     "autoValidation": true,
     "appUrl": "https://dev-ui.vakyansh.in",
