@@ -179,6 +179,10 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
 - To onboard languages for contributions
 
+  ```
+  NOTE: If language code and language already added in below points you can skip that point.
+  ```
+
   1. Add language code in config/<env>.json "enabled_languages" to enable languages for contributions.
 
      e.g. "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"];
@@ -189,6 +193,7 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
      Refer Link for Unicode: https://jrgraphix.net/r/Unicode/0E00-0E7F
 
      Refer Link for keyboard layout: https://github.com/simple-keyboard/simple-keyboard-layouts/tree/master/build/layouts
+     https://hodgef.com/simple-keyboard/demos/
 
   4. Add validation score for corresponding language to [this file](src/constants/langaugeConfigConstant.ts).
   5. Add language code in config/<env>.json "hasLanguage_image" to enable images and badges.
@@ -200,11 +205,11 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
      e.g. to enable "marathi" language logo , create public/images/[brand]/mr/logos and put all logos;
      to enable "marathi" language badges, create public/images/[brand]/mr/badges and put all badges;
 
-     ```
-     NOTE: If language code and language already added in above steps you can skip that point.
-     ```
-
 - To onboard languages for localisation/translations
+
+  ```
+  NOTE: If language code and language already added in below points you can skip that point.
+  ```
 
   1. Add language code in config/<env>.json "enabled_locales" to enable languages for localisation/translations.
 
@@ -229,7 +234,3 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
   6. Add logos for corresponding language in public/images folder.
 
      e.g. to enable "marathi" language , create public/images/[brand]/mr/logos and add logos;
-
-     ```
-     NOTE: If language code and language already added in above steps you can skip that point.
-     ```
