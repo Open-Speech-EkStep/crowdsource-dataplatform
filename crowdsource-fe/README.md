@@ -179,29 +179,57 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
 - To onboard languages for contributions
 
-  1. Add language code in config/<env>.json "enabled_languages" to enable languages for contributions
+  1. Add language code in config/<env>.json "enabled_languages" to enable languages for contributions.
+
      e.g. "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"];
-  2. Add language code and language in LOCALES_MAPPING, RAW_LANGUAGES AND DISPLAY_LANGUAGES constants in src/constants/localesConstant.ts
-  3. Add language in LANGUAGE_UNICODE,OTHER_LANGUAGE_UNICODE constant and language specific keyboard pattern in KeyboardLanguageLayout constant in src/constants/Keyboard.ts file.
-  4. Add validation score for corresponding language in src/constants/langaugeConfigConstant.ts
-  5. Add language code in config/<env>.json "hasLanguage_image" to enable images and badges
+
+  2. Add language code and language in LOCALES_MAPPING, RAW_LANGUAGES AND DISPLAY_LANGUAGES constants to [this file](src/constants/localesConstant.ts).
+  3. Add language in LANGUAGE_UNICODE,OTHER_LANGUAGE_UNICODE constant and language specific keyboard pattern in KeyboardLanguageLayout constant to [this file](src/constants/Keyboard.ts).
+
+     Refer Link for Unicode: https://jrgraphix.net/r/Unicode/0E00-0E7F
+
+     Refer Link for keyboard layout: https://github.com/simple-keyboard/simple-keyboard-layouts/tree/master/build/layouts
+
+  4. Add validation score for corresponding language to [this file](src/constants/langaugeConfigConstant.ts).
+  5. Add language code in config/<env>.json "hasLanguage_image" to enable images and badges.
+
      e.g. "hasLanguage_image": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"];
-     NOTE: If language code and language already added you can skip that part.
+
   6. Add badges and logos for corresponding language in images folder
+
      e.g. to enable "marathi" language logo , create public/images/[brand]/mr/logos and put all logos;
      to enable "marathi" language badges, create public/images/[brand]/mr/badges and put all badges;
 
+     ```
+     NOTE: If language code and language already added in above steps you can skip that point.
+     ```
+
 - To onboard languages for localisation/translations
 
-  1. Add language code in config/<env>.json "enabled_locales" to enable languages for localisation/translations
+  1. Add language code in config/<env>.json "enabled_locales" to enable languages for localisation/translations.
+
      e.g. "enabled_locales": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
-  2. create common.json folder to [this folder](public/locales/<locale>);
+
+  2. create common.json folder to [this folder](public/locales/<locale>).
+
      e.g to enable "marathi" language , create public/locales/mr/common.json;
+
   3. Copy all the keys from public/locales/en/common.json and paste to your folder i.e public/locales/mr/common.json;
+
      Run translation script to get translations in your language.
-     NOTE: If you don't copy all the files from en.json and don't run the translation script then by default translations would be in english.
-  4. Add language prefix in RAW_LANGUAGES,LOCALES_LANGUAGE_MAPPING AND LOCALE_LANGUAGES constants inside src/constants/localesConstant.ts.
-  5. Add language code in config/<env>.json "hasLanguage_image" to enable logos
+
+     **NOTE: If you don't copy all the files from en.json and don't run the translation script then by default translations would be in english.**
+
+  4. Add language prefix in RAW_LANGUAGES,LOCALES_LANGUAGE_MAPPING AND LOCALE_LANGUAGES constants inside [this file](src/constants/localesConstant.ts).
+
+  5. Add language code in config/<env>.json "hasLanguage_image" to enable logos.
+
      e.g. "hasLanguage_image": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"];
+
   6. Add logos for corresponding language in public/images folder.
+
      e.g. to enable "marathi" language , create public/images/[brand]/mr/logos and add logos;
+
+     ```
+     NOTE: If language code and language already added in above steps you can skip that point.
+     ```
