@@ -63,7 +63,7 @@ It will run the swagger ui on local.
 Data for the corresponding language must be present in the DB to enable on backend. Please refer to [link](/data-pipelines/ingestion/README.md) for ingesting language data.
 
 ### Steps
-- Add Language value in the LANGUAGES [constant file](/src/constants.js).
+- Add Language value in the LANGUAGES [constant file](/crowdsource-api/src/constants.js).
 Example - 
 ```sh
 const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" },
