@@ -6,7 +6,7 @@ export remote_base_path=$5
 export paired=$6
 export connection=$7
 export profanity_check_required=$8
-export user=$10
+export user=$9
 
 gsutil cp ${source_dataset_path}/${dataset_name}.tar.gz .
 
