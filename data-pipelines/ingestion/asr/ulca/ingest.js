@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { conn, insertMaster } = require('../../../common/dbUtils')
+const { conn, insertMaster, insertNewLanguageConfig } = require('../../../common/dbUtils')
 
 const MIN_DURATION = 1
 const MAX_DURATION = 15
@@ -107,13 +107,13 @@ const parse = (data, files) => {
     return dict
 }
 
-const start = async (connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required) => {
+const start = async (connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required, user) => {
     const client = conn(connectionString)
     try {
         const files = fs.readFileSync('./asr_files.txt', 'utf8').split('\n')
             .filter(x => x.includes('.wav'));
 
-        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'asr')
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'asr', user)
 
         console.log('Inserting in dataset_rows')
         const data = JSON.parse(fs.readFileSync(`${localDatasetPath}/data.json`))
@@ -134,6 +134,8 @@ const start = async (connectionString, localDatasetPath, params, remote_dataset_
             console.log('Total txt rows:', inserted.length)
             console.log('Done..')
         }
+
+        await insertNewLanguageConfig(client, language);
     } catch (error) {
         console.log('error..', error)
     } finally {
@@ -150,12 +152,13 @@ const main = () => {
 
     const paired = process.argv[6]
     const connectionString = process.argv[7]
+    const user = process.argv[8]
 
-    console.log(localDatasetPath, remote_dataset_bundle_path, basePath, language, paired, connectionString)
+    console.log(localDatasetPath, remote_dataset_bundle_path, basePath, language, paired, connectionString, user)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
     profanity_check_required = false
-    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required)
+    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required, user)
 }
 
 main()

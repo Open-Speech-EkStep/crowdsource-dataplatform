@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { conn, insertMaster } = require('../../common/dbUtils')
+const { conn, insertMaster, insertNewLanguageConfig } = require('../../common/dbUtils')
 
 const ingest1 = async (datasetId, datasetType, client, datset_base_path, language, png_paths, paired, profanity_check_required) => {
     const values = png_paths.map(path => {
@@ -95,13 +95,13 @@ const parse2 = (localDatasetPath, files) => {
 }
 
 const start = async (connectionString, localDatasetPath, params,
-    remote_dataset_bundle_path, basePath, language, paired, profanity_check_required) => {
+    remote_dataset_bundle_path, basePath, language, paired, profanity_check_required, user) => {
     const client = conn(connectionString)
     try {
         const files = fs.readFileSync('./ocr_files.txt', 'utf8').split('\n')
             .filter(x => x.split('.')[1] === 'png');
 
-        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'ocr')
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'ocr', user)
 
         console.log('Inserting in dataset_rows')
 
@@ -116,6 +116,8 @@ const start = async (connectionString, localDatasetPath, params,
             console.log('Total txt rows:', inserted.length)
             console.log('Done..')
         }
+
+        await insertNewLanguageConfig(client, language);
     } catch (error) {
         console.log('error..', error)
     } finally {
@@ -133,11 +135,12 @@ const main = () => {
     const paired = process.argv[6]
     const connectionString = process.argv[7]
     const profanity_check_required = process.argv[8]
+    const user = process.argv[9]
 
     console.log(basePath, language)
 
     params = JSON.parse(fs.readFileSync(`${localDatasetPath}/params.json`, 'utf-8'))
-    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required)
+    start(connectionString, localDatasetPath, params, remote_dataset_bundle_path, basePath, language, paired, profanity_check_required, user)
 }
 
 main()

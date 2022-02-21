@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { conn, insertMaster } = require('../../common/dbUtils')
+const { conn, insertMaster, insertNewLanguageConfig } = require('../../common/dbUtils')
 
 const ingest1 = async (datasetId, datasetType, client, language, rows, paired) => {
     const values = rows
@@ -14,12 +14,13 @@ const ingest1 = async (datasetId, datasetType, client, language, rows, paired) =
             return `('medium', '${datasetType}',
                 '${JSON.stringify(media)}', 
                 ${datasetId},
-                ${paired === 'paired' ? '\'contributed\'' : null}
+                ${paired === 'paired' ? '\'contributed\'' : null},
+                false
             )`
         })
     console.log('values', values)
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id, state ) 
+    ( difficulty_level, type, media, master_dataset_id, state, is_profane ) 
     values ${values} RETURNING dataset_row_id`
 
     const dataset_row_result = await client.query(`${insert_rows}`)
@@ -29,15 +30,17 @@ const ingest1 = async (datasetId, datasetType, client, language, rows, paired) =
 }
 
 
-const start = async (connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, language) => {
+const start = async (connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, language, user) => {
     const client = conn(connectionString)
     try {
         var txtContent = fs.readFileSync(localDatasetPath, 'utf8').split('\n');
-        txtContent = txtContent.slice(0, 10) // TODO remove hardcoding
+        // txtContent = txtContent.slice(0, 10) // TODO remove hardcoding
         console.log('Inserting in master')
-        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'text')
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'text', user)
         const datasetRowIds = await ingest1(id, 'text', client, language, txtContent, paired)
-        console.log('Done..', datasetRowIds.length)
+        console.log('Done..', datasetRowIds.length);
+
+        await insertNewLanguageConfig(client, language);
     } catch (error) {
         console.log('error..', error)
     } finally {
@@ -52,8 +55,9 @@ const main = () => {
     const remote_dataset_bundle_path = process.argv[5]
     const params = process.argv[6]
     const language = process.argv[7]
+    const user = process.argv[8]
 
-    start(connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, language)
+    start(connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, language, user)
 }
 
 main()

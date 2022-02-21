@@ -5,6 +5,7 @@ export language=$4
 export remote_base_path=$5
 export paired=$6
 export connection=$7
+export user=$8
 
 export pub_path=/tmp/${dataset_name}
 export bundle_path=${AZURE_ACC_URL}/${bucket}/$remote_base_path/${language}/original/bundled/$dataset_name.tar.gz
@@ -23,7 +24,7 @@ echo pushing dataset to: s3://${bucket}/$remote_base_path/${language}/${dataset_
 
 azcopy copy ${pub_path} "${AZURE_ACC_URL}/${bucket}/$remote_base_path/${language}/${dataset_name}" --recursive
 
-node ingest.js {} $bundle_path $remote_base_path $language $paired $connection
+node ingest.js {} $bundle_path $remote_base_path $language $paired $connection $user
 
 rm -rf $pub_path
 rm $dataset_name.tar.gz

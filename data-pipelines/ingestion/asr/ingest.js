@@ -16,12 +16,13 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
             "duration": ${path_with_duration[1]}
             }', 
             ${datasetId},
-            ${paired === 'paired' ? '\'contributed\'' : null}
+            ${paired === 'paired' ? '\'contributed\'' : null},
+            false
             )`
         })
 
     const insert_rows = `insert into dataset_row 
-    ( difficulty_level, type, media, master_dataset_id, state ) 
+    ( difficulty_level, type, media, master_dataset_id, state, is_profane ) 
     values ${values} RETURNING dataset_row_id`
 
     const dataset_row_result = await client.query(`${insert_rows}`)
@@ -32,7 +33,7 @@ const ingest1 = async (datasetId, datasetType, client, datset_base_path, languag
 
 const ingest2 = async (datasetRowIds, client, datset_base_path, language, dataRows2) => {
     const result = await client.query(`select contributor_id from contributors where user_name='##system##'`)
-    contributorId = result.rows[0].contributor_id
+    const contributorId = result.rows[0].contributor_id
 
     const values = dataRows2.map((data, i) => {
         return `(${datasetRowIds[i]}, ${contributorId},
@@ -96,15 +97,15 @@ const parse2 = (wav_paths_resolved) => {
     return txt_files_content
 }
 
-const start = async (connectionString, params, remote_dataset_bundle_path, basePath, language, paired) => {
+const start = async (connectionString, params, remote_dataset_bundle_path, basePath, language, paired, user) => {
     const client = conn(connectionString)
     try {
         const files = fs.readFileSync('./asr_files.txt', 'utf8').split('\n');
-        const id = await insertMaster(params, remote_dataset_bundle_path, client)
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'asr', user)
 
         console.log('Inserting in dataset_rows')
 
-        audio_paths_duration = await parse1(files, paired)
+        const audio_paths_duration = await parse1(files, paired)
         const datasetRowIds = await ingest1(id, 'asr', client, `${basePath}/${language}`, language, audio_paths_duration, paired)
         console.log('Total dataset rows:', datasetRowIds.length)
 
@@ -131,9 +132,10 @@ const main = () => {
 
     const paired = process.argv[6]
     const connectionString = process.argv[7]
+    const user = process.argv[8]
 
     console.log(basePath, language)
-    start(connectionString, params, remote_dataset_bundle_path, basePath, language, paired)
+    start(connectionString, params, remote_dataset_bundle_path, basePath, language, paired, user)
 }
 
 main()

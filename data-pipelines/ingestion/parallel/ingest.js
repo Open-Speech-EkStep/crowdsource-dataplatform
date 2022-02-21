@@ -2,7 +2,7 @@ const fs = require('fs');
 const csv = require("csvtojson");
 const xlsx = require("xlsx");
 
-const { conn, insertMaster } = require('../../common/dbUtils');
+const { conn, insertMaster, insertNewLanguageConfig } = require('../../common/dbUtils');
 
 const MAX_WORD_LENGTH = 20
 
@@ -76,7 +76,7 @@ const ingest2 = async (textToId, client, language, translation1, translation2) =
 
 
 const start = async (connectionString, params, localDatasetPath, paired,
-    remote_dataset_bundle_path, pairs, profanity_check_required, format) => {
+    remote_dataset_bundle_path, pairs, profanity_check_required, format, user) => {
     const client = conn(connectionString)
     try {
         var workbook = xlsx.readFile(localDatasetPath);
@@ -84,10 +84,10 @@ const start = async (connectionString, params, localDatasetPath, paired,
         var csvContent = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
         console.log('Inserting in master')
-        const id = await insertMaster(params, remote_dataset_bundle_path, client)
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'parallel', user)
         pairs_parsed = pairs.split(':')
-        language1 = pairs_parsed[0]
-        language2 = pairs_parsed[1]
+        const language1 = pairs_parsed[0]
+        const language2 = pairs_parsed[1]
 
         const translation1 = []
         const translation2 = []
@@ -110,6 +110,8 @@ const start = async (connectionString, params, localDatasetPath, paired,
             const inserted = await ingest2(textToId, client, language2, translation1, translation2)
             console.log('Total txt rows:', inserted.length)
         }
+
+        await insertNewLanguageConfig(client, language1);
     } catch (error) {
         console.log('error..', error)
     } finally {
@@ -118,7 +120,7 @@ const start = async (connectionString, params, localDatasetPath, paired,
 }
 
 const getExistingData = async (language, type, client) => {
-    const select_rows = `select media->>'data' as data, dataset_row_id as id from dataset_row where type = '${type}' and media->>'language' = '${language}' and is_active=true`
+    const select_rows = `select media->>'data' as data, dataset_row_id as id from dataset_row where type = '${type}' and media->>'language' = '${language}'`
     const dataset_row_result = await client.query(`${select_rows}`)
     textToId = {}
     for (row of dataset_row_result.rows) {
@@ -140,10 +142,11 @@ const main = () => {
     const pairs = process.argv[7]
     const profanity_check_required = process.argv[8]
     const format = process.argv[9]
+    const user = process.argv[10]
 
 
     console.log('pairs:', pairs)
-    start(connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs, profanity_check_required, format)
+    start(connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs, profanity_check_required, format, user)
 }
 
 main()

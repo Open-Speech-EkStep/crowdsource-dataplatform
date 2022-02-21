@@ -56,12 +56,12 @@ const ingest2 = async (datasetIds, client, language, rows) => {
 }
 
 
-const start = async (connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs) => {
+const start = async (connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs, user) => {
     const client = conn(connectionString)
     try {
         const csvContent = await csv({ delimiter: '#' }).fromFile(localDatasetPath)
         console.log('Inserting in master')
-        const id = await insertMaster(params, remote_dataset_bundle_path, client)
+        const id = await insertMaster(params, remote_dataset_bundle_path, client, 'parallel', user)
         var count = 0
         const langTranslations = {}
         const nvalues = Object.values(csvContent)
@@ -153,8 +153,9 @@ const main = () => {
     const remote_dataset_bundle_path = process.argv[5]
     const params = process.argv[6]
     const pairs = process.argv[7]
+    const user = process.argv[8]
     console.log('pairs:', JSON.parse(pairs))
-    start(connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs)
+    start(connectionString, params, localDatasetPath, paired, remote_dataset_bundle_path, pairs, user)
 }
 
 main()
