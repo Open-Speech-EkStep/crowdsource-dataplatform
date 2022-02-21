@@ -190,9 +190,14 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
   2. Add language code and language in LOCALES_MAPPING, RAW_LANGUAGES AND DISPLAY_LANGUAGES constants to [this file](src/constants/localesConstant.ts).
   3. Add language in LANGUAGE_UNICODE,OTHER_LANGUAGE_UNICODE constant and language specific keyboard pattern in KeyboardLanguageLayout constant to [this file](src/constants/Keyboard.ts).
 
-     Refer Link for Unicode: https://jrgraphix.net/r/Unicode/0E00-0E7F
+     Refer Link for Unicode:
 
-     Refer Link for keyboard layout: https://github.com/simple-keyboard/simple-keyboard-layouts/tree/master/build/layouts
+     https://jrgraphix.net/r/Unicode/0E00-0E7F
+
+     Refer Link for keyboard layout:
+
+     https://github.com/simple-keyboard/simple-keyboard-layouts/tree/master/build/layouts
+
      https://hodgef.com/simple-keyboard/demos/
 
   4. Add validation score for corresponding language to [this file](src/constants/langaugeConfigConstant.ts).
