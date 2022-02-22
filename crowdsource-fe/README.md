@@ -187,25 +187,29 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
      e.g. "enabled_languages": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"];
 
-  2. Add language code and language in LOCALES_MAPPING, RAW_LANGUAGES AND DISPLAY_LANGUAGES constants to [this file](src/constants/localesConstant.ts).
-  3. Add language in LANGUAGE_UNICODE,OTHER_LANGUAGE_UNICODE constant and language specific keyboard pattern in KeyboardLanguageLayout constant to [this file](src/constants/Keyboard.ts).
+  2. Add language code and language in LOCALES_MAPPING, RAW_LANGUAGES AND DISPLAY_LANGUAGES constants to [this file](src/constants/localesConstants.ts).
+  3. Add language and their unicode in LANGUAGE_UNICODE,OTHER_LANGUAGE_UNICODE constant and language specific keyboard pattern in KeyboardLanguageLayout constant to [this file](src/constants/Keyboard.ts).
 
-     Refer Link for Unicode:
+     Refer below Link for Unicode:
 
      https://jrgraphix.net/r/Unicode/0E00-0E7F
 
-     Refer Link for keyboard layout:
+     Refer below Link for keyboard layout:
 
      https://github.com/simple-keyboard/simple-keyboard-layouts/tree/master/build/layouts
 
      https://hodgef.com/simple-keyboard/demos/
 
   4. Add validation score for corresponding language to [this file](src/constants/langaugeConfigConstant.ts).
-  5. Add language code in config/<env>.json "hasLanguage_image" to enable images and badges.
+  5. Add language key and value in en.json for localisation.
+
+     e.g. "sanskrit": "Sanskrit",
+
+  6. Add language code in config/<env>.json "hasLanguage_image" to enable images and badges.
 
      e.g. "hasLanguage_image": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"];
 
-  6. Add badges and logos for corresponding language in images folder
+  7. Add badges and logos for corresponding language in images folder
 
      e.g. to enable "marathi" language logo , create public/images/[brand]/mr/logos and put all logos;
      to enable "marathi" language badges, create public/images/[brand]/mr/badges and put all badges;
