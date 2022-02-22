@@ -200,7 +200,7 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
      https://hodgef.com/simple-keyboard/demos/
 
-  4. Add validation score for corresponding language to [this file](src/constants/langaugeConfigConstant.ts).
+  4. Add validation score for corresponding language to [this file](src/constants/languageConfigConstants.ts).
   5. Add language key and value in en.json for localisation.
 
      e.g. "sanskrit": "Sanskrit",
@@ -224,7 +224,7 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
      e.g. "enabled_locales": ["as", "bn", "en", "gu", "hi", "kn", "ml", "mr", "or", "pa", "ta", "te"],
 
-  2. create common.json folder to [this folder](public/locales/<locale>).
+  2. create common.json folder to [this folder](public/locales).
 
      e.g to enable "marathi" language , create public/locales/mr/common.json;
 
@@ -234,7 +234,7 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
      **NOTE: If you don't copy all the files from en.json and don't run the translation script then by default translations would be in english.**
 
-  4. Add language prefix in RAW_LANGUAGES,LOCALES_LANGUAGE_MAPPING AND LOCALE_LANGUAGES constants inside [this file](src/constants/localesConstant.ts).
+  4. Add language prefix in RAW_LANGUAGES,LOCALES_LANGUAGE_MAPPING AND LOCALE_LANGUAGES constants inside [this file](src/constants/localesConstants.ts).
 
   5. Add language code in config/<env>.json "hasLanguage_image" to enable logos.
 
