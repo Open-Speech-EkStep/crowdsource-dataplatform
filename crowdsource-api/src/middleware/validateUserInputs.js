@@ -20,17 +20,14 @@ const {
     FEEDBACK_RESPONSES
 } = require("../constants")
 
-const validLanguages = LANGUAGES.map((item) =>
-        item.value
-    )
-
 const convertIntoMB = (fileSizeInByte) => {
     return Math.round(fileSizeInByte / (1024 * 1000));
 }
 
 function isValidLanguage(language) {
-    return validLanguages.includes(language)
+    return LANGUAGES.includes(language)
 }
+
 const validateUserInputAndFile = function (req, res, next) {
     const speakerDetails = req.body.speakerDetails;
     const speakerDetailsJson = JSON.parse(speakerDetails);
@@ -39,12 +36,11 @@ const validateUserInputAndFile = function (req, res, next) {
     const isInvalidParams = !(speakerDetailsJson.userName != undefined && speakerDetailsJson.userName.length <= MAX_LENGTH && !MOBILE_REGEX.test(speakerDetailsJson.userName));
 
     const MIN_INPUT_LENGTH = 2;
-    const allLanguages = LANGUAGES.map(lang => lang.value)
 
     const invalidMotherTongue = (speakerDetailsJson.motherTongue && !MOTHER_TONGUE.includes(speakerDetailsJson.motherTongue));
     const invalidGender = (speakerDetailsJson.gender && !GENDER.includes(speakerDetailsJson.gender));
     const invalidAgeGroup = (speakerDetailsJson.age && !AGE_GROUP.includes(speakerDetailsJson.age));
-    const invalidLanguage = (!req.body.language || !allLanguages.includes(req.body.language))
+    const invalidLanguage = (!req.body.language || !LANGUAGES.includes(req.body.language))
     console.log(config.get('whitelistingEmail') != "enabled", "config.get('whitelistingEmail') != 'enabled'")
     console.log(isEmailInUserName, "isEmailInUserName")
     console.log(config.get('whitelistingEmail') != "enabled" && isEmailInUserName, "config.get('whitelistingEmail') != 'enabled' && isEmailInUserName")
@@ -124,10 +120,8 @@ const validateUserInputForFeedback = function (req, res, next) {
     const invalidRecommended = recommended && (recommended.length > 5 || !FEEDBACK_RESPONSES.includes(recommended.toLowerCase()));
     const invalidRevisit = revisit && (revisit.length > 5 || !FEEDBACK_RESPONSES.includes(revisit.toLowerCase()));
 
-    const allLanguages = LANGUAGES.map(lang => lang.value)
-
     const invalidEmail = !email || isUserNameInvalid(email);
-    const invalidLanguage = !allLanguages.includes(language)
+    const invalidLanguage = !LANGUAGES.includes(language)
 
     const invalidCategory = (!(category.trim().length == 0 || category.trim().length < CATEGORY_MAX_LENGTH))
     const invalidFeedback = !(feedback || feedback.trim().length == 0) || feedback.trim().length > FEEDBACK_MAX_LENGTH;
@@ -268,7 +262,7 @@ function isUserNameInvalid(userName) {
 } 
 
 function isLanguageInvalid(language) {
-    return language && !validLanguages.includes(language);
+    return language && !LANGUAGES.includes(language);
 }
 
 module.exports = { validateUserInputAndFile, validateUserInfo, convertIntoMB, validateUserInputForFeedback, validateInputForSkip, validateRewardsInput, validateRewardsInfoInput, validateInputsForValidateEndpoint, validateGetContributionsInput, validateMediaTypeInput, validateReportInputs }

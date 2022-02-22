@@ -63,11 +63,11 @@ It will run the swagger ui on local.
 Data for the corresponding language must be present in the DB to enable on backend. Please refer to [link](/data-pipelines/ingestion/README.md) for ingesting language data.
 
 ### Steps
-- Add Language value in the LANGUAGES [constant file](/crowdsource-api/src/constants.js).
+- Add Language value in the LANGUAGES array on [constant file](/crowdsource-api/src/constants.js).
 Example - 
+To add Sanskrit :
 ```sh
-const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" },
-{ value: "Bengali", id: "bn", text: "বাংলা" }]
+const LANGUAGES = [..., 'Sanskrit']
 ```
 
 - Set threshold for language on auto-validation constants [file](/auto-validation-consumer/src/constants/constants.ts) by adding values to corresponding initiative constant array.

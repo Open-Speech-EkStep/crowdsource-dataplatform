@@ -28,7 +28,7 @@ const {
     getUserRewardsQuery
 } = require('./dbQuery');
 
-const { KIDS_AGE_GROUP, ADULT, KIDS, BADGE_SEQUENCE } = require('./constants');
+const { KIDS_AGE_GROUP, ADULT, KIDS } = require('./constants');
 
 const cacheOperation = require('./cache/cacheOperations')
 const queueOperations = require('./event_queue/queueOperations')

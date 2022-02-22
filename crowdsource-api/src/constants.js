@@ -32,26 +32,21 @@ const MOTHER_TONGUE = [
   'Telugu',
   'Urdu',
 ];
-const LANGUAGES = [{ value: "Assamese", id: "as", text: "অসমীয়া" },
-{ value: "Bengali", id: "bn", text: "বাংলা" },
-{ value: "English", id: "en", text: "English" },
-{ value: "Gujarati", id: "gu", text: "ગુજરાતી" },
-{ value: "Hindi", id: "hi", text: "हिंदी" },
-{ value: "Kannada", id: "kn", text: "ಕನ್ನಡ" },
-{ value: "Malayalam", id: "ml", text: "മലയാളം" },
-{ value: "Marathi", id: "mr", text: "मराठी" },
-{ value: "Odia", id: "or", text: "ଓଡିଆ" },
-{ value: "Punjabi", id: "pa", text: "ਪੰਜਾਬੀ" },
-{ value: "Tamil", id: "ta", text: "தமிழ்" },
-{ value: "Telugu", id: "te", text: "తెలుగు" }];
 
-const BADGE_SEQUENCE = {
-  '': '',
-  'Bronze': '1st',
-  'Silver': '2nd',
-  'Gold': '3rd',
-  'Platinum': '4th'
-};
+const LANGUAGES = [
+  'Assamese',
+  'Bengali',
+  'English',
+  'Gujarati',
+  'Hindi',
+  'Kannada',
+  'Malayalam',
+  'Marathi',
+  'Odia',
+  'Punjabi',
+  'Tamil',
+  'Telugu',
+]
 
 const AGE_GROUP = [
   '',
@@ -60,6 +55,7 @@ const AGE_GROUP = [
   '30 - 60',
   '60+',
 ];
+
 const GENDER = ['', 'male', 'female', 'others', 'Transgender - He', 'Transgender - She', 'Rather Not Say'];
 
 const WADASNR_BIN_PATH = '/opt/binaries/WadaSNR/Exe'
@@ -105,7 +101,6 @@ module.exports = {
   REPORT_SOURCES,
   MEDIA_TYPES,
   ROLE_UAT,
-  BADGE_SEQUENCE,
   OPTIONAL_FIELD_MAX_LENGTH,
   FEEDBACK_RESPONSES,
   VALID_ORIGINS
