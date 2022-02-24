@@ -36,6 +36,7 @@ const nextConfig = {
 
     return config;
   },
+  swcMinify: true,
   async redirects() {
     return [
       {

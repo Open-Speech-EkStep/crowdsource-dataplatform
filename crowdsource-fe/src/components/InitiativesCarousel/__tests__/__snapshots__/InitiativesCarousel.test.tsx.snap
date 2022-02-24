@@ -161,29 +161,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="ocrLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-ocrInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-ocrInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-ocrInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -207,29 +206,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/ocr_contribute_icon.svg"
+                                        srcset="/images/ocr_contribute_icon.svg 1x, /images/ocr_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -247,29 +245,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -324,29 +321,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="ttsLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ttsInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ttsInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ttsInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-ttsInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-ttsInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-ttsInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -370,29 +366,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Ftts_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Ftts_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Ftts_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/tts_contribute_icon.svg"
+                                        srcset="/images/tts_contribute_icon.svg 1x, /images/tts_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -410,29 +405,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -487,29 +481,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="asrLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-asrInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-asrInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-asrInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-asrInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-asrInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-asrInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -533,29 +526,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fasr_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fasr_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fasr_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/asr_contribute_icon.svg"
+                                        srcset="/images/asr_contribute_icon.svg 1x, /images/asr_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -573,29 +565,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -650,29 +641,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="translationLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-translationInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-translationInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-translationInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-translationInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-translationInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-translationInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -696,29 +686,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Ftranslation_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Ftranslation_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Ftranslation_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/translation_contribute_icon.svg"
+                                        srcset="/images/translation_contribute_icon.svg 1x, /images/translation_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -736,29 +725,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -813,29 +801,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="ocrLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-ocrInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-ocrInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-ocrInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -859,29 +846,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/ocr_contribute_icon.svg"
+                                        srcset="/images/ocr_contribute_icon.svg 1x, /images/ocr_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -899,29 +885,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -976,29 +961,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="ttsLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ttsInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ttsInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ttsInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-ttsInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-ttsInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-ttsInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -1022,29 +1006,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Ftts_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Ftts_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Ftts_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/tts_contribute_icon.svg"
+                                        srcset="/images/tts_contribute_icon.svg 1x, /images/tts_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1062,29 +1045,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1139,29 +1121,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="asrLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-asrInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-asrInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-asrInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-asrInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-asrInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-asrInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -1185,29 +1166,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fasr_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fasr_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fasr_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/asr_contribute_icon.svg"
+                                        srcset="/images/asr_contribute_icon.svg 1x, /images/asr_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1225,29 +1205,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1302,29 +1281,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="translationLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-translationInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-translationInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-translationInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-translationInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-translationInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-translationInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -1348,29 +1326,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Ftranslation_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Ftranslation_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Ftranslation_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/translation_contribute_icon.svg"
+                                        srcset="/images/translation_contribute_icon.svg 1x, /images/translation_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1388,29 +1365,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1465,29 +1441,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                       <div
                                         class="initiativeHeaderImg"
                                       >
-                                        <div
-                                          style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                        <span
+                                          style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                         >
-                                          <div
-                                            style="box-sizing: border-box; display: block; max-width: 100%;"
+                                          <span
+                                            style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                           >
                                             <img
                                               alt=""
                                               aria-hidden="true"
-                                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI2IiBoZWlnaHQ9IjEwMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                              style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                              src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27126%27%20height=%27103%27/%3e"
+                                              style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                             />
-                                          </div>
+                                          </span>
                                           <img
                                             alt="ocrLogo"
                                             data-nimg="intrinsic"
                                             decoding="async"
-                                            src="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=256&q=75"
-                                            srcset="/_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=128&q=75 1x, /_next/image?url=%2Fimages%2Fvakyansh%2Fen%2Flogos%2Fen-ocrInitiativeLogo.svg&w=256&q=75 2x"
+                                            src="/images/vakyansh/en/logos/en-ocrInitiativeLogo.svg"
+                                            srcset="/images/vakyansh/en/logos/en-ocrInitiativeLogo.svg 1x, /images/vakyansh/en/logos/en-ocrInitiativeLogo.svg 2x"
                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                           />
-                                          <noscript />
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
                                     <div
@@ -1511,29 +1486,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconGreen d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Focr_contribute_icon.svg&w=384&q=75 2x"
+                                        src="/images/ocr_contribute_icon.svg"
+                                        srcset="/images/ocr_contribute_icon.svg 1x, /images/ocr_contribute_icon.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
@@ -1551,29 +1525,28 @@ exports[`InitiativesCarousel should render the component and matches it against 
                                   <div
                                     class="actionIcon actionIconBlue d-flex rounded-circle"
                                   >
-                                    <div
-                                      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+                                    <span
+                                      style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
                                     >
-                                      <div
-                                        style="box-sizing: border-box; display: block; max-width: 100%;"
+                                      <span
+                                        style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
                                       >
                                         <img
                                           alt=""
                                           aria-hidden="true"
-                                          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-                                          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
+                                          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27160%27%20height=%27160%27/%3e"
+                                          style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
                                         />
-                                      </div>
+                                      </span>
                                       <img
                                         alt="initiativeAction"
                                         data-nimg="intrinsic"
                                         decoding="async"
-                                        src="/_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75"
-                                        srcset="/_next/image?url=%2Fimages%2Fvalidate.svg&w=256&q=75 1x, /_next/image?url=%2Fimages%2Fvalidate.svg&w=384&q=75 2x"
+                                        src="/images/validate.svg"
+                                        srcset="/images/validate.svg 1x, /images/validate.svg 2x"
                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
                                       />
-                                      <noscript />
-                                    </div>
+                                    </span>
                                   </div>
                                   <div
                                     class="mt-4 text-break"
