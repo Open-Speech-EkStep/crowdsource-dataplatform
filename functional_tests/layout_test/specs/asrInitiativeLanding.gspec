@@ -11,7 +11,7 @@
     contributeheading                       xpath  //*[@data-testid='ActionCardcontribute']//h1
     contributetext                          xpath  //*[@data-testid='ActionCardcontribute']//p
     validatecard                            css     div[data-testid='ActionCardvalidate']
-    validatelogo                            xpath  //*[@data-testid='ActionCardvalidate']//div/img[contains(@alt,'Validate Icon')]
+    validatelogo                            xpath  //*[@data-testid='ActionCardvalidate']//span/img[contains(@alt,'Validate Icon')]
     validatetext                            xpath  //*[@data-testid='ActionCardvalidate']//p
     validateheading                         xpath  //*[@data-testid='ActionCardvalidate']//h1
     targetsection                           css    div[data-testid=TargetProgress]
