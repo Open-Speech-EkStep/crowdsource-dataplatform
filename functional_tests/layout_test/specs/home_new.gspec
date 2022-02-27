@@ -6,7 +6,7 @@
     badesgroup     css    div[data-testid=BadgesIntro]
     bronzebadge    css    div[data-testid="BronzeContribute"]
     feedbackicon   css   button[data-testid=Button]
-    knowmorebutton css a[href="/en/badges?initiative=asr&language=English&source=contribute&badge=bronze"]
+    knowmorebutton css a[href="/en/badge-detail?initiative=asr&language=English&source=contribute&badge=bronze"]
     footer css footer[data-testid=Footer]
     termscondition  xpath //*[@id="__next"]/div/footer/div/div[1]/a[1]
     privacypolicy  xpath //*[@id="__next"]/div/footer/div/div[1]/a[2]
