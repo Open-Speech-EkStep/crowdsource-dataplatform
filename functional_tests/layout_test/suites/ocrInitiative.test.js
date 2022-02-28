@@ -25,8 +25,10 @@ function openOcrCards(driver,device,flow)
       Thread.sleep(1500);
       driver.findElement(By.xpath(content.get("ocrInitiativeNavBar"))).click();
       Thread.sleep(1000);
-      driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languagePunjabi"));
-      Thread.sleep(700);
+      driver.findElement(By.id(content.get("languageDropDown"))).click();
+      Thread.sleep(1000);
+      driver.findElement(By.xpath(content.get("languagePunjabi"))).click();
+      Thread.sleep(1000);
       if(flow=="Contribute")
       {
         driver.findElement(By.cssSelector(content.get("contributeCard"))).click();
@@ -47,8 +49,10 @@ function openOcrCards(driver,device,flow)
       Thread.sleep(2000);
       driver.findElement(By.xpath(content.get("ocrInitiativeNavBar"))).click();
       Thread.sleep(2000);
-      driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languagePunjabi"));
-      Thread.sleep(700);
+      driver.findElement(By.id(content.get("languageDropDown"))).click();
+      Thread.sleep(1000);
+      driver.findElement(By.xpath(content.get("languagePunjabi"))).click();
+      Thread.sleep(1000);
       if(flow=="Contribute")
       {
         driver.findElement(By.cssSelector(content.get("contributeCard"))).click();
@@ -71,9 +75,10 @@ function openOcrInitiative(driver,device)
     Thread.sleep(1500);
     driver.findElement(By.xpath(content.get("ocrInitiativeNavBar"))).click();
     Thread.sleep(2000);
-
-    driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languageKannada"));
-    Thread.sleep(2000);
+    driver.findElement(By.id(content.get("languageDropDown"))).click();
+    Thread.sleep(1000);
+    driver.findElement(By.xpath(content.get("languageKannada"))).click();
+    Thread.sleep(1000);
   }
   else
   {
@@ -84,8 +89,10 @@ function openOcrInitiative(driver,device)
 
     driver.findElement(By.xpath(content.get("ocrInitiativeNavBar"))).click();
     Thread.sleep(2000);
-    driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languageKannada"));
-    Thread.sleep(2000);
+    driver.findElement(By.id(content.get("languageDropDown"))).click();
+    Thread.sleep(1000);
+    driver.findElement(By.xpath(content.get("languageKannada"))).click();
+    Thread.sleep(1000);
 
   }
 
