@@ -431,6 +431,12 @@ workflows:
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
             - dev_ui_deployment_aks
+          
+      - setup_run_galen_tests:
+          name: setup_run_galen_dev
+          requires:
+            - cdn_invalidation_ui_dev
+
 
       - approve_to_deploy:
           name: approve_test_deploy
@@ -507,11 +513,6 @@ workflows:
           profile-name: ${AZURE_PROFILE_NAME}
           requires:
             - uat_ui_deployment_aks
-
-      - setup_run_galen_tests:
-          name: setup_run_galen_uat
-          requires:
-            - cdn_invalidation_ui_uat
 
       - approve_to_deploy:
           name: approve_prod_deploy
