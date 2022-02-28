@@ -113,8 +113,10 @@ var devices = {
     if(!device.isMobile)
     {
       Thread.sleep(1500);
-      driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languageOdia"));
-      Thread.sleep(1500);
+      driver.findElement(By.id(content.get("languageDropDown"))).click();
+      Thread.sleep(1000);
+      driver.findElement(By.xpath(content.get("languageOdia"))).click();
+      Thread.sleep(1000);
       driver.findElement(By.cssSelector(content.get("contributeCard"))).click();
       Thread.sleep(500);
 
@@ -122,8 +124,10 @@ var devices = {
     else
     {
       Thread.sleep(1500);
-      driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languageOdia"));
-      Thread.sleep(1500);
+      driver.findElement(By.id(content.get("languageDropDown"))).click();
+      Thread.sleep(1000);
+      driver.findElement(By.xpath(content.get("languageOdia"))).click();
+      Thread.sleep(1000);
       driver.findElement(By.cssSelector(content.get("contributeCard"))).click();
       Thread.sleep(500);
 
