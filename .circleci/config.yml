@@ -101,7 +101,7 @@ jobs:
             sudo apt install ./google-chrome-stable_current_amd64.deb
             google-chrome --version
             sudo npm install -g galenframework-cli --unsafe-perm=true --allow-root
-            wget  https://chromedriver.storage.googleapis.com/96.0.4664.45/chromedriver_linux64.zip
+            wget  https://chromedriver.storage.googleapis.com/98.0.4758.102/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip
             sudo cp chromedriver /usr/local/lib/node_modules/galenframework-cli/node_modules/chromedriver/lib/chromedriver/
             cd functional_tests/layout_test/
