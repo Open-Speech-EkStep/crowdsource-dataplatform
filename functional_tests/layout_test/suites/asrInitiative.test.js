@@ -27,8 +27,10 @@ function openAsrCards(driver,device,flow)
       Thread.sleep(1500);
       driver.findElement(By.xpath(content.get("asrInitiativeNavBar"))).click();
       Thread.sleep(1000);
-      driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languageOdia"));
-      Thread.sleep(700);
+      driver.findElement(By.id(content.get("languageDropDown"))).click();
+      Thread.sleep(1000);
+      driver.findElement(By.xpath(content.get("languageOdia"))).click();
+      Thread.sleep(1000);
       if(flow=="Contribute")
       {
         driver.findElement(By.cssSelector(content.get("contributeCard"))).click();
@@ -49,9 +51,10 @@ function openAsrCards(driver,device,flow)
       Thread.sleep(2000);
       driver.findElement(By.xpath(content.get("asrInitiativeNavBar"))).click();
       Thread.sleep(2000);
-      driver.findElement(By.id(content.get("languageDropDown"))).sendKeys(content.get("languageOdia"));
-    
-      Thread.sleep(700);
+      driver.findElement(By.id(content.get("languageDropDown"))).click();
+      Thread.sleep(1000);
+      driver.findElement(By.xpath(content.get("languageOdia"))).click();
+      Thread.sleep(1000);
       if(flow=="Contribute")
       {
         driver.findElement(By.cssSelector(content.get("contributeCard"))).click();
@@ -121,7 +124,7 @@ function openAsrCards(driver,device,flow)
   
   forAll(devices, function (device) {
     forAll(browsers, function (browser) {
-      test("Test Asr Initiative Landing Page ", function (device,browser) {
+       test("Test Asr Initiative Landing Page ", function (device,browser) {
         var driver = create_driver(content.get("url"),device,browser);
   
           openAsrInitiative(driver,device);
