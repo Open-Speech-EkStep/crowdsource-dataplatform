@@ -8,6 +8,7 @@ For Galen, you need to have a Java version 1.8 or greater installed.<br>
 1. Check your Chrome browser version.<br> E.g., `Open chrome browser -> Go to 'Help' -> Go to 'About Google Chrome'`.<br> 
 2. Download Chrome Webdriver in `functional_tests/layout_test/webDriver` folder (the webdriver version should be compatible with your browser version).<br> 
 3. Unzip the downloaded Webdriver file in the same folder.<br> 
+4. In galen.config file, uncomment the webdriver path `$.webdriver.chrome.driver=webDriver/chromedriver`.<br>
 ### To run Galen test, follow these steps:
 1. Navigate to layout_tests folder using following command. <br> 
 `cd functional_tests/layout_test`<br>
