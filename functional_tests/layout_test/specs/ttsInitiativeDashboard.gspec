@@ -42,7 +42,7 @@
             inside Breadcrumbs
             right-of ttsLogo 13px
             left-of ttsInitiativeDashboardText
-            text is "TTS Initiative"
+            text is "Speech Validation"
             css font-size is "20px"
 
     ttsInitiativeDashboardText:

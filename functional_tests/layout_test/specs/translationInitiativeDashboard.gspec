@@ -45,7 +45,7 @@
             inside Breadcrumbs
             right-of translationLogo 13px
             left-of translationInitiativeDashboardText
-            text is "Translation Initiative"
+            text is "Translation Validation"
             css font-size is "20px"
 
     translationInitiativeDashboardText:
