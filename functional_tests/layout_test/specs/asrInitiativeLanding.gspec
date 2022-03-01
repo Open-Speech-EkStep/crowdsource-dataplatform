@@ -45,12 +45,12 @@
     asrInitiativeHeadingText:
         @on Desktop
             above asrInitiativeText
-            text is "ASR Initiative"
+            text is "Speech Contribution"
             css font-size is "40px"
 
         @on Mobile
             above asrInitiativeTextM
-            text is "ASR Initiative"
+            text is "Speech Contribution"
             css font-size is "28px"
 
     asrInitiativeText:
@@ -179,12 +179,12 @@
 
     contributionmadetext:
         @on Desktop
-            text is "Contributions made to ASR Initiative"
+            text is "Contributions made to Speech Contribution"
             css font-size is "28px"
             above overallsummarytext 16px
 
         @on Mobile
-            text is "Contributions made to ASR Initiative"
+            text is "Contributions made to Speech Contribution"
             css font-size is "20px"
             above overallsummarytext 16px
 

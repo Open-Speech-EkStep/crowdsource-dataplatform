@@ -3,7 +3,7 @@
     header                      xpath   //header[@data-testid="Header"]
     Breadcrumbs                 xpath   //div[@data-testid="Breadcrumbs"]
     ttsLogo                    xpath   //img[contains(@alt,'ttsLogo')]
-    ttsInitiativeText               xpath   //span[text()='TTS Initiative']
+    ttsInitiativeText               xpath   //span[text()='Speech Validation']
     ttsInitiativeDashboardText      xpath   //span[text()='Dashboard']
     selectLanguageText          xpath   //label[text()='Select a language']
     selectLanguageDropdown      xpath   //select[@id='language']

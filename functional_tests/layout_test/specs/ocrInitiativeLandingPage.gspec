@@ -45,12 +45,12 @@
     ocrInitiativeHeadingText:
         @on Desktop
             above ocrInitiativeText
-            text is "OCR Initiative"
+            text is "Image Validation"
             css font-size is "40px"
 
         @on Mobile
             above ocrInitiativeTextM
-            text is "OCR Initiative"
+            text is "Image Validation"
             css font-size is "28px"
 
     ocrInitiativeText:
@@ -179,12 +179,12 @@
 
     contributionmadetext:
         @on Desktop
-            text is "Contributions made to OCR Initiative"
+            text is "Contributions made to Image Validation"
             css font-size is "28px"
             above overallsummarytext 16px
 
         @on Mobile
-            text is "Contributions made to OCR Initiative"
+            text is "Contributions made to Image Validation"
             css font-size is "20px"
             above overallsummarytext 16px
 

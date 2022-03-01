@@ -44,11 +44,11 @@
     translationInitiativeHeadingText:
         @on Desktop
             above translationInitiativeText
-            text is "Translation Initiative"
+            text is "Translation Validation"
             css font-size is "40px"
         @on Mobile
             above translationInitiativeTextM
-            text is "Translation Initiative"
+            text is "Translation Validation"
             css font-size is "28px"
     translationInitiativeText:
         @on Desktop
@@ -195,12 +195,12 @@
 
     contributionmadetext:
         @on Desktop
-            text is "Contributions made to Translation Initiative"
+            text is "Contributions made to Translation Validation"
             css font-size is "28px"
             above overallsummarytext 16px
 
         @on Mobile
-            text is "Contributions made to Translation Initiative"
+            text is "Contributions made to Translation Validation"
             css font-size is "20px"
             above overallsummarytext 16px
 

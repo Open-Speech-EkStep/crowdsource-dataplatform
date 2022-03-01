@@ -45,12 +45,12 @@
     ttsInitiativeHeadingText:
         @on Desktop
             above ttsInitiativeText
-            text is "TTS Initiative"
+            text is "Speech Validation"
             css font-size is "40px"
 
         @on Mobile
             above ttsInitiativeTextM
-            text is "TTS Initiative"
+            text is "Speech Validation"
             css font-size is "28px"
 
     ttsInitiativeText:
@@ -179,12 +179,12 @@
 
     contributionmadetext:
         @on Desktop
-            text is "Contributions made to TTS Initiative"
+            text is "Contributions made to Speech Validation"
             css font-size is "28px"
             above overallsummarytext 16px
 
         @on Mobile
-            text is "Contributions made to TTS Initiative"
+            text is "Contributions made to Speech Validation"
             css font-size is "20px"
             above overallsummarytext 16px
 

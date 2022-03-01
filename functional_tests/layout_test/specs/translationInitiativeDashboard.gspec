@@ -15,7 +15,7 @@
     quarterly                   xpath   //button[text()='Quarterly']
     footer                      xpath   //Footer[@data-testid="Footer"]
     translationLogo                   xpath   //img[contains(@alt,'translationLogo')]
-    translationInitiativeText              xpath   //span[text()='Translation Initiative']
+    translationInitiativeText              xpath   //span[text()='Translation Validation']
     translationInitiativeDashboardText     xpath   //span[text()='Dashboard']
     fromLanguageDropdown        xpath   //select[1][@id='language']
     toLanguageDropdown          xpath   //select[2][@id='language']

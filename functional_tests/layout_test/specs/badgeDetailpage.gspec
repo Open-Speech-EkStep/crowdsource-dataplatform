@@ -116,37 +116,37 @@
     ttsTab:
         @on Desktop
             inside badgeDetailTabs
-            text is "TTS Initiative"
+            text is "Speech Validation"
             css font-size is "20px"
 
         @on Mobile
             inside badgeDetailTabs
-            text is "TTS Initiative"
+            text is "Speech Validation"
             css font-size is "16px"
     asrTab:
         @on Desktop
             inside badgeDetailTabs
             left-of translationTab
-            text is "ASR Initiative"
+            text is "Speech Contribution"
             css font-size is "20px"
 
         @on Mobile
             inside badgeDetailTabs
             left-of translationTab
-            text is "ASR Initiative"
+            text is "Speech Contribution"
             css font-size is "16px"
 
     translationTab:
         @on Desktop
             inside badgeDetailTabs
             left-of ocrTab
-            text is "Translation Initiative"
+            text is "Translation Validation"
             css font-size is "20px"
 
         @on Mobile
             left-of ocrTab
             right-of asrTab
-            text is "Translation Initiative"
+            text is "Translation Validation"
             css font-size is "16px"
     
     badgeLevelRow:

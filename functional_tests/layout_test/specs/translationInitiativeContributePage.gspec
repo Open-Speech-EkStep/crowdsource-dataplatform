@@ -47,7 +47,7 @@
         @on Desktop
             below header
             height 42px
-            width 263 to 360px
+            width 363 to 390px
         
         @on Mobile
             below header
