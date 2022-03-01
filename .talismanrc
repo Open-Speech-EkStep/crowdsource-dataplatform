@@ -1,0 +1,5 @@
+fileignoreconfig:
+- filename: functional_tests/api_tests/test/contributions.test.js
+  checksum: 01630cbfa62b595d9c133096b68a3b10128336efa6b6cdb7a2d1ebbfdd7ffd5c
+- filename: functional_tests/api_tests/test/media.test.js
+  checksum: 23ba809a44ee8e8254674c2c1ed375547e7218837a9751d8ed728e3d208de4ab
