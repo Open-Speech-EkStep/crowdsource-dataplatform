@@ -1,0 +1,13 @@
+const feedback = "/feedback";
+const location = "/location-info";
+const contributions = "/contributions";
+const media = "/media";
+const report = "/report";
+const reward_info = "/rewards-info";
+const rewards = "/rewards";
+const user_rewards = "/user-rewards";
+const userID = "/get-userid";
+const skip = "/skip";
+const store = "/store";
+const validate = "/validate";
+module.exports = { contributions, feedback, location, media,report,reward_info, rewards,user_rewards,userID, skip, store, validate }

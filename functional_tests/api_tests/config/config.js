@@ -1,7 +1,4 @@
 const supertest = require('supertest')
-// const envarg = process.argv.filter((x) => x.startsWith('-env='))[0]
-// const env = envarg ? envarg.split('=')[1] : 'dev' // default
-
 let api_test_url = "";
 
 if (process.env.ENV === "") {
