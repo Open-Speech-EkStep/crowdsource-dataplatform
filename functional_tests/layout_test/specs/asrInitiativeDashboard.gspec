@@ -2,7 +2,7 @@
     header                      xpath   //header[@data-testid="Header"]
     Breadcrumbs                 xpath   //div[@data-testid='Breadcrumbs']
     asrLogo                    xpath   //img[contains(@alt,'asrLogo')]
-    asrInitiativeText               xpath   //span[text()='Speech Contribution']
+    asrInitiativeText               xpath   //span[text()='Speech Contribution ']
     asrInitiativeDashboardText      xpath   //span[text()='Dashboard']
     selectLanguageText          xpath   //label[text()='Select a language']
     selectLanguageDropdown      xpath   //select[@id='language']
