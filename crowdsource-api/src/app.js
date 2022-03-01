@@ -191,7 +191,7 @@ router.get('/contributions/:type', validateGetContributionsInput, (req, res) => 
         }
         #swagger.responses[200] = {
         description: 'response data',
-        schema: {"data": [{"contribution_id": "123", "dataset_row_id":321, "sentence": "Text 1", "contribution":"contribution/1", "source_info": "info"}]}
+        schema: {"data": [{"contribution_id": "123", "dataset_row_id":321, "sentence": "Text 1", "contribution":"contribution/1", "source_info": "info", "auto_validate": "true"}]}
         } */
   return getContributionList(req, res);
 });
