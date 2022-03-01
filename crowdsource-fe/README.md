@@ -200,7 +200,8 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
 
      https://hodgef.com/simple-keyboard/demos/
 
-  4. Add validation score for corresponding language to [this file](src/constants/languageConfigConstants.ts).
+  4. Add validation score for corresponding language to [this file](src/constants/languageConfigConstants.ts). [Know More](/auto-validation-consumer/README.md)
+
   5. Add language key and value in en.json for localisation to [this folder](public/locales/en/common.json).
 
      e.g. "sanskrit": "Sanskrit",
