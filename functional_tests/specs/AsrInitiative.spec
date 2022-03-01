@@ -1,8 +1,9 @@
 # Test ASR-Initiative
-Tags: component
+
+tags: component
 
 * Open Website
-* Select "ASR Initiative" from header
+* Select "Speech Contribution" from header
 
 ## Validate the Speaker Details pop-up
 * Select Contribution Language as "हिंदी"
@@ -32,7 +33,7 @@ Tags: component
 * Navigate to "Contribute" card
 * user should "" see instructions to record
 * When user skips all the rest of the "5" sentences , User should see Thank you Page
-* Validate Thank you page content for ASR Initiative
+* Validate Thank you page content for Speech Contribution
 * when user clicks on the Contribute More button, user should not see the Instructions page again
 
 ## Validate Validator flow
@@ -53,7 +54,7 @@ Tags: component
 ## Validate Feedback Page
 * When user clicks on the Feedback icon, user should see the feedback popup
 * Submit button should be disbaled, When user selects an opinion, submit button should be enabled
-* when user clicks on the submit button , user should see thankyou popup 
+* when user clicks on the submit button , user should see thankyou popup
 * When user clicks on the close button , user should see the home page
 
 ## Validate Report feature
@@ -65,7 +66,7 @@ Tags: component
 * When user submits , Thank you pop up should come & close button should close the pop up
 
 ## Validate Home page content
-* Validate ASR Initiative content
+* Validate Speech Contribution content
 
 ## Check Terms and Condition links from Footer
 * Click "Terms & Conditions" link

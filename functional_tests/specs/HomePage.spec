@@ -1,17 +1,18 @@
 # Test Home Page
-Tags: page
+
+tags: page
 
 * Open Website
 
 ## Validate Carousel Section
 * Section should have text "One Platform, multiple Crowdsourcing Initiatives"
-* Validate "TTS Initiative" Tab
-* Move tab to "ASR Initiative"
-* Validate "ASR Initiative" Tab
-* Move tab to "Translation Initiative"
-* Validate "Translation Initiative" Tab
-* Move tab to "OCR Initiative"
-* Validate "OCR Initiative" Tab
+* Validate "Speech Validation" Tab
+* Move tab to "Speech Contribution"
+* Validate "Speech Contribution" Tab
+* Move tab to "Translation Validation"
+* Validate "Translation Validation" Tab
+* Move tab to "Image Validation"
+* Validate "Image Validation" Tab
 
 ## Validate Total Participation section
 * Validate participation section content
@@ -19,10 +20,10 @@ Tags: page
 ## Validate Badge Section
 * Click "Know More" Link
 * "badge-detail" page should be displayed
-* Clicking "TTS Initiative" should navigate to "TTS Initiative" Page
-* Clicking "ASR Initiative" should navigate to "ASR Initiative" Page
-* Clicking "Translation Initiative" should navigate to "Translation Initiative" Page
-* Clicking "OCR Initiative" should navigate to "OCR Initiative" Page
+* Clicking "Speech Validation" should navigate to "Speech Validation" Page
+* Clicking "Speech Contribution" should navigate to "Speech Contribution" Page
+* Clicking "Translation Validation" should navigate to "Translation Validation" Page
+* Clicking "Image Validation" should navigate to "Image Validation" Page
 
 <!-- ## Validate Localisation -->
 <!-- * Select "हिंदी" from localisation dropdown -->

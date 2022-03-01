@@ -3,14 +3,14 @@
 tags: component
 
 * Open Website
-* Select "TTS Initiative" from header
+* Select "Speech Validation" from header
 
 ## Check Home Page
-* Validate TTS Initiative content
+* Validate Speech Validation content
 * User should see the top Language graph and other stats
 
 ## Validate Transcribe card should be enabled when the data is not contributed for Odia language
-* User should store the progress bar for "TTS Initiative"
+* User should store the progress bar for "Speech Validation"
 * Select Contribution Language as "ଓଡିଆ"
 * Navigate to "Transcribe" and add username "T User" then click Lets go
 * When user clicks on Play button, Pause button should appear and when user clicks on pause, play should appear
@@ -19,7 +19,7 @@ tags: component
 * User clicks on Play button, and then on pause button, then clicks on "Add Text" field and type "ହାଏ ଓଡିଆ ଓଡିଆ,", then resume, submit button should be disabled
 * When User clicks on "Add Text" field and type "ହାଏ ଓଡିଆ ଓଡିଆ" submit and cancel button should be enabled
 * When user clicks on submit button for Odia language user should see "Thank you for contributing!"
-* When user clicks on TTS Initiative breadcrumb, user should land on TTS Initiative home page
+* When user clicks on Speech Validation breadcrumb, user should land on Speech Validation home page
 
 ## Validate Transcribe flow
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -41,8 +41,8 @@ tags: component
 * When user skips the rest of the "3" sentences , User should see Thank you Page
 * Click "Contribute More" Button
 * When user skips the rest of the "1" sentences , User should see Thank you Page
-* Validate Thank you page content for TTS Initiative
-* When user clicks on Contribute more button , user should see no data available message for "TTS Initiative"
+* Validate Thank you page content for Speech Validation
+* When user clicks on Contribute more button , user should see no data available message for "Speech Validation"
 
 ## Validate Validate flow
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -62,7 +62,7 @@ tags: component
 * User clears "Your Edit" field should disable the buttons again in validation
 * When User clicks on "Your Edit" field and type "ಗಹಹಜಲಲ" submit and cancel button should be enabled
 * User skips the next "4" sentences user should land on Thank you page
-* When user clicks on Validate more button , user should see no data available message for "TTS Initiative"
+* When user clicks on Validate more button , user should see no data available message for "Speech Validation"
 
 ## Check the Validate flow for new user
 * Select Contribution Language as "ಕನ್ನಡ"
@@ -82,14 +82,14 @@ tags: component
 * User skips the next "3" sentences user should land on Thank you page
 * User should see the "Validate More" button
 * Navigate to "Know more" button and click "Know more" button
-* "Validate 5 sentences in Kannada and earn TTS Initiative Bronze Brand Contributor badge" text exists on page
+* "Validate 5 sentences in Kannada and earn Speech Validation Bronze Brand Contributor badge" text exists on page
 * When user clicks on back button, user should land on Crowdsourcing home page
 
 ## Check Dashboard Page
 * When user clicks on View all Details buttton user should be able to see "Progress Chart" , "Geographical Distribution"
 * user should be able to see "People participated" , "Duration transcribed" , "Duration validated" , "Languages"
 * When user select "ಕನ್ನಡ" Language from dropdown then "Languages" should not visible
-* When user clicks on TTS Initiative breadcrumb, user should land on TTS Initiative home page
+* When user clicks on Speech Validation breadcrumb, user should land on Speech Validation home page
 
 ## Validate My Badge flow and check Badges
 * Change user name to "Badge User"

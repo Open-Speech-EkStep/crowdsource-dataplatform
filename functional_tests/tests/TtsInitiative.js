@@ -3,12 +3,11 @@ const assert = require('assert');
 
 const { button, write, click, link, clear, text, into, scrollDown, scrollTo, $ } = require('taiko');
 
-const getSelectors = require('./constant')
+const getSelectors = require('./constant');
 
 beforeSpec(async () => {
-  selectors = await getSelectors(taiko)
+  selectors = await getSelectors(taiko);
 });
-
 
 step('Select <HeaderLink> from header', async function (HeaderLink) {
   await taiko.waitFor(500);
@@ -18,7 +17,7 @@ step('Select <HeaderLink> from header', async function (HeaderLink) {
   await click(link(HeaderLink));
 });
 
-step('Validate TTS Initiative content', async function () {
+step('Validate Speech Validation content', async function () {
   assert.ok(await selectors.ttsInitiativeHeading.exists());
   assert.ok(await selectors.validateText.exists());
   assert.ok(await selectors.transcribeText.exists());
@@ -91,7 +90,7 @@ step('When user clicks on back button, user should land on home page', async fun
 });
 
 step(
-  'When user clicks on TTS Initiative breadcrumb, user should land on TTS Initiative home page',
+  'When user clicks on Speech Validation breadcrumb, user should land on Speech Validation home page',
   async function () {
     await selectors.breadCrumb.exists();
     await click(selectors.breadCrumb);
@@ -101,7 +100,8 @@ step(
 );
 
 step(
-  'When User clicks on <type> field and type <text> submit and cancel button should be enabled', async function (type, text) {
+  'When User clicks on <type> field and type <text> submit and cancel button should be enabled',
+  async function (type, text) {
     const editfield = taiko.textBox(type);
     await taiko.waitFor(500);
     await write(text, into(editfield));
@@ -112,7 +112,8 @@ step(
 );
 
 step(
-  'When User clicks on <type> field and type <text> submit should be disabled and cancel button should be enabled',async function (type, text) {
+  'When User clicks on <type> field and type <text> submit should be disabled and cancel button should be enabled',
+  async function (type, text) {
     const editfield = taiko.textBox(type);
     await taiko.waitFor(500);
     await write(text, into(editfield));
@@ -246,7 +247,7 @@ step(
   }
 );
 
-step('Validate Thank you page content for TTS Initiative', async function () {
+step('Validate Thank you page content for Speech Validation', async function () {
   await taiko.waitFor(1000);
   assert.ok(await selectors.asrValidateThankYouPageText1.isVisible());
   assert.ok(await selectors.asrValidateThankYouPageText2.isVisible());

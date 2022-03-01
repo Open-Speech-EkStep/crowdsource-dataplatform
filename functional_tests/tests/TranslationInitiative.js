@@ -3,13 +3,13 @@ const assert = require('assert');
 
 const { click, link, text, scrollTo } = require('taiko');
 
-const getSelectors = require('./constant')
+const getSelectors = require('./constant');
 
 beforeSpec(async () => {
-  selectors = await getSelectors(taiko)
+  selectors = await getSelectors(taiko);
 });
 
-step('Validate Translation Initiative content', async function () {
+step('Validate Translation Validation content', async function () {
   assert.ok(await selectors.translationInitiativeHeading.exists());
   assert.ok(await selectors.validateText.exists());
   assert.ok(await selectors.translateText.exists());
@@ -20,7 +20,7 @@ step('Validate Translation Initiative content', async function () {
   assert.ok(await selectors.contributionTrackerText.isVisible());
 });
 
-step('User should see the top Language graph and other stats for Translation Initiative', async function () {
+step('User should see the top Language graph and other stats for Translation Validation', async function () {
   assert.ok(await selectors.translationInitiativeContributionHeading2.exists());
   assert.ok(await selectors.languagePairText.exists());
   assert.ok(await selectors.peopleParticipatedText.exists());
@@ -35,14 +35,17 @@ step('Select <lang> Language from <dropdown_id>', async function (lang, dropdown
   await selectLanguageDropDown.select(lang);
 });
 
-step('Close button should close the pop up and user should see Translation Initiative Home page', async function () {
-  if (await selectors.userDetailsText.exists()) {
-    assert.ok('user details pop-up exists');
-    await taiko.waitFor(700);
-    await click(selectors.userDetailsCloseButton);
+step(
+  'Close button should close the pop up and user should see Translation Validation Home page',
+  async function () {
+    if (await selectors.userDetailsText.exists()) {
+      assert.ok('user details pop-up exists');
+      await taiko.waitFor(700);
+      await click(selectors.userDetailsCloseButton);
+    }
+    assert.ok(await selectors.translationInitiativeHeading.exists());
   }
-  assert.ok(await selectors.translationInitiativeHeading.exists());
-});
+);
 
 step('User should see an error message <msg>', async function (msg) {
   await taiko.waitFor(300);
@@ -58,7 +61,7 @@ step('<arg0> should not visible', async function (arg0) {
 });
 
 step(
-  'When user clicks on Translation Initiative breadcrumb, user should land on Translation Initiative home page',
+  'When user clicks on Translation Validation breadcrumb, user should land on Translation Validation home page',
   async function () {
     await taiko.waitFor(1500);
     await selectors.translationBreadcrumb.exists();
@@ -68,7 +71,7 @@ step(
 );
 
 step(
-  'User skips all <count> sentences user should land on Translation Initiative Thank you page',
+  'User skips all <count> sentences user should land on Translation Validation Thank you page',
   async function (count) {
     const skipbutton = selectors.skipButton;
     for (let i = 0; i < count; i++) {

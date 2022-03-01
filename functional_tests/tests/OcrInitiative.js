@@ -4,15 +4,14 @@ const assert = require('assert');
 const { button, click, image, link, clear, text, scrollTo } = require('taiko');
 const getSelectors = require('./constant');
 beforeSpec(async () => {
-  selectors = await getSelectors(taiko)
+  selectors = await getSelectors(taiko);
 });
 
-
-step('Validate OCR Initiative content', async function () {
+step('Validate Image Validation content', async function () {
   assert.ok(await selectors.ocrInitiativeHeading.exists());
   assert.ok(await selectors.validateText.exists());
   assert.ok(await selectors.labelText.exists());
-  await scrollTo('Contributions made to OCR Initiative');
+  await scrollTo('Contributions made to Image Validation');
   await taiko.waitFor(500);
   assert.ok(await selectors.contributionTrackerText.isVisible());
   assert.ok(await selectors.overAllSummaryText.isVisible());
@@ -20,7 +19,7 @@ step('Validate OCR Initiative content', async function () {
   assert.ok(await selectors.top3contributionText.isVisible());
 });
 
-step('User should see the top Language graph and other stats for OCR Initiative', async function () {
+step('User should see the top Language graph and other stats for Image Validation', async function () {
   assert.ok(await selectors.top3contributionText.exists());
   assert.ok(await selectors.languageText.exists());
   assert.ok(await selectors.peopleParticipatedText.exists());
@@ -29,7 +28,7 @@ step('User should see the top Language graph and other stats for OCR Initiative'
 });
 
 step(
-  'When user clicks on OCR Initiative breadcrumb, user should land on OCR Initiative home page',
+  'When user clicks on Image Validation breadcrumb, user should land on Image Validation home page',
   async function () {
     await selectors.ocrBreadcrumb.exists();
     await click(selectors.ocrBreadcrumb);
@@ -74,7 +73,7 @@ step(
     await click(selectors.contributeMoreText);
     await taiko.waitFor(2000);
 
-    if (initiative == 'OCR Initiative') {
+    if (initiative == 'Image Validation') {
       assert.ok(await selectors.ocrThankYouEnthusiamText.exists());
     }
     if (initiative == 'Translation Initiative') {
@@ -93,7 +92,7 @@ step(
     await click(selectors.validateMoreText);
     await taiko.waitFor(2000);
 
-    if (initiative == 'OCR Initiative') {
+    if (initiative == 'Image Validation') {
       assert.ok(await selectors.ocrValidateThankYouEnthusiamText.exists());
     }
     if (initiative == 'Translation Initiative') {
@@ -110,7 +109,7 @@ step('When user clicks on Validate more button', async function () {
   await taiko.waitFor(2000);
 });
 
-step('Validate thank you page bronze Badge for OCR Initiative', async function () {
+step('Validate thank you page bronze Badge for Image Validation', async function () {
   await taiko.waitFor(2000);
   assert.ok(await selectors.badgeWinText.isVisible());
   assert.ok(await selectors.ocrBronzeBadgeWinText.isVisible());
@@ -142,7 +141,7 @@ step('Clicking watch video link should open video', async function () {
   taiko.waitFor(500);
 });
 
-step('Validate Thank you page content for OCR Initiative', async function () {
+step('Validate Thank you page content for Image Validation', async function () {
   assert.ok(await selectors.ocrValidateThankYouPageText1.exists());
   assert.ok(await selectors.ocrValidateThankYouPageText2.exists());
   assert.ok(await selectors.ocrValidateThankYouPageText3.isVisible());
