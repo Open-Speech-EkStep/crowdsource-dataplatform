@@ -136,6 +136,10 @@ e.g if for tts url is "/tts-initiative", then its page name should be "tts-initi
   e.g. "brand": "<website-name>"
   "contextRoot": "<context-root>",
 
+- To enable/disable your auto validation feature on UI, update config/<env>.json file
+  e.g. "autoValidation": "true".
+  <br> [Know More](/auto-validation-consumer/README.md)
+
 - Update [sitemap](public/sitemap.xml).
 
 - Custom brand images can be added inside a <brand> folder with filename format and structure similar to [this folder](public/images/vakyansh).

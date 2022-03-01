@@ -70,4 +70,4 @@ To add Sanskrit :
 const LANGUAGES = [..., 'Sanskrit']
 ```
 
-- Set threshold for language on auto-validation constants [file](/auto-validation-consumer/src/constants/constants.ts) by adding values to corresponding initiative constant array. [Know More](/auto-validation-consumer/README.md)
+- Set threshold for language on auto-validation constants [file](/auto-validation-consumer/src/constants/constants.ts) by adding values to corresponding initiative constant array. Update env config file in [folder](/crowdsource-api/config/) to enable or disable auto validation feature. [Know More](/auto-validation-consumer/README.md)
