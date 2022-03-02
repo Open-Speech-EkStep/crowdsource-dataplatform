@@ -10,7 +10,7 @@ describe('POST /validate/{contributionId}/{action}', function () {
     const reject = "reject";
     it('check when action is skip', async () => {
         const body = {
-            "sentenceId": 500788,
+            "sentenceId": 1592864,
             "state": "Punjab",
             "country": "India",
             "userName": "name",
@@ -20,7 +20,7 @@ describe('POST /validate/{contributionId}/{action}', function () {
             "fromLanguage": "Gujarati",
             "language": "English"
         }
-        const resp = await validateResponseWithCookie(body,52333,skip);
+        const resp = await validateResponseWithCookie(body,2331659,skip);
         expect(resp.status).to.equal(successStatus);
         expect(resp.body.message).to.equal(validateSuccesful);
     });

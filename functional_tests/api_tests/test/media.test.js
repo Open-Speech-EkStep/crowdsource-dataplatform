@@ -64,7 +64,7 @@ describe('POST /media/{type}', function () {
         expect(resp.body.data[0]).to.have.all.keys(mediaResponsekeys)
     });
     it('check when username contains only numbers', async () => {
-        const body = { "userName":123456789 , "language": "Hindi" }
+        const body = { "userName":'123456789' , "language": "Hindi" }
         const resp = await mediaResponseWithCookie(body,asr);
         expect(resp.status).to.equal(successStatus); //the condition should be revert once the api is fixed
         expect(resp.body.data[0]).to.have.all.keys(mediaResponsekeys); //the condition should be revert once the api is fixed
