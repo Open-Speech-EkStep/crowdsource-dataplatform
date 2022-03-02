@@ -89,6 +89,12 @@ const skipResponseWithCookie = async (reqBody,cookie=834983984392) => {
                 .set('Cookie', `userId=${cookie}`)   
                 .set('Content-type', 'application/json'); 
 }
+const skipResponseWithoutCookie = async (reqBody) => {   
+        return await baseURL.post(skip)
+                .send(reqBody)
+                .set('Origin', api_test_url)  
+                .set('Content-type', 'application/json'); 
+}
 const storeResponseWithCookie = async (reqBody,cookie=834983984392) => {   
         return await baseURL.post(store)
                 .send(reqBody)
@@ -107,5 +113,5 @@ module.exports = { feedbackResponseWithCookie, contributionsResponseWithCookie, 
                 contributionsResponseWithoutCookie,userRewardResponseWithCookie, userRewardResponseWithoutCookie,
                 rewardInfoResponse, mediaResponseWithCookie, mediaResponseWithoutCookie, reportResponseWithCookie, 
                 reportResponseWithoutCookie, rewardResponseWithCookie, rewardResponseWithoutCookie,
-                skipResponseWithCookie,storeResponseWithCookie, validateResponseWithCookie }
+                skipResponseWithCookie,storeResponseWithCookie, validateResponseWithCookie, skipResponseWithoutCookie }
 
