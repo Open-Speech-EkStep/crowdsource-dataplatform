@@ -8,7 +8,8 @@ const inputValueMissing = "Input values missing";
 const integerOutOfRange = "integer out of range";
 const parameterMissing = "required parameters missing";
 const skipSuccessful = "Skipped successfully.";
-const validateSuccesful = "Successfull";
+const validateSkipSuccesful = "Skip Successfull";
+const validateSuccesful = "Validate Successfull";
 const invalidParam = "Invalid params.";
 module.exports = { successfulFeedback,badRequest, invalidQuery, dataNotFound, userIdMissing, successfulReport, inputValueMissing, integerOutOfRange, 
-                    parameterMissing, skipSuccessful, validateSuccesful, invalidParam }
+                    parameterMissing, skipSuccessful, validateSkipSuccesful, validateSuccesful, invalidParam }

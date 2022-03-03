@@ -102,16 +102,23 @@ const storeResponseWithCookie = async (reqBody,cookie=834983984392) => {
                 .set('Cookie', `userId=${cookie}`)   
                 .set('Content-type', 'application/json'); 
 }
-const validateResponseWithCookie = async (reqBody, contributionId, action, cookie=834983984392) => {   
+const validateResponseWithCookie = async (reqBody, contributionId, action, cookie="a1b2c3d4".concat(Math.floor((Math.random() * 1000)))) => {   
         return await baseURL.post(`${validate}/${contributionId}/${action}`)
                 .send(reqBody)
                 .set('Origin', api_test_url)
                 .set('Cookie', `userId=${cookie}`)   
                 .set('Content-type', 'application/json'); 
 }
+const validateResponseWithoutCookie = async (reqBody, contributionId, action) => {   
+        return await baseURL.post(`${validate}/${contributionId}/${action}`)
+                .send(reqBody)
+                .set('Origin', api_test_url)
+                .set('Content-type', 'application/json'); 
+}
 module.exports = { feedbackResponseWithCookie, contributionsResponseWithCookie, userIdResponse, locationInfoResponse, 
                 contributionsResponseWithoutCookie,userRewardResponseWithCookie, userRewardResponseWithoutCookie,
                 rewardInfoResponse, mediaResponseWithCookie, mediaResponseWithoutCookie, reportResponseWithCookie, 
                 reportResponseWithoutCookie, rewardResponseWithCookie, rewardResponseWithoutCookie,
-                skipResponseWithCookie,storeResponseWithCookie, validateResponseWithCookie, skipResponseWithoutCookie }
+                skipResponseWithCookie,storeResponseWithCookie, validateResponseWithCookie, skipResponseWithoutCookie,
+                validateResponseWithoutCookie }
 
