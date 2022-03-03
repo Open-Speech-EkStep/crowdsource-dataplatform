@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 describe('POST /skip', function () {
     let mediaResp, dataset_id;
     before(async() => {
-        const mediaBody =  { "userName": "testPARALLEL", "language": "Hindi" , "toLanguage":"Telugu"}
+        const mediaBody =  { "userName": "someuser", "language": "Hindi" , "toLanguage":"Telugu"}
         mediaResp = await mediaResponseWithCookie(mediaBody,"parallel");
         dataset_id = mediaResp.body.data[0].dataset_row_id;
     });
