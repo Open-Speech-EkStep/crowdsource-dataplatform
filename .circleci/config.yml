@@ -110,6 +110,20 @@ jobs:
       - store_artifacts:
           path: functional_tests/layout_test/reports
           destination: reports
+    
+  setup_run_api_tests:
+    executor: node/default
+    steps:
+      - *fast-checkout
+      - run:
+          name: Setup for API tests
+          command: |
+            cd functional_tests/api_tests/
+            npm install
+            ENV=dev npm run test
+      - store_artifacts:
+          path: functional_tests/api_tests/mochawesome-report
+          destination: reports
 
   run_functional_tests:
     parameters:
@@ -623,6 +637,11 @@ workflows:
           requires:
             - push_dev_image
             - push_db_refresher_image
+
+      - setup_run_api_tests:
+          name: setup_run_api_test_dev
+          requires:
+            - dev_deployment_aks
 
       - setup_functional_tests:
           name: setup_ft_dev
