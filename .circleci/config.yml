@@ -641,7 +641,7 @@ workflows:
       - setup_run_api_tests:
           name: setup_run_api_test_dev
           requires:
-            - create-workspace
+            - dev_deployment_aks
 
       - setup_functional_tests:
           name: setup_ft_dev
@@ -651,6 +651,7 @@ workflows:
           requires:
             - dev_deployment_aks
             - migrate_dev_azure
+            - setup_run_api_test_dev
 
       - run_functional_tests:
           name: functional_tests_dev
