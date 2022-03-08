@@ -6,7 +6,7 @@
     "env": "test"
   },
   "scripts": {
-    "test": "ENV=$ENV mocha test/*.test.js -p --reporter mochawesome --reporter-options reportFilename=ApiTestReport,overwrite=false,charts=true"
+    "test": "ENV=$ENV mocha test/*.test.js -p --timeout 10000 --reporter mochawesome --reporter-options reportFilename=ApiTestReport,overwrite=false,charts=true"
   },
   "author": "Amulya Ahuja",
   "license": "ISC",
