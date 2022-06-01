@@ -50,7 +50,7 @@
     "react-draggable": "^4.4.4",
     "react-simple-keyboard": "^3.2.98",
     "react-slick": "^0.28.1",
-    "sharp": "^0.29.3",
+    "sharp": "^0.30.5",
     "swr": "^1.0.1",
     "word-error-rate": "^0.0.7"
   },
