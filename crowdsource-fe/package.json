@@ -31,7 +31,7 @@
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.22",
+    "@amcharts/amcharts4": "^4.10.28",
     "@next/bundle-analyzer": "^11.1.2",
     "@types/dom-mediacapture-record": "^1.0.11",
     "bootstrap": "^5.1.1",
